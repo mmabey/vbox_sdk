@@ -1,9 +1,13 @@
 # VirtualBox Software Developer Kit (SDK)
 
-Oracle provides this SDK to interface with VirtualBox. Other than the README 
-and LICENSE files, everything is exactly as it would be if you were to 
-download the kit directly from Oracle 
-(https://www.virtualbox.org/wiki/Downloads).
+Oracle provides this SDK to interface with VirtualBox. In the main branch, 
+everything is exactly as it would be if you were to download the kit directly 
+from Oracle (https://www.virtualbox.org/wiki/Downloads), except for the README 
+and LICENSE files.
+
+In this branch, the Python code in bindings/webservice/python has been 
+translated to be compatible with Python 3. I give no guarantees as to the 
+correctness of the translation.
 
 # License
 
