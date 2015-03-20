@@ -41,7 +41,7 @@ class ManagedManager:
         return
      c = self.map.get(handle,-1)
      if c == -1:
-        raise Error, 'wrong refcount'
+        raise Error('wrong refcount')
      c = c - 1
      if c == 0:
         try:
@@ -63,22 +63,22 @@ class String:
   def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __getitem__(self, index):
       if self.isarray:
           return String(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __str__(self):
       return str(self.handle)
@@ -88,7 +88,7 @@ class String:
          return isinstance(other,String) and self.handle == other.handle
       if isinstance(other,String):
          return self.handle == other.handle
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return self.handle == other
       return False
 
@@ -97,7 +97,7 @@ class String:
          return not isinstance(other,String) or self.handle != other.handle
       if isinstance(other,String):
          return self.handle != other.handle
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return self.handle != other
       return True
 
@@ -145,7 +145,7 @@ class Boolean:
       else:
         return 0
 
-  def __nonzero__(self):
+  def __bool__(self):
       if self.handle:
         return True
       else:
@@ -154,22 +154,22 @@ class Boolean:
   def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __getitem__(self, index):
       if self.isarray:
           return Boolean(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class Number:
   def __init__(self, mgr, handle, isarray = False):
@@ -180,17 +180,17 @@ class Number:
   def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __str__(self):
        return str(self.handle)
@@ -199,7 +199,7 @@ class Number:
        return int(self.handle)
 
   def __long__(self):
-       return long(self.handle)
+       return int(self.handle)
 
   def __float__(self):
        return float(self.handle)
@@ -241,7 +241,7 @@ class Octet:
        if isarray:
            self.handle = mgr.decodebase64(handle)
        else:
-           raise TypeError, "only octet arrays"
+           raise TypeError("only octet arrays")
 
   def __getitem__(self, index):
       return self.handle[index]
@@ -261,7 +261,7 @@ class UnsignedInt(Number):
   def __getitem__(self, index):
       if self.isarray:
           return UnsignedInt(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 
 class Int(Number):
@@ -273,7 +273,7 @@ class Int(Number):
   def __getitem__(self, index):
       if self.isarray:
           return Int(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class UnsignedShort(Number):
   def __init__(self, mgr, handle, isarray = False):
@@ -284,7 +284,7 @@ class UnsignedShort(Number):
   def __getitem__(self, index):
       if self.isarray:
           return UnsignedShort(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class Short(Number):
   def __init__(self, mgr, handle, isarray = False):
@@ -295,7 +295,7 @@ class Short(Number):
   def __getitem__(self, index):
       if self.isarray:
           return Short(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class UnsignedLong(Number):
   def __init__(self, mgr, handle, isarray = False):
@@ -306,7 +306,7 @@ class UnsignedLong(Number):
   def __getitem__(self, index):
       if self.isarray:
           return UnsignedLong(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class Long(Number):
   def __init__(self, mgr, handle, isarray = False):
@@ -317,7 +317,7 @@ class Long(Number):
   def __getitem__(self, index):
       if self.isarray:
           return Long(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class Double(Number):
   def __init__(self, mgr, handle, isarray = False):
@@ -328,7 +328,7 @@ class Double(Number):
   def __getitem__(self, index):
       if self.isarray:
           return Double(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class Float(Number):
   def __init__(self, mgr, handle, isarray = False):
@@ -339,7 +339,7 @@ class Float(Number):
   def __getitem__(self, index):
       if self.isarray:
           return Float(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 class IUnknown:
   def __init__(self,  mgr, handle, isarray = False):
@@ -347,7 +347,7 @@ class IUnknown:
        self.mgr = mgr
        self.isarray = isarray
 
-  def __nonzero__(self):
+  def __bool__(self):
       if self.handle != "":
            return True
       else:
@@ -356,22 +356,22 @@ class IUnknown:
   def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __getitem__(self, index):
       if self.isarray:
           return IUnknown(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
   def __str__(self):
        return str(self.handle)
@@ -410,22 +410,22 @@ class IVirtualBoxErrorInfo(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVirtualBoxErrorInfo(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -509,22 +509,22 @@ class INATNetwork(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATNetwork(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -615,7 +615,7 @@ class INATNetwork(IUnknown):
    def setNetworkName(self, value):
        req=INATNetwork_setNetworkNameRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._networkName = value
        else:
             req._networkName = value.handle
@@ -629,7 +629,7 @@ class INATNetwork(IUnknown):
    def setEnabled(self, value):
        req=INATNetwork_setEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._enabled = value
        else:
             req._enabled = value.handle
@@ -643,7 +643,7 @@ class INATNetwork(IUnknown):
    def setNetwork(self, value):
        req=INATNetwork_setNetworkRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._network = value
        else:
             req._network = value.handle
@@ -662,7 +662,7 @@ class INATNetwork(IUnknown):
    def setIPv6Enabled(self, value):
        req=INATNetwork_setIPv6EnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IPv6Enabled = value
        else:
             req._IPv6Enabled = value.handle
@@ -676,7 +676,7 @@ class INATNetwork(IUnknown):
    def setIPv6Prefix(self, value):
        req=INATNetwork_setIPv6PrefixRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IPv6Prefix = value
        else:
             req._IPv6Prefix = value.handle
@@ -690,7 +690,7 @@ class INATNetwork(IUnknown):
    def setAdvertiseDefaultIPv6RouteEnabled(self, value):
        req=INATNetwork_setAdvertiseDefaultIPv6RouteEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._advertiseDefaultIPv6RouteEnabled = value
        else:
             req._advertiseDefaultIPv6RouteEnabled = value.handle
@@ -704,7 +704,7 @@ class INATNetwork(IUnknown):
    def setNeedDhcpServer(self, value):
        req=INATNetwork_setNeedDhcpServerRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._needDhcpServer = value
        else:
             req._needDhcpServer = value.handle
@@ -733,7 +733,7 @@ class INATNetwork(IUnknown):
    def setLoopbackIp6(self, value):
        req=INATNetwork_setLoopbackIp6RequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._loopbackIp6 = value
        else:
             req._loopbackIp6 = value.handle
@@ -787,22 +787,22 @@ class IDHCPServer(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IDHCPServer(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -931,7 +931,7 @@ class IDHCPServer(IUnknown):
    def setEnabled(self, value):
        req=IDHCPServer_setEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._enabled = value
        else:
             req._enabled = value.handle
@@ -1004,22 +1004,22 @@ class IVirtualBox(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVirtualBox(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -1459,22 +1459,22 @@ class IVFSExplorer(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVFSExplorer(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -1591,22 +1591,22 @@ class IAppliance(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IAppliance(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -1738,22 +1738,22 @@ class IVirtualSystemDescription(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVirtualSystemDescription(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -1861,22 +1861,22 @@ class IBIOSSettings(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IBIOSSettings(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -1910,7 +1910,7 @@ class IBIOSSettings(IUnknown):
    def setLogoFadeIn(self, value):
        req=IBIOSSettings_setLogoFadeInRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._logoFadeIn = value
        else:
             req._logoFadeIn = value.handle
@@ -1924,7 +1924,7 @@ class IBIOSSettings(IUnknown):
    def setLogoFadeOut(self, value):
        req=IBIOSSettings_setLogoFadeOutRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._logoFadeOut = value
        else:
             req._logoFadeOut = value.handle
@@ -1938,7 +1938,7 @@ class IBIOSSettings(IUnknown):
    def setLogoDisplayTime(self, value):
        req=IBIOSSettings_setLogoDisplayTimeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._logoDisplayTime = value
        else:
             req._logoDisplayTime = value.handle
@@ -1952,7 +1952,7 @@ class IBIOSSettings(IUnknown):
    def setLogoImagePath(self, value):
        req=IBIOSSettings_setLogoImagePathRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._logoImagePath = value
        else:
             req._logoImagePath = value.handle
@@ -1966,7 +1966,7 @@ class IBIOSSettings(IUnknown):
    def setBootMenuMode(self, value):
        req=IBIOSSettings_setBootMenuModeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._bootMenuMode = value
        else:
             req._bootMenuMode = value.handle
@@ -1980,7 +1980,7 @@ class IBIOSSettings(IUnknown):
    def setACPIEnabled(self, value):
        req=IBIOSSettings_setACPIEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._ACPIEnabled = value
        else:
             req._ACPIEnabled = value.handle
@@ -1994,7 +1994,7 @@ class IBIOSSettings(IUnknown):
    def setIOAPICEnabled(self, value):
        req=IBIOSSettings_setIOAPICEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IOAPICEnabled = value
        else:
             req._IOAPICEnabled = value.handle
@@ -2008,7 +2008,7 @@ class IBIOSSettings(IUnknown):
    def setTimeOffset(self, value):
        req=IBIOSSettings_setTimeOffsetRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._timeOffset = value
        else:
             req._timeOffset = value.handle
@@ -2022,7 +2022,7 @@ class IBIOSSettings(IUnknown):
    def setPXEDebugEnabled(self, value):
        req=IBIOSSettings_setPXEDebugEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._PXEDebugEnabled = value
        else:
             req._PXEDebugEnabled = value.handle
@@ -2074,22 +2074,22 @@ class IPCIAddress(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IPCIAddress(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -2142,7 +2142,7 @@ class IPCIAddress(IUnknown):
    def setBus(self, value):
        req=IPCIAddress_setBusRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._bus = value
        else:
             req._bus = value.handle
@@ -2156,7 +2156,7 @@ class IPCIAddress(IUnknown):
    def setDevice(self, value):
        req=IPCIAddress_setDeviceRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._device = value
        else:
             req._device = value.handle
@@ -2170,7 +2170,7 @@ class IPCIAddress(IUnknown):
    def setDevFunction(self, value):
        req=IPCIAddress_setDevFunctionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._devFunction = value
        else:
             req._devFunction = value.handle
@@ -2204,22 +2204,22 @@ class IMachine(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMachine(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -3060,7 +3060,7 @@ class IMachine(IUnknown):
    def setIcon(self, value):
        req=IMachine_setIconRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._icon = value
        else:
             req._icon = value.handle
@@ -3084,7 +3084,7 @@ class IMachine(IUnknown):
    def setName(self, value):
        req=IMachine_setNameRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._name = value
        else:
             req._name = value.handle
@@ -3098,7 +3098,7 @@ class IMachine(IUnknown):
    def setDescription(self, value):
        req=IMachine_setDescriptionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._description = value
        else:
             req._description = value.handle
@@ -3117,7 +3117,7 @@ class IMachine(IUnknown):
    def setGroups(self, value):
        req=IMachine_setGroupsRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._groups = value
        else:
             req._groups = value.handle
@@ -3131,7 +3131,7 @@ class IMachine(IUnknown):
    def setOSTypeId(self, value):
        req=IMachine_setOSTypeIdRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._OSTypeId = value
        else:
             req._OSTypeId = value.handle
@@ -3145,7 +3145,7 @@ class IMachine(IUnknown):
    def setHardwareVersion(self, value):
        req=IMachine_setHardwareVersionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._hardwareVersion = value
        else:
             req._hardwareVersion = value.handle
@@ -3159,7 +3159,7 @@ class IMachine(IUnknown):
    def setHardwareUUID(self, value):
        req=IMachine_setHardwareUUIDRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._hardwareUUID = value
        else:
             req._hardwareUUID = value.handle
@@ -3173,7 +3173,7 @@ class IMachine(IUnknown):
    def setCPUCount(self, value):
        req=IMachine_setCPUCountRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._CPUCount = value
        else:
             req._CPUCount = value.handle
@@ -3187,7 +3187,7 @@ class IMachine(IUnknown):
    def setCPUHotPlugEnabled(self, value):
        req=IMachine_setCPUHotPlugEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._CPUHotPlugEnabled = value
        else:
             req._CPUHotPlugEnabled = value.handle
@@ -3201,7 +3201,7 @@ class IMachine(IUnknown):
    def setCPUExecutionCap(self, value):
        req=IMachine_setCPUExecutionCapRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._CPUExecutionCap = value
        else:
             req._CPUExecutionCap = value.handle
@@ -3215,7 +3215,7 @@ class IMachine(IUnknown):
    def setMemorySize(self, value):
        req=IMachine_setMemorySizeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._memorySize = value
        else:
             req._memorySize = value.handle
@@ -3229,7 +3229,7 @@ class IMachine(IUnknown):
    def setMemoryBalloonSize(self, value):
        req=IMachine_setMemoryBalloonSizeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._memoryBalloonSize = value
        else:
             req._memoryBalloonSize = value.handle
@@ -3243,7 +3243,7 @@ class IMachine(IUnknown):
    def setPageFusionEnabled(self, value):
        req=IMachine_setPageFusionEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._pageFusionEnabled = value
        else:
             req._pageFusionEnabled = value.handle
@@ -3257,7 +3257,7 @@ class IMachine(IUnknown):
    def setGraphicsControllerType(self, value):
        req=IMachine_setGraphicsControllerTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._graphicsControllerType = value
        else:
             req._graphicsControllerType = value.handle
@@ -3271,7 +3271,7 @@ class IMachine(IUnknown):
    def setVRAMSize(self, value):
        req=IMachine_setVRAMSizeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._VRAMSize = value
        else:
             req._VRAMSize = value.handle
@@ -3285,7 +3285,7 @@ class IMachine(IUnknown):
    def setAccelerate3DEnabled(self, value):
        req=IMachine_setAccelerate3DEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._accelerate3DEnabled = value
        else:
             req._accelerate3DEnabled = value.handle
@@ -3299,7 +3299,7 @@ class IMachine(IUnknown):
    def setAccelerate2DVideoEnabled(self, value):
        req=IMachine_setAccelerate2DVideoEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._accelerate2DVideoEnabled = value
        else:
             req._accelerate2DVideoEnabled = value.handle
@@ -3313,7 +3313,7 @@ class IMachine(IUnknown):
    def setMonitorCount(self, value):
        req=IMachine_setMonitorCountRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._monitorCount = value
        else:
             req._monitorCount = value.handle
@@ -3327,7 +3327,7 @@ class IMachine(IUnknown):
    def setVideoCaptureEnabled(self, value):
        req=IMachine_setVideoCaptureEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._videoCaptureEnabled = value
        else:
             req._videoCaptureEnabled = value.handle
@@ -3341,7 +3341,7 @@ class IMachine(IUnknown):
    def setVideoCaptureScreens(self, value):
        req=IMachine_setVideoCaptureScreensRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._videoCaptureScreens = value
        else:
             req._videoCaptureScreens = value.handle
@@ -3355,7 +3355,7 @@ class IMachine(IUnknown):
    def setVideoCaptureFile(self, value):
        req=IMachine_setVideoCaptureFileRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._videoCaptureFile = value
        else:
             req._videoCaptureFile = value.handle
@@ -3369,7 +3369,7 @@ class IMachine(IUnknown):
    def setVideoCaptureWidth(self, value):
        req=IMachine_setVideoCaptureWidthRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._videoCaptureWidth = value
        else:
             req._videoCaptureWidth = value.handle
@@ -3383,7 +3383,7 @@ class IMachine(IUnknown):
    def setVideoCaptureHeight(self, value):
        req=IMachine_setVideoCaptureHeightRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._videoCaptureHeight = value
        else:
             req._videoCaptureHeight = value.handle
@@ -3397,7 +3397,7 @@ class IMachine(IUnknown):
    def setVideoCaptureRate(self, value):
        req=IMachine_setVideoCaptureRateRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._videoCaptureRate = value
        else:
             req._videoCaptureRate = value.handle
@@ -3411,7 +3411,7 @@ class IMachine(IUnknown):
    def setVideoCaptureFPS(self, value):
        req=IMachine_setVideoCaptureFPSRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._videoCaptureFPS = value
        else:
             req._videoCaptureFPS = value.handle
@@ -3430,7 +3430,7 @@ class IMachine(IUnknown):
    def setFirmwareType(self, value):
        req=IMachine_setFirmwareTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._firmwareType = value
        else:
             req._firmwareType = value.handle
@@ -3444,7 +3444,7 @@ class IMachine(IUnknown):
    def setPointingHIDType(self, value):
        req=IMachine_setPointingHIDTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._pointingHIDType = value
        else:
             req._pointingHIDType = value.handle
@@ -3458,7 +3458,7 @@ class IMachine(IUnknown):
    def setKeyboardHIDType(self, value):
        req=IMachine_setKeyboardHIDTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._keyboardHIDType = value
        else:
             req._keyboardHIDType = value.handle
@@ -3472,7 +3472,7 @@ class IMachine(IUnknown):
    def setHPETEnabled(self, value):
        req=IMachine_setHPETEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._HPETEnabled = value
        else:
             req._HPETEnabled = value.handle
@@ -3486,7 +3486,7 @@ class IMachine(IUnknown):
    def setChipsetType(self, value):
        req=IMachine_setChipsetTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._chipsetType = value
        else:
             req._chipsetType = value.handle
@@ -3500,7 +3500,7 @@ class IMachine(IUnknown):
    def setSnapshotFolder(self, value):
        req=IMachine_setSnapshotFolderRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._snapshotFolder = value
        else:
             req._snapshotFolder = value.handle
@@ -3519,7 +3519,7 @@ class IMachine(IUnknown):
    def setEmulatedUSBCardReaderEnabled(self, value):
        req=IMachine_setEmulatedUSBCardReaderEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._emulatedUSBCardReaderEnabled = value
        else:
             req._emulatedUSBCardReaderEnabled = value.handle
@@ -3623,7 +3623,7 @@ class IMachine(IUnknown):
    def setClipboardMode(self, value):
        req=IMachine_setClipboardModeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._clipboardMode = value
        else:
             req._clipboardMode = value.handle
@@ -3637,7 +3637,7 @@ class IMachine(IUnknown):
    def setDragAndDropMode(self, value):
        req=IMachine_setDragAndDropModeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._dragAndDropMode = value
        else:
             req._dragAndDropMode = value.handle
@@ -3651,7 +3651,7 @@ class IMachine(IUnknown):
    def setGuestPropertyNotificationPatterns(self, value):
        req=IMachine_setGuestPropertyNotificationPatternsRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._guestPropertyNotificationPatterns = value
        else:
             req._guestPropertyNotificationPatterns = value.handle
@@ -3665,7 +3665,7 @@ class IMachine(IUnknown):
    def setTeleporterEnabled(self, value):
        req=IMachine_setTeleporterEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._teleporterEnabled = value
        else:
             req._teleporterEnabled = value.handle
@@ -3679,7 +3679,7 @@ class IMachine(IUnknown):
    def setTeleporterPort(self, value):
        req=IMachine_setTeleporterPortRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._teleporterPort = value
        else:
             req._teleporterPort = value.handle
@@ -3693,7 +3693,7 @@ class IMachine(IUnknown):
    def setTeleporterAddress(self, value):
        req=IMachine_setTeleporterAddressRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._teleporterAddress = value
        else:
             req._teleporterAddress = value.handle
@@ -3707,7 +3707,7 @@ class IMachine(IUnknown):
    def setTeleporterPassword(self, value):
        req=IMachine_setTeleporterPasswordRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._teleporterPassword = value
        else:
             req._teleporterPassword = value.handle
@@ -3721,7 +3721,7 @@ class IMachine(IUnknown):
    def setFaultToleranceState(self, value):
        req=IMachine_setFaultToleranceStateRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._faultToleranceState = value
        else:
             req._faultToleranceState = value.handle
@@ -3735,7 +3735,7 @@ class IMachine(IUnknown):
    def setFaultTolerancePort(self, value):
        req=IMachine_setFaultTolerancePortRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._faultTolerancePort = value
        else:
             req._faultTolerancePort = value.handle
@@ -3749,7 +3749,7 @@ class IMachine(IUnknown):
    def setFaultToleranceAddress(self, value):
        req=IMachine_setFaultToleranceAddressRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._faultToleranceAddress = value
        else:
             req._faultToleranceAddress = value.handle
@@ -3763,7 +3763,7 @@ class IMachine(IUnknown):
    def setFaultTolerancePassword(self, value):
        req=IMachine_setFaultTolerancePasswordRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._faultTolerancePassword = value
        else:
             req._faultTolerancePassword = value.handle
@@ -3777,7 +3777,7 @@ class IMachine(IUnknown):
    def setFaultToleranceSyncInterval(self, value):
        req=IMachine_setFaultToleranceSyncIntervalRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._faultToleranceSyncInterval = value
        else:
             req._faultToleranceSyncInterval = value.handle
@@ -3791,7 +3791,7 @@ class IMachine(IUnknown):
    def setRTCUseUTC(self, value):
        req=IMachine_setRTCUseUTCRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._RTCUseUTC = value
        else:
             req._RTCUseUTC = value.handle
@@ -3805,7 +3805,7 @@ class IMachine(IUnknown):
    def setIOCacheEnabled(self, value):
        req=IMachine_setIOCacheEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IOCacheEnabled = value
        else:
             req._IOCacheEnabled = value.handle
@@ -3819,7 +3819,7 @@ class IMachine(IUnknown):
    def setIOCacheSize(self, value):
        req=IMachine_setIOCacheSizeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IOCacheSize = value
        else:
             req._IOCacheSize = value.handle
@@ -3843,7 +3843,7 @@ class IMachine(IUnknown):
    def setTracingEnabled(self, value):
        req=IMachine_setTracingEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._tracingEnabled = value
        else:
             req._tracingEnabled = value.handle
@@ -3857,7 +3857,7 @@ class IMachine(IUnknown):
    def setTracingConfig(self, value):
        req=IMachine_setTracingConfigRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._tracingConfig = value
        else:
             req._tracingConfig = value.handle
@@ -3871,7 +3871,7 @@ class IMachine(IUnknown):
    def setAllowTracingToAccessVM(self, value):
        req=IMachine_setAllowTracingToAccessVMRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._allowTracingToAccessVM = value
        else:
             req._allowTracingToAccessVM = value.handle
@@ -3885,7 +3885,7 @@ class IMachine(IUnknown):
    def setAutostartEnabled(self, value):
        req=IMachine_setAutostartEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._autostartEnabled = value
        else:
             req._autostartEnabled = value.handle
@@ -3899,7 +3899,7 @@ class IMachine(IUnknown):
    def setAutostartDelay(self, value):
        req=IMachine_setAutostartDelayRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._autostartDelay = value
        else:
             req._autostartDelay = value.handle
@@ -3913,7 +3913,7 @@ class IMachine(IUnknown):
    def setAutostopType(self, value):
        req=IMachine_setAutostopTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._autostopType = value
        else:
             req._autostopType = value.handle
@@ -3927,7 +3927,7 @@ class IMachine(IUnknown):
    def setDefaultFrontend(self, value):
        req=IMachine_setDefaultFrontendRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._defaultFrontend = value
        else:
             req._defaultFrontend = value.handle
@@ -4095,22 +4095,22 @@ class IEmulatedUSB(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IEmulatedUSB(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -4185,22 +4185,22 @@ class IConsole(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IConsole(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -4556,7 +4556,7 @@ class IConsole(IUnknown):
    def setUseHostClipboard(self, value):
        req=IConsole_setUseHostClipboardRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._useHostClipboard = value
        else:
             req._useHostClipboard = value.handle
@@ -4605,22 +4605,22 @@ class IHostNetworkInterface(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IHostNetworkInterface(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -4792,22 +4792,22 @@ class IHostVideoInputDevice(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IHostVideoInputDevice(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -4873,22 +4873,22 @@ class IHost(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IHost(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -5221,22 +5221,22 @@ class ISystemProperties(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISystemProperties(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -5418,7 +5418,7 @@ class ISystemProperties(IUnknown):
    def setExclusiveHwVirt(self, value):
        req=ISystemProperties_setExclusiveHwVirtRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._exclusiveHwVirt = value
        else:
             req._exclusiveHwVirt = value.handle
@@ -5432,7 +5432,7 @@ class ISystemProperties(IUnknown):
    def setDefaultMachineFolder(self, value):
        req=ISystemProperties_setDefaultMachineFolderRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._defaultMachineFolder = value
        else:
             req._defaultMachineFolder = value.handle
@@ -5446,7 +5446,7 @@ class ISystemProperties(IUnknown):
    def setLoggingLevel(self, value):
        req=ISystemProperties_setLoggingLevelRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._loggingLevel = value
        else:
             req._loggingLevel = value.handle
@@ -5465,7 +5465,7 @@ class ISystemProperties(IUnknown):
    def setDefaultHardDiskFormat(self, value):
        req=ISystemProperties_setDefaultHardDiskFormatRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._defaultHardDiskFormat = value
        else:
             req._defaultHardDiskFormat = value.handle
@@ -5479,7 +5479,7 @@ class ISystemProperties(IUnknown):
    def setFreeDiskSpaceWarning(self, value):
        req=ISystemProperties_setFreeDiskSpaceWarningRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._freeDiskSpaceWarning = value
        else:
             req._freeDiskSpaceWarning = value.handle
@@ -5493,7 +5493,7 @@ class ISystemProperties(IUnknown):
    def setFreeDiskSpacePercentWarning(self, value):
        req=ISystemProperties_setFreeDiskSpacePercentWarningRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._freeDiskSpacePercentWarning = value
        else:
             req._freeDiskSpacePercentWarning = value.handle
@@ -5507,7 +5507,7 @@ class ISystemProperties(IUnknown):
    def setFreeDiskSpaceError(self, value):
        req=ISystemProperties_setFreeDiskSpaceErrorRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._freeDiskSpaceError = value
        else:
             req._freeDiskSpaceError = value.handle
@@ -5521,7 +5521,7 @@ class ISystemProperties(IUnknown):
    def setFreeDiskSpacePercentError(self, value):
        req=ISystemProperties_setFreeDiskSpacePercentErrorRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._freeDiskSpacePercentError = value
        else:
             req._freeDiskSpacePercentError = value.handle
@@ -5535,7 +5535,7 @@ class ISystemProperties(IUnknown):
    def setVRDEAuthLibrary(self, value):
        req=ISystemProperties_setVRDEAuthLibraryRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._VRDEAuthLibrary = value
        else:
             req._VRDEAuthLibrary = value.handle
@@ -5549,7 +5549,7 @@ class ISystemProperties(IUnknown):
    def setWebServiceAuthLibrary(self, value):
        req=ISystemProperties_setWebServiceAuthLibraryRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._webServiceAuthLibrary = value
        else:
             req._webServiceAuthLibrary = value.handle
@@ -5563,7 +5563,7 @@ class ISystemProperties(IUnknown):
    def setDefaultVRDEExtPack(self, value):
        req=ISystemProperties_setDefaultVRDEExtPackRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._defaultVRDEExtPack = value
        else:
             req._defaultVRDEExtPack = value.handle
@@ -5577,7 +5577,7 @@ class ISystemProperties(IUnknown):
    def setLogHistoryCount(self, value):
        req=ISystemProperties_setLogHistoryCountRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._logHistoryCount = value
        else:
             req._logHistoryCount = value.handle
@@ -5596,7 +5596,7 @@ class ISystemProperties(IUnknown):
    def setAutostartDatabasePath(self, value):
        req=ISystemProperties_setAutostartDatabasePathRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._autostartDatabasePath = value
        else:
             req._autostartDatabasePath = value.handle
@@ -5610,7 +5610,7 @@ class ISystemProperties(IUnknown):
    def setDefaultAdditionsISO(self, value):
        req=ISystemProperties_setDefaultAdditionsISORequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._defaultAdditionsISO = value
        else:
             req._defaultAdditionsISO = value.handle
@@ -5624,7 +5624,7 @@ class ISystemProperties(IUnknown):
    def setDefaultFrontend(self, value):
        req=ISystemProperties_setDefaultFrontendRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._defaultFrontend = value
        else:
             req._defaultFrontend = value.handle
@@ -5695,22 +5695,22 @@ class IGuestSession(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestSession(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -6157,7 +6157,7 @@ class IGuestSession(IUnknown):
    def setTimeout(self, value):
        req=IGuestSession_setTimeoutRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._timeout = value
        else:
             req._timeout = value.handle
@@ -6181,7 +6181,7 @@ class IGuestSession(IUnknown):
    def setEnvironment(self, value):
        req=IGuestSession_setEnvironmentRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._environment = value
        else:
             req._environment = value.handle
@@ -6243,22 +6243,22 @@ class IProcess(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IProcess(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -6423,22 +6423,22 @@ class IGuestProcess(IProcess):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestProcess(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -6487,22 +6487,22 @@ class IDirectory(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IDirectory(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -6580,22 +6580,22 @@ class IGuestDirectory(IDirectory):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestDirectory(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -6644,22 +6644,22 @@ class IFile(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IFile(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -6846,22 +6846,22 @@ class IGuestFile(IFile):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFile(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -6910,22 +6910,22 @@ class IFsObjInfo(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IFsObjInfo(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -7087,22 +7087,22 @@ class IGuestFsObjInfo(IFsObjInfo):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFsObjInfo(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -7151,22 +7151,22 @@ class IGuest(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuest(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -7409,7 +7409,7 @@ class IGuest(IUnknown):
    def setMemoryBalloonSize(self, value):
        req=IGuest_setMemoryBalloonSizeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._memoryBalloonSize = value
        else:
             req._memoryBalloonSize = value.handle
@@ -7423,7 +7423,7 @@ class IGuest(IUnknown):
    def setStatisticsUpdateInterval(self, value):
        req=IGuest_setStatisticsUpdateIntervalRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._statisticsUpdateInterval = value
        else:
             req._statisticsUpdateInterval = value.handle
@@ -7462,22 +7462,22 @@ class IProgress(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IProgress(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -7647,7 +7647,7 @@ class IProgress(IUnknown):
    def setTimeout(self, value):
        req=IProgress_setTimeoutRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._timeout = value
        else:
             req._timeout = value.handle
@@ -7692,22 +7692,22 @@ class ISnapshot(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISnapshot(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -7755,7 +7755,7 @@ class ISnapshot(IUnknown):
    def setName(self, value):
        req=ISnapshot_setNameRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._name = value
        else:
             req._name = value.handle
@@ -7769,7 +7769,7 @@ class ISnapshot(IUnknown):
    def setDescription(self, value):
        req=ISnapshot_setDescriptionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._description = value
        else:
             req._description = value.handle
@@ -7832,22 +7832,22 @@ class IMedium(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMedium(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -8089,7 +8089,7 @@ class IMedium(IUnknown):
    def setDescription(self, value):
        req=IMedium_setDescriptionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._description = value
        else:
             req._description = value.handle
@@ -8148,7 +8148,7 @@ class IMedium(IUnknown):
    def setType(self, value):
        req=IMedium_setTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._type = value
        else:
             req._type = value.handle
@@ -8192,7 +8192,7 @@ class IMedium(IUnknown):
    def setAutoReset(self, value):
        req=IMedium_setAutoResetRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._autoReset = value
        else:
             req._autoReset = value.handle
@@ -8254,22 +8254,22 @@ class IMediumFormat(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMediumFormat(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -8353,22 +8353,22 @@ class IToken(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IToken(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -8435,22 +8435,22 @@ class IKeyboard(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IKeyboard(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -8533,22 +8533,22 @@ class IMouse(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMouse(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -8678,22 +8678,22 @@ class IFramebuffer(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IFramebuffer(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -8903,22 +8903,22 @@ class IFramebufferOverlay(IFramebuffer):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IFramebufferOverlay(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -8973,7 +8973,7 @@ class IFramebufferOverlay(IFramebuffer):
    def setVisible(self, value):
        req=IFramebufferOverlay_setVisibleRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._visible = value
        else:
             req._visible = value.handle
@@ -8987,7 +8987,7 @@ class IFramebufferOverlay(IFramebuffer):
    def setAlpha(self, value):
        req=IFramebufferOverlay_setAlphaRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._alpha = value
        else:
             req._alpha = value.handle
@@ -9021,22 +9021,22 @@ class IDisplay(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IDisplay(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -9238,22 +9238,22 @@ class INetworkAdapter(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INetworkAdapter(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -9318,7 +9318,7 @@ class INetworkAdapter(IUnknown):
    def setAdapterType(self, value):
        req=INetworkAdapter_setAdapterTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._adapterType = value
        else:
             req._adapterType = value.handle
@@ -9337,7 +9337,7 @@ class INetworkAdapter(IUnknown):
    def setEnabled(self, value):
        req=INetworkAdapter_setEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._enabled = value
        else:
             req._enabled = value.handle
@@ -9351,7 +9351,7 @@ class INetworkAdapter(IUnknown):
    def setMACAddress(self, value):
        req=INetworkAdapter_setMACAddressRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._MACAddress = value
        else:
             req._MACAddress = value.handle
@@ -9365,7 +9365,7 @@ class INetworkAdapter(IUnknown):
    def setAttachmentType(self, value):
        req=INetworkAdapter_setAttachmentTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._attachmentType = value
        else:
             req._attachmentType = value.handle
@@ -9379,7 +9379,7 @@ class INetworkAdapter(IUnknown):
    def setBridgedInterface(self, value):
        req=INetworkAdapter_setBridgedInterfaceRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._bridgedInterface = value
        else:
             req._bridgedInterface = value.handle
@@ -9393,7 +9393,7 @@ class INetworkAdapter(IUnknown):
    def setHostOnlyInterface(self, value):
        req=INetworkAdapter_setHostOnlyInterfaceRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._hostOnlyInterface = value
        else:
             req._hostOnlyInterface = value.handle
@@ -9407,7 +9407,7 @@ class INetworkAdapter(IUnknown):
    def setInternalNetwork(self, value):
        req=INetworkAdapter_setInternalNetworkRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._internalNetwork = value
        else:
             req._internalNetwork = value.handle
@@ -9421,7 +9421,7 @@ class INetworkAdapter(IUnknown):
    def setNATNetwork(self, value):
        req=INetworkAdapter_setNATNetworkRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._NATNetwork = value
        else:
             req._NATNetwork = value.handle
@@ -9435,7 +9435,7 @@ class INetworkAdapter(IUnknown):
    def setGenericDriver(self, value):
        req=INetworkAdapter_setGenericDriverRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._genericDriver = value
        else:
             req._genericDriver = value.handle
@@ -9449,7 +9449,7 @@ class INetworkAdapter(IUnknown):
    def setCableConnected(self, value):
        req=INetworkAdapter_setCableConnectedRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._cableConnected = value
        else:
             req._cableConnected = value.handle
@@ -9463,7 +9463,7 @@ class INetworkAdapter(IUnknown):
    def setLineSpeed(self, value):
        req=INetworkAdapter_setLineSpeedRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._lineSpeed = value
        else:
             req._lineSpeed = value.handle
@@ -9477,7 +9477,7 @@ class INetworkAdapter(IUnknown):
    def setPromiscModePolicy(self, value):
        req=INetworkAdapter_setPromiscModePolicyRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._promiscModePolicy = value
        else:
             req._promiscModePolicy = value.handle
@@ -9491,7 +9491,7 @@ class INetworkAdapter(IUnknown):
    def setTraceEnabled(self, value):
        req=INetworkAdapter_setTraceEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._traceEnabled = value
        else:
             req._traceEnabled = value.handle
@@ -9505,7 +9505,7 @@ class INetworkAdapter(IUnknown):
    def setTraceFile(self, value):
        req=INetworkAdapter_setTraceFileRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._traceFile = value
        else:
             req._traceFile = value.handle
@@ -9524,7 +9524,7 @@ class INetworkAdapter(IUnknown):
    def setBootPriority(self, value):
        req=INetworkAdapter_setBootPriorityRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._bootPriority = value
        else:
             req._bootPriority = value.handle
@@ -9538,7 +9538,7 @@ class INetworkAdapter(IUnknown):
    def setBandwidthGroup(self, value):
        req=INetworkAdapter_setBandwidthGroupRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._bandwidthGroup = value
        else:
             req._bandwidthGroup = value.handle
@@ -9600,22 +9600,22 @@ class ISerialPort(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISerialPort(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -9654,7 +9654,7 @@ class ISerialPort(IUnknown):
    def setEnabled(self, value):
        req=ISerialPort_setEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._enabled = value
        else:
             req._enabled = value.handle
@@ -9668,7 +9668,7 @@ class ISerialPort(IUnknown):
    def setIOBase(self, value):
        req=ISerialPort_setIOBaseRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IOBase = value
        else:
             req._IOBase = value.handle
@@ -9682,7 +9682,7 @@ class ISerialPort(IUnknown):
    def setIRQ(self, value):
        req=ISerialPort_setIRQRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IRQ = value
        else:
             req._IRQ = value.handle
@@ -9696,7 +9696,7 @@ class ISerialPort(IUnknown):
    def setHostMode(self, value):
        req=ISerialPort_setHostModeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._hostMode = value
        else:
             req._hostMode = value.handle
@@ -9710,7 +9710,7 @@ class ISerialPort(IUnknown):
    def setServer(self, value):
        req=ISerialPort_setServerRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._server = value
        else:
             req._server = value.handle
@@ -9724,7 +9724,7 @@ class ISerialPort(IUnknown):
    def setPath(self, value):
        req=ISerialPort_setPathRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._path = value
        else:
             req._path = value.handle
@@ -9765,22 +9765,22 @@ class IParallelPort(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IParallelPort(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -9819,7 +9819,7 @@ class IParallelPort(IUnknown):
    def setEnabled(self, value):
        req=IParallelPort_setEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._enabled = value
        else:
             req._enabled = value.handle
@@ -9833,7 +9833,7 @@ class IParallelPort(IUnknown):
    def setIOBase(self, value):
        req=IParallelPort_setIOBaseRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IOBase = value
        else:
             req._IOBase = value.handle
@@ -9847,7 +9847,7 @@ class IParallelPort(IUnknown):
    def setIRQ(self, value):
        req=IParallelPort_setIRQRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._IRQ = value
        else:
             req._IRQ = value.handle
@@ -9861,7 +9861,7 @@ class IParallelPort(IUnknown):
    def setPath(self, value):
        req=IParallelPort_setPathRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._path = value
        else:
             req._path = value.handle
@@ -9898,22 +9898,22 @@ class IMachineDebugger(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMachineDebugger(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -10162,7 +10162,7 @@ class IMachineDebugger(IUnknown):
    def setSingleStep(self, value):
        req=IMachineDebugger_setSingleStepRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._singleStep = value
        else:
             req._singleStep = value.handle
@@ -10176,7 +10176,7 @@ class IMachineDebugger(IUnknown):
    def setRecompileUser(self, value):
        req=IMachineDebugger_setRecompileUserRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._recompileUser = value
        else:
             req._recompileUser = value.handle
@@ -10190,7 +10190,7 @@ class IMachineDebugger(IUnknown):
    def setRecompileSupervisor(self, value):
        req=IMachineDebugger_setRecompileSupervisorRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._recompileSupervisor = value
        else:
             req._recompileSupervisor = value.handle
@@ -10204,7 +10204,7 @@ class IMachineDebugger(IUnknown):
    def setExecuteAllInIEM(self, value):
        req=IMachineDebugger_setExecuteAllInIEMRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._executeAllInIEM = value
        else:
             req._executeAllInIEM = value.handle
@@ -10218,7 +10218,7 @@ class IMachineDebugger(IUnknown):
    def setPATMEnabled(self, value):
        req=IMachineDebugger_setPATMEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._PATMEnabled = value
        else:
             req._PATMEnabled = value.handle
@@ -10232,7 +10232,7 @@ class IMachineDebugger(IUnknown):
    def setCSAMEnabled(self, value):
        req=IMachineDebugger_setCSAMEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._CSAMEnabled = value
        else:
             req._CSAMEnabled = value.handle
@@ -10246,7 +10246,7 @@ class IMachineDebugger(IUnknown):
    def setLogEnabled(self, value):
        req=IMachineDebugger_setLogEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._logEnabled = value
        else:
             req._logEnabled = value.handle
@@ -10325,7 +10325,7 @@ class IMachineDebugger(IUnknown):
    def setVirtualTimeRate(self, value):
        req=IMachineDebugger_setVirtualTimeRateRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._virtualTimeRate = value
        else:
             req._virtualTimeRate = value.handle
@@ -10388,22 +10388,22 @@ class IUSBDeviceFilters(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IUSBDeviceFilters(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -10488,22 +10488,22 @@ class IUSBController(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IUSBController(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -10569,22 +10569,22 @@ class IUSBDevice(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IUSBDevice(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -10704,22 +10704,22 @@ class IUSBDeviceFilter(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IUSBDeviceFilter(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -10753,7 +10753,7 @@ class IUSBDeviceFilter(IUnknown):
    def setName(self, value):
        req=IUSBDeviceFilter_setNameRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._name = value
        else:
             req._name = value.handle
@@ -10767,7 +10767,7 @@ class IUSBDeviceFilter(IUnknown):
    def setActive(self, value):
        req=IUSBDeviceFilter_setActiveRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._active = value
        else:
             req._active = value.handle
@@ -10781,7 +10781,7 @@ class IUSBDeviceFilter(IUnknown):
    def setVendorId(self, value):
        req=IUSBDeviceFilter_setVendorIdRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._vendorId = value
        else:
             req._vendorId = value.handle
@@ -10795,7 +10795,7 @@ class IUSBDeviceFilter(IUnknown):
    def setProductId(self, value):
        req=IUSBDeviceFilter_setProductIdRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._productId = value
        else:
             req._productId = value.handle
@@ -10809,7 +10809,7 @@ class IUSBDeviceFilter(IUnknown):
    def setRevision(self, value):
        req=IUSBDeviceFilter_setRevisionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._revision = value
        else:
             req._revision = value.handle
@@ -10823,7 +10823,7 @@ class IUSBDeviceFilter(IUnknown):
    def setManufacturer(self, value):
        req=IUSBDeviceFilter_setManufacturerRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._manufacturer = value
        else:
             req._manufacturer = value.handle
@@ -10837,7 +10837,7 @@ class IUSBDeviceFilter(IUnknown):
    def setProduct(self, value):
        req=IUSBDeviceFilter_setProductRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._product = value
        else:
             req._product = value.handle
@@ -10851,7 +10851,7 @@ class IUSBDeviceFilter(IUnknown):
    def setSerialNumber(self, value):
        req=IUSBDeviceFilter_setSerialNumberRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._serialNumber = value
        else:
             req._serialNumber = value.handle
@@ -10865,7 +10865,7 @@ class IUSBDeviceFilter(IUnknown):
    def setPort(self, value):
        req=IUSBDeviceFilter_setPortRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._port = value
        else:
             req._port = value.handle
@@ -10879,7 +10879,7 @@ class IUSBDeviceFilter(IUnknown):
    def setRemote(self, value):
        req=IUSBDeviceFilter_setRemoteRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._remote = value
        else:
             req._remote = value.handle
@@ -10893,7 +10893,7 @@ class IUSBDeviceFilter(IUnknown):
    def setMaskedInterfaces(self, value):
        req=IUSBDeviceFilter_setMaskedInterfacesRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._maskedInterfaces = value
        else:
             req._maskedInterfaces = value.handle
@@ -10943,22 +10943,22 @@ class IHostUSBDevice(IUSBDevice):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IHostUSBDevice(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11012,22 +11012,22 @@ class IHostUSBDeviceFilter(IUSBDeviceFilter):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IHostUSBDeviceFilter(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11061,7 +11061,7 @@ class IHostUSBDeviceFilter(IUSBDeviceFilter):
    def setAction(self, value):
        req=IHostUSBDeviceFilter_setActionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._action = value
        else:
             req._action = value.handle
@@ -11091,22 +11091,22 @@ class IAudioAdapter(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IAudioAdapter(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11140,7 +11140,7 @@ class IAudioAdapter(IUnknown):
    def setEnabled(self, value):
        req=IAudioAdapter_setEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._enabled = value
        else:
             req._enabled = value.handle
@@ -11154,7 +11154,7 @@ class IAudioAdapter(IUnknown):
    def setAudioController(self, value):
        req=IAudioAdapter_setAudioControllerRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._audioController = value
        else:
             req._audioController = value.handle
@@ -11168,7 +11168,7 @@ class IAudioAdapter(IUnknown):
    def setAudioDriver(self, value):
        req=IAudioAdapter_setAudioDriverRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._audioDriver = value
        else:
             req._audioDriver = value.handle
@@ -11202,22 +11202,22 @@ class IVRDEServer(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVRDEServer(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11272,7 +11272,7 @@ class IVRDEServer(IUnknown):
    def setEnabled(self, value):
        req=IVRDEServer_setEnabledRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._enabled = value
        else:
             req._enabled = value.handle
@@ -11286,7 +11286,7 @@ class IVRDEServer(IUnknown):
    def setAuthType(self, value):
        req=IVRDEServer_setAuthTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._authType = value
        else:
             req._authType = value.handle
@@ -11300,7 +11300,7 @@ class IVRDEServer(IUnknown):
    def setAuthTimeout(self, value):
        req=IVRDEServer_setAuthTimeoutRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._authTimeout = value
        else:
             req._authTimeout = value.handle
@@ -11314,7 +11314,7 @@ class IVRDEServer(IUnknown):
    def setAllowMultiConnection(self, value):
        req=IVRDEServer_setAllowMultiConnectionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._allowMultiConnection = value
        else:
             req._allowMultiConnection = value.handle
@@ -11328,7 +11328,7 @@ class IVRDEServer(IUnknown):
    def setReuseSingleConnection(self, value):
        req=IVRDEServer_setReuseSingleConnectionRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._reuseSingleConnection = value
        else:
             req._reuseSingleConnection = value.handle
@@ -11342,7 +11342,7 @@ class IVRDEServer(IUnknown):
    def setVRDEExtPack(self, value):
        req=IVRDEServer_setVRDEExtPackRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._VRDEExtPack = value
        else:
             req._VRDEExtPack = value.handle
@@ -11356,7 +11356,7 @@ class IVRDEServer(IUnknown):
    def setAuthLibrary(self, value):
        req=IVRDEServer_setAuthLibraryRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._authLibrary = value
        else:
             req._authLibrary = value.handle
@@ -11404,22 +11404,22 @@ class ISession(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISession(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11500,22 +11500,22 @@ class IStorageController(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IStorageController(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11569,7 +11569,7 @@ class IStorageController(IUnknown):
    def setInstance(self, value):
        req=IStorageController_setInstanceRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._instance = value
        else:
             req._instance = value.handle
@@ -11583,7 +11583,7 @@ class IStorageController(IUnknown):
    def setPortCount(self, value):
        req=IStorageController_setPortCountRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._portCount = value
        else:
             req._portCount = value.handle
@@ -11602,7 +11602,7 @@ class IStorageController(IUnknown):
    def setControllerType(self, value):
        req=IStorageController_setControllerTypeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._controllerType = value
        else:
             req._controllerType = value.handle
@@ -11616,7 +11616,7 @@ class IStorageController(IUnknown):
    def setUseHostIOCache(self, value):
        req=IStorageController_setUseHostIOCacheRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._useHostIOCache = value
        else:
             req._useHostIOCache = value.handle
@@ -11663,22 +11663,22 @@ class IManagedObjectRef(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IManagedObjectRef(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11745,22 +11745,22 @@ class IWebsessionManager(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IWebsessionManager(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11840,22 +11840,22 @@ class IPerformanceMetric(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IPerformanceMetric(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -11951,22 +11951,22 @@ class IPerformanceCollector(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IPerformanceCollector(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12077,22 +12077,22 @@ class INATEngine(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATEngine(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12174,7 +12174,7 @@ class INATEngine(IUnknown):
    def setNetwork(self, value):
        req=INATEngine_setNetworkRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._network = value
        else:
             req._network = value.handle
@@ -12188,7 +12188,7 @@ class INATEngine(IUnknown):
    def setHostIP(self, value):
        req=INATEngine_setHostIPRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._hostIP = value
        else:
             req._hostIP = value.handle
@@ -12202,7 +12202,7 @@ class INATEngine(IUnknown):
    def setTFTPPrefix(self, value):
        req=INATEngine_setTFTPPrefixRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._TFTPPrefix = value
        else:
             req._TFTPPrefix = value.handle
@@ -12216,7 +12216,7 @@ class INATEngine(IUnknown):
    def setTFTPBootFile(self, value):
        req=INATEngine_setTFTPBootFileRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._TFTPBootFile = value
        else:
             req._TFTPBootFile = value.handle
@@ -12230,7 +12230,7 @@ class INATEngine(IUnknown):
    def setTFTPNextServer(self, value):
        req=INATEngine_setTFTPNextServerRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._TFTPNextServer = value
        else:
             req._TFTPNextServer = value.handle
@@ -12244,7 +12244,7 @@ class INATEngine(IUnknown):
    def setAliasMode(self, value):
        req=INATEngine_setAliasModeRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._aliasMode = value
        else:
             req._aliasMode = value.handle
@@ -12258,7 +12258,7 @@ class INATEngine(IUnknown):
    def setDNSPassDomain(self, value):
        req=INATEngine_setDNSPassDomainRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._DNSPassDomain = value
        else:
             req._DNSPassDomain = value.handle
@@ -12272,7 +12272,7 @@ class INATEngine(IUnknown):
    def setDNSProxy(self, value):
        req=INATEngine_setDNSProxyRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._DNSProxy = value
        else:
             req._DNSProxy = value.handle
@@ -12286,7 +12286,7 @@ class INATEngine(IUnknown):
    def setDNSUseHostResolver(self, value):
        req=INATEngine_setDNSUseHostResolverRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._DNSUseHostResolver = value
        else:
             req._DNSUseHostResolver = value.handle
@@ -12338,22 +12338,22 @@ class IBandwidthGroup(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IBandwidthGroup(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12402,7 +12402,7 @@ class IBandwidthGroup(IUnknown):
    def setMaxBytesPerSec(self, value):
        req=IBandwidthGroup_setMaxBytesPerSecRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._maxBytesPerSec = value
        else:
             req._maxBytesPerSec = value.handle
@@ -12435,22 +12435,22 @@ class IBandwidthControl(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IBandwidthControl(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12545,22 +12545,22 @@ class IEventSource(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IEventSource(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12683,22 +12683,22 @@ class IEventListener(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IEventListener(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12757,22 +12757,22 @@ class IEvent(IUnknown):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12857,22 +12857,22 @@ class IReusableEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IReusableEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -12935,22 +12935,22 @@ class IMachineEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMachineEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13004,22 +13004,22 @@ class IMachineStateChangedEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMachineStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13073,22 +13073,22 @@ class IMachineDataChangedEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMachineDataChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13142,22 +13142,22 @@ class IMediumRegisteredEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMediumRegisteredEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13223,22 +13223,22 @@ class IMachineRegisteredEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMachineRegisteredEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13292,22 +13292,22 @@ class ISessionStateChangedEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISessionStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13361,22 +13361,22 @@ class IGuestPropertyChangedEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestPropertyChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13442,22 +13442,22 @@ class ISnapshotEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISnapshotEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13511,22 +13511,22 @@ class ISnapshotTakenEvent(ISnapshotEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISnapshotTakenEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13575,22 +13575,22 @@ class ISnapshotDeletedEvent(ISnapshotEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISnapshotDeletedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13639,22 +13639,22 @@ class ISnapshotChangedEvent(ISnapshotEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISnapshotChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13703,22 +13703,22 @@ class IMousePointerShapeChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMousePointerShapeChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13808,22 +13808,22 @@ class IMouseCapabilityChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMouseCapabilityChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13895,22 +13895,22 @@ class IKeyboardLedsChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IKeyboardLedsChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -13976,22 +13976,22 @@ class IStateChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14045,22 +14045,22 @@ class IAdditionsStateChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IAdditionsStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14109,22 +14109,22 @@ class INetworkAdapterChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INetworkAdapterChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14178,22 +14178,22 @@ class ISerialPortChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISerialPortChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14247,22 +14247,22 @@ class IParallelPortChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IParallelPortChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14316,22 +14316,22 @@ class IStorageControllerChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IStorageControllerChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14380,22 +14380,22 @@ class IMediumChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IMediumChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14449,22 +14449,22 @@ class IClipboardModeChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IClipboardModeChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14518,22 +14518,22 @@ class IDragAndDropModeChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IDragAndDropModeChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14587,22 +14587,22 @@ class ICPUChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ICPUChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14662,22 +14662,22 @@ class ICPUExecutionCapChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ICPUExecutionCapChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14731,22 +14731,22 @@ class IGuestKeyboardEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestKeyboardEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14800,22 +14800,22 @@ class IGuestMouseEvent(IReusableEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestMouseEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14899,22 +14899,22 @@ class IGuestMultiTouchEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestMultiTouchEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -14998,22 +14998,22 @@ class IGuestSessionEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestSessionEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15067,22 +15067,22 @@ class IGuestSessionStateChangedEvent(IGuestSessionEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestSessionStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15148,22 +15148,22 @@ class IGuestSessionRegisteredEvent(IGuestSessionEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestSessionRegisteredEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15217,22 +15217,22 @@ class IGuestProcessEvent(IGuestSessionEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestProcessEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15292,22 +15292,22 @@ class IGuestProcessRegisteredEvent(IGuestProcessEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestProcessRegisteredEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15361,22 +15361,22 @@ class IGuestProcessStateChangedEvent(IGuestProcessEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestProcessStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15436,22 +15436,22 @@ class IGuestProcessIOEvent(IGuestProcessEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestProcessIOEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15511,22 +15511,22 @@ class IGuestProcessInputNotifyEvent(IGuestProcessIOEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestProcessInputNotifyEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15580,22 +15580,22 @@ class IGuestProcessOutputEvent(IGuestProcessIOEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestProcessOutputEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15649,22 +15649,22 @@ class IGuestFileEvent(IGuestSessionEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFileEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15718,22 +15718,22 @@ class IGuestFileRegisteredEvent(IGuestFileEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFileRegisteredEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15787,22 +15787,22 @@ class IGuestFileStateChangedEvent(IGuestFileEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFileStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15862,22 +15862,22 @@ class IGuestFileIOEvent(IGuestFileEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFileIOEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -15937,22 +15937,22 @@ class IGuestFileOffsetChangedEvent(IGuestFileIOEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFileOffsetChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16001,22 +16001,22 @@ class IGuestFileReadEvent(IGuestFileIOEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFileReadEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16070,22 +16070,22 @@ class IGuestFileWriteEvent(IGuestFileIOEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestFileWriteEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16134,22 +16134,22 @@ class IVRDEServerChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVRDEServerChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16198,22 +16198,22 @@ class IVRDEServerInfoChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVRDEServerInfoChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16262,22 +16262,22 @@ class IVideoCaptureChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVideoCaptureChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16326,22 +16326,22 @@ class IUSBControllerChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IUSBControllerChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16390,22 +16390,22 @@ class IUSBDeviceStateChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IUSBDeviceStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16471,22 +16471,22 @@ class ISharedFolderChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ISharedFolderChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16540,22 +16540,22 @@ class IRuntimeErrorEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IRuntimeErrorEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16621,22 +16621,22 @@ class IEventSourceChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IEventSourceChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16696,22 +16696,22 @@ class IExtraDataChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IExtraDataChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16777,22 +16777,22 @@ class IVetoEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVetoEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16869,22 +16869,22 @@ class IExtraDataCanChangeEvent(IVetoEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IExtraDataCanChangeEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -16950,22 +16950,22 @@ class ICanShowWindowEvent(IVetoEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return ICanShowWindowEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17014,22 +17014,22 @@ class IShowWindowEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IShowWindowEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17063,7 +17063,7 @@ class IShowWindowEvent(IEvent):
    def setWinId(self, value):
        req=IShowWindowEvent_setWinIdRequestMsg()
        req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
+       if type(value) in [int, bool, str, str]:
             req._winId = value
        else:
             req._winId = value.handle
@@ -17093,22 +17093,22 @@ class INATRedirectEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATRedirectEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17204,22 +17204,22 @@ class IHostPCIDevicePlugEvent(IMachineEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IHostPCIDevicePlugEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17291,22 +17291,22 @@ class IVBoxSVCAvailabilityChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IVBoxSVCAvailabilityChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17360,22 +17360,22 @@ class IBandwidthGroupChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IBandwidthGroupChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17429,22 +17429,22 @@ class IGuestMonitorChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestMonitorChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17528,22 +17528,22 @@ class IGuestUserStateChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IGuestUserStateChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17615,22 +17615,22 @@ class IStorageDeviceChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IStorageDeviceChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17696,22 +17696,22 @@ class INATNetworkChangedEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATNetworkChangedEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17765,22 +17765,22 @@ class INATNetworkStartStopEvent(INATNetworkChangedEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATNetworkStartStopEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17834,22 +17834,22 @@ class INATNetworkAlterEvent(INATNetworkChangedEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATNetworkAlterEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17898,22 +17898,22 @@ class INATNetworkCreationDeletionEvent(INATNetworkAlterEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATNetworkCreationDeletionEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -17967,22 +17967,22 @@ class INATNetworkSettingEvent(INATNetworkAlterEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATNetworkSettingEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -18060,22 +18060,22 @@ class INATNetworkPortForwardEvent(INATNetworkAlterEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return INATNetworkPortForwardEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -18171,22 +18171,22 @@ class IHostNameResolutionConfigurationChangeEvent(IEvent):
    def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __getitem__(self, index):
       if self.isarray:
           return IHostNameResolutionConfigurationChangeEvent(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
    def __str__(self):
         return self.handle
@@ -18238,46 +18238,46 @@ class IPCIDeviceAttachment:
        return self.name
 
     def setName(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getIsPhysicalDevice(self):
        return self.isPhysicalDevice
 
     def setIsPhysicalDevice(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getHostAddress(self):
        return self.hostAddress
 
     def setHostAddress(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getGuestAddress(self):
        return self.guestAddress
 
     def setGuestAddress(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
 
     def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __getitem__(self, index):
       if self.isarray:
           return IPCIDeviceAttachment(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 
 class IVRDEServerInfo:
@@ -18325,112 +18325,112 @@ class IVRDEServerInfo:
        return self.active
 
     def setActive(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getPort(self):
        return self.port
 
     def setPort(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getNumberOfClients(self):
        return self.numberOfClients
 
     def setNumberOfClients(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getBeginTime(self):
        return self.beginTime
 
     def setBeginTime(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getEndTime(self):
        return self.endTime
 
     def setEndTime(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getBytesSent(self):
        return self.bytesSent
 
     def setBytesSent(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getBytesSentTotal(self):
        return self.bytesSentTotal
 
     def setBytesSentTotal(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getBytesReceived(self):
        return self.bytesReceived
 
     def setBytesReceived(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getBytesReceivedTotal(self):
        return self.bytesReceivedTotal
 
     def setBytesReceivedTotal(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getUser(self):
        return self.user
 
     def setUser(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getDomain(self):
        return self.domain
 
     def setDomain(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getClientName(self):
        return self.clientName
 
     def setClientName(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getClientIP(self):
        return self.clientIP
 
     def setClientIP(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getClientVersion(self):
        return self.clientVersion
 
     def setClientVersion(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getEncryptionStyle(self):
        return self.encryptionStyle
 
     def setEncryptionStyle(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
 
     def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __getitem__(self, index):
       if self.isarray:
           return IVRDEServerInfo(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 
 class IGuestOSType:
@@ -18502,184 +18502,184 @@ class IGuestOSType:
        return self.familyId
 
     def setFamilyId(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getFamilyDescription(self):
        return self.familyDescription
 
     def setFamilyDescription(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getId(self):
        return self.id
 
     def setId(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getDescription(self):
        return self.description
 
     def setDescription(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getIs64Bit(self):
        return self.is64Bit
 
     def setIs64Bit(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedIOAPIC(self):
        return self.recommendedIOAPIC
 
     def setRecommendedIOAPIC(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedVirtEx(self):
        return self.recommendedVirtEx
 
     def setRecommendedVirtEx(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedRAM(self):
        return self.recommendedRAM
 
     def setRecommendedRAM(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedVRAM(self):
        return self.recommendedVRAM
 
     def setRecommendedVRAM(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommended2DVideoAcceleration(self):
        return self.recommended2DVideoAcceleration
 
     def setRecommended2DVideoAcceleration(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommended3DAcceleration(self):
        return self.recommended3DAcceleration
 
     def setRecommended3DAcceleration(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedHDD(self):
        return self.recommendedHDD
 
     def setRecommendedHDD(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getAdapterType(self):
        return self.adapterType
 
     def setAdapterType(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedPAE(self):
        return self.recommendedPAE
 
     def setRecommendedPAE(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedDVDStorageController(self):
        return self.recommendedDVDStorageController
 
     def setRecommendedDVDStorageController(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedDVDStorageBus(self):
        return self.recommendedDVDStorageBus
 
     def setRecommendedDVDStorageBus(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedHDStorageController(self):
        return self.recommendedHDStorageController
 
     def setRecommendedHDStorageController(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedHDStorageBus(self):
        return self.recommendedHDStorageBus
 
     def setRecommendedHDStorageBus(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedFirmware(self):
        return self.recommendedFirmware
 
     def setRecommendedFirmware(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedUSBHID(self):
        return self.recommendedUSBHID
 
     def setRecommendedUSBHID(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedHPET(self):
        return self.recommendedHPET
 
     def setRecommendedHPET(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedUSBTablet(self):
        return self.recommendedUSBTablet
 
     def setRecommendedUSBTablet(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedRTCUseUTC(self):
        return self.recommendedRTCUseUTC
 
     def setRecommendedRTCUseUTC(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedChipset(self):
        return self.recommendedChipset
 
     def setRecommendedChipset(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedAudioController(self):
        return self.recommendedAudioController
 
     def setRecommendedAudioController(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedFloppy(self):
        return self.recommendedFloppy
 
     def setRecommendedFloppy(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getRecommendedUSB(self):
        return self.recommendedUSB
 
     def setRecommendedUSB(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
 
     def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __getitem__(self, index):
       if self.isarray:
           return IGuestOSType(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 
 class IAdditionsFacility:
@@ -18707,52 +18707,52 @@ class IAdditionsFacility:
        return self.classType
 
     def setClassType(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getLastUpdated(self):
        return self.lastUpdated
 
     def setLastUpdated(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getName(self):
        return self.name
 
     def setName(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getStatus(self):
        return self.status
 
     def setStatus(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getType(self):
        return self.type
 
     def setType(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
 
     def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __getitem__(self, index):
       if self.isarray:
           return IAdditionsFacility(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 
 class IMediumAttachment:
@@ -18794,94 +18794,94 @@ class IMediumAttachment:
        return self.medium
 
     def setMedium(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getController(self):
        return self.controller
 
     def setController(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getPort(self):
        return self.port
 
     def setPort(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getDevice(self):
        return self.device
 
     def setDevice(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getType(self):
        return self.type
 
     def setType(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getPassthrough(self):
        return self.passthrough
 
     def setPassthrough(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getTemporaryEject(self):
        return self.temporaryEject
 
     def setTemporaryEject(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getIsEjected(self):
        return self.isEjected
 
     def setIsEjected(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getNonRotational(self):
        return self.nonRotational
 
     def setNonRotational(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getDiscard(self):
        return self.discard
 
     def setDiscard(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getHotPluggable(self):
        return self.hotPluggable
 
     def setHotPluggable(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getBandwidthGroup(self):
        return self.bandwidthGroup
 
     def setBandwidthGroup(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
 
     def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __getitem__(self, index):
       if self.isarray:
           return IMediumAttachment(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 
 class ISharedFolder:
@@ -18911,64 +18911,64 @@ class ISharedFolder:
        return self.name
 
     def setName(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getHostPath(self):
        return self.hostPath
 
     def setHostPath(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getAccessible(self):
        return self.accessible
 
     def setAccessible(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getWritable(self):
        return self.writable
 
     def setWritable(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getAutoMount(self):
        return self.autoMount
 
     def setAutoMount(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
     def getLastAccessError(self):
        return self.lastAccessError
 
     def setLastAccessError(self):
-       raise Error, 'setters not supported'
+       raise Error('setters not supported')
     
 
     def __next(self):
       if self.isarray:
           return self.handle.__next()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __size(self):
       if self.isarray:
           return self.handle.__size()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __len__(self):
       if self.isarray:
           return self.handle.__len__()
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
     def __getitem__(self, index):
       if self.isarray:
           return ISharedFolder(self.mgr, self.handle[index])
-      raise TypeError, "iteration over non-sequence"
+      raise TypeError("iteration over non-sequence")
 
 
 class SettingsVersion:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=SettingsVersion._ValueMap[handle]
        else:
            self.handle=handle
@@ -18978,7 +18978,7 @@ class SettingsVersion:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -18987,7 +18987,7 @@ class SettingsVersion:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19040,7 +19040,7 @@ class SettingsVersion:
 class AccessMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AccessMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -19050,7 +19050,7 @@ class AccessMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19059,7 +19059,7 @@ class AccessMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19080,7 +19080,7 @@ class AccessMode:
 class MachineState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=MachineState._ValueMap[handle]
        else:
            self.handle=handle
@@ -19090,7 +19090,7 @@ class MachineState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19099,7 +19099,7 @@ class MachineState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19168,7 +19168,7 @@ class MachineState:
 class SessionState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=SessionState._ValueMap[handle]
        else:
            self.handle=handle
@@ -19178,7 +19178,7 @@ class SessionState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19187,7 +19187,7 @@ class SessionState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19214,7 +19214,7 @@ class SessionState:
 class CPUPropertyType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=CPUPropertyType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19224,7 +19224,7 @@ class CPUPropertyType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19233,7 +19233,7 @@ class CPUPropertyType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19260,7 +19260,7 @@ class CPUPropertyType:
 class HWVirtExPropertyType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=HWVirtExPropertyType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19270,7 +19270,7 @@ class HWVirtExPropertyType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19279,7 +19279,7 @@ class HWVirtExPropertyType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19310,7 +19310,7 @@ class HWVirtExPropertyType:
 class FaultToleranceState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=FaultToleranceState._ValueMap[handle]
        else:
            self.handle=handle
@@ -19320,7 +19320,7 @@ class FaultToleranceState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19329,7 +19329,7 @@ class FaultToleranceState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19352,7 +19352,7 @@ class FaultToleranceState:
 class LockType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=LockType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19362,7 +19362,7 @@ class LockType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19371,7 +19371,7 @@ class LockType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19394,7 +19394,7 @@ class LockType:
 class SessionType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=SessionType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19404,7 +19404,7 @@ class SessionType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19413,7 +19413,7 @@ class SessionType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19438,7 +19438,7 @@ class SessionType:
 class DeviceType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DeviceType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19448,7 +19448,7 @@ class DeviceType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19457,7 +19457,7 @@ class DeviceType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19488,7 +19488,7 @@ class DeviceType:
 class DeviceActivity:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DeviceActivity._ValueMap[handle]
        else:
            self.handle=handle
@@ -19498,7 +19498,7 @@ class DeviceActivity:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19507,7 +19507,7 @@ class DeviceActivity:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19532,7 +19532,7 @@ class DeviceActivity:
 class ClipboardMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ClipboardMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -19542,7 +19542,7 @@ class ClipboardMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19551,7 +19551,7 @@ class ClipboardMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19576,7 +19576,7 @@ class ClipboardMode:
 class DragAndDropMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DragAndDropMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -19586,7 +19586,7 @@ class DragAndDropMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19595,7 +19595,7 @@ class DragAndDropMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19620,7 +19620,7 @@ class DragAndDropMode:
 class Scope:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=Scope._ValueMap[handle]
        else:
            self.handle=handle
@@ -19630,7 +19630,7 @@ class Scope:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19639,7 +19639,7 @@ class Scope:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19662,7 +19662,7 @@ class Scope:
 class BIOSBootMenuMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=BIOSBootMenuMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -19672,7 +19672,7 @@ class BIOSBootMenuMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19681,7 +19681,7 @@ class BIOSBootMenuMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19704,7 +19704,7 @@ class BIOSBootMenuMode:
 class ProcessorFeature:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessorFeature._ValueMap[handle]
        else:
            self.handle=handle
@@ -19714,7 +19714,7 @@ class ProcessorFeature:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19723,7 +19723,7 @@ class ProcessorFeature:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19748,7 +19748,7 @@ class ProcessorFeature:
 class FirmwareType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=FirmwareType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19758,7 +19758,7 @@ class FirmwareType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19767,7 +19767,7 @@ class FirmwareType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19794,7 +19794,7 @@ class FirmwareType:
 class PointingHIDType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=PointingHIDType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19804,7 +19804,7 @@ class PointingHIDType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19813,7 +19813,7 @@ class PointingHIDType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19842,7 +19842,7 @@ class PointingHIDType:
 class KeyboardHIDType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=KeyboardHIDType._ValueMap[handle]
        else:
            self.handle=handle
@@ -19852,7 +19852,7 @@ class KeyboardHIDType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19861,7 +19861,7 @@ class KeyboardHIDType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -19886,7 +19886,7 @@ class KeyboardHIDType:
 class DhcpOpt:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DhcpOpt._ValueMap[handle]
        else:
            self.handle=handle
@@ -19896,7 +19896,7 @@ class DhcpOpt:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -19905,7 +19905,7 @@ class DhcpOpt:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20048,7 +20048,7 @@ class DhcpOpt:
 class VFSType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=VFSType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20058,7 +20058,7 @@ class VFSType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20067,7 +20067,7 @@ class VFSType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20092,7 +20092,7 @@ class VFSType:
 class VFSFileType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=VFSFileType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20102,7 +20102,7 @@ class VFSFileType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20111,7 +20111,7 @@ class VFSFileType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20146,7 +20146,7 @@ class VFSFileType:
 class ImportOptions:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ImportOptions._ValueMap[handle]
        else:
            self.handle=handle
@@ -20156,7 +20156,7 @@ class ImportOptions:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20165,7 +20165,7 @@ class ImportOptions:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20186,7 +20186,7 @@ class ImportOptions:
 class ExportOptions:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ExportOptions._ValueMap[handle]
        else:
            self.handle=handle
@@ -20196,7 +20196,7 @@ class ExportOptions:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20205,7 +20205,7 @@ class ExportOptions:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20230,7 +20230,7 @@ class ExportOptions:
 class VirtualSystemDescriptionType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=VirtualSystemDescriptionType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20240,7 +20240,7 @@ class VirtualSystemDescriptionType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20249,7 +20249,7 @@ class VirtualSystemDescriptionType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20314,7 +20314,7 @@ class VirtualSystemDescriptionType:
 class VirtualSystemDescriptionValueType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=VirtualSystemDescriptionValueType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20324,7 +20324,7 @@ class VirtualSystemDescriptionValueType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20333,7 +20333,7 @@ class VirtualSystemDescriptionValueType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20358,7 +20358,7 @@ class VirtualSystemDescriptionValueType:
 class GraphicsControllerType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=GraphicsControllerType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20368,7 +20368,7 @@ class GraphicsControllerType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20377,7 +20377,7 @@ class GraphicsControllerType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20400,7 +20400,7 @@ class GraphicsControllerType:
 class CleanupMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=CleanupMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -20410,7 +20410,7 @@ class CleanupMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20419,7 +20419,7 @@ class CleanupMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20444,7 +20444,7 @@ class CleanupMode:
 class CloneMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=CloneMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -20454,7 +20454,7 @@ class CloneMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20463,7 +20463,7 @@ class CloneMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20486,7 +20486,7 @@ class CloneMode:
 class CloneOptions:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=CloneOptions._ValueMap[handle]
        else:
            self.handle=handle
@@ -20496,7 +20496,7 @@ class CloneOptions:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20505,7 +20505,7 @@ class CloneOptions:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20530,7 +20530,7 @@ class CloneOptions:
 class AutostopType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AutostopType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20540,7 +20540,7 @@ class AutostopType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20549,7 +20549,7 @@ class AutostopType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20574,7 +20574,7 @@ class AutostopType:
 class HostNetworkInterfaceMediumType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=HostNetworkInterfaceMediumType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20584,7 +20584,7 @@ class HostNetworkInterfaceMediumType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20593,7 +20593,7 @@ class HostNetworkInterfaceMediumType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20618,7 +20618,7 @@ class HostNetworkInterfaceMediumType:
 class HostNetworkInterfaceStatus:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=HostNetworkInterfaceStatus._ValueMap[handle]
        else:
            self.handle=handle
@@ -20628,7 +20628,7 @@ class HostNetworkInterfaceStatus:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20637,7 +20637,7 @@ class HostNetworkInterfaceStatus:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20660,7 +20660,7 @@ class HostNetworkInterfaceStatus:
 class HostNetworkInterfaceType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=HostNetworkInterfaceType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20670,7 +20670,7 @@ class HostNetworkInterfaceType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20679,7 +20679,7 @@ class HostNetworkInterfaceType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20700,7 +20700,7 @@ class HostNetworkInterfaceType:
 class AdditionsFacilityType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AdditionsFacilityType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20710,7 +20710,7 @@ class AdditionsFacilityType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20719,7 +20719,7 @@ class AdditionsFacilityType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20752,7 +20752,7 @@ class AdditionsFacilityType:
 class AdditionsFacilityClass:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AdditionsFacilityClass._ValueMap[handle]
        else:
            self.handle=handle
@@ -20762,7 +20762,7 @@ class AdditionsFacilityClass:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20771,7 +20771,7 @@ class AdditionsFacilityClass:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20802,7 +20802,7 @@ class AdditionsFacilityClass:
 class AdditionsFacilityStatus:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AdditionsFacilityStatus._ValueMap[handle]
        else:
            self.handle=handle
@@ -20812,7 +20812,7 @@ class AdditionsFacilityStatus:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20821,7 +20821,7 @@ class AdditionsFacilityStatus:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20856,7 +20856,7 @@ class AdditionsFacilityStatus:
 class AdditionsRunLevelType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AdditionsRunLevelType._ValueMap[handle]
        else:
            self.handle=handle
@@ -20866,7 +20866,7 @@ class AdditionsRunLevelType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20875,7 +20875,7 @@ class AdditionsRunLevelType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20900,7 +20900,7 @@ class AdditionsRunLevelType:
 class AdditionsUpdateFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AdditionsUpdateFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -20910,7 +20910,7 @@ class AdditionsUpdateFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20919,7 +20919,7 @@ class AdditionsUpdateFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20940,7 +20940,7 @@ class AdditionsUpdateFlag:
 class GuestSessionStatus:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=GuestSessionStatus._ValueMap[handle]
        else:
            self.handle=handle
@@ -20950,7 +20950,7 @@ class GuestSessionStatus:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -20959,7 +20959,7 @@ class GuestSessionStatus:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -20994,7 +20994,7 @@ class GuestSessionStatus:
 class GuestSessionWaitForFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=GuestSessionWaitForFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21004,7 +21004,7 @@ class GuestSessionWaitForFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21013,7 +21013,7 @@ class GuestSessionWaitForFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21038,7 +21038,7 @@ class GuestSessionWaitForFlag:
 class GuestSessionWaitResult:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=GuestSessionWaitResult._ValueMap[handle]
        else:
            self.handle=handle
@@ -21048,7 +21048,7 @@ class GuestSessionWaitResult:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21057,7 +21057,7 @@ class GuestSessionWaitResult:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21088,7 +21088,7 @@ class GuestSessionWaitResult:
 class GuestUserState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=GuestUserState._ValueMap[handle]
        else:
            self.handle=handle
@@ -21098,7 +21098,7 @@ class GuestUserState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21107,7 +21107,7 @@ class GuestUserState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21156,7 +21156,7 @@ class GuestUserState:
 class FileSeekType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=FileSeekType._ValueMap[handle]
        else:
            self.handle=handle
@@ -21166,7 +21166,7 @@ class FileSeekType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21175,7 +21175,7 @@ class FileSeekType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21196,7 +21196,7 @@ class FileSeekType:
 class ProcessInputFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessInputFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21206,7 +21206,7 @@ class ProcessInputFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21215,7 +21215,7 @@ class ProcessInputFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21236,7 +21236,7 @@ class ProcessInputFlag:
 class ProcessOutputFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessOutputFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21246,7 +21246,7 @@ class ProcessOutputFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21255,7 +21255,7 @@ class ProcessOutputFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21276,7 +21276,7 @@ class ProcessOutputFlag:
 class ProcessWaitForFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessWaitForFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21286,7 +21286,7 @@ class ProcessWaitForFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21295,7 +21295,7 @@ class ProcessWaitForFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21324,7 +21324,7 @@ class ProcessWaitForFlag:
 class ProcessWaitResult:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessWaitResult._ValueMap[handle]
        else:
            self.handle=handle
@@ -21334,7 +21334,7 @@ class ProcessWaitResult:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21343,7 +21343,7 @@ class ProcessWaitResult:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21380,7 +21380,7 @@ class ProcessWaitResult:
 class CopyFileFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=CopyFileFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21390,7 +21390,7 @@ class CopyFileFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21399,7 +21399,7 @@ class CopyFileFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21424,7 +21424,7 @@ class CopyFileFlag:
 class DirectoryCreateFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DirectoryCreateFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21434,7 +21434,7 @@ class DirectoryCreateFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21443,7 +21443,7 @@ class DirectoryCreateFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21464,7 +21464,7 @@ class DirectoryCreateFlag:
 class DirectoryRemoveRecFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DirectoryRemoveRecFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21474,7 +21474,7 @@ class DirectoryRemoveRecFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21483,7 +21483,7 @@ class DirectoryRemoveRecFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21506,7 +21506,7 @@ class DirectoryRemoveRecFlag:
 class PathRenameFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=PathRenameFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21516,7 +21516,7 @@ class PathRenameFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21525,7 +21525,7 @@ class PathRenameFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21550,7 +21550,7 @@ class PathRenameFlag:
 class ProcessCreateFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessCreateFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21560,7 +21560,7 @@ class ProcessCreateFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21569,7 +21569,7 @@ class ProcessCreateFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21602,7 +21602,7 @@ class ProcessCreateFlag:
 class ProcessPriority:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessPriority._ValueMap[handle]
        else:
            self.handle=handle
@@ -21612,7 +21612,7 @@ class ProcessPriority:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21621,7 +21621,7 @@ class ProcessPriority:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21642,7 +21642,7 @@ class ProcessPriority:
 class SymlinkType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=SymlinkType._ValueMap[handle]
        else:
            self.handle=handle
@@ -21652,7 +21652,7 @@ class SymlinkType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21661,7 +21661,7 @@ class SymlinkType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21684,7 +21684,7 @@ class SymlinkType:
 class SymlinkReadFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=SymlinkReadFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21694,7 +21694,7 @@ class SymlinkReadFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21703,7 +21703,7 @@ class SymlinkReadFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21724,7 +21724,7 @@ class SymlinkReadFlag:
 class ProcessStatus:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessStatus._ValueMap[handle]
        else:
            self.handle=handle
@@ -21734,7 +21734,7 @@ class ProcessStatus:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21743,7 +21743,7 @@ class ProcessStatus:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21784,7 +21784,7 @@ class ProcessStatus:
 class ProcessInputStatus:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ProcessInputStatus._ValueMap[handle]
        else:
            self.handle=handle
@@ -21794,7 +21794,7 @@ class ProcessInputStatus:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21803,7 +21803,7 @@ class ProcessInputStatus:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21830,7 +21830,7 @@ class ProcessInputStatus:
 class FileStatus:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=FileStatus._ValueMap[handle]
        else:
            self.handle=handle
@@ -21840,7 +21840,7 @@ class FileStatus:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21849,7 +21849,7 @@ class FileStatus:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21880,7 +21880,7 @@ class FileStatus:
 class FsObjType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=FsObjType._ValueMap[handle]
        else:
            self.handle=handle
@@ -21890,7 +21890,7 @@ class FsObjType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21899,7 +21899,7 @@ class FsObjType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21934,7 +21934,7 @@ class FsObjType:
 class DragAndDropAction:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DragAndDropAction._ValueMap[handle]
        else:
            self.handle=handle
@@ -21944,7 +21944,7 @@ class DragAndDropAction:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21953,7 +21953,7 @@ class DragAndDropAction:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -21978,7 +21978,7 @@ class DragAndDropAction:
 class DirectoryOpenFlag:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DirectoryOpenFlag._ValueMap[handle]
        else:
            self.handle=handle
@@ -21988,7 +21988,7 @@ class DirectoryOpenFlag:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -21997,7 +21997,7 @@ class DirectoryOpenFlag:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22018,7 +22018,7 @@ class DirectoryOpenFlag:
 class MediumState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=MediumState._ValueMap[handle]
        else:
            self.handle=handle
@@ -22028,7 +22028,7 @@ class MediumState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22037,7 +22037,7 @@ class MediumState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22068,7 +22068,7 @@ class MediumState:
 class MediumType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=MediumType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22078,7 +22078,7 @@ class MediumType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22087,7 +22087,7 @@ class MediumType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22116,7 +22116,7 @@ class MediumType:
 class MediumVariant:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=MediumVariant._ValueMap[handle]
        else:
            self.handle=handle
@@ -22126,7 +22126,7 @@ class MediumVariant:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22135,7 +22135,7 @@ class MediumVariant:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22168,7 +22168,7 @@ class MediumVariant:
 class DataType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DataType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22178,7 +22178,7 @@ class DataType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22187,7 +22187,7 @@ class DataType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22210,7 +22210,7 @@ class DataType:
 class DataFlags:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=DataFlags._ValueMap[handle]
        else:
            self.handle=handle
@@ -22220,7 +22220,7 @@ class DataFlags:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22229,7 +22229,7 @@ class DataFlags:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22256,7 +22256,7 @@ class DataFlags:
 class MediumFormatCapabilities:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=MediumFormatCapabilities._ValueMap[handle]
        else:
            self.handle=handle
@@ -22266,7 +22266,7 @@ class MediumFormatCapabilities:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22275,7 +22275,7 @@ class MediumFormatCapabilities:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22314,7 +22314,7 @@ class MediumFormatCapabilities:
 class MouseButtonState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=MouseButtonState._ValueMap[handle]
        else:
            self.handle=handle
@@ -22324,7 +22324,7 @@ class MouseButtonState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22333,7 +22333,7 @@ class MouseButtonState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22366,7 +22366,7 @@ class MouseButtonState:
 class TouchContactState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=TouchContactState._ValueMap[handle]
        else:
            self.handle=handle
@@ -22376,7 +22376,7 @@ class TouchContactState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22385,7 +22385,7 @@ class TouchContactState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22410,7 +22410,7 @@ class TouchContactState:
 class FramebufferPixelFormat:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=FramebufferPixelFormat._ValueMap[handle]
        else:
            self.handle=handle
@@ -22420,7 +22420,7 @@ class FramebufferPixelFormat:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22429,7 +22429,7 @@ class FramebufferPixelFormat:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22450,7 +22450,7 @@ class FramebufferPixelFormat:
 class NetworkAttachmentType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=NetworkAttachmentType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22460,7 +22460,7 @@ class NetworkAttachmentType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22469,7 +22469,7 @@ class NetworkAttachmentType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22500,7 +22500,7 @@ class NetworkAttachmentType:
 class NetworkAdapterType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=NetworkAdapterType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22510,7 +22510,7 @@ class NetworkAdapterType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22519,7 +22519,7 @@ class NetworkAdapterType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22550,7 +22550,7 @@ class NetworkAdapterType:
 class NetworkAdapterPromiscModePolicy:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=NetworkAdapterPromiscModePolicy._ValueMap[handle]
        else:
            self.handle=handle
@@ -22560,7 +22560,7 @@ class NetworkAdapterPromiscModePolicy:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22569,7 +22569,7 @@ class NetworkAdapterPromiscModePolicy:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22592,7 +22592,7 @@ class NetworkAdapterPromiscModePolicy:
 class PortMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=PortMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -22602,7 +22602,7 @@ class PortMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22611,7 +22611,7 @@ class PortMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22636,7 +22636,7 @@ class PortMode:
 class USBControllerType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=USBControllerType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22646,7 +22646,7 @@ class USBControllerType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22655,7 +22655,7 @@ class USBControllerType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22680,7 +22680,7 @@ class USBControllerType:
 class USBDeviceState:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=USBDeviceState._ValueMap[handle]
        else:
            self.handle=handle
@@ -22690,7 +22690,7 @@ class USBDeviceState:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22699,7 +22699,7 @@ class USBDeviceState:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22728,7 +22728,7 @@ class USBDeviceState:
 class USBDeviceFilterAction:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=USBDeviceFilterAction._ValueMap[handle]
        else:
            self.handle=handle
@@ -22738,7 +22738,7 @@ class USBDeviceFilterAction:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22747,7 +22747,7 @@ class USBDeviceFilterAction:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22770,7 +22770,7 @@ class USBDeviceFilterAction:
 class AudioDriverType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AudioDriverType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22780,7 +22780,7 @@ class AudioDriverType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22789,7 +22789,7 @@ class AudioDriverType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22824,7 +22824,7 @@ class AudioDriverType:
 class AudioControllerType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AudioControllerType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22834,7 +22834,7 @@ class AudioControllerType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22843,7 +22843,7 @@ class AudioControllerType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22866,7 +22866,7 @@ class AudioControllerType:
 class AuthType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=AuthType._ValueMap[handle]
        else:
            self.handle=handle
@@ -22876,7 +22876,7 @@ class AuthType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22885,7 +22885,7 @@ class AuthType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22908,7 +22908,7 @@ class AuthType:
 class Reason:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=Reason._ValueMap[handle]
        else:
            self.handle=handle
@@ -22918,7 +22918,7 @@ class Reason:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22927,7 +22927,7 @@ class Reason:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -22952,7 +22952,7 @@ class Reason:
 class StorageBus:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=StorageBus._ValueMap[handle]
        else:
            self.handle=handle
@@ -22962,7 +22962,7 @@ class StorageBus:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -22971,7 +22971,7 @@ class StorageBus:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23000,7 +23000,7 @@ class StorageBus:
 class StorageControllerType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=StorageControllerType._ValueMap[handle]
        else:
            self.handle=handle
@@ -23010,7 +23010,7 @@ class StorageControllerType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23019,7 +23019,7 @@ class StorageControllerType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23054,7 +23054,7 @@ class StorageControllerType:
 class ChipsetType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=ChipsetType._ValueMap[handle]
        else:
            self.handle=handle
@@ -23064,7 +23064,7 @@ class ChipsetType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23073,7 +23073,7 @@ class ChipsetType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23096,7 +23096,7 @@ class ChipsetType:
 class NATAliasMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=NATAliasMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -23106,7 +23106,7 @@ class NATAliasMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23115,7 +23115,7 @@ class NATAliasMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23138,7 +23138,7 @@ class NATAliasMode:
 class NATProtocol:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=NATProtocol._ValueMap[handle]
        else:
            self.handle=handle
@@ -23148,7 +23148,7 @@ class NATProtocol:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23157,7 +23157,7 @@ class NATProtocol:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23178,7 +23178,7 @@ class NATProtocol:
 class BandwidthGroupType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=BandwidthGroupType._ValueMap[handle]
        else:
            self.handle=handle
@@ -23188,7 +23188,7 @@ class BandwidthGroupType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23197,7 +23197,7 @@ class BandwidthGroupType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23220,7 +23220,7 @@ class BandwidthGroupType:
 class VBoxEventType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=VBoxEventType._ValueMap[handle]
        else:
            self.handle=handle
@@ -23230,7 +23230,7 @@ class VBoxEventType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23239,7 +23239,7 @@ class VBoxEventType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23398,7 +23398,7 @@ class VBoxEventType:
 class GuestMouseEventMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=GuestMouseEventMode._ValueMap[handle]
        else:
            self.handle=handle
@@ -23408,7 +23408,7 @@ class GuestMouseEventMode:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23417,7 +23417,7 @@ class GuestMouseEventMode:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 
@@ -23438,7 +23438,7 @@ class GuestMouseEventMode:
 class GuestMonitorChangedEventType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
-       if isinstance(handle,basestring):
+       if isinstance(handle,str):
            self.handle=GuestMonitorChangedEventType._ValueMap[handle]
        else:
            self.handle=handle
@@ -23448,7 +23448,7 @@ class GuestMonitorChangedEventType:
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) == other
       return False
 
@@ -23457,7 +23457,7 @@ class GuestMonitorChangedEventType:
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
-      if isinstance(other,basestring):
+      if isinstance(other,str):
          return str(self) != other
       return True
 

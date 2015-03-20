@@ -29,7 +29,7 @@ import traceback
 #
 def enumToString(constants, enum, elem):
     all = constants.all_values(enum)
-    for e in all.keys():
+    for e in list(all.keys()):
         if str(elem) == str(all[e]):
             return e
     return "<unknown>"
@@ -45,7 +45,7 @@ def main(argv):
     # Get the global VirtualBox object
     vbox = wrapper.vbox
 
-    print "Running VirtualBox version %s" %(vbox.version)
+    print("Running VirtualBox version %s" %(vbox.version))
 
     # Get all constants through the Python wrapper code
     vboxConstants = wrapper.constants
@@ -58,22 +58,22 @@ def main(argv):
             vmname = '<inaccessible>'
             try:
                 vmname = mach.name
-            except Exception, e:
+            except Exception as e:
                 None
             vmid = '';
             try:
                 vmid = mach.id
-            except Exception, e:
+            except Exception as e:
                 None
 
             # Print some basic VM information even if there were errors
-            print "Machine name: %s [%s]" %(vmname,vmid)
+            print("Machine name: %s [%s]" %(vmname,vmid))
             if vmname == '<inaccessible>' or vmid == '':
                 continue
 
             # Print some basic VM information
-            print "    State:           %s" %(enumToString(vboxConstants, "MachineState", mach.state))
-            print "    Session state:   %s" %(enumToString(vboxConstants, "SessionState", mach.sessionState))
+            print("    State:           %s" %(enumToString(vboxConstants, "MachineState", mach.state)))
+            print("    Session state:   %s" %(enumToString(vboxConstants, "SessionState", mach.sessionState)))
 
             # Do some stuff which requires a running VM
             if mach.state == vboxConstants.MachineState_Running:
@@ -91,9 +91,9 @@ def main(argv):
                 # Retrieve the current Guest Additions runlevel and print
                 # the installed Guest Additions version
                 addRunLevel = guest.additionsRunLevel
-                print "    Additions State: %s" %(enumToString(vboxConstants, "AdditionsRunLevelType", addRunLevel))
+                print("    Additions State: %s" %(enumToString(vboxConstants, "AdditionsRunLevelType", addRunLevel)))
                 if addRunLevel != vboxConstants.AdditionsRunLevelType_None:
-                    print "    Additions Ver:   %s"  %(guest.additionsVersion)
+                    print("    Additions Ver:   %s"  %(guest.additionsVersion))
 
                 # Get the VM's display object
                 display = console.display
@@ -101,13 +101,13 @@ def main(argv):
                 # Get the VM's current display resolution + bit depth + position
                 screenNum = 0 # From first screen
                 (screenW, screenH, screenBPP, screenX, screenY) = display.getScreenResolution(screenNum)
-                print "    Display (%d):     %dx%d, %d BPP at %d,%d"  %(screenNum, screenW, screenH, screenBPP, screenX, screenY)
+                print("    Display (%d):     %dx%d, %d BPP at %d,%d"  %(screenNum, screenW, screenH, screenBPP, screenX, screenY))
 
                 # We're done -- don't forget to unlock the machine!
                 session.unlockMachine()
 
-        except Exception, e:
-            print "Errror [%s]: %s" %(mach.name, str(e))
+        except Exception as e:
+            print("Errror [%s]: %s" %(mach.name, str(e)))
             traceback.print_exc()
 
     # Call destructor and delete wrapper

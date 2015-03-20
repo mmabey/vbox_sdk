@@ -7,7 +7,7 @@
 ##################################################
 
 from VirtualBox_types import *
-import urlparse, types
+import urllib.parse, types
 from ZSI.TCcompound import ComplexType, Struct
 from ZSI import client
 from ZSI.schema import GED, GTD
@@ -34,7 +34,7 @@ class vboxBindingSOAP:
     # op: IVirtualBoxErrorInfo_getResultCode
     def IVirtualBoxErrorInfo_getResultCode(self, request, **kw):
         if isinstance(request, IVirtualBoxErrorInfo_getResultCodeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -44,7 +44,7 @@ class vboxBindingSOAP:
     # op: IVirtualBoxErrorInfo_getResultDetail
     def IVirtualBoxErrorInfo_getResultDetail(self, request, **kw):
         if isinstance(request, IVirtualBoxErrorInfo_getResultDetailRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -54,7 +54,7 @@ class vboxBindingSOAP:
     # op: IVirtualBoxErrorInfo_getInterfaceID
     def IVirtualBoxErrorInfo_getInterfaceID(self, request, **kw):
         if isinstance(request, IVirtualBoxErrorInfo_getInterfaceIDRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -64,7 +64,7 @@ class vboxBindingSOAP:
     # op: IVirtualBoxErrorInfo_getComponent
     def IVirtualBoxErrorInfo_getComponent(self, request, **kw):
         if isinstance(request, IVirtualBoxErrorInfo_getComponentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -74,7 +74,7 @@ class vboxBindingSOAP:
     # op: IVirtualBoxErrorInfo_getText
     def IVirtualBoxErrorInfo_getText(self, request, **kw):
         if isinstance(request, IVirtualBoxErrorInfo_getTextRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -84,7 +84,7 @@ class vboxBindingSOAP:
     # op: IVirtualBoxErrorInfo_getNext
     def IVirtualBoxErrorInfo_getNext(self, request, **kw):
         if isinstance(request, IVirtualBoxErrorInfo_getNextRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -94,7 +94,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getNetworkName
     def INATNetwork_getNetworkName(self, request, **kw):
         if isinstance(request, INATNetwork_getNetworkNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -104,7 +104,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setNetworkName
     def INATNetwork_setNetworkName(self, request, **kw):
         if isinstance(request, INATNetwork_setNetworkNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -114,7 +114,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getEnabled
     def INATNetwork_getEnabled(self, request, **kw):
         if isinstance(request, INATNetwork_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -124,7 +124,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setEnabled
     def INATNetwork_setEnabled(self, request, **kw):
         if isinstance(request, INATNetwork_setEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -134,7 +134,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getNetwork
     def INATNetwork_getNetwork(self, request, **kw):
         if isinstance(request, INATNetwork_getNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -144,7 +144,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setNetwork
     def INATNetwork_setNetwork(self, request, **kw):
         if isinstance(request, INATNetwork_setNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -154,7 +154,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getGateway
     def INATNetwork_getGateway(self, request, **kw):
         if isinstance(request, INATNetwork_getGatewayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -164,7 +164,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getIPv6Enabled
     def INATNetwork_getIPv6Enabled(self, request, **kw):
         if isinstance(request, INATNetwork_getIPv6EnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -174,7 +174,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setIPv6Enabled
     def INATNetwork_setIPv6Enabled(self, request, **kw):
         if isinstance(request, INATNetwork_setIPv6EnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -184,7 +184,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getIPv6Prefix
     def INATNetwork_getIPv6Prefix(self, request, **kw):
         if isinstance(request, INATNetwork_getIPv6PrefixRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -194,7 +194,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setIPv6Prefix
     def INATNetwork_setIPv6Prefix(self, request, **kw):
         if isinstance(request, INATNetwork_setIPv6PrefixRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -204,7 +204,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getAdvertiseDefaultIPv6RouteEnabled
     def INATNetwork_getAdvertiseDefaultIPv6RouteEnabled(self, request, **kw):
         if isinstance(request, INATNetwork_getAdvertiseDefaultIPv6RouteEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -214,7 +214,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setAdvertiseDefaultIPv6RouteEnabled
     def INATNetwork_setAdvertiseDefaultIPv6RouteEnabled(self, request, **kw):
         if isinstance(request, INATNetwork_setAdvertiseDefaultIPv6RouteEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -224,7 +224,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getNeedDhcpServer
     def INATNetwork_getNeedDhcpServer(self, request, **kw):
         if isinstance(request, INATNetwork_getNeedDhcpServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -234,7 +234,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setNeedDhcpServer
     def INATNetwork_setNeedDhcpServer(self, request, **kw):
         if isinstance(request, INATNetwork_setNeedDhcpServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -244,7 +244,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getEventSource
     def INATNetwork_getEventSource(self, request, **kw):
         if isinstance(request, INATNetwork_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -254,7 +254,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getPortForwardRules4
     def INATNetwork_getPortForwardRules4(self, request, **kw):
         if isinstance(request, INATNetwork_getPortForwardRules4RequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -264,7 +264,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getLocalMappings
     def INATNetwork_getLocalMappings(self, request, **kw):
         if isinstance(request, INATNetwork_getLocalMappingsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -274,7 +274,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getLoopbackIp6
     def INATNetwork_getLoopbackIp6(self, request, **kw):
         if isinstance(request, INATNetwork_getLoopbackIp6RequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -284,7 +284,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_setLoopbackIp6
     def INATNetwork_setLoopbackIp6(self, request, **kw):
         if isinstance(request, INATNetwork_setLoopbackIp6RequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -294,7 +294,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_getPortForwardRules6
     def INATNetwork_getPortForwardRules6(self, request, **kw):
         if isinstance(request, INATNetwork_getPortForwardRules6RequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -304,7 +304,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_addLocalMapping
     def INATNetwork_addLocalMapping(self, request, **kw):
         if isinstance(request, INATNetwork_addLocalMappingRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -314,7 +314,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_addPortForwardRule
     def INATNetwork_addPortForwardRule(self, request, **kw):
         if isinstance(request, INATNetwork_addPortForwardRuleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -324,7 +324,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_removePortForwardRule
     def INATNetwork_removePortForwardRule(self, request, **kw):
         if isinstance(request, INATNetwork_removePortForwardRuleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -334,7 +334,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_start
     def INATNetwork_start(self, request, **kw):
         if isinstance(request, INATNetwork_startRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -344,7 +344,7 @@ class vboxBindingSOAP:
     # op: INATNetwork_stop
     def INATNetwork_stop(self, request, **kw):
         if isinstance(request, INATNetwork_stopRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -354,7 +354,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getEventSource
     def IDHCPServer_getEventSource(self, request, **kw):
         if isinstance(request, IDHCPServer_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -364,7 +364,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getEnabled
     def IDHCPServer_getEnabled(self, request, **kw):
         if isinstance(request, IDHCPServer_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -374,7 +374,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_setEnabled
     def IDHCPServer_setEnabled(self, request, **kw):
         if isinstance(request, IDHCPServer_setEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -384,7 +384,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getIPAddress
     def IDHCPServer_getIPAddress(self, request, **kw):
         if isinstance(request, IDHCPServer_getIPAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -394,7 +394,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getNetworkMask
     def IDHCPServer_getNetworkMask(self, request, **kw):
         if isinstance(request, IDHCPServer_getNetworkMaskRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -404,7 +404,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getNetworkName
     def IDHCPServer_getNetworkName(self, request, **kw):
         if isinstance(request, IDHCPServer_getNetworkNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -414,7 +414,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getLowerIP
     def IDHCPServer_getLowerIP(self, request, **kw):
         if isinstance(request, IDHCPServer_getLowerIPRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -424,7 +424,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getUpperIP
     def IDHCPServer_getUpperIP(self, request, **kw):
         if isinstance(request, IDHCPServer_getUpperIPRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -434,7 +434,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getGlobalOptions
     def IDHCPServer_getGlobalOptions(self, request, **kw):
         if isinstance(request, IDHCPServer_getGlobalOptionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -444,7 +444,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getVmConfigs
     def IDHCPServer_getVmConfigs(self, request, **kw):
         if isinstance(request, IDHCPServer_getVmConfigsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -454,7 +454,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_addGlobalOption
     def IDHCPServer_addGlobalOption(self, request, **kw):
         if isinstance(request, IDHCPServer_addGlobalOptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -464,7 +464,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_addVmSlotOption
     def IDHCPServer_addVmSlotOption(self, request, **kw):
         if isinstance(request, IDHCPServer_addVmSlotOptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -474,7 +474,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_removeVmSlotOptions
     def IDHCPServer_removeVmSlotOptions(self, request, **kw):
         if isinstance(request, IDHCPServer_removeVmSlotOptionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -484,7 +484,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getVmSlotOptions
     def IDHCPServer_getVmSlotOptions(self, request, **kw):
         if isinstance(request, IDHCPServer_getVmSlotOptionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -494,7 +494,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_getMacOptions
     def IDHCPServer_getMacOptions(self, request, **kw):
         if isinstance(request, IDHCPServer_getMacOptionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -504,7 +504,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_setConfiguration
     def IDHCPServer_setConfiguration(self, request, **kw):
         if isinstance(request, IDHCPServer_setConfigurationRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -514,7 +514,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_start
     def IDHCPServer_start(self, request, **kw):
         if isinstance(request, IDHCPServer_startRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -524,7 +524,7 @@ class vboxBindingSOAP:
     # op: IDHCPServer_stop
     def IDHCPServer_stop(self, request, **kw):
         if isinstance(request, IDHCPServer_stopRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -534,7 +534,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getVersion
     def IVirtualBox_getVersion(self, request, **kw):
         if isinstance(request, IVirtualBox_getVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -544,7 +544,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getVersionNormalized
     def IVirtualBox_getVersionNormalized(self, request, **kw):
         if isinstance(request, IVirtualBox_getVersionNormalizedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -554,7 +554,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getRevision
     def IVirtualBox_getRevision(self, request, **kw):
         if isinstance(request, IVirtualBox_getRevisionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -564,7 +564,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getPackageType
     def IVirtualBox_getPackageType(self, request, **kw):
         if isinstance(request, IVirtualBox_getPackageTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -574,7 +574,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getAPIVersion
     def IVirtualBox_getAPIVersion(self, request, **kw):
         if isinstance(request, IVirtualBox_getAPIVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -584,7 +584,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getHomeFolder
     def IVirtualBox_getHomeFolder(self, request, **kw):
         if isinstance(request, IVirtualBox_getHomeFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -594,7 +594,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getSettingsFilePath
     def IVirtualBox_getSettingsFilePath(self, request, **kw):
         if isinstance(request, IVirtualBox_getSettingsFilePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -604,7 +604,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getHost
     def IVirtualBox_getHost(self, request, **kw):
         if isinstance(request, IVirtualBox_getHostRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -614,7 +614,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getSystemProperties
     def IVirtualBox_getSystemProperties(self, request, **kw):
         if isinstance(request, IVirtualBox_getSystemPropertiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -624,7 +624,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getMachines
     def IVirtualBox_getMachines(self, request, **kw):
         if isinstance(request, IVirtualBox_getMachinesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -634,7 +634,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getMachineGroups
     def IVirtualBox_getMachineGroups(self, request, **kw):
         if isinstance(request, IVirtualBox_getMachineGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -644,7 +644,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getHardDisks
     def IVirtualBox_getHardDisks(self, request, **kw):
         if isinstance(request, IVirtualBox_getHardDisksRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -654,7 +654,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getDVDImages
     def IVirtualBox_getDVDImages(self, request, **kw):
         if isinstance(request, IVirtualBox_getDVDImagesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -664,7 +664,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getFloppyImages
     def IVirtualBox_getFloppyImages(self, request, **kw):
         if isinstance(request, IVirtualBox_getFloppyImagesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -674,7 +674,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getProgressOperations
     def IVirtualBox_getProgressOperations(self, request, **kw):
         if isinstance(request, IVirtualBox_getProgressOperationsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -684,7 +684,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getGuestOSTypes
     def IVirtualBox_getGuestOSTypes(self, request, **kw):
         if isinstance(request, IVirtualBox_getGuestOSTypesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -694,7 +694,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getSharedFolders
     def IVirtualBox_getSharedFolders(self, request, **kw):
         if isinstance(request, IVirtualBox_getSharedFoldersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -704,7 +704,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getPerformanceCollector
     def IVirtualBox_getPerformanceCollector(self, request, **kw):
         if isinstance(request, IVirtualBox_getPerformanceCollectorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -714,7 +714,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getDHCPServers
     def IVirtualBox_getDHCPServers(self, request, **kw):
         if isinstance(request, IVirtualBox_getDHCPServersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -724,7 +724,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getNATNetworks
     def IVirtualBox_getNATNetworks(self, request, **kw):
         if isinstance(request, IVirtualBox_getNATNetworksRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -734,7 +734,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getEventSource
     def IVirtualBox_getEventSource(self, request, **kw):
         if isinstance(request, IVirtualBox_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -744,7 +744,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getInternalNetworks
     def IVirtualBox_getInternalNetworks(self, request, **kw):
         if isinstance(request, IVirtualBox_getInternalNetworksRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -754,7 +754,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getGenericNetworkDrivers
     def IVirtualBox_getGenericNetworkDrivers(self, request, **kw):
         if isinstance(request, IVirtualBox_getGenericNetworkDriversRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -764,7 +764,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_composeMachineFilename
     def IVirtualBox_composeMachineFilename(self, request, **kw):
         if isinstance(request, IVirtualBox_composeMachineFilenameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -774,7 +774,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_createMachine
     def IVirtualBox_createMachine(self, request, **kw):
         if isinstance(request, IVirtualBox_createMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -784,7 +784,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_openMachine
     def IVirtualBox_openMachine(self, request, **kw):
         if isinstance(request, IVirtualBox_openMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -794,7 +794,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_registerMachine
     def IVirtualBox_registerMachine(self, request, **kw):
         if isinstance(request, IVirtualBox_registerMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -804,7 +804,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_findMachine
     def IVirtualBox_findMachine(self, request, **kw):
         if isinstance(request, IVirtualBox_findMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -814,7 +814,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getMachinesByGroups
     def IVirtualBox_getMachinesByGroups(self, request, **kw):
         if isinstance(request, IVirtualBox_getMachinesByGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -824,7 +824,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getMachineStates
     def IVirtualBox_getMachineStates(self, request, **kw):
         if isinstance(request, IVirtualBox_getMachineStatesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -834,7 +834,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_createAppliance
     def IVirtualBox_createAppliance(self, request, **kw):
         if isinstance(request, IVirtualBox_createApplianceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -844,7 +844,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_createHardDisk
     def IVirtualBox_createHardDisk(self, request, **kw):
         if isinstance(request, IVirtualBox_createHardDiskRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -854,7 +854,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_openMedium
     def IVirtualBox_openMedium(self, request, **kw):
         if isinstance(request, IVirtualBox_openMediumRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -864,7 +864,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getGuestOSType
     def IVirtualBox_getGuestOSType(self, request, **kw):
         if isinstance(request, IVirtualBox_getGuestOSTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -874,7 +874,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_createSharedFolder
     def IVirtualBox_createSharedFolder(self, request, **kw):
         if isinstance(request, IVirtualBox_createSharedFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -884,7 +884,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_removeSharedFolder
     def IVirtualBox_removeSharedFolder(self, request, **kw):
         if isinstance(request, IVirtualBox_removeSharedFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -894,7 +894,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getExtraDataKeys
     def IVirtualBox_getExtraDataKeys(self, request, **kw):
         if isinstance(request, IVirtualBox_getExtraDataKeysRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -904,7 +904,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_getExtraData
     def IVirtualBox_getExtraData(self, request, **kw):
         if isinstance(request, IVirtualBox_getExtraDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -914,7 +914,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_setExtraData
     def IVirtualBox_setExtraData(self, request, **kw):
         if isinstance(request, IVirtualBox_setExtraDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -924,7 +924,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_setSettingsSecret
     def IVirtualBox_setSettingsSecret(self, request, **kw):
         if isinstance(request, IVirtualBox_setSettingsSecretRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -934,7 +934,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_createDHCPServer
     def IVirtualBox_createDHCPServer(self, request, **kw):
         if isinstance(request, IVirtualBox_createDHCPServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -944,7 +944,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_findDHCPServerByNetworkName
     def IVirtualBox_findDHCPServerByNetworkName(self, request, **kw):
         if isinstance(request, IVirtualBox_findDHCPServerByNetworkNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -954,7 +954,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_removeDHCPServer
     def IVirtualBox_removeDHCPServer(self, request, **kw):
         if isinstance(request, IVirtualBox_removeDHCPServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -964,7 +964,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_createNATNetwork
     def IVirtualBox_createNATNetwork(self, request, **kw):
         if isinstance(request, IVirtualBox_createNATNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -974,7 +974,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_findNATNetworkByName
     def IVirtualBox_findNATNetworkByName(self, request, **kw):
         if isinstance(request, IVirtualBox_findNATNetworkByNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -984,7 +984,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_removeNATNetwork
     def IVirtualBox_removeNATNetwork(self, request, **kw):
         if isinstance(request, IVirtualBox_removeNATNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -994,7 +994,7 @@ class vboxBindingSOAP:
     # op: IVirtualBox_checkFirmwarePresent
     def IVirtualBox_checkFirmwarePresent(self, request, **kw):
         if isinstance(request, IVirtualBox_checkFirmwarePresentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1004,7 +1004,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_getPath
     def IVFSExplorer_getPath(self, request, **kw):
         if isinstance(request, IVFSExplorer_getPathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1014,7 +1014,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_getType
     def IVFSExplorer_getType(self, request, **kw):
         if isinstance(request, IVFSExplorer_getTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1024,7 +1024,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_update
     def IVFSExplorer_update(self, request, **kw):
         if isinstance(request, IVFSExplorer_updateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1034,7 +1034,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_cd
     def IVFSExplorer_cd(self, request, **kw):
         if isinstance(request, IVFSExplorer_cdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1044,7 +1044,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_cdUp
     def IVFSExplorer_cdUp(self, request, **kw):
         if isinstance(request, IVFSExplorer_cdUpRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1054,7 +1054,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_entryList
     def IVFSExplorer_entryList(self, request, **kw):
         if isinstance(request, IVFSExplorer_entryListRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1064,7 +1064,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_exists
     def IVFSExplorer_exists(self, request, **kw):
         if isinstance(request, IVFSExplorer_existsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1074,7 +1074,7 @@ class vboxBindingSOAP:
     # op: IVFSExplorer_remove
     def IVFSExplorer_remove(self, request, **kw):
         if isinstance(request, IVFSExplorer_removeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1084,7 +1084,7 @@ class vboxBindingSOAP:
     # op: IAppliance_getPath
     def IAppliance_getPath(self, request, **kw):
         if isinstance(request, IAppliance_getPathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1094,7 +1094,7 @@ class vboxBindingSOAP:
     # op: IAppliance_getDisks
     def IAppliance_getDisks(self, request, **kw):
         if isinstance(request, IAppliance_getDisksRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1104,7 +1104,7 @@ class vboxBindingSOAP:
     # op: IAppliance_getVirtualSystemDescriptions
     def IAppliance_getVirtualSystemDescriptions(self, request, **kw):
         if isinstance(request, IAppliance_getVirtualSystemDescriptionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1114,7 +1114,7 @@ class vboxBindingSOAP:
     # op: IAppliance_getMachines
     def IAppliance_getMachines(self, request, **kw):
         if isinstance(request, IAppliance_getMachinesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1124,7 +1124,7 @@ class vboxBindingSOAP:
     # op: IAppliance_read
     def IAppliance_read(self, request, **kw):
         if isinstance(request, IAppliance_readRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1134,7 +1134,7 @@ class vboxBindingSOAP:
     # op: IAppliance_interpret
     def IAppliance_interpret(self, request, **kw):
         if isinstance(request, IAppliance_interpretRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1144,7 +1144,7 @@ class vboxBindingSOAP:
     # op: IAppliance_importMachines
     def IAppliance_importMachines(self, request, **kw):
         if isinstance(request, IAppliance_importMachinesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1154,7 +1154,7 @@ class vboxBindingSOAP:
     # op: IAppliance_createVFSExplorer
     def IAppliance_createVFSExplorer(self, request, **kw):
         if isinstance(request, IAppliance_createVFSExplorerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1164,7 +1164,7 @@ class vboxBindingSOAP:
     # op: IAppliance_write
     def IAppliance_write(self, request, **kw):
         if isinstance(request, IAppliance_writeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1174,7 +1174,7 @@ class vboxBindingSOAP:
     # op: IAppliance_getWarnings
     def IAppliance_getWarnings(self, request, **kw):
         if isinstance(request, IAppliance_getWarningsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1184,7 +1184,7 @@ class vboxBindingSOAP:
     # op: IVirtualSystemDescription_getCount
     def IVirtualSystemDescription_getCount(self, request, **kw):
         if isinstance(request, IVirtualSystemDescription_getCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1194,7 +1194,7 @@ class vboxBindingSOAP:
     # op: IVirtualSystemDescription_getDescription
     def IVirtualSystemDescription_getDescription(self, request, **kw):
         if isinstance(request, IVirtualSystemDescription_getDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1204,7 +1204,7 @@ class vboxBindingSOAP:
     # op: IVirtualSystemDescription_getDescriptionByType
     def IVirtualSystemDescription_getDescriptionByType(self, request, **kw):
         if isinstance(request, IVirtualSystemDescription_getDescriptionByTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1214,7 +1214,7 @@ class vboxBindingSOAP:
     # op: IVirtualSystemDescription_getValuesByType
     def IVirtualSystemDescription_getValuesByType(self, request, **kw):
         if isinstance(request, IVirtualSystemDescription_getValuesByTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1224,7 +1224,7 @@ class vboxBindingSOAP:
     # op: IVirtualSystemDescription_setFinalValues
     def IVirtualSystemDescription_setFinalValues(self, request, **kw):
         if isinstance(request, IVirtualSystemDescription_setFinalValuesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1234,7 +1234,7 @@ class vboxBindingSOAP:
     # op: IVirtualSystemDescription_addDescription
     def IVirtualSystemDescription_addDescription(self, request, **kw):
         if isinstance(request, IVirtualSystemDescription_addDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1244,7 +1244,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getLogoFadeIn
     def IBIOSSettings_getLogoFadeIn(self, request, **kw):
         if isinstance(request, IBIOSSettings_getLogoFadeInRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1254,7 +1254,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setLogoFadeIn
     def IBIOSSettings_setLogoFadeIn(self, request, **kw):
         if isinstance(request, IBIOSSettings_setLogoFadeInRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1264,7 +1264,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getLogoFadeOut
     def IBIOSSettings_getLogoFadeOut(self, request, **kw):
         if isinstance(request, IBIOSSettings_getLogoFadeOutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1274,7 +1274,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setLogoFadeOut
     def IBIOSSettings_setLogoFadeOut(self, request, **kw):
         if isinstance(request, IBIOSSettings_setLogoFadeOutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1284,7 +1284,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getLogoDisplayTime
     def IBIOSSettings_getLogoDisplayTime(self, request, **kw):
         if isinstance(request, IBIOSSettings_getLogoDisplayTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1294,7 +1294,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setLogoDisplayTime
     def IBIOSSettings_setLogoDisplayTime(self, request, **kw):
         if isinstance(request, IBIOSSettings_setLogoDisplayTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1304,7 +1304,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getLogoImagePath
     def IBIOSSettings_getLogoImagePath(self, request, **kw):
         if isinstance(request, IBIOSSettings_getLogoImagePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1314,7 +1314,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setLogoImagePath
     def IBIOSSettings_setLogoImagePath(self, request, **kw):
         if isinstance(request, IBIOSSettings_setLogoImagePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1324,7 +1324,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getBootMenuMode
     def IBIOSSettings_getBootMenuMode(self, request, **kw):
         if isinstance(request, IBIOSSettings_getBootMenuModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1334,7 +1334,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setBootMenuMode
     def IBIOSSettings_setBootMenuMode(self, request, **kw):
         if isinstance(request, IBIOSSettings_setBootMenuModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1344,7 +1344,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getACPIEnabled
     def IBIOSSettings_getACPIEnabled(self, request, **kw):
         if isinstance(request, IBIOSSettings_getACPIEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1354,7 +1354,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setACPIEnabled
     def IBIOSSettings_setACPIEnabled(self, request, **kw):
         if isinstance(request, IBIOSSettings_setACPIEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1364,7 +1364,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getIOAPICEnabled
     def IBIOSSettings_getIOAPICEnabled(self, request, **kw):
         if isinstance(request, IBIOSSettings_getIOAPICEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1374,7 +1374,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setIOAPICEnabled
     def IBIOSSettings_setIOAPICEnabled(self, request, **kw):
         if isinstance(request, IBIOSSettings_setIOAPICEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1384,7 +1384,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getTimeOffset
     def IBIOSSettings_getTimeOffset(self, request, **kw):
         if isinstance(request, IBIOSSettings_getTimeOffsetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1394,7 +1394,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setTimeOffset
     def IBIOSSettings_setTimeOffset(self, request, **kw):
         if isinstance(request, IBIOSSettings_setTimeOffsetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1404,7 +1404,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getPXEDebugEnabled
     def IBIOSSettings_getPXEDebugEnabled(self, request, **kw):
         if isinstance(request, IBIOSSettings_getPXEDebugEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1414,7 +1414,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_setPXEDebugEnabled
     def IBIOSSettings_setPXEDebugEnabled(self, request, **kw):
         if isinstance(request, IBIOSSettings_setPXEDebugEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1424,7 +1424,7 @@ class vboxBindingSOAP:
     # op: IBIOSSettings_getNonVolatileStorageFile
     def IBIOSSettings_getNonVolatileStorageFile(self, request, **kw):
         if isinstance(request, IBIOSSettings_getNonVolatileStorageFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1434,7 +1434,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_getBus
     def IPCIAddress_getBus(self, request, **kw):
         if isinstance(request, IPCIAddress_getBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1444,7 +1444,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_setBus
     def IPCIAddress_setBus(self, request, **kw):
         if isinstance(request, IPCIAddress_setBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1454,7 +1454,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_getDevice
     def IPCIAddress_getDevice(self, request, **kw):
         if isinstance(request, IPCIAddress_getDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1464,7 +1464,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_setDevice
     def IPCIAddress_setDevice(self, request, **kw):
         if isinstance(request, IPCIAddress_setDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1474,7 +1474,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_getDevFunction
     def IPCIAddress_getDevFunction(self, request, **kw):
         if isinstance(request, IPCIAddress_getDevFunctionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1484,7 +1484,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_setDevFunction
     def IPCIAddress_setDevFunction(self, request, **kw):
         if isinstance(request, IPCIAddress_setDevFunctionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1494,7 +1494,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_asLong
     def IPCIAddress_asLong(self, request, **kw):
         if isinstance(request, IPCIAddress_asLongRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1504,7 +1504,7 @@ class vboxBindingSOAP:
     # op: IPCIAddress_fromLong
     def IPCIAddress_fromLong(self, request, **kw):
         if isinstance(request, IPCIAddress_fromLongRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1514,7 +1514,7 @@ class vboxBindingSOAP:
     # op: IMachine_getParent
     def IMachine_getParent(self, request, **kw):
         if isinstance(request, IMachine_getParentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1524,7 +1524,7 @@ class vboxBindingSOAP:
     # op: IMachine_getIcon
     def IMachine_getIcon(self, request, **kw):
         if isinstance(request, IMachine_getIconRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1534,7 +1534,7 @@ class vboxBindingSOAP:
     # op: IMachine_setIcon
     def IMachine_setIcon(self, request, **kw):
         if isinstance(request, IMachine_setIconRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1544,7 +1544,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAccessible
     def IMachine_getAccessible(self, request, **kw):
         if isinstance(request, IMachine_getAccessibleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1554,7 +1554,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAccessError
     def IMachine_getAccessError(self, request, **kw):
         if isinstance(request, IMachine_getAccessErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1564,7 +1564,7 @@ class vboxBindingSOAP:
     # op: IMachine_getName
     def IMachine_getName(self, request, **kw):
         if isinstance(request, IMachine_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1574,7 +1574,7 @@ class vboxBindingSOAP:
     # op: IMachine_setName
     def IMachine_setName(self, request, **kw):
         if isinstance(request, IMachine_setNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1584,7 +1584,7 @@ class vboxBindingSOAP:
     # op: IMachine_getDescription
     def IMachine_getDescription(self, request, **kw):
         if isinstance(request, IMachine_getDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1594,7 +1594,7 @@ class vboxBindingSOAP:
     # op: IMachine_setDescription
     def IMachine_setDescription(self, request, **kw):
         if isinstance(request, IMachine_setDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1604,7 +1604,7 @@ class vboxBindingSOAP:
     # op: IMachine_getId
     def IMachine_getId(self, request, **kw):
         if isinstance(request, IMachine_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1614,7 +1614,7 @@ class vboxBindingSOAP:
     # op: IMachine_getGroups
     def IMachine_getGroups(self, request, **kw):
         if isinstance(request, IMachine_getGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1624,7 +1624,7 @@ class vboxBindingSOAP:
     # op: IMachine_setGroups
     def IMachine_setGroups(self, request, **kw):
         if isinstance(request, IMachine_setGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1634,7 +1634,7 @@ class vboxBindingSOAP:
     # op: IMachine_getOSTypeId
     def IMachine_getOSTypeId(self, request, **kw):
         if isinstance(request, IMachine_getOSTypeIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1644,7 +1644,7 @@ class vboxBindingSOAP:
     # op: IMachine_setOSTypeId
     def IMachine_setOSTypeId(self, request, **kw):
         if isinstance(request, IMachine_setOSTypeIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1654,7 +1654,7 @@ class vboxBindingSOAP:
     # op: IMachine_getHardwareVersion
     def IMachine_getHardwareVersion(self, request, **kw):
         if isinstance(request, IMachine_getHardwareVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1664,7 +1664,7 @@ class vboxBindingSOAP:
     # op: IMachine_setHardwareVersion
     def IMachine_setHardwareVersion(self, request, **kw):
         if isinstance(request, IMachine_setHardwareVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1674,7 +1674,7 @@ class vboxBindingSOAP:
     # op: IMachine_getHardwareUUID
     def IMachine_getHardwareUUID(self, request, **kw):
         if isinstance(request, IMachine_getHardwareUUIDRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1684,7 +1684,7 @@ class vboxBindingSOAP:
     # op: IMachine_setHardwareUUID
     def IMachine_setHardwareUUID(self, request, **kw):
         if isinstance(request, IMachine_setHardwareUUIDRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1694,7 +1694,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCPUCount
     def IMachine_getCPUCount(self, request, **kw):
         if isinstance(request, IMachine_getCPUCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1704,7 +1704,7 @@ class vboxBindingSOAP:
     # op: IMachine_setCPUCount
     def IMachine_setCPUCount(self, request, **kw):
         if isinstance(request, IMachine_setCPUCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1714,7 +1714,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCPUHotPlugEnabled
     def IMachine_getCPUHotPlugEnabled(self, request, **kw):
         if isinstance(request, IMachine_getCPUHotPlugEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1724,7 +1724,7 @@ class vboxBindingSOAP:
     # op: IMachine_setCPUHotPlugEnabled
     def IMachine_setCPUHotPlugEnabled(self, request, **kw):
         if isinstance(request, IMachine_setCPUHotPlugEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1734,7 +1734,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCPUExecutionCap
     def IMachine_getCPUExecutionCap(self, request, **kw):
         if isinstance(request, IMachine_getCPUExecutionCapRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1744,7 +1744,7 @@ class vboxBindingSOAP:
     # op: IMachine_setCPUExecutionCap
     def IMachine_setCPUExecutionCap(self, request, **kw):
         if isinstance(request, IMachine_setCPUExecutionCapRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1754,7 +1754,7 @@ class vboxBindingSOAP:
     # op: IMachine_getMemorySize
     def IMachine_getMemorySize(self, request, **kw):
         if isinstance(request, IMachine_getMemorySizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1764,7 +1764,7 @@ class vboxBindingSOAP:
     # op: IMachine_setMemorySize
     def IMachine_setMemorySize(self, request, **kw):
         if isinstance(request, IMachine_setMemorySizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1774,7 +1774,7 @@ class vboxBindingSOAP:
     # op: IMachine_getMemoryBalloonSize
     def IMachine_getMemoryBalloonSize(self, request, **kw):
         if isinstance(request, IMachine_getMemoryBalloonSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1784,7 +1784,7 @@ class vboxBindingSOAP:
     # op: IMachine_setMemoryBalloonSize
     def IMachine_setMemoryBalloonSize(self, request, **kw):
         if isinstance(request, IMachine_setMemoryBalloonSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1794,7 +1794,7 @@ class vboxBindingSOAP:
     # op: IMachine_getPageFusionEnabled
     def IMachine_getPageFusionEnabled(self, request, **kw):
         if isinstance(request, IMachine_getPageFusionEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1804,7 +1804,7 @@ class vboxBindingSOAP:
     # op: IMachine_setPageFusionEnabled
     def IMachine_setPageFusionEnabled(self, request, **kw):
         if isinstance(request, IMachine_setPageFusionEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1814,7 +1814,7 @@ class vboxBindingSOAP:
     # op: IMachine_getGraphicsControllerType
     def IMachine_getGraphicsControllerType(self, request, **kw):
         if isinstance(request, IMachine_getGraphicsControllerTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1824,7 +1824,7 @@ class vboxBindingSOAP:
     # op: IMachine_setGraphicsControllerType
     def IMachine_setGraphicsControllerType(self, request, **kw):
         if isinstance(request, IMachine_setGraphicsControllerTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1834,7 +1834,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVRAMSize
     def IMachine_getVRAMSize(self, request, **kw):
         if isinstance(request, IMachine_getVRAMSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1844,7 +1844,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVRAMSize
     def IMachine_setVRAMSize(self, request, **kw):
         if isinstance(request, IMachine_setVRAMSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1854,7 +1854,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAccelerate3DEnabled
     def IMachine_getAccelerate3DEnabled(self, request, **kw):
         if isinstance(request, IMachine_getAccelerate3DEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1864,7 +1864,7 @@ class vboxBindingSOAP:
     # op: IMachine_setAccelerate3DEnabled
     def IMachine_setAccelerate3DEnabled(self, request, **kw):
         if isinstance(request, IMachine_setAccelerate3DEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1874,7 +1874,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAccelerate2DVideoEnabled
     def IMachine_getAccelerate2DVideoEnabled(self, request, **kw):
         if isinstance(request, IMachine_getAccelerate2DVideoEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1884,7 +1884,7 @@ class vboxBindingSOAP:
     # op: IMachine_setAccelerate2DVideoEnabled
     def IMachine_setAccelerate2DVideoEnabled(self, request, **kw):
         if isinstance(request, IMachine_setAccelerate2DVideoEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1894,7 +1894,7 @@ class vboxBindingSOAP:
     # op: IMachine_getMonitorCount
     def IMachine_getMonitorCount(self, request, **kw):
         if isinstance(request, IMachine_getMonitorCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1904,7 +1904,7 @@ class vboxBindingSOAP:
     # op: IMachine_setMonitorCount
     def IMachine_setMonitorCount(self, request, **kw):
         if isinstance(request, IMachine_setMonitorCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1914,7 +1914,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVideoCaptureEnabled
     def IMachine_getVideoCaptureEnabled(self, request, **kw):
         if isinstance(request, IMachine_getVideoCaptureEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1924,7 +1924,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVideoCaptureEnabled
     def IMachine_setVideoCaptureEnabled(self, request, **kw):
         if isinstance(request, IMachine_setVideoCaptureEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1934,7 +1934,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVideoCaptureScreens
     def IMachine_getVideoCaptureScreens(self, request, **kw):
         if isinstance(request, IMachine_getVideoCaptureScreensRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1944,7 +1944,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVideoCaptureScreens
     def IMachine_setVideoCaptureScreens(self, request, **kw):
         if isinstance(request, IMachine_setVideoCaptureScreensRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1954,7 +1954,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVideoCaptureFile
     def IMachine_getVideoCaptureFile(self, request, **kw):
         if isinstance(request, IMachine_getVideoCaptureFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1964,7 +1964,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVideoCaptureFile
     def IMachine_setVideoCaptureFile(self, request, **kw):
         if isinstance(request, IMachine_setVideoCaptureFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1974,7 +1974,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVideoCaptureWidth
     def IMachine_getVideoCaptureWidth(self, request, **kw):
         if isinstance(request, IMachine_getVideoCaptureWidthRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1984,7 +1984,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVideoCaptureWidth
     def IMachine_setVideoCaptureWidth(self, request, **kw):
         if isinstance(request, IMachine_setVideoCaptureWidthRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -1994,7 +1994,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVideoCaptureHeight
     def IMachine_getVideoCaptureHeight(self, request, **kw):
         if isinstance(request, IMachine_getVideoCaptureHeightRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2004,7 +2004,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVideoCaptureHeight
     def IMachine_setVideoCaptureHeight(self, request, **kw):
         if isinstance(request, IMachine_setVideoCaptureHeightRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2014,7 +2014,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVideoCaptureRate
     def IMachine_getVideoCaptureRate(self, request, **kw):
         if isinstance(request, IMachine_getVideoCaptureRateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2024,7 +2024,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVideoCaptureRate
     def IMachine_setVideoCaptureRate(self, request, **kw):
         if isinstance(request, IMachine_setVideoCaptureRateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2034,7 +2034,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVideoCaptureFPS
     def IMachine_getVideoCaptureFPS(self, request, **kw):
         if isinstance(request, IMachine_getVideoCaptureFPSRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2044,7 +2044,7 @@ class vboxBindingSOAP:
     # op: IMachine_setVideoCaptureFPS
     def IMachine_setVideoCaptureFPS(self, request, **kw):
         if isinstance(request, IMachine_setVideoCaptureFPSRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2054,7 +2054,7 @@ class vboxBindingSOAP:
     # op: IMachine_getBIOSSettings
     def IMachine_getBIOSSettings(self, request, **kw):
         if isinstance(request, IMachine_getBIOSSettingsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2064,7 +2064,7 @@ class vboxBindingSOAP:
     # op: IMachine_getFirmwareType
     def IMachine_getFirmwareType(self, request, **kw):
         if isinstance(request, IMachine_getFirmwareTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2074,7 +2074,7 @@ class vboxBindingSOAP:
     # op: IMachine_setFirmwareType
     def IMachine_setFirmwareType(self, request, **kw):
         if isinstance(request, IMachine_setFirmwareTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2084,7 +2084,7 @@ class vboxBindingSOAP:
     # op: IMachine_getPointingHIDType
     def IMachine_getPointingHIDType(self, request, **kw):
         if isinstance(request, IMachine_getPointingHIDTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2094,7 +2094,7 @@ class vboxBindingSOAP:
     # op: IMachine_setPointingHIDType
     def IMachine_setPointingHIDType(self, request, **kw):
         if isinstance(request, IMachine_setPointingHIDTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2104,7 +2104,7 @@ class vboxBindingSOAP:
     # op: IMachine_getKeyboardHIDType
     def IMachine_getKeyboardHIDType(self, request, **kw):
         if isinstance(request, IMachine_getKeyboardHIDTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2114,7 +2114,7 @@ class vboxBindingSOAP:
     # op: IMachine_setKeyboardHIDType
     def IMachine_setKeyboardHIDType(self, request, **kw):
         if isinstance(request, IMachine_setKeyboardHIDTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2124,7 +2124,7 @@ class vboxBindingSOAP:
     # op: IMachine_getHPETEnabled
     def IMachine_getHPETEnabled(self, request, **kw):
         if isinstance(request, IMachine_getHPETEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2134,7 +2134,7 @@ class vboxBindingSOAP:
     # op: IMachine_setHPETEnabled
     def IMachine_setHPETEnabled(self, request, **kw):
         if isinstance(request, IMachine_setHPETEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2144,7 +2144,7 @@ class vboxBindingSOAP:
     # op: IMachine_getChipsetType
     def IMachine_getChipsetType(self, request, **kw):
         if isinstance(request, IMachine_getChipsetTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2154,7 +2154,7 @@ class vboxBindingSOAP:
     # op: IMachine_setChipsetType
     def IMachine_setChipsetType(self, request, **kw):
         if isinstance(request, IMachine_setChipsetTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2164,7 +2164,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSnapshotFolder
     def IMachine_getSnapshotFolder(self, request, **kw):
         if isinstance(request, IMachine_getSnapshotFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2174,7 +2174,7 @@ class vboxBindingSOAP:
     # op: IMachine_setSnapshotFolder
     def IMachine_setSnapshotFolder(self, request, **kw):
         if isinstance(request, IMachine_setSnapshotFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2184,7 +2184,7 @@ class vboxBindingSOAP:
     # op: IMachine_getVRDEServer
     def IMachine_getVRDEServer(self, request, **kw):
         if isinstance(request, IMachine_getVRDEServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2194,7 +2194,7 @@ class vboxBindingSOAP:
     # op: IMachine_getEmulatedUSBCardReaderEnabled
     def IMachine_getEmulatedUSBCardReaderEnabled(self, request, **kw):
         if isinstance(request, IMachine_getEmulatedUSBCardReaderEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2204,7 +2204,7 @@ class vboxBindingSOAP:
     # op: IMachine_setEmulatedUSBCardReaderEnabled
     def IMachine_setEmulatedUSBCardReaderEnabled(self, request, **kw):
         if isinstance(request, IMachine_setEmulatedUSBCardReaderEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2214,7 +2214,7 @@ class vboxBindingSOAP:
     # op: IMachine_getMediumAttachments
     def IMachine_getMediumAttachments(self, request, **kw):
         if isinstance(request, IMachine_getMediumAttachmentsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2224,7 +2224,7 @@ class vboxBindingSOAP:
     # op: IMachine_getUSBControllers
     def IMachine_getUSBControllers(self, request, **kw):
         if isinstance(request, IMachine_getUSBControllersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2234,7 +2234,7 @@ class vboxBindingSOAP:
     # op: IMachine_getUSBDeviceFilters
     def IMachine_getUSBDeviceFilters(self, request, **kw):
         if isinstance(request, IMachine_getUSBDeviceFiltersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2244,7 +2244,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAudioAdapter
     def IMachine_getAudioAdapter(self, request, **kw):
         if isinstance(request, IMachine_getAudioAdapterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2254,7 +2254,7 @@ class vboxBindingSOAP:
     # op: IMachine_getStorageControllers
     def IMachine_getStorageControllers(self, request, **kw):
         if isinstance(request, IMachine_getStorageControllersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2264,7 +2264,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSettingsFilePath
     def IMachine_getSettingsFilePath(self, request, **kw):
         if isinstance(request, IMachine_getSettingsFilePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2274,7 +2274,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSettingsModified
     def IMachine_getSettingsModified(self, request, **kw):
         if isinstance(request, IMachine_getSettingsModifiedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2284,7 +2284,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSessionState
     def IMachine_getSessionState(self, request, **kw):
         if isinstance(request, IMachine_getSessionStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2294,7 +2294,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSessionType
     def IMachine_getSessionType(self, request, **kw):
         if isinstance(request, IMachine_getSessionTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2304,7 +2304,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSessionPID
     def IMachine_getSessionPID(self, request, **kw):
         if isinstance(request, IMachine_getSessionPIDRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2314,7 +2314,7 @@ class vboxBindingSOAP:
     # op: IMachine_getState
     def IMachine_getState(self, request, **kw):
         if isinstance(request, IMachine_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2324,7 +2324,7 @@ class vboxBindingSOAP:
     # op: IMachine_getLastStateChange
     def IMachine_getLastStateChange(self, request, **kw):
         if isinstance(request, IMachine_getLastStateChangeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2334,7 +2334,7 @@ class vboxBindingSOAP:
     # op: IMachine_getStateFilePath
     def IMachine_getStateFilePath(self, request, **kw):
         if isinstance(request, IMachine_getStateFilePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2344,7 +2344,7 @@ class vboxBindingSOAP:
     # op: IMachine_getLogFolder
     def IMachine_getLogFolder(self, request, **kw):
         if isinstance(request, IMachine_getLogFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2354,7 +2354,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCurrentSnapshot
     def IMachine_getCurrentSnapshot(self, request, **kw):
         if isinstance(request, IMachine_getCurrentSnapshotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2364,7 +2364,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSnapshotCount
     def IMachine_getSnapshotCount(self, request, **kw):
         if isinstance(request, IMachine_getSnapshotCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2374,7 +2374,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCurrentStateModified
     def IMachine_getCurrentStateModified(self, request, **kw):
         if isinstance(request, IMachine_getCurrentStateModifiedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2384,7 +2384,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSharedFolders
     def IMachine_getSharedFolders(self, request, **kw):
         if isinstance(request, IMachine_getSharedFoldersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2394,7 +2394,7 @@ class vboxBindingSOAP:
     # op: IMachine_getClipboardMode
     def IMachine_getClipboardMode(self, request, **kw):
         if isinstance(request, IMachine_getClipboardModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2404,7 +2404,7 @@ class vboxBindingSOAP:
     # op: IMachine_setClipboardMode
     def IMachine_setClipboardMode(self, request, **kw):
         if isinstance(request, IMachine_setClipboardModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2414,7 +2414,7 @@ class vboxBindingSOAP:
     # op: IMachine_getDragAndDropMode
     def IMachine_getDragAndDropMode(self, request, **kw):
         if isinstance(request, IMachine_getDragAndDropModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2424,7 +2424,7 @@ class vboxBindingSOAP:
     # op: IMachine_setDragAndDropMode
     def IMachine_setDragAndDropMode(self, request, **kw):
         if isinstance(request, IMachine_setDragAndDropModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2434,7 +2434,7 @@ class vboxBindingSOAP:
     # op: IMachine_getGuestPropertyNotificationPatterns
     def IMachine_getGuestPropertyNotificationPatterns(self, request, **kw):
         if isinstance(request, IMachine_getGuestPropertyNotificationPatternsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2444,7 +2444,7 @@ class vboxBindingSOAP:
     # op: IMachine_setGuestPropertyNotificationPatterns
     def IMachine_setGuestPropertyNotificationPatterns(self, request, **kw):
         if isinstance(request, IMachine_setGuestPropertyNotificationPatternsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2454,7 +2454,7 @@ class vboxBindingSOAP:
     # op: IMachine_getTeleporterEnabled
     def IMachine_getTeleporterEnabled(self, request, **kw):
         if isinstance(request, IMachine_getTeleporterEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2464,7 +2464,7 @@ class vboxBindingSOAP:
     # op: IMachine_setTeleporterEnabled
     def IMachine_setTeleporterEnabled(self, request, **kw):
         if isinstance(request, IMachine_setTeleporterEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2474,7 +2474,7 @@ class vboxBindingSOAP:
     # op: IMachine_getTeleporterPort
     def IMachine_getTeleporterPort(self, request, **kw):
         if isinstance(request, IMachine_getTeleporterPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2484,7 +2484,7 @@ class vboxBindingSOAP:
     # op: IMachine_setTeleporterPort
     def IMachine_setTeleporterPort(self, request, **kw):
         if isinstance(request, IMachine_setTeleporterPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2494,7 +2494,7 @@ class vboxBindingSOAP:
     # op: IMachine_getTeleporterAddress
     def IMachine_getTeleporterAddress(self, request, **kw):
         if isinstance(request, IMachine_getTeleporterAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2504,7 +2504,7 @@ class vboxBindingSOAP:
     # op: IMachine_setTeleporterAddress
     def IMachine_setTeleporterAddress(self, request, **kw):
         if isinstance(request, IMachine_setTeleporterAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2514,7 +2514,7 @@ class vboxBindingSOAP:
     # op: IMachine_getTeleporterPassword
     def IMachine_getTeleporterPassword(self, request, **kw):
         if isinstance(request, IMachine_getTeleporterPasswordRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2524,7 +2524,7 @@ class vboxBindingSOAP:
     # op: IMachine_setTeleporterPassword
     def IMachine_setTeleporterPassword(self, request, **kw):
         if isinstance(request, IMachine_setTeleporterPasswordRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2534,7 +2534,7 @@ class vboxBindingSOAP:
     # op: IMachine_getFaultToleranceState
     def IMachine_getFaultToleranceState(self, request, **kw):
         if isinstance(request, IMachine_getFaultToleranceStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2544,7 +2544,7 @@ class vboxBindingSOAP:
     # op: IMachine_setFaultToleranceState
     def IMachine_setFaultToleranceState(self, request, **kw):
         if isinstance(request, IMachine_setFaultToleranceStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2554,7 +2554,7 @@ class vboxBindingSOAP:
     # op: IMachine_getFaultTolerancePort
     def IMachine_getFaultTolerancePort(self, request, **kw):
         if isinstance(request, IMachine_getFaultTolerancePortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2564,7 +2564,7 @@ class vboxBindingSOAP:
     # op: IMachine_setFaultTolerancePort
     def IMachine_setFaultTolerancePort(self, request, **kw):
         if isinstance(request, IMachine_setFaultTolerancePortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2574,7 +2574,7 @@ class vboxBindingSOAP:
     # op: IMachine_getFaultToleranceAddress
     def IMachine_getFaultToleranceAddress(self, request, **kw):
         if isinstance(request, IMachine_getFaultToleranceAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2584,7 +2584,7 @@ class vboxBindingSOAP:
     # op: IMachine_setFaultToleranceAddress
     def IMachine_setFaultToleranceAddress(self, request, **kw):
         if isinstance(request, IMachine_setFaultToleranceAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2594,7 +2594,7 @@ class vboxBindingSOAP:
     # op: IMachine_getFaultTolerancePassword
     def IMachine_getFaultTolerancePassword(self, request, **kw):
         if isinstance(request, IMachine_getFaultTolerancePasswordRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2604,7 +2604,7 @@ class vboxBindingSOAP:
     # op: IMachine_setFaultTolerancePassword
     def IMachine_setFaultTolerancePassword(self, request, **kw):
         if isinstance(request, IMachine_setFaultTolerancePasswordRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2614,7 +2614,7 @@ class vboxBindingSOAP:
     # op: IMachine_getFaultToleranceSyncInterval
     def IMachine_getFaultToleranceSyncInterval(self, request, **kw):
         if isinstance(request, IMachine_getFaultToleranceSyncIntervalRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2624,7 +2624,7 @@ class vboxBindingSOAP:
     # op: IMachine_setFaultToleranceSyncInterval
     def IMachine_setFaultToleranceSyncInterval(self, request, **kw):
         if isinstance(request, IMachine_setFaultToleranceSyncIntervalRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2634,7 +2634,7 @@ class vboxBindingSOAP:
     # op: IMachine_getRTCUseUTC
     def IMachine_getRTCUseUTC(self, request, **kw):
         if isinstance(request, IMachine_getRTCUseUTCRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2644,7 +2644,7 @@ class vboxBindingSOAP:
     # op: IMachine_setRTCUseUTC
     def IMachine_setRTCUseUTC(self, request, **kw):
         if isinstance(request, IMachine_setRTCUseUTCRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2654,7 +2654,7 @@ class vboxBindingSOAP:
     # op: IMachine_getIOCacheEnabled
     def IMachine_getIOCacheEnabled(self, request, **kw):
         if isinstance(request, IMachine_getIOCacheEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2664,7 +2664,7 @@ class vboxBindingSOAP:
     # op: IMachine_setIOCacheEnabled
     def IMachine_setIOCacheEnabled(self, request, **kw):
         if isinstance(request, IMachine_setIOCacheEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2674,7 +2674,7 @@ class vboxBindingSOAP:
     # op: IMachine_getIOCacheSize
     def IMachine_getIOCacheSize(self, request, **kw):
         if isinstance(request, IMachine_getIOCacheSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2684,7 +2684,7 @@ class vboxBindingSOAP:
     # op: IMachine_setIOCacheSize
     def IMachine_setIOCacheSize(self, request, **kw):
         if isinstance(request, IMachine_setIOCacheSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2694,7 +2694,7 @@ class vboxBindingSOAP:
     # op: IMachine_getPCIDeviceAssignments
     def IMachine_getPCIDeviceAssignments(self, request, **kw):
         if isinstance(request, IMachine_getPCIDeviceAssignmentsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2704,7 +2704,7 @@ class vboxBindingSOAP:
     # op: IMachine_getBandwidthControl
     def IMachine_getBandwidthControl(self, request, **kw):
         if isinstance(request, IMachine_getBandwidthControlRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2714,7 +2714,7 @@ class vboxBindingSOAP:
     # op: IMachine_getTracingEnabled
     def IMachine_getTracingEnabled(self, request, **kw):
         if isinstance(request, IMachine_getTracingEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2724,7 +2724,7 @@ class vboxBindingSOAP:
     # op: IMachine_setTracingEnabled
     def IMachine_setTracingEnabled(self, request, **kw):
         if isinstance(request, IMachine_setTracingEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2734,7 +2734,7 @@ class vboxBindingSOAP:
     # op: IMachine_getTracingConfig
     def IMachine_getTracingConfig(self, request, **kw):
         if isinstance(request, IMachine_getTracingConfigRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2744,7 +2744,7 @@ class vboxBindingSOAP:
     # op: IMachine_setTracingConfig
     def IMachine_setTracingConfig(self, request, **kw):
         if isinstance(request, IMachine_setTracingConfigRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2754,7 +2754,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAllowTracingToAccessVM
     def IMachine_getAllowTracingToAccessVM(self, request, **kw):
         if isinstance(request, IMachine_getAllowTracingToAccessVMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2764,7 +2764,7 @@ class vboxBindingSOAP:
     # op: IMachine_setAllowTracingToAccessVM
     def IMachine_setAllowTracingToAccessVM(self, request, **kw):
         if isinstance(request, IMachine_setAllowTracingToAccessVMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2774,7 +2774,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAutostartEnabled
     def IMachine_getAutostartEnabled(self, request, **kw):
         if isinstance(request, IMachine_getAutostartEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2784,7 +2784,7 @@ class vboxBindingSOAP:
     # op: IMachine_setAutostartEnabled
     def IMachine_setAutostartEnabled(self, request, **kw):
         if isinstance(request, IMachine_setAutostartEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2794,7 +2794,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAutostartDelay
     def IMachine_getAutostartDelay(self, request, **kw):
         if isinstance(request, IMachine_getAutostartDelayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2804,7 +2804,7 @@ class vboxBindingSOAP:
     # op: IMachine_setAutostartDelay
     def IMachine_setAutostartDelay(self, request, **kw):
         if isinstance(request, IMachine_setAutostartDelayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2814,7 +2814,7 @@ class vboxBindingSOAP:
     # op: IMachine_getAutostopType
     def IMachine_getAutostopType(self, request, **kw):
         if isinstance(request, IMachine_getAutostopTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2824,7 +2824,7 @@ class vboxBindingSOAP:
     # op: IMachine_setAutostopType
     def IMachine_setAutostopType(self, request, **kw):
         if isinstance(request, IMachine_setAutostopTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2834,7 +2834,7 @@ class vboxBindingSOAP:
     # op: IMachine_getDefaultFrontend
     def IMachine_getDefaultFrontend(self, request, **kw):
         if isinstance(request, IMachine_getDefaultFrontendRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2844,7 +2844,7 @@ class vboxBindingSOAP:
     # op: IMachine_setDefaultFrontend
     def IMachine_setDefaultFrontend(self, request, **kw):
         if isinstance(request, IMachine_setDefaultFrontendRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2854,7 +2854,7 @@ class vboxBindingSOAP:
     # op: IMachine_getUSBProxyAvailable
     def IMachine_getUSBProxyAvailable(self, request, **kw):
         if isinstance(request, IMachine_getUSBProxyAvailableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2864,7 +2864,7 @@ class vboxBindingSOAP:
     # op: IMachine_lockMachine
     def IMachine_lockMachine(self, request, **kw):
         if isinstance(request, IMachine_lockMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2874,7 +2874,7 @@ class vboxBindingSOAP:
     # op: IMachine_launchVMProcess
     def IMachine_launchVMProcess(self, request, **kw):
         if isinstance(request, IMachine_launchVMProcessRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2884,7 +2884,7 @@ class vboxBindingSOAP:
     # op: IMachine_setBootOrder
     def IMachine_setBootOrder(self, request, **kw):
         if isinstance(request, IMachine_setBootOrderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2894,7 +2894,7 @@ class vboxBindingSOAP:
     # op: IMachine_getBootOrder
     def IMachine_getBootOrder(self, request, **kw):
         if isinstance(request, IMachine_getBootOrderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2904,7 +2904,7 @@ class vboxBindingSOAP:
     # op: IMachine_attachDevice
     def IMachine_attachDevice(self, request, **kw):
         if isinstance(request, IMachine_attachDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2914,7 +2914,7 @@ class vboxBindingSOAP:
     # op: IMachine_attachDeviceWithoutMedium
     def IMachine_attachDeviceWithoutMedium(self, request, **kw):
         if isinstance(request, IMachine_attachDeviceWithoutMediumRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2924,7 +2924,7 @@ class vboxBindingSOAP:
     # op: IMachine_detachDevice
     def IMachine_detachDevice(self, request, **kw):
         if isinstance(request, IMachine_detachDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2934,7 +2934,7 @@ class vboxBindingSOAP:
     # op: IMachine_passthroughDevice
     def IMachine_passthroughDevice(self, request, **kw):
         if isinstance(request, IMachine_passthroughDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2944,7 +2944,7 @@ class vboxBindingSOAP:
     # op: IMachine_temporaryEjectDevice
     def IMachine_temporaryEjectDevice(self, request, **kw):
         if isinstance(request, IMachine_temporaryEjectDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2954,7 +2954,7 @@ class vboxBindingSOAP:
     # op: IMachine_nonRotationalDevice
     def IMachine_nonRotationalDevice(self, request, **kw):
         if isinstance(request, IMachine_nonRotationalDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2964,7 +2964,7 @@ class vboxBindingSOAP:
     # op: IMachine_setAutoDiscardForDevice
     def IMachine_setAutoDiscardForDevice(self, request, **kw):
         if isinstance(request, IMachine_setAutoDiscardForDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2974,7 +2974,7 @@ class vboxBindingSOAP:
     # op: IMachine_setHotPluggableForDevice
     def IMachine_setHotPluggableForDevice(self, request, **kw):
         if isinstance(request, IMachine_setHotPluggableForDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2984,7 +2984,7 @@ class vboxBindingSOAP:
     # op: IMachine_setBandwidthGroupForDevice
     def IMachine_setBandwidthGroupForDevice(self, request, **kw):
         if isinstance(request, IMachine_setBandwidthGroupForDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -2994,7 +2994,7 @@ class vboxBindingSOAP:
     # op: IMachine_setNoBandwidthGroupForDevice
     def IMachine_setNoBandwidthGroupForDevice(self, request, **kw):
         if isinstance(request, IMachine_setNoBandwidthGroupForDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3004,7 +3004,7 @@ class vboxBindingSOAP:
     # op: IMachine_unmountMedium
     def IMachine_unmountMedium(self, request, **kw):
         if isinstance(request, IMachine_unmountMediumRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3014,7 +3014,7 @@ class vboxBindingSOAP:
     # op: IMachine_mountMedium
     def IMachine_mountMedium(self, request, **kw):
         if isinstance(request, IMachine_mountMediumRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3024,7 +3024,7 @@ class vboxBindingSOAP:
     # op: IMachine_getMedium
     def IMachine_getMedium(self, request, **kw):
         if isinstance(request, IMachine_getMediumRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3034,7 +3034,7 @@ class vboxBindingSOAP:
     # op: IMachine_getMediumAttachmentsOfController
     def IMachine_getMediumAttachmentsOfController(self, request, **kw):
         if isinstance(request, IMachine_getMediumAttachmentsOfControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3044,7 +3044,7 @@ class vboxBindingSOAP:
     # op: IMachine_getMediumAttachment
     def IMachine_getMediumAttachment(self, request, **kw):
         if isinstance(request, IMachine_getMediumAttachmentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3054,7 +3054,7 @@ class vboxBindingSOAP:
     # op: IMachine_attachHostPCIDevice
     def IMachine_attachHostPCIDevice(self, request, **kw):
         if isinstance(request, IMachine_attachHostPCIDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3064,7 +3064,7 @@ class vboxBindingSOAP:
     # op: IMachine_detachHostPCIDevice
     def IMachine_detachHostPCIDevice(self, request, **kw):
         if isinstance(request, IMachine_detachHostPCIDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3074,7 +3074,7 @@ class vboxBindingSOAP:
     # op: IMachine_getNetworkAdapter
     def IMachine_getNetworkAdapter(self, request, **kw):
         if isinstance(request, IMachine_getNetworkAdapterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3084,7 +3084,7 @@ class vboxBindingSOAP:
     # op: IMachine_addStorageController
     def IMachine_addStorageController(self, request, **kw):
         if isinstance(request, IMachine_addStorageControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3094,7 +3094,7 @@ class vboxBindingSOAP:
     # op: IMachine_getStorageControllerByName
     def IMachine_getStorageControllerByName(self, request, **kw):
         if isinstance(request, IMachine_getStorageControllerByNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3104,7 +3104,7 @@ class vboxBindingSOAP:
     # op: IMachine_getStorageControllerByInstance
     def IMachine_getStorageControllerByInstance(self, request, **kw):
         if isinstance(request, IMachine_getStorageControllerByInstanceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3114,7 +3114,7 @@ class vboxBindingSOAP:
     # op: IMachine_removeStorageController
     def IMachine_removeStorageController(self, request, **kw):
         if isinstance(request, IMachine_removeStorageControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3124,7 +3124,7 @@ class vboxBindingSOAP:
     # op: IMachine_setStorageControllerBootable
     def IMachine_setStorageControllerBootable(self, request, **kw):
         if isinstance(request, IMachine_setStorageControllerBootableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3134,7 +3134,7 @@ class vboxBindingSOAP:
     # op: IMachine_addUSBController
     def IMachine_addUSBController(self, request, **kw):
         if isinstance(request, IMachine_addUSBControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3144,7 +3144,7 @@ class vboxBindingSOAP:
     # op: IMachine_removeUSBController
     def IMachine_removeUSBController(self, request, **kw):
         if isinstance(request, IMachine_removeUSBControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3154,7 +3154,7 @@ class vboxBindingSOAP:
     # op: IMachine_getUSBControllerByName
     def IMachine_getUSBControllerByName(self, request, **kw):
         if isinstance(request, IMachine_getUSBControllerByNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3164,7 +3164,7 @@ class vboxBindingSOAP:
     # op: IMachine_getUSBControllerCountByType
     def IMachine_getUSBControllerCountByType(self, request, **kw):
         if isinstance(request, IMachine_getUSBControllerCountByTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3174,7 +3174,7 @@ class vboxBindingSOAP:
     # op: IMachine_getSerialPort
     def IMachine_getSerialPort(self, request, **kw):
         if isinstance(request, IMachine_getSerialPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3184,7 +3184,7 @@ class vboxBindingSOAP:
     # op: IMachine_getParallelPort
     def IMachine_getParallelPort(self, request, **kw):
         if isinstance(request, IMachine_getParallelPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3194,7 +3194,7 @@ class vboxBindingSOAP:
     # op: IMachine_getExtraDataKeys
     def IMachine_getExtraDataKeys(self, request, **kw):
         if isinstance(request, IMachine_getExtraDataKeysRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3204,7 +3204,7 @@ class vboxBindingSOAP:
     # op: IMachine_getExtraData
     def IMachine_getExtraData(self, request, **kw):
         if isinstance(request, IMachine_getExtraDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3214,7 +3214,7 @@ class vboxBindingSOAP:
     # op: IMachine_setExtraData
     def IMachine_setExtraData(self, request, **kw):
         if isinstance(request, IMachine_setExtraDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3224,7 +3224,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCPUProperty
     def IMachine_getCPUProperty(self, request, **kw):
         if isinstance(request, IMachine_getCPUPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3234,7 +3234,7 @@ class vboxBindingSOAP:
     # op: IMachine_setCPUProperty
     def IMachine_setCPUProperty(self, request, **kw):
         if isinstance(request, IMachine_setCPUPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3244,7 +3244,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCPUIDLeaf
     def IMachine_getCPUIDLeaf(self, request, **kw):
         if isinstance(request, IMachine_getCPUIDLeafRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3254,7 +3254,7 @@ class vboxBindingSOAP:
     # op: IMachine_setCPUIDLeaf
     def IMachine_setCPUIDLeaf(self, request, **kw):
         if isinstance(request, IMachine_setCPUIDLeafRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3264,7 +3264,7 @@ class vboxBindingSOAP:
     # op: IMachine_removeCPUIDLeaf
     def IMachine_removeCPUIDLeaf(self, request, **kw):
         if isinstance(request, IMachine_removeCPUIDLeafRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3274,7 +3274,7 @@ class vboxBindingSOAP:
     # op: IMachine_removeAllCPUIDLeaves
     def IMachine_removeAllCPUIDLeaves(self, request, **kw):
         if isinstance(request, IMachine_removeAllCPUIDLeavesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3284,7 +3284,7 @@ class vboxBindingSOAP:
     # op: IMachine_getHWVirtExProperty
     def IMachine_getHWVirtExProperty(self, request, **kw):
         if isinstance(request, IMachine_getHWVirtExPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3294,7 +3294,7 @@ class vboxBindingSOAP:
     # op: IMachine_setHWVirtExProperty
     def IMachine_setHWVirtExProperty(self, request, **kw):
         if isinstance(request, IMachine_setHWVirtExPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3304,7 +3304,7 @@ class vboxBindingSOAP:
     # op: IMachine_setSettingsFilePath
     def IMachine_setSettingsFilePath(self, request, **kw):
         if isinstance(request, IMachine_setSettingsFilePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3314,7 +3314,7 @@ class vboxBindingSOAP:
     # op: IMachine_saveSettings
     def IMachine_saveSettings(self, request, **kw):
         if isinstance(request, IMachine_saveSettingsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3324,7 +3324,7 @@ class vboxBindingSOAP:
     # op: IMachine_discardSettings
     def IMachine_discardSettings(self, request, **kw):
         if isinstance(request, IMachine_discardSettingsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3334,7 +3334,7 @@ class vboxBindingSOAP:
     # op: IMachine_unregister
     def IMachine_unregister(self, request, **kw):
         if isinstance(request, IMachine_unregisterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3344,7 +3344,7 @@ class vboxBindingSOAP:
     # op: IMachine_deleteConfig
     def IMachine_deleteConfig(self, request, **kw):
         if isinstance(request, IMachine_deleteConfigRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3354,7 +3354,7 @@ class vboxBindingSOAP:
     # op: IMachine_exportTo
     def IMachine_exportTo(self, request, **kw):
         if isinstance(request, IMachine_exportToRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3364,7 +3364,7 @@ class vboxBindingSOAP:
     # op: IMachine_findSnapshot
     def IMachine_findSnapshot(self, request, **kw):
         if isinstance(request, IMachine_findSnapshotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3374,7 +3374,7 @@ class vboxBindingSOAP:
     # op: IMachine_createSharedFolder
     def IMachine_createSharedFolder(self, request, **kw):
         if isinstance(request, IMachine_createSharedFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3384,7 +3384,7 @@ class vboxBindingSOAP:
     # op: IMachine_removeSharedFolder
     def IMachine_removeSharedFolder(self, request, **kw):
         if isinstance(request, IMachine_removeSharedFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3394,7 +3394,7 @@ class vboxBindingSOAP:
     # op: IMachine_canShowConsoleWindow
     def IMachine_canShowConsoleWindow(self, request, **kw):
         if isinstance(request, IMachine_canShowConsoleWindowRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3404,7 +3404,7 @@ class vboxBindingSOAP:
     # op: IMachine_showConsoleWindow
     def IMachine_showConsoleWindow(self, request, **kw):
         if isinstance(request, IMachine_showConsoleWindowRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3414,7 +3414,7 @@ class vboxBindingSOAP:
     # op: IMachine_getGuestProperty
     def IMachine_getGuestProperty(self, request, **kw):
         if isinstance(request, IMachine_getGuestPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3424,7 +3424,7 @@ class vboxBindingSOAP:
     # op: IMachine_getGuestPropertyValue
     def IMachine_getGuestPropertyValue(self, request, **kw):
         if isinstance(request, IMachine_getGuestPropertyValueRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3434,7 +3434,7 @@ class vboxBindingSOAP:
     # op: IMachine_getGuestPropertyTimestamp
     def IMachine_getGuestPropertyTimestamp(self, request, **kw):
         if isinstance(request, IMachine_getGuestPropertyTimestampRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3444,7 +3444,7 @@ class vboxBindingSOAP:
     # op: IMachine_setGuestProperty
     def IMachine_setGuestProperty(self, request, **kw):
         if isinstance(request, IMachine_setGuestPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3454,7 +3454,7 @@ class vboxBindingSOAP:
     # op: IMachine_setGuestPropertyValue
     def IMachine_setGuestPropertyValue(self, request, **kw):
         if isinstance(request, IMachine_setGuestPropertyValueRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3464,7 +3464,7 @@ class vboxBindingSOAP:
     # op: IMachine_deleteGuestProperty
     def IMachine_deleteGuestProperty(self, request, **kw):
         if isinstance(request, IMachine_deleteGuestPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3474,7 +3474,7 @@ class vboxBindingSOAP:
     # op: IMachine_enumerateGuestProperties
     def IMachine_enumerateGuestProperties(self, request, **kw):
         if isinstance(request, IMachine_enumerateGuestPropertiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3484,7 +3484,7 @@ class vboxBindingSOAP:
     # op: IMachine_querySavedGuestScreenInfo
     def IMachine_querySavedGuestScreenInfo(self, request, **kw):
         if isinstance(request, IMachine_querySavedGuestScreenInfoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3494,7 +3494,7 @@ class vboxBindingSOAP:
     # op: IMachine_querySavedThumbnailSize
     def IMachine_querySavedThumbnailSize(self, request, **kw):
         if isinstance(request, IMachine_querySavedThumbnailSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3504,7 +3504,7 @@ class vboxBindingSOAP:
     # op: IMachine_readSavedThumbnailToArray
     def IMachine_readSavedThumbnailToArray(self, request, **kw):
         if isinstance(request, IMachine_readSavedThumbnailToArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3514,7 +3514,7 @@ class vboxBindingSOAP:
     # op: IMachine_readSavedThumbnailPNGToArray
     def IMachine_readSavedThumbnailPNGToArray(self, request, **kw):
         if isinstance(request, IMachine_readSavedThumbnailPNGToArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3524,7 +3524,7 @@ class vboxBindingSOAP:
     # op: IMachine_querySavedScreenshotPNGSize
     def IMachine_querySavedScreenshotPNGSize(self, request, **kw):
         if isinstance(request, IMachine_querySavedScreenshotPNGSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3534,7 +3534,7 @@ class vboxBindingSOAP:
     # op: IMachine_readSavedScreenshotPNGToArray
     def IMachine_readSavedScreenshotPNGToArray(self, request, **kw):
         if isinstance(request, IMachine_readSavedScreenshotPNGToArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3544,7 +3544,7 @@ class vboxBindingSOAP:
     # op: IMachine_hotPlugCPU
     def IMachine_hotPlugCPU(self, request, **kw):
         if isinstance(request, IMachine_hotPlugCPURequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3554,7 +3554,7 @@ class vboxBindingSOAP:
     # op: IMachine_hotUnplugCPU
     def IMachine_hotUnplugCPU(self, request, **kw):
         if isinstance(request, IMachine_hotUnplugCPURequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3564,7 +3564,7 @@ class vboxBindingSOAP:
     # op: IMachine_getCPUStatus
     def IMachine_getCPUStatus(self, request, **kw):
         if isinstance(request, IMachine_getCPUStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3574,7 +3574,7 @@ class vboxBindingSOAP:
     # op: IMachine_queryLogFilename
     def IMachine_queryLogFilename(self, request, **kw):
         if isinstance(request, IMachine_queryLogFilenameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3584,7 +3584,7 @@ class vboxBindingSOAP:
     # op: IMachine_readLog
     def IMachine_readLog(self, request, **kw):
         if isinstance(request, IMachine_readLogRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3594,7 +3594,7 @@ class vboxBindingSOAP:
     # op: IMachine_cloneTo
     def IMachine_cloneTo(self, request, **kw):
         if isinstance(request, IMachine_cloneToRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3604,7 +3604,7 @@ class vboxBindingSOAP:
     # op: IEmulatedUSB_getWebcams
     def IEmulatedUSB_getWebcams(self, request, **kw):
         if isinstance(request, IEmulatedUSB_getWebcamsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3614,7 +3614,7 @@ class vboxBindingSOAP:
     # op: IEmulatedUSB_webcamAttach
     def IEmulatedUSB_webcamAttach(self, request, **kw):
         if isinstance(request, IEmulatedUSB_webcamAttachRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3624,7 +3624,7 @@ class vboxBindingSOAP:
     # op: IEmulatedUSB_webcamDetach
     def IEmulatedUSB_webcamDetach(self, request, **kw):
         if isinstance(request, IEmulatedUSB_webcamDetachRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3634,7 +3634,7 @@ class vboxBindingSOAP:
     # op: IConsole_getMachine
     def IConsole_getMachine(self, request, **kw):
         if isinstance(request, IConsole_getMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3644,7 +3644,7 @@ class vboxBindingSOAP:
     # op: IConsole_getState
     def IConsole_getState(self, request, **kw):
         if isinstance(request, IConsole_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3654,7 +3654,7 @@ class vboxBindingSOAP:
     # op: IConsole_getGuest
     def IConsole_getGuest(self, request, **kw):
         if isinstance(request, IConsole_getGuestRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3664,7 +3664,7 @@ class vboxBindingSOAP:
     # op: IConsole_getKeyboard
     def IConsole_getKeyboard(self, request, **kw):
         if isinstance(request, IConsole_getKeyboardRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3674,7 +3674,7 @@ class vboxBindingSOAP:
     # op: IConsole_getMouse
     def IConsole_getMouse(self, request, **kw):
         if isinstance(request, IConsole_getMouseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3684,7 +3684,7 @@ class vboxBindingSOAP:
     # op: IConsole_getDisplay
     def IConsole_getDisplay(self, request, **kw):
         if isinstance(request, IConsole_getDisplayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3694,7 +3694,7 @@ class vboxBindingSOAP:
     # op: IConsole_getDebugger
     def IConsole_getDebugger(self, request, **kw):
         if isinstance(request, IConsole_getDebuggerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3704,7 +3704,7 @@ class vboxBindingSOAP:
     # op: IConsole_getUSBDevices
     def IConsole_getUSBDevices(self, request, **kw):
         if isinstance(request, IConsole_getUSBDevicesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3714,7 +3714,7 @@ class vboxBindingSOAP:
     # op: IConsole_getRemoteUSBDevices
     def IConsole_getRemoteUSBDevices(self, request, **kw):
         if isinstance(request, IConsole_getRemoteUSBDevicesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3724,7 +3724,7 @@ class vboxBindingSOAP:
     # op: IConsole_getSharedFolders
     def IConsole_getSharedFolders(self, request, **kw):
         if isinstance(request, IConsole_getSharedFoldersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3734,7 +3734,7 @@ class vboxBindingSOAP:
     # op: IConsole_getVRDEServerInfo
     def IConsole_getVRDEServerInfo(self, request, **kw):
         if isinstance(request, IConsole_getVRDEServerInfoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3744,7 +3744,7 @@ class vboxBindingSOAP:
     # op: IConsole_getEventSource
     def IConsole_getEventSource(self, request, **kw):
         if isinstance(request, IConsole_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3754,7 +3754,7 @@ class vboxBindingSOAP:
     # op: IConsole_getAttachedPCIDevices
     def IConsole_getAttachedPCIDevices(self, request, **kw):
         if isinstance(request, IConsole_getAttachedPCIDevicesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3764,7 +3764,7 @@ class vboxBindingSOAP:
     # op: IConsole_getUseHostClipboard
     def IConsole_getUseHostClipboard(self, request, **kw):
         if isinstance(request, IConsole_getUseHostClipboardRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3774,7 +3774,7 @@ class vboxBindingSOAP:
     # op: IConsole_setUseHostClipboard
     def IConsole_setUseHostClipboard(self, request, **kw):
         if isinstance(request, IConsole_setUseHostClipboardRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3784,7 +3784,7 @@ class vboxBindingSOAP:
     # op: IConsole_getEmulatedUSB
     def IConsole_getEmulatedUSB(self, request, **kw):
         if isinstance(request, IConsole_getEmulatedUSBRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3794,7 +3794,7 @@ class vboxBindingSOAP:
     # op: IConsole_powerUp
     def IConsole_powerUp(self, request, **kw):
         if isinstance(request, IConsole_powerUpRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3804,7 +3804,7 @@ class vboxBindingSOAP:
     # op: IConsole_powerUpPaused
     def IConsole_powerUpPaused(self, request, **kw):
         if isinstance(request, IConsole_powerUpPausedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3814,7 +3814,7 @@ class vboxBindingSOAP:
     # op: IConsole_powerDown
     def IConsole_powerDown(self, request, **kw):
         if isinstance(request, IConsole_powerDownRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3824,7 +3824,7 @@ class vboxBindingSOAP:
     # op: IConsole_reset
     def IConsole_reset(self, request, **kw):
         if isinstance(request, IConsole_resetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3834,7 +3834,7 @@ class vboxBindingSOAP:
     # op: IConsole_pause
     def IConsole_pause(self, request, **kw):
         if isinstance(request, IConsole_pauseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3844,7 +3844,7 @@ class vboxBindingSOAP:
     # op: IConsole_resume
     def IConsole_resume(self, request, **kw):
         if isinstance(request, IConsole_resumeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3854,7 +3854,7 @@ class vboxBindingSOAP:
     # op: IConsole_powerButton
     def IConsole_powerButton(self, request, **kw):
         if isinstance(request, IConsole_powerButtonRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3864,7 +3864,7 @@ class vboxBindingSOAP:
     # op: IConsole_sleepButton
     def IConsole_sleepButton(self, request, **kw):
         if isinstance(request, IConsole_sleepButtonRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3874,7 +3874,7 @@ class vboxBindingSOAP:
     # op: IConsole_getPowerButtonHandled
     def IConsole_getPowerButtonHandled(self, request, **kw):
         if isinstance(request, IConsole_getPowerButtonHandledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3884,7 +3884,7 @@ class vboxBindingSOAP:
     # op: IConsole_getGuestEnteredACPIMode
     def IConsole_getGuestEnteredACPIMode(self, request, **kw):
         if isinstance(request, IConsole_getGuestEnteredACPIModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3894,7 +3894,7 @@ class vboxBindingSOAP:
     # op: IConsole_saveState
     def IConsole_saveState(self, request, **kw):
         if isinstance(request, IConsole_saveStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3904,7 +3904,7 @@ class vboxBindingSOAP:
     # op: IConsole_adoptSavedState
     def IConsole_adoptSavedState(self, request, **kw):
         if isinstance(request, IConsole_adoptSavedStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3914,7 +3914,7 @@ class vboxBindingSOAP:
     # op: IConsole_discardSavedState
     def IConsole_discardSavedState(self, request, **kw):
         if isinstance(request, IConsole_discardSavedStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3924,7 +3924,7 @@ class vboxBindingSOAP:
     # op: IConsole_getDeviceActivity
     def IConsole_getDeviceActivity(self, request, **kw):
         if isinstance(request, IConsole_getDeviceActivityRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3934,7 +3934,7 @@ class vboxBindingSOAP:
     # op: IConsole_attachUSBDevice
     def IConsole_attachUSBDevice(self, request, **kw):
         if isinstance(request, IConsole_attachUSBDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3944,7 +3944,7 @@ class vboxBindingSOAP:
     # op: IConsole_detachUSBDevice
     def IConsole_detachUSBDevice(self, request, **kw):
         if isinstance(request, IConsole_detachUSBDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3954,7 +3954,7 @@ class vboxBindingSOAP:
     # op: IConsole_findUSBDeviceByAddress
     def IConsole_findUSBDeviceByAddress(self, request, **kw):
         if isinstance(request, IConsole_findUSBDeviceByAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3964,7 +3964,7 @@ class vboxBindingSOAP:
     # op: IConsole_findUSBDeviceById
     def IConsole_findUSBDeviceById(self, request, **kw):
         if isinstance(request, IConsole_findUSBDeviceByIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3974,7 +3974,7 @@ class vboxBindingSOAP:
     # op: IConsole_createSharedFolder
     def IConsole_createSharedFolder(self, request, **kw):
         if isinstance(request, IConsole_createSharedFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3984,7 +3984,7 @@ class vboxBindingSOAP:
     # op: IConsole_removeSharedFolder
     def IConsole_removeSharedFolder(self, request, **kw):
         if isinstance(request, IConsole_removeSharedFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -3994,7 +3994,7 @@ class vboxBindingSOAP:
     # op: IConsole_takeSnapshot
     def IConsole_takeSnapshot(self, request, **kw):
         if isinstance(request, IConsole_takeSnapshotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4004,7 +4004,7 @@ class vboxBindingSOAP:
     # op: IConsole_deleteSnapshot
     def IConsole_deleteSnapshot(self, request, **kw):
         if isinstance(request, IConsole_deleteSnapshotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4014,7 +4014,7 @@ class vboxBindingSOAP:
     # op: IConsole_deleteSnapshotAndAllChildren
     def IConsole_deleteSnapshotAndAllChildren(self, request, **kw):
         if isinstance(request, IConsole_deleteSnapshotAndAllChildrenRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4024,7 +4024,7 @@ class vboxBindingSOAP:
     # op: IConsole_deleteSnapshotRange
     def IConsole_deleteSnapshotRange(self, request, **kw):
         if isinstance(request, IConsole_deleteSnapshotRangeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4034,7 +4034,7 @@ class vboxBindingSOAP:
     # op: IConsole_restoreSnapshot
     def IConsole_restoreSnapshot(self, request, **kw):
         if isinstance(request, IConsole_restoreSnapshotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4044,7 +4044,7 @@ class vboxBindingSOAP:
     # op: IConsole_teleport
     def IConsole_teleport(self, request, **kw):
         if isinstance(request, IConsole_teleportRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4054,7 +4054,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getName
     def IHostNetworkInterface_getName(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4064,7 +4064,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getShortName
     def IHostNetworkInterface_getShortName(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getShortNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4074,7 +4074,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getId
     def IHostNetworkInterface_getId(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4084,7 +4084,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getNetworkName
     def IHostNetworkInterface_getNetworkName(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getNetworkNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4094,7 +4094,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getDHCPEnabled
     def IHostNetworkInterface_getDHCPEnabled(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getDHCPEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4104,7 +4104,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getIPAddress
     def IHostNetworkInterface_getIPAddress(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getIPAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4114,7 +4114,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getNetworkMask
     def IHostNetworkInterface_getNetworkMask(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getNetworkMaskRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4124,7 +4124,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getIPV6Supported
     def IHostNetworkInterface_getIPV6Supported(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getIPV6SupportedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4134,7 +4134,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getIPV6Address
     def IHostNetworkInterface_getIPV6Address(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getIPV6AddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4144,7 +4144,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getIPV6NetworkMaskPrefixLength
     def IHostNetworkInterface_getIPV6NetworkMaskPrefixLength(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getIPV6NetworkMaskPrefixLengthRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4154,7 +4154,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getHardwareAddress
     def IHostNetworkInterface_getHardwareAddress(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getHardwareAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4164,7 +4164,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getMediumType
     def IHostNetworkInterface_getMediumType(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getMediumTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4174,7 +4174,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getStatus
     def IHostNetworkInterface_getStatus(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4184,7 +4184,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_getInterfaceType
     def IHostNetworkInterface_getInterfaceType(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_getInterfaceTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4194,7 +4194,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_enableStaticIPConfig
     def IHostNetworkInterface_enableStaticIPConfig(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_enableStaticIPConfigRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4204,7 +4204,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_enableStaticIPConfigV6
     def IHostNetworkInterface_enableStaticIPConfigV6(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_enableStaticIPConfigV6RequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4214,7 +4214,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_enableDynamicIPConfig
     def IHostNetworkInterface_enableDynamicIPConfig(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_enableDynamicIPConfigRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4224,7 +4224,7 @@ class vboxBindingSOAP:
     # op: IHostNetworkInterface_DHCPRediscover
     def IHostNetworkInterface_DHCPRediscover(self, request, **kw):
         if isinstance(request, IHostNetworkInterface_DHCPRediscoverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4234,7 +4234,7 @@ class vboxBindingSOAP:
     # op: IHostVideoInputDevice_getName
     def IHostVideoInputDevice_getName(self, request, **kw):
         if isinstance(request, IHostVideoInputDevice_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4244,7 +4244,7 @@ class vboxBindingSOAP:
     # op: IHostVideoInputDevice_getPath
     def IHostVideoInputDevice_getPath(self, request, **kw):
         if isinstance(request, IHostVideoInputDevice_getPathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4254,7 +4254,7 @@ class vboxBindingSOAP:
     # op: IHostVideoInputDevice_getAlias
     def IHostVideoInputDevice_getAlias(self, request, **kw):
         if isinstance(request, IHostVideoInputDevice_getAliasRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4264,7 +4264,7 @@ class vboxBindingSOAP:
     # op: IHost_getDVDDrives
     def IHost_getDVDDrives(self, request, **kw):
         if isinstance(request, IHost_getDVDDrivesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4274,7 +4274,7 @@ class vboxBindingSOAP:
     # op: IHost_getFloppyDrives
     def IHost_getFloppyDrives(self, request, **kw):
         if isinstance(request, IHost_getFloppyDrivesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4284,7 +4284,7 @@ class vboxBindingSOAP:
     # op: IHost_getUSBDevices
     def IHost_getUSBDevices(self, request, **kw):
         if isinstance(request, IHost_getUSBDevicesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4294,7 +4294,7 @@ class vboxBindingSOAP:
     # op: IHost_getUSBDeviceFilters
     def IHost_getUSBDeviceFilters(self, request, **kw):
         if isinstance(request, IHost_getUSBDeviceFiltersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4304,7 +4304,7 @@ class vboxBindingSOAP:
     # op: IHost_getNetworkInterfaces
     def IHost_getNetworkInterfaces(self, request, **kw):
         if isinstance(request, IHost_getNetworkInterfacesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4314,7 +4314,7 @@ class vboxBindingSOAP:
     # op: IHost_getNameServers
     def IHost_getNameServers(self, request, **kw):
         if isinstance(request, IHost_getNameServersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4324,7 +4324,7 @@ class vboxBindingSOAP:
     # op: IHost_getDomainName
     def IHost_getDomainName(self, request, **kw):
         if isinstance(request, IHost_getDomainNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4334,7 +4334,7 @@ class vboxBindingSOAP:
     # op: IHost_getSearchStrings
     def IHost_getSearchStrings(self, request, **kw):
         if isinstance(request, IHost_getSearchStringsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4344,7 +4344,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorCount
     def IHost_getProcessorCount(self, request, **kw):
         if isinstance(request, IHost_getProcessorCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4354,7 +4354,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorOnlineCount
     def IHost_getProcessorOnlineCount(self, request, **kw):
         if isinstance(request, IHost_getProcessorOnlineCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4364,7 +4364,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorCoreCount
     def IHost_getProcessorCoreCount(self, request, **kw):
         if isinstance(request, IHost_getProcessorCoreCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4374,7 +4374,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorOnlineCoreCount
     def IHost_getProcessorOnlineCoreCount(self, request, **kw):
         if isinstance(request, IHost_getProcessorOnlineCoreCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4384,7 +4384,7 @@ class vboxBindingSOAP:
     # op: IHost_getMemorySize
     def IHost_getMemorySize(self, request, **kw):
         if isinstance(request, IHost_getMemorySizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4394,7 +4394,7 @@ class vboxBindingSOAP:
     # op: IHost_getMemoryAvailable
     def IHost_getMemoryAvailable(self, request, **kw):
         if isinstance(request, IHost_getMemoryAvailableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4404,7 +4404,7 @@ class vboxBindingSOAP:
     # op: IHost_getOperatingSystem
     def IHost_getOperatingSystem(self, request, **kw):
         if isinstance(request, IHost_getOperatingSystemRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4414,7 +4414,7 @@ class vboxBindingSOAP:
     # op: IHost_getOSVersion
     def IHost_getOSVersion(self, request, **kw):
         if isinstance(request, IHost_getOSVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4424,7 +4424,7 @@ class vboxBindingSOAP:
     # op: IHost_getUTCTime
     def IHost_getUTCTime(self, request, **kw):
         if isinstance(request, IHost_getUTCTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4434,7 +4434,7 @@ class vboxBindingSOAP:
     # op: IHost_getAcceleration3DAvailable
     def IHost_getAcceleration3DAvailable(self, request, **kw):
         if isinstance(request, IHost_getAcceleration3DAvailableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4444,7 +4444,7 @@ class vboxBindingSOAP:
     # op: IHost_getVideoInputDevices
     def IHost_getVideoInputDevices(self, request, **kw):
         if isinstance(request, IHost_getVideoInputDevicesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4454,7 +4454,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorSpeed
     def IHost_getProcessorSpeed(self, request, **kw):
         if isinstance(request, IHost_getProcessorSpeedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4464,7 +4464,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorFeature
     def IHost_getProcessorFeature(self, request, **kw):
         if isinstance(request, IHost_getProcessorFeatureRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4474,7 +4474,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorDescription
     def IHost_getProcessorDescription(self, request, **kw):
         if isinstance(request, IHost_getProcessorDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4484,7 +4484,7 @@ class vboxBindingSOAP:
     # op: IHost_getProcessorCPUIDLeaf
     def IHost_getProcessorCPUIDLeaf(self, request, **kw):
         if isinstance(request, IHost_getProcessorCPUIDLeafRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4494,7 +4494,7 @@ class vboxBindingSOAP:
     # op: IHost_createHostOnlyNetworkInterface
     def IHost_createHostOnlyNetworkInterface(self, request, **kw):
         if isinstance(request, IHost_createHostOnlyNetworkInterfaceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4504,7 +4504,7 @@ class vboxBindingSOAP:
     # op: IHost_removeHostOnlyNetworkInterface
     def IHost_removeHostOnlyNetworkInterface(self, request, **kw):
         if isinstance(request, IHost_removeHostOnlyNetworkInterfaceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4514,7 +4514,7 @@ class vboxBindingSOAP:
     # op: IHost_createUSBDeviceFilter
     def IHost_createUSBDeviceFilter(self, request, **kw):
         if isinstance(request, IHost_createUSBDeviceFilterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4524,7 +4524,7 @@ class vboxBindingSOAP:
     # op: IHost_insertUSBDeviceFilter
     def IHost_insertUSBDeviceFilter(self, request, **kw):
         if isinstance(request, IHost_insertUSBDeviceFilterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4534,7 +4534,7 @@ class vboxBindingSOAP:
     # op: IHost_removeUSBDeviceFilter
     def IHost_removeUSBDeviceFilter(self, request, **kw):
         if isinstance(request, IHost_removeUSBDeviceFilterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4544,7 +4544,7 @@ class vboxBindingSOAP:
     # op: IHost_findHostDVDDrive
     def IHost_findHostDVDDrive(self, request, **kw):
         if isinstance(request, IHost_findHostDVDDriveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4554,7 +4554,7 @@ class vboxBindingSOAP:
     # op: IHost_findHostFloppyDrive
     def IHost_findHostFloppyDrive(self, request, **kw):
         if isinstance(request, IHost_findHostFloppyDriveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4564,7 +4564,7 @@ class vboxBindingSOAP:
     # op: IHost_findHostNetworkInterfaceByName
     def IHost_findHostNetworkInterfaceByName(self, request, **kw):
         if isinstance(request, IHost_findHostNetworkInterfaceByNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4574,7 +4574,7 @@ class vboxBindingSOAP:
     # op: IHost_findHostNetworkInterfaceById
     def IHost_findHostNetworkInterfaceById(self, request, **kw):
         if isinstance(request, IHost_findHostNetworkInterfaceByIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4584,7 +4584,7 @@ class vboxBindingSOAP:
     # op: IHost_findHostNetworkInterfacesOfType
     def IHost_findHostNetworkInterfacesOfType(self, request, **kw):
         if isinstance(request, IHost_findHostNetworkInterfacesOfTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4594,7 +4594,7 @@ class vboxBindingSOAP:
     # op: IHost_findUSBDeviceById
     def IHost_findUSBDeviceById(self, request, **kw):
         if isinstance(request, IHost_findUSBDeviceByIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4604,7 +4604,7 @@ class vboxBindingSOAP:
     # op: IHost_findUSBDeviceByAddress
     def IHost_findUSBDeviceByAddress(self, request, **kw):
         if isinstance(request, IHost_findUSBDeviceByAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4614,7 +4614,7 @@ class vboxBindingSOAP:
     # op: IHost_generateMACAddress
     def IHost_generateMACAddress(self, request, **kw):
         if isinstance(request, IHost_generateMACAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4624,7 +4624,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMinGuestRAM
     def ISystemProperties_getMinGuestRAM(self, request, **kw):
         if isinstance(request, ISystemProperties_getMinGuestRAMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4634,7 +4634,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxGuestRAM
     def ISystemProperties_getMaxGuestRAM(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxGuestRAMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4644,7 +4644,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMinGuestVRAM
     def ISystemProperties_getMinGuestVRAM(self, request, **kw):
         if isinstance(request, ISystemProperties_getMinGuestVRAMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4654,7 +4654,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxGuestVRAM
     def ISystemProperties_getMaxGuestVRAM(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxGuestVRAMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4664,7 +4664,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMinGuestCPUCount
     def ISystemProperties_getMinGuestCPUCount(self, request, **kw):
         if isinstance(request, ISystemProperties_getMinGuestCPUCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4674,7 +4674,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxGuestCPUCount
     def ISystemProperties_getMaxGuestCPUCount(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxGuestCPUCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4684,7 +4684,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxGuestMonitors
     def ISystemProperties_getMaxGuestMonitors(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxGuestMonitorsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4694,7 +4694,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getInfoVDSize
     def ISystemProperties_getInfoVDSize(self, request, **kw):
         if isinstance(request, ISystemProperties_getInfoVDSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4704,7 +4704,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getSerialPortCount
     def ISystemProperties_getSerialPortCount(self, request, **kw):
         if isinstance(request, ISystemProperties_getSerialPortCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4714,7 +4714,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getParallelPortCount
     def ISystemProperties_getParallelPortCount(self, request, **kw):
         if isinstance(request, ISystemProperties_getParallelPortCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4724,7 +4724,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxBootPosition
     def ISystemProperties_getMaxBootPosition(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxBootPositionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4734,7 +4734,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getExclusiveHwVirt
     def ISystemProperties_getExclusiveHwVirt(self, request, **kw):
         if isinstance(request, ISystemProperties_getExclusiveHwVirtRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4744,7 +4744,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setExclusiveHwVirt
     def ISystemProperties_setExclusiveHwVirt(self, request, **kw):
         if isinstance(request, ISystemProperties_setExclusiveHwVirtRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4754,7 +4754,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDefaultMachineFolder
     def ISystemProperties_getDefaultMachineFolder(self, request, **kw):
         if isinstance(request, ISystemProperties_getDefaultMachineFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4764,7 +4764,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setDefaultMachineFolder
     def ISystemProperties_setDefaultMachineFolder(self, request, **kw):
         if isinstance(request, ISystemProperties_setDefaultMachineFolderRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4774,7 +4774,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getLoggingLevel
     def ISystemProperties_getLoggingLevel(self, request, **kw):
         if isinstance(request, ISystemProperties_getLoggingLevelRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4784,7 +4784,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setLoggingLevel
     def ISystemProperties_setLoggingLevel(self, request, **kw):
         if isinstance(request, ISystemProperties_setLoggingLevelRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4794,7 +4794,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMediumFormats
     def ISystemProperties_getMediumFormats(self, request, **kw):
         if isinstance(request, ISystemProperties_getMediumFormatsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4804,7 +4804,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDefaultHardDiskFormat
     def ISystemProperties_getDefaultHardDiskFormat(self, request, **kw):
         if isinstance(request, ISystemProperties_getDefaultHardDiskFormatRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4814,7 +4814,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setDefaultHardDiskFormat
     def ISystemProperties_setDefaultHardDiskFormat(self, request, **kw):
         if isinstance(request, ISystemProperties_setDefaultHardDiskFormatRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4824,7 +4824,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getFreeDiskSpaceWarning
     def ISystemProperties_getFreeDiskSpaceWarning(self, request, **kw):
         if isinstance(request, ISystemProperties_getFreeDiskSpaceWarningRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4834,7 +4834,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setFreeDiskSpaceWarning
     def ISystemProperties_setFreeDiskSpaceWarning(self, request, **kw):
         if isinstance(request, ISystemProperties_setFreeDiskSpaceWarningRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4844,7 +4844,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getFreeDiskSpacePercentWarning
     def ISystemProperties_getFreeDiskSpacePercentWarning(self, request, **kw):
         if isinstance(request, ISystemProperties_getFreeDiskSpacePercentWarningRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4854,7 +4854,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setFreeDiskSpacePercentWarning
     def ISystemProperties_setFreeDiskSpacePercentWarning(self, request, **kw):
         if isinstance(request, ISystemProperties_setFreeDiskSpacePercentWarningRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4864,7 +4864,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getFreeDiskSpaceError
     def ISystemProperties_getFreeDiskSpaceError(self, request, **kw):
         if isinstance(request, ISystemProperties_getFreeDiskSpaceErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4874,7 +4874,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setFreeDiskSpaceError
     def ISystemProperties_setFreeDiskSpaceError(self, request, **kw):
         if isinstance(request, ISystemProperties_setFreeDiskSpaceErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4884,7 +4884,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getFreeDiskSpacePercentError
     def ISystemProperties_getFreeDiskSpacePercentError(self, request, **kw):
         if isinstance(request, ISystemProperties_getFreeDiskSpacePercentErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4894,7 +4894,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setFreeDiskSpacePercentError
     def ISystemProperties_setFreeDiskSpacePercentError(self, request, **kw):
         if isinstance(request, ISystemProperties_setFreeDiskSpacePercentErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4904,7 +4904,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getVRDEAuthLibrary
     def ISystemProperties_getVRDEAuthLibrary(self, request, **kw):
         if isinstance(request, ISystemProperties_getVRDEAuthLibraryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4914,7 +4914,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setVRDEAuthLibrary
     def ISystemProperties_setVRDEAuthLibrary(self, request, **kw):
         if isinstance(request, ISystemProperties_setVRDEAuthLibraryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4924,7 +4924,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getWebServiceAuthLibrary
     def ISystemProperties_getWebServiceAuthLibrary(self, request, **kw):
         if isinstance(request, ISystemProperties_getWebServiceAuthLibraryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4934,7 +4934,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setWebServiceAuthLibrary
     def ISystemProperties_setWebServiceAuthLibrary(self, request, **kw):
         if isinstance(request, ISystemProperties_setWebServiceAuthLibraryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4944,7 +4944,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDefaultVRDEExtPack
     def ISystemProperties_getDefaultVRDEExtPack(self, request, **kw):
         if isinstance(request, ISystemProperties_getDefaultVRDEExtPackRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4954,7 +4954,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setDefaultVRDEExtPack
     def ISystemProperties_setDefaultVRDEExtPack(self, request, **kw):
         if isinstance(request, ISystemProperties_setDefaultVRDEExtPackRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4964,7 +4964,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getLogHistoryCount
     def ISystemProperties_getLogHistoryCount(self, request, **kw):
         if isinstance(request, ISystemProperties_getLogHistoryCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4974,7 +4974,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setLogHistoryCount
     def ISystemProperties_setLogHistoryCount(self, request, **kw):
         if isinstance(request, ISystemProperties_setLogHistoryCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4984,7 +4984,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDefaultAudioDriver
     def ISystemProperties_getDefaultAudioDriver(self, request, **kw):
         if isinstance(request, ISystemProperties_getDefaultAudioDriverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -4994,7 +4994,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getAutostartDatabasePath
     def ISystemProperties_getAutostartDatabasePath(self, request, **kw):
         if isinstance(request, ISystemProperties_getAutostartDatabasePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5004,7 +5004,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setAutostartDatabasePath
     def ISystemProperties_setAutostartDatabasePath(self, request, **kw):
         if isinstance(request, ISystemProperties_setAutostartDatabasePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5014,7 +5014,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDefaultAdditionsISO
     def ISystemProperties_getDefaultAdditionsISO(self, request, **kw):
         if isinstance(request, ISystemProperties_getDefaultAdditionsISORequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5024,7 +5024,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setDefaultAdditionsISO
     def ISystemProperties_setDefaultAdditionsISO(self, request, **kw):
         if isinstance(request, ISystemProperties_setDefaultAdditionsISORequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5034,7 +5034,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDefaultFrontend
     def ISystemProperties_getDefaultFrontend(self, request, **kw):
         if isinstance(request, ISystemProperties_getDefaultFrontendRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5044,7 +5044,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_setDefaultFrontend
     def ISystemProperties_setDefaultFrontend(self, request, **kw):
         if isinstance(request, ISystemProperties_setDefaultFrontendRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5054,7 +5054,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxNetworkAdapters
     def ISystemProperties_getMaxNetworkAdapters(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxNetworkAdaptersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5064,7 +5064,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxNetworkAdaptersOfType
     def ISystemProperties_getMaxNetworkAdaptersOfType(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxNetworkAdaptersOfTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5074,7 +5074,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxDevicesPerPortForStorageBus
     def ISystemProperties_getMaxDevicesPerPortForStorageBus(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxDevicesPerPortForStorageBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5084,7 +5084,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMinPortCountForStorageBus
     def ISystemProperties_getMinPortCountForStorageBus(self, request, **kw):
         if isinstance(request, ISystemProperties_getMinPortCountForStorageBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5094,7 +5094,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxPortCountForStorageBus
     def ISystemProperties_getMaxPortCountForStorageBus(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxPortCountForStorageBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5104,7 +5104,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxInstancesOfStorageBus
     def ISystemProperties_getMaxInstancesOfStorageBus(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxInstancesOfStorageBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5114,7 +5114,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDeviceTypesForStorageBus
     def ISystemProperties_getDeviceTypesForStorageBus(self, request, **kw):
         if isinstance(request, ISystemProperties_getDeviceTypesForStorageBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5124,7 +5124,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getDefaultIoCacheSettingForStorageController
     def ISystemProperties_getDefaultIoCacheSettingForStorageController(self, request, **kw):
         if isinstance(request, ISystemProperties_getDefaultIoCacheSettingForStorageControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5134,7 +5134,7 @@ class vboxBindingSOAP:
     # op: ISystemProperties_getMaxInstancesOfUSBControllerType
     def ISystemProperties_getMaxInstancesOfUSBControllerType(self, request, **kw):
         if isinstance(request, ISystemProperties_getMaxInstancesOfUSBControllerTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5144,7 +5144,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getUser
     def IGuestSession_getUser(self, request, **kw):
         if isinstance(request, IGuestSession_getUserRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5154,7 +5154,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getDomain
     def IGuestSession_getDomain(self, request, **kw):
         if isinstance(request, IGuestSession_getDomainRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5164,7 +5164,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getName
     def IGuestSession_getName(self, request, **kw):
         if isinstance(request, IGuestSession_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5174,7 +5174,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getId
     def IGuestSession_getId(self, request, **kw):
         if isinstance(request, IGuestSession_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5184,7 +5184,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getTimeout
     def IGuestSession_getTimeout(self, request, **kw):
         if isinstance(request, IGuestSession_getTimeoutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5194,7 +5194,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_setTimeout
     def IGuestSession_setTimeout(self, request, **kw):
         if isinstance(request, IGuestSession_setTimeoutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5204,7 +5204,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getProtocolVersion
     def IGuestSession_getProtocolVersion(self, request, **kw):
         if isinstance(request, IGuestSession_getProtocolVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5214,7 +5214,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getStatus
     def IGuestSession_getStatus(self, request, **kw):
         if isinstance(request, IGuestSession_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5224,7 +5224,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getEnvironment
     def IGuestSession_getEnvironment(self, request, **kw):
         if isinstance(request, IGuestSession_getEnvironmentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5234,7 +5234,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_setEnvironment
     def IGuestSession_setEnvironment(self, request, **kw):
         if isinstance(request, IGuestSession_setEnvironmentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5244,7 +5244,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getProcesses
     def IGuestSession_getProcesses(self, request, **kw):
         if isinstance(request, IGuestSession_getProcessesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5254,7 +5254,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getDirectories
     def IGuestSession_getDirectories(self, request, **kw):
         if isinstance(request, IGuestSession_getDirectoriesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5264,7 +5264,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getFiles
     def IGuestSession_getFiles(self, request, **kw):
         if isinstance(request, IGuestSession_getFilesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5274,7 +5274,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_getEventSource
     def IGuestSession_getEventSource(self, request, **kw):
         if isinstance(request, IGuestSession_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5284,7 +5284,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_close
     def IGuestSession_close(self, request, **kw):
         if isinstance(request, IGuestSession_closeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5294,7 +5294,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_copyFrom
     def IGuestSession_copyFrom(self, request, **kw):
         if isinstance(request, IGuestSession_copyFromRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5304,7 +5304,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_copyTo
     def IGuestSession_copyTo(self, request, **kw):
         if isinstance(request, IGuestSession_copyToRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5314,7 +5314,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryCreate
     def IGuestSession_directoryCreate(self, request, **kw):
         if isinstance(request, IGuestSession_directoryCreateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5324,7 +5324,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryCreateTemp
     def IGuestSession_directoryCreateTemp(self, request, **kw):
         if isinstance(request, IGuestSession_directoryCreateTempRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5334,7 +5334,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryExists
     def IGuestSession_directoryExists(self, request, **kw):
         if isinstance(request, IGuestSession_directoryExistsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5344,7 +5344,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryOpen
     def IGuestSession_directoryOpen(self, request, **kw):
         if isinstance(request, IGuestSession_directoryOpenRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5354,7 +5354,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryQueryInfo
     def IGuestSession_directoryQueryInfo(self, request, **kw):
         if isinstance(request, IGuestSession_directoryQueryInfoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5364,7 +5364,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryRemove
     def IGuestSession_directoryRemove(self, request, **kw):
         if isinstance(request, IGuestSession_directoryRemoveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5374,7 +5374,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryRemoveRecursive
     def IGuestSession_directoryRemoveRecursive(self, request, **kw):
         if isinstance(request, IGuestSession_directoryRemoveRecursiveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5384,7 +5384,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directoryRename
     def IGuestSession_directoryRename(self, request, **kw):
         if isinstance(request, IGuestSession_directoryRenameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5394,7 +5394,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_directorySetACL
     def IGuestSession_directorySetACL(self, request, **kw):
         if isinstance(request, IGuestSession_directorySetACLRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5404,7 +5404,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_environmentClear
     def IGuestSession_environmentClear(self, request, **kw):
         if isinstance(request, IGuestSession_environmentClearRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5414,7 +5414,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_environmentGet
     def IGuestSession_environmentGet(self, request, **kw):
         if isinstance(request, IGuestSession_environmentGetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5424,7 +5424,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_environmentSet
     def IGuestSession_environmentSet(self, request, **kw):
         if isinstance(request, IGuestSession_environmentSetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5434,7 +5434,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_environmentUnset
     def IGuestSession_environmentUnset(self, request, **kw):
         if isinstance(request, IGuestSession_environmentUnsetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5444,7 +5444,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileCreateTemp
     def IGuestSession_fileCreateTemp(self, request, **kw):
         if isinstance(request, IGuestSession_fileCreateTempRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5454,7 +5454,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileExists
     def IGuestSession_fileExists(self, request, **kw):
         if isinstance(request, IGuestSession_fileExistsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5464,7 +5464,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileRemove
     def IGuestSession_fileRemove(self, request, **kw):
         if isinstance(request, IGuestSession_fileRemoveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5474,7 +5474,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileOpen
     def IGuestSession_fileOpen(self, request, **kw):
         if isinstance(request, IGuestSession_fileOpenRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5484,7 +5484,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileOpenEx
     def IGuestSession_fileOpenEx(self, request, **kw):
         if isinstance(request, IGuestSession_fileOpenExRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5494,7 +5494,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileQueryInfo
     def IGuestSession_fileQueryInfo(self, request, **kw):
         if isinstance(request, IGuestSession_fileQueryInfoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5504,7 +5504,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileQuerySize
     def IGuestSession_fileQuerySize(self, request, **kw):
         if isinstance(request, IGuestSession_fileQuerySizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5514,7 +5514,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileRename
     def IGuestSession_fileRename(self, request, **kw):
         if isinstance(request, IGuestSession_fileRenameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5524,7 +5524,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_fileSetACL
     def IGuestSession_fileSetACL(self, request, **kw):
         if isinstance(request, IGuestSession_fileSetACLRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5534,7 +5534,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_processCreate
     def IGuestSession_processCreate(self, request, **kw):
         if isinstance(request, IGuestSession_processCreateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5544,7 +5544,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_processCreateEx
     def IGuestSession_processCreateEx(self, request, **kw):
         if isinstance(request, IGuestSession_processCreateExRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5554,7 +5554,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_processGet
     def IGuestSession_processGet(self, request, **kw):
         if isinstance(request, IGuestSession_processGetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5564,7 +5564,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_symlinkCreate
     def IGuestSession_symlinkCreate(self, request, **kw):
         if isinstance(request, IGuestSession_symlinkCreateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5574,7 +5574,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_symlinkExists
     def IGuestSession_symlinkExists(self, request, **kw):
         if isinstance(request, IGuestSession_symlinkExistsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5584,7 +5584,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_symlinkRead
     def IGuestSession_symlinkRead(self, request, **kw):
         if isinstance(request, IGuestSession_symlinkReadRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5594,7 +5594,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_symlinkRemoveDirectory
     def IGuestSession_symlinkRemoveDirectory(self, request, **kw):
         if isinstance(request, IGuestSession_symlinkRemoveDirectoryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5604,7 +5604,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_symlinkRemoveFile
     def IGuestSession_symlinkRemoveFile(self, request, **kw):
         if isinstance(request, IGuestSession_symlinkRemoveFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5614,7 +5614,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_waitFor
     def IGuestSession_waitFor(self, request, **kw):
         if isinstance(request, IGuestSession_waitForRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5624,7 +5624,7 @@ class vboxBindingSOAP:
     # op: IGuestSession_waitForArray
     def IGuestSession_waitForArray(self, request, **kw):
         if isinstance(request, IGuestSession_waitForArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5634,7 +5634,7 @@ class vboxBindingSOAP:
     # op: IProcess_getArguments
     def IProcess_getArguments(self, request, **kw):
         if isinstance(request, IProcess_getArgumentsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5644,7 +5644,7 @@ class vboxBindingSOAP:
     # op: IProcess_getEnvironment
     def IProcess_getEnvironment(self, request, **kw):
         if isinstance(request, IProcess_getEnvironmentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5654,7 +5654,7 @@ class vboxBindingSOAP:
     # op: IProcess_getEventSource
     def IProcess_getEventSource(self, request, **kw):
         if isinstance(request, IProcess_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5664,7 +5664,7 @@ class vboxBindingSOAP:
     # op: IProcess_getExecutablePath
     def IProcess_getExecutablePath(self, request, **kw):
         if isinstance(request, IProcess_getExecutablePathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5674,7 +5674,7 @@ class vboxBindingSOAP:
     # op: IProcess_getExitCode
     def IProcess_getExitCode(self, request, **kw):
         if isinstance(request, IProcess_getExitCodeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5684,7 +5684,7 @@ class vboxBindingSOAP:
     # op: IProcess_getName
     def IProcess_getName(self, request, **kw):
         if isinstance(request, IProcess_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5694,7 +5694,7 @@ class vboxBindingSOAP:
     # op: IProcess_getPID
     def IProcess_getPID(self, request, **kw):
         if isinstance(request, IProcess_getPIDRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5704,7 +5704,7 @@ class vboxBindingSOAP:
     # op: IProcess_getStatus
     def IProcess_getStatus(self, request, **kw):
         if isinstance(request, IProcess_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5714,7 +5714,7 @@ class vboxBindingSOAP:
     # op: IProcess_waitFor
     def IProcess_waitFor(self, request, **kw):
         if isinstance(request, IProcess_waitForRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5724,7 +5724,7 @@ class vboxBindingSOAP:
     # op: IProcess_waitForArray
     def IProcess_waitForArray(self, request, **kw):
         if isinstance(request, IProcess_waitForArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5734,7 +5734,7 @@ class vboxBindingSOAP:
     # op: IProcess_read
     def IProcess_read(self, request, **kw):
         if isinstance(request, IProcess_readRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5744,7 +5744,7 @@ class vboxBindingSOAP:
     # op: IProcess_write
     def IProcess_write(self, request, **kw):
         if isinstance(request, IProcess_writeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5754,7 +5754,7 @@ class vboxBindingSOAP:
     # op: IProcess_writeArray
     def IProcess_writeArray(self, request, **kw):
         if isinstance(request, IProcess_writeArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5764,7 +5764,7 @@ class vboxBindingSOAP:
     # op: IProcess_terminate
     def IProcess_terminate(self, request, **kw):
         if isinstance(request, IProcess_terminateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5774,7 +5774,7 @@ class vboxBindingSOAP:
     # op: IDirectory_getDirectoryName
     def IDirectory_getDirectoryName(self, request, **kw):
         if isinstance(request, IDirectory_getDirectoryNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5784,7 +5784,7 @@ class vboxBindingSOAP:
     # op: IDirectory_getFilter
     def IDirectory_getFilter(self, request, **kw):
         if isinstance(request, IDirectory_getFilterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5794,7 +5794,7 @@ class vboxBindingSOAP:
     # op: IDirectory_close
     def IDirectory_close(self, request, **kw):
         if isinstance(request, IDirectory_closeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5804,7 +5804,7 @@ class vboxBindingSOAP:
     # op: IDirectory_read
     def IDirectory_read(self, request, **kw):
         if isinstance(request, IDirectory_readRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5814,7 +5814,7 @@ class vboxBindingSOAP:
     # op: IFile_getCreationMode
     def IFile_getCreationMode(self, request, **kw):
         if isinstance(request, IFile_getCreationModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5824,7 +5824,7 @@ class vboxBindingSOAP:
     # op: IFile_getDisposition
     def IFile_getDisposition(self, request, **kw):
         if isinstance(request, IFile_getDispositionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5834,7 +5834,7 @@ class vboxBindingSOAP:
     # op: IFile_getEventSource
     def IFile_getEventSource(self, request, **kw):
         if isinstance(request, IFile_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5844,7 +5844,7 @@ class vboxBindingSOAP:
     # op: IFile_getFileName
     def IFile_getFileName(self, request, **kw):
         if isinstance(request, IFile_getFileNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5854,7 +5854,7 @@ class vboxBindingSOAP:
     # op: IFile_getId
     def IFile_getId(self, request, **kw):
         if isinstance(request, IFile_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5864,7 +5864,7 @@ class vboxBindingSOAP:
     # op: IFile_getInitialSize
     def IFile_getInitialSize(self, request, **kw):
         if isinstance(request, IFile_getInitialSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5874,7 +5874,7 @@ class vboxBindingSOAP:
     # op: IFile_getOpenMode
     def IFile_getOpenMode(self, request, **kw):
         if isinstance(request, IFile_getOpenModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5884,7 +5884,7 @@ class vboxBindingSOAP:
     # op: IFile_getOffset
     def IFile_getOffset(self, request, **kw):
         if isinstance(request, IFile_getOffsetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5894,7 +5894,7 @@ class vboxBindingSOAP:
     # op: IFile_getStatus
     def IFile_getStatus(self, request, **kw):
         if isinstance(request, IFile_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5904,7 +5904,7 @@ class vboxBindingSOAP:
     # op: IFile_close
     def IFile_close(self, request, **kw):
         if isinstance(request, IFile_closeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5914,7 +5914,7 @@ class vboxBindingSOAP:
     # op: IFile_queryInfo
     def IFile_queryInfo(self, request, **kw):
         if isinstance(request, IFile_queryInfoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5924,7 +5924,7 @@ class vboxBindingSOAP:
     # op: IFile_read
     def IFile_read(self, request, **kw):
         if isinstance(request, IFile_readRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5934,7 +5934,7 @@ class vboxBindingSOAP:
     # op: IFile_readAt
     def IFile_readAt(self, request, **kw):
         if isinstance(request, IFile_readAtRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5944,7 +5944,7 @@ class vboxBindingSOAP:
     # op: IFile_seek
     def IFile_seek(self, request, **kw):
         if isinstance(request, IFile_seekRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5954,7 +5954,7 @@ class vboxBindingSOAP:
     # op: IFile_setACL
     def IFile_setACL(self, request, **kw):
         if isinstance(request, IFile_setACLRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5964,7 +5964,7 @@ class vboxBindingSOAP:
     # op: IFile_write
     def IFile_write(self, request, **kw):
         if isinstance(request, IFile_writeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5974,7 +5974,7 @@ class vboxBindingSOAP:
     # op: IFile_writeAt
     def IFile_writeAt(self, request, **kw):
         if isinstance(request, IFile_writeAtRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5984,7 +5984,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getAccessTime
     def IFsObjInfo_getAccessTime(self, request, **kw):
         if isinstance(request, IFsObjInfo_getAccessTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -5994,7 +5994,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getAllocatedSize
     def IFsObjInfo_getAllocatedSize(self, request, **kw):
         if isinstance(request, IFsObjInfo_getAllocatedSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6004,7 +6004,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getBirthTime
     def IFsObjInfo_getBirthTime(self, request, **kw):
         if isinstance(request, IFsObjInfo_getBirthTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6014,7 +6014,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getChangeTime
     def IFsObjInfo_getChangeTime(self, request, **kw):
         if isinstance(request, IFsObjInfo_getChangeTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6024,7 +6024,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getDeviceNumber
     def IFsObjInfo_getDeviceNumber(self, request, **kw):
         if isinstance(request, IFsObjInfo_getDeviceNumberRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6034,7 +6034,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getFileAttributes
     def IFsObjInfo_getFileAttributes(self, request, **kw):
         if isinstance(request, IFsObjInfo_getFileAttributesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6044,7 +6044,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getGenerationId
     def IFsObjInfo_getGenerationId(self, request, **kw):
         if isinstance(request, IFsObjInfo_getGenerationIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6054,7 +6054,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getGID
     def IFsObjInfo_getGID(self, request, **kw):
         if isinstance(request, IFsObjInfo_getGIDRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6064,7 +6064,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getGroupName
     def IFsObjInfo_getGroupName(self, request, **kw):
         if isinstance(request, IFsObjInfo_getGroupNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6074,7 +6074,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getHardLinks
     def IFsObjInfo_getHardLinks(self, request, **kw):
         if isinstance(request, IFsObjInfo_getHardLinksRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6084,7 +6084,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getModificationTime
     def IFsObjInfo_getModificationTime(self, request, **kw):
         if isinstance(request, IFsObjInfo_getModificationTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6094,7 +6094,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getName
     def IFsObjInfo_getName(self, request, **kw):
         if isinstance(request, IFsObjInfo_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6104,7 +6104,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getNodeId
     def IFsObjInfo_getNodeId(self, request, **kw):
         if isinstance(request, IFsObjInfo_getNodeIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6114,7 +6114,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getNodeIdDevice
     def IFsObjInfo_getNodeIdDevice(self, request, **kw):
         if isinstance(request, IFsObjInfo_getNodeIdDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6124,7 +6124,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getObjectSize
     def IFsObjInfo_getObjectSize(self, request, **kw):
         if isinstance(request, IFsObjInfo_getObjectSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6134,7 +6134,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getType
     def IFsObjInfo_getType(self, request, **kw):
         if isinstance(request, IFsObjInfo_getTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6144,7 +6144,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getUID
     def IFsObjInfo_getUID(self, request, **kw):
         if isinstance(request, IFsObjInfo_getUIDRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6154,7 +6154,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getUserFlags
     def IFsObjInfo_getUserFlags(self, request, **kw):
         if isinstance(request, IFsObjInfo_getUserFlagsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6164,7 +6164,7 @@ class vboxBindingSOAP:
     # op: IFsObjInfo_getUserName
     def IFsObjInfo_getUserName(self, request, **kw):
         if isinstance(request, IFsObjInfo_getUserNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6174,7 +6174,7 @@ class vboxBindingSOAP:
     # op: IGuest_getOSTypeId
     def IGuest_getOSTypeId(self, request, **kw):
         if isinstance(request, IGuest_getOSTypeIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6184,7 +6184,7 @@ class vboxBindingSOAP:
     # op: IGuest_getAdditionsRunLevel
     def IGuest_getAdditionsRunLevel(self, request, **kw):
         if isinstance(request, IGuest_getAdditionsRunLevelRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6194,7 +6194,7 @@ class vboxBindingSOAP:
     # op: IGuest_getAdditionsVersion
     def IGuest_getAdditionsVersion(self, request, **kw):
         if isinstance(request, IGuest_getAdditionsVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6204,7 +6204,7 @@ class vboxBindingSOAP:
     # op: IGuest_getAdditionsRevision
     def IGuest_getAdditionsRevision(self, request, **kw):
         if isinstance(request, IGuest_getAdditionsRevisionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6214,7 +6214,7 @@ class vboxBindingSOAP:
     # op: IGuest_getEventSource
     def IGuest_getEventSource(self, request, **kw):
         if isinstance(request, IGuest_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6224,7 +6224,7 @@ class vboxBindingSOAP:
     # op: IGuest_getFacilities
     def IGuest_getFacilities(self, request, **kw):
         if isinstance(request, IGuest_getFacilitiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6234,7 +6234,7 @@ class vboxBindingSOAP:
     # op: IGuest_getSessions
     def IGuest_getSessions(self, request, **kw):
         if isinstance(request, IGuest_getSessionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6244,7 +6244,7 @@ class vboxBindingSOAP:
     # op: IGuest_getMemoryBalloonSize
     def IGuest_getMemoryBalloonSize(self, request, **kw):
         if isinstance(request, IGuest_getMemoryBalloonSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6254,7 +6254,7 @@ class vboxBindingSOAP:
     # op: IGuest_setMemoryBalloonSize
     def IGuest_setMemoryBalloonSize(self, request, **kw):
         if isinstance(request, IGuest_setMemoryBalloonSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6264,7 +6264,7 @@ class vboxBindingSOAP:
     # op: IGuest_getStatisticsUpdateInterval
     def IGuest_getStatisticsUpdateInterval(self, request, **kw):
         if isinstance(request, IGuest_getStatisticsUpdateIntervalRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6274,7 +6274,7 @@ class vboxBindingSOAP:
     # op: IGuest_setStatisticsUpdateInterval
     def IGuest_setStatisticsUpdateInterval(self, request, **kw):
         if isinstance(request, IGuest_setStatisticsUpdateIntervalRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6284,7 +6284,7 @@ class vboxBindingSOAP:
     # op: IGuest_internalGetStatistics
     def IGuest_internalGetStatistics(self, request, **kw):
         if isinstance(request, IGuest_internalGetStatisticsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6294,7 +6294,7 @@ class vboxBindingSOAP:
     # op: IGuest_getFacilityStatus
     def IGuest_getFacilityStatus(self, request, **kw):
         if isinstance(request, IGuest_getFacilityStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6304,7 +6304,7 @@ class vboxBindingSOAP:
     # op: IGuest_getAdditionsStatus
     def IGuest_getAdditionsStatus(self, request, **kw):
         if isinstance(request, IGuest_getAdditionsStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6314,7 +6314,7 @@ class vboxBindingSOAP:
     # op: IGuest_setCredentials
     def IGuest_setCredentials(self, request, **kw):
         if isinstance(request, IGuest_setCredentialsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6324,7 +6324,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragHGEnter
     def IGuest_dragHGEnter(self, request, **kw):
         if isinstance(request, IGuest_dragHGEnterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6334,7 +6334,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragHGMove
     def IGuest_dragHGMove(self, request, **kw):
         if isinstance(request, IGuest_dragHGMoveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6344,7 +6344,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragHGLeave
     def IGuest_dragHGLeave(self, request, **kw):
         if isinstance(request, IGuest_dragHGLeaveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6354,7 +6354,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragHGDrop
     def IGuest_dragHGDrop(self, request, **kw):
         if isinstance(request, IGuest_dragHGDropRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6364,7 +6364,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragHGPutData
     def IGuest_dragHGPutData(self, request, **kw):
         if isinstance(request, IGuest_dragHGPutDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6374,7 +6374,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragGHPending
     def IGuest_dragGHPending(self, request, **kw):
         if isinstance(request, IGuest_dragGHPendingRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6384,7 +6384,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragGHDropped
     def IGuest_dragGHDropped(self, request, **kw):
         if isinstance(request, IGuest_dragGHDroppedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6394,7 +6394,7 @@ class vboxBindingSOAP:
     # op: IGuest_dragGHGetData
     def IGuest_dragGHGetData(self, request, **kw):
         if isinstance(request, IGuest_dragGHGetDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6404,7 +6404,7 @@ class vboxBindingSOAP:
     # op: IGuest_createSession
     def IGuest_createSession(self, request, **kw):
         if isinstance(request, IGuest_createSessionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6414,7 +6414,7 @@ class vboxBindingSOAP:
     # op: IGuest_findSession
     def IGuest_findSession(self, request, **kw):
         if isinstance(request, IGuest_findSessionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6424,7 +6424,7 @@ class vboxBindingSOAP:
     # op: IGuest_updateGuestAdditions
     def IGuest_updateGuestAdditions(self, request, **kw):
         if isinstance(request, IGuest_updateGuestAdditionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6434,7 +6434,7 @@ class vboxBindingSOAP:
     # op: IProgress_getId
     def IProgress_getId(self, request, **kw):
         if isinstance(request, IProgress_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6444,7 +6444,7 @@ class vboxBindingSOAP:
     # op: IProgress_getDescription
     def IProgress_getDescription(self, request, **kw):
         if isinstance(request, IProgress_getDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6454,7 +6454,7 @@ class vboxBindingSOAP:
     # op: IProgress_getInitiator
     def IProgress_getInitiator(self, request, **kw):
         if isinstance(request, IProgress_getInitiatorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6464,7 +6464,7 @@ class vboxBindingSOAP:
     # op: IProgress_getCancelable
     def IProgress_getCancelable(self, request, **kw):
         if isinstance(request, IProgress_getCancelableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6474,7 +6474,7 @@ class vboxBindingSOAP:
     # op: IProgress_getPercent
     def IProgress_getPercent(self, request, **kw):
         if isinstance(request, IProgress_getPercentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6484,7 +6484,7 @@ class vboxBindingSOAP:
     # op: IProgress_getTimeRemaining
     def IProgress_getTimeRemaining(self, request, **kw):
         if isinstance(request, IProgress_getTimeRemainingRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6494,7 +6494,7 @@ class vboxBindingSOAP:
     # op: IProgress_getCompleted
     def IProgress_getCompleted(self, request, **kw):
         if isinstance(request, IProgress_getCompletedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6504,7 +6504,7 @@ class vboxBindingSOAP:
     # op: IProgress_getCanceled
     def IProgress_getCanceled(self, request, **kw):
         if isinstance(request, IProgress_getCanceledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6514,7 +6514,7 @@ class vboxBindingSOAP:
     # op: IProgress_getResultCode
     def IProgress_getResultCode(self, request, **kw):
         if isinstance(request, IProgress_getResultCodeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6524,7 +6524,7 @@ class vboxBindingSOAP:
     # op: IProgress_getErrorInfo
     def IProgress_getErrorInfo(self, request, **kw):
         if isinstance(request, IProgress_getErrorInfoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6534,7 +6534,7 @@ class vboxBindingSOAP:
     # op: IProgress_getOperationCount
     def IProgress_getOperationCount(self, request, **kw):
         if isinstance(request, IProgress_getOperationCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6544,7 +6544,7 @@ class vboxBindingSOAP:
     # op: IProgress_getOperation
     def IProgress_getOperation(self, request, **kw):
         if isinstance(request, IProgress_getOperationRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6554,7 +6554,7 @@ class vboxBindingSOAP:
     # op: IProgress_getOperationDescription
     def IProgress_getOperationDescription(self, request, **kw):
         if isinstance(request, IProgress_getOperationDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6564,7 +6564,7 @@ class vboxBindingSOAP:
     # op: IProgress_getOperationPercent
     def IProgress_getOperationPercent(self, request, **kw):
         if isinstance(request, IProgress_getOperationPercentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6574,7 +6574,7 @@ class vboxBindingSOAP:
     # op: IProgress_getOperationWeight
     def IProgress_getOperationWeight(self, request, **kw):
         if isinstance(request, IProgress_getOperationWeightRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6584,7 +6584,7 @@ class vboxBindingSOAP:
     # op: IProgress_getTimeout
     def IProgress_getTimeout(self, request, **kw):
         if isinstance(request, IProgress_getTimeoutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6594,7 +6594,7 @@ class vboxBindingSOAP:
     # op: IProgress_setTimeout
     def IProgress_setTimeout(self, request, **kw):
         if isinstance(request, IProgress_setTimeoutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6604,7 +6604,7 @@ class vboxBindingSOAP:
     # op: IProgress_setCurrentOperationProgress
     def IProgress_setCurrentOperationProgress(self, request, **kw):
         if isinstance(request, IProgress_setCurrentOperationProgressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6614,7 +6614,7 @@ class vboxBindingSOAP:
     # op: IProgress_setNextOperation
     def IProgress_setNextOperation(self, request, **kw):
         if isinstance(request, IProgress_setNextOperationRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6624,7 +6624,7 @@ class vboxBindingSOAP:
     # op: IProgress_waitForCompletion
     def IProgress_waitForCompletion(self, request, **kw):
         if isinstance(request, IProgress_waitForCompletionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6634,7 +6634,7 @@ class vboxBindingSOAP:
     # op: IProgress_waitForOperationCompletion
     def IProgress_waitForOperationCompletion(self, request, **kw):
         if isinstance(request, IProgress_waitForOperationCompletionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6644,7 +6644,7 @@ class vboxBindingSOAP:
     # op: IProgress_waitForAsyncProgressCompletion
     def IProgress_waitForAsyncProgressCompletion(self, request, **kw):
         if isinstance(request, IProgress_waitForAsyncProgressCompletionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6654,7 +6654,7 @@ class vboxBindingSOAP:
     # op: IProgress_cancel
     def IProgress_cancel(self, request, **kw):
         if isinstance(request, IProgress_cancelRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6664,7 +6664,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getId
     def ISnapshot_getId(self, request, **kw):
         if isinstance(request, ISnapshot_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6674,7 +6674,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getName
     def ISnapshot_getName(self, request, **kw):
         if isinstance(request, ISnapshot_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6684,7 +6684,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_setName
     def ISnapshot_setName(self, request, **kw):
         if isinstance(request, ISnapshot_setNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6694,7 +6694,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getDescription
     def ISnapshot_getDescription(self, request, **kw):
         if isinstance(request, ISnapshot_getDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6704,7 +6704,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_setDescription
     def ISnapshot_setDescription(self, request, **kw):
         if isinstance(request, ISnapshot_setDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6714,7 +6714,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getTimeStamp
     def ISnapshot_getTimeStamp(self, request, **kw):
         if isinstance(request, ISnapshot_getTimeStampRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6724,7 +6724,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getOnline
     def ISnapshot_getOnline(self, request, **kw):
         if isinstance(request, ISnapshot_getOnlineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6734,7 +6734,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getMachine
     def ISnapshot_getMachine(self, request, **kw):
         if isinstance(request, ISnapshot_getMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6744,7 +6744,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getParent
     def ISnapshot_getParent(self, request, **kw):
         if isinstance(request, ISnapshot_getParentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6754,7 +6754,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getChildren
     def ISnapshot_getChildren(self, request, **kw):
         if isinstance(request, ISnapshot_getChildrenRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6764,7 +6764,7 @@ class vboxBindingSOAP:
     # op: ISnapshot_getChildrenCount
     def ISnapshot_getChildrenCount(self, request, **kw):
         if isinstance(request, ISnapshot_getChildrenCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6774,7 +6774,7 @@ class vboxBindingSOAP:
     # op: IMedium_getId
     def IMedium_getId(self, request, **kw):
         if isinstance(request, IMedium_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6784,7 +6784,7 @@ class vboxBindingSOAP:
     # op: IMedium_getDescription
     def IMedium_getDescription(self, request, **kw):
         if isinstance(request, IMedium_getDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6794,7 +6794,7 @@ class vboxBindingSOAP:
     # op: IMedium_setDescription
     def IMedium_setDescription(self, request, **kw):
         if isinstance(request, IMedium_setDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6804,7 +6804,7 @@ class vboxBindingSOAP:
     # op: IMedium_getState
     def IMedium_getState(self, request, **kw):
         if isinstance(request, IMedium_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6814,7 +6814,7 @@ class vboxBindingSOAP:
     # op: IMedium_getVariant
     def IMedium_getVariant(self, request, **kw):
         if isinstance(request, IMedium_getVariantRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6824,7 +6824,7 @@ class vboxBindingSOAP:
     # op: IMedium_getLocation
     def IMedium_getLocation(self, request, **kw):
         if isinstance(request, IMedium_getLocationRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6834,7 +6834,7 @@ class vboxBindingSOAP:
     # op: IMedium_getName
     def IMedium_getName(self, request, **kw):
         if isinstance(request, IMedium_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6844,7 +6844,7 @@ class vboxBindingSOAP:
     # op: IMedium_getDeviceType
     def IMedium_getDeviceType(self, request, **kw):
         if isinstance(request, IMedium_getDeviceTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6854,7 +6854,7 @@ class vboxBindingSOAP:
     # op: IMedium_getHostDrive
     def IMedium_getHostDrive(self, request, **kw):
         if isinstance(request, IMedium_getHostDriveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6864,7 +6864,7 @@ class vboxBindingSOAP:
     # op: IMedium_getSize
     def IMedium_getSize(self, request, **kw):
         if isinstance(request, IMedium_getSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6874,7 +6874,7 @@ class vboxBindingSOAP:
     # op: IMedium_getFormat
     def IMedium_getFormat(self, request, **kw):
         if isinstance(request, IMedium_getFormatRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6884,7 +6884,7 @@ class vboxBindingSOAP:
     # op: IMedium_getMediumFormat
     def IMedium_getMediumFormat(self, request, **kw):
         if isinstance(request, IMedium_getMediumFormatRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6894,7 +6894,7 @@ class vboxBindingSOAP:
     # op: IMedium_getType
     def IMedium_getType(self, request, **kw):
         if isinstance(request, IMedium_getTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6904,7 +6904,7 @@ class vboxBindingSOAP:
     # op: IMedium_setType
     def IMedium_setType(self, request, **kw):
         if isinstance(request, IMedium_setTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6914,7 +6914,7 @@ class vboxBindingSOAP:
     # op: IMedium_getAllowedTypes
     def IMedium_getAllowedTypes(self, request, **kw):
         if isinstance(request, IMedium_getAllowedTypesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6924,7 +6924,7 @@ class vboxBindingSOAP:
     # op: IMedium_getParent
     def IMedium_getParent(self, request, **kw):
         if isinstance(request, IMedium_getParentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6934,7 +6934,7 @@ class vboxBindingSOAP:
     # op: IMedium_getChildren
     def IMedium_getChildren(self, request, **kw):
         if isinstance(request, IMedium_getChildrenRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6944,7 +6944,7 @@ class vboxBindingSOAP:
     # op: IMedium_getBase
     def IMedium_getBase(self, request, **kw):
         if isinstance(request, IMedium_getBaseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6954,7 +6954,7 @@ class vboxBindingSOAP:
     # op: IMedium_getReadOnly
     def IMedium_getReadOnly(self, request, **kw):
         if isinstance(request, IMedium_getReadOnlyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6964,7 +6964,7 @@ class vboxBindingSOAP:
     # op: IMedium_getLogicalSize
     def IMedium_getLogicalSize(self, request, **kw):
         if isinstance(request, IMedium_getLogicalSizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6974,7 +6974,7 @@ class vboxBindingSOAP:
     # op: IMedium_getAutoReset
     def IMedium_getAutoReset(self, request, **kw):
         if isinstance(request, IMedium_getAutoResetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6984,7 +6984,7 @@ class vboxBindingSOAP:
     # op: IMedium_setAutoReset
     def IMedium_setAutoReset(self, request, **kw):
         if isinstance(request, IMedium_setAutoResetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -6994,7 +6994,7 @@ class vboxBindingSOAP:
     # op: IMedium_getLastAccessError
     def IMedium_getLastAccessError(self, request, **kw):
         if isinstance(request, IMedium_getLastAccessErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7004,7 +7004,7 @@ class vboxBindingSOAP:
     # op: IMedium_getMachineIds
     def IMedium_getMachineIds(self, request, **kw):
         if isinstance(request, IMedium_getMachineIdsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7014,7 +7014,7 @@ class vboxBindingSOAP:
     # op: IMedium_setIds
     def IMedium_setIds(self, request, **kw):
         if isinstance(request, IMedium_setIdsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7024,7 +7024,7 @@ class vboxBindingSOAP:
     # op: IMedium_refreshState
     def IMedium_refreshState(self, request, **kw):
         if isinstance(request, IMedium_refreshStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7034,7 +7034,7 @@ class vboxBindingSOAP:
     # op: IMedium_getSnapshotIds
     def IMedium_getSnapshotIds(self, request, **kw):
         if isinstance(request, IMedium_getSnapshotIdsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7044,7 +7044,7 @@ class vboxBindingSOAP:
     # op: IMedium_lockRead
     def IMedium_lockRead(self, request, **kw):
         if isinstance(request, IMedium_lockReadRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7054,7 +7054,7 @@ class vboxBindingSOAP:
     # op: IMedium_lockWrite
     def IMedium_lockWrite(self, request, **kw):
         if isinstance(request, IMedium_lockWriteRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7064,7 +7064,7 @@ class vboxBindingSOAP:
     # op: IMedium_close
     def IMedium_close(self, request, **kw):
         if isinstance(request, IMedium_closeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7074,7 +7074,7 @@ class vboxBindingSOAP:
     # op: IMedium_getProperty
     def IMedium_getProperty(self, request, **kw):
         if isinstance(request, IMedium_getPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7084,7 +7084,7 @@ class vboxBindingSOAP:
     # op: IMedium_setProperty
     def IMedium_setProperty(self, request, **kw):
         if isinstance(request, IMedium_setPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7094,7 +7094,7 @@ class vboxBindingSOAP:
     # op: IMedium_getProperties
     def IMedium_getProperties(self, request, **kw):
         if isinstance(request, IMedium_getPropertiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7104,7 +7104,7 @@ class vboxBindingSOAP:
     # op: IMedium_setProperties
     def IMedium_setProperties(self, request, **kw):
         if isinstance(request, IMedium_setPropertiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7114,7 +7114,7 @@ class vboxBindingSOAP:
     # op: IMedium_createBaseStorage
     def IMedium_createBaseStorage(self, request, **kw):
         if isinstance(request, IMedium_createBaseStorageRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7124,7 +7124,7 @@ class vboxBindingSOAP:
     # op: IMedium_deleteStorage
     def IMedium_deleteStorage(self, request, **kw):
         if isinstance(request, IMedium_deleteStorageRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7134,7 +7134,7 @@ class vboxBindingSOAP:
     # op: IMedium_createDiffStorage
     def IMedium_createDiffStorage(self, request, **kw):
         if isinstance(request, IMedium_createDiffStorageRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7144,7 +7144,7 @@ class vboxBindingSOAP:
     # op: IMedium_mergeTo
     def IMedium_mergeTo(self, request, **kw):
         if isinstance(request, IMedium_mergeToRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7154,7 +7154,7 @@ class vboxBindingSOAP:
     # op: IMedium_cloneTo
     def IMedium_cloneTo(self, request, **kw):
         if isinstance(request, IMedium_cloneToRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7164,7 +7164,7 @@ class vboxBindingSOAP:
     # op: IMedium_cloneToBase
     def IMedium_cloneToBase(self, request, **kw):
         if isinstance(request, IMedium_cloneToBaseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7174,7 +7174,7 @@ class vboxBindingSOAP:
     # op: IMedium_setLocation
     def IMedium_setLocation(self, request, **kw):
         if isinstance(request, IMedium_setLocationRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7184,7 +7184,7 @@ class vboxBindingSOAP:
     # op: IMedium_compact
     def IMedium_compact(self, request, **kw):
         if isinstance(request, IMedium_compactRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7194,7 +7194,7 @@ class vboxBindingSOAP:
     # op: IMedium_resize
     def IMedium_resize(self, request, **kw):
         if isinstance(request, IMedium_resizeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7204,7 +7204,7 @@ class vboxBindingSOAP:
     # op: IMedium_reset
     def IMedium_reset(self, request, **kw):
         if isinstance(request, IMedium_resetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7214,7 +7214,7 @@ class vboxBindingSOAP:
     # op: IMediumFormat_getId
     def IMediumFormat_getId(self, request, **kw):
         if isinstance(request, IMediumFormat_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7224,7 +7224,7 @@ class vboxBindingSOAP:
     # op: IMediumFormat_getName
     def IMediumFormat_getName(self, request, **kw):
         if isinstance(request, IMediumFormat_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7234,7 +7234,7 @@ class vboxBindingSOAP:
     # op: IMediumFormat_getCapabilities
     def IMediumFormat_getCapabilities(self, request, **kw):
         if isinstance(request, IMediumFormat_getCapabilitiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7244,7 +7244,7 @@ class vboxBindingSOAP:
     # op: IMediumFormat_describeFileExtensions
     def IMediumFormat_describeFileExtensions(self, request, **kw):
         if isinstance(request, IMediumFormat_describeFileExtensionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7254,7 +7254,7 @@ class vboxBindingSOAP:
     # op: IMediumFormat_describeProperties
     def IMediumFormat_describeProperties(self, request, **kw):
         if isinstance(request, IMediumFormat_describePropertiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7264,7 +7264,7 @@ class vboxBindingSOAP:
     # op: IToken_abandon
     def IToken_abandon(self, request, **kw):
         if isinstance(request, IToken_abandonRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7274,7 +7274,7 @@ class vboxBindingSOAP:
     # op: IToken_dummy
     def IToken_dummy(self, request, **kw):
         if isinstance(request, IToken_dummyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7284,7 +7284,7 @@ class vboxBindingSOAP:
     # op: IKeyboard_getEventSource
     def IKeyboard_getEventSource(self, request, **kw):
         if isinstance(request, IKeyboard_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7294,7 +7294,7 @@ class vboxBindingSOAP:
     # op: IKeyboard_putScancode
     def IKeyboard_putScancode(self, request, **kw):
         if isinstance(request, IKeyboard_putScancodeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7304,7 +7304,7 @@ class vboxBindingSOAP:
     # op: IKeyboard_putScancodes
     def IKeyboard_putScancodes(self, request, **kw):
         if isinstance(request, IKeyboard_putScancodesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7314,7 +7314,7 @@ class vboxBindingSOAP:
     # op: IKeyboard_putCAD
     def IKeyboard_putCAD(self, request, **kw):
         if isinstance(request, IKeyboard_putCADRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7324,7 +7324,7 @@ class vboxBindingSOAP:
     # op: IMouse_getAbsoluteSupported
     def IMouse_getAbsoluteSupported(self, request, **kw):
         if isinstance(request, IMouse_getAbsoluteSupportedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7334,7 +7334,7 @@ class vboxBindingSOAP:
     # op: IMouse_getRelativeSupported
     def IMouse_getRelativeSupported(self, request, **kw):
         if isinstance(request, IMouse_getRelativeSupportedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7344,7 +7344,7 @@ class vboxBindingSOAP:
     # op: IMouse_getMultiTouchSupported
     def IMouse_getMultiTouchSupported(self, request, **kw):
         if isinstance(request, IMouse_getMultiTouchSupportedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7354,7 +7354,7 @@ class vboxBindingSOAP:
     # op: IMouse_getNeedsHostCursor
     def IMouse_getNeedsHostCursor(self, request, **kw):
         if isinstance(request, IMouse_getNeedsHostCursorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7364,7 +7364,7 @@ class vboxBindingSOAP:
     # op: IMouse_getEventSource
     def IMouse_getEventSource(self, request, **kw):
         if isinstance(request, IMouse_getEventSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7374,7 +7374,7 @@ class vboxBindingSOAP:
     # op: IMouse_putMouseEvent
     def IMouse_putMouseEvent(self, request, **kw):
         if isinstance(request, IMouse_putMouseEventRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7384,7 +7384,7 @@ class vboxBindingSOAP:
     # op: IMouse_putMouseEventAbsolute
     def IMouse_putMouseEventAbsolute(self, request, **kw):
         if isinstance(request, IMouse_putMouseEventAbsoluteRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7394,7 +7394,7 @@ class vboxBindingSOAP:
     # op: IMouse_putEventMultiTouch
     def IMouse_putEventMultiTouch(self, request, **kw):
         if isinstance(request, IMouse_putEventMultiTouchRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7404,7 +7404,7 @@ class vboxBindingSOAP:
     # op: IMouse_putEventMultiTouchString
     def IMouse_putEventMultiTouchString(self, request, **kw):
         if isinstance(request, IMouse_putEventMultiTouchStringRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7414,7 +7414,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getWidth
     def IFramebuffer_getWidth(self, request, **kw):
         if isinstance(request, IFramebuffer_getWidthRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7424,7 +7424,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getHeight
     def IFramebuffer_getHeight(self, request, **kw):
         if isinstance(request, IFramebuffer_getHeightRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7434,7 +7434,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getBitsPerPixel
     def IFramebuffer_getBitsPerPixel(self, request, **kw):
         if isinstance(request, IFramebuffer_getBitsPerPixelRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7444,7 +7444,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getBytesPerLine
     def IFramebuffer_getBytesPerLine(self, request, **kw):
         if isinstance(request, IFramebuffer_getBytesPerLineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7454,7 +7454,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getPixelFormat
     def IFramebuffer_getPixelFormat(self, request, **kw):
         if isinstance(request, IFramebuffer_getPixelFormatRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7464,7 +7464,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getUsesGuestVRAM
     def IFramebuffer_getUsesGuestVRAM(self, request, **kw):
         if isinstance(request, IFramebuffer_getUsesGuestVRAMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7474,7 +7474,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getHeightReduction
     def IFramebuffer_getHeightReduction(self, request, **kw):
         if isinstance(request, IFramebuffer_getHeightReductionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7484,7 +7484,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_getOverlay
     def IFramebuffer_getOverlay(self, request, **kw):
         if isinstance(request, IFramebuffer_getOverlayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7494,7 +7494,7 @@ class vboxBindingSOAP:
     # op: IFramebuffer_videoModeSupported
     def IFramebuffer_videoModeSupported(self, request, **kw):
         if isinstance(request, IFramebuffer_videoModeSupportedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7504,7 +7504,7 @@ class vboxBindingSOAP:
     # op: IFramebufferOverlay_getX
     def IFramebufferOverlay_getX(self, request, **kw):
         if isinstance(request, IFramebufferOverlay_getXRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7514,7 +7514,7 @@ class vboxBindingSOAP:
     # op: IFramebufferOverlay_getY
     def IFramebufferOverlay_getY(self, request, **kw):
         if isinstance(request, IFramebufferOverlay_getYRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7524,7 +7524,7 @@ class vboxBindingSOAP:
     # op: IFramebufferOverlay_getVisible
     def IFramebufferOverlay_getVisible(self, request, **kw):
         if isinstance(request, IFramebufferOverlay_getVisibleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7534,7 +7534,7 @@ class vboxBindingSOAP:
     # op: IFramebufferOverlay_setVisible
     def IFramebufferOverlay_setVisible(self, request, **kw):
         if isinstance(request, IFramebufferOverlay_setVisibleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7544,7 +7544,7 @@ class vboxBindingSOAP:
     # op: IFramebufferOverlay_getAlpha
     def IFramebufferOverlay_getAlpha(self, request, **kw):
         if isinstance(request, IFramebufferOverlay_getAlphaRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7554,7 +7554,7 @@ class vboxBindingSOAP:
     # op: IFramebufferOverlay_setAlpha
     def IFramebufferOverlay_setAlpha(self, request, **kw):
         if isinstance(request, IFramebufferOverlay_setAlphaRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7564,7 +7564,7 @@ class vboxBindingSOAP:
     # op: IFramebufferOverlay_move
     def IFramebufferOverlay_move(self, request, **kw):
         if isinstance(request, IFramebufferOverlay_moveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7574,7 +7574,7 @@ class vboxBindingSOAP:
     # op: IDisplay_getScreenResolution
     def IDisplay_getScreenResolution(self, request, **kw):
         if isinstance(request, IDisplay_getScreenResolutionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7584,7 +7584,7 @@ class vboxBindingSOAP:
     # op: IDisplay_setFramebuffer
     def IDisplay_setFramebuffer(self, request, **kw):
         if isinstance(request, IDisplay_setFramebufferRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7594,7 +7594,7 @@ class vboxBindingSOAP:
     # op: IDisplay_getFramebuffer
     def IDisplay_getFramebuffer(self, request, **kw):
         if isinstance(request, IDisplay_getFramebufferRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7604,7 +7604,7 @@ class vboxBindingSOAP:
     # op: IDisplay_setVideoModeHint
     def IDisplay_setVideoModeHint(self, request, **kw):
         if isinstance(request, IDisplay_setVideoModeHintRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7614,7 +7614,7 @@ class vboxBindingSOAP:
     # op: IDisplay_setSeamlessMode
     def IDisplay_setSeamlessMode(self, request, **kw):
         if isinstance(request, IDisplay_setSeamlessModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7624,7 +7624,7 @@ class vboxBindingSOAP:
     # op: IDisplay_takeScreenShotToArray
     def IDisplay_takeScreenShotToArray(self, request, **kw):
         if isinstance(request, IDisplay_takeScreenShotToArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7634,7 +7634,7 @@ class vboxBindingSOAP:
     # op: IDisplay_takeScreenShotPNGToArray
     def IDisplay_takeScreenShotPNGToArray(self, request, **kw):
         if isinstance(request, IDisplay_takeScreenShotPNGToArrayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7644,7 +7644,7 @@ class vboxBindingSOAP:
     # op: IDisplay_invalidateAndUpdate
     def IDisplay_invalidateAndUpdate(self, request, **kw):
         if isinstance(request, IDisplay_invalidateAndUpdateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7654,7 +7654,7 @@ class vboxBindingSOAP:
     # op: IDisplay_resizeCompleted
     def IDisplay_resizeCompleted(self, request, **kw):
         if isinstance(request, IDisplay_resizeCompletedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7664,7 +7664,7 @@ class vboxBindingSOAP:
     # op: IDisplay_viewportChanged
     def IDisplay_viewportChanged(self, request, **kw):
         if isinstance(request, IDisplay_viewportChangedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7674,7 +7674,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getAdapterType
     def INetworkAdapter_getAdapterType(self, request, **kw):
         if isinstance(request, INetworkAdapter_getAdapterTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7684,7 +7684,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setAdapterType
     def INetworkAdapter_setAdapterType(self, request, **kw):
         if isinstance(request, INetworkAdapter_setAdapterTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7694,7 +7694,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getSlot
     def INetworkAdapter_getSlot(self, request, **kw):
         if isinstance(request, INetworkAdapter_getSlotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7704,7 +7704,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getEnabled
     def INetworkAdapter_getEnabled(self, request, **kw):
         if isinstance(request, INetworkAdapter_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7714,7 +7714,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setEnabled
     def INetworkAdapter_setEnabled(self, request, **kw):
         if isinstance(request, INetworkAdapter_setEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7724,7 +7724,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getMACAddress
     def INetworkAdapter_getMACAddress(self, request, **kw):
         if isinstance(request, INetworkAdapter_getMACAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7734,7 +7734,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setMACAddress
     def INetworkAdapter_setMACAddress(self, request, **kw):
         if isinstance(request, INetworkAdapter_setMACAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7744,7 +7744,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getAttachmentType
     def INetworkAdapter_getAttachmentType(self, request, **kw):
         if isinstance(request, INetworkAdapter_getAttachmentTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7754,7 +7754,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setAttachmentType
     def INetworkAdapter_setAttachmentType(self, request, **kw):
         if isinstance(request, INetworkAdapter_setAttachmentTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7764,7 +7764,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getBridgedInterface
     def INetworkAdapter_getBridgedInterface(self, request, **kw):
         if isinstance(request, INetworkAdapter_getBridgedInterfaceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7774,7 +7774,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setBridgedInterface
     def INetworkAdapter_setBridgedInterface(self, request, **kw):
         if isinstance(request, INetworkAdapter_setBridgedInterfaceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7784,7 +7784,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getHostOnlyInterface
     def INetworkAdapter_getHostOnlyInterface(self, request, **kw):
         if isinstance(request, INetworkAdapter_getHostOnlyInterfaceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7794,7 +7794,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setHostOnlyInterface
     def INetworkAdapter_setHostOnlyInterface(self, request, **kw):
         if isinstance(request, INetworkAdapter_setHostOnlyInterfaceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7804,7 +7804,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getInternalNetwork
     def INetworkAdapter_getInternalNetwork(self, request, **kw):
         if isinstance(request, INetworkAdapter_getInternalNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7814,7 +7814,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setInternalNetwork
     def INetworkAdapter_setInternalNetwork(self, request, **kw):
         if isinstance(request, INetworkAdapter_setInternalNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7824,7 +7824,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getNATNetwork
     def INetworkAdapter_getNATNetwork(self, request, **kw):
         if isinstance(request, INetworkAdapter_getNATNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7834,7 +7834,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setNATNetwork
     def INetworkAdapter_setNATNetwork(self, request, **kw):
         if isinstance(request, INetworkAdapter_setNATNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7844,7 +7844,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getGenericDriver
     def INetworkAdapter_getGenericDriver(self, request, **kw):
         if isinstance(request, INetworkAdapter_getGenericDriverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7854,7 +7854,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setGenericDriver
     def INetworkAdapter_setGenericDriver(self, request, **kw):
         if isinstance(request, INetworkAdapter_setGenericDriverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7864,7 +7864,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getCableConnected
     def INetworkAdapter_getCableConnected(self, request, **kw):
         if isinstance(request, INetworkAdapter_getCableConnectedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7874,7 +7874,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setCableConnected
     def INetworkAdapter_setCableConnected(self, request, **kw):
         if isinstance(request, INetworkAdapter_setCableConnectedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7884,7 +7884,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getLineSpeed
     def INetworkAdapter_getLineSpeed(self, request, **kw):
         if isinstance(request, INetworkAdapter_getLineSpeedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7894,7 +7894,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setLineSpeed
     def INetworkAdapter_setLineSpeed(self, request, **kw):
         if isinstance(request, INetworkAdapter_setLineSpeedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7904,7 +7904,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getPromiscModePolicy
     def INetworkAdapter_getPromiscModePolicy(self, request, **kw):
         if isinstance(request, INetworkAdapter_getPromiscModePolicyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7914,7 +7914,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setPromiscModePolicy
     def INetworkAdapter_setPromiscModePolicy(self, request, **kw):
         if isinstance(request, INetworkAdapter_setPromiscModePolicyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7924,7 +7924,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getTraceEnabled
     def INetworkAdapter_getTraceEnabled(self, request, **kw):
         if isinstance(request, INetworkAdapter_getTraceEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7934,7 +7934,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setTraceEnabled
     def INetworkAdapter_setTraceEnabled(self, request, **kw):
         if isinstance(request, INetworkAdapter_setTraceEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7944,7 +7944,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getTraceFile
     def INetworkAdapter_getTraceFile(self, request, **kw):
         if isinstance(request, INetworkAdapter_getTraceFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7954,7 +7954,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setTraceFile
     def INetworkAdapter_setTraceFile(self, request, **kw):
         if isinstance(request, INetworkAdapter_setTraceFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7964,7 +7964,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getNATEngine
     def INetworkAdapter_getNATEngine(self, request, **kw):
         if isinstance(request, INetworkAdapter_getNATEngineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7974,7 +7974,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getBootPriority
     def INetworkAdapter_getBootPriority(self, request, **kw):
         if isinstance(request, INetworkAdapter_getBootPriorityRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7984,7 +7984,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setBootPriority
     def INetworkAdapter_setBootPriority(self, request, **kw):
         if isinstance(request, INetworkAdapter_setBootPriorityRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -7994,7 +7994,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getBandwidthGroup
     def INetworkAdapter_getBandwidthGroup(self, request, **kw):
         if isinstance(request, INetworkAdapter_getBandwidthGroupRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8004,7 +8004,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setBandwidthGroup
     def INetworkAdapter_setBandwidthGroup(self, request, **kw):
         if isinstance(request, INetworkAdapter_setBandwidthGroupRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8014,7 +8014,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getProperty
     def INetworkAdapter_getProperty(self, request, **kw):
         if isinstance(request, INetworkAdapter_getPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8024,7 +8024,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_setProperty
     def INetworkAdapter_setProperty(self, request, **kw):
         if isinstance(request, INetworkAdapter_setPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8034,7 +8034,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapter_getProperties
     def INetworkAdapter_getProperties(self, request, **kw):
         if isinstance(request, INetworkAdapter_getPropertiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8044,7 +8044,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_getSlot
     def ISerialPort_getSlot(self, request, **kw):
         if isinstance(request, ISerialPort_getSlotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8054,7 +8054,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_getEnabled
     def ISerialPort_getEnabled(self, request, **kw):
         if isinstance(request, ISerialPort_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8064,7 +8064,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_setEnabled
     def ISerialPort_setEnabled(self, request, **kw):
         if isinstance(request, ISerialPort_setEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8074,7 +8074,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_getIOBase
     def ISerialPort_getIOBase(self, request, **kw):
         if isinstance(request, ISerialPort_getIOBaseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8084,7 +8084,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_setIOBase
     def ISerialPort_setIOBase(self, request, **kw):
         if isinstance(request, ISerialPort_setIOBaseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8094,7 +8094,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_getIRQ
     def ISerialPort_getIRQ(self, request, **kw):
         if isinstance(request, ISerialPort_getIRQRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8104,7 +8104,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_setIRQ
     def ISerialPort_setIRQ(self, request, **kw):
         if isinstance(request, ISerialPort_setIRQRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8114,7 +8114,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_getHostMode
     def ISerialPort_getHostMode(self, request, **kw):
         if isinstance(request, ISerialPort_getHostModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8124,7 +8124,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_setHostMode
     def ISerialPort_setHostMode(self, request, **kw):
         if isinstance(request, ISerialPort_setHostModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8134,7 +8134,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_getServer
     def ISerialPort_getServer(self, request, **kw):
         if isinstance(request, ISerialPort_getServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8144,7 +8144,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_setServer
     def ISerialPort_setServer(self, request, **kw):
         if isinstance(request, ISerialPort_setServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8154,7 +8154,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_getPath
     def ISerialPort_getPath(self, request, **kw):
         if isinstance(request, ISerialPort_getPathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8164,7 +8164,7 @@ class vboxBindingSOAP:
     # op: ISerialPort_setPath
     def ISerialPort_setPath(self, request, **kw):
         if isinstance(request, ISerialPort_setPathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8174,7 +8174,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_getSlot
     def IParallelPort_getSlot(self, request, **kw):
         if isinstance(request, IParallelPort_getSlotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8184,7 +8184,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_getEnabled
     def IParallelPort_getEnabled(self, request, **kw):
         if isinstance(request, IParallelPort_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8194,7 +8194,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_setEnabled
     def IParallelPort_setEnabled(self, request, **kw):
         if isinstance(request, IParallelPort_setEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8204,7 +8204,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_getIOBase
     def IParallelPort_getIOBase(self, request, **kw):
         if isinstance(request, IParallelPort_getIOBaseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8214,7 +8214,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_setIOBase
     def IParallelPort_setIOBase(self, request, **kw):
         if isinstance(request, IParallelPort_setIOBaseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8224,7 +8224,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_getIRQ
     def IParallelPort_getIRQ(self, request, **kw):
         if isinstance(request, IParallelPort_getIRQRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8234,7 +8234,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_setIRQ
     def IParallelPort_setIRQ(self, request, **kw):
         if isinstance(request, IParallelPort_setIRQRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8244,7 +8244,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_getPath
     def IParallelPort_getPath(self, request, **kw):
         if isinstance(request, IParallelPort_getPathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8254,7 +8254,7 @@ class vboxBindingSOAP:
     # op: IParallelPort_setPath
     def IParallelPort_setPath(self, request, **kw):
         if isinstance(request, IParallelPort_setPathRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8264,7 +8264,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getSingleStep
     def IMachineDebugger_getSingleStep(self, request, **kw):
         if isinstance(request, IMachineDebugger_getSingleStepRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8274,7 +8274,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setSingleStep
     def IMachineDebugger_setSingleStep(self, request, **kw):
         if isinstance(request, IMachineDebugger_setSingleStepRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8284,7 +8284,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getRecompileUser
     def IMachineDebugger_getRecompileUser(self, request, **kw):
         if isinstance(request, IMachineDebugger_getRecompileUserRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8294,7 +8294,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setRecompileUser
     def IMachineDebugger_setRecompileUser(self, request, **kw):
         if isinstance(request, IMachineDebugger_setRecompileUserRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8304,7 +8304,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getRecompileSupervisor
     def IMachineDebugger_getRecompileSupervisor(self, request, **kw):
         if isinstance(request, IMachineDebugger_getRecompileSupervisorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8314,7 +8314,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setRecompileSupervisor
     def IMachineDebugger_setRecompileSupervisor(self, request, **kw):
         if isinstance(request, IMachineDebugger_setRecompileSupervisorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8324,7 +8324,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getExecuteAllInIEM
     def IMachineDebugger_getExecuteAllInIEM(self, request, **kw):
         if isinstance(request, IMachineDebugger_getExecuteAllInIEMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8334,7 +8334,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setExecuteAllInIEM
     def IMachineDebugger_setExecuteAllInIEM(self, request, **kw):
         if isinstance(request, IMachineDebugger_setExecuteAllInIEMRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8344,7 +8344,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getPATMEnabled
     def IMachineDebugger_getPATMEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getPATMEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8354,7 +8354,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setPATMEnabled
     def IMachineDebugger_setPATMEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_setPATMEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8364,7 +8364,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getCSAMEnabled
     def IMachineDebugger_getCSAMEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getCSAMEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8374,7 +8374,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setCSAMEnabled
     def IMachineDebugger_setCSAMEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_setCSAMEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8384,7 +8384,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getLogEnabled
     def IMachineDebugger_getLogEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getLogEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8394,7 +8394,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setLogEnabled
     def IMachineDebugger_setLogEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_setLogEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8404,7 +8404,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getLogDbgFlags
     def IMachineDebugger_getLogDbgFlags(self, request, **kw):
         if isinstance(request, IMachineDebugger_getLogDbgFlagsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8414,7 +8414,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getLogDbgGroups
     def IMachineDebugger_getLogDbgGroups(self, request, **kw):
         if isinstance(request, IMachineDebugger_getLogDbgGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8424,7 +8424,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getLogDbgDestinations
     def IMachineDebugger_getLogDbgDestinations(self, request, **kw):
         if isinstance(request, IMachineDebugger_getLogDbgDestinationsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8434,7 +8434,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getLogRelFlags
     def IMachineDebugger_getLogRelFlags(self, request, **kw):
         if isinstance(request, IMachineDebugger_getLogRelFlagsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8444,7 +8444,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getLogRelGroups
     def IMachineDebugger_getLogRelGroups(self, request, **kw):
         if isinstance(request, IMachineDebugger_getLogRelGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8454,7 +8454,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getLogRelDestinations
     def IMachineDebugger_getLogRelDestinations(self, request, **kw):
         if isinstance(request, IMachineDebugger_getLogRelDestinationsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8464,7 +8464,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getHWVirtExEnabled
     def IMachineDebugger_getHWVirtExEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getHWVirtExEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8474,7 +8474,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getHWVirtExNestedPagingEnabled
     def IMachineDebugger_getHWVirtExNestedPagingEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getHWVirtExNestedPagingEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8484,7 +8484,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getHWVirtExVPIDEnabled
     def IMachineDebugger_getHWVirtExVPIDEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getHWVirtExVPIDEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8494,7 +8494,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getHWVirtExUXEnabled
     def IMachineDebugger_getHWVirtExUXEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getHWVirtExUXEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8504,7 +8504,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getOSName
     def IMachineDebugger_getOSName(self, request, **kw):
         if isinstance(request, IMachineDebugger_getOSNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8514,7 +8514,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getOSVersion
     def IMachineDebugger_getOSVersion(self, request, **kw):
         if isinstance(request, IMachineDebugger_getOSVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8524,7 +8524,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getPAEEnabled
     def IMachineDebugger_getPAEEnabled(self, request, **kw):
         if isinstance(request, IMachineDebugger_getPAEEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8534,7 +8534,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getVirtualTimeRate
     def IMachineDebugger_getVirtualTimeRate(self, request, **kw):
         if isinstance(request, IMachineDebugger_getVirtualTimeRateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8544,7 +8544,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setVirtualTimeRate
     def IMachineDebugger_setVirtualTimeRate(self, request, **kw):
         if isinstance(request, IMachineDebugger_setVirtualTimeRateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8554,7 +8554,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_dumpGuestCore
     def IMachineDebugger_dumpGuestCore(self, request, **kw):
         if isinstance(request, IMachineDebugger_dumpGuestCoreRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8564,7 +8564,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_dumpHostProcessCore
     def IMachineDebugger_dumpHostProcessCore(self, request, **kw):
         if isinstance(request, IMachineDebugger_dumpHostProcessCoreRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8574,7 +8574,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_info
     def IMachineDebugger_info(self, request, **kw):
         if isinstance(request, IMachineDebugger_infoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8584,7 +8584,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_injectNMI
     def IMachineDebugger_injectNMI(self, request, **kw):
         if isinstance(request, IMachineDebugger_injectNMIRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8594,7 +8594,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_modifyLogGroups
     def IMachineDebugger_modifyLogGroups(self, request, **kw):
         if isinstance(request, IMachineDebugger_modifyLogGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8604,7 +8604,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_modifyLogFlags
     def IMachineDebugger_modifyLogFlags(self, request, **kw):
         if isinstance(request, IMachineDebugger_modifyLogFlagsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8614,7 +8614,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_modifyLogDestinations
     def IMachineDebugger_modifyLogDestinations(self, request, **kw):
         if isinstance(request, IMachineDebugger_modifyLogDestinationsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8624,7 +8624,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_readPhysicalMemory
     def IMachineDebugger_readPhysicalMemory(self, request, **kw):
         if isinstance(request, IMachineDebugger_readPhysicalMemoryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8634,7 +8634,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_writePhysicalMemory
     def IMachineDebugger_writePhysicalMemory(self, request, **kw):
         if isinstance(request, IMachineDebugger_writePhysicalMemoryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8644,7 +8644,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_readVirtualMemory
     def IMachineDebugger_readVirtualMemory(self, request, **kw):
         if isinstance(request, IMachineDebugger_readVirtualMemoryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8654,7 +8654,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_writeVirtualMemory
     def IMachineDebugger_writeVirtualMemory(self, request, **kw):
         if isinstance(request, IMachineDebugger_writeVirtualMemoryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8664,7 +8664,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_detectOS
     def IMachineDebugger_detectOS(self, request, **kw):
         if isinstance(request, IMachineDebugger_detectOSRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8674,7 +8674,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getRegister
     def IMachineDebugger_getRegister(self, request, **kw):
         if isinstance(request, IMachineDebugger_getRegisterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8684,7 +8684,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getRegisters
     def IMachineDebugger_getRegisters(self, request, **kw):
         if isinstance(request, IMachineDebugger_getRegistersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8694,7 +8694,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setRegister
     def IMachineDebugger_setRegister(self, request, **kw):
         if isinstance(request, IMachineDebugger_setRegisterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8704,7 +8704,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_setRegisters
     def IMachineDebugger_setRegisters(self, request, **kw):
         if isinstance(request, IMachineDebugger_setRegistersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8714,7 +8714,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_dumpGuestStack
     def IMachineDebugger_dumpGuestStack(self, request, **kw):
         if isinstance(request, IMachineDebugger_dumpGuestStackRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8724,7 +8724,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_resetStats
     def IMachineDebugger_resetStats(self, request, **kw):
         if isinstance(request, IMachineDebugger_resetStatsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8734,7 +8734,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_dumpStats
     def IMachineDebugger_dumpStats(self, request, **kw):
         if isinstance(request, IMachineDebugger_dumpStatsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8744,7 +8744,7 @@ class vboxBindingSOAP:
     # op: IMachineDebugger_getStats
     def IMachineDebugger_getStats(self, request, **kw):
         if isinstance(request, IMachineDebugger_getStatsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8754,7 +8754,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilters_getDeviceFilters
     def IUSBDeviceFilters_getDeviceFilters(self, request, **kw):
         if isinstance(request, IUSBDeviceFilters_getDeviceFiltersRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8764,7 +8764,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilters_createDeviceFilter
     def IUSBDeviceFilters_createDeviceFilter(self, request, **kw):
         if isinstance(request, IUSBDeviceFilters_createDeviceFilterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8774,7 +8774,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilters_insertDeviceFilter
     def IUSBDeviceFilters_insertDeviceFilter(self, request, **kw):
         if isinstance(request, IUSBDeviceFilters_insertDeviceFilterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8784,7 +8784,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilters_removeDeviceFilter
     def IUSBDeviceFilters_removeDeviceFilter(self, request, **kw):
         if isinstance(request, IUSBDeviceFilters_removeDeviceFilterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8794,7 +8794,7 @@ class vboxBindingSOAP:
     # op: IUSBController_getName
     def IUSBController_getName(self, request, **kw):
         if isinstance(request, IUSBController_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8804,7 +8804,7 @@ class vboxBindingSOAP:
     # op: IUSBController_getType
     def IUSBController_getType(self, request, **kw):
         if isinstance(request, IUSBController_getTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8814,7 +8814,7 @@ class vboxBindingSOAP:
     # op: IUSBController_getUSBStandard
     def IUSBController_getUSBStandard(self, request, **kw):
         if isinstance(request, IUSBController_getUSBStandardRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8824,7 +8824,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getId
     def IUSBDevice_getId(self, request, **kw):
         if isinstance(request, IUSBDevice_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8834,7 +8834,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getVendorId
     def IUSBDevice_getVendorId(self, request, **kw):
         if isinstance(request, IUSBDevice_getVendorIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8844,7 +8844,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getProductId
     def IUSBDevice_getProductId(self, request, **kw):
         if isinstance(request, IUSBDevice_getProductIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8854,7 +8854,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getRevision
     def IUSBDevice_getRevision(self, request, **kw):
         if isinstance(request, IUSBDevice_getRevisionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8864,7 +8864,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getManufacturer
     def IUSBDevice_getManufacturer(self, request, **kw):
         if isinstance(request, IUSBDevice_getManufacturerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8874,7 +8874,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getProduct
     def IUSBDevice_getProduct(self, request, **kw):
         if isinstance(request, IUSBDevice_getProductRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8884,7 +8884,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getSerialNumber
     def IUSBDevice_getSerialNumber(self, request, **kw):
         if isinstance(request, IUSBDevice_getSerialNumberRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8894,7 +8894,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getAddress
     def IUSBDevice_getAddress(self, request, **kw):
         if isinstance(request, IUSBDevice_getAddressRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8904,7 +8904,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getPort
     def IUSBDevice_getPort(self, request, **kw):
         if isinstance(request, IUSBDevice_getPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8914,7 +8914,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getVersion
     def IUSBDevice_getVersion(self, request, **kw):
         if isinstance(request, IUSBDevice_getVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8924,7 +8924,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getPortVersion
     def IUSBDevice_getPortVersion(self, request, **kw):
         if isinstance(request, IUSBDevice_getPortVersionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8934,7 +8934,7 @@ class vboxBindingSOAP:
     # op: IUSBDevice_getRemote
     def IUSBDevice_getRemote(self, request, **kw):
         if isinstance(request, IUSBDevice_getRemoteRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8944,7 +8944,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getName
     def IUSBDeviceFilter_getName(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8954,7 +8954,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setName
     def IUSBDeviceFilter_setName(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8964,7 +8964,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getActive
     def IUSBDeviceFilter_getActive(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getActiveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8974,7 +8974,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setActive
     def IUSBDeviceFilter_setActive(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setActiveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8984,7 +8984,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getVendorId
     def IUSBDeviceFilter_getVendorId(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getVendorIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -8994,7 +8994,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setVendorId
     def IUSBDeviceFilter_setVendorId(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setVendorIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9004,7 +9004,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getProductId
     def IUSBDeviceFilter_getProductId(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getProductIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9014,7 +9014,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setProductId
     def IUSBDeviceFilter_setProductId(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setProductIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9024,7 +9024,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getRevision
     def IUSBDeviceFilter_getRevision(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getRevisionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9034,7 +9034,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setRevision
     def IUSBDeviceFilter_setRevision(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setRevisionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9044,7 +9044,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getManufacturer
     def IUSBDeviceFilter_getManufacturer(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getManufacturerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9054,7 +9054,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setManufacturer
     def IUSBDeviceFilter_setManufacturer(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setManufacturerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9064,7 +9064,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getProduct
     def IUSBDeviceFilter_getProduct(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getProductRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9074,7 +9074,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setProduct
     def IUSBDeviceFilter_setProduct(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setProductRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9084,7 +9084,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getSerialNumber
     def IUSBDeviceFilter_getSerialNumber(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getSerialNumberRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9094,7 +9094,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setSerialNumber
     def IUSBDeviceFilter_setSerialNumber(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setSerialNumberRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9104,7 +9104,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getPort
     def IUSBDeviceFilter_getPort(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9114,7 +9114,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setPort
     def IUSBDeviceFilter_setPort(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9124,7 +9124,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getRemote
     def IUSBDeviceFilter_getRemote(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getRemoteRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9134,7 +9134,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setRemote
     def IUSBDeviceFilter_setRemote(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setRemoteRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9144,7 +9144,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_getMaskedInterfaces
     def IUSBDeviceFilter_getMaskedInterfaces(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_getMaskedInterfacesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9154,7 +9154,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceFilter_setMaskedInterfaces
     def IUSBDeviceFilter_setMaskedInterfaces(self, request, **kw):
         if isinstance(request, IUSBDeviceFilter_setMaskedInterfacesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9164,7 +9164,7 @@ class vboxBindingSOAP:
     # op: IHostUSBDevice_getState
     def IHostUSBDevice_getState(self, request, **kw):
         if isinstance(request, IHostUSBDevice_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9174,7 +9174,7 @@ class vboxBindingSOAP:
     # op: IHostUSBDeviceFilter_getAction
     def IHostUSBDeviceFilter_getAction(self, request, **kw):
         if isinstance(request, IHostUSBDeviceFilter_getActionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9184,7 +9184,7 @@ class vboxBindingSOAP:
     # op: IHostUSBDeviceFilter_setAction
     def IHostUSBDeviceFilter_setAction(self, request, **kw):
         if isinstance(request, IHostUSBDeviceFilter_setActionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9194,7 +9194,7 @@ class vboxBindingSOAP:
     # op: IAudioAdapter_getEnabled
     def IAudioAdapter_getEnabled(self, request, **kw):
         if isinstance(request, IAudioAdapter_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9204,7 +9204,7 @@ class vboxBindingSOAP:
     # op: IAudioAdapter_setEnabled
     def IAudioAdapter_setEnabled(self, request, **kw):
         if isinstance(request, IAudioAdapter_setEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9214,7 +9214,7 @@ class vboxBindingSOAP:
     # op: IAudioAdapter_getAudioController
     def IAudioAdapter_getAudioController(self, request, **kw):
         if isinstance(request, IAudioAdapter_getAudioControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9224,7 +9224,7 @@ class vboxBindingSOAP:
     # op: IAudioAdapter_setAudioController
     def IAudioAdapter_setAudioController(self, request, **kw):
         if isinstance(request, IAudioAdapter_setAudioControllerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9234,7 +9234,7 @@ class vboxBindingSOAP:
     # op: IAudioAdapter_getAudioDriver
     def IAudioAdapter_getAudioDriver(self, request, **kw):
         if isinstance(request, IAudioAdapter_getAudioDriverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9244,7 +9244,7 @@ class vboxBindingSOAP:
     # op: IAudioAdapter_setAudioDriver
     def IAudioAdapter_setAudioDriver(self, request, **kw):
         if isinstance(request, IAudioAdapter_setAudioDriverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9254,7 +9254,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getEnabled
     def IVRDEServer_getEnabled(self, request, **kw):
         if isinstance(request, IVRDEServer_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9264,7 +9264,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setEnabled
     def IVRDEServer_setEnabled(self, request, **kw):
         if isinstance(request, IVRDEServer_setEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9274,7 +9274,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getAuthType
     def IVRDEServer_getAuthType(self, request, **kw):
         if isinstance(request, IVRDEServer_getAuthTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9284,7 +9284,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setAuthType
     def IVRDEServer_setAuthType(self, request, **kw):
         if isinstance(request, IVRDEServer_setAuthTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9294,7 +9294,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getAuthTimeout
     def IVRDEServer_getAuthTimeout(self, request, **kw):
         if isinstance(request, IVRDEServer_getAuthTimeoutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9304,7 +9304,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setAuthTimeout
     def IVRDEServer_setAuthTimeout(self, request, **kw):
         if isinstance(request, IVRDEServer_setAuthTimeoutRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9314,7 +9314,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getAllowMultiConnection
     def IVRDEServer_getAllowMultiConnection(self, request, **kw):
         if isinstance(request, IVRDEServer_getAllowMultiConnectionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9324,7 +9324,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setAllowMultiConnection
     def IVRDEServer_setAllowMultiConnection(self, request, **kw):
         if isinstance(request, IVRDEServer_setAllowMultiConnectionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9334,7 +9334,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getReuseSingleConnection
     def IVRDEServer_getReuseSingleConnection(self, request, **kw):
         if isinstance(request, IVRDEServer_getReuseSingleConnectionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9344,7 +9344,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setReuseSingleConnection
     def IVRDEServer_setReuseSingleConnection(self, request, **kw):
         if isinstance(request, IVRDEServer_setReuseSingleConnectionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9354,7 +9354,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getVRDEExtPack
     def IVRDEServer_getVRDEExtPack(self, request, **kw):
         if isinstance(request, IVRDEServer_getVRDEExtPackRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9364,7 +9364,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setVRDEExtPack
     def IVRDEServer_setVRDEExtPack(self, request, **kw):
         if isinstance(request, IVRDEServer_setVRDEExtPackRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9374,7 +9374,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getAuthLibrary
     def IVRDEServer_getAuthLibrary(self, request, **kw):
         if isinstance(request, IVRDEServer_getAuthLibraryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9384,7 +9384,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setAuthLibrary
     def IVRDEServer_setAuthLibrary(self, request, **kw):
         if isinstance(request, IVRDEServer_setAuthLibraryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9394,7 +9394,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getVRDEProperties
     def IVRDEServer_getVRDEProperties(self, request, **kw):
         if isinstance(request, IVRDEServer_getVRDEPropertiesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9404,7 +9404,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_setVRDEProperty
     def IVRDEServer_setVRDEProperty(self, request, **kw):
         if isinstance(request, IVRDEServer_setVRDEPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9414,7 +9414,7 @@ class vboxBindingSOAP:
     # op: IVRDEServer_getVRDEProperty
     def IVRDEServer_getVRDEProperty(self, request, **kw):
         if isinstance(request, IVRDEServer_getVRDEPropertyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9424,7 +9424,7 @@ class vboxBindingSOAP:
     # op: ISession_getState
     def ISession_getState(self, request, **kw):
         if isinstance(request, ISession_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9434,7 +9434,7 @@ class vboxBindingSOAP:
     # op: ISession_getType
     def ISession_getType(self, request, **kw):
         if isinstance(request, ISession_getTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9444,7 +9444,7 @@ class vboxBindingSOAP:
     # op: ISession_getMachine
     def ISession_getMachine(self, request, **kw):
         if isinstance(request, ISession_getMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9454,7 +9454,7 @@ class vboxBindingSOAP:
     # op: ISession_getConsole
     def ISession_getConsole(self, request, **kw):
         if isinstance(request, ISession_getConsoleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9464,7 +9464,7 @@ class vboxBindingSOAP:
     # op: ISession_unlockMachine
     def ISession_unlockMachine(self, request, **kw):
         if isinstance(request, ISession_unlockMachineRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9474,7 +9474,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getName
     def IStorageController_getName(self, request, **kw):
         if isinstance(request, IStorageController_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9484,7 +9484,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getMaxDevicesPerPortCount
     def IStorageController_getMaxDevicesPerPortCount(self, request, **kw):
         if isinstance(request, IStorageController_getMaxDevicesPerPortCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9494,7 +9494,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getMinPortCount
     def IStorageController_getMinPortCount(self, request, **kw):
         if isinstance(request, IStorageController_getMinPortCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9504,7 +9504,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getMaxPortCount
     def IStorageController_getMaxPortCount(self, request, **kw):
         if isinstance(request, IStorageController_getMaxPortCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9514,7 +9514,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getInstance
     def IStorageController_getInstance(self, request, **kw):
         if isinstance(request, IStorageController_getInstanceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9524,7 +9524,7 @@ class vboxBindingSOAP:
     # op: IStorageController_setInstance
     def IStorageController_setInstance(self, request, **kw):
         if isinstance(request, IStorageController_setInstanceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9534,7 +9534,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getPortCount
     def IStorageController_getPortCount(self, request, **kw):
         if isinstance(request, IStorageController_getPortCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9544,7 +9544,7 @@ class vboxBindingSOAP:
     # op: IStorageController_setPortCount
     def IStorageController_setPortCount(self, request, **kw):
         if isinstance(request, IStorageController_setPortCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9554,7 +9554,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getBus
     def IStorageController_getBus(self, request, **kw):
         if isinstance(request, IStorageController_getBusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9564,7 +9564,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getControllerType
     def IStorageController_getControllerType(self, request, **kw):
         if isinstance(request, IStorageController_getControllerTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9574,7 +9574,7 @@ class vboxBindingSOAP:
     # op: IStorageController_setControllerType
     def IStorageController_setControllerType(self, request, **kw):
         if isinstance(request, IStorageController_setControllerTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9584,7 +9584,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getUseHostIOCache
     def IStorageController_getUseHostIOCache(self, request, **kw):
         if isinstance(request, IStorageController_getUseHostIOCacheRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9594,7 +9594,7 @@ class vboxBindingSOAP:
     # op: IStorageController_setUseHostIOCache
     def IStorageController_setUseHostIOCache(self, request, **kw):
         if isinstance(request, IStorageController_setUseHostIOCacheRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9604,7 +9604,7 @@ class vboxBindingSOAP:
     # op: IStorageController_getBootable
     def IStorageController_getBootable(self, request, **kw):
         if isinstance(request, IStorageController_getBootableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9614,7 +9614,7 @@ class vboxBindingSOAP:
     # op: IManagedObjectRef_getInterfaceName
     def IManagedObjectRef_getInterfaceName(self, request, **kw):
         if isinstance(request, IManagedObjectRef_getInterfaceNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9624,7 +9624,7 @@ class vboxBindingSOAP:
     # op: IManagedObjectRef_release
     def IManagedObjectRef_release(self, request, **kw):
         if isinstance(request, IManagedObjectRef_releaseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9634,7 +9634,7 @@ class vboxBindingSOAP:
     # op: IWebsessionManager_logon
     def IWebsessionManager_logon(self, request, **kw):
         if isinstance(request, IWebsessionManager_logonRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9644,7 +9644,7 @@ class vboxBindingSOAP:
     # op: IWebsessionManager_getSessionObject
     def IWebsessionManager_getSessionObject(self, request, **kw):
         if isinstance(request, IWebsessionManager_getSessionObjectRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9654,7 +9654,7 @@ class vboxBindingSOAP:
     # op: IWebsessionManager_logoff
     def IWebsessionManager_logoff(self, request, **kw):
         if isinstance(request, IWebsessionManager_logoffRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9664,7 +9664,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getMetricName
     def IPerformanceMetric_getMetricName(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getMetricNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9674,7 +9674,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getObject
     def IPerformanceMetric_getObject(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getObjectRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9684,7 +9684,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getDescription
     def IPerformanceMetric_getDescription(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getDescriptionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9694,7 +9694,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getPeriod
     def IPerformanceMetric_getPeriod(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getPeriodRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9704,7 +9704,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getCount
     def IPerformanceMetric_getCount(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9714,7 +9714,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getUnit
     def IPerformanceMetric_getUnit(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getUnitRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9724,7 +9724,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getMinimumValue
     def IPerformanceMetric_getMinimumValue(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getMinimumValueRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9734,7 +9734,7 @@ class vboxBindingSOAP:
     # op: IPerformanceMetric_getMaximumValue
     def IPerformanceMetric_getMaximumValue(self, request, **kw):
         if isinstance(request, IPerformanceMetric_getMaximumValueRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9744,7 +9744,7 @@ class vboxBindingSOAP:
     # op: IPerformanceCollector_getMetricNames
     def IPerformanceCollector_getMetricNames(self, request, **kw):
         if isinstance(request, IPerformanceCollector_getMetricNamesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9754,7 +9754,7 @@ class vboxBindingSOAP:
     # op: IPerformanceCollector_getMetrics
     def IPerformanceCollector_getMetrics(self, request, **kw):
         if isinstance(request, IPerformanceCollector_getMetricsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9764,7 +9764,7 @@ class vboxBindingSOAP:
     # op: IPerformanceCollector_setupMetrics
     def IPerformanceCollector_setupMetrics(self, request, **kw):
         if isinstance(request, IPerformanceCollector_setupMetricsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9774,7 +9774,7 @@ class vboxBindingSOAP:
     # op: IPerformanceCollector_enableMetrics
     def IPerformanceCollector_enableMetrics(self, request, **kw):
         if isinstance(request, IPerformanceCollector_enableMetricsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9784,7 +9784,7 @@ class vboxBindingSOAP:
     # op: IPerformanceCollector_disableMetrics
     def IPerformanceCollector_disableMetrics(self, request, **kw):
         if isinstance(request, IPerformanceCollector_disableMetricsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9794,7 +9794,7 @@ class vboxBindingSOAP:
     # op: IPerformanceCollector_queryMetricsData
     def IPerformanceCollector_queryMetricsData(self, request, **kw):
         if isinstance(request, IPerformanceCollector_queryMetricsDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9804,7 +9804,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getNetwork
     def INATEngine_getNetwork(self, request, **kw):
         if isinstance(request, INATEngine_getNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9814,7 +9814,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setNetwork
     def INATEngine_setNetwork(self, request, **kw):
         if isinstance(request, INATEngine_setNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9824,7 +9824,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getHostIP
     def INATEngine_getHostIP(self, request, **kw):
         if isinstance(request, INATEngine_getHostIPRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9834,7 +9834,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setHostIP
     def INATEngine_setHostIP(self, request, **kw):
         if isinstance(request, INATEngine_setHostIPRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9844,7 +9844,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getTFTPPrefix
     def INATEngine_getTFTPPrefix(self, request, **kw):
         if isinstance(request, INATEngine_getTFTPPrefixRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9854,7 +9854,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setTFTPPrefix
     def INATEngine_setTFTPPrefix(self, request, **kw):
         if isinstance(request, INATEngine_setTFTPPrefixRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9864,7 +9864,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getTFTPBootFile
     def INATEngine_getTFTPBootFile(self, request, **kw):
         if isinstance(request, INATEngine_getTFTPBootFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9874,7 +9874,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setTFTPBootFile
     def INATEngine_setTFTPBootFile(self, request, **kw):
         if isinstance(request, INATEngine_setTFTPBootFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9884,7 +9884,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getTFTPNextServer
     def INATEngine_getTFTPNextServer(self, request, **kw):
         if isinstance(request, INATEngine_getTFTPNextServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9894,7 +9894,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setTFTPNextServer
     def INATEngine_setTFTPNextServer(self, request, **kw):
         if isinstance(request, INATEngine_setTFTPNextServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9904,7 +9904,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getAliasMode
     def INATEngine_getAliasMode(self, request, **kw):
         if isinstance(request, INATEngine_getAliasModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9914,7 +9914,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setAliasMode
     def INATEngine_setAliasMode(self, request, **kw):
         if isinstance(request, INATEngine_setAliasModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9924,7 +9924,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getDNSPassDomain
     def INATEngine_getDNSPassDomain(self, request, **kw):
         if isinstance(request, INATEngine_getDNSPassDomainRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9934,7 +9934,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setDNSPassDomain
     def INATEngine_setDNSPassDomain(self, request, **kw):
         if isinstance(request, INATEngine_setDNSPassDomainRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9944,7 +9944,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getDNSProxy
     def INATEngine_getDNSProxy(self, request, **kw):
         if isinstance(request, INATEngine_getDNSProxyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9954,7 +9954,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setDNSProxy
     def INATEngine_setDNSProxy(self, request, **kw):
         if isinstance(request, INATEngine_setDNSProxyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9964,7 +9964,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getDNSUseHostResolver
     def INATEngine_getDNSUseHostResolver(self, request, **kw):
         if isinstance(request, INATEngine_getDNSUseHostResolverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9974,7 +9974,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setDNSUseHostResolver
     def INATEngine_setDNSUseHostResolver(self, request, **kw):
         if isinstance(request, INATEngine_setDNSUseHostResolverRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9984,7 +9984,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getRedirects
     def INATEngine_getRedirects(self, request, **kw):
         if isinstance(request, INATEngine_getRedirectsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -9994,7 +9994,7 @@ class vboxBindingSOAP:
     # op: INATEngine_setNetworkSettings
     def INATEngine_setNetworkSettings(self, request, **kw):
         if isinstance(request, INATEngine_setNetworkSettingsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10004,7 +10004,7 @@ class vboxBindingSOAP:
     # op: INATEngine_getNetworkSettings
     def INATEngine_getNetworkSettings(self, request, **kw):
         if isinstance(request, INATEngine_getNetworkSettingsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10014,7 +10014,7 @@ class vboxBindingSOAP:
     # op: INATEngine_addRedirect
     def INATEngine_addRedirect(self, request, **kw):
         if isinstance(request, INATEngine_addRedirectRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10024,7 +10024,7 @@ class vboxBindingSOAP:
     # op: INATEngine_removeRedirect
     def INATEngine_removeRedirect(self, request, **kw):
         if isinstance(request, INATEngine_removeRedirectRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10034,7 +10034,7 @@ class vboxBindingSOAP:
     # op: IBandwidthGroup_getName
     def IBandwidthGroup_getName(self, request, **kw):
         if isinstance(request, IBandwidthGroup_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10044,7 +10044,7 @@ class vboxBindingSOAP:
     # op: IBandwidthGroup_getType
     def IBandwidthGroup_getType(self, request, **kw):
         if isinstance(request, IBandwidthGroup_getTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10054,7 +10054,7 @@ class vboxBindingSOAP:
     # op: IBandwidthGroup_getReference
     def IBandwidthGroup_getReference(self, request, **kw):
         if isinstance(request, IBandwidthGroup_getReferenceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10064,7 +10064,7 @@ class vboxBindingSOAP:
     # op: IBandwidthGroup_getMaxBytesPerSec
     def IBandwidthGroup_getMaxBytesPerSec(self, request, **kw):
         if isinstance(request, IBandwidthGroup_getMaxBytesPerSecRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10074,7 +10074,7 @@ class vboxBindingSOAP:
     # op: IBandwidthGroup_setMaxBytesPerSec
     def IBandwidthGroup_setMaxBytesPerSec(self, request, **kw):
         if isinstance(request, IBandwidthGroup_setMaxBytesPerSecRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10084,7 +10084,7 @@ class vboxBindingSOAP:
     # op: IBandwidthControl_getNumGroups
     def IBandwidthControl_getNumGroups(self, request, **kw):
         if isinstance(request, IBandwidthControl_getNumGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10094,7 +10094,7 @@ class vboxBindingSOAP:
     # op: IBandwidthControl_createBandwidthGroup
     def IBandwidthControl_createBandwidthGroup(self, request, **kw):
         if isinstance(request, IBandwidthControl_createBandwidthGroupRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10104,7 +10104,7 @@ class vboxBindingSOAP:
     # op: IBandwidthControl_deleteBandwidthGroup
     def IBandwidthControl_deleteBandwidthGroup(self, request, **kw):
         if isinstance(request, IBandwidthControl_deleteBandwidthGroupRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10114,7 +10114,7 @@ class vboxBindingSOAP:
     # op: IBandwidthControl_getBandwidthGroup
     def IBandwidthControl_getBandwidthGroup(self, request, **kw):
         if isinstance(request, IBandwidthControl_getBandwidthGroupRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10124,7 +10124,7 @@ class vboxBindingSOAP:
     # op: IBandwidthControl_getAllBandwidthGroups
     def IBandwidthControl_getAllBandwidthGroups(self, request, **kw):
         if isinstance(request, IBandwidthControl_getAllBandwidthGroupsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10134,7 +10134,7 @@ class vboxBindingSOAP:
     # op: IEventSource_createListener
     def IEventSource_createListener(self, request, **kw):
         if isinstance(request, IEventSource_createListenerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10144,7 +10144,7 @@ class vboxBindingSOAP:
     # op: IEventSource_createAggregator
     def IEventSource_createAggregator(self, request, **kw):
         if isinstance(request, IEventSource_createAggregatorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10154,7 +10154,7 @@ class vboxBindingSOAP:
     # op: IEventSource_registerListener
     def IEventSource_registerListener(self, request, **kw):
         if isinstance(request, IEventSource_registerListenerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10164,7 +10164,7 @@ class vboxBindingSOAP:
     # op: IEventSource_unregisterListener
     def IEventSource_unregisterListener(self, request, **kw):
         if isinstance(request, IEventSource_unregisterListenerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10174,7 +10174,7 @@ class vboxBindingSOAP:
     # op: IEventSource_fireEvent
     def IEventSource_fireEvent(self, request, **kw):
         if isinstance(request, IEventSource_fireEventRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10184,7 +10184,7 @@ class vboxBindingSOAP:
     # op: IEventSource_getEvent
     def IEventSource_getEvent(self, request, **kw):
         if isinstance(request, IEventSource_getEventRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10194,7 +10194,7 @@ class vboxBindingSOAP:
     # op: IEventSource_eventProcessed
     def IEventSource_eventProcessed(self, request, **kw):
         if isinstance(request, IEventSource_eventProcessedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10204,7 +10204,7 @@ class vboxBindingSOAP:
     # op: IEventListener_handleEvent
     def IEventListener_handleEvent(self, request, **kw):
         if isinstance(request, IEventListener_handleEventRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10214,7 +10214,7 @@ class vboxBindingSOAP:
     # op: IEvent_getType
     def IEvent_getType(self, request, **kw):
         if isinstance(request, IEvent_getTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10224,7 +10224,7 @@ class vboxBindingSOAP:
     # op: IEvent_getSource
     def IEvent_getSource(self, request, **kw):
         if isinstance(request, IEvent_getSourceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10234,7 +10234,7 @@ class vboxBindingSOAP:
     # op: IEvent_getWaitable
     def IEvent_getWaitable(self, request, **kw):
         if isinstance(request, IEvent_getWaitableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10244,7 +10244,7 @@ class vboxBindingSOAP:
     # op: IEvent_setProcessed
     def IEvent_setProcessed(self, request, **kw):
         if isinstance(request, IEvent_setProcessedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10254,7 +10254,7 @@ class vboxBindingSOAP:
     # op: IEvent_waitProcessed
     def IEvent_waitProcessed(self, request, **kw):
         if isinstance(request, IEvent_waitProcessedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10264,7 +10264,7 @@ class vboxBindingSOAP:
     # op: IReusableEvent_getGeneration
     def IReusableEvent_getGeneration(self, request, **kw):
         if isinstance(request, IReusableEvent_getGenerationRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10274,7 +10274,7 @@ class vboxBindingSOAP:
     # op: IReusableEvent_reuse
     def IReusableEvent_reuse(self, request, **kw):
         if isinstance(request, IReusableEvent_reuseRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10284,7 +10284,7 @@ class vboxBindingSOAP:
     # op: IMachineEvent_getMachineId
     def IMachineEvent_getMachineId(self, request, **kw):
         if isinstance(request, IMachineEvent_getMachineIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10294,7 +10294,7 @@ class vboxBindingSOAP:
     # op: IMachineStateChangedEvent_getState
     def IMachineStateChangedEvent_getState(self, request, **kw):
         if isinstance(request, IMachineStateChangedEvent_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10304,7 +10304,7 @@ class vboxBindingSOAP:
     # op: IMachineDataChangedEvent_getTemporary
     def IMachineDataChangedEvent_getTemporary(self, request, **kw):
         if isinstance(request, IMachineDataChangedEvent_getTemporaryRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10314,7 +10314,7 @@ class vboxBindingSOAP:
     # op: IMediumRegisteredEvent_getMediumId
     def IMediumRegisteredEvent_getMediumId(self, request, **kw):
         if isinstance(request, IMediumRegisteredEvent_getMediumIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10324,7 +10324,7 @@ class vboxBindingSOAP:
     # op: IMediumRegisteredEvent_getMediumType
     def IMediumRegisteredEvent_getMediumType(self, request, **kw):
         if isinstance(request, IMediumRegisteredEvent_getMediumTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10334,7 +10334,7 @@ class vboxBindingSOAP:
     # op: IMediumRegisteredEvent_getRegistered
     def IMediumRegisteredEvent_getRegistered(self, request, **kw):
         if isinstance(request, IMediumRegisteredEvent_getRegisteredRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10344,7 +10344,7 @@ class vboxBindingSOAP:
     # op: IMachineRegisteredEvent_getRegistered
     def IMachineRegisteredEvent_getRegistered(self, request, **kw):
         if isinstance(request, IMachineRegisteredEvent_getRegisteredRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10354,7 +10354,7 @@ class vboxBindingSOAP:
     # op: ISessionStateChangedEvent_getState
     def ISessionStateChangedEvent_getState(self, request, **kw):
         if isinstance(request, ISessionStateChangedEvent_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10364,7 +10364,7 @@ class vboxBindingSOAP:
     # op: IGuestPropertyChangedEvent_getName
     def IGuestPropertyChangedEvent_getName(self, request, **kw):
         if isinstance(request, IGuestPropertyChangedEvent_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10374,7 +10374,7 @@ class vboxBindingSOAP:
     # op: IGuestPropertyChangedEvent_getValue
     def IGuestPropertyChangedEvent_getValue(self, request, **kw):
         if isinstance(request, IGuestPropertyChangedEvent_getValueRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10384,7 +10384,7 @@ class vboxBindingSOAP:
     # op: IGuestPropertyChangedEvent_getFlags
     def IGuestPropertyChangedEvent_getFlags(self, request, **kw):
         if isinstance(request, IGuestPropertyChangedEvent_getFlagsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10394,7 +10394,7 @@ class vboxBindingSOAP:
     # op: ISnapshotEvent_getSnapshotId
     def ISnapshotEvent_getSnapshotId(self, request, **kw):
         if isinstance(request, ISnapshotEvent_getSnapshotIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10404,7 +10404,7 @@ class vboxBindingSOAP:
     # op: IMousePointerShapeChangedEvent_getVisible
     def IMousePointerShapeChangedEvent_getVisible(self, request, **kw):
         if isinstance(request, IMousePointerShapeChangedEvent_getVisibleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10414,7 +10414,7 @@ class vboxBindingSOAP:
     # op: IMousePointerShapeChangedEvent_getAlpha
     def IMousePointerShapeChangedEvent_getAlpha(self, request, **kw):
         if isinstance(request, IMousePointerShapeChangedEvent_getAlphaRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10424,7 +10424,7 @@ class vboxBindingSOAP:
     # op: IMousePointerShapeChangedEvent_getXhot
     def IMousePointerShapeChangedEvent_getXhot(self, request, **kw):
         if isinstance(request, IMousePointerShapeChangedEvent_getXhotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10434,7 +10434,7 @@ class vboxBindingSOAP:
     # op: IMousePointerShapeChangedEvent_getYhot
     def IMousePointerShapeChangedEvent_getYhot(self, request, **kw):
         if isinstance(request, IMousePointerShapeChangedEvent_getYhotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10444,7 +10444,7 @@ class vboxBindingSOAP:
     # op: IMousePointerShapeChangedEvent_getWidth
     def IMousePointerShapeChangedEvent_getWidth(self, request, **kw):
         if isinstance(request, IMousePointerShapeChangedEvent_getWidthRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10454,7 +10454,7 @@ class vboxBindingSOAP:
     # op: IMousePointerShapeChangedEvent_getHeight
     def IMousePointerShapeChangedEvent_getHeight(self, request, **kw):
         if isinstance(request, IMousePointerShapeChangedEvent_getHeightRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10464,7 +10464,7 @@ class vboxBindingSOAP:
     # op: IMousePointerShapeChangedEvent_getShape
     def IMousePointerShapeChangedEvent_getShape(self, request, **kw):
         if isinstance(request, IMousePointerShapeChangedEvent_getShapeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10474,7 +10474,7 @@ class vboxBindingSOAP:
     # op: IMouseCapabilityChangedEvent_getSupportsAbsolute
     def IMouseCapabilityChangedEvent_getSupportsAbsolute(self, request, **kw):
         if isinstance(request, IMouseCapabilityChangedEvent_getSupportsAbsoluteRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10484,7 +10484,7 @@ class vboxBindingSOAP:
     # op: IMouseCapabilityChangedEvent_getSupportsRelative
     def IMouseCapabilityChangedEvent_getSupportsRelative(self, request, **kw):
         if isinstance(request, IMouseCapabilityChangedEvent_getSupportsRelativeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10494,7 +10494,7 @@ class vboxBindingSOAP:
     # op: IMouseCapabilityChangedEvent_getSupportsMultiTouch
     def IMouseCapabilityChangedEvent_getSupportsMultiTouch(self, request, **kw):
         if isinstance(request, IMouseCapabilityChangedEvent_getSupportsMultiTouchRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10504,7 +10504,7 @@ class vboxBindingSOAP:
     # op: IMouseCapabilityChangedEvent_getNeedsHostCursor
     def IMouseCapabilityChangedEvent_getNeedsHostCursor(self, request, **kw):
         if isinstance(request, IMouseCapabilityChangedEvent_getNeedsHostCursorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10514,7 +10514,7 @@ class vboxBindingSOAP:
     # op: IKeyboardLedsChangedEvent_getNumLock
     def IKeyboardLedsChangedEvent_getNumLock(self, request, **kw):
         if isinstance(request, IKeyboardLedsChangedEvent_getNumLockRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10524,7 +10524,7 @@ class vboxBindingSOAP:
     # op: IKeyboardLedsChangedEvent_getCapsLock
     def IKeyboardLedsChangedEvent_getCapsLock(self, request, **kw):
         if isinstance(request, IKeyboardLedsChangedEvent_getCapsLockRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10534,7 +10534,7 @@ class vboxBindingSOAP:
     # op: IKeyboardLedsChangedEvent_getScrollLock
     def IKeyboardLedsChangedEvent_getScrollLock(self, request, **kw):
         if isinstance(request, IKeyboardLedsChangedEvent_getScrollLockRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10544,7 +10544,7 @@ class vboxBindingSOAP:
     # op: IStateChangedEvent_getState
     def IStateChangedEvent_getState(self, request, **kw):
         if isinstance(request, IStateChangedEvent_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10554,7 +10554,7 @@ class vboxBindingSOAP:
     # op: INetworkAdapterChangedEvent_getNetworkAdapter
     def INetworkAdapterChangedEvent_getNetworkAdapter(self, request, **kw):
         if isinstance(request, INetworkAdapterChangedEvent_getNetworkAdapterRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10564,7 +10564,7 @@ class vboxBindingSOAP:
     # op: ISerialPortChangedEvent_getSerialPort
     def ISerialPortChangedEvent_getSerialPort(self, request, **kw):
         if isinstance(request, ISerialPortChangedEvent_getSerialPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10574,7 +10574,7 @@ class vboxBindingSOAP:
     # op: IParallelPortChangedEvent_getParallelPort
     def IParallelPortChangedEvent_getParallelPort(self, request, **kw):
         if isinstance(request, IParallelPortChangedEvent_getParallelPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10584,7 +10584,7 @@ class vboxBindingSOAP:
     # op: IMediumChangedEvent_getMediumAttachment
     def IMediumChangedEvent_getMediumAttachment(self, request, **kw):
         if isinstance(request, IMediumChangedEvent_getMediumAttachmentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10594,7 +10594,7 @@ class vboxBindingSOAP:
     # op: IClipboardModeChangedEvent_getClipboardMode
     def IClipboardModeChangedEvent_getClipboardMode(self, request, **kw):
         if isinstance(request, IClipboardModeChangedEvent_getClipboardModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10604,7 +10604,7 @@ class vboxBindingSOAP:
     # op: IDragAndDropModeChangedEvent_getDragAndDropMode
     def IDragAndDropModeChangedEvent_getDragAndDropMode(self, request, **kw):
         if isinstance(request, IDragAndDropModeChangedEvent_getDragAndDropModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10614,7 +10614,7 @@ class vboxBindingSOAP:
     # op: ICPUChangedEvent_getCPU
     def ICPUChangedEvent_getCPU(self, request, **kw):
         if isinstance(request, ICPUChangedEvent_getCPURequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10624,7 +10624,7 @@ class vboxBindingSOAP:
     # op: ICPUChangedEvent_getAdd
     def ICPUChangedEvent_getAdd(self, request, **kw):
         if isinstance(request, ICPUChangedEvent_getAddRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10634,7 +10634,7 @@ class vboxBindingSOAP:
     # op: ICPUExecutionCapChangedEvent_getExecutionCap
     def ICPUExecutionCapChangedEvent_getExecutionCap(self, request, **kw):
         if isinstance(request, ICPUExecutionCapChangedEvent_getExecutionCapRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10644,7 +10644,7 @@ class vboxBindingSOAP:
     # op: IGuestKeyboardEvent_getScancodes
     def IGuestKeyboardEvent_getScancodes(self, request, **kw):
         if isinstance(request, IGuestKeyboardEvent_getScancodesRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10654,7 +10654,7 @@ class vboxBindingSOAP:
     # op: IGuestMouseEvent_getMode
     def IGuestMouseEvent_getMode(self, request, **kw):
         if isinstance(request, IGuestMouseEvent_getModeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10664,7 +10664,7 @@ class vboxBindingSOAP:
     # op: IGuestMouseEvent_getX
     def IGuestMouseEvent_getX(self, request, **kw):
         if isinstance(request, IGuestMouseEvent_getXRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10674,7 +10674,7 @@ class vboxBindingSOAP:
     # op: IGuestMouseEvent_getY
     def IGuestMouseEvent_getY(self, request, **kw):
         if isinstance(request, IGuestMouseEvent_getYRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10684,7 +10684,7 @@ class vboxBindingSOAP:
     # op: IGuestMouseEvent_getZ
     def IGuestMouseEvent_getZ(self, request, **kw):
         if isinstance(request, IGuestMouseEvent_getZRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10694,7 +10694,7 @@ class vboxBindingSOAP:
     # op: IGuestMouseEvent_getW
     def IGuestMouseEvent_getW(self, request, **kw):
         if isinstance(request, IGuestMouseEvent_getWRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10704,7 +10704,7 @@ class vboxBindingSOAP:
     # op: IGuestMouseEvent_getButtons
     def IGuestMouseEvent_getButtons(self, request, **kw):
         if isinstance(request, IGuestMouseEvent_getButtonsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10714,7 +10714,7 @@ class vboxBindingSOAP:
     # op: IGuestMultiTouchEvent_getContactCount
     def IGuestMultiTouchEvent_getContactCount(self, request, **kw):
         if isinstance(request, IGuestMultiTouchEvent_getContactCountRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10724,7 +10724,7 @@ class vboxBindingSOAP:
     # op: IGuestMultiTouchEvent_getXPositions
     def IGuestMultiTouchEvent_getXPositions(self, request, **kw):
         if isinstance(request, IGuestMultiTouchEvent_getXPositionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10734,7 +10734,7 @@ class vboxBindingSOAP:
     # op: IGuestMultiTouchEvent_getYPositions
     def IGuestMultiTouchEvent_getYPositions(self, request, **kw):
         if isinstance(request, IGuestMultiTouchEvent_getYPositionsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10744,7 +10744,7 @@ class vboxBindingSOAP:
     # op: IGuestMultiTouchEvent_getContactIds
     def IGuestMultiTouchEvent_getContactIds(self, request, **kw):
         if isinstance(request, IGuestMultiTouchEvent_getContactIdsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10754,7 +10754,7 @@ class vboxBindingSOAP:
     # op: IGuestMultiTouchEvent_getContactFlags
     def IGuestMultiTouchEvent_getContactFlags(self, request, **kw):
         if isinstance(request, IGuestMultiTouchEvent_getContactFlagsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10764,7 +10764,7 @@ class vboxBindingSOAP:
     # op: IGuestMultiTouchEvent_getScanTime
     def IGuestMultiTouchEvent_getScanTime(self, request, **kw):
         if isinstance(request, IGuestMultiTouchEvent_getScanTimeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10774,7 +10774,7 @@ class vboxBindingSOAP:
     # op: IGuestSessionEvent_getSession
     def IGuestSessionEvent_getSession(self, request, **kw):
         if isinstance(request, IGuestSessionEvent_getSessionRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10784,7 +10784,7 @@ class vboxBindingSOAP:
     # op: IGuestSessionStateChangedEvent_getId
     def IGuestSessionStateChangedEvent_getId(self, request, **kw):
         if isinstance(request, IGuestSessionStateChangedEvent_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10794,7 +10794,7 @@ class vboxBindingSOAP:
     # op: IGuestSessionStateChangedEvent_getStatus
     def IGuestSessionStateChangedEvent_getStatus(self, request, **kw):
         if isinstance(request, IGuestSessionStateChangedEvent_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10804,7 +10804,7 @@ class vboxBindingSOAP:
     # op: IGuestSessionStateChangedEvent_getError
     def IGuestSessionStateChangedEvent_getError(self, request, **kw):
         if isinstance(request, IGuestSessionStateChangedEvent_getErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10814,7 +10814,7 @@ class vboxBindingSOAP:
     # op: IGuestSessionRegisteredEvent_getRegistered
     def IGuestSessionRegisteredEvent_getRegistered(self, request, **kw):
         if isinstance(request, IGuestSessionRegisteredEvent_getRegisteredRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10824,7 +10824,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessEvent_getProcess
     def IGuestProcessEvent_getProcess(self, request, **kw):
         if isinstance(request, IGuestProcessEvent_getProcessRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10834,7 +10834,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessEvent_getPid
     def IGuestProcessEvent_getPid(self, request, **kw):
         if isinstance(request, IGuestProcessEvent_getPidRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10844,7 +10844,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessRegisteredEvent_getRegistered
     def IGuestProcessRegisteredEvent_getRegistered(self, request, **kw):
         if isinstance(request, IGuestProcessRegisteredEvent_getRegisteredRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10854,7 +10854,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessStateChangedEvent_getStatus
     def IGuestProcessStateChangedEvent_getStatus(self, request, **kw):
         if isinstance(request, IGuestProcessStateChangedEvent_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10864,7 +10864,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessStateChangedEvent_getError
     def IGuestProcessStateChangedEvent_getError(self, request, **kw):
         if isinstance(request, IGuestProcessStateChangedEvent_getErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10874,7 +10874,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessIOEvent_getHandle
     def IGuestProcessIOEvent_getHandle(self, request, **kw):
         if isinstance(request, IGuestProcessIOEvent_getHandleRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10884,7 +10884,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessIOEvent_getProcessed
     def IGuestProcessIOEvent_getProcessed(self, request, **kw):
         if isinstance(request, IGuestProcessIOEvent_getProcessedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10894,7 +10894,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessInputNotifyEvent_getStatus
     def IGuestProcessInputNotifyEvent_getStatus(self, request, **kw):
         if isinstance(request, IGuestProcessInputNotifyEvent_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10904,7 +10904,7 @@ class vboxBindingSOAP:
     # op: IGuestProcessOutputEvent_getData
     def IGuestProcessOutputEvent_getData(self, request, **kw):
         if isinstance(request, IGuestProcessOutputEvent_getDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10914,7 +10914,7 @@ class vboxBindingSOAP:
     # op: IGuestFileEvent_getFile
     def IGuestFileEvent_getFile(self, request, **kw):
         if isinstance(request, IGuestFileEvent_getFileRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10924,7 +10924,7 @@ class vboxBindingSOAP:
     # op: IGuestFileRegisteredEvent_getRegistered
     def IGuestFileRegisteredEvent_getRegistered(self, request, **kw):
         if isinstance(request, IGuestFileRegisteredEvent_getRegisteredRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10934,7 +10934,7 @@ class vboxBindingSOAP:
     # op: IGuestFileStateChangedEvent_getStatus
     def IGuestFileStateChangedEvent_getStatus(self, request, **kw):
         if isinstance(request, IGuestFileStateChangedEvent_getStatusRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10944,7 +10944,7 @@ class vboxBindingSOAP:
     # op: IGuestFileStateChangedEvent_getError
     def IGuestFileStateChangedEvent_getError(self, request, **kw):
         if isinstance(request, IGuestFileStateChangedEvent_getErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10954,7 +10954,7 @@ class vboxBindingSOAP:
     # op: IGuestFileIOEvent_getOffset
     def IGuestFileIOEvent_getOffset(self, request, **kw):
         if isinstance(request, IGuestFileIOEvent_getOffsetRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10964,7 +10964,7 @@ class vboxBindingSOAP:
     # op: IGuestFileIOEvent_getProcessed
     def IGuestFileIOEvent_getProcessed(self, request, **kw):
         if isinstance(request, IGuestFileIOEvent_getProcessedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10974,7 +10974,7 @@ class vboxBindingSOAP:
     # op: IGuestFileReadEvent_getData
     def IGuestFileReadEvent_getData(self, request, **kw):
         if isinstance(request, IGuestFileReadEvent_getDataRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10984,7 +10984,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceStateChangedEvent_getDevice
     def IUSBDeviceStateChangedEvent_getDevice(self, request, **kw):
         if isinstance(request, IUSBDeviceStateChangedEvent_getDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -10994,7 +10994,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceStateChangedEvent_getAttached
     def IUSBDeviceStateChangedEvent_getAttached(self, request, **kw):
         if isinstance(request, IUSBDeviceStateChangedEvent_getAttachedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11004,7 +11004,7 @@ class vboxBindingSOAP:
     # op: IUSBDeviceStateChangedEvent_getError
     def IUSBDeviceStateChangedEvent_getError(self, request, **kw):
         if isinstance(request, IUSBDeviceStateChangedEvent_getErrorRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11014,7 +11014,7 @@ class vboxBindingSOAP:
     # op: ISharedFolderChangedEvent_getScope
     def ISharedFolderChangedEvent_getScope(self, request, **kw):
         if isinstance(request, ISharedFolderChangedEvent_getScopeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11024,7 +11024,7 @@ class vboxBindingSOAP:
     # op: IRuntimeErrorEvent_getFatal
     def IRuntimeErrorEvent_getFatal(self, request, **kw):
         if isinstance(request, IRuntimeErrorEvent_getFatalRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11034,7 +11034,7 @@ class vboxBindingSOAP:
     # op: IRuntimeErrorEvent_getId
     def IRuntimeErrorEvent_getId(self, request, **kw):
         if isinstance(request, IRuntimeErrorEvent_getIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11044,7 +11044,7 @@ class vboxBindingSOAP:
     # op: IRuntimeErrorEvent_getMessage
     def IRuntimeErrorEvent_getMessage(self, request, **kw):
         if isinstance(request, IRuntimeErrorEvent_getMessageRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11054,7 +11054,7 @@ class vboxBindingSOAP:
     # op: IEventSourceChangedEvent_getListener
     def IEventSourceChangedEvent_getListener(self, request, **kw):
         if isinstance(request, IEventSourceChangedEvent_getListenerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11064,7 +11064,7 @@ class vboxBindingSOAP:
     # op: IEventSourceChangedEvent_getAdd
     def IEventSourceChangedEvent_getAdd(self, request, **kw):
         if isinstance(request, IEventSourceChangedEvent_getAddRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11074,7 +11074,7 @@ class vboxBindingSOAP:
     # op: IExtraDataChangedEvent_getMachineId
     def IExtraDataChangedEvent_getMachineId(self, request, **kw):
         if isinstance(request, IExtraDataChangedEvent_getMachineIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11084,7 +11084,7 @@ class vboxBindingSOAP:
     # op: IExtraDataChangedEvent_getKey
     def IExtraDataChangedEvent_getKey(self, request, **kw):
         if isinstance(request, IExtraDataChangedEvent_getKeyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11094,7 +11094,7 @@ class vboxBindingSOAP:
     # op: IExtraDataChangedEvent_getValue
     def IExtraDataChangedEvent_getValue(self, request, **kw):
         if isinstance(request, IExtraDataChangedEvent_getValueRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11104,7 +11104,7 @@ class vboxBindingSOAP:
     # op: IVetoEvent_addVeto
     def IVetoEvent_addVeto(self, request, **kw):
         if isinstance(request, IVetoEvent_addVetoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11114,7 +11114,7 @@ class vboxBindingSOAP:
     # op: IVetoEvent_isVetoed
     def IVetoEvent_isVetoed(self, request, **kw):
         if isinstance(request, IVetoEvent_isVetoedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11124,7 +11124,7 @@ class vboxBindingSOAP:
     # op: IVetoEvent_getVetos
     def IVetoEvent_getVetos(self, request, **kw):
         if isinstance(request, IVetoEvent_getVetosRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11134,7 +11134,7 @@ class vboxBindingSOAP:
     # op: IExtraDataCanChangeEvent_getMachineId
     def IExtraDataCanChangeEvent_getMachineId(self, request, **kw):
         if isinstance(request, IExtraDataCanChangeEvent_getMachineIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11144,7 +11144,7 @@ class vboxBindingSOAP:
     # op: IExtraDataCanChangeEvent_getKey
     def IExtraDataCanChangeEvent_getKey(self, request, **kw):
         if isinstance(request, IExtraDataCanChangeEvent_getKeyRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11154,7 +11154,7 @@ class vboxBindingSOAP:
     # op: IExtraDataCanChangeEvent_getValue
     def IExtraDataCanChangeEvent_getValue(self, request, **kw):
         if isinstance(request, IExtraDataCanChangeEvent_getValueRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11164,7 +11164,7 @@ class vboxBindingSOAP:
     # op: IShowWindowEvent_getWinId
     def IShowWindowEvent_getWinId(self, request, **kw):
         if isinstance(request, IShowWindowEvent_getWinIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11174,7 +11174,7 @@ class vboxBindingSOAP:
     # op: IShowWindowEvent_setWinId
     def IShowWindowEvent_setWinId(self, request, **kw):
         if isinstance(request, IShowWindowEvent_setWinIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11184,7 +11184,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getSlot
     def INATRedirectEvent_getSlot(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getSlotRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11194,7 +11194,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getRemove
     def INATRedirectEvent_getRemove(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getRemoveRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11204,7 +11204,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getName
     def INATRedirectEvent_getName(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11214,7 +11214,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getProto
     def INATRedirectEvent_getProto(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getProtoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11224,7 +11224,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getHostIP
     def INATRedirectEvent_getHostIP(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getHostIPRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11234,7 +11234,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getHostPort
     def INATRedirectEvent_getHostPort(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getHostPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11244,7 +11244,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getGuestIP
     def INATRedirectEvent_getGuestIP(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getGuestIPRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11254,7 +11254,7 @@ class vboxBindingSOAP:
     # op: INATRedirectEvent_getGuestPort
     def INATRedirectEvent_getGuestPort(self, request, **kw):
         if isinstance(request, INATRedirectEvent_getGuestPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11264,7 +11264,7 @@ class vboxBindingSOAP:
     # op: IHostPCIDevicePlugEvent_getPlugged
     def IHostPCIDevicePlugEvent_getPlugged(self, request, **kw):
         if isinstance(request, IHostPCIDevicePlugEvent_getPluggedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11274,7 +11274,7 @@ class vboxBindingSOAP:
     # op: IHostPCIDevicePlugEvent_getSuccess
     def IHostPCIDevicePlugEvent_getSuccess(self, request, **kw):
         if isinstance(request, IHostPCIDevicePlugEvent_getSuccessRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11284,7 +11284,7 @@ class vboxBindingSOAP:
     # op: IHostPCIDevicePlugEvent_getAttachment
     def IHostPCIDevicePlugEvent_getAttachment(self, request, **kw):
         if isinstance(request, IHostPCIDevicePlugEvent_getAttachmentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11294,7 +11294,7 @@ class vboxBindingSOAP:
     # op: IHostPCIDevicePlugEvent_getMessage
     def IHostPCIDevicePlugEvent_getMessage(self, request, **kw):
         if isinstance(request, IHostPCIDevicePlugEvent_getMessageRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11304,7 +11304,7 @@ class vboxBindingSOAP:
     # op: IVBoxSVCAvailabilityChangedEvent_getAvailable
     def IVBoxSVCAvailabilityChangedEvent_getAvailable(self, request, **kw):
         if isinstance(request, IVBoxSVCAvailabilityChangedEvent_getAvailableRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11314,7 +11314,7 @@ class vboxBindingSOAP:
     # op: IBandwidthGroupChangedEvent_getBandwidthGroup
     def IBandwidthGroupChangedEvent_getBandwidthGroup(self, request, **kw):
         if isinstance(request, IBandwidthGroupChangedEvent_getBandwidthGroupRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11324,7 +11324,7 @@ class vboxBindingSOAP:
     # op: IGuestMonitorChangedEvent_getChangeType
     def IGuestMonitorChangedEvent_getChangeType(self, request, **kw):
         if isinstance(request, IGuestMonitorChangedEvent_getChangeTypeRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11334,7 +11334,7 @@ class vboxBindingSOAP:
     # op: IGuestMonitorChangedEvent_getScreenId
     def IGuestMonitorChangedEvent_getScreenId(self, request, **kw):
         if isinstance(request, IGuestMonitorChangedEvent_getScreenIdRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11344,7 +11344,7 @@ class vboxBindingSOAP:
     # op: IGuestMonitorChangedEvent_getOriginX
     def IGuestMonitorChangedEvent_getOriginX(self, request, **kw):
         if isinstance(request, IGuestMonitorChangedEvent_getOriginXRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11354,7 +11354,7 @@ class vboxBindingSOAP:
     # op: IGuestMonitorChangedEvent_getOriginY
     def IGuestMonitorChangedEvent_getOriginY(self, request, **kw):
         if isinstance(request, IGuestMonitorChangedEvent_getOriginYRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11364,7 +11364,7 @@ class vboxBindingSOAP:
     # op: IGuestMonitorChangedEvent_getWidth
     def IGuestMonitorChangedEvent_getWidth(self, request, **kw):
         if isinstance(request, IGuestMonitorChangedEvent_getWidthRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11374,7 +11374,7 @@ class vboxBindingSOAP:
     # op: IGuestMonitorChangedEvent_getHeight
     def IGuestMonitorChangedEvent_getHeight(self, request, **kw):
         if isinstance(request, IGuestMonitorChangedEvent_getHeightRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11384,7 +11384,7 @@ class vboxBindingSOAP:
     # op: IGuestUserStateChangedEvent_getName
     def IGuestUserStateChangedEvent_getName(self, request, **kw):
         if isinstance(request, IGuestUserStateChangedEvent_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11394,7 +11394,7 @@ class vboxBindingSOAP:
     # op: IGuestUserStateChangedEvent_getDomain
     def IGuestUserStateChangedEvent_getDomain(self, request, **kw):
         if isinstance(request, IGuestUserStateChangedEvent_getDomainRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11404,7 +11404,7 @@ class vboxBindingSOAP:
     # op: IGuestUserStateChangedEvent_getState
     def IGuestUserStateChangedEvent_getState(self, request, **kw):
         if isinstance(request, IGuestUserStateChangedEvent_getStateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11414,7 +11414,7 @@ class vboxBindingSOAP:
     # op: IGuestUserStateChangedEvent_getStateDetails
     def IGuestUserStateChangedEvent_getStateDetails(self, request, **kw):
         if isinstance(request, IGuestUserStateChangedEvent_getStateDetailsRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11424,7 +11424,7 @@ class vboxBindingSOAP:
     # op: IStorageDeviceChangedEvent_getStorageDevice
     def IStorageDeviceChangedEvent_getStorageDevice(self, request, **kw):
         if isinstance(request, IStorageDeviceChangedEvent_getStorageDeviceRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11434,7 +11434,7 @@ class vboxBindingSOAP:
     # op: IStorageDeviceChangedEvent_getRemoved
     def IStorageDeviceChangedEvent_getRemoved(self, request, **kw):
         if isinstance(request, IStorageDeviceChangedEvent_getRemovedRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11444,7 +11444,7 @@ class vboxBindingSOAP:
     # op: IStorageDeviceChangedEvent_getSilent
     def IStorageDeviceChangedEvent_getSilent(self, request, **kw):
         if isinstance(request, IStorageDeviceChangedEvent_getSilentRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11454,7 +11454,7 @@ class vboxBindingSOAP:
     # op: INATNetworkChangedEvent_getNetworkName
     def INATNetworkChangedEvent_getNetworkName(self, request, **kw):
         if isinstance(request, INATNetworkChangedEvent_getNetworkNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11464,7 +11464,7 @@ class vboxBindingSOAP:
     # op: INATNetworkStartStopEvent_getStartEvent
     def INATNetworkStartStopEvent_getStartEvent(self, request, **kw):
         if isinstance(request, INATNetworkStartStopEvent_getStartEventRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11474,7 +11474,7 @@ class vboxBindingSOAP:
     # op: INATNetworkCreationDeletionEvent_getCreationEvent
     def INATNetworkCreationDeletionEvent_getCreationEvent(self, request, **kw):
         if isinstance(request, INATNetworkCreationDeletionEvent_getCreationEventRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11484,7 +11484,7 @@ class vboxBindingSOAP:
     # op: INATNetworkSettingEvent_getEnabled
     def INATNetworkSettingEvent_getEnabled(self, request, **kw):
         if isinstance(request, INATNetworkSettingEvent_getEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11494,7 +11494,7 @@ class vboxBindingSOAP:
     # op: INATNetworkSettingEvent_getNetwork
     def INATNetworkSettingEvent_getNetwork(self, request, **kw):
         if isinstance(request, INATNetworkSettingEvent_getNetworkRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11504,7 +11504,7 @@ class vboxBindingSOAP:
     # op: INATNetworkSettingEvent_getGateway
     def INATNetworkSettingEvent_getGateway(self, request, **kw):
         if isinstance(request, INATNetworkSettingEvent_getGatewayRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11514,7 +11514,7 @@ class vboxBindingSOAP:
     # op: INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabled
     def INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabled(self, request, **kw):
         if isinstance(request, INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11524,7 +11524,7 @@ class vboxBindingSOAP:
     # op: INATNetworkSettingEvent_getNeedDhcpServer
     def INATNetworkSettingEvent_getNeedDhcpServer(self, request, **kw):
         if isinstance(request, INATNetworkSettingEvent_getNeedDhcpServerRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11534,7 +11534,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getCreate
     def INATNetworkPortForwardEvent_getCreate(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getCreateRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11544,7 +11544,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getIpv6
     def INATNetworkPortForwardEvent_getIpv6(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getIpv6RequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11554,7 +11554,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getName
     def INATNetworkPortForwardEvent_getName(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getNameRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11564,7 +11564,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getProto
     def INATNetworkPortForwardEvent_getProto(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getProtoRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11574,7 +11574,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getHostIp
     def INATNetworkPortForwardEvent_getHostIp(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getHostIpRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11584,7 +11584,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getHostPort
     def INATNetworkPortForwardEvent_getHostPort(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getHostPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11594,7 +11594,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getGuestIp
     def INATNetworkPortForwardEvent_getGuestIp(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getGuestIpRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
@@ -11604,7 +11604,7 @@ class vboxBindingSOAP:
     # op: INATNetworkPortForwardEvent_getGuestPort
     def INATNetworkPortForwardEvent_getGuestPort(self, request, **kw):
         if isinstance(request, INATNetworkPortForwardEvent_getGuestPortRequestMsg) is False:
-            raise TypeError, "%s incorrect request type" % (request.__class__)
+            raise TypeError("%s incorrect request type" % (request.__class__))
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
