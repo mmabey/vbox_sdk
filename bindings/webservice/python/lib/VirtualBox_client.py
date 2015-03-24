@@ -14,13 +14,17 @@ from ZSI.schema import GED, GTD
 import ZSI
 from ZSI.generate.pyclass import pyclass_type
 
+
 # Locator
 class vboxServiceLocator:
     vboxServicePort_address = "http://localhost:18083/"
+
     def getvboxServicePortAddress(self):
         return vboxServiceLocator.vboxServicePort_address
+
     def getvboxServicePort(self, url=None, **kw):
         return vboxBindingSOAP(url or vboxServiceLocator.vboxServicePort_address, **kw)
+
 
 # Methods
 class vboxBindingSOAP:
@@ -5128,7 +5132,8 @@ class vboxBindingSOAP:
         # no input wsaction
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
-        response = self.binding.Receive(ISystemProperties_getDefaultIoCacheSettingForStorageControllerResultMsg.typecode)
+        response = self.binding.Receive(
+            ISystemProperties_getDefaultIoCacheSettingForStorageControllerResultMsg.typecode)
         return response
 
     # op: ISystemProperties_getMaxInstancesOfUSBControllerType
@@ -11611,29 +11616,40 @@ class vboxBindingSOAP:
         response = self.binding.Receive(INATNetworkPortForwardEvent_getGuestPortResultMsg.typecode)
         return response
 
-IVirtualBoxErrorInfo_getResultCodeRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getResultCode").pyclass
 
-IVirtualBoxErrorInfo_getResultCodeResultMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getResultCodeResponse").pyclass
+IVirtualBoxErrorInfo_getResultCodeRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IVirtualBoxErrorInfo_getResultCode").pyclass
 
-IVirtualBoxErrorInfo_getResultDetailRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getResultDetail").pyclass
+IVirtualBoxErrorInfo_getResultCodeResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IVirtualBoxErrorInfo_getResultCodeResponse").pyclass
 
-IVirtualBoxErrorInfo_getResultDetailResultMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getResultDetailResponse").pyclass
+IVirtualBoxErrorInfo_getResultDetailRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IVirtualBoxErrorInfo_getResultDetail").pyclass
 
-IVirtualBoxErrorInfo_getInterfaceIDRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getInterfaceID").pyclass
+IVirtualBoxErrorInfo_getResultDetailResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IVirtualBoxErrorInfo_getResultDetailResponse").pyclass
 
-IVirtualBoxErrorInfo_getInterfaceIDResultMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getInterfaceIDResponse").pyclass
+IVirtualBoxErrorInfo_getInterfaceIDRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IVirtualBoxErrorInfo_getInterfaceID").pyclass
 
-IVirtualBoxErrorInfo_getComponentRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getComponent").pyclass
+IVirtualBoxErrorInfo_getInterfaceIDResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IVirtualBoxErrorInfo_getInterfaceIDResponse").pyclass
 
-IVirtualBoxErrorInfo_getComponentResultMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getComponentResponse").pyclass
+IVirtualBoxErrorInfo_getComponentRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IVirtualBoxErrorInfo_getComponent").pyclass
+
+IVirtualBoxErrorInfo_getComponentResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IVirtualBoxErrorInfo_getComponentResponse").pyclass
 
 IVirtualBoxErrorInfo_getTextRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getText").pyclass
 
-IVirtualBoxErrorInfo_getTextResultMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getTextResponse").pyclass
+IVirtualBoxErrorInfo_getTextResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBoxErrorInfo_getTextResponse").pyclass
 
 IVirtualBoxErrorInfo_getNextRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getNext").pyclass
 
-IVirtualBoxErrorInfo_getNextResultMsg = GED("http://www.virtualbox.org/", "IVirtualBoxErrorInfo_getNextResponse").pyclass
+IVirtualBoxErrorInfo_getNextResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBoxErrorInfo_getNextResponse").pyclass
 
 INATNetwork_getNetworkNameRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getNetworkName").pyclass
 
@@ -11679,33 +11695,42 @@ INATNetwork_setIPv6PrefixRequestMsg = GED("http://www.virtualbox.org/", "INATNet
 
 INATNetwork_setIPv6PrefixResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_setIPv6PrefixResponse").pyclass
 
-INATNetwork_getAdvertiseDefaultIPv6RouteEnabledRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getAdvertiseDefaultIPv6RouteEnabled").pyclass
+INATNetwork_getAdvertiseDefaultIPv6RouteEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                                "INATNetwork_getAdvertiseDefaultIPv6RouteEnabled").pyclass
 
-INATNetwork_getAdvertiseDefaultIPv6RouteEnabledResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_getAdvertiseDefaultIPv6RouteEnabledResponse").pyclass
+INATNetwork_getAdvertiseDefaultIPv6RouteEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                               "INATNetwork_getAdvertiseDefaultIPv6RouteEnabledResponse").pyclass
 
-INATNetwork_setAdvertiseDefaultIPv6RouteEnabledRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_setAdvertiseDefaultIPv6RouteEnabled").pyclass
+INATNetwork_setAdvertiseDefaultIPv6RouteEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                                "INATNetwork_setAdvertiseDefaultIPv6RouteEnabled").pyclass
 
-INATNetwork_setAdvertiseDefaultIPv6RouteEnabledResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_setAdvertiseDefaultIPv6RouteEnabledResponse").pyclass
+INATNetwork_setAdvertiseDefaultIPv6RouteEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                               "INATNetwork_setAdvertiseDefaultIPv6RouteEnabledResponse").pyclass
 
 INATNetwork_getNeedDhcpServerRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getNeedDhcpServer").pyclass
 
-INATNetwork_getNeedDhcpServerResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_getNeedDhcpServerResponse").pyclass
+INATNetwork_getNeedDhcpServerResultMsg = GED("http://www.virtualbox.org/",
+                                             "INATNetwork_getNeedDhcpServerResponse").pyclass
 
 INATNetwork_setNeedDhcpServerRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_setNeedDhcpServer").pyclass
 
-INATNetwork_setNeedDhcpServerResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_setNeedDhcpServerResponse").pyclass
+INATNetwork_setNeedDhcpServerResultMsg = GED("http://www.virtualbox.org/",
+                                             "INATNetwork_setNeedDhcpServerResponse").pyclass
 
 INATNetwork_getEventSourceRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getEventSource").pyclass
 
 INATNetwork_getEventSourceResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_getEventSourceResponse").pyclass
 
-INATNetwork_getPortForwardRules4RequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getPortForwardRules4").pyclass
+INATNetwork_getPortForwardRules4RequestMsg = GED("http://www.virtualbox.org/",
+                                                 "INATNetwork_getPortForwardRules4").pyclass
 
-INATNetwork_getPortForwardRules4ResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_getPortForwardRules4Response").pyclass
+INATNetwork_getPortForwardRules4ResultMsg = GED("http://www.virtualbox.org/",
+                                                "INATNetwork_getPortForwardRules4Response").pyclass
 
 INATNetwork_getLocalMappingsRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getLocalMappings").pyclass
 
-INATNetwork_getLocalMappingsResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_getLocalMappingsResponse").pyclass
+INATNetwork_getLocalMappingsResultMsg = GED("http://www.virtualbox.org/",
+                                            "INATNetwork_getLocalMappingsResponse").pyclass
 
 INATNetwork_getLoopbackIp6RequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getLoopbackIp6").pyclass
 
@@ -11715,9 +11740,11 @@ INATNetwork_setLoopbackIp6RequestMsg = GED("http://www.virtualbox.org/", "INATNe
 
 INATNetwork_setLoopbackIp6ResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_setLoopbackIp6Response").pyclass
 
-INATNetwork_getPortForwardRules6RequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_getPortForwardRules6").pyclass
+INATNetwork_getPortForwardRules6RequestMsg = GED("http://www.virtualbox.org/",
+                                                 "INATNetwork_getPortForwardRules6").pyclass
 
-INATNetwork_getPortForwardRules6ResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_getPortForwardRules6Response").pyclass
+INATNetwork_getPortForwardRules6ResultMsg = GED("http://www.virtualbox.org/",
+                                                "INATNetwork_getPortForwardRules6Response").pyclass
 
 INATNetwork_addLocalMappingRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_addLocalMapping").pyclass
 
@@ -11725,11 +11752,14 @@ INATNetwork_addLocalMappingResultMsg = GED("http://www.virtualbox.org/", "INATNe
 
 INATNetwork_addPortForwardRuleRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_addPortForwardRule").pyclass
 
-INATNetwork_addPortForwardRuleResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_addPortForwardRuleResponse").pyclass
+INATNetwork_addPortForwardRuleResultMsg = GED("http://www.virtualbox.org/",
+                                              "INATNetwork_addPortForwardRuleResponse").pyclass
 
-INATNetwork_removePortForwardRuleRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_removePortForwardRule").pyclass
+INATNetwork_removePortForwardRuleRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "INATNetwork_removePortForwardRule").pyclass
 
-INATNetwork_removePortForwardRuleResultMsg = GED("http://www.virtualbox.org/", "INATNetwork_removePortForwardRuleResponse").pyclass
+INATNetwork_removePortForwardRuleResultMsg = GED("http://www.virtualbox.org/",
+                                                 "INATNetwork_removePortForwardRuleResponse").pyclass
 
 INATNetwork_startRequestMsg = GED("http://www.virtualbox.org/", "INATNetwork_start").pyclass
 
@@ -11773,7 +11803,8 @@ IDHCPServer_getUpperIPResultMsg = GED("http://www.virtualbox.org/", "IDHCPServer
 
 IDHCPServer_getGlobalOptionsRequestMsg = GED("http://www.virtualbox.org/", "IDHCPServer_getGlobalOptions").pyclass
 
-IDHCPServer_getGlobalOptionsResultMsg = GED("http://www.virtualbox.org/", "IDHCPServer_getGlobalOptionsResponse").pyclass
+IDHCPServer_getGlobalOptionsResultMsg = GED("http://www.virtualbox.org/",
+                                            "IDHCPServer_getGlobalOptionsResponse").pyclass
 
 IDHCPServer_getVmConfigsRequestMsg = GED("http://www.virtualbox.org/", "IDHCPServer_getVmConfigs").pyclass
 
@@ -11789,11 +11820,13 @@ IDHCPServer_addVmSlotOptionResultMsg = GED("http://www.virtualbox.org/", "IDHCPS
 
 IDHCPServer_removeVmSlotOptionsRequestMsg = GED("http://www.virtualbox.org/", "IDHCPServer_removeVmSlotOptions").pyclass
 
-IDHCPServer_removeVmSlotOptionsResultMsg = GED("http://www.virtualbox.org/", "IDHCPServer_removeVmSlotOptionsResponse").pyclass
+IDHCPServer_removeVmSlotOptionsResultMsg = GED("http://www.virtualbox.org/",
+                                               "IDHCPServer_removeVmSlotOptionsResponse").pyclass
 
 IDHCPServer_getVmSlotOptionsRequestMsg = GED("http://www.virtualbox.org/", "IDHCPServer_getVmSlotOptions").pyclass
 
-IDHCPServer_getVmSlotOptionsResultMsg = GED("http://www.virtualbox.org/", "IDHCPServer_getVmSlotOptionsResponse").pyclass
+IDHCPServer_getVmSlotOptionsResultMsg = GED("http://www.virtualbox.org/",
+                                            "IDHCPServer_getVmSlotOptionsResponse").pyclass
 
 IDHCPServer_getMacOptionsRequestMsg = GED("http://www.virtualbox.org/", "IDHCPServer_getMacOptions").pyclass
 
@@ -11801,7 +11834,8 @@ IDHCPServer_getMacOptionsResultMsg = GED("http://www.virtualbox.org/", "IDHCPSer
 
 IDHCPServer_setConfigurationRequestMsg = GED("http://www.virtualbox.org/", "IDHCPServer_setConfiguration").pyclass
 
-IDHCPServer_setConfigurationResultMsg = GED("http://www.virtualbox.org/", "IDHCPServer_setConfigurationResponse").pyclass
+IDHCPServer_setConfigurationResultMsg = GED("http://www.virtualbox.org/",
+                                            "IDHCPServer_setConfigurationResponse").pyclass
 
 IDHCPServer_startRequestMsg = GED("http://www.virtualbox.org/", "IDHCPServer_start").pyclass
 
@@ -11815,9 +11849,11 @@ IVirtualBox_getVersionRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBo
 
 IVirtualBox_getVersionResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getVersionResponse").pyclass
 
-IVirtualBox_getVersionNormalizedRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getVersionNormalized").pyclass
+IVirtualBox_getVersionNormalizedRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IVirtualBox_getVersionNormalized").pyclass
 
-IVirtualBox_getVersionNormalizedResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getVersionNormalizedResponse").pyclass
+IVirtualBox_getVersionNormalizedResultMsg = GED("http://www.virtualbox.org/",
+                                                "IVirtualBox_getVersionNormalizedResponse").pyclass
 
 IVirtualBox_getRevisionRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getRevision").pyclass
 
@@ -11837,7 +11873,8 @@ IVirtualBox_getHomeFolderResultMsg = GED("http://www.virtualbox.org/", "IVirtual
 
 IVirtualBox_getSettingsFilePathRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getSettingsFilePath").pyclass
 
-IVirtualBox_getSettingsFilePathResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getSettingsFilePathResponse").pyclass
+IVirtualBox_getSettingsFilePathResultMsg = GED("http://www.virtualbox.org/",
+                                               "IVirtualBox_getSettingsFilePathResponse").pyclass
 
 IVirtualBox_getHostRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getHost").pyclass
 
@@ -11845,7 +11882,8 @@ IVirtualBox_getHostResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_ge
 
 IVirtualBox_getSystemPropertiesRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getSystemProperties").pyclass
 
-IVirtualBox_getSystemPropertiesResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getSystemPropertiesResponse").pyclass
+IVirtualBox_getSystemPropertiesResultMsg = GED("http://www.virtualbox.org/",
+                                               "IVirtualBox_getSystemPropertiesResponse").pyclass
 
 IVirtualBox_getMachinesRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getMachines").pyclass
 
@@ -11853,7 +11891,8 @@ IVirtualBox_getMachinesResultMsg = GED("http://www.virtualbox.org/", "IVirtualBo
 
 IVirtualBox_getMachineGroupsRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getMachineGroups").pyclass
 
-IVirtualBox_getMachineGroupsResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getMachineGroupsResponse").pyclass
+IVirtualBox_getMachineGroupsResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_getMachineGroupsResponse").pyclass
 
 IVirtualBox_getHardDisksRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getHardDisks").pyclass
 
@@ -11867,9 +11906,11 @@ IVirtualBox_getFloppyImagesRequestMsg = GED("http://www.virtualbox.org/", "IVirt
 
 IVirtualBox_getFloppyImagesResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getFloppyImagesResponse").pyclass
 
-IVirtualBox_getProgressOperationsRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getProgressOperations").pyclass
+IVirtualBox_getProgressOperationsRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IVirtualBox_getProgressOperations").pyclass
 
-IVirtualBox_getProgressOperationsResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getProgressOperationsResponse").pyclass
+IVirtualBox_getProgressOperationsResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IVirtualBox_getProgressOperationsResponse").pyclass
 
 IVirtualBox_getGuestOSTypesRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getGuestOSTypes").pyclass
 
@@ -11877,11 +11918,14 @@ IVirtualBox_getGuestOSTypesResultMsg = GED("http://www.virtualbox.org/", "IVirtu
 
 IVirtualBox_getSharedFoldersRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getSharedFolders").pyclass
 
-IVirtualBox_getSharedFoldersResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getSharedFoldersResponse").pyclass
+IVirtualBox_getSharedFoldersResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_getSharedFoldersResponse").pyclass
 
-IVirtualBox_getPerformanceCollectorRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getPerformanceCollector").pyclass
+IVirtualBox_getPerformanceCollectorRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IVirtualBox_getPerformanceCollector").pyclass
 
-IVirtualBox_getPerformanceCollectorResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getPerformanceCollectorResponse").pyclass
+IVirtualBox_getPerformanceCollectorResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IVirtualBox_getPerformanceCollectorResponse").pyclass
 
 IVirtualBox_getDHCPServersRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getDHCPServers").pyclass
 
@@ -11897,15 +11941,20 @@ IVirtualBox_getEventSourceResultMsg = GED("http://www.virtualbox.org/", "IVirtua
 
 IVirtualBox_getInternalNetworksRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getInternalNetworks").pyclass
 
-IVirtualBox_getInternalNetworksResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getInternalNetworksResponse").pyclass
+IVirtualBox_getInternalNetworksResultMsg = GED("http://www.virtualbox.org/",
+                                               "IVirtualBox_getInternalNetworksResponse").pyclass
 
-IVirtualBox_getGenericNetworkDriversRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getGenericNetworkDrivers").pyclass
+IVirtualBox_getGenericNetworkDriversRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IVirtualBox_getGenericNetworkDrivers").pyclass
 
-IVirtualBox_getGenericNetworkDriversResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getGenericNetworkDriversResponse").pyclass
+IVirtualBox_getGenericNetworkDriversResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IVirtualBox_getGenericNetworkDriversResponse").pyclass
 
-IVirtualBox_composeMachineFilenameRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_composeMachineFilename").pyclass
+IVirtualBox_composeMachineFilenameRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IVirtualBox_composeMachineFilename").pyclass
 
-IVirtualBox_composeMachineFilenameResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_composeMachineFilenameResponse").pyclass
+IVirtualBox_composeMachineFilenameResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IVirtualBox_composeMachineFilenameResponse").pyclass
 
 IVirtualBox_createMachineRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createMachine").pyclass
 
@@ -11925,11 +11974,13 @@ IVirtualBox_findMachineResultMsg = GED("http://www.virtualbox.org/", "IVirtualBo
 
 IVirtualBox_getMachinesByGroupsRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getMachinesByGroups").pyclass
 
-IVirtualBox_getMachinesByGroupsResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getMachinesByGroupsResponse").pyclass
+IVirtualBox_getMachinesByGroupsResultMsg = GED("http://www.virtualbox.org/",
+                                               "IVirtualBox_getMachinesByGroupsResponse").pyclass
 
 IVirtualBox_getMachineStatesRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getMachineStates").pyclass
 
-IVirtualBox_getMachineStatesResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getMachineStatesResponse").pyclass
+IVirtualBox_getMachineStatesResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_getMachineStatesResponse").pyclass
 
 IVirtualBox_createApplianceRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createAppliance").pyclass
 
@@ -11949,15 +12000,18 @@ IVirtualBox_getGuestOSTypeResultMsg = GED("http://www.virtualbox.org/", "IVirtua
 
 IVirtualBox_createSharedFolderRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createSharedFolder").pyclass
 
-IVirtualBox_createSharedFolderResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createSharedFolderResponse").pyclass
+IVirtualBox_createSharedFolderResultMsg = GED("http://www.virtualbox.org/",
+                                              "IVirtualBox_createSharedFolderResponse").pyclass
 
 IVirtualBox_removeSharedFolderRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_removeSharedFolder").pyclass
 
-IVirtualBox_removeSharedFolderResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_removeSharedFolderResponse").pyclass
+IVirtualBox_removeSharedFolderResultMsg = GED("http://www.virtualbox.org/",
+                                              "IVirtualBox_removeSharedFolderResponse").pyclass
 
 IVirtualBox_getExtraDataKeysRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getExtraDataKeys").pyclass
 
-IVirtualBox_getExtraDataKeysResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getExtraDataKeysResponse").pyclass
+IVirtualBox_getExtraDataKeysResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_getExtraDataKeysResponse").pyclass
 
 IVirtualBox_getExtraDataRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_getExtraData").pyclass
 
@@ -11969,35 +12023,46 @@ IVirtualBox_setExtraDataResultMsg = GED("http://www.virtualbox.org/", "IVirtualB
 
 IVirtualBox_setSettingsSecretRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_setSettingsSecret").pyclass
 
-IVirtualBox_setSettingsSecretResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_setSettingsSecretResponse").pyclass
+IVirtualBox_setSettingsSecretResultMsg = GED("http://www.virtualbox.org/",
+                                             "IVirtualBox_setSettingsSecretResponse").pyclass
 
 IVirtualBox_createDHCPServerRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createDHCPServer").pyclass
 
-IVirtualBox_createDHCPServerResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createDHCPServerResponse").pyclass
+IVirtualBox_createDHCPServerResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_createDHCPServerResponse").pyclass
 
-IVirtualBox_findDHCPServerByNetworkNameRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_findDHCPServerByNetworkName").pyclass
+IVirtualBox_findDHCPServerByNetworkNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IVirtualBox_findDHCPServerByNetworkName").pyclass
 
-IVirtualBox_findDHCPServerByNetworkNameResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_findDHCPServerByNetworkNameResponse").pyclass
+IVirtualBox_findDHCPServerByNetworkNameResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IVirtualBox_findDHCPServerByNetworkNameResponse").pyclass
 
 IVirtualBox_removeDHCPServerRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_removeDHCPServer").pyclass
 
-IVirtualBox_removeDHCPServerResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_removeDHCPServerResponse").pyclass
+IVirtualBox_removeDHCPServerResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_removeDHCPServerResponse").pyclass
 
 IVirtualBox_createNATNetworkRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createNATNetwork").pyclass
 
-IVirtualBox_createNATNetworkResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_createNATNetworkResponse").pyclass
+IVirtualBox_createNATNetworkResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_createNATNetworkResponse").pyclass
 
-IVirtualBox_findNATNetworkByNameRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_findNATNetworkByName").pyclass
+IVirtualBox_findNATNetworkByNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IVirtualBox_findNATNetworkByName").pyclass
 
-IVirtualBox_findNATNetworkByNameResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_findNATNetworkByNameResponse").pyclass
+IVirtualBox_findNATNetworkByNameResultMsg = GED("http://www.virtualbox.org/",
+                                                "IVirtualBox_findNATNetworkByNameResponse").pyclass
 
 IVirtualBox_removeNATNetworkRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_removeNATNetwork").pyclass
 
-IVirtualBox_removeNATNetworkResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_removeNATNetworkResponse").pyclass
+IVirtualBox_removeNATNetworkResultMsg = GED("http://www.virtualbox.org/",
+                                            "IVirtualBox_removeNATNetworkResponse").pyclass
 
-IVirtualBox_checkFirmwarePresentRequestMsg = GED("http://www.virtualbox.org/", "IVirtualBox_checkFirmwarePresent").pyclass
+IVirtualBox_checkFirmwarePresentRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IVirtualBox_checkFirmwarePresent").pyclass
 
-IVirtualBox_checkFirmwarePresentResultMsg = GED("http://www.virtualbox.org/", "IVirtualBox_checkFirmwarePresentResponse").pyclass
+IVirtualBox_checkFirmwarePresentResultMsg = GED("http://www.virtualbox.org/",
+                                                "IVirtualBox_checkFirmwarePresentResponse").pyclass
 
 IVFSExplorer_getPathRequestMsg = GED("http://www.virtualbox.org/", "IVFSExplorer_getPath").pyclass
 
@@ -12039,9 +12104,11 @@ IAppliance_getDisksRequestMsg = GED("http://www.virtualbox.org/", "IAppliance_ge
 
 IAppliance_getDisksResultMsg = GED("http://www.virtualbox.org/", "IAppliance_getDisksResponse").pyclass
 
-IAppliance_getVirtualSystemDescriptionsRequestMsg = GED("http://www.virtualbox.org/", "IAppliance_getVirtualSystemDescriptions").pyclass
+IAppliance_getVirtualSystemDescriptionsRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IAppliance_getVirtualSystemDescriptions").pyclass
 
-IAppliance_getVirtualSystemDescriptionsResultMsg = GED("http://www.virtualbox.org/", "IAppliance_getVirtualSystemDescriptionsResponse").pyclass
+IAppliance_getVirtualSystemDescriptionsResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IAppliance_getVirtualSystemDescriptionsResponse").pyclass
 
 IAppliance_getMachinesRequestMsg = GED("http://www.virtualbox.org/", "IAppliance_getMachines").pyclass
 
@@ -12061,7 +12128,8 @@ IAppliance_importMachinesResultMsg = GED("http://www.virtualbox.org/", "IApplian
 
 IAppliance_createVFSExplorerRequestMsg = GED("http://www.virtualbox.org/", "IAppliance_createVFSExplorer").pyclass
 
-IAppliance_createVFSExplorerResultMsg = GED("http://www.virtualbox.org/", "IAppliance_createVFSExplorerResponse").pyclass
+IAppliance_createVFSExplorerResultMsg = GED("http://www.virtualbox.org/",
+                                            "IAppliance_createVFSExplorerResponse").pyclass
 
 IAppliance_writeRequestMsg = GED("http://www.virtualbox.org/", "IAppliance_write").pyclass
 
@@ -12071,29 +12139,41 @@ IAppliance_getWarningsRequestMsg = GED("http://www.virtualbox.org/", "IAppliance
 
 IAppliance_getWarningsResultMsg = GED("http://www.virtualbox.org/", "IAppliance_getWarningsResponse").pyclass
 
-IVirtualSystemDescription_getCountRequestMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getCount").pyclass
+IVirtualSystemDescription_getCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IVirtualSystemDescription_getCount").pyclass
 
-IVirtualSystemDescription_getCountResultMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getCountResponse").pyclass
+IVirtualSystemDescription_getCountResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IVirtualSystemDescription_getCountResponse").pyclass
 
-IVirtualSystemDescription_getDescriptionRequestMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getDescription").pyclass
+IVirtualSystemDescription_getDescriptionRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IVirtualSystemDescription_getDescription").pyclass
 
-IVirtualSystemDescription_getDescriptionResultMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getDescriptionResponse").pyclass
+IVirtualSystemDescription_getDescriptionResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IVirtualSystemDescription_getDescriptionResponse").pyclass
 
-IVirtualSystemDescription_getDescriptionByTypeRequestMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getDescriptionByType").pyclass
+IVirtualSystemDescription_getDescriptionByTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                               "IVirtualSystemDescription_getDescriptionByType").pyclass
 
-IVirtualSystemDescription_getDescriptionByTypeResultMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getDescriptionByTypeResponse").pyclass
+IVirtualSystemDescription_getDescriptionByTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                              "IVirtualSystemDescription_getDescriptionByTypeResponse").pyclass
 
-IVirtualSystemDescription_getValuesByTypeRequestMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getValuesByType").pyclass
+IVirtualSystemDescription_getValuesByTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "IVirtualSystemDescription_getValuesByType").pyclass
 
-IVirtualSystemDescription_getValuesByTypeResultMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_getValuesByTypeResponse").pyclass
+IVirtualSystemDescription_getValuesByTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                         "IVirtualSystemDescription_getValuesByTypeResponse").pyclass
 
-IVirtualSystemDescription_setFinalValuesRequestMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_setFinalValues").pyclass
+IVirtualSystemDescription_setFinalValuesRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IVirtualSystemDescription_setFinalValues").pyclass
 
-IVirtualSystemDescription_setFinalValuesResultMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_setFinalValuesResponse").pyclass
+IVirtualSystemDescription_setFinalValuesResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IVirtualSystemDescription_setFinalValuesResponse").pyclass
 
-IVirtualSystemDescription_addDescriptionRequestMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_addDescription").pyclass
+IVirtualSystemDescription_addDescriptionRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IVirtualSystemDescription_addDescription").pyclass
 
-IVirtualSystemDescription_addDescriptionResultMsg = GED("http://www.virtualbox.org/", "IVirtualSystemDescription_addDescriptionResponse").pyclass
+IVirtualSystemDescription_addDescriptionResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IVirtualSystemDescription_addDescriptionResponse").pyclass
 
 IBIOSSettings_getLogoFadeInRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getLogoFadeIn").pyclass
 
@@ -12105,51 +12185,65 @@ IBIOSSettings_setLogoFadeInResultMsg = GED("http://www.virtualbox.org/", "IBIOSS
 
 IBIOSSettings_getLogoFadeOutRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getLogoFadeOut").pyclass
 
-IBIOSSettings_getLogoFadeOutResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getLogoFadeOutResponse").pyclass
+IBIOSSettings_getLogoFadeOutResultMsg = GED("http://www.virtualbox.org/",
+                                            "IBIOSSettings_getLogoFadeOutResponse").pyclass
 
 IBIOSSettings_setLogoFadeOutRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setLogoFadeOut").pyclass
 
-IBIOSSettings_setLogoFadeOutResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setLogoFadeOutResponse").pyclass
+IBIOSSettings_setLogoFadeOutResultMsg = GED("http://www.virtualbox.org/",
+                                            "IBIOSSettings_setLogoFadeOutResponse").pyclass
 
-IBIOSSettings_getLogoDisplayTimeRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getLogoDisplayTime").pyclass
+IBIOSSettings_getLogoDisplayTimeRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IBIOSSettings_getLogoDisplayTime").pyclass
 
-IBIOSSettings_getLogoDisplayTimeResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getLogoDisplayTimeResponse").pyclass
+IBIOSSettings_getLogoDisplayTimeResultMsg = GED("http://www.virtualbox.org/",
+                                                "IBIOSSettings_getLogoDisplayTimeResponse").pyclass
 
-IBIOSSettings_setLogoDisplayTimeRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setLogoDisplayTime").pyclass
+IBIOSSettings_setLogoDisplayTimeRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IBIOSSettings_setLogoDisplayTime").pyclass
 
-IBIOSSettings_setLogoDisplayTimeResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setLogoDisplayTimeResponse").pyclass
+IBIOSSettings_setLogoDisplayTimeResultMsg = GED("http://www.virtualbox.org/",
+                                                "IBIOSSettings_setLogoDisplayTimeResponse").pyclass
 
 IBIOSSettings_getLogoImagePathRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getLogoImagePath").pyclass
 
-IBIOSSettings_getLogoImagePathResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getLogoImagePathResponse").pyclass
+IBIOSSettings_getLogoImagePathResultMsg = GED("http://www.virtualbox.org/",
+                                              "IBIOSSettings_getLogoImagePathResponse").pyclass
 
 IBIOSSettings_setLogoImagePathRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setLogoImagePath").pyclass
 
-IBIOSSettings_setLogoImagePathResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setLogoImagePathResponse").pyclass
+IBIOSSettings_setLogoImagePathResultMsg = GED("http://www.virtualbox.org/",
+                                              "IBIOSSettings_setLogoImagePathResponse").pyclass
 
 IBIOSSettings_getBootMenuModeRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getBootMenuMode").pyclass
 
-IBIOSSettings_getBootMenuModeResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getBootMenuModeResponse").pyclass
+IBIOSSettings_getBootMenuModeResultMsg = GED("http://www.virtualbox.org/",
+                                             "IBIOSSettings_getBootMenuModeResponse").pyclass
 
 IBIOSSettings_setBootMenuModeRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setBootMenuMode").pyclass
 
-IBIOSSettings_setBootMenuModeResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setBootMenuModeResponse").pyclass
+IBIOSSettings_setBootMenuModeResultMsg = GED("http://www.virtualbox.org/",
+                                             "IBIOSSettings_setBootMenuModeResponse").pyclass
 
 IBIOSSettings_getACPIEnabledRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getACPIEnabled").pyclass
 
-IBIOSSettings_getACPIEnabledResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getACPIEnabledResponse").pyclass
+IBIOSSettings_getACPIEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                            "IBIOSSettings_getACPIEnabledResponse").pyclass
 
 IBIOSSettings_setACPIEnabledRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setACPIEnabled").pyclass
 
-IBIOSSettings_setACPIEnabledResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setACPIEnabledResponse").pyclass
+IBIOSSettings_setACPIEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                            "IBIOSSettings_setACPIEnabledResponse").pyclass
 
 IBIOSSettings_getIOAPICEnabledRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getIOAPICEnabled").pyclass
 
-IBIOSSettings_getIOAPICEnabledResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getIOAPICEnabledResponse").pyclass
+IBIOSSettings_getIOAPICEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                              "IBIOSSettings_getIOAPICEnabledResponse").pyclass
 
 IBIOSSettings_setIOAPICEnabledRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setIOAPICEnabled").pyclass
 
-IBIOSSettings_setIOAPICEnabledResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setIOAPICEnabledResponse").pyclass
+IBIOSSettings_setIOAPICEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                              "IBIOSSettings_setIOAPICEnabledResponse").pyclass
 
 IBIOSSettings_getTimeOffsetRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getTimeOffset").pyclass
 
@@ -12159,17 +12253,23 @@ IBIOSSettings_setTimeOffsetRequestMsg = GED("http://www.virtualbox.org/", "IBIOS
 
 IBIOSSettings_setTimeOffsetResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setTimeOffsetResponse").pyclass
 
-IBIOSSettings_getPXEDebugEnabledRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getPXEDebugEnabled").pyclass
+IBIOSSettings_getPXEDebugEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IBIOSSettings_getPXEDebugEnabled").pyclass
 
-IBIOSSettings_getPXEDebugEnabledResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getPXEDebugEnabledResponse").pyclass
+IBIOSSettings_getPXEDebugEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                "IBIOSSettings_getPXEDebugEnabledResponse").pyclass
 
-IBIOSSettings_setPXEDebugEnabledRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setPXEDebugEnabled").pyclass
+IBIOSSettings_setPXEDebugEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IBIOSSettings_setPXEDebugEnabled").pyclass
 
-IBIOSSettings_setPXEDebugEnabledResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_setPXEDebugEnabledResponse").pyclass
+IBIOSSettings_setPXEDebugEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                "IBIOSSettings_setPXEDebugEnabledResponse").pyclass
 
-IBIOSSettings_getNonVolatileStorageFileRequestMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getNonVolatileStorageFile").pyclass
+IBIOSSettings_getNonVolatileStorageFileRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IBIOSSettings_getNonVolatileStorageFile").pyclass
 
-IBIOSSettings_getNonVolatileStorageFileResultMsg = GED("http://www.virtualbox.org/", "IBIOSSettings_getNonVolatileStorageFileResponse").pyclass
+IBIOSSettings_getNonVolatileStorageFileResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IBIOSSettings_getNonVolatileStorageFileResponse").pyclass
 
 IPCIAddress_getBusRequestMsg = GED("http://www.virtualbox.org/", "IPCIAddress_getBus").pyclass
 
@@ -12285,11 +12385,13 @@ IMachine_setCPUCountResultMsg = GED("http://www.virtualbox.org/", "IMachine_setC
 
 IMachine_getCPUHotPlugEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getCPUHotPlugEnabled").pyclass
 
-IMachine_getCPUHotPlugEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getCPUHotPlugEnabledResponse").pyclass
+IMachine_getCPUHotPlugEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getCPUHotPlugEnabledResponse").pyclass
 
 IMachine_setCPUHotPlugEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setCPUHotPlugEnabled").pyclass
 
-IMachine_setCPUHotPlugEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setCPUHotPlugEnabledResponse").pyclass
+IMachine_setCPUHotPlugEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_setCPUHotPlugEnabledResponse").pyclass
 
 IMachine_getCPUExecutionCapRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getCPUExecutionCap").pyclass
 
@@ -12309,27 +12411,35 @@ IMachine_setMemorySizeResultMsg = GED("http://www.virtualbox.org/", "IMachine_se
 
 IMachine_getMemoryBalloonSizeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getMemoryBalloonSize").pyclass
 
-IMachine_getMemoryBalloonSizeResultMsg = GED("http://www.virtualbox.org/", "IMachine_getMemoryBalloonSizeResponse").pyclass
+IMachine_getMemoryBalloonSizeResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getMemoryBalloonSizeResponse").pyclass
 
 IMachine_setMemoryBalloonSizeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setMemoryBalloonSize").pyclass
 
-IMachine_setMemoryBalloonSizeResultMsg = GED("http://www.virtualbox.org/", "IMachine_setMemoryBalloonSizeResponse").pyclass
+IMachine_setMemoryBalloonSizeResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_setMemoryBalloonSizeResponse").pyclass
 
 IMachine_getPageFusionEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getPageFusionEnabled").pyclass
 
-IMachine_getPageFusionEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getPageFusionEnabledResponse").pyclass
+IMachine_getPageFusionEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getPageFusionEnabledResponse").pyclass
 
 IMachine_setPageFusionEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setPageFusionEnabled").pyclass
 
-IMachine_setPageFusionEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setPageFusionEnabledResponse").pyclass
+IMachine_setPageFusionEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_setPageFusionEnabledResponse").pyclass
 
-IMachine_getGraphicsControllerTypeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getGraphicsControllerType").pyclass
+IMachine_getGraphicsControllerTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_getGraphicsControllerType").pyclass
 
-IMachine_getGraphicsControllerTypeResultMsg = GED("http://www.virtualbox.org/", "IMachine_getGraphicsControllerTypeResponse").pyclass
+IMachine_getGraphicsControllerTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_getGraphicsControllerTypeResponse").pyclass
 
-IMachine_setGraphicsControllerTypeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setGraphicsControllerType").pyclass
+IMachine_setGraphicsControllerTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_setGraphicsControllerType").pyclass
 
-IMachine_setGraphicsControllerTypeResultMsg = GED("http://www.virtualbox.org/", "IMachine_setGraphicsControllerTypeResponse").pyclass
+IMachine_setGraphicsControllerTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_setGraphicsControllerTypeResponse").pyclass
 
 IMachine_getVRAMSizeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVRAMSize").pyclass
 
@@ -12341,19 +12451,25 @@ IMachine_setVRAMSizeResultMsg = GED("http://www.virtualbox.org/", "IMachine_setV
 
 IMachine_getAccelerate3DEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getAccelerate3DEnabled").pyclass
 
-IMachine_getAccelerate3DEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getAccelerate3DEnabledResponse").pyclass
+IMachine_getAccelerate3DEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_getAccelerate3DEnabledResponse").pyclass
 
 IMachine_setAccelerate3DEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setAccelerate3DEnabled").pyclass
 
-IMachine_setAccelerate3DEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setAccelerate3DEnabledResponse").pyclass
+IMachine_setAccelerate3DEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_setAccelerate3DEnabledResponse").pyclass
 
-IMachine_getAccelerate2DVideoEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getAccelerate2DVideoEnabled").pyclass
+IMachine_getAccelerate2DVideoEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachine_getAccelerate2DVideoEnabled").pyclass
 
-IMachine_getAccelerate2DVideoEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getAccelerate2DVideoEnabledResponse").pyclass
+IMachine_getAccelerate2DVideoEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachine_getAccelerate2DVideoEnabledResponse").pyclass
 
-IMachine_setAccelerate2DVideoEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setAccelerate2DVideoEnabled").pyclass
+IMachine_setAccelerate2DVideoEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachine_setAccelerate2DVideoEnabled").pyclass
 
-IMachine_setAccelerate2DVideoEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setAccelerate2DVideoEnabledResponse").pyclass
+IMachine_setAccelerate2DVideoEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachine_setAccelerate2DVideoEnabledResponse").pyclass
 
 IMachine_getMonitorCountRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getMonitorCount").pyclass
 
@@ -12365,51 +12481,63 @@ IMachine_setMonitorCountResultMsg = GED("http://www.virtualbox.org/", "IMachine_
 
 IMachine_getVideoCaptureEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureEnabled").pyclass
 
-IMachine_getVideoCaptureEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureEnabledResponse").pyclass
+IMachine_getVideoCaptureEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_getVideoCaptureEnabledResponse").pyclass
 
 IMachine_setVideoCaptureEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureEnabled").pyclass
 
-IMachine_setVideoCaptureEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureEnabledResponse").pyclass
+IMachine_setVideoCaptureEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_setVideoCaptureEnabledResponse").pyclass
 
 IMachine_getVideoCaptureScreensRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureScreens").pyclass
 
-IMachine_getVideoCaptureScreensResultMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureScreensResponse").pyclass
+IMachine_getVideoCaptureScreensResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_getVideoCaptureScreensResponse").pyclass
 
 IMachine_setVideoCaptureScreensRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureScreens").pyclass
 
-IMachine_setVideoCaptureScreensResultMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureScreensResponse").pyclass
+IMachine_setVideoCaptureScreensResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_setVideoCaptureScreensResponse").pyclass
 
 IMachine_getVideoCaptureFileRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureFile").pyclass
 
-IMachine_getVideoCaptureFileResultMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureFileResponse").pyclass
+IMachine_getVideoCaptureFileResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getVideoCaptureFileResponse").pyclass
 
 IMachine_setVideoCaptureFileRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureFile").pyclass
 
-IMachine_setVideoCaptureFileResultMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureFileResponse").pyclass
+IMachine_setVideoCaptureFileResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_setVideoCaptureFileResponse").pyclass
 
 IMachine_getVideoCaptureWidthRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureWidth").pyclass
 
-IMachine_getVideoCaptureWidthResultMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureWidthResponse").pyclass
+IMachine_getVideoCaptureWidthResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getVideoCaptureWidthResponse").pyclass
 
 IMachine_setVideoCaptureWidthRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureWidth").pyclass
 
-IMachine_setVideoCaptureWidthResultMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureWidthResponse").pyclass
+IMachine_setVideoCaptureWidthResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_setVideoCaptureWidthResponse").pyclass
 
 IMachine_getVideoCaptureHeightRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureHeight").pyclass
 
-IMachine_getVideoCaptureHeightResultMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureHeightResponse").pyclass
+IMachine_getVideoCaptureHeightResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_getVideoCaptureHeightResponse").pyclass
 
 IMachine_setVideoCaptureHeightRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureHeight").pyclass
 
-IMachine_setVideoCaptureHeightResultMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureHeightResponse").pyclass
+IMachine_setVideoCaptureHeightResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_setVideoCaptureHeightResponse").pyclass
 
 IMachine_getVideoCaptureRateRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureRate").pyclass
 
-IMachine_getVideoCaptureRateResultMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureRateResponse").pyclass
+IMachine_getVideoCaptureRateResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getVideoCaptureRateResponse").pyclass
 
 IMachine_setVideoCaptureRateRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureRate").pyclass
 
-IMachine_setVideoCaptureRateResultMsg = GED("http://www.virtualbox.org/", "IMachine_setVideoCaptureRateResponse").pyclass
+IMachine_setVideoCaptureRateResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_setVideoCaptureRateResponse").pyclass
 
 IMachine_getVideoCaptureFPSRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getVideoCaptureFPS").pyclass
 
@@ -12475,17 +12603,22 @@ IMachine_getVRDEServerRequestMsg = GED("http://www.virtualbox.org/", "IMachine_g
 
 IMachine_getVRDEServerResultMsg = GED("http://www.virtualbox.org/", "IMachine_getVRDEServerResponse").pyclass
 
-IMachine_getEmulatedUSBCardReaderEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getEmulatedUSBCardReaderEnabled").pyclass
+IMachine_getEmulatedUSBCardReaderEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IMachine_getEmulatedUSBCardReaderEnabled").pyclass
 
-IMachine_getEmulatedUSBCardReaderEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getEmulatedUSBCardReaderEnabledResponse").pyclass
+IMachine_getEmulatedUSBCardReaderEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IMachine_getEmulatedUSBCardReaderEnabledResponse").pyclass
 
-IMachine_setEmulatedUSBCardReaderEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setEmulatedUSBCardReaderEnabled").pyclass
+IMachine_setEmulatedUSBCardReaderEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IMachine_setEmulatedUSBCardReaderEnabled").pyclass
 
-IMachine_setEmulatedUSBCardReaderEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setEmulatedUSBCardReaderEnabledResponse").pyclass
+IMachine_setEmulatedUSBCardReaderEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IMachine_setEmulatedUSBCardReaderEnabledResponse").pyclass
 
 IMachine_getMediumAttachmentsRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getMediumAttachments").pyclass
 
-IMachine_getMediumAttachmentsResultMsg = GED("http://www.virtualbox.org/", "IMachine_getMediumAttachmentsResponse").pyclass
+IMachine_getMediumAttachmentsResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getMediumAttachmentsResponse").pyclass
 
 IMachine_getUSBControllersRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBControllers").pyclass
 
@@ -12493,7 +12626,8 @@ IMachine_getUSBControllersResultMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachine_getUSBDeviceFiltersRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBDeviceFilters").pyclass
 
-IMachine_getUSBDeviceFiltersResultMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBDeviceFiltersResponse").pyclass
+IMachine_getUSBDeviceFiltersResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getUSBDeviceFiltersResponse").pyclass
 
 IMachine_getAudioAdapterRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getAudioAdapter").pyclass
 
@@ -12501,15 +12635,18 @@ IMachine_getAudioAdapterResultMsg = GED("http://www.virtualbox.org/", "IMachine_
 
 IMachine_getStorageControllersRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getStorageControllers").pyclass
 
-IMachine_getStorageControllersResultMsg = GED("http://www.virtualbox.org/", "IMachine_getStorageControllersResponse").pyclass
+IMachine_getStorageControllersResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_getStorageControllersResponse").pyclass
 
 IMachine_getSettingsFilePathRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getSettingsFilePath").pyclass
 
-IMachine_getSettingsFilePathResultMsg = GED("http://www.virtualbox.org/", "IMachine_getSettingsFilePathResponse").pyclass
+IMachine_getSettingsFilePathResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getSettingsFilePathResponse").pyclass
 
 IMachine_getSettingsModifiedRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getSettingsModified").pyclass
 
-IMachine_getSettingsModifiedResultMsg = GED("http://www.virtualbox.org/", "IMachine_getSettingsModifiedResponse").pyclass
+IMachine_getSettingsModifiedResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getSettingsModifiedResponse").pyclass
 
 IMachine_getSessionStateRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getSessionState").pyclass
 
@@ -12547,9 +12684,11 @@ IMachine_getSnapshotCountRequestMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachine_getSnapshotCountResultMsg = GED("http://www.virtualbox.org/", "IMachine_getSnapshotCountResponse").pyclass
 
-IMachine_getCurrentStateModifiedRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getCurrentStateModified").pyclass
+IMachine_getCurrentStateModifiedRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_getCurrentStateModified").pyclass
 
-IMachine_getCurrentStateModifiedResultMsg = GED("http://www.virtualbox.org/", "IMachine_getCurrentStateModifiedResponse").pyclass
+IMachine_getCurrentStateModifiedResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachine_getCurrentStateModifiedResponse").pyclass
 
 IMachine_getSharedFoldersRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getSharedFolders").pyclass
 
@@ -12571,21 +12710,27 @@ IMachine_setDragAndDropModeRequestMsg = GED("http://www.virtualbox.org/", "IMach
 
 IMachine_setDragAndDropModeResultMsg = GED("http://www.virtualbox.org/", "IMachine_setDragAndDropModeResponse").pyclass
 
-IMachine_getGuestPropertyNotificationPatternsRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getGuestPropertyNotificationPatterns").pyclass
+IMachine_getGuestPropertyNotificationPatternsRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "IMachine_getGuestPropertyNotificationPatterns").pyclass
 
-IMachine_getGuestPropertyNotificationPatternsResultMsg = GED("http://www.virtualbox.org/", "IMachine_getGuestPropertyNotificationPatternsResponse").pyclass
+IMachine_getGuestPropertyNotificationPatternsResultMsg = GED("http://www.virtualbox.org/",
+                                                             "IMachine_getGuestPropertyNotificationPatternsResponse").pyclass
 
-IMachine_setGuestPropertyNotificationPatternsRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setGuestPropertyNotificationPatterns").pyclass
+IMachine_setGuestPropertyNotificationPatternsRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "IMachine_setGuestPropertyNotificationPatterns").pyclass
 
-IMachine_setGuestPropertyNotificationPatternsResultMsg = GED("http://www.virtualbox.org/", "IMachine_setGuestPropertyNotificationPatternsResponse").pyclass
+IMachine_setGuestPropertyNotificationPatternsResultMsg = GED("http://www.virtualbox.org/",
+                                                             "IMachine_setGuestPropertyNotificationPatternsResponse").pyclass
 
 IMachine_getTeleporterEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getTeleporterEnabled").pyclass
 
-IMachine_getTeleporterEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getTeleporterEnabledResponse").pyclass
+IMachine_getTeleporterEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getTeleporterEnabledResponse").pyclass
 
 IMachine_setTeleporterEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setTeleporterEnabled").pyclass
 
-IMachine_setTeleporterEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setTeleporterEnabledResponse").pyclass
+IMachine_setTeleporterEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_setTeleporterEnabledResponse").pyclass
 
 IMachine_getTeleporterPortRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getTeleporterPort").pyclass
 
@@ -12597,59 +12742,79 @@ IMachine_setTeleporterPortResultMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachine_getTeleporterAddressRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getTeleporterAddress").pyclass
 
-IMachine_getTeleporterAddressResultMsg = GED("http://www.virtualbox.org/", "IMachine_getTeleporterAddressResponse").pyclass
+IMachine_getTeleporterAddressResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getTeleporterAddressResponse").pyclass
 
 IMachine_setTeleporterAddressRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setTeleporterAddress").pyclass
 
-IMachine_setTeleporterAddressResultMsg = GED("http://www.virtualbox.org/", "IMachine_setTeleporterAddressResponse").pyclass
+IMachine_setTeleporterAddressResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_setTeleporterAddressResponse").pyclass
 
 IMachine_getTeleporterPasswordRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getTeleporterPassword").pyclass
 
-IMachine_getTeleporterPasswordResultMsg = GED("http://www.virtualbox.org/", "IMachine_getTeleporterPasswordResponse").pyclass
+IMachine_getTeleporterPasswordResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_getTeleporterPasswordResponse").pyclass
 
 IMachine_setTeleporterPasswordRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setTeleporterPassword").pyclass
 
-IMachine_setTeleporterPasswordResultMsg = GED("http://www.virtualbox.org/", "IMachine_setTeleporterPasswordResponse").pyclass
+IMachine_setTeleporterPasswordResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_setTeleporterPasswordResponse").pyclass
 
 IMachine_getFaultToleranceStateRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultToleranceState").pyclass
 
-IMachine_getFaultToleranceStateResultMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultToleranceStateResponse").pyclass
+IMachine_getFaultToleranceStateResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_getFaultToleranceStateResponse").pyclass
 
 IMachine_setFaultToleranceStateRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultToleranceState").pyclass
 
-IMachine_setFaultToleranceStateResultMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultToleranceStateResponse").pyclass
+IMachine_setFaultToleranceStateResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_setFaultToleranceStateResponse").pyclass
 
 IMachine_getFaultTolerancePortRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultTolerancePort").pyclass
 
-IMachine_getFaultTolerancePortResultMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultTolerancePortResponse").pyclass
+IMachine_getFaultTolerancePortResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_getFaultTolerancePortResponse").pyclass
 
 IMachine_setFaultTolerancePortRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultTolerancePort").pyclass
 
-IMachine_setFaultTolerancePortResultMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultTolerancePortResponse").pyclass
+IMachine_setFaultTolerancePortResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_setFaultTolerancePortResponse").pyclass
 
-IMachine_getFaultToleranceAddressRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultToleranceAddress").pyclass
+IMachine_getFaultToleranceAddressRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_getFaultToleranceAddress").pyclass
 
-IMachine_getFaultToleranceAddressResultMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultToleranceAddressResponse").pyclass
+IMachine_getFaultToleranceAddressResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_getFaultToleranceAddressResponse").pyclass
 
-IMachine_setFaultToleranceAddressRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultToleranceAddress").pyclass
+IMachine_setFaultToleranceAddressRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_setFaultToleranceAddress").pyclass
 
-IMachine_setFaultToleranceAddressResultMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultToleranceAddressResponse").pyclass
+IMachine_setFaultToleranceAddressResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_setFaultToleranceAddressResponse").pyclass
 
-IMachine_getFaultTolerancePasswordRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultTolerancePassword").pyclass
+IMachine_getFaultTolerancePasswordRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_getFaultTolerancePassword").pyclass
 
-IMachine_getFaultTolerancePasswordResultMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultTolerancePasswordResponse").pyclass
+IMachine_getFaultTolerancePasswordResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_getFaultTolerancePasswordResponse").pyclass
 
-IMachine_setFaultTolerancePasswordRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultTolerancePassword").pyclass
+IMachine_setFaultTolerancePasswordRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_setFaultTolerancePassword").pyclass
 
-IMachine_setFaultTolerancePasswordResultMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultTolerancePasswordResponse").pyclass
+IMachine_setFaultTolerancePasswordResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_setFaultTolerancePasswordResponse").pyclass
 
-IMachine_getFaultToleranceSyncIntervalRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultToleranceSyncInterval").pyclass
+IMachine_getFaultToleranceSyncIntervalRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachine_getFaultToleranceSyncInterval").pyclass
 
-IMachine_getFaultToleranceSyncIntervalResultMsg = GED("http://www.virtualbox.org/", "IMachine_getFaultToleranceSyncIntervalResponse").pyclass
+IMachine_getFaultToleranceSyncIntervalResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachine_getFaultToleranceSyncIntervalResponse").pyclass
 
-IMachine_setFaultToleranceSyncIntervalRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultToleranceSyncInterval").pyclass
+IMachine_setFaultToleranceSyncIntervalRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachine_setFaultToleranceSyncInterval").pyclass
 
-IMachine_setFaultToleranceSyncIntervalResultMsg = GED("http://www.virtualbox.org/", "IMachine_setFaultToleranceSyncIntervalResponse").pyclass
+IMachine_setFaultToleranceSyncIntervalResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachine_setFaultToleranceSyncIntervalResponse").pyclass
 
 IMachine_getRTCUseUTCRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getRTCUseUTC").pyclass
 
@@ -12675,13 +12840,16 @@ IMachine_setIOCacheSizeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_
 
 IMachine_setIOCacheSizeResultMsg = GED("http://www.virtualbox.org/", "IMachine_setIOCacheSizeResponse").pyclass
 
-IMachine_getPCIDeviceAssignmentsRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getPCIDeviceAssignments").pyclass
+IMachine_getPCIDeviceAssignmentsRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_getPCIDeviceAssignments").pyclass
 
-IMachine_getPCIDeviceAssignmentsResultMsg = GED("http://www.virtualbox.org/", "IMachine_getPCIDeviceAssignmentsResponse").pyclass
+IMachine_getPCIDeviceAssignmentsResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachine_getPCIDeviceAssignmentsResponse").pyclass
 
 IMachine_getBandwidthControlRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getBandwidthControl").pyclass
 
-IMachine_getBandwidthControlResultMsg = GED("http://www.virtualbox.org/", "IMachine_getBandwidthControlResponse").pyclass
+IMachine_getBandwidthControlResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getBandwidthControlResponse").pyclass
 
 IMachine_getTracingEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getTracingEnabled").pyclass
 
@@ -12699,21 +12867,27 @@ IMachine_setTracingConfigRequestMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachine_setTracingConfigResultMsg = GED("http://www.virtualbox.org/", "IMachine_setTracingConfigResponse").pyclass
 
-IMachine_getAllowTracingToAccessVMRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getAllowTracingToAccessVM").pyclass
+IMachine_getAllowTracingToAccessVMRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_getAllowTracingToAccessVM").pyclass
 
-IMachine_getAllowTracingToAccessVMResultMsg = GED("http://www.virtualbox.org/", "IMachine_getAllowTracingToAccessVMResponse").pyclass
+IMachine_getAllowTracingToAccessVMResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_getAllowTracingToAccessVMResponse").pyclass
 
-IMachine_setAllowTracingToAccessVMRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setAllowTracingToAccessVM").pyclass
+IMachine_setAllowTracingToAccessVMRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_setAllowTracingToAccessVM").pyclass
 
-IMachine_setAllowTracingToAccessVMResultMsg = GED("http://www.virtualbox.org/", "IMachine_setAllowTracingToAccessVMResponse").pyclass
+IMachine_setAllowTracingToAccessVMResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_setAllowTracingToAccessVMResponse").pyclass
 
 IMachine_getAutostartEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getAutostartEnabled").pyclass
 
-IMachine_getAutostartEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_getAutostartEnabledResponse").pyclass
+IMachine_getAutostartEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getAutostartEnabledResponse").pyclass
 
 IMachine_setAutostartEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setAutostartEnabled").pyclass
 
-IMachine_setAutostartEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachine_setAutostartEnabledResponse").pyclass
+IMachine_setAutostartEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_setAutostartEnabledResponse").pyclass
 
 IMachine_getAutostartDelayRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getAutostartDelay").pyclass
 
@@ -12741,7 +12915,8 @@ IMachine_setDefaultFrontendResultMsg = GED("http://www.virtualbox.org/", "IMachi
 
 IMachine_getUSBProxyAvailableRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBProxyAvailable").pyclass
 
-IMachine_getUSBProxyAvailableResultMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBProxyAvailableResponse").pyclass
+IMachine_getUSBProxyAvailableResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_getUSBProxyAvailableResponse").pyclass
 
 IMachine_lockMachineRequestMsg = GED("http://www.virtualbox.org/", "IMachine_lockMachine").pyclass
 
@@ -12763,9 +12938,11 @@ IMachine_attachDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_at
 
 IMachine_attachDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_attachDeviceResponse").pyclass
 
-IMachine_attachDeviceWithoutMediumRequestMsg = GED("http://www.virtualbox.org/", "IMachine_attachDeviceWithoutMedium").pyclass
+IMachine_attachDeviceWithoutMediumRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_attachDeviceWithoutMedium").pyclass
 
-IMachine_attachDeviceWithoutMediumResultMsg = GED("http://www.virtualbox.org/", "IMachine_attachDeviceWithoutMediumResponse").pyclass
+IMachine_attachDeviceWithoutMediumResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_attachDeviceWithoutMediumResponse").pyclass
 
 IMachine_detachDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_detachDevice").pyclass
 
@@ -12777,27 +12954,37 @@ IMachine_passthroughDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachine_temporaryEjectDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_temporaryEjectDevice").pyclass
 
-IMachine_temporaryEjectDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_temporaryEjectDeviceResponse").pyclass
+IMachine_temporaryEjectDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_temporaryEjectDeviceResponse").pyclass
 
 IMachine_nonRotationalDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_nonRotationalDevice").pyclass
 
-IMachine_nonRotationalDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_nonRotationalDeviceResponse").pyclass
+IMachine_nonRotationalDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_nonRotationalDeviceResponse").pyclass
 
-IMachine_setAutoDiscardForDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setAutoDiscardForDevice").pyclass
+IMachine_setAutoDiscardForDeviceRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_setAutoDiscardForDevice").pyclass
 
-IMachine_setAutoDiscardForDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_setAutoDiscardForDeviceResponse").pyclass
+IMachine_setAutoDiscardForDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachine_setAutoDiscardForDeviceResponse").pyclass
 
-IMachine_setHotPluggableForDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setHotPluggableForDevice").pyclass
+IMachine_setHotPluggableForDeviceRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_setHotPluggableForDevice").pyclass
 
-IMachine_setHotPluggableForDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_setHotPluggableForDeviceResponse").pyclass
+IMachine_setHotPluggableForDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_setHotPluggableForDeviceResponse").pyclass
 
-IMachine_setBandwidthGroupForDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setBandwidthGroupForDevice").pyclass
+IMachine_setBandwidthGroupForDeviceRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachine_setBandwidthGroupForDevice").pyclass
 
-IMachine_setBandwidthGroupForDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_setBandwidthGroupForDeviceResponse").pyclass
+IMachine_setBandwidthGroupForDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_setBandwidthGroupForDeviceResponse").pyclass
 
-IMachine_setNoBandwidthGroupForDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setNoBandwidthGroupForDevice").pyclass
+IMachine_setNoBandwidthGroupForDeviceRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachine_setNoBandwidthGroupForDevice").pyclass
 
-IMachine_setNoBandwidthGroupForDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_setNoBandwidthGroupForDeviceResponse").pyclass
+IMachine_setNoBandwidthGroupForDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachine_setNoBandwidthGroupForDeviceResponse").pyclass
 
 IMachine_unmountMediumRequestMsg = GED("http://www.virtualbox.org/", "IMachine_unmountMedium").pyclass
 
@@ -12811,21 +12998,26 @@ IMachine_getMediumRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getMe
 
 IMachine_getMediumResultMsg = GED("http://www.virtualbox.org/", "IMachine_getMediumResponse").pyclass
 
-IMachine_getMediumAttachmentsOfControllerRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getMediumAttachmentsOfController").pyclass
+IMachine_getMediumAttachmentsOfControllerRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "IMachine_getMediumAttachmentsOfController").pyclass
 
-IMachine_getMediumAttachmentsOfControllerResultMsg = GED("http://www.virtualbox.org/", "IMachine_getMediumAttachmentsOfControllerResponse").pyclass
+IMachine_getMediumAttachmentsOfControllerResultMsg = GED("http://www.virtualbox.org/",
+                                                         "IMachine_getMediumAttachmentsOfControllerResponse").pyclass
 
 IMachine_getMediumAttachmentRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getMediumAttachment").pyclass
 
-IMachine_getMediumAttachmentResultMsg = GED("http://www.virtualbox.org/", "IMachine_getMediumAttachmentResponse").pyclass
+IMachine_getMediumAttachmentResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getMediumAttachmentResponse").pyclass
 
 IMachine_attachHostPCIDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_attachHostPCIDevice").pyclass
 
-IMachine_attachHostPCIDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_attachHostPCIDeviceResponse").pyclass
+IMachine_attachHostPCIDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_attachHostPCIDeviceResponse").pyclass
 
 IMachine_detachHostPCIDeviceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_detachHostPCIDevice").pyclass
 
-IMachine_detachHostPCIDeviceResultMsg = GED("http://www.virtualbox.org/", "IMachine_detachHostPCIDeviceResponse").pyclass
+IMachine_detachHostPCIDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_detachHostPCIDeviceResponse").pyclass
 
 IMachine_getNetworkAdapterRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getNetworkAdapter").pyclass
 
@@ -12833,23 +13025,32 @@ IMachine_getNetworkAdapterResultMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachine_addStorageControllerRequestMsg = GED("http://www.virtualbox.org/", "IMachine_addStorageController").pyclass
 
-IMachine_addStorageControllerResultMsg = GED("http://www.virtualbox.org/", "IMachine_addStorageControllerResponse").pyclass
+IMachine_addStorageControllerResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_addStorageControllerResponse").pyclass
 
-IMachine_getStorageControllerByNameRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getStorageControllerByName").pyclass
+IMachine_getStorageControllerByNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachine_getStorageControllerByName").pyclass
 
-IMachine_getStorageControllerByNameResultMsg = GED("http://www.virtualbox.org/", "IMachine_getStorageControllerByNameResponse").pyclass
+IMachine_getStorageControllerByNameResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_getStorageControllerByNameResponse").pyclass
 
-IMachine_getStorageControllerByInstanceRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getStorageControllerByInstance").pyclass
+IMachine_getStorageControllerByInstanceRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMachine_getStorageControllerByInstance").pyclass
 
-IMachine_getStorageControllerByInstanceResultMsg = GED("http://www.virtualbox.org/", "IMachine_getStorageControllerByInstanceResponse").pyclass
+IMachine_getStorageControllerByInstanceResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachine_getStorageControllerByInstanceResponse").pyclass
 
-IMachine_removeStorageControllerRequestMsg = GED("http://www.virtualbox.org/", "IMachine_removeStorageController").pyclass
+IMachine_removeStorageControllerRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_removeStorageController").pyclass
 
-IMachine_removeStorageControllerResultMsg = GED("http://www.virtualbox.org/", "IMachine_removeStorageControllerResponse").pyclass
+IMachine_removeStorageControllerResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachine_removeStorageControllerResponse").pyclass
 
-IMachine_setStorageControllerBootableRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setStorageControllerBootable").pyclass
+IMachine_setStorageControllerBootableRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachine_setStorageControllerBootable").pyclass
 
-IMachine_setStorageControllerBootableResultMsg = GED("http://www.virtualbox.org/", "IMachine_setStorageControllerBootableResponse").pyclass
+IMachine_setStorageControllerBootableResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachine_setStorageControllerBootableResponse").pyclass
 
 IMachine_addUSBControllerRequestMsg = GED("http://www.virtualbox.org/", "IMachine_addUSBController").pyclass
 
@@ -12857,15 +13058,19 @@ IMachine_addUSBControllerResultMsg = GED("http://www.virtualbox.org/", "IMachine
 
 IMachine_removeUSBControllerRequestMsg = GED("http://www.virtualbox.org/", "IMachine_removeUSBController").pyclass
 
-IMachine_removeUSBControllerResultMsg = GED("http://www.virtualbox.org/", "IMachine_removeUSBControllerResponse").pyclass
+IMachine_removeUSBControllerResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_removeUSBControllerResponse").pyclass
 
 IMachine_getUSBControllerByNameRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBControllerByName").pyclass
 
-IMachine_getUSBControllerByNameResultMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBControllerByNameResponse").pyclass
+IMachine_getUSBControllerByNameResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachine_getUSBControllerByNameResponse").pyclass
 
-IMachine_getUSBControllerCountByTypeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBControllerCountByType").pyclass
+IMachine_getUSBControllerCountByTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachine_getUSBControllerCountByType").pyclass
 
-IMachine_getUSBControllerCountByTypeResultMsg = GED("http://www.virtualbox.org/", "IMachine_getUSBControllerCountByTypeResponse").pyclass
+IMachine_getUSBControllerCountByTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachine_getUSBControllerCountByTypeResponse").pyclass
 
 IMachine_getSerialPortRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getSerialPort").pyclass
 
@@ -12909,19 +13114,23 @@ IMachine_removeCPUIDLeafResultMsg = GED("http://www.virtualbox.org/", "IMachine_
 
 IMachine_removeAllCPUIDLeavesRequestMsg = GED("http://www.virtualbox.org/", "IMachine_removeAllCPUIDLeaves").pyclass
 
-IMachine_removeAllCPUIDLeavesResultMsg = GED("http://www.virtualbox.org/", "IMachine_removeAllCPUIDLeavesResponse").pyclass
+IMachine_removeAllCPUIDLeavesResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_removeAllCPUIDLeavesResponse").pyclass
 
 IMachine_getHWVirtExPropertyRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getHWVirtExProperty").pyclass
 
-IMachine_getHWVirtExPropertyResultMsg = GED("http://www.virtualbox.org/", "IMachine_getHWVirtExPropertyResponse").pyclass
+IMachine_getHWVirtExPropertyResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_getHWVirtExPropertyResponse").pyclass
 
 IMachine_setHWVirtExPropertyRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setHWVirtExProperty").pyclass
 
-IMachine_setHWVirtExPropertyResultMsg = GED("http://www.virtualbox.org/", "IMachine_setHWVirtExPropertyResponse").pyclass
+IMachine_setHWVirtExPropertyResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_setHWVirtExPropertyResponse").pyclass
 
 IMachine_setSettingsFilePathRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setSettingsFilePath").pyclass
 
-IMachine_setSettingsFilePathResultMsg = GED("http://www.virtualbox.org/", "IMachine_setSettingsFilePathResponse").pyclass
+IMachine_setSettingsFilePathResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_setSettingsFilePathResponse").pyclass
 
 IMachine_saveSettingsRequestMsg = GED("http://www.virtualbox.org/", "IMachine_saveSettings").pyclass
 
@@ -12957,7 +13166,8 @@ IMachine_removeSharedFolderResultMsg = GED("http://www.virtualbox.org/", "IMachi
 
 IMachine_canShowConsoleWindowRequestMsg = GED("http://www.virtualbox.org/", "IMachine_canShowConsoleWindow").pyclass
 
-IMachine_canShowConsoleWindowResultMsg = GED("http://www.virtualbox.org/", "IMachine_canShowConsoleWindowResponse").pyclass
+IMachine_canShowConsoleWindowResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachine_canShowConsoleWindowResponse").pyclass
 
 IMachine_showConsoleWindowRequestMsg = GED("http://www.virtualbox.org/", "IMachine_showConsoleWindow").pyclass
 
@@ -12969,11 +13179,14 @@ IMachine_getGuestPropertyResultMsg = GED("http://www.virtualbox.org/", "IMachine
 
 IMachine_getGuestPropertyValueRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getGuestPropertyValue").pyclass
 
-IMachine_getGuestPropertyValueResultMsg = GED("http://www.virtualbox.org/", "IMachine_getGuestPropertyValueResponse").pyclass
+IMachine_getGuestPropertyValueResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_getGuestPropertyValueResponse").pyclass
 
-IMachine_getGuestPropertyTimestampRequestMsg = GED("http://www.virtualbox.org/", "IMachine_getGuestPropertyTimestamp").pyclass
+IMachine_getGuestPropertyTimestampRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_getGuestPropertyTimestamp").pyclass
 
-IMachine_getGuestPropertyTimestampResultMsg = GED("http://www.virtualbox.org/", "IMachine_getGuestPropertyTimestampResponse").pyclass
+IMachine_getGuestPropertyTimestampResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_getGuestPropertyTimestampResponse").pyclass
 
 IMachine_setGuestPropertyRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setGuestProperty").pyclass
 
@@ -12981,39 +13194,55 @@ IMachine_setGuestPropertyResultMsg = GED("http://www.virtualbox.org/", "IMachine
 
 IMachine_setGuestPropertyValueRequestMsg = GED("http://www.virtualbox.org/", "IMachine_setGuestPropertyValue").pyclass
 
-IMachine_setGuestPropertyValueResultMsg = GED("http://www.virtualbox.org/", "IMachine_setGuestPropertyValueResponse").pyclass
+IMachine_setGuestPropertyValueResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachine_setGuestPropertyValueResponse").pyclass
 
 IMachine_deleteGuestPropertyRequestMsg = GED("http://www.virtualbox.org/", "IMachine_deleteGuestProperty").pyclass
 
-IMachine_deleteGuestPropertyResultMsg = GED("http://www.virtualbox.org/", "IMachine_deleteGuestPropertyResponse").pyclass
+IMachine_deleteGuestPropertyResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachine_deleteGuestPropertyResponse").pyclass
 
-IMachine_enumerateGuestPropertiesRequestMsg = GED("http://www.virtualbox.org/", "IMachine_enumerateGuestProperties").pyclass
+IMachine_enumerateGuestPropertiesRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_enumerateGuestProperties").pyclass
 
-IMachine_enumerateGuestPropertiesResultMsg = GED("http://www.virtualbox.org/", "IMachine_enumerateGuestPropertiesResponse").pyclass
+IMachine_enumerateGuestPropertiesResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_enumerateGuestPropertiesResponse").pyclass
 
-IMachine_querySavedGuestScreenInfoRequestMsg = GED("http://www.virtualbox.org/", "IMachine_querySavedGuestScreenInfo").pyclass
+IMachine_querySavedGuestScreenInfoRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_querySavedGuestScreenInfo").pyclass
 
-IMachine_querySavedGuestScreenInfoResultMsg = GED("http://www.virtualbox.org/", "IMachine_querySavedGuestScreenInfoResponse").pyclass
+IMachine_querySavedGuestScreenInfoResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_querySavedGuestScreenInfoResponse").pyclass
 
-IMachine_querySavedThumbnailSizeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_querySavedThumbnailSize").pyclass
+IMachine_querySavedThumbnailSizeRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachine_querySavedThumbnailSize").pyclass
 
-IMachine_querySavedThumbnailSizeResultMsg = GED("http://www.virtualbox.org/", "IMachine_querySavedThumbnailSizeResponse").pyclass
+IMachine_querySavedThumbnailSizeResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachine_querySavedThumbnailSizeResponse").pyclass
 
-IMachine_readSavedThumbnailToArrayRequestMsg = GED("http://www.virtualbox.org/", "IMachine_readSavedThumbnailToArray").pyclass
+IMachine_readSavedThumbnailToArrayRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachine_readSavedThumbnailToArray").pyclass
 
-IMachine_readSavedThumbnailToArrayResultMsg = GED("http://www.virtualbox.org/", "IMachine_readSavedThumbnailToArrayResponse").pyclass
+IMachine_readSavedThumbnailToArrayResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachine_readSavedThumbnailToArrayResponse").pyclass
 
-IMachine_readSavedThumbnailPNGToArrayRequestMsg = GED("http://www.virtualbox.org/", "IMachine_readSavedThumbnailPNGToArray").pyclass
+IMachine_readSavedThumbnailPNGToArrayRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachine_readSavedThumbnailPNGToArray").pyclass
 
-IMachine_readSavedThumbnailPNGToArrayResultMsg = GED("http://www.virtualbox.org/", "IMachine_readSavedThumbnailPNGToArrayResponse").pyclass
+IMachine_readSavedThumbnailPNGToArrayResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachine_readSavedThumbnailPNGToArrayResponse").pyclass
 
-IMachine_querySavedScreenshotPNGSizeRequestMsg = GED("http://www.virtualbox.org/", "IMachine_querySavedScreenshotPNGSize").pyclass
+IMachine_querySavedScreenshotPNGSizeRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachine_querySavedScreenshotPNGSize").pyclass
 
-IMachine_querySavedScreenshotPNGSizeResultMsg = GED("http://www.virtualbox.org/", "IMachine_querySavedScreenshotPNGSizeResponse").pyclass
+IMachine_querySavedScreenshotPNGSizeResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachine_querySavedScreenshotPNGSizeResponse").pyclass
 
-IMachine_readSavedScreenshotPNGToArrayRequestMsg = GED("http://www.virtualbox.org/", "IMachine_readSavedScreenshotPNGToArray").pyclass
+IMachine_readSavedScreenshotPNGToArrayRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachine_readSavedScreenshotPNGToArray").pyclass
 
-IMachine_readSavedScreenshotPNGToArrayResultMsg = GED("http://www.virtualbox.org/", "IMachine_readSavedScreenshotPNGToArrayResponse").pyclass
+IMachine_readSavedScreenshotPNGToArrayResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachine_readSavedScreenshotPNGToArrayResponse").pyclass
 
 IMachine_hotPlugCPURequestMsg = GED("http://www.virtualbox.org/", "IMachine_hotPlugCPU").pyclass
 
@@ -13085,7 +13314,8 @@ IConsole_getUSBDevicesResultMsg = GED("http://www.virtualbox.org/", "IConsole_ge
 
 IConsole_getRemoteUSBDevicesRequestMsg = GED("http://www.virtualbox.org/", "IConsole_getRemoteUSBDevices").pyclass
 
-IConsole_getRemoteUSBDevicesResultMsg = GED("http://www.virtualbox.org/", "IConsole_getRemoteUSBDevicesResponse").pyclass
+IConsole_getRemoteUSBDevicesResultMsg = GED("http://www.virtualbox.org/",
+                                            "IConsole_getRemoteUSBDevicesResponse").pyclass
 
 IConsole_getSharedFoldersRequestMsg = GED("http://www.virtualbox.org/", "IConsole_getSharedFolders").pyclass
 
@@ -13101,15 +13331,18 @@ IConsole_getEventSourceResultMsg = GED("http://www.virtualbox.org/", "IConsole_g
 
 IConsole_getAttachedPCIDevicesRequestMsg = GED("http://www.virtualbox.org/", "IConsole_getAttachedPCIDevices").pyclass
 
-IConsole_getAttachedPCIDevicesResultMsg = GED("http://www.virtualbox.org/", "IConsole_getAttachedPCIDevicesResponse").pyclass
+IConsole_getAttachedPCIDevicesResultMsg = GED("http://www.virtualbox.org/",
+                                              "IConsole_getAttachedPCIDevicesResponse").pyclass
 
 IConsole_getUseHostClipboardRequestMsg = GED("http://www.virtualbox.org/", "IConsole_getUseHostClipboard").pyclass
 
-IConsole_getUseHostClipboardResultMsg = GED("http://www.virtualbox.org/", "IConsole_getUseHostClipboardResponse").pyclass
+IConsole_getUseHostClipboardResultMsg = GED("http://www.virtualbox.org/",
+                                            "IConsole_getUseHostClipboardResponse").pyclass
 
 IConsole_setUseHostClipboardRequestMsg = GED("http://www.virtualbox.org/", "IConsole_setUseHostClipboard").pyclass
 
-IConsole_setUseHostClipboardResultMsg = GED("http://www.virtualbox.org/", "IConsole_setUseHostClipboardResponse").pyclass
+IConsole_setUseHostClipboardResultMsg = GED("http://www.virtualbox.org/",
+                                            "IConsole_setUseHostClipboardResponse").pyclass
 
 IConsole_getEmulatedUSBRequestMsg = GED("http://www.virtualbox.org/", "IConsole_getEmulatedUSB").pyclass
 
@@ -13149,11 +13382,14 @@ IConsole_sleepButtonResultMsg = GED("http://www.virtualbox.org/", "IConsole_slee
 
 IConsole_getPowerButtonHandledRequestMsg = GED("http://www.virtualbox.org/", "IConsole_getPowerButtonHandled").pyclass
 
-IConsole_getPowerButtonHandledResultMsg = GED("http://www.virtualbox.org/", "IConsole_getPowerButtonHandledResponse").pyclass
+IConsole_getPowerButtonHandledResultMsg = GED("http://www.virtualbox.org/",
+                                              "IConsole_getPowerButtonHandledResponse").pyclass
 
-IConsole_getGuestEnteredACPIModeRequestMsg = GED("http://www.virtualbox.org/", "IConsole_getGuestEnteredACPIMode").pyclass
+IConsole_getGuestEnteredACPIModeRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IConsole_getGuestEnteredACPIMode").pyclass
 
-IConsole_getGuestEnteredACPIModeResultMsg = GED("http://www.virtualbox.org/", "IConsole_getGuestEnteredACPIModeResponse").pyclass
+IConsole_getGuestEnteredACPIModeResultMsg = GED("http://www.virtualbox.org/",
+                                                "IConsole_getGuestEnteredACPIModeResponse").pyclass
 
 IConsole_saveStateRequestMsg = GED("http://www.virtualbox.org/", "IConsole_saveState").pyclass
 
@@ -13181,7 +13417,8 @@ IConsole_detachUSBDeviceResultMsg = GED("http://www.virtualbox.org/", "IConsole_
 
 IConsole_findUSBDeviceByAddressRequestMsg = GED("http://www.virtualbox.org/", "IConsole_findUSBDeviceByAddress").pyclass
 
-IConsole_findUSBDeviceByAddressResultMsg = GED("http://www.virtualbox.org/", "IConsole_findUSBDeviceByAddressResponse").pyclass
+IConsole_findUSBDeviceByAddressResultMsg = GED("http://www.virtualbox.org/",
+                                               "IConsole_findUSBDeviceByAddressResponse").pyclass
 
 IConsole_findUSBDeviceByIdRequestMsg = GED("http://www.virtualbox.org/", "IConsole_findUSBDeviceById").pyclass
 
@@ -13203,13 +13440,16 @@ IConsole_deleteSnapshotRequestMsg = GED("http://www.virtualbox.org/", "IConsole_
 
 IConsole_deleteSnapshotResultMsg = GED("http://www.virtualbox.org/", "IConsole_deleteSnapshotResponse").pyclass
 
-IConsole_deleteSnapshotAndAllChildrenRequestMsg = GED("http://www.virtualbox.org/", "IConsole_deleteSnapshotAndAllChildren").pyclass
+IConsole_deleteSnapshotAndAllChildrenRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IConsole_deleteSnapshotAndAllChildren").pyclass
 
-IConsole_deleteSnapshotAndAllChildrenResultMsg = GED("http://www.virtualbox.org/", "IConsole_deleteSnapshotAndAllChildrenResponse").pyclass
+IConsole_deleteSnapshotAndAllChildrenResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IConsole_deleteSnapshotAndAllChildrenResponse").pyclass
 
 IConsole_deleteSnapshotRangeRequestMsg = GED("http://www.virtualbox.org/", "IConsole_deleteSnapshotRange").pyclass
 
-IConsole_deleteSnapshotRangeResultMsg = GED("http://www.virtualbox.org/", "IConsole_deleteSnapshotRangeResponse").pyclass
+IConsole_deleteSnapshotRangeResultMsg = GED("http://www.virtualbox.org/",
+                                            "IConsole_deleteSnapshotRangeResponse").pyclass
 
 IConsole_restoreSnapshotRequestMsg = GED("http://www.virtualbox.org/", "IConsole_restoreSnapshot").pyclass
 
@@ -13221,87 +13461,122 @@ IConsole_teleportResultMsg = GED("http://www.virtualbox.org/", "IConsole_telepor
 
 IHostNetworkInterface_getNameRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getName").pyclass
 
-IHostNetworkInterface_getNameResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getNameResponse").pyclass
+IHostNetworkInterface_getNameResultMsg = GED("http://www.virtualbox.org/",
+                                             "IHostNetworkInterface_getNameResponse").pyclass
 
-IHostNetworkInterface_getShortNameRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getShortName").pyclass
+IHostNetworkInterface_getShortNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IHostNetworkInterface_getShortName").pyclass
 
-IHostNetworkInterface_getShortNameResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getShortNameResponse").pyclass
+IHostNetworkInterface_getShortNameResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IHostNetworkInterface_getShortNameResponse").pyclass
 
 IHostNetworkInterface_getIdRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getId").pyclass
 
 IHostNetworkInterface_getIdResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIdResponse").pyclass
 
-IHostNetworkInterface_getNetworkNameRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getNetworkName").pyclass
+IHostNetworkInterface_getNetworkNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHostNetworkInterface_getNetworkName").pyclass
 
-IHostNetworkInterface_getNetworkNameResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getNetworkNameResponse").pyclass
+IHostNetworkInterface_getNetworkNameResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHostNetworkInterface_getNetworkNameResponse").pyclass
 
-IHostNetworkInterface_getDHCPEnabledRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getDHCPEnabled").pyclass
+IHostNetworkInterface_getDHCPEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHostNetworkInterface_getDHCPEnabled").pyclass
 
-IHostNetworkInterface_getDHCPEnabledResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getDHCPEnabledResponse").pyclass
+IHostNetworkInterface_getDHCPEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHostNetworkInterface_getDHCPEnabledResponse").pyclass
 
-IHostNetworkInterface_getIPAddressRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPAddress").pyclass
+IHostNetworkInterface_getIPAddressRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IHostNetworkInterface_getIPAddress").pyclass
 
-IHostNetworkInterface_getIPAddressResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPAddressResponse").pyclass
+IHostNetworkInterface_getIPAddressResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IHostNetworkInterface_getIPAddressResponse").pyclass
 
-IHostNetworkInterface_getNetworkMaskRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getNetworkMask").pyclass
+IHostNetworkInterface_getNetworkMaskRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHostNetworkInterface_getNetworkMask").pyclass
 
-IHostNetworkInterface_getNetworkMaskResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getNetworkMaskResponse").pyclass
+IHostNetworkInterface_getNetworkMaskResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHostNetworkInterface_getNetworkMaskResponse").pyclass
 
-IHostNetworkInterface_getIPV6SupportedRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPV6Supported").pyclass
+IHostNetworkInterface_getIPV6SupportedRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IHostNetworkInterface_getIPV6Supported").pyclass
 
-IHostNetworkInterface_getIPV6SupportedResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPV6SupportedResponse").pyclass
+IHostNetworkInterface_getIPV6SupportedResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IHostNetworkInterface_getIPV6SupportedResponse").pyclass
 
-IHostNetworkInterface_getIPV6AddressRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPV6Address").pyclass
+IHostNetworkInterface_getIPV6AddressRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHostNetworkInterface_getIPV6Address").pyclass
 
-IHostNetworkInterface_getIPV6AddressResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPV6AddressResponse").pyclass
+IHostNetworkInterface_getIPV6AddressResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHostNetworkInterface_getIPV6AddressResponse").pyclass
 
-IHostNetworkInterface_getIPV6NetworkMaskPrefixLengthRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPV6NetworkMaskPrefixLength").pyclass
+IHostNetworkInterface_getIPV6NetworkMaskPrefixLengthRequestMsg = GED("http://www.virtualbox.org/",
+                                                                     "IHostNetworkInterface_getIPV6NetworkMaskPrefixLength").pyclass
 
-IHostNetworkInterface_getIPV6NetworkMaskPrefixLengthResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getIPV6NetworkMaskPrefixLengthResponse").pyclass
+IHostNetworkInterface_getIPV6NetworkMaskPrefixLengthResultMsg = GED("http://www.virtualbox.org/",
+                                                                    "IHostNetworkInterface_getIPV6NetworkMaskPrefixLengthResponse").pyclass
 
-IHostNetworkInterface_getHardwareAddressRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getHardwareAddress").pyclass
+IHostNetworkInterface_getHardwareAddressRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IHostNetworkInterface_getHardwareAddress").pyclass
 
-IHostNetworkInterface_getHardwareAddressResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getHardwareAddressResponse").pyclass
+IHostNetworkInterface_getHardwareAddressResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IHostNetworkInterface_getHardwareAddressResponse").pyclass
 
-IHostNetworkInterface_getMediumTypeRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getMediumType").pyclass
+IHostNetworkInterface_getMediumTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IHostNetworkInterface_getMediumType").pyclass
 
-IHostNetworkInterface_getMediumTypeResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getMediumTypeResponse").pyclass
+IHostNetworkInterface_getMediumTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IHostNetworkInterface_getMediumTypeResponse").pyclass
 
 IHostNetworkInterface_getStatusRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getStatus").pyclass
 
-IHostNetworkInterface_getStatusResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getStatusResponse").pyclass
+IHostNetworkInterface_getStatusResultMsg = GED("http://www.virtualbox.org/",
+                                               "IHostNetworkInterface_getStatusResponse").pyclass
 
-IHostNetworkInterface_getInterfaceTypeRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getInterfaceType").pyclass
+IHostNetworkInterface_getInterfaceTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IHostNetworkInterface_getInterfaceType").pyclass
 
-IHostNetworkInterface_getInterfaceTypeResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_getInterfaceTypeResponse").pyclass
+IHostNetworkInterface_getInterfaceTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IHostNetworkInterface_getInterfaceTypeResponse").pyclass
 
-IHostNetworkInterface_enableStaticIPConfigRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_enableStaticIPConfig").pyclass
+IHostNetworkInterface_enableStaticIPConfigRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "IHostNetworkInterface_enableStaticIPConfig").pyclass
 
-IHostNetworkInterface_enableStaticIPConfigResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_enableStaticIPConfigResponse").pyclass
+IHostNetworkInterface_enableStaticIPConfigResultMsg = GED("http://www.virtualbox.org/",
+                                                          "IHostNetworkInterface_enableStaticIPConfigResponse").pyclass
 
-IHostNetworkInterface_enableStaticIPConfigV6RequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_enableStaticIPConfigV6").pyclass
+IHostNetworkInterface_enableStaticIPConfigV6RequestMsg = GED("http://www.virtualbox.org/",
+                                                             "IHostNetworkInterface_enableStaticIPConfigV6").pyclass
 
-IHostNetworkInterface_enableStaticIPConfigV6ResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_enableStaticIPConfigV6Response").pyclass
+IHostNetworkInterface_enableStaticIPConfigV6ResultMsg = GED("http://www.virtualbox.org/",
+                                                            "IHostNetworkInterface_enableStaticIPConfigV6Response").pyclass
 
-IHostNetworkInterface_enableDynamicIPConfigRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_enableDynamicIPConfig").pyclass
+IHostNetworkInterface_enableDynamicIPConfigRequestMsg = GED("http://www.virtualbox.org/",
+                                                            "IHostNetworkInterface_enableDynamicIPConfig").pyclass
 
-IHostNetworkInterface_enableDynamicIPConfigResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_enableDynamicIPConfigResponse").pyclass
+IHostNetworkInterface_enableDynamicIPConfigResultMsg = GED("http://www.virtualbox.org/",
+                                                           "IHostNetworkInterface_enableDynamicIPConfigResponse").pyclass
 
-IHostNetworkInterface_DHCPRediscoverRequestMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_DHCPRediscover").pyclass
+IHostNetworkInterface_DHCPRediscoverRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHostNetworkInterface_DHCPRediscover").pyclass
 
-IHostNetworkInterface_DHCPRediscoverResultMsg = GED("http://www.virtualbox.org/", "IHostNetworkInterface_DHCPRediscoverResponse").pyclass
+IHostNetworkInterface_DHCPRediscoverResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHostNetworkInterface_DHCPRediscoverResponse").pyclass
 
 IHostVideoInputDevice_getNameRequestMsg = GED("http://www.virtualbox.org/", "IHostVideoInputDevice_getName").pyclass
 
-IHostVideoInputDevice_getNameResultMsg = GED("http://www.virtualbox.org/", "IHostVideoInputDevice_getNameResponse").pyclass
+IHostVideoInputDevice_getNameResultMsg = GED("http://www.virtualbox.org/",
+                                             "IHostVideoInputDevice_getNameResponse").pyclass
 
 IHostVideoInputDevice_getPathRequestMsg = GED("http://www.virtualbox.org/", "IHostVideoInputDevice_getPath").pyclass
 
-IHostVideoInputDevice_getPathResultMsg = GED("http://www.virtualbox.org/", "IHostVideoInputDevice_getPathResponse").pyclass
+IHostVideoInputDevice_getPathResultMsg = GED("http://www.virtualbox.org/",
+                                             "IHostVideoInputDevice_getPathResponse").pyclass
 
 IHostVideoInputDevice_getAliasRequestMsg = GED("http://www.virtualbox.org/", "IHostVideoInputDevice_getAlias").pyclass
 
-IHostVideoInputDevice_getAliasResultMsg = GED("http://www.virtualbox.org/", "IHostVideoInputDevice_getAliasResponse").pyclass
+IHostVideoInputDevice_getAliasResultMsg = GED("http://www.virtualbox.org/",
+                                              "IHostVideoInputDevice_getAliasResponse").pyclass
 
 IHost_getDVDDrivesRequestMsg = GED("http://www.virtualbox.org/", "IHost_getDVDDrives").pyclass
 
@@ -13341,15 +13616,18 @@ IHost_getProcessorCountResultMsg = GED("http://www.virtualbox.org/", "IHost_getP
 
 IHost_getProcessorOnlineCountRequestMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorOnlineCount").pyclass
 
-IHost_getProcessorOnlineCountResultMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorOnlineCountResponse").pyclass
+IHost_getProcessorOnlineCountResultMsg = GED("http://www.virtualbox.org/",
+                                             "IHost_getProcessorOnlineCountResponse").pyclass
 
 IHost_getProcessorCoreCountRequestMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorCoreCount").pyclass
 
 IHost_getProcessorCoreCountResultMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorCoreCountResponse").pyclass
 
-IHost_getProcessorOnlineCoreCountRequestMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorOnlineCoreCount").pyclass
+IHost_getProcessorOnlineCoreCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IHost_getProcessorOnlineCoreCount").pyclass
 
-IHost_getProcessorOnlineCoreCountResultMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorOnlineCoreCountResponse").pyclass
+IHost_getProcessorOnlineCoreCountResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IHost_getProcessorOnlineCoreCountResponse").pyclass
 
 IHost_getMemorySizeRequestMsg = GED("http://www.virtualbox.org/", "IHost_getMemorySize").pyclass
 
@@ -13371,9 +13649,11 @@ IHost_getUTCTimeRequestMsg = GED("http://www.virtualbox.org/", "IHost_getUTCTime
 
 IHost_getUTCTimeResultMsg = GED("http://www.virtualbox.org/", "IHost_getUTCTimeResponse").pyclass
 
-IHost_getAcceleration3DAvailableRequestMsg = GED("http://www.virtualbox.org/", "IHost_getAcceleration3DAvailable").pyclass
+IHost_getAcceleration3DAvailableRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IHost_getAcceleration3DAvailable").pyclass
 
-IHost_getAcceleration3DAvailableResultMsg = GED("http://www.virtualbox.org/", "IHost_getAcceleration3DAvailableResponse").pyclass
+IHost_getAcceleration3DAvailableResultMsg = GED("http://www.virtualbox.org/",
+                                                "IHost_getAcceleration3DAvailableResponse").pyclass
 
 IHost_getVideoInputDevicesRequestMsg = GED("http://www.virtualbox.org/", "IHost_getVideoInputDevices").pyclass
 
@@ -13389,19 +13669,24 @@ IHost_getProcessorFeatureResultMsg = GED("http://www.virtualbox.org/", "IHost_ge
 
 IHost_getProcessorDescriptionRequestMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorDescription").pyclass
 
-IHost_getProcessorDescriptionResultMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorDescriptionResponse").pyclass
+IHost_getProcessorDescriptionResultMsg = GED("http://www.virtualbox.org/",
+                                             "IHost_getProcessorDescriptionResponse").pyclass
 
 IHost_getProcessorCPUIDLeafRequestMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorCPUIDLeaf").pyclass
 
 IHost_getProcessorCPUIDLeafResultMsg = GED("http://www.virtualbox.org/", "IHost_getProcessorCPUIDLeafResponse").pyclass
 
-IHost_createHostOnlyNetworkInterfaceRequestMsg = GED("http://www.virtualbox.org/", "IHost_createHostOnlyNetworkInterface").pyclass
+IHost_createHostOnlyNetworkInterfaceRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHost_createHostOnlyNetworkInterface").pyclass
 
-IHost_createHostOnlyNetworkInterfaceResultMsg = GED("http://www.virtualbox.org/", "IHost_createHostOnlyNetworkInterfaceResponse").pyclass
+IHost_createHostOnlyNetworkInterfaceResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHost_createHostOnlyNetworkInterfaceResponse").pyclass
 
-IHost_removeHostOnlyNetworkInterfaceRequestMsg = GED("http://www.virtualbox.org/", "IHost_removeHostOnlyNetworkInterface").pyclass
+IHost_removeHostOnlyNetworkInterfaceRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHost_removeHostOnlyNetworkInterface").pyclass
 
-IHost_removeHostOnlyNetworkInterfaceResultMsg = GED("http://www.virtualbox.org/", "IHost_removeHostOnlyNetworkInterfaceResponse").pyclass
+IHost_removeHostOnlyNetworkInterfaceResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHost_removeHostOnlyNetworkInterfaceResponse").pyclass
 
 IHost_createUSBDeviceFilterRequestMsg = GED("http://www.virtualbox.org/", "IHost_createUSBDeviceFilter").pyclass
 
@@ -13423,17 +13708,23 @@ IHost_findHostFloppyDriveRequestMsg = GED("http://www.virtualbox.org/", "IHost_f
 
 IHost_findHostFloppyDriveResultMsg = GED("http://www.virtualbox.org/", "IHost_findHostFloppyDriveResponse").pyclass
 
-IHost_findHostNetworkInterfaceByNameRequestMsg = GED("http://www.virtualbox.org/", "IHost_findHostNetworkInterfaceByName").pyclass
+IHost_findHostNetworkInterfaceByNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IHost_findHostNetworkInterfaceByName").pyclass
 
-IHost_findHostNetworkInterfaceByNameResultMsg = GED("http://www.virtualbox.org/", "IHost_findHostNetworkInterfaceByNameResponse").pyclass
+IHost_findHostNetworkInterfaceByNameResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IHost_findHostNetworkInterfaceByNameResponse").pyclass
 
-IHost_findHostNetworkInterfaceByIdRequestMsg = GED("http://www.virtualbox.org/", "IHost_findHostNetworkInterfaceById").pyclass
+IHost_findHostNetworkInterfaceByIdRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IHost_findHostNetworkInterfaceById").pyclass
 
-IHost_findHostNetworkInterfaceByIdResultMsg = GED("http://www.virtualbox.org/", "IHost_findHostNetworkInterfaceByIdResponse").pyclass
+IHost_findHostNetworkInterfaceByIdResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IHost_findHostNetworkInterfaceByIdResponse").pyclass
 
-IHost_findHostNetworkInterfacesOfTypeRequestMsg = GED("http://www.virtualbox.org/", "IHost_findHostNetworkInterfacesOfType").pyclass
+IHost_findHostNetworkInterfacesOfTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IHost_findHostNetworkInterfacesOfType").pyclass
 
-IHost_findHostNetworkInterfacesOfTypeResultMsg = GED("http://www.virtualbox.org/", "IHost_findHostNetworkInterfacesOfTypeResponse").pyclass
+IHost_findHostNetworkInterfacesOfTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IHost_findHostNetworkInterfacesOfTypeResponse").pyclass
 
 IHost_findUSBDeviceByIdRequestMsg = GED("http://www.virtualbox.org/", "IHost_findUSBDeviceById").pyclass
 
@@ -13441,219 +13732,323 @@ IHost_findUSBDeviceByIdResultMsg = GED("http://www.virtualbox.org/", "IHost_find
 
 IHost_findUSBDeviceByAddressRequestMsg = GED("http://www.virtualbox.org/", "IHost_findUSBDeviceByAddress").pyclass
 
-IHost_findUSBDeviceByAddressResultMsg = GED("http://www.virtualbox.org/", "IHost_findUSBDeviceByAddressResponse").pyclass
+IHost_findUSBDeviceByAddressResultMsg = GED("http://www.virtualbox.org/",
+                                            "IHost_findUSBDeviceByAddressResponse").pyclass
 
 IHost_generateMACAddressRequestMsg = GED("http://www.virtualbox.org/", "IHost_generateMACAddress").pyclass
 
 IHost_generateMACAddressResultMsg = GED("http://www.virtualbox.org/", "IHost_generateMACAddressResponse").pyclass
 
-ISystemProperties_getMinGuestRAMRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinGuestRAM").pyclass
+ISystemProperties_getMinGuestRAMRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "ISystemProperties_getMinGuestRAM").pyclass
 
-ISystemProperties_getMinGuestRAMResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinGuestRAMResponse").pyclass
+ISystemProperties_getMinGuestRAMResultMsg = GED("http://www.virtualbox.org/",
+                                                "ISystemProperties_getMinGuestRAMResponse").pyclass
 
-ISystemProperties_getMaxGuestRAMRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestRAM").pyclass
+ISystemProperties_getMaxGuestRAMRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "ISystemProperties_getMaxGuestRAM").pyclass
 
-ISystemProperties_getMaxGuestRAMResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestRAMResponse").pyclass
+ISystemProperties_getMaxGuestRAMResultMsg = GED("http://www.virtualbox.org/",
+                                                "ISystemProperties_getMaxGuestRAMResponse").pyclass
 
-ISystemProperties_getMinGuestVRAMRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinGuestVRAM").pyclass
+ISystemProperties_getMinGuestVRAMRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "ISystemProperties_getMinGuestVRAM").pyclass
 
-ISystemProperties_getMinGuestVRAMResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinGuestVRAMResponse").pyclass
+ISystemProperties_getMinGuestVRAMResultMsg = GED("http://www.virtualbox.org/",
+                                                 "ISystemProperties_getMinGuestVRAMResponse").pyclass
 
-ISystemProperties_getMaxGuestVRAMRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestVRAM").pyclass
+ISystemProperties_getMaxGuestVRAMRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "ISystemProperties_getMaxGuestVRAM").pyclass
 
-ISystemProperties_getMaxGuestVRAMResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestVRAMResponse").pyclass
+ISystemProperties_getMaxGuestVRAMResultMsg = GED("http://www.virtualbox.org/",
+                                                 "ISystemProperties_getMaxGuestVRAMResponse").pyclass
 
-ISystemProperties_getMinGuestCPUCountRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinGuestCPUCount").pyclass
+ISystemProperties_getMinGuestCPUCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "ISystemProperties_getMinGuestCPUCount").pyclass
 
-ISystemProperties_getMinGuestCPUCountResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinGuestCPUCountResponse").pyclass
+ISystemProperties_getMinGuestCPUCountResultMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getMinGuestCPUCountResponse").pyclass
 
-ISystemProperties_getMaxGuestCPUCountRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestCPUCount").pyclass
+ISystemProperties_getMaxGuestCPUCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "ISystemProperties_getMaxGuestCPUCount").pyclass
 
-ISystemProperties_getMaxGuestCPUCountResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestCPUCountResponse").pyclass
+ISystemProperties_getMaxGuestCPUCountResultMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getMaxGuestCPUCountResponse").pyclass
 
-ISystemProperties_getMaxGuestMonitorsRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestMonitors").pyclass
+ISystemProperties_getMaxGuestMonitorsRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "ISystemProperties_getMaxGuestMonitors").pyclass
 
-ISystemProperties_getMaxGuestMonitorsResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxGuestMonitorsResponse").pyclass
+ISystemProperties_getMaxGuestMonitorsResultMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getMaxGuestMonitorsResponse").pyclass
 
 ISystemProperties_getInfoVDSizeRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getInfoVDSize").pyclass
 
-ISystemProperties_getInfoVDSizeResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getInfoVDSizeResponse").pyclass
+ISystemProperties_getInfoVDSizeResultMsg = GED("http://www.virtualbox.org/",
+                                               "ISystemProperties_getInfoVDSizeResponse").pyclass
 
-ISystemProperties_getSerialPortCountRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getSerialPortCount").pyclass
+ISystemProperties_getSerialPortCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getSerialPortCount").pyclass
 
-ISystemProperties_getSerialPortCountResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getSerialPortCountResponse").pyclass
+ISystemProperties_getSerialPortCountResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_getSerialPortCountResponse").pyclass
 
-ISystemProperties_getParallelPortCountRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getParallelPortCount").pyclass
+ISystemProperties_getParallelPortCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "ISystemProperties_getParallelPortCount").pyclass
 
-ISystemProperties_getParallelPortCountResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getParallelPortCountResponse").pyclass
+ISystemProperties_getParallelPortCountResultMsg = GED("http://www.virtualbox.org/",
+                                                      "ISystemProperties_getParallelPortCountResponse").pyclass
 
-ISystemProperties_getMaxBootPositionRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxBootPosition").pyclass
+ISystemProperties_getMaxBootPositionRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getMaxBootPosition").pyclass
 
-ISystemProperties_getMaxBootPositionResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxBootPositionResponse").pyclass
+ISystemProperties_getMaxBootPositionResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_getMaxBootPositionResponse").pyclass
 
-ISystemProperties_getExclusiveHwVirtRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getExclusiveHwVirt").pyclass
+ISystemProperties_getExclusiveHwVirtRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getExclusiveHwVirt").pyclass
 
-ISystemProperties_getExclusiveHwVirtResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getExclusiveHwVirtResponse").pyclass
+ISystemProperties_getExclusiveHwVirtResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_getExclusiveHwVirtResponse").pyclass
 
-ISystemProperties_setExclusiveHwVirtRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setExclusiveHwVirt").pyclass
+ISystemProperties_setExclusiveHwVirtRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_setExclusiveHwVirt").pyclass
 
-ISystemProperties_setExclusiveHwVirtResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setExclusiveHwVirtResponse").pyclass
+ISystemProperties_setExclusiveHwVirtResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_setExclusiveHwVirtResponse").pyclass
 
-ISystemProperties_getDefaultMachineFolderRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultMachineFolder").pyclass
+ISystemProperties_getDefaultMachineFolderRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_getDefaultMachineFolder").pyclass
 
-ISystemProperties_getDefaultMachineFolderResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultMachineFolderResponse").pyclass
+ISystemProperties_getDefaultMachineFolderResultMsg = GED("http://www.virtualbox.org/",
+                                                         "ISystemProperties_getDefaultMachineFolderResponse").pyclass
 
-ISystemProperties_setDefaultMachineFolderRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultMachineFolder").pyclass
+ISystemProperties_setDefaultMachineFolderRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_setDefaultMachineFolder").pyclass
 
-ISystemProperties_setDefaultMachineFolderResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultMachineFolderResponse").pyclass
+ISystemProperties_setDefaultMachineFolderResultMsg = GED("http://www.virtualbox.org/",
+                                                         "ISystemProperties_setDefaultMachineFolderResponse").pyclass
 
-ISystemProperties_getLoggingLevelRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getLoggingLevel").pyclass
+ISystemProperties_getLoggingLevelRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "ISystemProperties_getLoggingLevel").pyclass
 
-ISystemProperties_getLoggingLevelResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getLoggingLevelResponse").pyclass
+ISystemProperties_getLoggingLevelResultMsg = GED("http://www.virtualbox.org/",
+                                                 "ISystemProperties_getLoggingLevelResponse").pyclass
 
-ISystemProperties_setLoggingLevelRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setLoggingLevel").pyclass
+ISystemProperties_setLoggingLevelRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "ISystemProperties_setLoggingLevel").pyclass
 
-ISystemProperties_setLoggingLevelResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setLoggingLevelResponse").pyclass
+ISystemProperties_setLoggingLevelResultMsg = GED("http://www.virtualbox.org/",
+                                                 "ISystemProperties_setLoggingLevelResponse").pyclass
 
-ISystemProperties_getMediumFormatsRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMediumFormats").pyclass
+ISystemProperties_getMediumFormatsRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "ISystemProperties_getMediumFormats").pyclass
 
-ISystemProperties_getMediumFormatsResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMediumFormatsResponse").pyclass
+ISystemProperties_getMediumFormatsResultMsg = GED("http://www.virtualbox.org/",
+                                                  "ISystemProperties_getMediumFormatsResponse").pyclass
 
-ISystemProperties_getDefaultHardDiskFormatRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultHardDiskFormat").pyclass
+ISystemProperties_getDefaultHardDiskFormatRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "ISystemProperties_getDefaultHardDiskFormat").pyclass
 
-ISystemProperties_getDefaultHardDiskFormatResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultHardDiskFormatResponse").pyclass
+ISystemProperties_getDefaultHardDiskFormatResultMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_getDefaultHardDiskFormatResponse").pyclass
 
-ISystemProperties_setDefaultHardDiskFormatRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultHardDiskFormat").pyclass
+ISystemProperties_setDefaultHardDiskFormatRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "ISystemProperties_setDefaultHardDiskFormat").pyclass
 
-ISystemProperties_setDefaultHardDiskFormatResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultHardDiskFormatResponse").pyclass
+ISystemProperties_setDefaultHardDiskFormatResultMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_setDefaultHardDiskFormatResponse").pyclass
 
-ISystemProperties_getFreeDiskSpaceWarningRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpaceWarning").pyclass
+ISystemProperties_getFreeDiskSpaceWarningRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_getFreeDiskSpaceWarning").pyclass
 
-ISystemProperties_getFreeDiskSpaceWarningResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpaceWarningResponse").pyclass
+ISystemProperties_getFreeDiskSpaceWarningResultMsg = GED("http://www.virtualbox.org/",
+                                                         "ISystemProperties_getFreeDiskSpaceWarningResponse").pyclass
 
-ISystemProperties_setFreeDiskSpaceWarningRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpaceWarning").pyclass
+ISystemProperties_setFreeDiskSpaceWarningRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_setFreeDiskSpaceWarning").pyclass
 
-ISystemProperties_setFreeDiskSpaceWarningResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpaceWarningResponse").pyclass
+ISystemProperties_setFreeDiskSpaceWarningResultMsg = GED("http://www.virtualbox.org/",
+                                                         "ISystemProperties_setFreeDiskSpaceWarningResponse").pyclass
 
-ISystemProperties_getFreeDiskSpacePercentWarningRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpacePercentWarning").pyclass
+ISystemProperties_getFreeDiskSpacePercentWarningRequestMsg = GED("http://www.virtualbox.org/",
+                                                                 "ISystemProperties_getFreeDiskSpacePercentWarning").pyclass
 
-ISystemProperties_getFreeDiskSpacePercentWarningResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpacePercentWarningResponse").pyclass
+ISystemProperties_getFreeDiskSpacePercentWarningResultMsg = GED("http://www.virtualbox.org/",
+                                                                "ISystemProperties_getFreeDiskSpacePercentWarningResponse").pyclass
 
-ISystemProperties_setFreeDiskSpacePercentWarningRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpacePercentWarning").pyclass
+ISystemProperties_setFreeDiskSpacePercentWarningRequestMsg = GED("http://www.virtualbox.org/",
+                                                                 "ISystemProperties_setFreeDiskSpacePercentWarning").pyclass
 
-ISystemProperties_setFreeDiskSpacePercentWarningResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpacePercentWarningResponse").pyclass
+ISystemProperties_setFreeDiskSpacePercentWarningResultMsg = GED("http://www.virtualbox.org/",
+                                                                "ISystemProperties_setFreeDiskSpacePercentWarningResponse").pyclass
 
-ISystemProperties_getFreeDiskSpaceErrorRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpaceError").pyclass
+ISystemProperties_getFreeDiskSpaceErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_getFreeDiskSpaceError").pyclass
 
-ISystemProperties_getFreeDiskSpaceErrorResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpaceErrorResponse").pyclass
+ISystemProperties_getFreeDiskSpaceErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                       "ISystemProperties_getFreeDiskSpaceErrorResponse").pyclass
 
-ISystemProperties_setFreeDiskSpaceErrorRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpaceError").pyclass
+ISystemProperties_setFreeDiskSpaceErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_setFreeDiskSpaceError").pyclass
 
-ISystemProperties_setFreeDiskSpaceErrorResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpaceErrorResponse").pyclass
+ISystemProperties_setFreeDiskSpaceErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                       "ISystemProperties_setFreeDiskSpaceErrorResponse").pyclass
 
-ISystemProperties_getFreeDiskSpacePercentErrorRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpacePercentError").pyclass
+ISystemProperties_getFreeDiskSpacePercentErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                               "ISystemProperties_getFreeDiskSpacePercentError").pyclass
 
-ISystemProperties_getFreeDiskSpacePercentErrorResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getFreeDiskSpacePercentErrorResponse").pyclass
+ISystemProperties_getFreeDiskSpacePercentErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                              "ISystemProperties_getFreeDiskSpacePercentErrorResponse").pyclass
 
-ISystemProperties_setFreeDiskSpacePercentErrorRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpacePercentError").pyclass
+ISystemProperties_setFreeDiskSpacePercentErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                               "ISystemProperties_setFreeDiskSpacePercentError").pyclass
 
-ISystemProperties_setFreeDiskSpacePercentErrorResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setFreeDiskSpacePercentErrorResponse").pyclass
+ISystemProperties_setFreeDiskSpacePercentErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                              "ISystemProperties_setFreeDiskSpacePercentErrorResponse").pyclass
 
-ISystemProperties_getVRDEAuthLibraryRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getVRDEAuthLibrary").pyclass
+ISystemProperties_getVRDEAuthLibraryRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getVRDEAuthLibrary").pyclass
 
-ISystemProperties_getVRDEAuthLibraryResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getVRDEAuthLibraryResponse").pyclass
+ISystemProperties_getVRDEAuthLibraryResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_getVRDEAuthLibraryResponse").pyclass
 
-ISystemProperties_setVRDEAuthLibraryRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setVRDEAuthLibrary").pyclass
+ISystemProperties_setVRDEAuthLibraryRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_setVRDEAuthLibrary").pyclass
 
-ISystemProperties_setVRDEAuthLibraryResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setVRDEAuthLibraryResponse").pyclass
+ISystemProperties_setVRDEAuthLibraryResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_setVRDEAuthLibraryResponse").pyclass
 
-ISystemProperties_getWebServiceAuthLibraryRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getWebServiceAuthLibrary").pyclass
+ISystemProperties_getWebServiceAuthLibraryRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "ISystemProperties_getWebServiceAuthLibrary").pyclass
 
-ISystemProperties_getWebServiceAuthLibraryResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getWebServiceAuthLibraryResponse").pyclass
+ISystemProperties_getWebServiceAuthLibraryResultMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_getWebServiceAuthLibraryResponse").pyclass
 
-ISystemProperties_setWebServiceAuthLibraryRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setWebServiceAuthLibrary").pyclass
+ISystemProperties_setWebServiceAuthLibraryRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "ISystemProperties_setWebServiceAuthLibrary").pyclass
 
-ISystemProperties_setWebServiceAuthLibraryResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setWebServiceAuthLibraryResponse").pyclass
+ISystemProperties_setWebServiceAuthLibraryResultMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_setWebServiceAuthLibraryResponse").pyclass
 
-ISystemProperties_getDefaultVRDEExtPackRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultVRDEExtPack").pyclass
+ISystemProperties_getDefaultVRDEExtPackRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_getDefaultVRDEExtPack").pyclass
 
-ISystemProperties_getDefaultVRDEExtPackResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultVRDEExtPackResponse").pyclass
+ISystemProperties_getDefaultVRDEExtPackResultMsg = GED("http://www.virtualbox.org/",
+                                                       "ISystemProperties_getDefaultVRDEExtPackResponse").pyclass
 
-ISystemProperties_setDefaultVRDEExtPackRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultVRDEExtPack").pyclass
+ISystemProperties_setDefaultVRDEExtPackRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_setDefaultVRDEExtPack").pyclass
 
-ISystemProperties_setDefaultVRDEExtPackResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultVRDEExtPackResponse").pyclass
+ISystemProperties_setDefaultVRDEExtPackResultMsg = GED("http://www.virtualbox.org/",
+                                                       "ISystemProperties_setDefaultVRDEExtPackResponse").pyclass
 
-ISystemProperties_getLogHistoryCountRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getLogHistoryCount").pyclass
+ISystemProperties_getLogHistoryCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getLogHistoryCount").pyclass
 
-ISystemProperties_getLogHistoryCountResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getLogHistoryCountResponse").pyclass
+ISystemProperties_getLogHistoryCountResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_getLogHistoryCountResponse").pyclass
 
-ISystemProperties_setLogHistoryCountRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setLogHistoryCount").pyclass
+ISystemProperties_setLogHistoryCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_setLogHistoryCount").pyclass
 
-ISystemProperties_setLogHistoryCountResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setLogHistoryCountResponse").pyclass
+ISystemProperties_setLogHistoryCountResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_setLogHistoryCountResponse").pyclass
 
-ISystemProperties_getDefaultAudioDriverRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultAudioDriver").pyclass
+ISystemProperties_getDefaultAudioDriverRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_getDefaultAudioDriver").pyclass
 
-ISystemProperties_getDefaultAudioDriverResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultAudioDriverResponse").pyclass
+ISystemProperties_getDefaultAudioDriverResultMsg = GED("http://www.virtualbox.org/",
+                                                       "ISystemProperties_getDefaultAudioDriverResponse").pyclass
 
-ISystemProperties_getAutostartDatabasePathRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getAutostartDatabasePath").pyclass
+ISystemProperties_getAutostartDatabasePathRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "ISystemProperties_getAutostartDatabasePath").pyclass
 
-ISystemProperties_getAutostartDatabasePathResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getAutostartDatabasePathResponse").pyclass
+ISystemProperties_getAutostartDatabasePathResultMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_getAutostartDatabasePathResponse").pyclass
 
-ISystemProperties_setAutostartDatabasePathRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setAutostartDatabasePath").pyclass
+ISystemProperties_setAutostartDatabasePathRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "ISystemProperties_setAutostartDatabasePath").pyclass
 
-ISystemProperties_setAutostartDatabasePathResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setAutostartDatabasePathResponse").pyclass
+ISystemProperties_setAutostartDatabasePathResultMsg = GED("http://www.virtualbox.org/",
+                                                          "ISystemProperties_setAutostartDatabasePathResponse").pyclass
 
-ISystemProperties_getDefaultAdditionsISORequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultAdditionsISO").pyclass
+ISystemProperties_getDefaultAdditionsISORequestMsg = GED("http://www.virtualbox.org/",
+                                                         "ISystemProperties_getDefaultAdditionsISO").pyclass
 
-ISystemProperties_getDefaultAdditionsISOResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultAdditionsISOResponse").pyclass
+ISystemProperties_getDefaultAdditionsISOResultMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_getDefaultAdditionsISOResponse").pyclass
 
-ISystemProperties_setDefaultAdditionsISORequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultAdditionsISO").pyclass
+ISystemProperties_setDefaultAdditionsISORequestMsg = GED("http://www.virtualbox.org/",
+                                                         "ISystemProperties_setDefaultAdditionsISO").pyclass
 
-ISystemProperties_setDefaultAdditionsISOResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultAdditionsISOResponse").pyclass
+ISystemProperties_setDefaultAdditionsISOResultMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_setDefaultAdditionsISOResponse").pyclass
 
-ISystemProperties_getDefaultFrontendRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultFrontend").pyclass
+ISystemProperties_getDefaultFrontendRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_getDefaultFrontend").pyclass
 
-ISystemProperties_getDefaultFrontendResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultFrontendResponse").pyclass
+ISystemProperties_getDefaultFrontendResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_getDefaultFrontendResponse").pyclass
 
-ISystemProperties_setDefaultFrontendRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultFrontend").pyclass
+ISystemProperties_setDefaultFrontendRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "ISystemProperties_setDefaultFrontend").pyclass
 
-ISystemProperties_setDefaultFrontendResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_setDefaultFrontendResponse").pyclass
+ISystemProperties_setDefaultFrontendResultMsg = GED("http://www.virtualbox.org/",
+                                                    "ISystemProperties_setDefaultFrontendResponse").pyclass
 
-ISystemProperties_getMaxNetworkAdaptersRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxNetworkAdapters").pyclass
+ISystemProperties_getMaxNetworkAdaptersRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "ISystemProperties_getMaxNetworkAdapters").pyclass
 
-ISystemProperties_getMaxNetworkAdaptersResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxNetworkAdaptersResponse").pyclass
+ISystemProperties_getMaxNetworkAdaptersResultMsg = GED("http://www.virtualbox.org/",
+                                                       "ISystemProperties_getMaxNetworkAdaptersResponse").pyclass
 
-ISystemProperties_getMaxNetworkAdaptersOfTypeRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxNetworkAdaptersOfType").pyclass
+ISystemProperties_getMaxNetworkAdaptersOfTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "ISystemProperties_getMaxNetworkAdaptersOfType").pyclass
 
-ISystemProperties_getMaxNetworkAdaptersOfTypeResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxNetworkAdaptersOfTypeResponse").pyclass
+ISystemProperties_getMaxNetworkAdaptersOfTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                             "ISystemProperties_getMaxNetworkAdaptersOfTypeResponse").pyclass
 
-ISystemProperties_getMaxDevicesPerPortForStorageBusRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxDevicesPerPortForStorageBus").pyclass
+ISystemProperties_getMaxDevicesPerPortForStorageBusRequestMsg = GED("http://www.virtualbox.org/",
+                                                                    "ISystemProperties_getMaxDevicesPerPortForStorageBus").pyclass
 
-ISystemProperties_getMaxDevicesPerPortForStorageBusResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxDevicesPerPortForStorageBusResponse").pyclass
+ISystemProperties_getMaxDevicesPerPortForStorageBusResultMsg = GED("http://www.virtualbox.org/",
+                                                                   "ISystemProperties_getMaxDevicesPerPortForStorageBusResponse").pyclass
 
-ISystemProperties_getMinPortCountForStorageBusRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinPortCountForStorageBus").pyclass
+ISystemProperties_getMinPortCountForStorageBusRequestMsg = GED("http://www.virtualbox.org/",
+                                                               "ISystemProperties_getMinPortCountForStorageBus").pyclass
 
-ISystemProperties_getMinPortCountForStorageBusResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMinPortCountForStorageBusResponse").pyclass
+ISystemProperties_getMinPortCountForStorageBusResultMsg = GED("http://www.virtualbox.org/",
+                                                              "ISystemProperties_getMinPortCountForStorageBusResponse").pyclass
 
-ISystemProperties_getMaxPortCountForStorageBusRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxPortCountForStorageBus").pyclass
+ISystemProperties_getMaxPortCountForStorageBusRequestMsg = GED("http://www.virtualbox.org/",
+                                                               "ISystemProperties_getMaxPortCountForStorageBus").pyclass
 
-ISystemProperties_getMaxPortCountForStorageBusResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxPortCountForStorageBusResponse").pyclass
+ISystemProperties_getMaxPortCountForStorageBusResultMsg = GED("http://www.virtualbox.org/",
+                                                              "ISystemProperties_getMaxPortCountForStorageBusResponse").pyclass
 
-ISystemProperties_getMaxInstancesOfStorageBusRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxInstancesOfStorageBus").pyclass
+ISystemProperties_getMaxInstancesOfStorageBusRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "ISystemProperties_getMaxInstancesOfStorageBus").pyclass
 
-ISystemProperties_getMaxInstancesOfStorageBusResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxInstancesOfStorageBusResponse").pyclass
+ISystemProperties_getMaxInstancesOfStorageBusResultMsg = GED("http://www.virtualbox.org/",
+                                                             "ISystemProperties_getMaxInstancesOfStorageBusResponse").pyclass
 
-ISystemProperties_getDeviceTypesForStorageBusRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDeviceTypesForStorageBus").pyclass
+ISystemProperties_getDeviceTypesForStorageBusRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "ISystemProperties_getDeviceTypesForStorageBus").pyclass
 
-ISystemProperties_getDeviceTypesForStorageBusResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDeviceTypesForStorageBusResponse").pyclass
+ISystemProperties_getDeviceTypesForStorageBusResultMsg = GED("http://www.virtualbox.org/",
+                                                             "ISystemProperties_getDeviceTypesForStorageBusResponse").pyclass
 
-ISystemProperties_getDefaultIoCacheSettingForStorageControllerRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultIoCacheSettingForStorageController").pyclass
+ISystemProperties_getDefaultIoCacheSettingForStorageControllerRequestMsg = GED("http://www.virtualbox.org/",
+                                                                               "ISystemProperties_getDefaultIoCacheSettingForStorageController").pyclass
 
-ISystemProperties_getDefaultIoCacheSettingForStorageControllerResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getDefaultIoCacheSettingForStorageControllerResponse").pyclass
+ISystemProperties_getDefaultIoCacheSettingForStorageControllerResultMsg = GED("http://www.virtualbox.org/",
+                                                                              "ISystemProperties_getDefaultIoCacheSettingForStorageControllerResponse").pyclass
 
-ISystemProperties_getMaxInstancesOfUSBControllerTypeRequestMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxInstancesOfUSBControllerType").pyclass
+ISystemProperties_getMaxInstancesOfUSBControllerTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                                     "ISystemProperties_getMaxInstancesOfUSBControllerType").pyclass
 
-ISystemProperties_getMaxInstancesOfUSBControllerTypeResultMsg = GED("http://www.virtualbox.org/", "ISystemProperties_getMaxInstancesOfUSBControllerTypeResponse").pyclass
+ISystemProperties_getMaxInstancesOfUSBControllerTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                                    "ISystemProperties_getMaxInstancesOfUSBControllerTypeResponse").pyclass
 
 IGuestSession_getUserRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getUser").pyclass
 
@@ -13679,9 +14074,11 @@ IGuestSession_setTimeoutRequestMsg = GED("http://www.virtualbox.org/", "IGuestSe
 
 IGuestSession_setTimeoutResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_setTimeoutResponse").pyclass
 
-IGuestSession_getProtocolVersionRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getProtocolVersion").pyclass
+IGuestSession_getProtocolVersionRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IGuestSession_getProtocolVersion").pyclass
 
-IGuestSession_getProtocolVersionResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_getProtocolVersionResponse").pyclass
+IGuestSession_getProtocolVersionResultMsg = GED("http://www.virtualbox.org/",
+                                                "IGuestSession_getProtocolVersionResponse").pyclass
 
 IGuestSession_getStatusRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getStatus").pyclass
 
@@ -13689,11 +14086,13 @@ IGuestSession_getStatusResultMsg = GED("http://www.virtualbox.org/", "IGuestSess
 
 IGuestSession_getEnvironmentRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getEnvironment").pyclass
 
-IGuestSession_getEnvironmentResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_getEnvironmentResponse").pyclass
+IGuestSession_getEnvironmentResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuestSession_getEnvironmentResponse").pyclass
 
 IGuestSession_setEnvironmentRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_setEnvironment").pyclass
 
-IGuestSession_setEnvironmentResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_setEnvironmentResponse").pyclass
+IGuestSession_setEnvironmentResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuestSession_setEnvironmentResponse").pyclass
 
 IGuestSession_getProcessesRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getProcesses").pyclass
 
@@ -13701,7 +14100,8 @@ IGuestSession_getProcessesResultMsg = GED("http://www.virtualbox.org/", "IGuestS
 
 IGuestSession_getDirectoriesRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getDirectories").pyclass
 
-IGuestSession_getDirectoriesResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_getDirectoriesResponse").pyclass
+IGuestSession_getDirectoriesResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuestSession_getDirectoriesResponse").pyclass
 
 IGuestSession_getFilesRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getFiles").pyclass
 
@@ -13709,7 +14109,8 @@ IGuestSession_getFilesResultMsg = GED("http://www.virtualbox.org/", "IGuestSessi
 
 IGuestSession_getEventSourceRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_getEventSource").pyclass
 
-IGuestSession_getEventSourceResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_getEventSourceResponse").pyclass
+IGuestSession_getEventSourceResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuestSession_getEventSourceResponse").pyclass
 
 IGuestSession_closeRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_close").pyclass
 
@@ -13725,59 +14126,75 @@ IGuestSession_copyToResultMsg = GED("http://www.virtualbox.org/", "IGuestSession
 
 IGuestSession_directoryCreateRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryCreate").pyclass
 
-IGuestSession_directoryCreateResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryCreateResponse").pyclass
+IGuestSession_directoryCreateResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestSession_directoryCreateResponse").pyclass
 
-IGuestSession_directoryCreateTempRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryCreateTemp").pyclass
+IGuestSession_directoryCreateTempRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IGuestSession_directoryCreateTemp").pyclass
 
-IGuestSession_directoryCreateTempResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryCreateTempResponse").pyclass
+IGuestSession_directoryCreateTempResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IGuestSession_directoryCreateTempResponse").pyclass
 
 IGuestSession_directoryExistsRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryExists").pyclass
 
-IGuestSession_directoryExistsResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryExistsResponse").pyclass
+IGuestSession_directoryExistsResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestSession_directoryExistsResponse").pyclass
 
 IGuestSession_directoryOpenRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryOpen").pyclass
 
 IGuestSession_directoryOpenResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryOpenResponse").pyclass
 
-IGuestSession_directoryQueryInfoRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryQueryInfo").pyclass
+IGuestSession_directoryQueryInfoRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IGuestSession_directoryQueryInfo").pyclass
 
-IGuestSession_directoryQueryInfoResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryQueryInfoResponse").pyclass
+IGuestSession_directoryQueryInfoResultMsg = GED("http://www.virtualbox.org/",
+                                                "IGuestSession_directoryQueryInfoResponse").pyclass
 
 IGuestSession_directoryRemoveRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryRemove").pyclass
 
-IGuestSession_directoryRemoveResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryRemoveResponse").pyclass
+IGuestSession_directoryRemoveResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestSession_directoryRemoveResponse").pyclass
 
-IGuestSession_directoryRemoveRecursiveRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryRemoveRecursive").pyclass
+IGuestSession_directoryRemoveRecursiveRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IGuestSession_directoryRemoveRecursive").pyclass
 
-IGuestSession_directoryRemoveRecursiveResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryRemoveRecursiveResponse").pyclass
+IGuestSession_directoryRemoveRecursiveResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IGuestSession_directoryRemoveRecursiveResponse").pyclass
 
 IGuestSession_directoryRenameRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryRename").pyclass
 
-IGuestSession_directoryRenameResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directoryRenameResponse").pyclass
+IGuestSession_directoryRenameResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestSession_directoryRenameResponse").pyclass
 
 IGuestSession_directorySetACLRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_directorySetACL").pyclass
 
-IGuestSession_directorySetACLResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_directorySetACLResponse").pyclass
+IGuestSession_directorySetACLResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestSession_directorySetACLResponse").pyclass
 
 IGuestSession_environmentClearRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentClear").pyclass
 
-IGuestSession_environmentClearResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentClearResponse").pyclass
+IGuestSession_environmentClearResultMsg = GED("http://www.virtualbox.org/",
+                                              "IGuestSession_environmentClearResponse").pyclass
 
 IGuestSession_environmentGetRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentGet").pyclass
 
-IGuestSession_environmentGetResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentGetResponse").pyclass
+IGuestSession_environmentGetResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuestSession_environmentGetResponse").pyclass
 
 IGuestSession_environmentSetRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentSet").pyclass
 
-IGuestSession_environmentSetResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentSetResponse").pyclass
+IGuestSession_environmentSetResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuestSession_environmentSetResponse").pyclass
 
 IGuestSession_environmentUnsetRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentUnset").pyclass
 
-IGuestSession_environmentUnsetResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_environmentUnsetResponse").pyclass
+IGuestSession_environmentUnsetResultMsg = GED("http://www.virtualbox.org/",
+                                              "IGuestSession_environmentUnsetResponse").pyclass
 
 IGuestSession_fileCreateTempRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_fileCreateTemp").pyclass
 
-IGuestSession_fileCreateTempResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_fileCreateTempResponse").pyclass
+IGuestSession_fileCreateTempResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuestSession_fileCreateTempResponse").pyclass
 
 IGuestSession_fileExistsRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_fileExists").pyclass
 
@@ -13817,7 +14234,8 @@ IGuestSession_processCreateResultMsg = GED("http://www.virtualbox.org/", "IGuest
 
 IGuestSession_processCreateExRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_processCreateEx").pyclass
 
-IGuestSession_processCreateExResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_processCreateExResponse").pyclass
+IGuestSession_processCreateExResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestSession_processCreateExResponse").pyclass
 
 IGuestSession_processGetRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_processGet").pyclass
 
@@ -13835,13 +14253,16 @@ IGuestSession_symlinkReadRequestMsg = GED("http://www.virtualbox.org/", "IGuestS
 
 IGuestSession_symlinkReadResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_symlinkReadResponse").pyclass
 
-IGuestSession_symlinkRemoveDirectoryRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_symlinkRemoveDirectory").pyclass
+IGuestSession_symlinkRemoveDirectoryRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestSession_symlinkRemoveDirectory").pyclass
 
-IGuestSession_symlinkRemoveDirectoryResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_symlinkRemoveDirectoryResponse").pyclass
+IGuestSession_symlinkRemoveDirectoryResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestSession_symlinkRemoveDirectoryResponse").pyclass
 
 IGuestSession_symlinkRemoveFileRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_symlinkRemoveFile").pyclass
 
-IGuestSession_symlinkRemoveFileResultMsg = GED("http://www.virtualbox.org/", "IGuestSession_symlinkRemoveFileResponse").pyclass
+IGuestSession_symlinkRemoveFileResultMsg = GED("http://www.virtualbox.org/",
+                                               "IGuestSession_symlinkRemoveFileResponse").pyclass
 
 IGuestSession_waitForRequestMsg = GED("http://www.virtualbox.org/", "IGuestSession_waitFor").pyclass
 
@@ -14013,7 +14434,8 @@ IFsObjInfo_getDeviceNumberResultMsg = GED("http://www.virtualbox.org/", "IFsObjI
 
 IFsObjInfo_getFileAttributesRequestMsg = GED("http://www.virtualbox.org/", "IFsObjInfo_getFileAttributes").pyclass
 
-IFsObjInfo_getFileAttributesResultMsg = GED("http://www.virtualbox.org/", "IFsObjInfo_getFileAttributesResponse").pyclass
+IFsObjInfo_getFileAttributesResultMsg = GED("http://www.virtualbox.org/",
+                                            "IFsObjInfo_getFileAttributesResponse").pyclass
 
 IFsObjInfo_getGenerationIdRequestMsg = GED("http://www.virtualbox.org/", "IFsObjInfo_getGenerationId").pyclass
 
@@ -14033,7 +14455,8 @@ IFsObjInfo_getHardLinksResultMsg = GED("http://www.virtualbox.org/", "IFsObjInfo
 
 IFsObjInfo_getModificationTimeRequestMsg = GED("http://www.virtualbox.org/", "IFsObjInfo_getModificationTime").pyclass
 
-IFsObjInfo_getModificationTimeResultMsg = GED("http://www.virtualbox.org/", "IFsObjInfo_getModificationTimeResponse").pyclass
+IFsObjInfo_getModificationTimeResultMsg = GED("http://www.virtualbox.org/",
+                                              "IFsObjInfo_getModificationTimeResponse").pyclass
 
 IFsObjInfo_getNameRequestMsg = GED("http://www.virtualbox.org/", "IFsObjInfo_getName").pyclass
 
@@ -14103,17 +14526,22 @@ IGuest_setMemoryBalloonSizeRequestMsg = GED("http://www.virtualbox.org/", "IGues
 
 IGuest_setMemoryBalloonSizeResultMsg = GED("http://www.virtualbox.org/", "IGuest_setMemoryBalloonSizeResponse").pyclass
 
-IGuest_getStatisticsUpdateIntervalRequestMsg = GED("http://www.virtualbox.org/", "IGuest_getStatisticsUpdateInterval").pyclass
+IGuest_getStatisticsUpdateIntervalRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuest_getStatisticsUpdateInterval").pyclass
 
-IGuest_getStatisticsUpdateIntervalResultMsg = GED("http://www.virtualbox.org/", "IGuest_getStatisticsUpdateIntervalResponse").pyclass
+IGuest_getStatisticsUpdateIntervalResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IGuest_getStatisticsUpdateIntervalResponse").pyclass
 
-IGuest_setStatisticsUpdateIntervalRequestMsg = GED("http://www.virtualbox.org/", "IGuest_setStatisticsUpdateInterval").pyclass
+IGuest_setStatisticsUpdateIntervalRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuest_setStatisticsUpdateInterval").pyclass
 
-IGuest_setStatisticsUpdateIntervalResultMsg = GED("http://www.virtualbox.org/", "IGuest_setStatisticsUpdateIntervalResponse").pyclass
+IGuest_setStatisticsUpdateIntervalResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IGuest_setStatisticsUpdateIntervalResponse").pyclass
 
 IGuest_internalGetStatisticsRequestMsg = GED("http://www.virtualbox.org/", "IGuest_internalGetStatistics").pyclass
 
-IGuest_internalGetStatisticsResultMsg = GED("http://www.virtualbox.org/", "IGuest_internalGetStatisticsResponse").pyclass
+IGuest_internalGetStatisticsResultMsg = GED("http://www.virtualbox.org/",
+                                            "IGuest_internalGetStatisticsResponse").pyclass
 
 IGuest_getFacilityStatusRequestMsg = GED("http://www.virtualbox.org/", "IGuest_getFacilityStatus").pyclass
 
@@ -14219,17 +14647,21 @@ IProgress_getOperationRequestMsg = GED("http://www.virtualbox.org/", "IProgress_
 
 IProgress_getOperationResultMsg = GED("http://www.virtualbox.org/", "IProgress_getOperationResponse").pyclass
 
-IProgress_getOperationDescriptionRequestMsg = GED("http://www.virtualbox.org/", "IProgress_getOperationDescription").pyclass
+IProgress_getOperationDescriptionRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IProgress_getOperationDescription").pyclass
 
-IProgress_getOperationDescriptionResultMsg = GED("http://www.virtualbox.org/", "IProgress_getOperationDescriptionResponse").pyclass
+IProgress_getOperationDescriptionResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IProgress_getOperationDescriptionResponse").pyclass
 
 IProgress_getOperationPercentRequestMsg = GED("http://www.virtualbox.org/", "IProgress_getOperationPercent").pyclass
 
-IProgress_getOperationPercentResultMsg = GED("http://www.virtualbox.org/", "IProgress_getOperationPercentResponse").pyclass
+IProgress_getOperationPercentResultMsg = GED("http://www.virtualbox.org/",
+                                             "IProgress_getOperationPercentResponse").pyclass
 
 IProgress_getOperationWeightRequestMsg = GED("http://www.virtualbox.org/", "IProgress_getOperationWeight").pyclass
 
-IProgress_getOperationWeightResultMsg = GED("http://www.virtualbox.org/", "IProgress_getOperationWeightResponse").pyclass
+IProgress_getOperationWeightResultMsg = GED("http://www.virtualbox.org/",
+                                            "IProgress_getOperationWeightResponse").pyclass
 
 IProgress_getTimeoutRequestMsg = GED("http://www.virtualbox.org/", "IProgress_getTimeout").pyclass
 
@@ -14239,9 +14671,11 @@ IProgress_setTimeoutRequestMsg = GED("http://www.virtualbox.org/", "IProgress_se
 
 IProgress_setTimeoutResultMsg = GED("http://www.virtualbox.org/", "IProgress_setTimeoutResponse").pyclass
 
-IProgress_setCurrentOperationProgressRequestMsg = GED("http://www.virtualbox.org/", "IProgress_setCurrentOperationProgress").pyclass
+IProgress_setCurrentOperationProgressRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IProgress_setCurrentOperationProgress").pyclass
 
-IProgress_setCurrentOperationProgressResultMsg = GED("http://www.virtualbox.org/", "IProgress_setCurrentOperationProgressResponse").pyclass
+IProgress_setCurrentOperationProgressResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IProgress_setCurrentOperationProgressResponse").pyclass
 
 IProgress_setNextOperationRequestMsg = GED("http://www.virtualbox.org/", "IProgress_setNextOperation").pyclass
 
@@ -14251,13 +14685,17 @@ IProgress_waitForCompletionRequestMsg = GED("http://www.virtualbox.org/", "IProg
 
 IProgress_waitForCompletionResultMsg = GED("http://www.virtualbox.org/", "IProgress_waitForCompletionResponse").pyclass
 
-IProgress_waitForOperationCompletionRequestMsg = GED("http://www.virtualbox.org/", "IProgress_waitForOperationCompletion").pyclass
+IProgress_waitForOperationCompletionRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IProgress_waitForOperationCompletion").pyclass
 
-IProgress_waitForOperationCompletionResultMsg = GED("http://www.virtualbox.org/", "IProgress_waitForOperationCompletionResponse").pyclass
+IProgress_waitForOperationCompletionResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IProgress_waitForOperationCompletionResponse").pyclass
 
-IProgress_waitForAsyncProgressCompletionRequestMsg = GED("http://www.virtualbox.org/", "IProgress_waitForAsyncProgressCompletion").pyclass
+IProgress_waitForAsyncProgressCompletionRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IProgress_waitForAsyncProgressCompletion").pyclass
 
-IProgress_waitForAsyncProgressCompletionResultMsg = GED("http://www.virtualbox.org/", "IProgress_waitForAsyncProgressCompletionResponse").pyclass
+IProgress_waitForAsyncProgressCompletionResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IProgress_waitForAsyncProgressCompletionResponse").pyclass
 
 IProgress_cancelRequestMsg = GED("http://www.virtualbox.org/", "IProgress_cancel").pyclass
 
@@ -14493,15 +14931,20 @@ IMediumFormat_getNameResultMsg = GED("http://www.virtualbox.org/", "IMediumForma
 
 IMediumFormat_getCapabilitiesRequestMsg = GED("http://www.virtualbox.org/", "IMediumFormat_getCapabilities").pyclass
 
-IMediumFormat_getCapabilitiesResultMsg = GED("http://www.virtualbox.org/", "IMediumFormat_getCapabilitiesResponse").pyclass
+IMediumFormat_getCapabilitiesResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMediumFormat_getCapabilitiesResponse").pyclass
 
-IMediumFormat_describeFileExtensionsRequestMsg = GED("http://www.virtualbox.org/", "IMediumFormat_describeFileExtensions").pyclass
+IMediumFormat_describeFileExtensionsRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMediumFormat_describeFileExtensions").pyclass
 
-IMediumFormat_describeFileExtensionsResultMsg = GED("http://www.virtualbox.org/", "IMediumFormat_describeFileExtensionsResponse").pyclass
+IMediumFormat_describeFileExtensionsResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMediumFormat_describeFileExtensionsResponse").pyclass
 
-IMediumFormat_describePropertiesRequestMsg = GED("http://www.virtualbox.org/", "IMediumFormat_describeProperties").pyclass
+IMediumFormat_describePropertiesRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMediumFormat_describeProperties").pyclass
 
-IMediumFormat_describePropertiesResultMsg = GED("http://www.virtualbox.org/", "IMediumFormat_describePropertiesResponse").pyclass
+IMediumFormat_describePropertiesResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMediumFormat_describePropertiesResponse").pyclass
 
 IToken_abandonRequestMsg = GED("http://www.virtualbox.org/", "IToken_abandon").pyclass
 
@@ -14537,7 +14980,8 @@ IMouse_getRelativeSupportedResultMsg = GED("http://www.virtualbox.org/", "IMouse
 
 IMouse_getMultiTouchSupportedRequestMsg = GED("http://www.virtualbox.org/", "IMouse_getMultiTouchSupported").pyclass
 
-IMouse_getMultiTouchSupportedResultMsg = GED("http://www.virtualbox.org/", "IMouse_getMultiTouchSupportedResponse").pyclass
+IMouse_getMultiTouchSupportedResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMouse_getMultiTouchSupportedResponse").pyclass
 
 IMouse_getNeedsHostCursorRequestMsg = GED("http://www.virtualbox.org/", "IMouse_getNeedsHostCursor").pyclass
 
@@ -14553,7 +14997,8 @@ IMouse_putMouseEventResultMsg = GED("http://www.virtualbox.org/", "IMouse_putMou
 
 IMouse_putMouseEventAbsoluteRequestMsg = GED("http://www.virtualbox.org/", "IMouse_putMouseEventAbsolute").pyclass
 
-IMouse_putMouseEventAbsoluteResultMsg = GED("http://www.virtualbox.org/", "IMouse_putMouseEventAbsoluteResponse").pyclass
+IMouse_putMouseEventAbsoluteResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMouse_putMouseEventAbsoluteResponse").pyclass
 
 IMouse_putEventMultiTouchRequestMsg = GED("http://www.virtualbox.org/", "IMouse_putEventMultiTouch").pyclass
 
@@ -14561,7 +15006,8 @@ IMouse_putEventMultiTouchResultMsg = GED("http://www.virtualbox.org/", "IMouse_p
 
 IMouse_putEventMultiTouchStringRequestMsg = GED("http://www.virtualbox.org/", "IMouse_putEventMultiTouchString").pyclass
 
-IMouse_putEventMultiTouchStringResultMsg = GED("http://www.virtualbox.org/", "IMouse_putEventMultiTouchStringResponse").pyclass
+IMouse_putEventMultiTouchStringResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMouse_putEventMultiTouchStringResponse").pyclass
 
 IFramebuffer_getWidthRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getWidth").pyclass
 
@@ -14573,11 +15019,13 @@ IFramebuffer_getHeightResultMsg = GED("http://www.virtualbox.org/", "IFramebuffe
 
 IFramebuffer_getBitsPerPixelRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getBitsPerPixel").pyclass
 
-IFramebuffer_getBitsPerPixelResultMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getBitsPerPixelResponse").pyclass
+IFramebuffer_getBitsPerPixelResultMsg = GED("http://www.virtualbox.org/",
+                                            "IFramebuffer_getBitsPerPixelResponse").pyclass
 
 IFramebuffer_getBytesPerLineRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getBytesPerLine").pyclass
 
-IFramebuffer_getBytesPerLineResultMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getBytesPerLineResponse").pyclass
+IFramebuffer_getBytesPerLineResultMsg = GED("http://www.virtualbox.org/",
+                                            "IFramebuffer_getBytesPerLineResponse").pyclass
 
 IFramebuffer_getPixelFormatRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getPixelFormat").pyclass
 
@@ -14585,11 +15033,13 @@ IFramebuffer_getPixelFormatResultMsg = GED("http://www.virtualbox.org/", "IFrame
 
 IFramebuffer_getUsesGuestVRAMRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getUsesGuestVRAM").pyclass
 
-IFramebuffer_getUsesGuestVRAMResultMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getUsesGuestVRAMResponse").pyclass
+IFramebuffer_getUsesGuestVRAMResultMsg = GED("http://www.virtualbox.org/",
+                                             "IFramebuffer_getUsesGuestVRAMResponse").pyclass
 
 IFramebuffer_getHeightReductionRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getHeightReduction").pyclass
 
-IFramebuffer_getHeightReductionResultMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getHeightReductionResponse").pyclass
+IFramebuffer_getHeightReductionResultMsg = GED("http://www.virtualbox.org/",
+                                               "IFramebuffer_getHeightReductionResponse").pyclass
 
 IFramebuffer_getOverlayRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_getOverlay").pyclass
 
@@ -14597,7 +15047,8 @@ IFramebuffer_getOverlayResultMsg = GED("http://www.virtualbox.org/", "IFramebuff
 
 IFramebuffer_videoModeSupportedRequestMsg = GED("http://www.virtualbox.org/", "IFramebuffer_videoModeSupported").pyclass
 
-IFramebuffer_videoModeSupportedResultMsg = GED("http://www.virtualbox.org/", "IFramebuffer_videoModeSupportedResponse").pyclass
+IFramebuffer_videoModeSupportedResultMsg = GED("http://www.virtualbox.org/",
+                                               "IFramebuffer_videoModeSupportedResponse").pyclass
 
 IFramebufferOverlay_getXRequestMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_getX").pyclass
 
@@ -14609,19 +15060,23 @@ IFramebufferOverlay_getYResultMsg = GED("http://www.virtualbox.org/", "IFramebuf
 
 IFramebufferOverlay_getVisibleRequestMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_getVisible").pyclass
 
-IFramebufferOverlay_getVisibleResultMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_getVisibleResponse").pyclass
+IFramebufferOverlay_getVisibleResultMsg = GED("http://www.virtualbox.org/",
+                                              "IFramebufferOverlay_getVisibleResponse").pyclass
 
 IFramebufferOverlay_setVisibleRequestMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_setVisible").pyclass
 
-IFramebufferOverlay_setVisibleResultMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_setVisibleResponse").pyclass
+IFramebufferOverlay_setVisibleResultMsg = GED("http://www.virtualbox.org/",
+                                              "IFramebufferOverlay_setVisibleResponse").pyclass
 
 IFramebufferOverlay_getAlphaRequestMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_getAlpha").pyclass
 
-IFramebufferOverlay_getAlphaResultMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_getAlphaResponse").pyclass
+IFramebufferOverlay_getAlphaResultMsg = GED("http://www.virtualbox.org/",
+                                            "IFramebufferOverlay_getAlphaResponse").pyclass
 
 IFramebufferOverlay_setAlphaRequestMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_setAlpha").pyclass
 
-IFramebufferOverlay_setAlphaResultMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_setAlphaResponse").pyclass
+IFramebufferOverlay_setAlphaResultMsg = GED("http://www.virtualbox.org/",
+                                            "IFramebufferOverlay_setAlphaResponse").pyclass
 
 IFramebufferOverlay_moveRequestMsg = GED("http://www.virtualbox.org/", "IFramebufferOverlay_move").pyclass
 
@@ -14629,7 +15084,8 @@ IFramebufferOverlay_moveResultMsg = GED("http://www.virtualbox.org/", "IFramebuf
 
 IDisplay_getScreenResolutionRequestMsg = GED("http://www.virtualbox.org/", "IDisplay_getScreenResolution").pyclass
 
-IDisplay_getScreenResolutionResultMsg = GED("http://www.virtualbox.org/", "IDisplay_getScreenResolutionResponse").pyclass
+IDisplay_getScreenResolutionResultMsg = GED("http://www.virtualbox.org/",
+                                            "IDisplay_getScreenResolutionResponse").pyclass
 
 IDisplay_setFramebufferRequestMsg = GED("http://www.virtualbox.org/", "IDisplay_setFramebuffer").pyclass
 
@@ -14649,15 +15105,19 @@ IDisplay_setSeamlessModeResultMsg = GED("http://www.virtualbox.org/", "IDisplay_
 
 IDisplay_takeScreenShotToArrayRequestMsg = GED("http://www.virtualbox.org/", "IDisplay_takeScreenShotToArray").pyclass
 
-IDisplay_takeScreenShotToArrayResultMsg = GED("http://www.virtualbox.org/", "IDisplay_takeScreenShotToArrayResponse").pyclass
+IDisplay_takeScreenShotToArrayResultMsg = GED("http://www.virtualbox.org/",
+                                              "IDisplay_takeScreenShotToArrayResponse").pyclass
 
-IDisplay_takeScreenShotPNGToArrayRequestMsg = GED("http://www.virtualbox.org/", "IDisplay_takeScreenShotPNGToArray").pyclass
+IDisplay_takeScreenShotPNGToArrayRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IDisplay_takeScreenShotPNGToArray").pyclass
 
-IDisplay_takeScreenShotPNGToArrayResultMsg = GED("http://www.virtualbox.org/", "IDisplay_takeScreenShotPNGToArrayResponse").pyclass
+IDisplay_takeScreenShotPNGToArrayResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IDisplay_takeScreenShotPNGToArrayResponse").pyclass
 
 IDisplay_invalidateAndUpdateRequestMsg = GED("http://www.virtualbox.org/", "IDisplay_invalidateAndUpdate").pyclass
 
-IDisplay_invalidateAndUpdateResultMsg = GED("http://www.virtualbox.org/", "IDisplay_invalidateAndUpdateResponse").pyclass
+IDisplay_invalidateAndUpdateResultMsg = GED("http://www.virtualbox.org/",
+                                            "IDisplay_invalidateAndUpdateResponse").pyclass
 
 IDisplay_resizeCompletedRequestMsg = GED("http://www.virtualbox.org/", "IDisplay_resizeCompleted").pyclass
 
@@ -14669,11 +15129,13 @@ IDisplay_viewportChangedResultMsg = GED("http://www.virtualbox.org/", "IDisplay_
 
 INetworkAdapter_getAdapterTypeRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getAdapterType").pyclass
 
-INetworkAdapter_getAdapterTypeResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getAdapterTypeResponse").pyclass
+INetworkAdapter_getAdapterTypeResultMsg = GED("http://www.virtualbox.org/",
+                                              "INetworkAdapter_getAdapterTypeResponse").pyclass
 
 INetworkAdapter_setAdapterTypeRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setAdapterType").pyclass
 
-INetworkAdapter_setAdapterTypeResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setAdapterTypeResponse").pyclass
+INetworkAdapter_setAdapterTypeResultMsg = GED("http://www.virtualbox.org/",
+                                              "INetworkAdapter_setAdapterTypeResponse").pyclass
 
 INetworkAdapter_getSlotRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getSlot").pyclass
 
@@ -14689,119 +15151,164 @@ INetworkAdapter_setEnabledResultMsg = GED("http://www.virtualbox.org/", "INetwor
 
 INetworkAdapter_getMACAddressRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getMACAddress").pyclass
 
-INetworkAdapter_getMACAddressResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getMACAddressResponse").pyclass
+INetworkAdapter_getMACAddressResultMsg = GED("http://www.virtualbox.org/",
+                                             "INetworkAdapter_getMACAddressResponse").pyclass
 
 INetworkAdapter_setMACAddressRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setMACAddress").pyclass
 
-INetworkAdapter_setMACAddressResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setMACAddressResponse").pyclass
+INetworkAdapter_setMACAddressResultMsg = GED("http://www.virtualbox.org/",
+                                             "INetworkAdapter_setMACAddressResponse").pyclass
 
-INetworkAdapter_getAttachmentTypeRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getAttachmentType").pyclass
+INetworkAdapter_getAttachmentTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_getAttachmentType").pyclass
 
-INetworkAdapter_getAttachmentTypeResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getAttachmentTypeResponse").pyclass
+INetworkAdapter_getAttachmentTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_getAttachmentTypeResponse").pyclass
 
-INetworkAdapter_setAttachmentTypeRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setAttachmentType").pyclass
+INetworkAdapter_setAttachmentTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_setAttachmentType").pyclass
 
-INetworkAdapter_setAttachmentTypeResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setAttachmentTypeResponse").pyclass
+INetworkAdapter_setAttachmentTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_setAttachmentTypeResponse").pyclass
 
-INetworkAdapter_getBridgedInterfaceRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getBridgedInterface").pyclass
+INetworkAdapter_getBridgedInterfaceRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "INetworkAdapter_getBridgedInterface").pyclass
 
-INetworkAdapter_getBridgedInterfaceResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getBridgedInterfaceResponse").pyclass
+INetworkAdapter_getBridgedInterfaceResultMsg = GED("http://www.virtualbox.org/",
+                                                   "INetworkAdapter_getBridgedInterfaceResponse").pyclass
 
-INetworkAdapter_setBridgedInterfaceRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setBridgedInterface").pyclass
+INetworkAdapter_setBridgedInterfaceRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "INetworkAdapter_setBridgedInterface").pyclass
 
-INetworkAdapter_setBridgedInterfaceResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setBridgedInterfaceResponse").pyclass
+INetworkAdapter_setBridgedInterfaceResultMsg = GED("http://www.virtualbox.org/",
+                                                   "INetworkAdapter_setBridgedInterfaceResponse").pyclass
 
-INetworkAdapter_getHostOnlyInterfaceRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getHostOnlyInterface").pyclass
+INetworkAdapter_getHostOnlyInterfaceRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "INetworkAdapter_getHostOnlyInterface").pyclass
 
-INetworkAdapter_getHostOnlyInterfaceResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getHostOnlyInterfaceResponse").pyclass
+INetworkAdapter_getHostOnlyInterfaceResultMsg = GED("http://www.virtualbox.org/",
+                                                    "INetworkAdapter_getHostOnlyInterfaceResponse").pyclass
 
-INetworkAdapter_setHostOnlyInterfaceRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setHostOnlyInterface").pyclass
+INetworkAdapter_setHostOnlyInterfaceRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "INetworkAdapter_setHostOnlyInterface").pyclass
 
-INetworkAdapter_setHostOnlyInterfaceResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setHostOnlyInterfaceResponse").pyclass
+INetworkAdapter_setHostOnlyInterfaceResultMsg = GED("http://www.virtualbox.org/",
+                                                    "INetworkAdapter_setHostOnlyInterfaceResponse").pyclass
 
-INetworkAdapter_getInternalNetworkRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getInternalNetwork").pyclass
+INetworkAdapter_getInternalNetworkRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "INetworkAdapter_getInternalNetwork").pyclass
 
-INetworkAdapter_getInternalNetworkResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getInternalNetworkResponse").pyclass
+INetworkAdapter_getInternalNetworkResultMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_getInternalNetworkResponse").pyclass
 
-INetworkAdapter_setInternalNetworkRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setInternalNetwork").pyclass
+INetworkAdapter_setInternalNetworkRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "INetworkAdapter_setInternalNetwork").pyclass
 
-INetworkAdapter_setInternalNetworkResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setInternalNetworkResponse").pyclass
+INetworkAdapter_setInternalNetworkResultMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_setInternalNetworkResponse").pyclass
 
 INetworkAdapter_getNATNetworkRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getNATNetwork").pyclass
 
-INetworkAdapter_getNATNetworkResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getNATNetworkResponse").pyclass
+INetworkAdapter_getNATNetworkResultMsg = GED("http://www.virtualbox.org/",
+                                             "INetworkAdapter_getNATNetworkResponse").pyclass
 
 INetworkAdapter_setNATNetworkRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setNATNetwork").pyclass
 
-INetworkAdapter_setNATNetworkResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setNATNetworkResponse").pyclass
+INetworkAdapter_setNATNetworkResultMsg = GED("http://www.virtualbox.org/",
+                                             "INetworkAdapter_setNATNetworkResponse").pyclass
 
-INetworkAdapter_getGenericDriverRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getGenericDriver").pyclass
+INetworkAdapter_getGenericDriverRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_getGenericDriver").pyclass
 
-INetworkAdapter_getGenericDriverResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getGenericDriverResponse").pyclass
+INetworkAdapter_getGenericDriverResultMsg = GED("http://www.virtualbox.org/",
+                                                "INetworkAdapter_getGenericDriverResponse").pyclass
 
-INetworkAdapter_setGenericDriverRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setGenericDriver").pyclass
+INetworkAdapter_setGenericDriverRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_setGenericDriver").pyclass
 
-INetworkAdapter_setGenericDriverResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setGenericDriverResponse").pyclass
+INetworkAdapter_setGenericDriverResultMsg = GED("http://www.virtualbox.org/",
+                                                "INetworkAdapter_setGenericDriverResponse").pyclass
 
-INetworkAdapter_getCableConnectedRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getCableConnected").pyclass
+INetworkAdapter_getCableConnectedRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_getCableConnected").pyclass
 
-INetworkAdapter_getCableConnectedResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getCableConnectedResponse").pyclass
+INetworkAdapter_getCableConnectedResultMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_getCableConnectedResponse").pyclass
 
-INetworkAdapter_setCableConnectedRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setCableConnected").pyclass
+INetworkAdapter_setCableConnectedRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_setCableConnected").pyclass
 
-INetworkAdapter_setCableConnectedResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setCableConnectedResponse").pyclass
+INetworkAdapter_setCableConnectedResultMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_setCableConnectedResponse").pyclass
 
 INetworkAdapter_getLineSpeedRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getLineSpeed").pyclass
 
-INetworkAdapter_getLineSpeedResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getLineSpeedResponse").pyclass
+INetworkAdapter_getLineSpeedResultMsg = GED("http://www.virtualbox.org/",
+                                            "INetworkAdapter_getLineSpeedResponse").pyclass
 
 INetworkAdapter_setLineSpeedRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setLineSpeed").pyclass
 
-INetworkAdapter_setLineSpeedResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setLineSpeedResponse").pyclass
+INetworkAdapter_setLineSpeedResultMsg = GED("http://www.virtualbox.org/",
+                                            "INetworkAdapter_setLineSpeedResponse").pyclass
 
-INetworkAdapter_getPromiscModePolicyRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getPromiscModePolicy").pyclass
+INetworkAdapter_getPromiscModePolicyRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "INetworkAdapter_getPromiscModePolicy").pyclass
 
-INetworkAdapter_getPromiscModePolicyResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getPromiscModePolicyResponse").pyclass
+INetworkAdapter_getPromiscModePolicyResultMsg = GED("http://www.virtualbox.org/",
+                                                    "INetworkAdapter_getPromiscModePolicyResponse").pyclass
 
-INetworkAdapter_setPromiscModePolicyRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setPromiscModePolicy").pyclass
+INetworkAdapter_setPromiscModePolicyRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "INetworkAdapter_setPromiscModePolicy").pyclass
 
-INetworkAdapter_setPromiscModePolicyResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setPromiscModePolicyResponse").pyclass
+INetworkAdapter_setPromiscModePolicyResultMsg = GED("http://www.virtualbox.org/",
+                                                    "INetworkAdapter_setPromiscModePolicyResponse").pyclass
 
 INetworkAdapter_getTraceEnabledRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getTraceEnabled").pyclass
 
-INetworkAdapter_getTraceEnabledResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getTraceEnabledResponse").pyclass
+INetworkAdapter_getTraceEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "INetworkAdapter_getTraceEnabledResponse").pyclass
 
 INetworkAdapter_setTraceEnabledRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setTraceEnabled").pyclass
 
-INetworkAdapter_setTraceEnabledResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setTraceEnabledResponse").pyclass
+INetworkAdapter_setTraceEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "INetworkAdapter_setTraceEnabledResponse").pyclass
 
 INetworkAdapter_getTraceFileRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getTraceFile").pyclass
 
-INetworkAdapter_getTraceFileResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getTraceFileResponse").pyclass
+INetworkAdapter_getTraceFileResultMsg = GED("http://www.virtualbox.org/",
+                                            "INetworkAdapter_getTraceFileResponse").pyclass
 
 INetworkAdapter_setTraceFileRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setTraceFile").pyclass
 
-INetworkAdapter_setTraceFileResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setTraceFileResponse").pyclass
+INetworkAdapter_setTraceFileResultMsg = GED("http://www.virtualbox.org/",
+                                            "INetworkAdapter_setTraceFileResponse").pyclass
 
 INetworkAdapter_getNATEngineRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getNATEngine").pyclass
 
-INetworkAdapter_getNATEngineResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getNATEngineResponse").pyclass
+INetworkAdapter_getNATEngineResultMsg = GED("http://www.virtualbox.org/",
+                                            "INetworkAdapter_getNATEngineResponse").pyclass
 
 INetworkAdapter_getBootPriorityRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getBootPriority").pyclass
 
-INetworkAdapter_getBootPriorityResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getBootPriorityResponse").pyclass
+INetworkAdapter_getBootPriorityResultMsg = GED("http://www.virtualbox.org/",
+                                               "INetworkAdapter_getBootPriorityResponse").pyclass
 
 INetworkAdapter_setBootPriorityRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setBootPriority").pyclass
 
-INetworkAdapter_setBootPriorityResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setBootPriorityResponse").pyclass
+INetworkAdapter_setBootPriorityResultMsg = GED("http://www.virtualbox.org/",
+                                               "INetworkAdapter_setBootPriorityResponse").pyclass
 
-INetworkAdapter_getBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getBandwidthGroup").pyclass
+INetworkAdapter_getBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_getBandwidthGroup").pyclass
 
-INetworkAdapter_getBandwidthGroupResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getBandwidthGroupResponse").pyclass
+INetworkAdapter_getBandwidthGroupResultMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_getBandwidthGroupResponse").pyclass
 
-INetworkAdapter_setBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setBandwidthGroup").pyclass
+INetworkAdapter_setBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "INetworkAdapter_setBandwidthGroup").pyclass
 
-INetworkAdapter_setBandwidthGroupResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_setBandwidthGroupResponse").pyclass
+INetworkAdapter_setBandwidthGroupResultMsg = GED("http://www.virtualbox.org/",
+                                                 "INetworkAdapter_setBandwidthGroupResponse").pyclass
 
 INetworkAdapter_getPropertyRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getProperty").pyclass
 
@@ -14813,7 +15320,8 @@ INetworkAdapter_setPropertyResultMsg = GED("http://www.virtualbox.org/", "INetwo
 
 INetworkAdapter_getPropertiesRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getProperties").pyclass
 
-INetworkAdapter_getPropertiesResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapter_getPropertiesResponse").pyclass
+INetworkAdapter_getPropertiesResultMsg = GED("http://www.virtualbox.org/",
+                                             "INetworkAdapter_getPropertiesResponse").pyclass
 
 ISerialPort_getSlotRequestMsg = GED("http://www.virtualbox.org/", "ISerialPort_getSlot").pyclass
 
@@ -14905,99 +15413,137 @@ IParallelPort_setPathResultMsg = GED("http://www.virtualbox.org/", "IParallelPor
 
 IMachineDebugger_getSingleStepRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getSingleStep").pyclass
 
-IMachineDebugger_getSingleStepResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getSingleStepResponse").pyclass
+IMachineDebugger_getSingleStepResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachineDebugger_getSingleStepResponse").pyclass
 
 IMachineDebugger_setSingleStepRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setSingleStep").pyclass
 
-IMachineDebugger_setSingleStepResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setSingleStepResponse").pyclass
+IMachineDebugger_setSingleStepResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachineDebugger_setSingleStepResponse").pyclass
 
-IMachineDebugger_getRecompileUserRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRecompileUser").pyclass
+IMachineDebugger_getRecompileUserRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachineDebugger_getRecompileUser").pyclass
 
-IMachineDebugger_getRecompileUserResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRecompileUserResponse").pyclass
+IMachineDebugger_getRecompileUserResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachineDebugger_getRecompileUserResponse").pyclass
 
-IMachineDebugger_setRecompileUserRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRecompileUser").pyclass
+IMachineDebugger_setRecompileUserRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachineDebugger_setRecompileUser").pyclass
 
-IMachineDebugger_setRecompileUserResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRecompileUserResponse").pyclass
+IMachineDebugger_setRecompileUserResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachineDebugger_setRecompileUserResponse").pyclass
 
-IMachineDebugger_getRecompileSupervisorRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRecompileSupervisor").pyclass
+IMachineDebugger_getRecompileSupervisorRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMachineDebugger_getRecompileSupervisor").pyclass
 
-IMachineDebugger_getRecompileSupervisorResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRecompileSupervisorResponse").pyclass
+IMachineDebugger_getRecompileSupervisorResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachineDebugger_getRecompileSupervisorResponse").pyclass
 
-IMachineDebugger_setRecompileSupervisorRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRecompileSupervisor").pyclass
+IMachineDebugger_setRecompileSupervisorRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMachineDebugger_setRecompileSupervisor").pyclass
 
-IMachineDebugger_setRecompileSupervisorResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRecompileSupervisorResponse").pyclass
+IMachineDebugger_setRecompileSupervisorResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachineDebugger_setRecompileSupervisorResponse").pyclass
 
-IMachineDebugger_getExecuteAllInIEMRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getExecuteAllInIEM").pyclass
+IMachineDebugger_getExecuteAllInIEMRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_getExecuteAllInIEM").pyclass
 
-IMachineDebugger_getExecuteAllInIEMResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getExecuteAllInIEMResponse").pyclass
+IMachineDebugger_getExecuteAllInIEMResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_getExecuteAllInIEMResponse").pyclass
 
-IMachineDebugger_setExecuteAllInIEMRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setExecuteAllInIEM").pyclass
+IMachineDebugger_setExecuteAllInIEMRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_setExecuteAllInIEM").pyclass
 
-IMachineDebugger_setExecuteAllInIEMResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setExecuteAllInIEMResponse").pyclass
+IMachineDebugger_setExecuteAllInIEMResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_setExecuteAllInIEMResponse").pyclass
 
 IMachineDebugger_getPATMEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getPATMEnabled").pyclass
 
-IMachineDebugger_getPATMEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getPATMEnabledResponse").pyclass
+IMachineDebugger_getPATMEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_getPATMEnabledResponse").pyclass
 
 IMachineDebugger_setPATMEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setPATMEnabled").pyclass
 
-IMachineDebugger_setPATMEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setPATMEnabledResponse").pyclass
+IMachineDebugger_setPATMEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_setPATMEnabledResponse").pyclass
 
 IMachineDebugger_getCSAMEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getCSAMEnabled").pyclass
 
-IMachineDebugger_getCSAMEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getCSAMEnabledResponse").pyclass
+IMachineDebugger_getCSAMEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_getCSAMEnabledResponse").pyclass
 
 IMachineDebugger_setCSAMEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setCSAMEnabled").pyclass
 
-IMachineDebugger_setCSAMEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setCSAMEnabledResponse").pyclass
+IMachineDebugger_setCSAMEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_setCSAMEnabledResponse").pyclass
 
 IMachineDebugger_getLogEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogEnabled").pyclass
 
-IMachineDebugger_getLogEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogEnabledResponse").pyclass
+IMachineDebugger_getLogEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachineDebugger_getLogEnabledResponse").pyclass
 
 IMachineDebugger_setLogEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setLogEnabled").pyclass
 
-IMachineDebugger_setLogEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setLogEnabledResponse").pyclass
+IMachineDebugger_setLogEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachineDebugger_setLogEnabledResponse").pyclass
 
 IMachineDebugger_getLogDbgFlagsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogDbgFlags").pyclass
 
-IMachineDebugger_getLogDbgFlagsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogDbgFlagsResponse").pyclass
+IMachineDebugger_getLogDbgFlagsResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_getLogDbgFlagsResponse").pyclass
 
-IMachineDebugger_getLogDbgGroupsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogDbgGroups").pyclass
+IMachineDebugger_getLogDbgGroupsRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachineDebugger_getLogDbgGroups").pyclass
 
-IMachineDebugger_getLogDbgGroupsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogDbgGroupsResponse").pyclass
+IMachineDebugger_getLogDbgGroupsResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachineDebugger_getLogDbgGroupsResponse").pyclass
 
-IMachineDebugger_getLogDbgDestinationsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogDbgDestinations").pyclass
+IMachineDebugger_getLogDbgDestinationsRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachineDebugger_getLogDbgDestinations").pyclass
 
-IMachineDebugger_getLogDbgDestinationsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogDbgDestinationsResponse").pyclass
+IMachineDebugger_getLogDbgDestinationsResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachineDebugger_getLogDbgDestinationsResponse").pyclass
 
 IMachineDebugger_getLogRelFlagsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogRelFlags").pyclass
 
-IMachineDebugger_getLogRelFlagsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogRelFlagsResponse").pyclass
+IMachineDebugger_getLogRelFlagsResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_getLogRelFlagsResponse").pyclass
 
-IMachineDebugger_getLogRelGroupsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogRelGroups").pyclass
+IMachineDebugger_getLogRelGroupsRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachineDebugger_getLogRelGroups").pyclass
 
-IMachineDebugger_getLogRelGroupsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogRelGroupsResponse").pyclass
+IMachineDebugger_getLogRelGroupsResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachineDebugger_getLogRelGroupsResponse").pyclass
 
-IMachineDebugger_getLogRelDestinationsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogRelDestinations").pyclass
+IMachineDebugger_getLogRelDestinationsRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachineDebugger_getLogRelDestinations").pyclass
 
-IMachineDebugger_getLogRelDestinationsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getLogRelDestinationsResponse").pyclass
+IMachineDebugger_getLogRelDestinationsResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachineDebugger_getLogRelDestinationsResponse").pyclass
 
-IMachineDebugger_getHWVirtExEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExEnabled").pyclass
+IMachineDebugger_getHWVirtExEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_getHWVirtExEnabled").pyclass
 
-IMachineDebugger_getHWVirtExEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExEnabledResponse").pyclass
+IMachineDebugger_getHWVirtExEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_getHWVirtExEnabledResponse").pyclass
 
-IMachineDebugger_getHWVirtExNestedPagingEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExNestedPagingEnabled").pyclass
+IMachineDebugger_getHWVirtExNestedPagingEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                                "IMachineDebugger_getHWVirtExNestedPagingEnabled").pyclass
 
-IMachineDebugger_getHWVirtExNestedPagingEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExNestedPagingEnabledResponse").pyclass
+IMachineDebugger_getHWVirtExNestedPagingEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                               "IMachineDebugger_getHWVirtExNestedPagingEnabledResponse").pyclass
 
-IMachineDebugger_getHWVirtExVPIDEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExVPIDEnabled").pyclass
+IMachineDebugger_getHWVirtExVPIDEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMachineDebugger_getHWVirtExVPIDEnabled").pyclass
 
-IMachineDebugger_getHWVirtExVPIDEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExVPIDEnabledResponse").pyclass
+IMachineDebugger_getHWVirtExVPIDEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachineDebugger_getHWVirtExVPIDEnabledResponse").pyclass
 
-IMachineDebugger_getHWVirtExUXEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExUXEnabled").pyclass
+IMachineDebugger_getHWVirtExUXEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachineDebugger_getHWVirtExUXEnabled").pyclass
 
-IMachineDebugger_getHWVirtExUXEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getHWVirtExUXEnabledResponse").pyclass
+IMachineDebugger_getHWVirtExUXEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachineDebugger_getHWVirtExUXEnabledResponse").pyclass
 
 IMachineDebugger_getOSNameRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getOSName").pyclass
 
@@ -15005,27 +15551,36 @@ IMachineDebugger_getOSNameResultMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachineDebugger_getOSVersionRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getOSVersion").pyclass
 
-IMachineDebugger_getOSVersionResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getOSVersionResponse").pyclass
+IMachineDebugger_getOSVersionResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachineDebugger_getOSVersionResponse").pyclass
 
 IMachineDebugger_getPAEEnabledRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getPAEEnabled").pyclass
 
-IMachineDebugger_getPAEEnabledResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getPAEEnabledResponse").pyclass
+IMachineDebugger_getPAEEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachineDebugger_getPAEEnabledResponse").pyclass
 
-IMachineDebugger_getVirtualTimeRateRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getVirtualTimeRate").pyclass
+IMachineDebugger_getVirtualTimeRateRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_getVirtualTimeRate").pyclass
 
-IMachineDebugger_getVirtualTimeRateResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getVirtualTimeRateResponse").pyclass
+IMachineDebugger_getVirtualTimeRateResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_getVirtualTimeRateResponse").pyclass
 
-IMachineDebugger_setVirtualTimeRateRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setVirtualTimeRate").pyclass
+IMachineDebugger_setVirtualTimeRateRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_setVirtualTimeRate").pyclass
 
-IMachineDebugger_setVirtualTimeRateResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setVirtualTimeRateResponse").pyclass
+IMachineDebugger_setVirtualTimeRateResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_setVirtualTimeRateResponse").pyclass
 
 IMachineDebugger_dumpGuestCoreRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_dumpGuestCore").pyclass
 
-IMachineDebugger_dumpGuestCoreResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_dumpGuestCoreResponse").pyclass
+IMachineDebugger_dumpGuestCoreResultMsg = GED("http://www.virtualbox.org/",
+                                              "IMachineDebugger_dumpGuestCoreResponse").pyclass
 
-IMachineDebugger_dumpHostProcessCoreRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_dumpHostProcessCore").pyclass
+IMachineDebugger_dumpHostProcessCoreRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachineDebugger_dumpHostProcessCore").pyclass
 
-IMachineDebugger_dumpHostProcessCoreResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_dumpHostProcessCoreResponse").pyclass
+IMachineDebugger_dumpHostProcessCoreResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_dumpHostProcessCoreResponse").pyclass
 
 IMachineDebugger_infoRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_info").pyclass
 
@@ -15035,33 +15590,46 @@ IMachineDebugger_injectNMIRequestMsg = GED("http://www.virtualbox.org/", "IMachi
 
 IMachineDebugger_injectNMIResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_injectNMIResponse").pyclass
 
-IMachineDebugger_modifyLogGroupsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_modifyLogGroups").pyclass
+IMachineDebugger_modifyLogGroupsRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IMachineDebugger_modifyLogGroups").pyclass
 
-IMachineDebugger_modifyLogGroupsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_modifyLogGroupsResponse").pyclass
+IMachineDebugger_modifyLogGroupsResultMsg = GED("http://www.virtualbox.org/",
+                                                "IMachineDebugger_modifyLogGroupsResponse").pyclass
 
 IMachineDebugger_modifyLogFlagsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_modifyLogFlags").pyclass
 
-IMachineDebugger_modifyLogFlagsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_modifyLogFlagsResponse").pyclass
+IMachineDebugger_modifyLogFlagsResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_modifyLogFlagsResponse").pyclass
 
-IMachineDebugger_modifyLogDestinationsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_modifyLogDestinations").pyclass
+IMachineDebugger_modifyLogDestinationsRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMachineDebugger_modifyLogDestinations").pyclass
 
-IMachineDebugger_modifyLogDestinationsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_modifyLogDestinationsResponse").pyclass
+IMachineDebugger_modifyLogDestinationsResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachineDebugger_modifyLogDestinationsResponse").pyclass
 
-IMachineDebugger_readPhysicalMemoryRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_readPhysicalMemory").pyclass
+IMachineDebugger_readPhysicalMemoryRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_readPhysicalMemory").pyclass
 
-IMachineDebugger_readPhysicalMemoryResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_readPhysicalMemoryResponse").pyclass
+IMachineDebugger_readPhysicalMemoryResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_readPhysicalMemoryResponse").pyclass
 
-IMachineDebugger_writePhysicalMemoryRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_writePhysicalMemory").pyclass
+IMachineDebugger_writePhysicalMemoryRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachineDebugger_writePhysicalMemory").pyclass
 
-IMachineDebugger_writePhysicalMemoryResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_writePhysicalMemoryResponse").pyclass
+IMachineDebugger_writePhysicalMemoryResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_writePhysicalMemoryResponse").pyclass
 
-IMachineDebugger_readVirtualMemoryRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_readVirtualMemory").pyclass
+IMachineDebugger_readVirtualMemoryRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_readVirtualMemory").pyclass
 
-IMachineDebugger_readVirtualMemoryResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_readVirtualMemoryResponse").pyclass
+IMachineDebugger_readVirtualMemoryResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachineDebugger_readVirtualMemoryResponse").pyclass
 
-IMachineDebugger_writeVirtualMemoryRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_writeVirtualMemory").pyclass
+IMachineDebugger_writeVirtualMemoryRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IMachineDebugger_writeVirtualMemory").pyclass
 
-IMachineDebugger_writeVirtualMemoryResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_writeVirtualMemoryResponse").pyclass
+IMachineDebugger_writeVirtualMemoryResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineDebugger_writeVirtualMemoryResponse").pyclass
 
 IMachineDebugger_detectOSRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_detectOS").pyclass
 
@@ -15069,23 +15637,28 @@ IMachineDebugger_detectOSResultMsg = GED("http://www.virtualbox.org/", "IMachine
 
 IMachineDebugger_getRegisterRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRegister").pyclass
 
-IMachineDebugger_getRegisterResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRegisterResponse").pyclass
+IMachineDebugger_getRegisterResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachineDebugger_getRegisterResponse").pyclass
 
 IMachineDebugger_getRegistersRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRegisters").pyclass
 
-IMachineDebugger_getRegistersResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getRegistersResponse").pyclass
+IMachineDebugger_getRegistersResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachineDebugger_getRegistersResponse").pyclass
 
 IMachineDebugger_setRegisterRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRegister").pyclass
 
-IMachineDebugger_setRegisterResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRegisterResponse").pyclass
+IMachineDebugger_setRegisterResultMsg = GED("http://www.virtualbox.org/",
+                                            "IMachineDebugger_setRegisterResponse").pyclass
 
 IMachineDebugger_setRegistersRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRegisters").pyclass
 
-IMachineDebugger_setRegistersResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_setRegistersResponse").pyclass
+IMachineDebugger_setRegistersResultMsg = GED("http://www.virtualbox.org/",
+                                             "IMachineDebugger_setRegistersResponse").pyclass
 
 IMachineDebugger_dumpGuestStackRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_dumpGuestStack").pyclass
 
-IMachineDebugger_dumpGuestStackResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_dumpGuestStackResponse").pyclass
+IMachineDebugger_dumpGuestStackResultMsg = GED("http://www.virtualbox.org/",
+                                               "IMachineDebugger_dumpGuestStackResponse").pyclass
 
 IMachineDebugger_resetStatsRequestMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_resetStats").pyclass
 
@@ -15099,21 +15672,29 @@ IMachineDebugger_getStatsRequestMsg = GED("http://www.virtualbox.org/", "IMachin
 
 IMachineDebugger_getStatsResultMsg = GED("http://www.virtualbox.org/", "IMachineDebugger_getStatsResponse").pyclass
 
-IUSBDeviceFilters_getDeviceFiltersRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_getDeviceFilters").pyclass
+IUSBDeviceFilters_getDeviceFiltersRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IUSBDeviceFilters_getDeviceFilters").pyclass
 
-IUSBDeviceFilters_getDeviceFiltersResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_getDeviceFiltersResponse").pyclass
+IUSBDeviceFilters_getDeviceFiltersResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IUSBDeviceFilters_getDeviceFiltersResponse").pyclass
 
-IUSBDeviceFilters_createDeviceFilterRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_createDeviceFilter").pyclass
+IUSBDeviceFilters_createDeviceFilterRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IUSBDeviceFilters_createDeviceFilter").pyclass
 
-IUSBDeviceFilters_createDeviceFilterResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_createDeviceFilterResponse").pyclass
+IUSBDeviceFilters_createDeviceFilterResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IUSBDeviceFilters_createDeviceFilterResponse").pyclass
 
-IUSBDeviceFilters_insertDeviceFilterRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_insertDeviceFilter").pyclass
+IUSBDeviceFilters_insertDeviceFilterRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IUSBDeviceFilters_insertDeviceFilter").pyclass
 
-IUSBDeviceFilters_insertDeviceFilterResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_insertDeviceFilterResponse").pyclass
+IUSBDeviceFilters_insertDeviceFilterResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IUSBDeviceFilters_insertDeviceFilterResponse").pyclass
 
-IUSBDeviceFilters_removeDeviceFilterRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_removeDeviceFilter").pyclass
+IUSBDeviceFilters_removeDeviceFilterRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IUSBDeviceFilters_removeDeviceFilter").pyclass
 
-IUSBDeviceFilters_removeDeviceFilterResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilters_removeDeviceFilterResponse").pyclass
+IUSBDeviceFilters_removeDeviceFilterResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IUSBDeviceFilters_removeDeviceFilterResponse").pyclass
 
 IUSBController_getNameRequestMsg = GED("http://www.virtualbox.org/", "IUSBController_getName").pyclass
 
@@ -15125,7 +15706,8 @@ IUSBController_getTypeResultMsg = GED("http://www.virtualbox.org/", "IUSBControl
 
 IUSBController_getUSBStandardRequestMsg = GED("http://www.virtualbox.org/", "IUSBController_getUSBStandard").pyclass
 
-IUSBController_getUSBStandardResultMsg = GED("http://www.virtualbox.org/", "IUSBController_getUSBStandardResponse").pyclass
+IUSBController_getUSBStandardResultMsg = GED("http://www.virtualbox.org/",
+                                             "IUSBController_getUSBStandardResponse").pyclass
 
 IUSBDevice_getIdRequestMsg = GED("http://www.virtualbox.org/", "IUSBDevice_getId").pyclass
 
@@ -15193,35 +15775,45 @@ IUSBDeviceFilter_setActiveResultMsg = GED("http://www.virtualbox.org/", "IUSBDev
 
 IUSBDeviceFilter_getVendorIdRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getVendorId").pyclass
 
-IUSBDeviceFilter_getVendorIdResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getVendorIdResponse").pyclass
+IUSBDeviceFilter_getVendorIdResultMsg = GED("http://www.virtualbox.org/",
+                                            "IUSBDeviceFilter_getVendorIdResponse").pyclass
 
 IUSBDeviceFilter_setVendorIdRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setVendorId").pyclass
 
-IUSBDeviceFilter_setVendorIdResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setVendorIdResponse").pyclass
+IUSBDeviceFilter_setVendorIdResultMsg = GED("http://www.virtualbox.org/",
+                                            "IUSBDeviceFilter_setVendorIdResponse").pyclass
 
 IUSBDeviceFilter_getProductIdRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getProductId").pyclass
 
-IUSBDeviceFilter_getProductIdResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getProductIdResponse").pyclass
+IUSBDeviceFilter_getProductIdResultMsg = GED("http://www.virtualbox.org/",
+                                             "IUSBDeviceFilter_getProductIdResponse").pyclass
 
 IUSBDeviceFilter_setProductIdRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setProductId").pyclass
 
-IUSBDeviceFilter_setProductIdResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setProductIdResponse").pyclass
+IUSBDeviceFilter_setProductIdResultMsg = GED("http://www.virtualbox.org/",
+                                             "IUSBDeviceFilter_setProductIdResponse").pyclass
 
 IUSBDeviceFilter_getRevisionRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getRevision").pyclass
 
-IUSBDeviceFilter_getRevisionResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getRevisionResponse").pyclass
+IUSBDeviceFilter_getRevisionResultMsg = GED("http://www.virtualbox.org/",
+                                            "IUSBDeviceFilter_getRevisionResponse").pyclass
 
 IUSBDeviceFilter_setRevisionRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setRevision").pyclass
 
-IUSBDeviceFilter_setRevisionResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setRevisionResponse").pyclass
+IUSBDeviceFilter_setRevisionResultMsg = GED("http://www.virtualbox.org/",
+                                            "IUSBDeviceFilter_setRevisionResponse").pyclass
 
-IUSBDeviceFilter_getManufacturerRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getManufacturer").pyclass
+IUSBDeviceFilter_getManufacturerRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IUSBDeviceFilter_getManufacturer").pyclass
 
-IUSBDeviceFilter_getManufacturerResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getManufacturerResponse").pyclass
+IUSBDeviceFilter_getManufacturerResultMsg = GED("http://www.virtualbox.org/",
+                                                "IUSBDeviceFilter_getManufacturerResponse").pyclass
 
-IUSBDeviceFilter_setManufacturerRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setManufacturer").pyclass
+IUSBDeviceFilter_setManufacturerRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IUSBDeviceFilter_setManufacturer").pyclass
 
-IUSBDeviceFilter_setManufacturerResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setManufacturerResponse").pyclass
+IUSBDeviceFilter_setManufacturerResultMsg = GED("http://www.virtualbox.org/",
+                                                "IUSBDeviceFilter_setManufacturerResponse").pyclass
 
 IUSBDeviceFilter_getProductRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getProduct").pyclass
 
@@ -15231,13 +15823,17 @@ IUSBDeviceFilter_setProductRequestMsg = GED("http://www.virtualbox.org/", "IUSBD
 
 IUSBDeviceFilter_setProductResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setProductResponse").pyclass
 
-IUSBDeviceFilter_getSerialNumberRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getSerialNumber").pyclass
+IUSBDeviceFilter_getSerialNumberRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IUSBDeviceFilter_getSerialNumber").pyclass
 
-IUSBDeviceFilter_getSerialNumberResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getSerialNumberResponse").pyclass
+IUSBDeviceFilter_getSerialNumberResultMsg = GED("http://www.virtualbox.org/",
+                                                "IUSBDeviceFilter_getSerialNumberResponse").pyclass
 
-IUSBDeviceFilter_setSerialNumberRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setSerialNumber").pyclass
+IUSBDeviceFilter_setSerialNumberRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IUSBDeviceFilter_setSerialNumber").pyclass
 
-IUSBDeviceFilter_setSerialNumberResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setSerialNumberResponse").pyclass
+IUSBDeviceFilter_setSerialNumberResultMsg = GED("http://www.virtualbox.org/",
+                                                "IUSBDeviceFilter_setSerialNumberResponse").pyclass
 
 IUSBDeviceFilter_getPortRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getPort").pyclass
 
@@ -15255,13 +15851,17 @@ IUSBDeviceFilter_setRemoteRequestMsg = GED("http://www.virtualbox.org/", "IUSBDe
 
 IUSBDeviceFilter_setRemoteResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setRemoteResponse").pyclass
 
-IUSBDeviceFilter_getMaskedInterfacesRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getMaskedInterfaces").pyclass
+IUSBDeviceFilter_getMaskedInterfacesRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IUSBDeviceFilter_getMaskedInterfaces").pyclass
 
-IUSBDeviceFilter_getMaskedInterfacesResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_getMaskedInterfacesResponse").pyclass
+IUSBDeviceFilter_getMaskedInterfacesResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IUSBDeviceFilter_getMaskedInterfacesResponse").pyclass
 
-IUSBDeviceFilter_setMaskedInterfacesRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setMaskedInterfaces").pyclass
+IUSBDeviceFilter_setMaskedInterfacesRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IUSBDeviceFilter_setMaskedInterfaces").pyclass
 
-IUSBDeviceFilter_setMaskedInterfacesResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceFilter_setMaskedInterfacesResponse").pyclass
+IUSBDeviceFilter_setMaskedInterfacesResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IUSBDeviceFilter_setMaskedInterfacesResponse").pyclass
 
 IHostUSBDevice_getStateRequestMsg = GED("http://www.virtualbox.org/", "IHostUSBDevice_getState").pyclass
 
@@ -15269,11 +15869,13 @@ IHostUSBDevice_getStateResultMsg = GED("http://www.virtualbox.org/", "IHostUSBDe
 
 IHostUSBDeviceFilter_getActionRequestMsg = GED("http://www.virtualbox.org/", "IHostUSBDeviceFilter_getAction").pyclass
 
-IHostUSBDeviceFilter_getActionResultMsg = GED("http://www.virtualbox.org/", "IHostUSBDeviceFilter_getActionResponse").pyclass
+IHostUSBDeviceFilter_getActionResultMsg = GED("http://www.virtualbox.org/",
+                                              "IHostUSBDeviceFilter_getActionResponse").pyclass
 
 IHostUSBDeviceFilter_setActionRequestMsg = GED("http://www.virtualbox.org/", "IHostUSBDeviceFilter_setAction").pyclass
 
-IHostUSBDeviceFilter_setActionResultMsg = GED("http://www.virtualbox.org/", "IHostUSBDeviceFilter_setActionResponse").pyclass
+IHostUSBDeviceFilter_setActionResultMsg = GED("http://www.virtualbox.org/",
+                                              "IHostUSBDeviceFilter_setActionResponse").pyclass
 
 IAudioAdapter_getEnabledRequestMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_getEnabled").pyclass
 
@@ -15283,21 +15885,27 @@ IAudioAdapter_setEnabledRequestMsg = GED("http://www.virtualbox.org/", "IAudioAd
 
 IAudioAdapter_setEnabledResultMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_setEnabledResponse").pyclass
 
-IAudioAdapter_getAudioControllerRequestMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_getAudioController").pyclass
+IAudioAdapter_getAudioControllerRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IAudioAdapter_getAudioController").pyclass
 
-IAudioAdapter_getAudioControllerResultMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_getAudioControllerResponse").pyclass
+IAudioAdapter_getAudioControllerResultMsg = GED("http://www.virtualbox.org/",
+                                                "IAudioAdapter_getAudioControllerResponse").pyclass
 
-IAudioAdapter_setAudioControllerRequestMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_setAudioController").pyclass
+IAudioAdapter_setAudioControllerRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IAudioAdapter_setAudioController").pyclass
 
-IAudioAdapter_setAudioControllerResultMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_setAudioControllerResponse").pyclass
+IAudioAdapter_setAudioControllerResultMsg = GED("http://www.virtualbox.org/",
+                                                "IAudioAdapter_setAudioControllerResponse").pyclass
 
 IAudioAdapter_getAudioDriverRequestMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_getAudioDriver").pyclass
 
-IAudioAdapter_getAudioDriverResultMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_getAudioDriverResponse").pyclass
+IAudioAdapter_getAudioDriverResultMsg = GED("http://www.virtualbox.org/",
+                                            "IAudioAdapter_getAudioDriverResponse").pyclass
 
 IAudioAdapter_setAudioDriverRequestMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_setAudioDriver").pyclass
 
-IAudioAdapter_setAudioDriverResultMsg = GED("http://www.virtualbox.org/", "IAudioAdapter_setAudioDriverResponse").pyclass
+IAudioAdapter_setAudioDriverResultMsg = GED("http://www.virtualbox.org/",
+                                            "IAudioAdapter_setAudioDriverResponse").pyclass
 
 IVRDEServer_getEnabledRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getEnabled").pyclass
 
@@ -15323,21 +15931,29 @@ IVRDEServer_setAuthTimeoutRequestMsg = GED("http://www.virtualbox.org/", "IVRDES
 
 IVRDEServer_setAuthTimeoutResultMsg = GED("http://www.virtualbox.org/", "IVRDEServer_setAuthTimeoutResponse").pyclass
 
-IVRDEServer_getAllowMultiConnectionRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getAllowMultiConnection").pyclass
+IVRDEServer_getAllowMultiConnectionRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IVRDEServer_getAllowMultiConnection").pyclass
 
-IVRDEServer_getAllowMultiConnectionResultMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getAllowMultiConnectionResponse").pyclass
+IVRDEServer_getAllowMultiConnectionResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IVRDEServer_getAllowMultiConnectionResponse").pyclass
 
-IVRDEServer_setAllowMultiConnectionRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_setAllowMultiConnection").pyclass
+IVRDEServer_setAllowMultiConnectionRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IVRDEServer_setAllowMultiConnection").pyclass
 
-IVRDEServer_setAllowMultiConnectionResultMsg = GED("http://www.virtualbox.org/", "IVRDEServer_setAllowMultiConnectionResponse").pyclass
+IVRDEServer_setAllowMultiConnectionResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IVRDEServer_setAllowMultiConnectionResponse").pyclass
 
-IVRDEServer_getReuseSingleConnectionRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getReuseSingleConnection").pyclass
+IVRDEServer_getReuseSingleConnectionRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IVRDEServer_getReuseSingleConnection").pyclass
 
-IVRDEServer_getReuseSingleConnectionResultMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getReuseSingleConnectionResponse").pyclass
+IVRDEServer_getReuseSingleConnectionResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IVRDEServer_getReuseSingleConnectionResponse").pyclass
 
-IVRDEServer_setReuseSingleConnectionRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_setReuseSingleConnection").pyclass
+IVRDEServer_setReuseSingleConnectionRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IVRDEServer_setReuseSingleConnection").pyclass
 
-IVRDEServer_setReuseSingleConnectionResultMsg = GED("http://www.virtualbox.org/", "IVRDEServer_setReuseSingleConnectionResponse").pyclass
+IVRDEServer_setReuseSingleConnectionResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IVRDEServer_setReuseSingleConnectionResponse").pyclass
 
 IVRDEServer_getVRDEExtPackRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getVRDEExtPack").pyclass
 
@@ -15357,7 +15973,8 @@ IVRDEServer_setAuthLibraryResultMsg = GED("http://www.virtualbox.org/", "IVRDESe
 
 IVRDEServer_getVRDEPropertiesRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getVRDEProperties").pyclass
 
-IVRDEServer_getVRDEPropertiesResultMsg = GED("http://www.virtualbox.org/", "IVRDEServer_getVRDEPropertiesResponse").pyclass
+IVRDEServer_getVRDEPropertiesResultMsg = GED("http://www.virtualbox.org/",
+                                             "IVRDEServer_getVRDEPropertiesResponse").pyclass
 
 IVRDEServer_setVRDEPropertyRequestMsg = GED("http://www.virtualbox.org/", "IVRDEServer_setVRDEProperty").pyclass
 
@@ -15391,61 +16008,82 @@ IStorageController_getNameRequestMsg = GED("http://www.virtualbox.org/", "IStora
 
 IStorageController_getNameResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getNameResponse").pyclass
 
-IStorageController_getMaxDevicesPerPortCountRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getMaxDevicesPerPortCount").pyclass
+IStorageController_getMaxDevicesPerPortCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                             "IStorageController_getMaxDevicesPerPortCount").pyclass
 
-IStorageController_getMaxDevicesPerPortCountResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getMaxDevicesPerPortCountResponse").pyclass
+IStorageController_getMaxDevicesPerPortCountResultMsg = GED("http://www.virtualbox.org/",
+                                                            "IStorageController_getMaxDevicesPerPortCountResponse").pyclass
 
-IStorageController_getMinPortCountRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getMinPortCount").pyclass
+IStorageController_getMinPortCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IStorageController_getMinPortCount").pyclass
 
-IStorageController_getMinPortCountResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getMinPortCountResponse").pyclass
+IStorageController_getMinPortCountResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IStorageController_getMinPortCountResponse").pyclass
 
-IStorageController_getMaxPortCountRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getMaxPortCount").pyclass
+IStorageController_getMaxPortCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IStorageController_getMaxPortCount").pyclass
 
-IStorageController_getMaxPortCountResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getMaxPortCountResponse").pyclass
+IStorageController_getMaxPortCountResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IStorageController_getMaxPortCountResponse").pyclass
 
 IStorageController_getInstanceRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getInstance").pyclass
 
-IStorageController_getInstanceResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getInstanceResponse").pyclass
+IStorageController_getInstanceResultMsg = GED("http://www.virtualbox.org/",
+                                              "IStorageController_getInstanceResponse").pyclass
 
 IStorageController_setInstanceRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_setInstance").pyclass
 
-IStorageController_setInstanceResultMsg = GED("http://www.virtualbox.org/", "IStorageController_setInstanceResponse").pyclass
+IStorageController_setInstanceResultMsg = GED("http://www.virtualbox.org/",
+                                              "IStorageController_setInstanceResponse").pyclass
 
 IStorageController_getPortCountRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getPortCount").pyclass
 
-IStorageController_getPortCountResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getPortCountResponse").pyclass
+IStorageController_getPortCountResultMsg = GED("http://www.virtualbox.org/",
+                                               "IStorageController_getPortCountResponse").pyclass
 
 IStorageController_setPortCountRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_setPortCount").pyclass
 
-IStorageController_setPortCountResultMsg = GED("http://www.virtualbox.org/", "IStorageController_setPortCountResponse").pyclass
+IStorageController_setPortCountResultMsg = GED("http://www.virtualbox.org/",
+                                               "IStorageController_setPortCountResponse").pyclass
 
 IStorageController_getBusRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getBus").pyclass
 
 IStorageController_getBusResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getBusResponse").pyclass
 
-IStorageController_getControllerTypeRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getControllerType").pyclass
+IStorageController_getControllerTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IStorageController_getControllerType").pyclass
 
-IStorageController_getControllerTypeResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getControllerTypeResponse").pyclass
+IStorageController_getControllerTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IStorageController_getControllerTypeResponse").pyclass
 
-IStorageController_setControllerTypeRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_setControllerType").pyclass
+IStorageController_setControllerTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IStorageController_setControllerType").pyclass
 
-IStorageController_setControllerTypeResultMsg = GED("http://www.virtualbox.org/", "IStorageController_setControllerTypeResponse").pyclass
+IStorageController_setControllerTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IStorageController_setControllerTypeResponse").pyclass
 
-IStorageController_getUseHostIOCacheRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getUseHostIOCache").pyclass
+IStorageController_getUseHostIOCacheRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IStorageController_getUseHostIOCache").pyclass
 
-IStorageController_getUseHostIOCacheResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getUseHostIOCacheResponse").pyclass
+IStorageController_getUseHostIOCacheResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IStorageController_getUseHostIOCacheResponse").pyclass
 
-IStorageController_setUseHostIOCacheRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_setUseHostIOCache").pyclass
+IStorageController_setUseHostIOCacheRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IStorageController_setUseHostIOCache").pyclass
 
-IStorageController_setUseHostIOCacheResultMsg = GED("http://www.virtualbox.org/", "IStorageController_setUseHostIOCacheResponse").pyclass
+IStorageController_setUseHostIOCacheResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IStorageController_setUseHostIOCacheResponse").pyclass
 
 IStorageController_getBootableRequestMsg = GED("http://www.virtualbox.org/", "IStorageController_getBootable").pyclass
 
-IStorageController_getBootableResultMsg = GED("http://www.virtualbox.org/", "IStorageController_getBootableResponse").pyclass
+IStorageController_getBootableResultMsg = GED("http://www.virtualbox.org/",
+                                              "IStorageController_getBootableResponse").pyclass
 
-IManagedObjectRef_getInterfaceNameRequestMsg = GED("http://www.virtualbox.org/", "IManagedObjectRef_getInterfaceName").pyclass
+IManagedObjectRef_getInterfaceNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IManagedObjectRef_getInterfaceName").pyclass
 
-IManagedObjectRef_getInterfaceNameResultMsg = GED("http://www.virtualbox.org/", "IManagedObjectRef_getInterfaceNameResponse").pyclass
+IManagedObjectRef_getInterfaceNameResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IManagedObjectRef_getInterfaceNameResponse").pyclass
 
 IManagedObjectRef_releaseRequestMsg = GED("http://www.virtualbox.org/", "IManagedObjectRef_release").pyclass
 
@@ -15455,29 +16093,37 @@ IWebsessionManager_logonRequestMsg = GED("http://www.virtualbox.org/", "IWebsess
 
 IWebsessionManager_logonResultMsg = GED("http://www.virtualbox.org/", "IWebsessionManager_logonResponse").pyclass
 
-IWebsessionManager_getSessionObjectRequestMsg = GED("http://www.virtualbox.org/", "IWebsessionManager_getSessionObject").pyclass
+IWebsessionManager_getSessionObjectRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IWebsessionManager_getSessionObject").pyclass
 
-IWebsessionManager_getSessionObjectResultMsg = GED("http://www.virtualbox.org/", "IWebsessionManager_getSessionObjectResponse").pyclass
+IWebsessionManager_getSessionObjectResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IWebsessionManager_getSessionObjectResponse").pyclass
 
 IWebsessionManager_logoffRequestMsg = GED("http://www.virtualbox.org/", "IWebsessionManager_logoff").pyclass
 
 IWebsessionManager_logoffResultMsg = GED("http://www.virtualbox.org/", "IWebsessionManager_logoffResponse").pyclass
 
-IPerformanceMetric_getMetricNameRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getMetricName").pyclass
+IPerformanceMetric_getMetricNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IPerformanceMetric_getMetricName").pyclass
 
-IPerformanceMetric_getMetricNameResultMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getMetricNameResponse").pyclass
+IPerformanceMetric_getMetricNameResultMsg = GED("http://www.virtualbox.org/",
+                                                "IPerformanceMetric_getMetricNameResponse").pyclass
 
 IPerformanceMetric_getObjectRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getObject").pyclass
 
-IPerformanceMetric_getObjectResultMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getObjectResponse").pyclass
+IPerformanceMetric_getObjectResultMsg = GED("http://www.virtualbox.org/",
+                                            "IPerformanceMetric_getObjectResponse").pyclass
 
-IPerformanceMetric_getDescriptionRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getDescription").pyclass
+IPerformanceMetric_getDescriptionRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IPerformanceMetric_getDescription").pyclass
 
-IPerformanceMetric_getDescriptionResultMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getDescriptionResponse").pyclass
+IPerformanceMetric_getDescriptionResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IPerformanceMetric_getDescriptionResponse").pyclass
 
 IPerformanceMetric_getPeriodRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getPeriod").pyclass
 
-IPerformanceMetric_getPeriodResultMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getPeriodResponse").pyclass
+IPerformanceMetric_getPeriodResultMsg = GED("http://www.virtualbox.org/",
+                                            "IPerformanceMetric_getPeriodResponse").pyclass
 
 IPerformanceMetric_getCountRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getCount").pyclass
 
@@ -15487,37 +16133,53 @@ IPerformanceMetric_getUnitRequestMsg = GED("http://www.virtualbox.org/", "IPerfo
 
 IPerformanceMetric_getUnitResultMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getUnitResponse").pyclass
 
-IPerformanceMetric_getMinimumValueRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getMinimumValue").pyclass
+IPerformanceMetric_getMinimumValueRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IPerformanceMetric_getMinimumValue").pyclass
 
-IPerformanceMetric_getMinimumValueResultMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getMinimumValueResponse").pyclass
+IPerformanceMetric_getMinimumValueResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IPerformanceMetric_getMinimumValueResponse").pyclass
 
-IPerformanceMetric_getMaximumValueRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getMaximumValue").pyclass
+IPerformanceMetric_getMaximumValueRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IPerformanceMetric_getMaximumValue").pyclass
 
-IPerformanceMetric_getMaximumValueResultMsg = GED("http://www.virtualbox.org/", "IPerformanceMetric_getMaximumValueResponse").pyclass
+IPerformanceMetric_getMaximumValueResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IPerformanceMetric_getMaximumValueResponse").pyclass
 
-IPerformanceCollector_getMetricNamesRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_getMetricNames").pyclass
+IPerformanceCollector_getMetricNamesRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IPerformanceCollector_getMetricNames").pyclass
 
-IPerformanceCollector_getMetricNamesResultMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_getMetricNamesResponse").pyclass
+IPerformanceCollector_getMetricNamesResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IPerformanceCollector_getMetricNamesResponse").pyclass
 
-IPerformanceCollector_getMetricsRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_getMetrics").pyclass
+IPerformanceCollector_getMetricsRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IPerformanceCollector_getMetrics").pyclass
 
-IPerformanceCollector_getMetricsResultMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_getMetricsResponse").pyclass
+IPerformanceCollector_getMetricsResultMsg = GED("http://www.virtualbox.org/",
+                                                "IPerformanceCollector_getMetricsResponse").pyclass
 
-IPerformanceCollector_setupMetricsRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_setupMetrics").pyclass
+IPerformanceCollector_setupMetricsRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IPerformanceCollector_setupMetrics").pyclass
 
-IPerformanceCollector_setupMetricsResultMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_setupMetricsResponse").pyclass
+IPerformanceCollector_setupMetricsResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IPerformanceCollector_setupMetricsResponse").pyclass
 
-IPerformanceCollector_enableMetricsRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_enableMetrics").pyclass
+IPerformanceCollector_enableMetricsRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IPerformanceCollector_enableMetrics").pyclass
 
-IPerformanceCollector_enableMetricsResultMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_enableMetricsResponse").pyclass
+IPerformanceCollector_enableMetricsResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IPerformanceCollector_enableMetricsResponse").pyclass
 
-IPerformanceCollector_disableMetricsRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_disableMetrics").pyclass
+IPerformanceCollector_disableMetricsRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IPerformanceCollector_disableMetrics").pyclass
 
-IPerformanceCollector_disableMetricsResultMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_disableMetricsResponse").pyclass
+IPerformanceCollector_disableMetricsResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IPerformanceCollector_disableMetricsResponse").pyclass
 
-IPerformanceCollector_queryMetricsDataRequestMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_queryMetricsData").pyclass
+IPerformanceCollector_queryMetricsDataRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IPerformanceCollector_queryMetricsData").pyclass
 
-IPerformanceCollector_queryMetricsDataResultMsg = GED("http://www.virtualbox.org/", "IPerformanceCollector_queryMetricsDataResponse").pyclass
+IPerformanceCollector_queryMetricsDataResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IPerformanceCollector_queryMetricsDataResponse").pyclass
 
 INATEngine_getNetworkRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_getNetwork").pyclass
 
@@ -15553,11 +16215,13 @@ INATEngine_setTFTPBootFileResultMsg = GED("http://www.virtualbox.org/", "INATEng
 
 INATEngine_getTFTPNextServerRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_getTFTPNextServer").pyclass
 
-INATEngine_getTFTPNextServerResultMsg = GED("http://www.virtualbox.org/", "INATEngine_getTFTPNextServerResponse").pyclass
+INATEngine_getTFTPNextServerResultMsg = GED("http://www.virtualbox.org/",
+                                            "INATEngine_getTFTPNextServerResponse").pyclass
 
 INATEngine_setTFTPNextServerRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_setTFTPNextServer").pyclass
 
-INATEngine_setTFTPNextServerResultMsg = GED("http://www.virtualbox.org/", "INATEngine_setTFTPNextServerResponse").pyclass
+INATEngine_setTFTPNextServerResultMsg = GED("http://www.virtualbox.org/",
+                                            "INATEngine_setTFTPNextServerResponse").pyclass
 
 INATEngine_getAliasModeRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_getAliasMode").pyclass
 
@@ -15583,13 +16247,17 @@ INATEngine_setDNSProxyRequestMsg = GED("http://www.virtualbox.org/", "INATEngine
 
 INATEngine_setDNSProxyResultMsg = GED("http://www.virtualbox.org/", "INATEngine_setDNSProxyResponse").pyclass
 
-INATEngine_getDNSUseHostResolverRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_getDNSUseHostResolver").pyclass
+INATEngine_getDNSUseHostResolverRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "INATEngine_getDNSUseHostResolver").pyclass
 
-INATEngine_getDNSUseHostResolverResultMsg = GED("http://www.virtualbox.org/", "INATEngine_getDNSUseHostResolverResponse").pyclass
+INATEngine_getDNSUseHostResolverResultMsg = GED("http://www.virtualbox.org/",
+                                                "INATEngine_getDNSUseHostResolverResponse").pyclass
 
-INATEngine_setDNSUseHostResolverRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_setDNSUseHostResolver").pyclass
+INATEngine_setDNSUseHostResolverRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "INATEngine_setDNSUseHostResolver").pyclass
 
-INATEngine_setDNSUseHostResolverResultMsg = GED("http://www.virtualbox.org/", "INATEngine_setDNSUseHostResolverResponse").pyclass
+INATEngine_setDNSUseHostResolverResultMsg = GED("http://www.virtualbox.org/",
+                                                "INATEngine_setDNSUseHostResolverResponse").pyclass
 
 INATEngine_getRedirectsRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_getRedirects").pyclass
 
@@ -15597,11 +16265,13 @@ INATEngine_getRedirectsResultMsg = GED("http://www.virtualbox.org/", "INATEngine
 
 INATEngine_setNetworkSettingsRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_setNetworkSettings").pyclass
 
-INATEngine_setNetworkSettingsResultMsg = GED("http://www.virtualbox.org/", "INATEngine_setNetworkSettingsResponse").pyclass
+INATEngine_setNetworkSettingsResultMsg = GED("http://www.virtualbox.org/",
+                                             "INATEngine_setNetworkSettingsResponse").pyclass
 
 INATEngine_getNetworkSettingsRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_getNetworkSettings").pyclass
 
-INATEngine_getNetworkSettingsResultMsg = GED("http://www.virtualbox.org/", "INATEngine_getNetworkSettingsResponse").pyclass
+INATEngine_getNetworkSettingsResultMsg = GED("http://www.virtualbox.org/",
+                                             "INATEngine_getNetworkSettingsResponse").pyclass
 
 INATEngine_addRedirectRequestMsg = GED("http://www.virtualbox.org/", "INATEngine_addRedirect").pyclass
 
@@ -15621,35 +16291,49 @@ IBandwidthGroup_getTypeResultMsg = GED("http://www.virtualbox.org/", "IBandwidth
 
 IBandwidthGroup_getReferenceRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthGroup_getReference").pyclass
 
-IBandwidthGroup_getReferenceResultMsg = GED("http://www.virtualbox.org/", "IBandwidthGroup_getReferenceResponse").pyclass
+IBandwidthGroup_getReferenceResultMsg = GED("http://www.virtualbox.org/",
+                                            "IBandwidthGroup_getReferenceResponse").pyclass
 
-IBandwidthGroup_getMaxBytesPerSecRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthGroup_getMaxBytesPerSec").pyclass
+IBandwidthGroup_getMaxBytesPerSecRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IBandwidthGroup_getMaxBytesPerSec").pyclass
 
-IBandwidthGroup_getMaxBytesPerSecResultMsg = GED("http://www.virtualbox.org/", "IBandwidthGroup_getMaxBytesPerSecResponse").pyclass
+IBandwidthGroup_getMaxBytesPerSecResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IBandwidthGroup_getMaxBytesPerSecResponse").pyclass
 
-IBandwidthGroup_setMaxBytesPerSecRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthGroup_setMaxBytesPerSec").pyclass
+IBandwidthGroup_setMaxBytesPerSecRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IBandwidthGroup_setMaxBytesPerSec").pyclass
 
-IBandwidthGroup_setMaxBytesPerSecResultMsg = GED("http://www.virtualbox.org/", "IBandwidthGroup_setMaxBytesPerSecResponse").pyclass
+IBandwidthGroup_setMaxBytesPerSecResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IBandwidthGroup_setMaxBytesPerSecResponse").pyclass
 
 IBandwidthControl_getNumGroupsRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_getNumGroups").pyclass
 
-IBandwidthControl_getNumGroupsResultMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_getNumGroupsResponse").pyclass
+IBandwidthControl_getNumGroupsResultMsg = GED("http://www.virtualbox.org/",
+                                              "IBandwidthControl_getNumGroupsResponse").pyclass
 
-IBandwidthControl_createBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_createBandwidthGroup").pyclass
+IBandwidthControl_createBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IBandwidthControl_createBandwidthGroup").pyclass
 
-IBandwidthControl_createBandwidthGroupResultMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_createBandwidthGroupResponse").pyclass
+IBandwidthControl_createBandwidthGroupResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IBandwidthControl_createBandwidthGroupResponse").pyclass
 
-IBandwidthControl_deleteBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_deleteBandwidthGroup").pyclass
+IBandwidthControl_deleteBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IBandwidthControl_deleteBandwidthGroup").pyclass
 
-IBandwidthControl_deleteBandwidthGroupResultMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_deleteBandwidthGroupResponse").pyclass
+IBandwidthControl_deleteBandwidthGroupResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IBandwidthControl_deleteBandwidthGroupResponse").pyclass
 
-IBandwidthControl_getBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_getBandwidthGroup").pyclass
+IBandwidthControl_getBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IBandwidthControl_getBandwidthGroup").pyclass
 
-IBandwidthControl_getBandwidthGroupResultMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_getBandwidthGroupResponse").pyclass
+IBandwidthControl_getBandwidthGroupResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IBandwidthControl_getBandwidthGroupResponse").pyclass
 
-IBandwidthControl_getAllBandwidthGroupsRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_getAllBandwidthGroups").pyclass
+IBandwidthControl_getAllBandwidthGroupsRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IBandwidthControl_getAllBandwidthGroups").pyclass
 
-IBandwidthControl_getAllBandwidthGroupsResultMsg = GED("http://www.virtualbox.org/", "IBandwidthControl_getAllBandwidthGroupsResponse").pyclass
+IBandwidthControl_getAllBandwidthGroupsResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IBandwidthControl_getAllBandwidthGroupsResponse").pyclass
 
 IEventSource_createListenerRequestMsg = GED("http://www.virtualbox.org/", "IEventSource_createListener").pyclass
 
@@ -15657,15 +16341,18 @@ IEventSource_createListenerResultMsg = GED("http://www.virtualbox.org/", "IEvent
 
 IEventSource_createAggregatorRequestMsg = GED("http://www.virtualbox.org/", "IEventSource_createAggregator").pyclass
 
-IEventSource_createAggregatorResultMsg = GED("http://www.virtualbox.org/", "IEventSource_createAggregatorResponse").pyclass
+IEventSource_createAggregatorResultMsg = GED("http://www.virtualbox.org/",
+                                             "IEventSource_createAggregatorResponse").pyclass
 
 IEventSource_registerListenerRequestMsg = GED("http://www.virtualbox.org/", "IEventSource_registerListener").pyclass
 
-IEventSource_registerListenerResultMsg = GED("http://www.virtualbox.org/", "IEventSource_registerListenerResponse").pyclass
+IEventSource_registerListenerResultMsg = GED("http://www.virtualbox.org/",
+                                             "IEventSource_registerListenerResponse").pyclass
 
 IEventSource_unregisterListenerRequestMsg = GED("http://www.virtualbox.org/", "IEventSource_unregisterListener").pyclass
 
-IEventSource_unregisterListenerResultMsg = GED("http://www.virtualbox.org/", "IEventSource_unregisterListenerResponse").pyclass
+IEventSource_unregisterListenerResultMsg = GED("http://www.virtualbox.org/",
+                                               "IEventSource_unregisterListenerResponse").pyclass
 
 IEventSource_fireEventRequestMsg = GED("http://www.virtualbox.org/", "IEventSource_fireEvent").pyclass
 
@@ -15705,7 +16392,8 @@ IEvent_waitProcessedResultMsg = GED("http://www.virtualbox.org/", "IEvent_waitPr
 
 IReusableEvent_getGenerationRequestMsg = GED("http://www.virtualbox.org/", "IReusableEvent_getGeneration").pyclass
 
-IReusableEvent_getGenerationResultMsg = GED("http://www.virtualbox.org/", "IReusableEvent_getGenerationResponse").pyclass
+IReusableEvent_getGenerationResultMsg = GED("http://www.virtualbox.org/",
+                                            "IReusableEvent_getGenerationResponse").pyclass
 
 IReusableEvent_reuseRequestMsg = GED("http://www.virtualbox.org/", "IReusableEvent_reuse").pyclass
 
@@ -15715,133 +16403,194 @@ IMachineEvent_getMachineIdRequestMsg = GED("http://www.virtualbox.org/", "IMachi
 
 IMachineEvent_getMachineIdResultMsg = GED("http://www.virtualbox.org/", "IMachineEvent_getMachineIdResponse").pyclass
 
-IMachineStateChangedEvent_getStateRequestMsg = GED("http://www.virtualbox.org/", "IMachineStateChangedEvent_getState").pyclass
+IMachineStateChangedEvent_getStateRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMachineStateChangedEvent_getState").pyclass
 
-IMachineStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org/", "IMachineStateChangedEvent_getStateResponse").pyclass
+IMachineStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMachineStateChangedEvent_getStateResponse").pyclass
 
-IMachineDataChangedEvent_getTemporaryRequestMsg = GED("http://www.virtualbox.org/", "IMachineDataChangedEvent_getTemporary").pyclass
+IMachineDataChangedEvent_getTemporaryRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachineDataChangedEvent_getTemporary").pyclass
 
-IMachineDataChangedEvent_getTemporaryResultMsg = GED("http://www.virtualbox.org/", "IMachineDataChangedEvent_getTemporaryResponse").pyclass
+IMachineDataChangedEvent_getTemporaryResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachineDataChangedEvent_getTemporaryResponse").pyclass
 
-IMediumRegisteredEvent_getMediumIdRequestMsg = GED("http://www.virtualbox.org/", "IMediumRegisteredEvent_getMediumId").pyclass
+IMediumRegisteredEvent_getMediumIdRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IMediumRegisteredEvent_getMediumId").pyclass
 
-IMediumRegisteredEvent_getMediumIdResultMsg = GED("http://www.virtualbox.org/", "IMediumRegisteredEvent_getMediumIdResponse").pyclass
+IMediumRegisteredEvent_getMediumIdResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IMediumRegisteredEvent_getMediumIdResponse").pyclass
 
-IMediumRegisteredEvent_getMediumTypeRequestMsg = GED("http://www.virtualbox.org/", "IMediumRegisteredEvent_getMediumType").pyclass
+IMediumRegisteredEvent_getMediumTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMediumRegisteredEvent_getMediumType").pyclass
 
-IMediumRegisteredEvent_getMediumTypeResultMsg = GED("http://www.virtualbox.org/", "IMediumRegisteredEvent_getMediumTypeResponse").pyclass
+IMediumRegisteredEvent_getMediumTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMediumRegisteredEvent_getMediumTypeResponse").pyclass
 
-IMediumRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/", "IMediumRegisteredEvent_getRegistered").pyclass
+IMediumRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IMediumRegisteredEvent_getRegistered").pyclass
 
-IMediumRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/", "IMediumRegisteredEvent_getRegisteredResponse").pyclass
+IMediumRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IMediumRegisteredEvent_getRegisteredResponse").pyclass
 
-IMachineRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/", "IMachineRegisteredEvent_getRegistered").pyclass
+IMachineRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IMachineRegisteredEvent_getRegistered").pyclass
 
-IMachineRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/", "IMachineRegisteredEvent_getRegisteredResponse").pyclass
+IMachineRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IMachineRegisteredEvent_getRegisteredResponse").pyclass
 
-ISessionStateChangedEvent_getStateRequestMsg = GED("http://www.virtualbox.org/", "ISessionStateChangedEvent_getState").pyclass
+ISessionStateChangedEvent_getStateRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "ISessionStateChangedEvent_getState").pyclass
 
-ISessionStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org/", "ISessionStateChangedEvent_getStateResponse").pyclass
+ISessionStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org/",
+                                                  "ISessionStateChangedEvent_getStateResponse").pyclass
 
-IGuestPropertyChangedEvent_getNameRequestMsg = GED("http://www.virtualbox.org/", "IGuestPropertyChangedEvent_getName").pyclass
+IGuestPropertyChangedEvent_getNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestPropertyChangedEvent_getName").pyclass
 
-IGuestPropertyChangedEvent_getNameResultMsg = GED("http://www.virtualbox.org/", "IGuestPropertyChangedEvent_getNameResponse").pyclass
+IGuestPropertyChangedEvent_getNameResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IGuestPropertyChangedEvent_getNameResponse").pyclass
 
-IGuestPropertyChangedEvent_getValueRequestMsg = GED("http://www.virtualbox.org/", "IGuestPropertyChangedEvent_getValue").pyclass
+IGuestPropertyChangedEvent_getValueRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestPropertyChangedEvent_getValue").pyclass
 
-IGuestPropertyChangedEvent_getValueResultMsg = GED("http://www.virtualbox.org/", "IGuestPropertyChangedEvent_getValueResponse").pyclass
+IGuestPropertyChangedEvent_getValueResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestPropertyChangedEvent_getValueResponse").pyclass
 
-IGuestPropertyChangedEvent_getFlagsRequestMsg = GED("http://www.virtualbox.org/", "IGuestPropertyChangedEvent_getFlags").pyclass
+IGuestPropertyChangedEvent_getFlagsRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestPropertyChangedEvent_getFlags").pyclass
 
-IGuestPropertyChangedEvent_getFlagsResultMsg = GED("http://www.virtualbox.org/", "IGuestPropertyChangedEvent_getFlagsResponse").pyclass
+IGuestPropertyChangedEvent_getFlagsResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestPropertyChangedEvent_getFlagsResponse").pyclass
 
 ISnapshotEvent_getSnapshotIdRequestMsg = GED("http://www.virtualbox.org/", "ISnapshotEvent_getSnapshotId").pyclass
 
-ISnapshotEvent_getSnapshotIdResultMsg = GED("http://www.virtualbox.org/", "ISnapshotEvent_getSnapshotIdResponse").pyclass
+ISnapshotEvent_getSnapshotIdResultMsg = GED("http://www.virtualbox.org/",
+                                            "ISnapshotEvent_getSnapshotIdResponse").pyclass
 
-IMousePointerShapeChangedEvent_getVisibleRequestMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getVisible").pyclass
+IMousePointerShapeChangedEvent_getVisibleRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "IMousePointerShapeChangedEvent_getVisible").pyclass
 
-IMousePointerShapeChangedEvent_getVisibleResultMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getVisibleResponse").pyclass
+IMousePointerShapeChangedEvent_getVisibleResultMsg = GED("http://www.virtualbox.org/",
+                                                         "IMousePointerShapeChangedEvent_getVisibleResponse").pyclass
 
-IMousePointerShapeChangedEvent_getAlphaRequestMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getAlpha").pyclass
+IMousePointerShapeChangedEvent_getAlphaRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMousePointerShapeChangedEvent_getAlpha").pyclass
 
-IMousePointerShapeChangedEvent_getAlphaResultMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getAlphaResponse").pyclass
+IMousePointerShapeChangedEvent_getAlphaResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMousePointerShapeChangedEvent_getAlphaResponse").pyclass
 
-IMousePointerShapeChangedEvent_getXhotRequestMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getXhot").pyclass
+IMousePointerShapeChangedEvent_getXhotRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMousePointerShapeChangedEvent_getXhot").pyclass
 
-IMousePointerShapeChangedEvent_getXhotResultMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getXhotResponse").pyclass
+IMousePointerShapeChangedEvent_getXhotResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMousePointerShapeChangedEvent_getXhotResponse").pyclass
 
-IMousePointerShapeChangedEvent_getYhotRequestMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getYhot").pyclass
+IMousePointerShapeChangedEvent_getYhotRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "IMousePointerShapeChangedEvent_getYhot").pyclass
 
-IMousePointerShapeChangedEvent_getYhotResultMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getYhotResponse").pyclass
+IMousePointerShapeChangedEvent_getYhotResultMsg = GED("http://www.virtualbox.org/",
+                                                      "IMousePointerShapeChangedEvent_getYhotResponse").pyclass
 
-IMousePointerShapeChangedEvent_getWidthRequestMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getWidth").pyclass
+IMousePointerShapeChangedEvent_getWidthRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMousePointerShapeChangedEvent_getWidth").pyclass
 
-IMousePointerShapeChangedEvent_getWidthResultMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getWidthResponse").pyclass
+IMousePointerShapeChangedEvent_getWidthResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMousePointerShapeChangedEvent_getWidthResponse").pyclass
 
-IMousePointerShapeChangedEvent_getHeightRequestMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getHeight").pyclass
+IMousePointerShapeChangedEvent_getHeightRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IMousePointerShapeChangedEvent_getHeight").pyclass
 
-IMousePointerShapeChangedEvent_getHeightResultMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getHeightResponse").pyclass
+IMousePointerShapeChangedEvent_getHeightResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IMousePointerShapeChangedEvent_getHeightResponse").pyclass
 
-IMousePointerShapeChangedEvent_getShapeRequestMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getShape").pyclass
+IMousePointerShapeChangedEvent_getShapeRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMousePointerShapeChangedEvent_getShape").pyclass
 
-IMousePointerShapeChangedEvent_getShapeResultMsg = GED("http://www.virtualbox.org/", "IMousePointerShapeChangedEvent_getShapeResponse").pyclass
+IMousePointerShapeChangedEvent_getShapeResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMousePointerShapeChangedEvent_getShapeResponse").pyclass
 
-IMouseCapabilityChangedEvent_getSupportsAbsoluteRequestMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getSupportsAbsolute").pyclass
+IMouseCapabilityChangedEvent_getSupportsAbsoluteRequestMsg = GED("http://www.virtualbox.org/",
+                                                                 "IMouseCapabilityChangedEvent_getSupportsAbsolute").pyclass
 
-IMouseCapabilityChangedEvent_getSupportsAbsoluteResultMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getSupportsAbsoluteResponse").pyclass
+IMouseCapabilityChangedEvent_getSupportsAbsoluteResultMsg = GED("http://www.virtualbox.org/",
+                                                                "IMouseCapabilityChangedEvent_getSupportsAbsoluteResponse").pyclass
 
-IMouseCapabilityChangedEvent_getSupportsRelativeRequestMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getSupportsRelative").pyclass
+IMouseCapabilityChangedEvent_getSupportsRelativeRequestMsg = GED("http://www.virtualbox.org/",
+                                                                 "IMouseCapabilityChangedEvent_getSupportsRelative").pyclass
 
-IMouseCapabilityChangedEvent_getSupportsRelativeResultMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getSupportsRelativeResponse").pyclass
+IMouseCapabilityChangedEvent_getSupportsRelativeResultMsg = GED("http://www.virtualbox.org/",
+                                                                "IMouseCapabilityChangedEvent_getSupportsRelativeResponse").pyclass
 
-IMouseCapabilityChangedEvent_getSupportsMultiTouchRequestMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getSupportsMultiTouch").pyclass
+IMouseCapabilityChangedEvent_getSupportsMultiTouchRequestMsg = GED("http://www.virtualbox.org/",
+                                                                   "IMouseCapabilityChangedEvent_getSupportsMultiTouch").pyclass
 
-IMouseCapabilityChangedEvent_getSupportsMultiTouchResultMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getSupportsMultiTouchResponse").pyclass
+IMouseCapabilityChangedEvent_getSupportsMultiTouchResultMsg = GED("http://www.virtualbox.org/",
+                                                                  "IMouseCapabilityChangedEvent_getSupportsMultiTouchResponse").pyclass
 
-IMouseCapabilityChangedEvent_getNeedsHostCursorRequestMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getNeedsHostCursor").pyclass
+IMouseCapabilityChangedEvent_getNeedsHostCursorRequestMsg = GED("http://www.virtualbox.org/",
+                                                                "IMouseCapabilityChangedEvent_getNeedsHostCursor").pyclass
 
-IMouseCapabilityChangedEvent_getNeedsHostCursorResultMsg = GED("http://www.virtualbox.org/", "IMouseCapabilityChangedEvent_getNeedsHostCursorResponse").pyclass
+IMouseCapabilityChangedEvent_getNeedsHostCursorResultMsg = GED("http://www.virtualbox.org/",
+                                                               "IMouseCapabilityChangedEvent_getNeedsHostCursorResponse").pyclass
 
-IKeyboardLedsChangedEvent_getNumLockRequestMsg = GED("http://www.virtualbox.org/", "IKeyboardLedsChangedEvent_getNumLock").pyclass
+IKeyboardLedsChangedEvent_getNumLockRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IKeyboardLedsChangedEvent_getNumLock").pyclass
 
-IKeyboardLedsChangedEvent_getNumLockResultMsg = GED("http://www.virtualbox.org/", "IKeyboardLedsChangedEvent_getNumLockResponse").pyclass
+IKeyboardLedsChangedEvent_getNumLockResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IKeyboardLedsChangedEvent_getNumLockResponse").pyclass
 
-IKeyboardLedsChangedEvent_getCapsLockRequestMsg = GED("http://www.virtualbox.org/", "IKeyboardLedsChangedEvent_getCapsLock").pyclass
+IKeyboardLedsChangedEvent_getCapsLockRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IKeyboardLedsChangedEvent_getCapsLock").pyclass
 
-IKeyboardLedsChangedEvent_getCapsLockResultMsg = GED("http://www.virtualbox.org/", "IKeyboardLedsChangedEvent_getCapsLockResponse").pyclass
+IKeyboardLedsChangedEvent_getCapsLockResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IKeyboardLedsChangedEvent_getCapsLockResponse").pyclass
 
-IKeyboardLedsChangedEvent_getScrollLockRequestMsg = GED("http://www.virtualbox.org/", "IKeyboardLedsChangedEvent_getScrollLock").pyclass
+IKeyboardLedsChangedEvent_getScrollLockRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IKeyboardLedsChangedEvent_getScrollLock").pyclass
 
-IKeyboardLedsChangedEvent_getScrollLockResultMsg = GED("http://www.virtualbox.org/", "IKeyboardLedsChangedEvent_getScrollLockResponse").pyclass
+IKeyboardLedsChangedEvent_getScrollLockResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IKeyboardLedsChangedEvent_getScrollLockResponse").pyclass
 
 IStateChangedEvent_getStateRequestMsg = GED("http://www.virtualbox.org/", "IStateChangedEvent_getState").pyclass
 
 IStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org/", "IStateChangedEvent_getStateResponse").pyclass
 
-INetworkAdapterChangedEvent_getNetworkAdapterRequestMsg = GED("http://www.virtualbox.org/", "INetworkAdapterChangedEvent_getNetworkAdapter").pyclass
+INetworkAdapterChangedEvent_getNetworkAdapterRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "INetworkAdapterChangedEvent_getNetworkAdapter").pyclass
 
-INetworkAdapterChangedEvent_getNetworkAdapterResultMsg = GED("http://www.virtualbox.org/", "INetworkAdapterChangedEvent_getNetworkAdapterResponse").pyclass
+INetworkAdapterChangedEvent_getNetworkAdapterResultMsg = GED("http://www.virtualbox.org/",
+                                                             "INetworkAdapterChangedEvent_getNetworkAdapterResponse").pyclass
 
-ISerialPortChangedEvent_getSerialPortRequestMsg = GED("http://www.virtualbox.org/", "ISerialPortChangedEvent_getSerialPort").pyclass
+ISerialPortChangedEvent_getSerialPortRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "ISerialPortChangedEvent_getSerialPort").pyclass
 
-ISerialPortChangedEvent_getSerialPortResultMsg = GED("http://www.virtualbox.org/", "ISerialPortChangedEvent_getSerialPortResponse").pyclass
+ISerialPortChangedEvent_getSerialPortResultMsg = GED("http://www.virtualbox.org/",
+                                                     "ISerialPortChangedEvent_getSerialPortResponse").pyclass
 
-IParallelPortChangedEvent_getParallelPortRequestMsg = GED("http://www.virtualbox.org/", "IParallelPortChangedEvent_getParallelPort").pyclass
+IParallelPortChangedEvent_getParallelPortRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "IParallelPortChangedEvent_getParallelPort").pyclass
 
-IParallelPortChangedEvent_getParallelPortResultMsg = GED("http://www.virtualbox.org/", "IParallelPortChangedEvent_getParallelPortResponse").pyclass
+IParallelPortChangedEvent_getParallelPortResultMsg = GED("http://www.virtualbox.org/",
+                                                         "IParallelPortChangedEvent_getParallelPortResponse").pyclass
 
-IMediumChangedEvent_getMediumAttachmentRequestMsg = GED("http://www.virtualbox.org/", "IMediumChangedEvent_getMediumAttachment").pyclass
+IMediumChangedEvent_getMediumAttachmentRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IMediumChangedEvent_getMediumAttachment").pyclass
 
-IMediumChangedEvent_getMediumAttachmentResultMsg = GED("http://www.virtualbox.org/", "IMediumChangedEvent_getMediumAttachmentResponse").pyclass
+IMediumChangedEvent_getMediumAttachmentResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IMediumChangedEvent_getMediumAttachmentResponse").pyclass
 
-IClipboardModeChangedEvent_getClipboardModeRequestMsg = GED("http://www.virtualbox.org/", "IClipboardModeChangedEvent_getClipboardMode").pyclass
+IClipboardModeChangedEvent_getClipboardModeRequestMsg = GED("http://www.virtualbox.org/",
+                                                            "IClipboardModeChangedEvent_getClipboardMode").pyclass
 
-IClipboardModeChangedEvent_getClipboardModeResultMsg = GED("http://www.virtualbox.org/", "IClipboardModeChangedEvent_getClipboardModeResponse").pyclass
+IClipboardModeChangedEvent_getClipboardModeResultMsg = GED("http://www.virtualbox.org/",
+                                                           "IClipboardModeChangedEvent_getClipboardModeResponse").pyclass
 
-IDragAndDropModeChangedEvent_getDragAndDropModeRequestMsg = GED("http://www.virtualbox.org/", "IDragAndDropModeChangedEvent_getDragAndDropMode").pyclass
+IDragAndDropModeChangedEvent_getDragAndDropModeRequestMsg = GED("http://www.virtualbox.org/",
+                                                                "IDragAndDropModeChangedEvent_getDragAndDropMode").pyclass
 
-IDragAndDropModeChangedEvent_getDragAndDropModeResultMsg = GED("http://www.virtualbox.org/", "IDragAndDropModeChangedEvent_getDragAndDropModeResponse").pyclass
+IDragAndDropModeChangedEvent_getDragAndDropModeResultMsg = GED("http://www.virtualbox.org/",
+                                                               "IDragAndDropModeChangedEvent_getDragAndDropModeResponse").pyclass
 
 ICPUChangedEvent_getCPURequestMsg = GED("http://www.virtualbox.org/", "ICPUChangedEvent_getCPU").pyclass
 
@@ -15851,13 +16600,17 @@ ICPUChangedEvent_getAddRequestMsg = GED("http://www.virtualbox.org/", "ICPUChang
 
 ICPUChangedEvent_getAddResultMsg = GED("http://www.virtualbox.org/", "ICPUChangedEvent_getAddResponse").pyclass
 
-ICPUExecutionCapChangedEvent_getExecutionCapRequestMsg = GED("http://www.virtualbox.org/", "ICPUExecutionCapChangedEvent_getExecutionCap").pyclass
+ICPUExecutionCapChangedEvent_getExecutionCapRequestMsg = GED("http://www.virtualbox.org/",
+                                                             "ICPUExecutionCapChangedEvent_getExecutionCap").pyclass
 
-ICPUExecutionCapChangedEvent_getExecutionCapResultMsg = GED("http://www.virtualbox.org/", "ICPUExecutionCapChangedEvent_getExecutionCapResponse").pyclass
+ICPUExecutionCapChangedEvent_getExecutionCapResultMsg = GED("http://www.virtualbox.org/",
+                                                            "ICPUExecutionCapChangedEvent_getExecutionCapResponse").pyclass
 
-IGuestKeyboardEvent_getScancodesRequestMsg = GED("http://www.virtualbox.org/", "IGuestKeyboardEvent_getScancodes").pyclass
+IGuestKeyboardEvent_getScancodesRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IGuestKeyboardEvent_getScancodes").pyclass
 
-IGuestKeyboardEvent_getScancodesResultMsg = GED("http://www.virtualbox.org/", "IGuestKeyboardEvent_getScancodesResponse").pyclass
+IGuestKeyboardEvent_getScancodesResultMsg = GED("http://www.virtualbox.org/",
+                                                "IGuestKeyboardEvent_getScancodesResponse").pyclass
 
 IGuestMouseEvent_getModeRequestMsg = GED("http://www.virtualbox.org/", "IGuestMouseEvent_getMode").pyclass
 
@@ -15883,101 +16636,142 @@ IGuestMouseEvent_getButtonsRequestMsg = GED("http://www.virtualbox.org/", "IGues
 
 IGuestMouseEvent_getButtonsResultMsg = GED("http://www.virtualbox.org/", "IGuestMouseEvent_getButtonsResponse").pyclass
 
-IGuestMultiTouchEvent_getContactCountRequestMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getContactCount").pyclass
+IGuestMultiTouchEvent_getContactCountRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IGuestMultiTouchEvent_getContactCount").pyclass
 
-IGuestMultiTouchEvent_getContactCountResultMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getContactCountResponse").pyclass
+IGuestMultiTouchEvent_getContactCountResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestMultiTouchEvent_getContactCountResponse").pyclass
 
-IGuestMultiTouchEvent_getXPositionsRequestMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getXPositions").pyclass
+IGuestMultiTouchEvent_getXPositionsRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestMultiTouchEvent_getXPositions").pyclass
 
-IGuestMultiTouchEvent_getXPositionsResultMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getXPositionsResponse").pyclass
+IGuestMultiTouchEvent_getXPositionsResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestMultiTouchEvent_getXPositionsResponse").pyclass
 
-IGuestMultiTouchEvent_getYPositionsRequestMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getYPositions").pyclass
+IGuestMultiTouchEvent_getYPositionsRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestMultiTouchEvent_getYPositions").pyclass
 
-IGuestMultiTouchEvent_getYPositionsResultMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getYPositionsResponse").pyclass
+IGuestMultiTouchEvent_getYPositionsResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestMultiTouchEvent_getYPositionsResponse").pyclass
 
-IGuestMultiTouchEvent_getContactIdsRequestMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getContactIds").pyclass
+IGuestMultiTouchEvent_getContactIdsRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestMultiTouchEvent_getContactIds").pyclass
 
-IGuestMultiTouchEvent_getContactIdsResultMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getContactIdsResponse").pyclass
+IGuestMultiTouchEvent_getContactIdsResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestMultiTouchEvent_getContactIdsResponse").pyclass
 
-IGuestMultiTouchEvent_getContactFlagsRequestMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getContactFlags").pyclass
+IGuestMultiTouchEvent_getContactFlagsRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IGuestMultiTouchEvent_getContactFlags").pyclass
 
-IGuestMultiTouchEvent_getContactFlagsResultMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getContactFlagsResponse").pyclass
+IGuestMultiTouchEvent_getContactFlagsResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestMultiTouchEvent_getContactFlagsResponse").pyclass
 
-IGuestMultiTouchEvent_getScanTimeRequestMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getScanTime").pyclass
+IGuestMultiTouchEvent_getScanTimeRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IGuestMultiTouchEvent_getScanTime").pyclass
 
-IGuestMultiTouchEvent_getScanTimeResultMsg = GED("http://www.virtualbox.org/", "IGuestMultiTouchEvent_getScanTimeResponse").pyclass
+IGuestMultiTouchEvent_getScanTimeResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IGuestMultiTouchEvent_getScanTimeResponse").pyclass
 
 IGuestSessionEvent_getSessionRequestMsg = GED("http://www.virtualbox.org/", "IGuestSessionEvent_getSession").pyclass
 
-IGuestSessionEvent_getSessionResultMsg = GED("http://www.virtualbox.org/", "IGuestSessionEvent_getSessionResponse").pyclass
+IGuestSessionEvent_getSessionResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestSessionEvent_getSessionResponse").pyclass
 
-IGuestSessionStateChangedEvent_getIdRequestMsg = GED("http://www.virtualbox.org/", "IGuestSessionStateChangedEvent_getId").pyclass
+IGuestSessionStateChangedEvent_getIdRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestSessionStateChangedEvent_getId").pyclass
 
-IGuestSessionStateChangedEvent_getIdResultMsg = GED("http://www.virtualbox.org/", "IGuestSessionStateChangedEvent_getIdResponse").pyclass
+IGuestSessionStateChangedEvent_getIdResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestSessionStateChangedEvent_getIdResponse").pyclass
 
-IGuestSessionStateChangedEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/", "IGuestSessionStateChangedEvent_getStatus").pyclass
+IGuestSessionStateChangedEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IGuestSessionStateChangedEvent_getStatus").pyclass
 
-IGuestSessionStateChangedEvent_getStatusResultMsg = GED("http://www.virtualbox.org/", "IGuestSessionStateChangedEvent_getStatusResponse").pyclass
+IGuestSessionStateChangedEvent_getStatusResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IGuestSessionStateChangedEvent_getStatusResponse").pyclass
 
-IGuestSessionStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/", "IGuestSessionStateChangedEvent_getError").pyclass
+IGuestSessionStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IGuestSessionStateChangedEvent_getError").pyclass
 
-IGuestSessionStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/", "IGuestSessionStateChangedEvent_getErrorResponse").pyclass
+IGuestSessionStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IGuestSessionStateChangedEvent_getErrorResponse").pyclass
 
-IGuestSessionRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/", "IGuestSessionRegisteredEvent_getRegistered").pyclass
+IGuestSessionRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "IGuestSessionRegisteredEvent_getRegistered").pyclass
 
-IGuestSessionRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/", "IGuestSessionRegisteredEvent_getRegisteredResponse").pyclass
+IGuestSessionRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/",
+                                                          "IGuestSessionRegisteredEvent_getRegisteredResponse").pyclass
 
 IGuestProcessEvent_getProcessRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessEvent_getProcess").pyclass
 
-IGuestProcessEvent_getProcessResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessEvent_getProcessResponse").pyclass
+IGuestProcessEvent_getProcessResultMsg = GED("http://www.virtualbox.org/",
+                                             "IGuestProcessEvent_getProcessResponse").pyclass
 
 IGuestProcessEvent_getPidRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessEvent_getPid").pyclass
 
 IGuestProcessEvent_getPidResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessEvent_getPidResponse").pyclass
 
-IGuestProcessRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessRegisteredEvent_getRegistered").pyclass
+IGuestProcessRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/",
+                                                           "IGuestProcessRegisteredEvent_getRegistered").pyclass
 
-IGuestProcessRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessRegisteredEvent_getRegisteredResponse").pyclass
+IGuestProcessRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/",
+                                                          "IGuestProcessRegisteredEvent_getRegisteredResponse").pyclass
 
-IGuestProcessStateChangedEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessStateChangedEvent_getStatus").pyclass
+IGuestProcessStateChangedEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "IGuestProcessStateChangedEvent_getStatus").pyclass
 
-IGuestProcessStateChangedEvent_getStatusResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessStateChangedEvent_getStatusResponse").pyclass
+IGuestProcessStateChangedEvent_getStatusResultMsg = GED("http://www.virtualbox.org/",
+                                                        "IGuestProcessStateChangedEvent_getStatusResponse").pyclass
 
-IGuestProcessStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessStateChangedEvent_getError").pyclass
+IGuestProcessStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IGuestProcessStateChangedEvent_getError").pyclass
 
-IGuestProcessStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessStateChangedEvent_getErrorResponse").pyclass
+IGuestProcessStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IGuestProcessStateChangedEvent_getErrorResponse").pyclass
 
 IGuestProcessIOEvent_getHandleRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessIOEvent_getHandle").pyclass
 
-IGuestProcessIOEvent_getHandleResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessIOEvent_getHandleResponse").pyclass
+IGuestProcessIOEvent_getHandleResultMsg = GED("http://www.virtualbox.org/",
+                                              "IGuestProcessIOEvent_getHandleResponse").pyclass
 
-IGuestProcessIOEvent_getProcessedRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessIOEvent_getProcessed").pyclass
+IGuestProcessIOEvent_getProcessedRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IGuestProcessIOEvent_getProcessed").pyclass
 
-IGuestProcessIOEvent_getProcessedResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessIOEvent_getProcessedResponse").pyclass
+IGuestProcessIOEvent_getProcessedResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IGuestProcessIOEvent_getProcessedResponse").pyclass
 
-IGuestProcessInputNotifyEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessInputNotifyEvent_getStatus").pyclass
+IGuestProcessInputNotifyEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IGuestProcessInputNotifyEvent_getStatus").pyclass
 
-IGuestProcessInputNotifyEvent_getStatusResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessInputNotifyEvent_getStatusResponse").pyclass
+IGuestProcessInputNotifyEvent_getStatusResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IGuestProcessInputNotifyEvent_getStatusResponse").pyclass
 
-IGuestProcessOutputEvent_getDataRequestMsg = GED("http://www.virtualbox.org/", "IGuestProcessOutputEvent_getData").pyclass
+IGuestProcessOutputEvent_getDataRequestMsg = GED("http://www.virtualbox.org/",
+                                                 "IGuestProcessOutputEvent_getData").pyclass
 
-IGuestProcessOutputEvent_getDataResultMsg = GED("http://www.virtualbox.org/", "IGuestProcessOutputEvent_getDataResponse").pyclass
+IGuestProcessOutputEvent_getDataResultMsg = GED("http://www.virtualbox.org/",
+                                                "IGuestProcessOutputEvent_getDataResponse").pyclass
 
 IGuestFileEvent_getFileRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileEvent_getFile").pyclass
 
 IGuestFileEvent_getFileResultMsg = GED("http://www.virtualbox.org/", "IGuestFileEvent_getFileResponse").pyclass
 
-IGuestFileRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileRegisteredEvent_getRegistered").pyclass
+IGuestFileRegisteredEvent_getRegisteredRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IGuestFileRegisteredEvent_getRegistered").pyclass
 
-IGuestFileRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/", "IGuestFileRegisteredEvent_getRegisteredResponse").pyclass
+IGuestFileRegisteredEvent_getRegisteredResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IGuestFileRegisteredEvent_getRegisteredResponse").pyclass
 
-IGuestFileStateChangedEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileStateChangedEvent_getStatus").pyclass
+IGuestFileStateChangedEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IGuestFileStateChangedEvent_getStatus").pyclass
 
-IGuestFileStateChangedEvent_getStatusResultMsg = GED("http://www.virtualbox.org/", "IGuestFileStateChangedEvent_getStatusResponse").pyclass
+IGuestFileStateChangedEvent_getStatusResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestFileStateChangedEvent_getStatusResponse").pyclass
 
-IGuestFileStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileStateChangedEvent_getError").pyclass
+IGuestFileStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestFileStateChangedEvent_getError").pyclass
 
-IGuestFileStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/", "IGuestFileStateChangedEvent_getErrorResponse").pyclass
+IGuestFileStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestFileStateChangedEvent_getErrorResponse").pyclass
 
 IGuestFileIOEvent_getOffsetRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileIOEvent_getOffset").pyclass
 
@@ -15985,27 +16779,36 @@ IGuestFileIOEvent_getOffsetResultMsg = GED("http://www.virtualbox.org/", "IGuest
 
 IGuestFileIOEvent_getProcessedRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileIOEvent_getProcessed").pyclass
 
-IGuestFileIOEvent_getProcessedResultMsg = GED("http://www.virtualbox.org/", "IGuestFileIOEvent_getProcessedResponse").pyclass
+IGuestFileIOEvent_getProcessedResultMsg = GED("http://www.virtualbox.org/",
+                                              "IGuestFileIOEvent_getProcessedResponse").pyclass
 
 IGuestFileReadEvent_getDataRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileReadEvent_getData").pyclass
 
 IGuestFileReadEvent_getDataResultMsg = GED("http://www.virtualbox.org/", "IGuestFileReadEvent_getDataResponse").pyclass
 
-IUSBDeviceStateChangedEvent_getDeviceRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceStateChangedEvent_getDevice").pyclass
+IUSBDeviceStateChangedEvent_getDeviceRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IUSBDeviceStateChangedEvent_getDevice").pyclass
 
-IUSBDeviceStateChangedEvent_getDeviceResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceStateChangedEvent_getDeviceResponse").pyclass
+IUSBDeviceStateChangedEvent_getDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IUSBDeviceStateChangedEvent_getDeviceResponse").pyclass
 
-IUSBDeviceStateChangedEvent_getAttachedRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceStateChangedEvent_getAttached").pyclass
+IUSBDeviceStateChangedEvent_getAttachedRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IUSBDeviceStateChangedEvent_getAttached").pyclass
 
-IUSBDeviceStateChangedEvent_getAttachedResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceStateChangedEvent_getAttachedResponse").pyclass
+IUSBDeviceStateChangedEvent_getAttachedResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IUSBDeviceStateChangedEvent_getAttachedResponse").pyclass
 
-IUSBDeviceStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/", "IUSBDeviceStateChangedEvent_getError").pyclass
+IUSBDeviceStateChangedEvent_getErrorRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IUSBDeviceStateChangedEvent_getError").pyclass
 
-IUSBDeviceStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/", "IUSBDeviceStateChangedEvent_getErrorResponse").pyclass
+IUSBDeviceStateChangedEvent_getErrorResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IUSBDeviceStateChangedEvent_getErrorResponse").pyclass
 
-ISharedFolderChangedEvent_getScopeRequestMsg = GED("http://www.virtualbox.org/", "ISharedFolderChangedEvent_getScope").pyclass
+ISharedFolderChangedEvent_getScopeRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "ISharedFolderChangedEvent_getScope").pyclass
 
-ISharedFolderChangedEvent_getScopeResultMsg = GED("http://www.virtualbox.org/", "ISharedFolderChangedEvent_getScopeResponse").pyclass
+ISharedFolderChangedEvent_getScopeResultMsg = GED("http://www.virtualbox.org/",
+                                                  "ISharedFolderChangedEvent_getScopeResponse").pyclass
 
 IRuntimeErrorEvent_getFatalRequestMsg = GED("http://www.virtualbox.org/", "IRuntimeErrorEvent_getFatal").pyclass
 
@@ -16017,27 +16820,35 @@ IRuntimeErrorEvent_getIdResultMsg = GED("http://www.virtualbox.org/", "IRuntimeE
 
 IRuntimeErrorEvent_getMessageRequestMsg = GED("http://www.virtualbox.org/", "IRuntimeErrorEvent_getMessage").pyclass
 
-IRuntimeErrorEvent_getMessageResultMsg = GED("http://www.virtualbox.org/", "IRuntimeErrorEvent_getMessageResponse").pyclass
+IRuntimeErrorEvent_getMessageResultMsg = GED("http://www.virtualbox.org/",
+                                             "IRuntimeErrorEvent_getMessageResponse").pyclass
 
-IEventSourceChangedEvent_getListenerRequestMsg = GED("http://www.virtualbox.org/", "IEventSourceChangedEvent_getListener").pyclass
+IEventSourceChangedEvent_getListenerRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IEventSourceChangedEvent_getListener").pyclass
 
-IEventSourceChangedEvent_getListenerResultMsg = GED("http://www.virtualbox.org/", "IEventSourceChangedEvent_getListenerResponse").pyclass
+IEventSourceChangedEvent_getListenerResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IEventSourceChangedEvent_getListenerResponse").pyclass
 
 IEventSourceChangedEvent_getAddRequestMsg = GED("http://www.virtualbox.org/", "IEventSourceChangedEvent_getAdd").pyclass
 
-IEventSourceChangedEvent_getAddResultMsg = GED("http://www.virtualbox.org/", "IEventSourceChangedEvent_getAddResponse").pyclass
+IEventSourceChangedEvent_getAddResultMsg = GED("http://www.virtualbox.org/",
+                                               "IEventSourceChangedEvent_getAddResponse").pyclass
 
-IExtraDataChangedEvent_getMachineIdRequestMsg = GED("http://www.virtualbox.org/", "IExtraDataChangedEvent_getMachineId").pyclass
+IExtraDataChangedEvent_getMachineIdRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IExtraDataChangedEvent_getMachineId").pyclass
 
-IExtraDataChangedEvent_getMachineIdResultMsg = GED("http://www.virtualbox.org/", "IExtraDataChangedEvent_getMachineIdResponse").pyclass
+IExtraDataChangedEvent_getMachineIdResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IExtraDataChangedEvent_getMachineIdResponse").pyclass
 
 IExtraDataChangedEvent_getKeyRequestMsg = GED("http://www.virtualbox.org/", "IExtraDataChangedEvent_getKey").pyclass
 
-IExtraDataChangedEvent_getKeyResultMsg = GED("http://www.virtualbox.org/", "IExtraDataChangedEvent_getKeyResponse").pyclass
+IExtraDataChangedEvent_getKeyResultMsg = GED("http://www.virtualbox.org/",
+                                             "IExtraDataChangedEvent_getKeyResponse").pyclass
 
 IExtraDataChangedEvent_getValueRequestMsg = GED("http://www.virtualbox.org/", "IExtraDataChangedEvent_getValue").pyclass
 
-IExtraDataChangedEvent_getValueResultMsg = GED("http://www.virtualbox.org/", "IExtraDataChangedEvent_getValueResponse").pyclass
+IExtraDataChangedEvent_getValueResultMsg = GED("http://www.virtualbox.org/",
+                                               "IExtraDataChangedEvent_getValueResponse").pyclass
 
 IVetoEvent_addVetoRequestMsg = GED("http://www.virtualbox.org/", "IVetoEvent_addVeto").pyclass
 
@@ -16051,17 +16862,22 @@ IVetoEvent_getVetosRequestMsg = GED("http://www.virtualbox.org/", "IVetoEvent_ge
 
 IVetoEvent_getVetosResultMsg = GED("http://www.virtualbox.org/", "IVetoEvent_getVetosResponse").pyclass
 
-IExtraDataCanChangeEvent_getMachineIdRequestMsg = GED("http://www.virtualbox.org/", "IExtraDataCanChangeEvent_getMachineId").pyclass
+IExtraDataCanChangeEvent_getMachineIdRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IExtraDataCanChangeEvent_getMachineId").pyclass
 
-IExtraDataCanChangeEvent_getMachineIdResultMsg = GED("http://www.virtualbox.org/", "IExtraDataCanChangeEvent_getMachineIdResponse").pyclass
+IExtraDataCanChangeEvent_getMachineIdResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IExtraDataCanChangeEvent_getMachineIdResponse").pyclass
 
 IExtraDataCanChangeEvent_getKeyRequestMsg = GED("http://www.virtualbox.org/", "IExtraDataCanChangeEvent_getKey").pyclass
 
-IExtraDataCanChangeEvent_getKeyResultMsg = GED("http://www.virtualbox.org/", "IExtraDataCanChangeEvent_getKeyResponse").pyclass
+IExtraDataCanChangeEvent_getKeyResultMsg = GED("http://www.virtualbox.org/",
+                                               "IExtraDataCanChangeEvent_getKeyResponse").pyclass
 
-IExtraDataCanChangeEvent_getValueRequestMsg = GED("http://www.virtualbox.org/", "IExtraDataCanChangeEvent_getValue").pyclass
+IExtraDataCanChangeEvent_getValueRequestMsg = GED("http://www.virtualbox.org/",
+                                                  "IExtraDataCanChangeEvent_getValue").pyclass
 
-IExtraDataCanChangeEvent_getValueResultMsg = GED("http://www.virtualbox.org/", "IExtraDataCanChangeEvent_getValueResponse").pyclass
+IExtraDataCanChangeEvent_getValueResultMsg = GED("http://www.virtualbox.org/",
+                                                 "IExtraDataCanChangeEvent_getValueResponse").pyclass
 
 IShowWindowEvent_getWinIdRequestMsg = GED("http://www.virtualbox.org/", "IShowWindowEvent_getWinId").pyclass
 
@@ -16093,152 +16909,225 @@ INATRedirectEvent_getHostIPResultMsg = GED("http://www.virtualbox.org/", "INATRe
 
 INATRedirectEvent_getHostPortRequestMsg = GED("http://www.virtualbox.org/", "INATRedirectEvent_getHostPort").pyclass
 
-INATRedirectEvent_getHostPortResultMsg = GED("http://www.virtualbox.org/", "INATRedirectEvent_getHostPortResponse").pyclass
+INATRedirectEvent_getHostPortResultMsg = GED("http://www.virtualbox.org/",
+                                             "INATRedirectEvent_getHostPortResponse").pyclass
 
 INATRedirectEvent_getGuestIPRequestMsg = GED("http://www.virtualbox.org/", "INATRedirectEvent_getGuestIP").pyclass
 
-INATRedirectEvent_getGuestIPResultMsg = GED("http://www.virtualbox.org/", "INATRedirectEvent_getGuestIPResponse").pyclass
+INATRedirectEvent_getGuestIPResultMsg = GED("http://www.virtualbox.org/",
+                                            "INATRedirectEvent_getGuestIPResponse").pyclass
 
 INATRedirectEvent_getGuestPortRequestMsg = GED("http://www.virtualbox.org/", "INATRedirectEvent_getGuestPort").pyclass
 
-INATRedirectEvent_getGuestPortResultMsg = GED("http://www.virtualbox.org/", "INATRedirectEvent_getGuestPortResponse").pyclass
+INATRedirectEvent_getGuestPortResultMsg = GED("http://www.virtualbox.org/",
+                                              "INATRedirectEvent_getGuestPortResponse").pyclass
 
-IHostPCIDevicePlugEvent_getPluggedRequestMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getPlugged").pyclass
+IHostPCIDevicePlugEvent_getPluggedRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IHostPCIDevicePlugEvent_getPlugged").pyclass
 
-IHostPCIDevicePlugEvent_getPluggedResultMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getPluggedResponse").pyclass
+IHostPCIDevicePlugEvent_getPluggedResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IHostPCIDevicePlugEvent_getPluggedResponse").pyclass
 
-IHostPCIDevicePlugEvent_getSuccessRequestMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getSuccess").pyclass
+IHostPCIDevicePlugEvent_getSuccessRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IHostPCIDevicePlugEvent_getSuccess").pyclass
 
-IHostPCIDevicePlugEvent_getSuccessResultMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getSuccessResponse").pyclass
+IHostPCIDevicePlugEvent_getSuccessResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IHostPCIDevicePlugEvent_getSuccessResponse").pyclass
 
-IHostPCIDevicePlugEvent_getAttachmentRequestMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getAttachment").pyclass
+IHostPCIDevicePlugEvent_getAttachmentRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IHostPCIDevicePlugEvent_getAttachment").pyclass
 
-IHostPCIDevicePlugEvent_getAttachmentResultMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getAttachmentResponse").pyclass
+IHostPCIDevicePlugEvent_getAttachmentResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IHostPCIDevicePlugEvent_getAttachmentResponse").pyclass
 
-IHostPCIDevicePlugEvent_getMessageRequestMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getMessage").pyclass
+IHostPCIDevicePlugEvent_getMessageRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IHostPCIDevicePlugEvent_getMessage").pyclass
 
-IHostPCIDevicePlugEvent_getMessageResultMsg = GED("http://www.virtualbox.org/", "IHostPCIDevicePlugEvent_getMessageResponse").pyclass
+IHostPCIDevicePlugEvent_getMessageResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IHostPCIDevicePlugEvent_getMessageResponse").pyclass
 
-IVBoxSVCAvailabilityChangedEvent_getAvailableRequestMsg = GED("http://www.virtualbox.org/", "IVBoxSVCAvailabilityChangedEvent_getAvailable").pyclass
+IVBoxSVCAvailabilityChangedEvent_getAvailableRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "IVBoxSVCAvailabilityChangedEvent_getAvailable").pyclass
 
-IVBoxSVCAvailabilityChangedEvent_getAvailableResultMsg = GED("http://www.virtualbox.org/", "IVBoxSVCAvailabilityChangedEvent_getAvailableResponse").pyclass
+IVBoxSVCAvailabilityChangedEvent_getAvailableResultMsg = GED("http://www.virtualbox.org/",
+                                                             "IVBoxSVCAvailabilityChangedEvent_getAvailableResponse").pyclass
 
-IBandwidthGroupChangedEvent_getBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/", "IBandwidthGroupChangedEvent_getBandwidthGroup").pyclass
+IBandwidthGroupChangedEvent_getBandwidthGroupRequestMsg = GED("http://www.virtualbox.org/",
+                                                              "IBandwidthGroupChangedEvent_getBandwidthGroup").pyclass
 
-IBandwidthGroupChangedEvent_getBandwidthGroupResultMsg = GED("http://www.virtualbox.org/", "IBandwidthGroupChangedEvent_getBandwidthGroupResponse").pyclass
+IBandwidthGroupChangedEvent_getBandwidthGroupResultMsg = GED("http://www.virtualbox.org/",
+                                                             "IBandwidthGroupChangedEvent_getBandwidthGroupResponse").pyclass
 
-IGuestMonitorChangedEvent_getChangeTypeRequestMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getChangeType").pyclass
+IGuestMonitorChangedEvent_getChangeTypeRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "IGuestMonitorChangedEvent_getChangeType").pyclass
 
-IGuestMonitorChangedEvent_getChangeTypeResultMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getChangeTypeResponse").pyclass
+IGuestMonitorChangedEvent_getChangeTypeResultMsg = GED("http://www.virtualbox.org/",
+                                                       "IGuestMonitorChangedEvent_getChangeTypeResponse").pyclass
 
-IGuestMonitorChangedEvent_getScreenIdRequestMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getScreenId").pyclass
+IGuestMonitorChangedEvent_getScreenIdRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IGuestMonitorChangedEvent_getScreenId").pyclass
 
-IGuestMonitorChangedEvent_getScreenIdResultMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getScreenIdResponse").pyclass
+IGuestMonitorChangedEvent_getScreenIdResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestMonitorChangedEvent_getScreenIdResponse").pyclass
 
-IGuestMonitorChangedEvent_getOriginXRequestMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getOriginX").pyclass
+IGuestMonitorChangedEvent_getOriginXRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestMonitorChangedEvent_getOriginX").pyclass
 
-IGuestMonitorChangedEvent_getOriginXResultMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getOriginXResponse").pyclass
+IGuestMonitorChangedEvent_getOriginXResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestMonitorChangedEvent_getOriginXResponse").pyclass
 
-IGuestMonitorChangedEvent_getOriginYRequestMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getOriginY").pyclass
+IGuestMonitorChangedEvent_getOriginYRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestMonitorChangedEvent_getOriginY").pyclass
 
-IGuestMonitorChangedEvent_getOriginYResultMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getOriginYResponse").pyclass
+IGuestMonitorChangedEvent_getOriginYResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestMonitorChangedEvent_getOriginYResponse").pyclass
 
-IGuestMonitorChangedEvent_getWidthRequestMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getWidth").pyclass
+IGuestMonitorChangedEvent_getWidthRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestMonitorChangedEvent_getWidth").pyclass
 
-IGuestMonitorChangedEvent_getWidthResultMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getWidthResponse").pyclass
+IGuestMonitorChangedEvent_getWidthResultMsg = GED("http://www.virtualbox.org/",
+                                                  "IGuestMonitorChangedEvent_getWidthResponse").pyclass
 
-IGuestMonitorChangedEvent_getHeightRequestMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getHeight").pyclass
+IGuestMonitorChangedEvent_getHeightRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestMonitorChangedEvent_getHeight").pyclass
 
-IGuestMonitorChangedEvent_getHeightResultMsg = GED("http://www.virtualbox.org/", "IGuestMonitorChangedEvent_getHeightResponse").pyclass
+IGuestMonitorChangedEvent_getHeightResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestMonitorChangedEvent_getHeightResponse").pyclass
 
-IGuestUserStateChangedEvent_getNameRequestMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getName").pyclass
+IGuestUserStateChangedEvent_getNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestUserStateChangedEvent_getName").pyclass
 
-IGuestUserStateChangedEvent_getNameResultMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getNameResponse").pyclass
+IGuestUserStateChangedEvent_getNameResultMsg = GED("http://www.virtualbox.org/",
+                                                   "IGuestUserStateChangedEvent_getNameResponse").pyclass
 
-IGuestUserStateChangedEvent_getDomainRequestMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getDomain").pyclass
+IGuestUserStateChangedEvent_getDomainRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IGuestUserStateChangedEvent_getDomain").pyclass
 
-IGuestUserStateChangedEvent_getDomainResultMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getDomainResponse").pyclass
+IGuestUserStateChangedEvent_getDomainResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestUserStateChangedEvent_getDomainResponse").pyclass
 
-IGuestUserStateChangedEvent_getStateRequestMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getState").pyclass
+IGuestUserStateChangedEvent_getStateRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IGuestUserStateChangedEvent_getState").pyclass
 
-IGuestUserStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getStateResponse").pyclass
+IGuestUserStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IGuestUserStateChangedEvent_getStateResponse").pyclass
 
-IGuestUserStateChangedEvent_getStateDetailsRequestMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getStateDetails").pyclass
+IGuestUserStateChangedEvent_getStateDetailsRequestMsg = GED("http://www.virtualbox.org/",
+                                                            "IGuestUserStateChangedEvent_getStateDetails").pyclass
 
-IGuestUserStateChangedEvent_getStateDetailsResultMsg = GED("http://www.virtualbox.org/", "IGuestUserStateChangedEvent_getStateDetailsResponse").pyclass
+IGuestUserStateChangedEvent_getStateDetailsResultMsg = GED("http://www.virtualbox.org/",
+                                                           "IGuestUserStateChangedEvent_getStateDetailsResponse").pyclass
 
-IStorageDeviceChangedEvent_getStorageDeviceRequestMsg = GED("http://www.virtualbox.org/", "IStorageDeviceChangedEvent_getStorageDevice").pyclass
+IStorageDeviceChangedEvent_getStorageDeviceRequestMsg = GED("http://www.virtualbox.org/",
+                                                            "IStorageDeviceChangedEvent_getStorageDevice").pyclass
 
-IStorageDeviceChangedEvent_getStorageDeviceResultMsg = GED("http://www.virtualbox.org/", "IStorageDeviceChangedEvent_getStorageDeviceResponse").pyclass
+IStorageDeviceChangedEvent_getStorageDeviceResultMsg = GED("http://www.virtualbox.org/",
+                                                           "IStorageDeviceChangedEvent_getStorageDeviceResponse").pyclass
 
-IStorageDeviceChangedEvent_getRemovedRequestMsg = GED("http://www.virtualbox.org/", "IStorageDeviceChangedEvent_getRemoved").pyclass
+IStorageDeviceChangedEvent_getRemovedRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "IStorageDeviceChangedEvent_getRemoved").pyclass
 
-IStorageDeviceChangedEvent_getRemovedResultMsg = GED("http://www.virtualbox.org/", "IStorageDeviceChangedEvent_getRemovedResponse").pyclass
+IStorageDeviceChangedEvent_getRemovedResultMsg = GED("http://www.virtualbox.org/",
+                                                     "IStorageDeviceChangedEvent_getRemovedResponse").pyclass
 
-IStorageDeviceChangedEvent_getSilentRequestMsg = GED("http://www.virtualbox.org/", "IStorageDeviceChangedEvent_getSilent").pyclass
+IStorageDeviceChangedEvent_getSilentRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "IStorageDeviceChangedEvent_getSilent").pyclass
 
-IStorageDeviceChangedEvent_getSilentResultMsg = GED("http://www.virtualbox.org/", "IStorageDeviceChangedEvent_getSilentResponse").pyclass
+IStorageDeviceChangedEvent_getSilentResultMsg = GED("http://www.virtualbox.org/",
+                                                    "IStorageDeviceChangedEvent_getSilentResponse").pyclass
 
-INATNetworkChangedEvent_getNetworkNameRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkChangedEvent_getNetworkName").pyclass
+INATNetworkChangedEvent_getNetworkNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "INATNetworkChangedEvent_getNetworkName").pyclass
 
-INATNetworkChangedEvent_getNetworkNameResultMsg = GED("http://www.virtualbox.org/", "INATNetworkChangedEvent_getNetworkNameResponse").pyclass
+INATNetworkChangedEvent_getNetworkNameResultMsg = GED("http://www.virtualbox.org/",
+                                                      "INATNetworkChangedEvent_getNetworkNameResponse").pyclass
 
-INATNetworkStartStopEvent_getStartEventRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkStartStopEvent_getStartEvent").pyclass
+INATNetworkStartStopEvent_getStartEventRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "INATNetworkStartStopEvent_getStartEvent").pyclass
 
-INATNetworkStartStopEvent_getStartEventResultMsg = GED("http://www.virtualbox.org/", "INATNetworkStartStopEvent_getStartEventResponse").pyclass
+INATNetworkStartStopEvent_getStartEventResultMsg = GED("http://www.virtualbox.org/",
+                                                       "INATNetworkStartStopEvent_getStartEventResponse").pyclass
 
-INATNetworkCreationDeletionEvent_getCreationEventRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkCreationDeletionEvent_getCreationEvent").pyclass
+INATNetworkCreationDeletionEvent_getCreationEventRequestMsg = GED("http://www.virtualbox.org/",
+                                                                  "INATNetworkCreationDeletionEvent_getCreationEvent").pyclass
 
-INATNetworkCreationDeletionEvent_getCreationEventResultMsg = GED("http://www.virtualbox.org/", "INATNetworkCreationDeletionEvent_getCreationEventResponse").pyclass
+INATNetworkCreationDeletionEvent_getCreationEventResultMsg = GED("http://www.virtualbox.org/",
+                                                                 "INATNetworkCreationDeletionEvent_getCreationEventResponse").pyclass
 
-INATNetworkSettingEvent_getEnabledRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getEnabled").pyclass
+INATNetworkSettingEvent_getEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "INATNetworkSettingEvent_getEnabled").pyclass
 
-INATNetworkSettingEvent_getEnabledResultMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getEnabledResponse").pyclass
+INATNetworkSettingEvent_getEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                  "INATNetworkSettingEvent_getEnabledResponse").pyclass
 
-INATNetworkSettingEvent_getNetworkRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getNetwork").pyclass
+INATNetworkSettingEvent_getNetworkRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "INATNetworkSettingEvent_getNetwork").pyclass
 
-INATNetworkSettingEvent_getNetworkResultMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getNetworkResponse").pyclass
+INATNetworkSettingEvent_getNetworkResultMsg = GED("http://www.virtualbox.org/",
+                                                  "INATNetworkSettingEvent_getNetworkResponse").pyclass
 
-INATNetworkSettingEvent_getGatewayRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getGateway").pyclass
+INATNetworkSettingEvent_getGatewayRequestMsg = GED("http://www.virtualbox.org/",
+                                                   "INATNetworkSettingEvent_getGateway").pyclass
 
-INATNetworkSettingEvent_getGatewayResultMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getGatewayResponse").pyclass
+INATNetworkSettingEvent_getGatewayResultMsg = GED("http://www.virtualbox.org/",
+                                                  "INATNetworkSettingEvent_getGatewayResponse").pyclass
 
-INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabled").pyclass
+INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledRequestMsg = GED("http://www.virtualbox.org/",
+                                                                            "INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabled").pyclass
 
-INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledResultMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledResponse").pyclass
+INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledResultMsg = GED("http://www.virtualbox.org/",
+                                                                           "INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledResponse").pyclass
 
-INATNetworkSettingEvent_getNeedDhcpServerRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getNeedDhcpServer").pyclass
+INATNetworkSettingEvent_getNeedDhcpServerRequestMsg = GED("http://www.virtualbox.org/",
+                                                          "INATNetworkSettingEvent_getNeedDhcpServer").pyclass
 
-INATNetworkSettingEvent_getNeedDhcpServerResultMsg = GED("http://www.virtualbox.org/", "INATNetworkSettingEvent_getNeedDhcpServerResponse").pyclass
+INATNetworkSettingEvent_getNeedDhcpServerResultMsg = GED("http://www.virtualbox.org/",
+                                                         "INATNetworkSettingEvent_getNeedDhcpServerResponse").pyclass
 
-INATNetworkPortForwardEvent_getCreateRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getCreate").pyclass
+INATNetworkPortForwardEvent_getCreateRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "INATNetworkPortForwardEvent_getCreate").pyclass
 
-INATNetworkPortForwardEvent_getCreateResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getCreateResponse").pyclass
+INATNetworkPortForwardEvent_getCreateResultMsg = GED("http://www.virtualbox.org/",
+                                                     "INATNetworkPortForwardEvent_getCreateResponse").pyclass
 
-INATNetworkPortForwardEvent_getIpv6RequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getIpv6").pyclass
+INATNetworkPortForwardEvent_getIpv6RequestMsg = GED("http://www.virtualbox.org/",
+                                                    "INATNetworkPortForwardEvent_getIpv6").pyclass
 
-INATNetworkPortForwardEvent_getIpv6ResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getIpv6Response").pyclass
+INATNetworkPortForwardEvent_getIpv6ResultMsg = GED("http://www.virtualbox.org/",
+                                                   "INATNetworkPortForwardEvent_getIpv6Response").pyclass
 
-INATNetworkPortForwardEvent_getNameRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getName").pyclass
+INATNetworkPortForwardEvent_getNameRequestMsg = GED("http://www.virtualbox.org/",
+                                                    "INATNetworkPortForwardEvent_getName").pyclass
 
-INATNetworkPortForwardEvent_getNameResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getNameResponse").pyclass
+INATNetworkPortForwardEvent_getNameResultMsg = GED("http://www.virtualbox.org/",
+                                                   "INATNetworkPortForwardEvent_getNameResponse").pyclass
 
-INATNetworkPortForwardEvent_getProtoRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getProto").pyclass
+INATNetworkPortForwardEvent_getProtoRequestMsg = GED("http://www.virtualbox.org/",
+                                                     "INATNetworkPortForwardEvent_getProto").pyclass
 
-INATNetworkPortForwardEvent_getProtoResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getProtoResponse").pyclass
+INATNetworkPortForwardEvent_getProtoResultMsg = GED("http://www.virtualbox.org/",
+                                                    "INATNetworkPortForwardEvent_getProtoResponse").pyclass
 
-INATNetworkPortForwardEvent_getHostIpRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getHostIp").pyclass
+INATNetworkPortForwardEvent_getHostIpRequestMsg = GED("http://www.virtualbox.org/",
+                                                      "INATNetworkPortForwardEvent_getHostIp").pyclass
 
-INATNetworkPortForwardEvent_getHostIpResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getHostIpResponse").pyclass
+INATNetworkPortForwardEvent_getHostIpResultMsg = GED("http://www.virtualbox.org/",
+                                                     "INATNetworkPortForwardEvent_getHostIpResponse").pyclass
 
-INATNetworkPortForwardEvent_getHostPortRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getHostPort").pyclass
+INATNetworkPortForwardEvent_getHostPortRequestMsg = GED("http://www.virtualbox.org/",
+                                                        "INATNetworkPortForwardEvent_getHostPort").pyclass
 
-INATNetworkPortForwardEvent_getHostPortResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getHostPortResponse").pyclass
+INATNetworkPortForwardEvent_getHostPortResultMsg = GED("http://www.virtualbox.org/",
+                                                       "INATNetworkPortForwardEvent_getHostPortResponse").pyclass
 
-INATNetworkPortForwardEvent_getGuestIpRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getGuestIp").pyclass
+INATNetworkPortForwardEvent_getGuestIpRequestMsg = GED("http://www.virtualbox.org/",
+                                                       "INATNetworkPortForwardEvent_getGuestIp").pyclass
 
-INATNetworkPortForwardEvent_getGuestIpResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getGuestIpResponse").pyclass
+INATNetworkPortForwardEvent_getGuestIpResultMsg = GED("http://www.virtualbox.org/",
+                                                      "INATNetworkPortForwardEvent_getGuestIpResponse").pyclass
 
-INATNetworkPortForwardEvent_getGuestPortRequestMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getGuestPort").pyclass
+INATNetworkPortForwardEvent_getGuestPortRequestMsg = GED("http://www.virtualbox.org/",
+                                                         "INATNetworkPortForwardEvent_getGuestPort").pyclass
 
-INATNetworkPortForwardEvent_getGuestPortResultMsg = GED("http://www.virtualbox.org/", "INATNetworkPortForwardEvent_getGuestPortResponse").pyclass
+INATNetworkPortForwardEvent_getGuestPortResultMsg = GED("http://www.virtualbox.org/",
+                                                        "INATNetworkPortForwardEvent_getGuestPortResponse").pyclass
