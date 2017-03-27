@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/4.3-sdk/src/libs/xpcom18a4/ipc/ipcd/client/public/ipcIMessageObserver.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/5.1-sdk/src/libs/xpcom18a4/ipc/ipcd/client/public/ipcIMessageObserver.idl
  */
 
 #ifndef __gen_ipcIMessageObserver_h__

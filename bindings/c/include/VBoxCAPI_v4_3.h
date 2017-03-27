@@ -20,7 +20,7 @@
  */
 
 /*
- * Copyright (C) 2008-2014 Oracle Corporation
+ * Copyright (C) 2008-2016 Oracle Corporation
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -21759,29 +21759,7 @@ typedef struct VBOXCAPI
      */
     int (*pfnInterruptEventQueueProcessing)(void);
 
-    /**
-     * Clear memory used by a UTF-8 string. Must be zero terminated.
-     * Can be used for any UTF-8 or ASCII/ANSI string.
-     *
-     * @param pszString     input/output string
-     */
-    void (*pfnUtf8Clear)(char *pszString);
-    /**
-     * Clear memory used by a UTF-16 string. Must be zero terminated.
-     * Can be used for any UTF-16 or UCS-2 string.
-     *
-     * @param pwszString    input/output string
-     */
-     void (*pfnUtf16Clear)(BSTR pwszString);
-
-    /** Tail version, same as uVersion.
-     *
-     * This should only be accessed if for some reason an API client needs
-     * exactly the version it requested, or if cb is used to calculate the
-     * address of this field. It may move as the structure before this is
-     * allowed to grow as long as all the data from earlier minor versions
-     * remains at the same place.
-     */
+    /** Tail version, same as uVersion. */
     unsigned uEndVersion;
 } VBOXCAPI;
 /** Pointer to a const VBOXCAPI function table. */
@@ -21798,17 +21776,9 @@ typedef VBOXCAPI const *PCVBOXXPCOM;
 #define VBOXXPCOMC VBOXCAPI
 #endif /* !WIN32 */
 
-/** Extract the C API style major version.
- * Useful for comparing the interface version in VBOXCAPI::uVersion. */
-#define VBOX_CAPI_MAJOR(x) (((x) & 0xffff0000U) >> 16)
-
-/** Extract the C API style major version.
- * Useful for comparing the interface version in VBOXCAPI::uVersion. */
-#define VBOX_CAPI_MINOR(x) ((x) & 0x0000ffffU)
-
 /** The current interface version.
  * For use with VBoxGetCAPIFunctions and to be found in VBOXCAPI::uVersion. */
-#define VBOX_CAPI_VERSION 0x00040001U
+#define VBOX_CAPI_VERSION 0x00040000U
 
 #ifndef WIN32
 /** Backwards compatibility: The current interface version.

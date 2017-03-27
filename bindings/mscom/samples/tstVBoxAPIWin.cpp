@@ -1,4 +1,4 @@
-/* $Id: tstVBoxAPIWin.cpp 83575 2013-02-04 14:27:54Z fmehnert $ */
+/* $Id: tstVBoxAPIWin.cpp 109356 2016-07-31 16:06:12Z bird $ */
 /** @file
  *
  * tstVBoxAPIWin - sample program to illustrate the VirtualBox
@@ -12,7 +12,7 @@
  */
 
 /*
- * Copyright (C) 2006-2010 Oracle Corporation
+ * Copyright (C) 2006-2016 Oracle Corporation
  *
  * This file is part of VirtualBox Open Source Edition (OSE), as
  * available from http://www.virtualbox.org. This file is free software;
@@ -52,6 +52,7 @@
 
 
 #include <stdio.h>
+#include <iprt/win/windows.h>  /* Avoid -Wall warnings. */
 #include "VirtualBox.h"
 
 #define SAFE_RELEASE(x) \
@@ -73,7 +74,7 @@ int listVMs(IVirtualBox *virtualBox)
     if (SUCCEEDED(rc))
     {
         IMachine **machines;
-        rc = SafeArrayAccessData (machinesArray, (void **) &machines);
+        rc = SafeArrayAccessData(machinesArray, (void **) &machines);
         if (SUCCEEDED(rc))
         {
             for (ULONG i = 0; i < machinesArray->rgsabound[0].cElements; ++i)
@@ -88,10 +89,10 @@ int listVMs(IVirtualBox *virtualBox)
                 }
             }
 
-            SafeArrayUnaccessData (machinesArray);
+            SafeArrayUnaccessData(machinesArray);
         }
 
-        SafeArrayDestroy (machinesArray);
+        SafeArrayDestroy(machinesArray);
     }
 
     return 0;
@@ -198,7 +199,7 @@ int testStartVM(IVirtualBox *virtualBox)
             /* Create the session object. */
             rc = CoCreateInstance(CLSID_Session,        /* the VirtualBox base object */
                                   NULL,                 /* no aggregation */
-                                  CLSCTX_INPROC_SERVER, /* the object lives in a server process on this machine */
+                                  CLSCTX_INPROC_SERVER, /* the object lives in the current process */
                                   IID_ISession,         /* IID of the interface */
                                   (void**)&session);
             if (!SUCCEEDED(rc))
@@ -217,8 +218,8 @@ int testStartVM(IVirtualBox *virtualBox)
             }
 
             /* Wait until VM is running. */
-            printf ("Starting VM, please wait ...\n");
-            rc = progress->WaitForCompletion (-1);
+            printf("Starting VM, please wait ...\n");
+            rc = progress->WaitForCompletion(-1);
 
             /* Get console object. */
             session->get_Console(&console);
@@ -226,15 +227,15 @@ int testStartVM(IVirtualBox *virtualBox)
             /* Bring console window to front. */
             machine->ShowConsoleWindow(0);
 
-            printf ("Press enter to power off VM and close the session...\n");
+            printf("Press enter to power off VM and close the session...\n");
             getchar();
 
             /* Power down the machine. */
             rc = console->PowerDown(&progress);
 
             /* Wait until VM is powered down. */
-            printf ("Powering off VM, please wait ...\n");
-            rc = progress->WaitForCompletion (-1);
+            printf("Powering off VM, please wait ...\n");
+            rc = progress->WaitForCompletion(-1);
 
             /* Close the session. */
             rc = session->UnlockMachine();
@@ -255,40 +256,38 @@ int testStartVM(IVirtualBox *virtualBox)
 }
 
 
-int main(int argc, char *argv[])
+int main()
 {
-    HRESULT rc;
-    IVirtualBox *virtualBox;
+    /* Initialize the COM subsystem. */
+    CoInitialize(NULL);
 
-    do
+    /* Instantiate the VirtualBox root object. */
+    IVirtualBoxClient *virtualBoxClient;
+    HRESULT rc = CoCreateInstance(CLSID_VirtualBoxClient, /* the VirtualBoxClient object */
+                                  NULL,                   /* no aggregation */
+                                  CLSCTX_INPROC_SERVER,   /* the object lives in the current process */
+                                  IID_IVirtualBoxClient,  /* IID of the interface */
+                                  (void**)&virtualBoxClient);
+    if (SUCCEEDED(rc))
     {
-        /* Initialize the COM subsystem. */
-        CoInitialize(NULL);
-
-        /* Instantiate the VirtualBox root object. */
-        rc = CoCreateInstance(CLSID_VirtualBox,       /* the VirtualBox base object */
-                              NULL,                   /* no aggregation */
-                              CLSCTX_LOCAL_SERVER,    /* the object lives in a server process on this machine */
-                              IID_IVirtualBox,        /* IID of the interface */
-                              (void**)&virtualBox);
-
-        if (!SUCCEEDED(rc))
+        IVirtualBox *virtualBox;
+        rc = virtualBoxClient->get_VirtualBox(&virtualBox);
+        if (SUCCEEDED(rc))
         {
-            printf("Error creating VirtualBox instance! rc = 0x%x\n", rc);
-            break;
+            listVMs(virtualBox);
+
+            testErrorInfo(virtualBox);
+
+            /* Enable the following line to get a VM started. */
+            //testStartVM(virtualBox);
+
+            /* Release the VirtualBox object. */
+            virtualBox->Release();
+            virtualBoxClient->Release();
         }
-
-        listVMs(virtualBox);
-
-        testErrorInfo(virtualBox);
-
-        /* Enable the following line to get a VM started. */
-        //testStartVM(virtualBox);
-
-        /* Release the VirtualBox object. */
-        virtualBox->Release();
-
-    } while (0);
+        else
+            printf("Error creating VirtualBox instance! rc = 0x%x\n", rc);
+    }
 
     CoUninitialize();
     return 0;

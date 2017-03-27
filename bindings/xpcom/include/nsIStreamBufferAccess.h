@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/4.3-sdk/src/libs/xpcom18a4/xpcom/io/nsIStreamBufferAccess.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/5.1-sdk/src/libs/xpcom18a4/xpcom/io/nsIStreamBufferAccess.idl
  */
 
 #ifndef __gen_nsIStreamBufferAccess_h__

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/4.3-sdk/src/libs/xpcom18a4/xpcom/base/nsIException.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/5.1-sdk/src/libs/xpcom18a4/xpcom/base/nsIException.idl
  */
 
 #ifndef __gen_nsIException_h__
