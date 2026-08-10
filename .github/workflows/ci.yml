@@ -13,8 +13,8 @@ jobs:
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v9
         with:
           enable-cache: true
       - run: uv python install ${{ matrix.python-version }}
@@ -33,8 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v9
         with:
           enable-cache: true
       - name: Install VirtualBox
@@ -47,6 +47,10 @@ jobs:
           VBOX_PROGRAM_PATH: /usr/lib/virtualbox
           VBOX_SDK_PATH: /usr/lib/virtualbox/sdk
           PYTHONPATH: /usr/lib/virtualbox/sdk/bindings/xpcom/python
+          # The compiled xpcom extension dlopen()s VBoxXPCOMC.so; without this
+          # it doesn't raise ImportError, it segfaults (exit 139) -- see the
+          # first CI run of this workflow.
+          LD_LIBRARY_PATH: /usr/lib/virtualbox
         run: |
           uv run python -c "
           from vboxapi import VirtualBoxManager
