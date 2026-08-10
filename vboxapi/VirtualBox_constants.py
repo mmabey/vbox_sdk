@@ -2624,6 +2624,7 @@ class VirtualBoxReflectionInfo:
             'BootingFirmware': 49,
             'CloudInitScriptPath': 50,
             'HardDiskControllerVirtioSCSI': 60,
+            'HardDiskControllerNVMe': 61,
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 1,
@@ -3700,6 +3701,7 @@ class VirtualBoxReflectionInfo:
             'BootingFirmware': 'BootingFirmware',
             'CloudInitScriptPath': 'CloudInitScriptPath',
             'HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
+            'HardDiskControllerNVMe': 'HardDiskControllerNVMe',
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 'Reference',
@@ -4715,6 +4717,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_BootingFirmware': 49,
         'VirtualSystemDescriptionType_CloudInitScriptPath': 50,
         'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 60,
+        'VirtualSystemDescriptionType_HardDiskControllerNVMe': 61,
         'VirtualSystemDescriptionValueType_Reference': 1,
         'VirtualSystemDescriptionValueType_Original': 2,
         'VirtualSystemDescriptionValueType_Auto': 3,
@@ -5562,6 +5565,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_BootingFirmware': 'BootingFirmware',
         'VirtualSystemDescriptionType_CloudInitScriptPath': 'CloudInitScriptPath',
         'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
+        'VirtualSystemDescriptionType_HardDiskControllerNVMe': 'HardDiskControllerNVMe',
         'VirtualSystemDescriptionValueType_Reference': 'Reference',
         'VirtualSystemDescriptionValueType_Original': 'Original',
         'VirtualSystemDescriptionValueType_Auto': 'Auto',
