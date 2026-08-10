@@ -616,11 +616,10 @@ class INATNetwork(IUnknown):
        return 
 
 
-   def start(self, _arg_trunkType):
+   def start(self):
        req=INATNetwork_startRequestMsg()
        req._this=self.handle
        
-       req._trunkType=_arg_trunkType
        val=self.mgr.getPort().INATNetwork_start(req)
        
        return 
@@ -796,6 +795,164 @@ class INATNetwork(IUnknown):
         ],
          'portForwardRules6':[getPortForwardRules6,None]}
 
+class ICloudNetwork(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return ICloudNetwork(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = ICloudNetwork._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = ICloudNetwork._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getNetworkName(self):
+       req=ICloudNetwork_getNetworkNameRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetwork_getNetworkName(req)
+       return String(self.mgr,val._returnval)
+   def setNetworkName(self, value):
+       req=ICloudNetwork_setNetworkNameRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._networkName = value
+       else:
+            req._networkName = value.handle
+       self.mgr.getPort().ICloudNetwork_setNetworkName(req)
+
+   def getEnabled(self):
+       req=ICloudNetwork_getEnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetwork_getEnabled(req)
+       return Boolean(self.mgr,val._returnval)
+   def setEnabled(self, value):
+       req=ICloudNetwork_setEnabledRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._enabled = value
+       else:
+            req._enabled = value.handle
+       self.mgr.getPort().ICloudNetwork_setEnabled(req)
+
+   def getProvider(self):
+       req=ICloudNetwork_getProviderRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetwork_getProvider(req)
+       return String(self.mgr,val._returnval)
+   def setProvider(self, value):
+       req=ICloudNetwork_setProviderRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._provider = value
+       else:
+            req._provider = value.handle
+       self.mgr.getPort().ICloudNetwork_setProvider(req)
+
+   def getProfile(self):
+       req=ICloudNetwork_getProfileRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetwork_getProfile(req)
+       return String(self.mgr,val._returnval)
+   def setProfile(self, value):
+       req=ICloudNetwork_setProfileRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._profile = value
+       else:
+            req._profile = value.handle
+       self.mgr.getPort().ICloudNetwork_setProfile(req)
+
+   def getNetworkId(self):
+       req=ICloudNetwork_getNetworkIdRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetwork_getNetworkId(req)
+       return String(self.mgr,val._returnval)
+   def setNetworkId(self, value):
+       req=ICloudNetwork_setNetworkIdRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._networkId = value
+       else:
+            req._networkId = value.handle
+       self.mgr.getPort().ICloudNetwork_setNetworkId(req)
+
+
+
+   _Attrs_={         'networkName':[getNetworkName,setNetworkName,
+        ],
+         'enabled':[getEnabled,setEnabled,
+        ],
+         'provider':[getProvider,setProvider,
+        ],
+         'profile':[getProfile,setProfile,
+        ],
+         'networkId':[getNetworkId,setNetworkId,
+        ]}
+
 class IDHCPServer(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -871,93 +1028,6 @@ class IDHCPServer(IUnknown):
          self.__dict__[name] = val
 
    
-   def addGlobalOption(self, _arg_option, _arg_value):
-       req=IDHCPServer_addGlobalOptionRequestMsg()
-       req._this=self.handle
-       
-       req._option=_arg_option
-       req._value=_arg_value
-       val=self.mgr.getPort().IDHCPServer_addGlobalOption(req)
-       
-       return 
-
-
-   def removeGlobalOption(self, _arg_option):
-       req=IDHCPServer_removeGlobalOptionRequestMsg()
-       req._this=self.handle
-       
-       req._option=_arg_option
-       val=self.mgr.getPort().IDHCPServer_removeGlobalOption(req)
-       
-       return 
-
-
-   def removeGlobalOptions(self):
-       req=IDHCPServer_removeGlobalOptionsRequestMsg()
-       req._this=self.handle
-       
-       val=self.mgr.getPort().IDHCPServer_removeGlobalOptions(req)
-       
-       return 
-
-
-   def addVmSlotOption(self, _arg_vmname, _arg_slot, _arg_option, _arg_value):
-       req=IDHCPServer_addVmSlotOptionRequestMsg()
-       req._this=self.handle
-       
-       req._vmname=_arg_vmname
-       req._slot=_arg_slot
-       req._option=_arg_option
-       req._value=_arg_value
-       val=self.mgr.getPort().IDHCPServer_addVmSlotOption(req)
-       
-       return 
-
-
-   def removeVmSlotOption(self, _arg_vmname, _arg_slot, _arg_option):
-       req=IDHCPServer_removeVmSlotOptionRequestMsg()
-       req._this=self.handle
-       
-       req._vmname=_arg_vmname
-       req._slot=_arg_slot
-       req._option=_arg_option
-       val=self.mgr.getPort().IDHCPServer_removeVmSlotOption(req)
-       
-       return 
-
-
-   def removeVmSlotOptions(self, _arg_vmname, _arg_slot):
-       req=IDHCPServer_removeVmSlotOptionsRequestMsg()
-       req._this=self.handle
-       
-       req._vmname=_arg_vmname
-       req._slot=_arg_slot
-       val=self.mgr.getPort().IDHCPServer_removeVmSlotOptions(req)
-       
-       return 
-
-
-   def getVmSlotOptions(self, _arg_vmname, _arg_slot):
-       req=IDHCPServer_getVmSlotOptionsRequestMsg()
-       req._this=self.handle
-       
-       req._vmname=_arg_vmname
-       req._slot=_arg_slot
-       val=self.mgr.getPort().IDHCPServer_getVmSlotOptions(req)
-       
-       return String(self.mgr,val._returnval, True)
-
-
-   def getMacOptions(self, _arg_mac):
-       req=IDHCPServer_getMacOptionsRequestMsg()
-       req._this=self.handle
-       
-       req._mac=_arg_mac
-       val=self.mgr.getPort().IDHCPServer_getMacOptions(req)
-       
-       return String(self.mgr,val._returnval, True)
-
-
    def setConfiguration(self, _arg_IPAddress, _arg_networkMask, _arg_FromIPAddress, _arg_ToIPAddress):
        req=IDHCPServer_setConfigurationRequestMsg()
        req._this=self.handle
@@ -971,11 +1041,10 @@ class IDHCPServer(IUnknown):
        return 
 
 
-   def start(self, _arg_networkName, _arg_trunkName, _arg_trunkType):
+   def start(self, _arg_trunkName, _arg_trunkType):
        req=IDHCPServer_startRequestMsg()
        req._this=self.handle
        
-       req._networkName=_arg_networkName
        req._trunkName=_arg_trunkName
        req._trunkType=_arg_trunkType
        val=self.mgr.getPort().IDHCPServer_start(req)
@@ -999,6 +1068,30 @@ class IDHCPServer(IUnknown):
        val=self.mgr.getPort().IDHCPServer_restart(req)
        
        return 
+
+
+   def findLeaseByMAC(self, _arg_mac, _arg_type):
+       req=IDHCPServer_findLeaseByMACRequestMsg()
+       req._this=self.handle
+       
+       req._mac=_arg_mac
+       req._type=_arg_type
+       val=self.mgr.getPort().IDHCPServer_findLeaseByMAC(req)
+       
+       return String(self.mgr,val._address), String(self.mgr,val._state), Long(self.mgr,val._issued), Long(self.mgr,val._expire)
+
+
+   def getConfig(self, _arg_scope, _arg_name, _arg_slot, _arg_mayAdd):
+       req=IDHCPServer_getConfigRequestMsg()
+       req._this=self.handle
+       
+       req._scope=_arg_scope
+       req._name=_arg_name
+       req._slot=_arg_slot
+       req._mayAdd=_arg_mayAdd
+       val=self.mgr.getPort().IDHCPServer_getConfig(req)
+       
+       return IDHCPConfig(self.mgr,val._returnval)
 
 
    def getEventSource(self):
@@ -1045,16 +1138,21 @@ class IDHCPServer(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IDHCPServer_getUpperIP(req)
        return String(self.mgr,val._returnval)
-   def getGlobalOptions(self):
-       req=IDHCPServer_getGlobalOptionsRequestMsg()
+   def getGlobalConfig(self):
+       req=IDHCPServer_getGlobalConfigRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IDHCPServer_getGlobalOptions(req)
-       return String(self.mgr,val._returnval, True)
-   def getVmConfigs(self):
-       req=IDHCPServer_getVmConfigsRequestMsg()
+       val=self.mgr.getPort().IDHCPServer_getGlobalConfig(req)
+       return IDHCPGlobalConfig(self.mgr,val._returnval)
+   def getGroupConfigs(self):
+       req=IDHCPServer_getGroupConfigsRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IDHCPServer_getVmConfigs(req)
-       return String(self.mgr,val._returnval, True)
+       val=self.mgr.getPort().IDHCPServer_getGroupConfigs(req)
+       return IDHCPGroupConfig(self.mgr,val._returnval, True)
+   def getIndividualConfigs(self):
+       req=IDHCPServer_getIndividualConfigsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPServer_getIndividualConfigs(req)
+       return IDHCPIndividualConfig(self.mgr,val._returnval, True)
 
 
    _Attrs_={         'eventSource':[getEventSource,None],
@@ -1065,8 +1163,679 @@ class IDHCPServer(IUnknown):
          'networkName':[getNetworkName,None],
          'lowerIP':[getLowerIP,None],
          'upperIP':[getUpperIP,None],
-         'globalOptions':[getGlobalOptions,None],
-         'vmConfigs':[getVmConfigs,None]}
+         'globalConfig':[getGlobalConfig,None],
+         'groupConfigs':[getGroupConfigs,None],
+         'individualConfigs':[getIndividualConfigs,None]}
+
+class IDHCPConfig(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IDHCPConfig(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IDHCPConfig._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IDHCPConfig._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def setOption(self, _arg_option, _arg_encoding, _arg_value):
+       req=IDHCPConfig_setOptionRequestMsg()
+       req._this=self.handle
+       
+       req._option=_arg_option
+       req._encoding=_arg_encoding
+       req._value=_arg_value
+       val=self.mgr.getPort().IDHCPConfig_setOption(req)
+       
+       return 
+
+
+   def removeOption(self, _arg_option):
+       req=IDHCPConfig_removeOptionRequestMsg()
+       req._this=self.handle
+       
+       req._option=_arg_option
+       val=self.mgr.getPort().IDHCPConfig_removeOption(req)
+       
+       return 
+
+
+   def removeAllOptions(self):
+       req=IDHCPConfig_removeAllOptionsRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IDHCPConfig_removeAllOptions(req)
+       
+       return 
+
+
+   def getOption(self, _arg_option):
+       req=IDHCPConfig_getOptionRequestMsg()
+       req._this=self.handle
+       
+       req._option=_arg_option
+       val=self.mgr.getPort().IDHCPConfig_getOption(req)
+       
+       return String(self.mgr,val._returnval), DHCPOptionEncoding(self.mgr,val._encoding)
+
+
+   def getAllOptions(self):
+       req=IDHCPConfig_getAllOptionsRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IDHCPConfig_getAllOptions(req)
+       
+       return String(self.mgr,val._returnval, True), DHCPOption(self.mgr,val._options, True), DHCPOptionEncoding(self.mgr,val._encodings, True)
+
+
+   def remove(self):
+       req=IDHCPConfig_removeRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IDHCPConfig_remove(req)
+       
+       return 
+
+
+   def getScope(self):
+       req=IDHCPConfig_getScopeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPConfig_getScope(req)
+       return DHCPConfigScope(self.mgr,val._returnval)
+   def getMinLeaseTime(self):
+       req=IDHCPConfig_getMinLeaseTimeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPConfig_getMinLeaseTime(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setMinLeaseTime(self, value):
+       req=IDHCPConfig_setMinLeaseTimeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._minLeaseTime = value
+       else:
+            req._minLeaseTime = value.handle
+       self.mgr.getPort().IDHCPConfig_setMinLeaseTime(req)
+
+   def getDefaultLeaseTime(self):
+       req=IDHCPConfig_getDefaultLeaseTimeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPConfig_getDefaultLeaseTime(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setDefaultLeaseTime(self, value):
+       req=IDHCPConfig_setDefaultLeaseTimeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._defaultLeaseTime = value
+       else:
+            req._defaultLeaseTime = value.handle
+       self.mgr.getPort().IDHCPConfig_setDefaultLeaseTime(req)
+
+   def getMaxLeaseTime(self):
+       req=IDHCPConfig_getMaxLeaseTimeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPConfig_getMaxLeaseTime(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setMaxLeaseTime(self, value):
+       req=IDHCPConfig_setMaxLeaseTimeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._maxLeaseTime = value
+       else:
+            req._maxLeaseTime = value.handle
+       self.mgr.getPort().IDHCPConfig_setMaxLeaseTime(req)
+
+   def getForcedOptions(self):
+       req=IDHCPConfig_getForcedOptionsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPConfig_getForcedOptions(req)
+       return DHCPOption(self.mgr,val._returnval, True)
+   def setForcedOptions(self, value):
+       req=IDHCPConfig_setForcedOptionsRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str, tuple, list]:
+            req._forcedOptions = value
+       else:
+            req._forcedOptions = value.handle
+       self.mgr.getPort().IDHCPConfig_setForcedOptions(req)
+
+   def getSuppressedOptions(self):
+       req=IDHCPConfig_getSuppressedOptionsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPConfig_getSuppressedOptions(req)
+       return DHCPOption(self.mgr,val._returnval, True)
+   def setSuppressedOptions(self, value):
+       req=IDHCPConfig_setSuppressedOptionsRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str, tuple, list]:
+            req._suppressedOptions = value
+       else:
+            req._suppressedOptions = value.handle
+       self.mgr.getPort().IDHCPConfig_setSuppressedOptions(req)
+
+
+
+   _Attrs_={         'scope':[getScope,None],
+         'minLeaseTime':[getMinLeaseTime,setMinLeaseTime,
+        ],
+         'defaultLeaseTime':[getDefaultLeaseTime,setDefaultLeaseTime,
+        ],
+         'maxLeaseTime':[getMaxLeaseTime,setMaxLeaseTime,
+        ],
+         'forcedOptions':[getForcedOptions,setForcedOptions,
+        ],
+         'suppressedOptions':[getSuppressedOptions,setSuppressedOptions,
+        ]}
+
+class IDHCPGlobalConfig(IDHCPConfig):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IDHCPGlobalConfig(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IDHCPGlobalConfig._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IDHCPConfig.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IDHCPGlobalConfig._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+
+
+   _Attrs_={}
+
+class IDHCPGroupCondition(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IDHCPGroupCondition(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IDHCPGroupCondition._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IDHCPGroupCondition._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def remove(self):
+       req=IDHCPGroupCondition_removeRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IDHCPGroupCondition_remove(req)
+       
+       return 
+
+
+   def getInclusive(self):
+       req=IDHCPGroupCondition_getInclusiveRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPGroupCondition_getInclusive(req)
+       return Boolean(self.mgr,val._returnval)
+   def setInclusive(self, value):
+       req=IDHCPGroupCondition_setInclusiveRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._inclusive = value
+       else:
+            req._inclusive = value.handle
+       self.mgr.getPort().IDHCPGroupCondition_setInclusive(req)
+
+   def getType(self):
+       req=IDHCPGroupCondition_getTypeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPGroupCondition_getType(req)
+       return DHCPGroupConditionType(self.mgr,val._returnval)
+   def setType(self, value):
+       req=IDHCPGroupCondition_setTypeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._type = value
+       else:
+            req._type = value.handle
+       self.mgr.getPort().IDHCPGroupCondition_setType(req)
+
+   def getValue(self):
+       req=IDHCPGroupCondition_getValueRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPGroupCondition_getValue(req)
+       return String(self.mgr,val._returnval)
+   def setValue(self, value):
+       req=IDHCPGroupCondition_setValueRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._value = value
+       else:
+            req._value = value.handle
+       self.mgr.getPort().IDHCPGroupCondition_setValue(req)
+
+
+
+   _Attrs_={         'inclusive':[getInclusive,setInclusive,
+        ],
+         'type':[getType,setType,
+        ],
+         'value':[getValue,setValue,
+        ]}
+
+class IDHCPGroupConfig(IDHCPConfig):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IDHCPGroupConfig(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IDHCPGroupConfig._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IDHCPConfig.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IDHCPGroupConfig._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def addCondition(self, _arg_inclusive, _arg_type, _arg_value):
+       req=IDHCPGroupConfig_addConditionRequestMsg()
+       req._this=self.handle
+       
+       req._inclusive=_arg_inclusive
+       req._type=_arg_type
+       req._value=_arg_value
+       val=self.mgr.getPort().IDHCPGroupConfig_addCondition(req)
+       
+       return IDHCPGroupCondition(self.mgr,val._returnval)
+
+
+   def removeAllConditions(self):
+       req=IDHCPGroupConfig_removeAllConditionsRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IDHCPGroupConfig_removeAllConditions(req)
+       
+       return 
+
+
+   def getName(self):
+       req=IDHCPGroupConfig_getNameRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPGroupConfig_getName(req)
+       return String(self.mgr,val._returnval)
+   def setName(self, value):
+       req=IDHCPGroupConfig_setNameRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._name = value
+       else:
+            req._name = value.handle
+       self.mgr.getPort().IDHCPGroupConfig_setName(req)
+
+   def getConditions(self):
+       req=IDHCPGroupConfig_getConditionsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPGroupConfig_getConditions(req)
+       return IDHCPGroupCondition(self.mgr,val._returnval, True)
+
+
+   _Attrs_={         'name':[getName,setName,
+        ],
+         'conditions':[getConditions,None]}
+
+class IDHCPIndividualConfig(IDHCPConfig):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IDHCPIndividualConfig(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IDHCPIndividualConfig._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IDHCPConfig.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IDHCPIndividualConfig._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getMACAddress(self):
+       req=IDHCPIndividualConfig_getMACAddressRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPIndividualConfig_getMACAddress(req)
+       return String(self.mgr,val._returnval)
+   def getMachineId(self):
+       req=IDHCPIndividualConfig_getMachineIdRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPIndividualConfig_getMachineId(req)
+       return String(self.mgr,val._returnval)
+   def getSlot(self):
+       req=IDHCPIndividualConfig_getSlotRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPIndividualConfig_getSlot(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def getFixedAddress(self):
+       req=IDHCPIndividualConfig_getFixedAddressRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDHCPIndividualConfig_getFixedAddress(req)
+       return String(self.mgr,val._returnval)
+   def setFixedAddress(self, value):
+       req=IDHCPIndividualConfig_setFixedAddressRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._fixedAddress = value
+       else:
+            req._fixedAddress = value.handle
+       self.mgr.getPort().IDHCPIndividualConfig_setFixedAddress(req)
+
+
+
+   _Attrs_={         'MACAddress':[getMACAddress,None],
+         'machineId':[getMachineId,None],
+         'slot':[getSlot,None],
+         'fixedAddress':[getFixedAddress,setFixedAddress,
+        ]}
 
 class IVirtualBox(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -1398,6 +2167,36 @@ class IVirtualBox(IUnknown):
        return 
 
 
+   def createCloudNetwork(self, _arg_networkName):
+       req=IVirtualBox_createCloudNetworkRequestMsg()
+       req._this=self.handle
+       
+       req._networkName=_arg_networkName
+       val=self.mgr.getPort().IVirtualBox_createCloudNetwork(req)
+       
+       return ICloudNetwork(self.mgr,val._returnval)
+
+
+   def findCloudNetworkByName(self, _arg_networkName):
+       req=IVirtualBox_findCloudNetworkByNameRequestMsg()
+       req._this=self.handle
+       
+       req._networkName=_arg_networkName
+       val=self.mgr.getPort().IVirtualBox_findCloudNetworkByName(req)
+       
+       return ICloudNetwork(self.mgr,val._returnval)
+
+
+   def removeCloudNetwork(self, _arg_network):
+       req=IVirtualBox_removeCloudNetworkRequestMsg()
+       req._this=self.handle
+       
+       req._network=_arg_network
+       val=self.mgr.getPort().IVirtualBox_removeCloudNetwork(req)
+       
+       return 
+
+
    def checkFirmwarePresent(self, _arg_firmwareType, _arg_version):
        req=IVirtualBox_checkFirmwarePresentRequestMsg()
        req._this=self.handle
@@ -1529,6 +2328,11 @@ class IVirtualBox(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IVirtualBox_getGenericNetworkDrivers(req)
        return String(self.mgr,val._returnval, True)
+   def getCloudNetworks(self):
+       req=IVirtualBox_getCloudNetworksRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IVirtualBox_getCloudNetworks(req)
+       return ICloudNetwork(self.mgr,val._returnval, True)
    def getCloudProviderManager(self):
        req=IVirtualBox_getCloudProviderManagerRequestMsg()
        req._this=self.handle
@@ -1560,6 +2364,7 @@ class IVirtualBox(IUnknown):
          'eventSource':[getEventSource,None],
          'internalNetworks':[getInternalNetworks,None],
          'genericNetworkDrivers':[getGenericNetworkDrivers,None],
+         'cloudNetworks':[getCloudNetworks,None],
          'cloudProviderManager':[getCloudProviderManager,None]}
 
 class IVFSExplorer(IUnknown):
@@ -2095,6 +2900,16 @@ class IAppliance(IUnknown):
        val=self.mgr.getPort().IAppliance_addPasswords(req)
        
        return 
+
+
+   def createVirtualSystemDescriptions(self, _arg_requested):
+       req=IAppliance_createVirtualSystemDescriptionsRequestMsg()
+       req._this=self.handle
+       
+       req._requested=_arg_requested
+       val=self.mgr.getPort().IAppliance_createVirtualSystemDescriptions(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
 
 
    def getPath(self):
@@ -2799,6 +3614,164 @@ class IUnattended(IUnknown):
          'detectedOSLanguages':[getDetectedOSLanguages,None],
          'detectedOSHints':[getDetectedOSHints,None]}
 
+class IGraphicsAdapter(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGraphicsAdapter(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGraphicsAdapter._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGraphicsAdapter._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getGraphicsControllerType(self):
+       req=IGraphicsAdapter_getGraphicsControllerTypeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGraphicsAdapter_getGraphicsControllerType(req)
+       return GraphicsControllerType(self.mgr,val._returnval)
+   def setGraphicsControllerType(self, value):
+       req=IGraphicsAdapter_setGraphicsControllerTypeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._graphicsControllerType = value
+       else:
+            req._graphicsControllerType = value.handle
+       self.mgr.getPort().IGraphicsAdapter_setGraphicsControllerType(req)
+
+   def getVRAMSize(self):
+       req=IGraphicsAdapter_getVRAMSizeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGraphicsAdapter_getVRAMSize(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setVRAMSize(self, value):
+       req=IGraphicsAdapter_setVRAMSizeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._VRAMSize = value
+       else:
+            req._VRAMSize = value.handle
+       self.mgr.getPort().IGraphicsAdapter_setVRAMSize(req)
+
+   def getAccelerate3DEnabled(self):
+       req=IGraphicsAdapter_getAccelerate3DEnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGraphicsAdapter_getAccelerate3DEnabled(req)
+       return Boolean(self.mgr,val._returnval)
+   def setAccelerate3DEnabled(self, value):
+       req=IGraphicsAdapter_setAccelerate3DEnabledRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._accelerate3DEnabled = value
+       else:
+            req._accelerate3DEnabled = value.handle
+       self.mgr.getPort().IGraphicsAdapter_setAccelerate3DEnabled(req)
+
+   def getAccelerate2DVideoEnabled(self):
+       req=IGraphicsAdapter_getAccelerate2DVideoEnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGraphicsAdapter_getAccelerate2DVideoEnabled(req)
+       return Boolean(self.mgr,val._returnval)
+   def setAccelerate2DVideoEnabled(self, value):
+       req=IGraphicsAdapter_setAccelerate2DVideoEnabledRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._accelerate2DVideoEnabled = value
+       else:
+            req._accelerate2DVideoEnabled = value.handle
+       self.mgr.getPort().IGraphicsAdapter_setAccelerate2DVideoEnabled(req)
+
+   def getMonitorCount(self):
+       req=IGraphicsAdapter_getMonitorCountRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGraphicsAdapter_getMonitorCount(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setMonitorCount(self, value):
+       req=IGraphicsAdapter_setMonitorCountRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._monitorCount = value
+       else:
+            req._monitorCount = value.handle
+       self.mgr.getPort().IGraphicsAdapter_setMonitorCount(req)
+
+
+
+   _Attrs_={         'graphicsControllerType':[getGraphicsControllerType,setGraphicsControllerType,
+        ],
+         'VRAMSize':[getVRAMSize,setVRAMSize,
+        ],
+         'accelerate3DEnabled':[getAccelerate3DEnabled,setAccelerate3DEnabled,
+        ],
+         'accelerate2DVideoEnabled':[getAccelerate2DVideoEnabled,setAccelerate2DVideoEnabled,
+        ],
+         'monitorCount':[getMonitorCount,setMonitorCount,
+        ]}
+
 class IBIOSSettings(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -3019,6 +3992,20 @@ class IBIOSSettings(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IBIOSSettings_getNonVolatileStorageFile(req)
        return String(self.mgr,val._returnval)
+   def getSMBIOSUuidLittleEndian(self):
+       req=IBIOSSettings_getSMBIOSUuidLittleEndianRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IBIOSSettings_getSMBIOSUuidLittleEndian(req)
+       return Boolean(self.mgr,val._returnval)
+   def setSMBIOSUuidLittleEndian(self, value):
+       req=IBIOSSettings_setSMBIOSUuidLittleEndianRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._SMBIOSUuidLittleEndian = value
+       else:
+            req._SMBIOSUuidLittleEndian = value.handle
+       self.mgr.getPort().IBIOSSettings_setSMBIOSUuidLittleEndian(req)
+
 
 
    _Attrs_={         'logoFadeIn':[getLogoFadeIn,setLogoFadeIn,
@@ -3041,7 +4028,9 @@ class IBIOSSettings(IUnknown):
         ],
          'PXEDebugEnabled':[getPXEDebugEnabled,setPXEDebugEnabled,
         ],
-         'nonVolatileStorageFile':[getNonVolatileStorageFile,None]}
+         'nonVolatileStorageFile':[getNonVolatileStorageFile,None],
+         'SMBIOSUuidLittleEndian':[getSMBIOSUuidLittleEndian,setSMBIOSUuidLittleEndian,
+        ]}
 
 class IRecordingScreenSettings(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -3766,13 +4755,13 @@ class IMachine(IUnknown):
        return 
 
 
-   def launchVMProcess(self, _arg_session, _arg_name, _arg_environment):
+   def launchVMProcess(self, _arg_session, _arg_name, _arg_environmentChanges):
        req=IMachine_launchVMProcessRequestMsg()
        req._this=self.handle
        
        req._session=_arg_session
        req._name=_arg_name
-       req._environment=_arg_environment
+       req._environmentChanges=_arg_environmentChanges
        val=self.mgr.getPort().IMachine_launchVMProcess(req)
        
        return IProgress(self.mgr,val._returnval)
@@ -4881,76 +5870,11 @@ class IMachine(IUnknown):
             req._pageFusionEnabled = value.handle
        self.mgr.getPort().IMachine_setPageFusionEnabled(req)
 
-   def getGraphicsControllerType(self):
-       req=IMachine_getGraphicsControllerTypeRequestMsg()
+   def getGraphicsAdapter(self):
+       req=IMachine_getGraphicsAdapterRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IMachine_getGraphicsControllerType(req)
-       return GraphicsControllerType(self.mgr,val._returnval)
-   def setGraphicsControllerType(self, value):
-       req=IMachine_setGraphicsControllerTypeRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._graphicsControllerType = value
-       else:
-            req._graphicsControllerType = value.handle
-       self.mgr.getPort().IMachine_setGraphicsControllerType(req)
-
-   def getVRAMSize(self):
-       req=IMachine_getVRAMSizeRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getVRAMSize(req)
-       return UnsignedInt(self.mgr,val._returnval)
-   def setVRAMSize(self, value):
-       req=IMachine_setVRAMSizeRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._VRAMSize = value
-       else:
-            req._VRAMSize = value.handle
-       self.mgr.getPort().IMachine_setVRAMSize(req)
-
-   def getAccelerate3DEnabled(self):
-       req=IMachine_getAccelerate3DEnabledRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getAccelerate3DEnabled(req)
-       return Boolean(self.mgr,val._returnval)
-   def setAccelerate3DEnabled(self, value):
-       req=IMachine_setAccelerate3DEnabledRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._accelerate3DEnabled = value
-       else:
-            req._accelerate3DEnabled = value.handle
-       self.mgr.getPort().IMachine_setAccelerate3DEnabled(req)
-
-   def getAccelerate2DVideoEnabled(self):
-       req=IMachine_getAccelerate2DVideoEnabledRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getAccelerate2DVideoEnabled(req)
-       return Boolean(self.mgr,val._returnval)
-   def setAccelerate2DVideoEnabled(self, value):
-       req=IMachine_setAccelerate2DVideoEnabledRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._accelerate2DVideoEnabled = value
-       else:
-            req._accelerate2DVideoEnabled = value.handle
-       self.mgr.getPort().IMachine_setAccelerate2DVideoEnabled(req)
-
-   def getMonitorCount(self):
-       req=IMachine_getMonitorCountRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getMonitorCount(req)
-       return UnsignedInt(self.mgr,val._returnval)
-   def setMonitorCount(self, value):
-       req=IMachine_setMonitorCountRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._monitorCount = value
-       else:
-            req._monitorCount = value.handle
-       self.mgr.getPort().IMachine_setMonitorCount(req)
-
+       val=self.mgr.getPort().IMachine_getGraphicsAdapter(req)
+       return IGraphicsAdapter(self.mgr,val._returnval)
    def getBIOSSettings(self):
        req=IMachine_getBIOSSettingsRequestMsg()
        req._this=self.handle
@@ -5173,6 +6097,20 @@ class IMachine(IUnknown):
             req._clipboardMode = value.handle
        self.mgr.getPort().IMachine_setClipboardMode(req)
 
+   def getClipboardFileTransfersEnabled(self):
+       req=IMachine_getClipboardFileTransfersEnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IMachine_getClipboardFileTransfersEnabled(req)
+       return Boolean(self.mgr,val._returnval)
+   def setClipboardFileTransfersEnabled(self, value):
+       req=IMachine_setClipboardFileTransfersEnabledRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._clipboardFileTransfersEnabled = value
+       else:
+            req._clipboardFileTransfersEnabled = value.handle
+       self.mgr.getPort().IMachine_setClipboardFileTransfersEnabled(req)
+
    def getDnDMode(self):
        req=IMachine_getDnDModeRequestMsg()
        req._this=self.handle
@@ -5256,76 +6194,6 @@ class IMachine(IUnknown):
        else:
             req._paravirtProvider = value.handle
        self.mgr.getPort().IMachine_setParavirtProvider(req)
-
-   def getFaultToleranceState(self):
-       req=IMachine_getFaultToleranceStateRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getFaultToleranceState(req)
-       return FaultToleranceState(self.mgr,val._returnval)
-   def setFaultToleranceState(self, value):
-       req=IMachine_setFaultToleranceStateRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._faultToleranceState = value
-       else:
-            req._faultToleranceState = value.handle
-       self.mgr.getPort().IMachine_setFaultToleranceState(req)
-
-   def getFaultTolerancePort(self):
-       req=IMachine_getFaultTolerancePortRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getFaultTolerancePort(req)
-       return UnsignedInt(self.mgr,val._returnval)
-   def setFaultTolerancePort(self, value):
-       req=IMachine_setFaultTolerancePortRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._faultTolerancePort = value
-       else:
-            req._faultTolerancePort = value.handle
-       self.mgr.getPort().IMachine_setFaultTolerancePort(req)
-
-   def getFaultToleranceAddress(self):
-       req=IMachine_getFaultToleranceAddressRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getFaultToleranceAddress(req)
-       return String(self.mgr,val._returnval)
-   def setFaultToleranceAddress(self, value):
-       req=IMachine_setFaultToleranceAddressRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._faultToleranceAddress = value
-       else:
-            req._faultToleranceAddress = value.handle
-       self.mgr.getPort().IMachine_setFaultToleranceAddress(req)
-
-   def getFaultTolerancePassword(self):
-       req=IMachine_getFaultTolerancePasswordRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getFaultTolerancePassword(req)
-       return String(self.mgr,val._returnval)
-   def setFaultTolerancePassword(self, value):
-       req=IMachine_setFaultTolerancePasswordRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._faultTolerancePassword = value
-       else:
-            req._faultTolerancePassword = value.handle
-       self.mgr.getPort().IMachine_setFaultTolerancePassword(req)
-
-   def getFaultToleranceSyncInterval(self):
-       req=IMachine_getFaultToleranceSyncIntervalRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getFaultToleranceSyncInterval(req)
-       return UnsignedInt(self.mgr,val._returnval)
-   def setFaultToleranceSyncInterval(self, value):
-       req=IMachine_setFaultToleranceSyncIntervalRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._faultToleranceSyncInterval = value
-       else:
-            req._faultToleranceSyncInterval = value.handle
-       self.mgr.getPort().IMachine_setFaultToleranceSyncInterval(req)
 
    def getRTCUseUTC(self):
        req=IMachine_getRTCUseUTCRequestMsg()
@@ -5486,7 +6354,7 @@ class IMachine(IUnknown):
        req=IMachine_getVMProcessPriorityRequestMsg()
        req._this=self.handle
        val=self.mgr.getPort().IMachine_getVMProcessPriority(req)
-       return String(self.mgr,val._returnval)
+       return VMProcPriority(self.mgr,val._returnval)
    def setVMProcessPriority(self, value):
        req=IMachine_setVMProcessPriorityRequestMsg()
        req._this=self.handle
@@ -5558,16 +6426,7 @@ class IMachine(IUnknown):
         ],
          'pageFusionEnabled':[getPageFusionEnabled,setPageFusionEnabled,
         ],
-         'graphicsControllerType':[getGraphicsControllerType,setGraphicsControllerType,
-        ],
-         'VRAMSize':[getVRAMSize,setVRAMSize,
-        ],
-         'accelerate3DEnabled':[getAccelerate3DEnabled,setAccelerate3DEnabled,
-        ],
-         'accelerate2DVideoEnabled':[getAccelerate2DVideoEnabled,setAccelerate2DVideoEnabled,
-        ],
-         'monitorCount':[getMonitorCount,setMonitorCount,
-        ],
+         'graphicsAdapter':[getGraphicsAdapter,None],
          'BIOSSettings':[getBIOSSettings,None],
          'recordingSettings':[getRecordingSettings,None],
          'firmwareType':[getFirmwareType,setFirmwareType,
@@ -5606,6 +6465,8 @@ class IMachine(IUnknown):
          'sharedFolders':[getSharedFolders,None],
          'clipboardMode':[getClipboardMode,setClipboardMode,
         ],
+         'clipboardFileTransfersEnabled':[getClipboardFileTransfersEnabled,setClipboardFileTransfersEnabled,
+        ],
          'dnDMode':[getDnDMode,setDnDMode,
         ],
          'teleporterEnabled':[getTeleporterEnabled,setTeleporterEnabled,
@@ -5617,16 +6478,6 @@ class IMachine(IUnknown):
          'teleporterPassword':[getTeleporterPassword,setTeleporterPassword,
         ],
          'paravirtProvider':[getParavirtProvider,setParavirtProvider,
-        ],
-         'faultToleranceState':[getFaultToleranceState,setFaultToleranceState,
-        ],
-         'faultTolerancePort':[getFaultTolerancePort,setFaultTolerancePort,
-        ],
-         'faultToleranceAddress':[getFaultToleranceAddress,setFaultToleranceAddress,
-        ],
-         'faultTolerancePassword':[getFaultTolerancePassword,setFaultTolerancePassword,
-        ],
-         'faultToleranceSyncInterval':[getFaultToleranceSyncInterval,setFaultToleranceSyncInterval,
         ],
          'RTCUseUTC':[getRTCUseUTC,setRTCUseUTC,
         ],
@@ -6466,6 +7317,85 @@ class IHostVideoInputDevice(IUnknown):
          'path':[getPath,None],
          'alias':[getAlias,None]}
 
+class IHostUpdate(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IHostUpdate(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IHostUpdate._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IHostUpdate._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+
+
+   _Attrs_={}
+
 class IHost(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -6831,6 +7761,11 @@ class IHost(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IHost_getVideoInputDevices(req)
        return IHostVideoInputDevice(self.mgr,val._returnval, True)
+   def getUpdate(self):
+       req=IHost_getUpdateRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IHost_getUpdate(req)
+       return IHostUpdate(self.mgr,val._returnval)
 
 
    _Attrs_={         'DVDDrives':[getDVDDrives,None],
@@ -6851,7 +7786,8 @@ class IHost(IUnknown):
          'OSVersion':[getOSVersion,None],
          'UTCTime':[getUTCTime,None],
          'acceleration3DAvailable':[getAcceleration3DAvailable,None],
-         'videoInputDevices':[getVideoInputDevices,None]}
+         'videoInputDevices':[getVideoInputDevices,None],
+         'update':[getUpdate,None]}
 
 class ISystemProperties(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -6998,6 +7934,26 @@ class ISystemProperties(IUnknown):
        val=self.mgr.getPort().ISystemProperties_getDeviceTypesForStorageBus(req)
        
        return DeviceType(self.mgr,val._returnval, True)
+
+
+   def getStorageBusForStorageControllerType(self, _arg_storageControllerType):
+       req=ISystemProperties_getStorageBusForStorageControllerTypeRequestMsg()
+       req._this=self.handle
+       
+       req._storageControllerType=_arg_storageControllerType
+       val=self.mgr.getPort().ISystemProperties_getStorageBusForStorageControllerType(req)
+       
+       return StorageBus(self.mgr,val._returnval)
+
+
+   def getStorageControllerTypesForStorageBus(self, _arg_storageBus):
+       req=ISystemProperties_getStorageControllerTypesForStorageBusRequestMsg()
+       req._this=self.handle
+       
+       req._storageBus=_arg_storageBus
+       val=self.mgr.getPort().ISystemProperties_getStorageControllerTypesForStorageBus(req)
+       
+       return StorageControllerType(self.mgr,val._returnval, True)
 
 
    def getDefaultIoCacheSettingForStorageController(self, _arg_controllerType):
@@ -7344,6 +8300,141 @@ class ISystemProperties(IUnknown):
             req._proxyURL = value.handle
        self.mgr.getPort().ISystemProperties_setProxyURL(req)
 
+   def getSupportedParavirtProviders(self):
+       req=ISystemProperties_getSupportedParavirtProvidersRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedParavirtProviders(req)
+       return ParavirtProvider(self.mgr,val._returnval, True)
+   def getSupportedClipboardModes(self):
+       req=ISystemProperties_getSupportedClipboardModesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedClipboardModes(req)
+       return ClipboardMode(self.mgr,val._returnval, True)
+   def getSupportedDnDModes(self):
+       req=ISystemProperties_getSupportedDnDModesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedDnDModes(req)
+       return DnDMode(self.mgr,val._returnval, True)
+   def getSupportedFirmwareTypes(self):
+       req=ISystemProperties_getSupportedFirmwareTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedFirmwareTypes(req)
+       return FirmwareType(self.mgr,val._returnval, True)
+   def getSupportedPointingHIDTypes(self):
+       req=ISystemProperties_getSupportedPointingHIDTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedPointingHIDTypes(req)
+       return PointingHIDType(self.mgr,val._returnval, True)
+   def getSupportedKeyboardHIDTypes(self):
+       req=ISystemProperties_getSupportedKeyboardHIDTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedKeyboardHIDTypes(req)
+       return KeyboardHIDType(self.mgr,val._returnval, True)
+   def getSupportedVFSTypes(self):
+       req=ISystemProperties_getSupportedVFSTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedVFSTypes(req)
+       return VFSType(self.mgr,val._returnval, True)
+   def getSupportedImportOptions(self):
+       req=ISystemProperties_getSupportedImportOptionsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedImportOptions(req)
+       return ImportOptions(self.mgr,val._returnval, True)
+   def getSupportedExportOptions(self):
+       req=ISystemProperties_getSupportedExportOptionsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedExportOptions(req)
+       return ExportOptions(self.mgr,val._returnval, True)
+   def getSupportedRecordingAudioCodecs(self):
+       req=ISystemProperties_getSupportedRecordingAudioCodecsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedRecordingAudioCodecs(req)
+       return RecordingAudioCodec(self.mgr,val._returnval, True)
+   def getSupportedRecordingVideoCodecs(self):
+       req=ISystemProperties_getSupportedRecordingVideoCodecsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedRecordingVideoCodecs(req)
+       return RecordingVideoCodec(self.mgr,val._returnval, True)
+   def getSupportedRecordingVSMethods(self):
+       req=ISystemProperties_getSupportedRecordingVSMethodsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedRecordingVSMethods(req)
+       return RecordingVideoScalingMethod(self.mgr,val._returnval, True)
+   def getSupportedRecordingVRCModes(self):
+       req=ISystemProperties_getSupportedRecordingVRCModesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedRecordingVRCModes(req)
+       return RecordingVideoRateControlMode(self.mgr,val._returnval, True)
+   def getSupportedGraphicsControllerTypes(self):
+       req=ISystemProperties_getSupportedGraphicsControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedGraphicsControllerTypes(req)
+       return GraphicsControllerType(self.mgr,val._returnval, True)
+   def getSupportedCloneOptions(self):
+       req=ISystemProperties_getSupportedCloneOptionsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedCloneOptions(req)
+       return CloneOptions(self.mgr,val._returnval, True)
+   def getSupportedAutostopTypes(self):
+       req=ISystemProperties_getSupportedAutostopTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedAutostopTypes(req)
+       return AutostopType(self.mgr,val._returnval, True)
+   def getSupportedVMProcPriorities(self):
+       req=ISystemProperties_getSupportedVMProcPrioritiesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedVMProcPriorities(req)
+       return VMProcPriority(self.mgr,val._returnval, True)
+   def getSupportedNetworkAttachmentTypes(self):
+       req=ISystemProperties_getSupportedNetworkAttachmentTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedNetworkAttachmentTypes(req)
+       return NetworkAttachmentType(self.mgr,val._returnval, True)
+   def getSupportedNetworkAdapterTypes(self):
+       req=ISystemProperties_getSupportedNetworkAdapterTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedNetworkAdapterTypes(req)
+       return NetworkAdapterType(self.mgr,val._returnval, True)
+   def getSupportedPortModes(self):
+       req=ISystemProperties_getSupportedPortModesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedPortModes(req)
+       return PortMode(self.mgr,val._returnval, True)
+   def getSupportedUartTypes(self):
+       req=ISystemProperties_getSupportedUartTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedUartTypes(req)
+       return UartType(self.mgr,val._returnval, True)
+   def getSupportedUSBControllerTypes(self):
+       req=ISystemProperties_getSupportedUSBControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedUSBControllerTypes(req)
+       return USBControllerType(self.mgr,val._returnval, True)
+   def getSupportedAudioDriverTypes(self):
+       req=ISystemProperties_getSupportedAudioDriverTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedAudioDriverTypes(req)
+       return AudioDriverType(self.mgr,val._returnval, True)
+   def getSupportedAudioControllerTypes(self):
+       req=ISystemProperties_getSupportedAudioControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedAudioControllerTypes(req)
+       return AudioControllerType(self.mgr,val._returnval, True)
+   def getSupportedStorageBuses(self):
+       req=ISystemProperties_getSupportedStorageBusesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedStorageBuses(req)
+       return StorageBus(self.mgr,val._returnval, True)
+   def getSupportedStorageControllerTypes(self):
+       req=ISystemProperties_getSupportedStorageControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedStorageControllerTypes(req)
+       return StorageControllerType(self.mgr,val._returnval, True)
+   def getSupportedChipsetTypes(self):
+       req=ISystemProperties_getSupportedChipsetTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedChipsetTypes(req)
+       return ChipsetType(self.mgr,val._returnval, True)
 
 
    _Attrs_={         'minGuestRAM':[getMinGuestRAM,None],
@@ -7394,7 +8485,34 @@ class ISystemProperties(IUnknown):
          'proxyMode':[getProxyMode,setProxyMode,
         ],
          'proxyURL':[getProxyURL,setProxyURL,
-        ]}
+        ],
+         'supportedParavirtProviders':[getSupportedParavirtProviders,None],
+         'supportedClipboardModes':[getSupportedClipboardModes,None],
+         'supportedDnDModes':[getSupportedDnDModes,None],
+         'supportedFirmwareTypes':[getSupportedFirmwareTypes,None],
+         'supportedPointingHIDTypes':[getSupportedPointingHIDTypes,None],
+         'supportedKeyboardHIDTypes':[getSupportedKeyboardHIDTypes,None],
+         'supportedVFSTypes':[getSupportedVFSTypes,None],
+         'supportedImportOptions':[getSupportedImportOptions,None],
+         'supportedExportOptions':[getSupportedExportOptions,None],
+         'supportedRecordingAudioCodecs':[getSupportedRecordingAudioCodecs,None],
+         'supportedRecordingVideoCodecs':[getSupportedRecordingVideoCodecs,None],
+         'supportedRecordingVSMethods':[getSupportedRecordingVSMethods,None],
+         'supportedRecordingVRCModes':[getSupportedRecordingVRCModes,None],
+         'supportedGraphicsControllerTypes':[getSupportedGraphicsControllerTypes,None],
+         'supportedCloneOptions':[getSupportedCloneOptions,None],
+         'supportedAutostopTypes':[getSupportedAutostopTypes,None],
+         'supportedVMProcPriorities':[getSupportedVMProcPriorities,None],
+         'supportedNetworkAttachmentTypes':[getSupportedNetworkAttachmentTypes,None],
+         'supportedNetworkAdapterTypes':[getSupportedNetworkAdapterTypes,None],
+         'supportedPortModes':[getSupportedPortModes,None],
+         'supportedUartTypes':[getSupportedUartTypes,None],
+         'supportedUSBControllerTypes':[getSupportedUSBControllerTypes,None],
+         'supportedAudioDriverTypes':[getSupportedAudioDriverTypes,None],
+         'supportedAudioControllerTypes':[getSupportedAudioControllerTypes,None],
+         'supportedStorageBuses':[getSupportedStorageBuses,None],
+         'supportedStorageControllerTypes':[getSupportedStorageControllerTypes,None],
+         'supportedChipsetTypes':[getSupportedChipsetTypes,None]}
 
 class IDnDBase(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -11386,6 +12504,18 @@ class IKeyboard(IUnknown):
        return 
 
 
+   def putUsageCode(self, _arg_usageCode, _arg_usagePage, _arg_keyRelease):
+       req=IKeyboard_putUsageCodeRequestMsg()
+       req._this=self.handle
+       
+       req._usageCode=_arg_usageCode
+       req._usagePage=_arg_usagePage
+       req._keyRelease=_arg_keyRelease
+       val=self.mgr.getPort().IKeyboard_putUsageCode(req)
+       
+       return 
+
+
    def getKeyboardLEDs(self):
        req=IKeyboard_getKeyboardLEDsRequestMsg()
        req._this=self.handle
@@ -12305,7 +13435,7 @@ class IDisplay(IUnknown):
        return IFramebuffer(self.mgr,val._returnval)
 
 
-   def setVideoModeHint(self, _arg_display, _arg_enabled, _arg_changeOrigin, _arg_originX, _arg_originY, _arg_width, _arg_height, _arg_bitsPerPixel):
+   def setVideoModeHint(self, _arg_display, _arg_enabled, _arg_changeOrigin, _arg_originX, _arg_originY, _arg_width, _arg_height, _arg_bitsPerPixel, _arg_notify):
        req=IDisplay_setVideoModeHintRequestMsg()
        req._this=self.handle
        
@@ -12317,9 +13447,20 @@ class IDisplay(IUnknown):
        req._width=_arg_width
        req._height=_arg_height
        req._bitsPerPixel=_arg_bitsPerPixel
+       req._notify=_arg_notify
        val=self.mgr.getPort().IDisplay_setVideoModeHint(req)
        
        return 
+
+
+   def getVideoModeHint(self, _arg_display):
+       req=IDisplay_getVideoModeHintRequestMsg()
+       req._this=self.handle
+       
+       req._display=_arg_display
+       val=self.mgr.getPort().IDisplay_getVideoModeHint(req)
+       
+       return Boolean(self.mgr,val._enabled), Boolean(self.mgr,val._changeOrigin), Int(self.mgr,val._originX), Int(self.mgr,val._originY), UnsignedInt(self.mgr,val._width), UnsignedInt(self.mgr,val._height), UnsignedInt(self.mgr,val._bitsPerPixel)
 
 
    def setSeamlessMode(self, _arg_enabled):
@@ -12734,6 +13875,20 @@ class INetworkAdapter(IUnknown):
             req._genericDriver = value.handle
        self.mgr.getPort().INetworkAdapter_setGenericDriver(req)
 
+   def getCloudNetwork(self):
+       req=INetworkAdapter_getCloudNetworkRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INetworkAdapter_getCloudNetwork(req)
+       return String(self.mgr,val._returnval)
+   def setCloudNetwork(self, value):
+       req=INetworkAdapter_setCloudNetworkRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._cloudNetwork = value
+       else:
+            req._cloudNetwork = value.handle
+       self.mgr.getPort().INetworkAdapter_setCloudNetwork(req)
+
    def getCableConnected(self):
        req=INetworkAdapter_getCableConnectedRequestMsg()
        req._this=self.handle
@@ -12857,6 +14012,8 @@ class INetworkAdapter(IUnknown):
          'NATNetwork':[getNATNetwork,setNATNetwork,
         ],
          'genericDriver':[getGenericDriver,setGenericDriver,
+        ],
+         'cloudNetwork':[getCloudNetwork,setCloudNetwork,
         ],
          'cableConnected':[getCableConnected,setCableConnected,
         ],
@@ -13538,6 +14695,16 @@ class IMachineDebugger(IUnknown):
        return String(self.mgr,val._returnval)
 
 
+   def getCPULoad(self, _arg_cpuId):
+       req=IMachineDebugger_getCPULoadRequestMsg()
+       req._this=self.handle
+       
+       req._cpuId=_arg_cpuId
+       val=self.mgr.getPort().IMachineDebugger_getCPULoad(req)
+       
+       return Long(self.mgr,val._returnval), UnsignedInt(self.mgr,val._pctExecuting), UnsignedInt(self.mgr,val._pctHalted), UnsignedInt(self.mgr,val._pctOther)
+
+
    def getSingleStep(self):
        req=IMachineDebugger_getSingleStepRequestMsg()
        req._this=self.handle
@@ -14116,15 +15283,15 @@ class IUSBDevice(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IUSBDevice_getPort(req)
        return UnsignedShort(self.mgr,val._returnval)
+   def getPortPath(self):
+       req=IUSBDevice_getPortPathRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IUSBDevice_getPortPath(req)
+       return String(self.mgr,val._returnval)
    def getVersion(self):
        req=IUSBDevice_getVersionRequestMsg()
        req._this=self.handle
        val=self.mgr.getPort().IUSBDevice_getVersion(req)
-       return UnsignedShort(self.mgr,val._returnval)
-   def getPortVersion(self):
-       req=IUSBDevice_getPortVersionRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IUSBDevice_getPortVersion(req)
        return UnsignedShort(self.mgr,val._returnval)
    def getSpeed(self):
        req=IUSBDevice_getSpeedRequestMsg()
@@ -14157,8 +15324,8 @@ class IUSBDevice(IUnknown):
          'serialNumber':[getSerialNumber,None],
          'address':[getAddress,None],
          'port':[getPort,None],
+         'portPath':[getPortPath,None],
          'version':[getVersion,None],
-         'portVersion':[getPortVersion,None],
          'speed':[getSpeed,None],
          'remote':[getRemote,None],
          'deviceInfo':[getDeviceInfo,None],
@@ -19019,14 +20186,20 @@ class IStorageControllerChangedEvent(IEvent):
          self.__dict__[name] = val
 
    
-   def getMidlDoesNotLikeEmptyInterfaces(self):
-       req=IStorageControllerChangedEvent_getMidlDoesNotLikeEmptyInterfacesRequestMsg()
+   def getMachinId(self):
+       req=IStorageControllerChangedEvent_getMachinIdRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IStorageControllerChangedEvent_getMidlDoesNotLikeEmptyInterfaces(req)
-       return Boolean(self.mgr,val._returnval)
+       val=self.mgr.getPort().IStorageControllerChangedEvent_getMachinId(req)
+       return String(self.mgr,val._returnval)
+   def getControllerName(self):
+       req=IStorageControllerChangedEvent_getControllerNameRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IStorageControllerChangedEvent_getControllerName(req)
+       return String(self.mgr,val._returnval)
 
 
-   _Attrs_={         'midlDoesNotLikeEmptyInterfaces':[getMidlDoesNotLikeEmptyInterfaces,None]}
+   _Attrs_={         'machinId':[getMachinId,None],
+         'controllerName':[getControllerName,None]}
 
 class IMediumChangedEvent(IEvent):
    def __init__(self, mgr, handle, isarray = False):
@@ -19195,6 +20368,90 @@ class IClipboardModeChangedEvent(IEvent):
 
 
    _Attrs_={         'clipboardMode':[getClipboardMode,None]}
+
+class IClipboardFileTransferModeChangedEvent(IEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IClipboardFileTransferModeChangedEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IClipboardFileTransferModeChangedEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IClipboardFileTransferModeChangedEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getEnabled(self):
+       req=IClipboardFileTransferModeChangedEvent_getEnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IClipboardFileTransferModeChangedEvent_getEnabled(req)
+       return Boolean(self.mgr,val._returnval)
+
+
+   _Attrs_={         'enabled':[getEnabled,None]}
 
 class IDnDModeChangedEvent(IEvent):
    def __init__(self, mgr, handle, isarray = False):
@@ -24233,15 +25490,6 @@ class IGuestAdditionsStatusChangedEvent(IEvent):
        req._this=self.handle
        val=self.mgr.getPort().IGuestAdditionsStatusChangedEvent_getFacility(req)
        return AdditionsFacilityType(self.mgr,val._returnval)
-   def setFacility(self, value):
-       req=IGuestAdditionsStatusChangedEvent_setFacilityRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._facility = value
-       else:
-            req._facility = value.handle
-       self.mgr.getPort().IGuestAdditionsStatusChangedEvent_setFacility(req)
-
    def getStatus(self):
        req=IGuestAdditionsStatusChangedEvent_getStatusRequestMsg()
        req._this=self.handle
@@ -24259,11 +25507,973 @@ class IGuestAdditionsStatusChangedEvent(IEvent):
        return Long(self.mgr,val._returnval)
 
 
-   _Attrs_={         'facility':[getFacility,setFacility,
-        ],
+   _Attrs_={         'facility':[getFacility,None],
          'status':[getStatus,None],
          'runLevel':[getRunLevel,None],
          'timestamp':[getTimestamp,None]}
+
+class IGuestMonitorInfoChangedEvent(IEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGuestMonitorInfoChangedEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGuestMonitorInfoChangedEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGuestMonitorInfoChangedEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getOutput(self):
+       req=IGuestMonitorInfoChangedEvent_getOutputRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestMonitorInfoChangedEvent_getOutput(req)
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   _Attrs_={         'output':[getOutput,None]}
+
+class IStringArray(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IStringArray(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IStringArray._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IStringArray._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getValues(self):
+       req=IStringArray_getValuesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IStringArray_getValues(req)
+       return String(self.mgr,val._returnval, True)
+
+
+   _Attrs_={         'values':[getValues,None]}
+
+class IFormValue(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IFormValue(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IFormValue._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IFormValue._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getType(self):
+       req=IFormValue_getTypeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFormValue_getType(req)
+       return FormValueType(self.mgr,val._returnval)
+   def getGeneration(self):
+       req=IFormValue_getGenerationRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFormValue_getGeneration(req)
+       return Int(self.mgr,val._returnval)
+   def getEnabled(self):
+       req=IFormValue_getEnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFormValue_getEnabled(req)
+       return Boolean(self.mgr,val._returnval)
+   def getVisible(self):
+       req=IFormValue_getVisibleRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFormValue_getVisible(req)
+       return Boolean(self.mgr,val._returnval)
+   def getLabel(self):
+       req=IFormValue_getLabelRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFormValue_getLabel(req)
+       return String(self.mgr,val._returnval)
+   def getDescription(self):
+       req=IFormValue_getDescriptionRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFormValue_getDescription(req)
+       return String(self.mgr,val._returnval)
+   def getHelp(self):
+       req=IFormValue_getHelpRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFormValue_getHelp(req)
+       return String(self.mgr,val._returnval)
+
+
+   _Attrs_={         'type':[getType,None],
+         'generation':[getGeneration,None],
+         'enabled':[getEnabled,None],
+         'visible':[getVisible,None],
+         'label':[getLabel,None],
+         'description':[getDescription,None],
+         'help':[getHelp,None]}
+
+class IBooleanFormValue(IFormValue):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IBooleanFormValue(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IBooleanFormValue._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IFormValue.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IBooleanFormValue._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getSelected(self):
+       req=IBooleanFormValue_getSelectedRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IBooleanFormValue_getSelected(req)
+       
+       return Boolean(self.mgr,val._returnval)
+
+
+   def setSelected(self, _arg_selected):
+       req=IBooleanFormValue_setSelectedRequestMsg()
+       req._this=self.handle
+       
+       req._selected=_arg_selected
+       val=self.mgr.getPort().IBooleanFormValue_setSelected(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+
+
+   _Attrs_={}
+
+class IRangedIntegerFormValue(IFormValue):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IRangedIntegerFormValue(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IRangedIntegerFormValue._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IFormValue.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IRangedIntegerFormValue._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getInteger(self):
+       req=IRangedIntegerFormValue_getIntegerRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IRangedIntegerFormValue_getInteger(req)
+       
+       return Int(self.mgr,val._returnval)
+
+
+   def setInteger(self, _arg_value):
+       req=IRangedIntegerFormValue_setIntegerRequestMsg()
+       req._this=self.handle
+       
+       req._value=_arg_value
+       val=self.mgr.getPort().IRangedIntegerFormValue_setInteger(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def getSuffix(self):
+       req=IRangedIntegerFormValue_getSuffixRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRangedIntegerFormValue_getSuffix(req)
+       return String(self.mgr,val._returnval)
+   def getMinimum(self):
+       req=IRangedIntegerFormValue_getMinimumRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRangedIntegerFormValue_getMinimum(req)
+       return Int(self.mgr,val._returnval)
+   def getMaximum(self):
+       req=IRangedIntegerFormValue_getMaximumRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRangedIntegerFormValue_getMaximum(req)
+       return Int(self.mgr,val._returnval)
+
+
+   _Attrs_={         'suffix':[getSuffix,None],
+         'minimum':[getMinimum,None],
+         'maximum':[getMaximum,None]}
+
+class IStringFormValue(IFormValue):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IStringFormValue(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IStringFormValue._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IFormValue.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IStringFormValue._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getString(self):
+       req=IStringFormValue_getStringRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IStringFormValue_getString(req)
+       
+       return String(self.mgr,val._returnval)
+
+
+   def setString(self, _arg_text):
+       req=IStringFormValue_setStringRequestMsg()
+       req._this=self.handle
+       
+       req._text=_arg_text
+       val=self.mgr.getPort().IStringFormValue_setString(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def getMultiline(self):
+       req=IStringFormValue_getMultilineRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IStringFormValue_getMultiline(req)
+       return Boolean(self.mgr,val._returnval)
+
+
+   _Attrs_={         'multiline':[getMultiline,None]}
+
+class IChoiceFormValue(IFormValue):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IChoiceFormValue(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IChoiceFormValue._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IFormValue.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IChoiceFormValue._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getSelectedIndex(self):
+       req=IChoiceFormValue_getSelectedIndexRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IChoiceFormValue_getSelectedIndex(req)
+       
+       return Int(self.mgr,val._returnval)
+
+
+   def setSelectedIndex(self, _arg_index):
+       req=IChoiceFormValue_setSelectedIndexRequestMsg()
+       req._this=self.handle
+       
+       req._index=_arg_index
+       val=self.mgr.getPort().IChoiceFormValue_setSelectedIndex(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def getValues(self):
+       req=IChoiceFormValue_getValuesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IChoiceFormValue_getValues(req)
+       return String(self.mgr,val._returnval, True)
+
+
+   _Attrs_={         'values':[getValues,None]}
+
+class IForm(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IForm(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IForm._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IForm._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getValues(self):
+       req=IForm_getValuesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IForm_getValues(req)
+       return IFormValue(self.mgr,val._returnval, True)
+
+
+   _Attrs_={         'values':[getValues,None]}
+
+class IVirtualSystemDescriptionForm(IForm):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IVirtualSystemDescriptionForm(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IVirtualSystemDescriptionForm._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IForm.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IVirtualSystemDescriptionForm._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getVirtualSystemDescription(self):
+       req=IVirtualSystemDescriptionForm_getVirtualSystemDescriptionRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IVirtualSystemDescriptionForm_getVirtualSystemDescription(req)
+       
+       return IVirtualSystemDescription(self.mgr,val._returnval)
+
+
+
+
+   _Attrs_={}
+
+class ICloudNetworkGatewayInfo(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return ICloudNetworkGatewayInfo(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = ICloudNetworkGatewayInfo._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = ICloudNetworkGatewayInfo._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getPublicIP(self):
+       req=ICloudNetworkGatewayInfo_getPublicIPRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetworkGatewayInfo_getPublicIP(req)
+       return String(self.mgr,val._returnval)
+
+
+   _Attrs_={         'publicIP':[getPublicIP,None]}
 
 class ICloudClient(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -24340,25 +26550,190 @@ class ICloudClient(IUnknown):
          self.__dict__[name] = val
 
    
-   def getExportLaunchParameters(self):
-       req=ICloudClient_getExportLaunchParametersRequestMsg()
+   def getExportDescriptionForm(self, _arg_description):
+       req=ICloudClient_getExportDescriptionFormRequestMsg()
        req._this=self.handle
        
-       val=self.mgr.getPort().ICloudClient_getExportLaunchParameters(req)
+       req._description=_arg_description
+       val=self.mgr.getPort().ICloudClient_getExportDescriptionForm(req)
        
-       return String(self.mgr,val._returnval)
+       return IProgress(self.mgr,val._returnval), IVirtualSystemDescriptionForm(self.mgr,val._form)
 
 
-   def exportLaunchVM(self, _arg_description, _arg_progress, _arg_virtualBox):
-       req=ICloudClient_exportLaunchVMRequestMsg()
+   def exportVM(self, _arg_description, _arg_progress):
+       req=ICloudClient_exportVMRequestMsg()
        req._this=self.handle
        
        req._description=_arg_description
        req._progress=_arg_progress
-       req._virtualBox=_arg_virtualBox
-       val=self.mgr.getPort().ICloudClient_exportLaunchVM(req)
+       val=self.mgr.getPort().ICloudClient_exportVM(req)
        
        return 
+
+
+   def getLaunchDescriptionForm(self, _arg_description):
+       req=ICloudClient_getLaunchDescriptionFormRequestMsg()
+       req._this=self.handle
+       
+       req._description=_arg_description
+       val=self.mgr.getPort().ICloudClient_getLaunchDescriptionForm(req)
+       
+       return IProgress(self.mgr,val._returnval), IVirtualSystemDescriptionForm(self.mgr,val._form)
+
+
+   def launchVM(self, _arg_description):
+       req=ICloudClient_launchVMRequestMsg()
+       req._this=self.handle
+       
+       req._description=_arg_description
+       val=self.mgr.getPort().ICloudClient_launchVM(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def getImportDescriptionForm(self, _arg_description):
+       req=ICloudClient_getImportDescriptionFormRequestMsg()
+       req._this=self.handle
+       
+       req._description=_arg_description
+       val=self.mgr.getPort().ICloudClient_getImportDescriptionForm(req)
+       
+       return IProgress(self.mgr,val._returnval), IVirtualSystemDescriptionForm(self.mgr,val._form)
+
+
+   def importInstance(self, _arg_description, _arg_progress):
+       req=ICloudClient_importInstanceRequestMsg()
+       req._this=self.handle
+       
+       req._description=_arg_description
+       req._progress=_arg_progress
+       val=self.mgr.getPort().ICloudClient_importInstance(req)
+       
+       return 
+
+
+   def listInstances(self, _arg_machineState):
+       req=ICloudClient_listInstancesRequestMsg()
+       req._this=self.handle
+       
+       req._machineState=_arg_machineState
+       val=self.mgr.getPort().ICloudClient_listInstances(req)
+       
+       return IProgress(self.mgr,val._returnval), IStringArray(self.mgr,val._returnNames), IStringArray(self.mgr,val._returnIds)
+
+
+   def listImages(self, _arg_imageState):
+       req=ICloudClient_listImagesRequestMsg()
+       req._this=self.handle
+       
+       req._imageState=_arg_imageState
+       val=self.mgr.getPort().ICloudClient_listImages(req)
+       
+       return IProgress(self.mgr,val._returnval), IStringArray(self.mgr,val._returnNames), IStringArray(self.mgr,val._returnIds)
+
+
+   def getInstanceInfo(self, _arg_uid, _arg_description):
+       req=ICloudClient_getInstanceInfoRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       req._description=_arg_description
+       val=self.mgr.getPort().ICloudClient_getInstanceInfo(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def startInstance(self, _arg_uid):
+       req=ICloudClient_startInstanceRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       val=self.mgr.getPort().ICloudClient_startInstance(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def pauseInstance(self, _arg_uid):
+       req=ICloudClient_pauseInstanceRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       val=self.mgr.getPort().ICloudClient_pauseInstance(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def terminateInstance(self, _arg_uid):
+       req=ICloudClient_terminateInstanceRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       val=self.mgr.getPort().ICloudClient_terminateInstance(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def createImage(self, _arg_parameters):
+       req=ICloudClient_createImageRequestMsg()
+       req._this=self.handle
+       
+       req._parameters=_arg_parameters
+       val=self.mgr.getPort().ICloudClient_createImage(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def exportImage(self, _arg_image, _arg_parameters):
+       req=ICloudClient_exportImageRequestMsg()
+       req._this=self.handle
+       
+       req._image=_arg_image
+       req._parameters=_arg_parameters
+       val=self.mgr.getPort().ICloudClient_exportImage(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def importImage(self, _arg_uid, _arg_parameters):
+       req=ICloudClient_importImageRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       req._parameters=_arg_parameters
+       val=self.mgr.getPort().ICloudClient_importImage(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def deleteImage(self, _arg_uid):
+       req=ICloudClient_deleteImageRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       val=self.mgr.getPort().ICloudClient_deleteImage(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def getImageInfo(self, _arg_uid):
+       req=ICloudClient_getImageInfoRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       val=self.mgr.getPort().ICloudClient_getImageInfo(req)
+       
+       return IProgress(self.mgr,val._returnval), IStringArray(self.mgr,val._infoArray)
+
+
+   def startCloudNetworkGateway(self, _arg_network, _arg_sshPublicKey):
+       req=ICloudClient_startCloudNetworkGatewayRequestMsg()
+       req._this=self.handle
+       
+       req._network=_arg_network
+       req._sshPublicKey=_arg_sshPublicKey
+       val=self.mgr.getPort().ICloudClient_startCloudNetworkGateway(req)
+       
+       return IProgress(self.mgr,val._returnval), ICloudNetworkGatewayInfo(self.mgr,val._gatewayInfo)
 
 
 
@@ -25408,6 +27783,8 @@ class IMediumAttachment:
           self.handle = handle
        else:
 
+          self.machine = IMachine(self.mgr, handle._machine)
+       
           self.medium = IMedium(self.mgr, handle._medium)
        
           self.controller = String(self.mgr, handle._controller)
@@ -25435,6 +27812,12 @@ class IMediumAttachment:
           pass
 
    
+    def getMachine(self):
+       return self.machine
+
+    def setMachine(self):
+       raise Error('setters not supported')
+    
     def getMedium(self):
        return self.medium
 
@@ -25561,7 +27944,7 @@ class SettingsVersion:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'v1_0',2:'v1_1',3:'v1_2',4:'v1_3pre',5:'v1_3',6:'v1_4',7:'v1_5',8:'v1_6',9:'v1_7',10:'v1_8',11:'v1_9',12:'v1_10',13:'v1_11',14:'v1_12',15:'v1_13',16:'v1_14',17:'v1_15',18:'v1_16',19:'v1_17',99999:'Future'}
+   _NameMap={0:'Null',1:'v1_0',2:'v1_1',3:'v1_2',4:'v1_3pre',5:'v1_3',6:'v1_4',7:'v1_5',8:'v1_6',9:'v1_7',10:'v1_8',11:'v1_9',12:'v1_10',13:'v1_11',14:'v1_12',15:'v1_13',16:'v1_14',17:'v1_15',18:'v1_16',19:'v1_17',20:'v1_18',99999:'Future'}
    _ValueMap={
               'Null':0,
               'v1_0':1,
@@ -25583,6 +27966,7 @@ class SettingsVersion:
               'v1_15':17,
               'v1_16':18,
               'v1_17':19,
+              'v1_18':20,
               'Future':99999}
 
    Null=0
@@ -25605,6 +27989,7 @@ class SettingsVersion:
    v1_15=17
    v1_16=18
    v1_17=19
+   v1_18=20
    Future=99999
 
 class AccessMode:
@@ -25679,7 +28064,7 @@ class MachineState:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'PoweredOff',2:'Saved',3:'Teleported',4:'Aborted',5:'Running',6:'Paused',7:'Stuck',8:'Teleporting',9:'LiveSnapshotting',10:'Starting',11:'Stopping',12:'Saving',13:'Restoring',14:'TeleportingPausedVM',15:'TeleportingIn',16:'FaultTolerantSyncing',17:'DeletingSnapshotOnline',18:'DeletingSnapshotPaused',19:'OnlineSnapshotting',20:'RestoringSnapshot',21:'DeletingSnapshot',22:'SettingUp',23:'Snapshotting',5:'FirstOnline',19:'LastOnline',8:'FirstTransient',23:'LastTransient'}
+   _NameMap={0:'Null',1:'PoweredOff',2:'Saved',3:'Teleported',4:'Aborted',5:'Running',6:'Paused',7:'Stuck',8:'Teleporting',9:'LiveSnapshotting',10:'Starting',11:'Stopping',12:'Saving',13:'Restoring',14:'TeleportingPausedVM',15:'TeleportingIn',16:'DeletingSnapshotOnline',17:'DeletingSnapshotPaused',18:'OnlineSnapshotting',19:'RestoringSnapshot',20:'DeletingSnapshot',21:'SettingUp',22:'Snapshotting',5:'FirstOnline',18:'LastOnline',8:'FirstTransient',22:'LastTransient'}
    _ValueMap={
               'Null':0,
               'PoweredOff':1,
@@ -25697,18 +28082,17 @@ class MachineState:
               'Restoring':13,
               'TeleportingPausedVM':14,
               'TeleportingIn':15,
-              'FaultTolerantSyncing':16,
-              'DeletingSnapshotOnline':17,
-              'DeletingSnapshotPaused':18,
-              'OnlineSnapshotting':19,
-              'RestoringSnapshot':20,
-              'DeletingSnapshot':21,
-              'SettingUp':22,
-              'Snapshotting':23,
+              'DeletingSnapshotOnline':16,
+              'DeletingSnapshotPaused':17,
+              'OnlineSnapshotting':18,
+              'RestoringSnapshot':19,
+              'DeletingSnapshot':20,
+              'SettingUp':21,
+              'Snapshotting':22,
               'FirstOnline':5,
-              'LastOnline':19,
+              'LastOnline':18,
               'FirstTransient':8,
-              'LastTransient':23}
+              'LastTransient':22}
 
    Null=0
    PoweredOff=1
@@ -25726,18 +28110,17 @@ class MachineState:
    Restoring=13
    TeleportingPausedVM=14
    TeleportingIn=15
-   FaultTolerantSyncing=16
-   DeletingSnapshotOnline=17
-   DeletingSnapshotPaused=18
-   OnlineSnapshotting=19
-   RestoringSnapshot=20
-   DeletingSnapshot=21
-   SettingUp=22
-   Snapshotting=23
+   DeletingSnapshotOnline=16
+   DeletingSnapshotPaused=17
+   OnlineSnapshotting=18
+   RestoringSnapshot=19
+   DeletingSnapshot=20
+   SettingUp=21
+   Snapshotting=22
    FirstOnline=5
-   LastOnline=19
+   LastOnline=18
    FirstTransient=8
-   LastTransient=23
+   LastTransient=22
 
 class SessionState:
    def __init__(self,mgr,handle):
@@ -25950,48 +28333,6 @@ class ParavirtProvider:
    Minimal=3
    HyperV=4
    KVM=5
-
-class FaultToleranceState:
-   def __init__(self,mgr,handle):
-       self.mgr=mgr
-       if isinstance(handle,basestring):
-           self.handle=FaultToleranceState._ValueMap[handle]
-       else:
-           self.handle=handle
-
-   def __eq__(self,other):
-      if isinstance(other,FaultToleranceState):
-         return self.handle == other.handle
-      if isinstance(other,int):
-         return self.handle == other
-      if isinstance(other,basestring):
-         return str(self) == other
-      return False
-
-   def __ne__(self,other):
-      if isinstance(other,FaultToleranceState):
-         return self.handle != other.handle
-      if isinstance(other,int):
-         return self.handle != other
-      if isinstance(other,basestring):
-         return str(self) != other
-      return True
-
-   def __str__(self):
-        return FaultToleranceState._NameMap[self.handle]
-
-   def __int__(self):
-        return self.handle
-
-   _NameMap={1:'Inactive',2:'Master',3:'Standby'}
-   _ValueMap={
-              'Inactive':1,
-              'Master':2,
-              'Standby':3}
-
-   Inactive=1
-   Master=2
-   Standby=3
 
 class LockType:
    def __init__(self,mgr,handle):
@@ -26627,16 +28968,16 @@ class BitmapFormat:
    PNG=0x20474E50
    JPEG=0x4745504A
 
-class DhcpOpt:
+class DHCPOption:
    def __init__(self,mgr,handle):
        self.mgr=mgr
        if isinstance(handle,basestring):
-           self.handle=DhcpOpt._ValueMap[handle]
+           self.handle=DHCPOption._ValueMap[handle]
        else:
            self.handle=handle
 
    def __eq__(self,other):
-      if isinstance(other,DhcpOpt):
+      if isinstance(other,DHCPOption):
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
@@ -26645,7 +28986,7 @@ class DhcpOpt:
       return False
 
    def __ne__(self,other):
-      if isinstance(other,DhcpOpt):
+      if isinstance(other,DHCPOption):
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
@@ -26654,24 +28995,24 @@ class DhcpOpt:
       return True
 
    def __str__(self):
-        return DhcpOpt._NameMap[self.handle]
+        return DHCPOption._NameMap[self.handle]
 
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'SubnetMask',2:'TimeOffset',3:'Router',4:'TimeServer',5:'NameServer',6:'DomainNameServer',7:'LogServer',8:'Cookie',9:'LPRServer',10:'ImpressServer',11:'ResourseLocationServer',12:'HostName',13:'BootFileSize',14:'MeritDumpFile',15:'DomainName',16:'SwapServer',17:'RootPath',18:'ExtensionPath',19:'IPForwardingEnableDisable',20:'NonLocalSourceRoutingEnableDisable',21:'PolicyFilter',22:'MaximumDatagramReassemblySize',23:'DefaultIPTime2Live',24:'PathMTUAgingTimeout',25:'IPLayerParametersPerInterface',26:'InterfaceMTU',27:'AllSubnetsAreLocal',28:'BroadcastAddress',29:'PerformMaskDiscovery',30:'MaskSupplier',31:'PerformRouteDiscovery',32:'RouterSolicitationAddress',33:'StaticRoute',34:'TrailerEncapsulation',35:'ARPCacheTimeout',36:'EthernetEncapsulation',37:'TCPDefaultTTL',38:'TCPKeepAliveInterval',39:'TCPKeepAliveGarbage',40:'NetworkInformationServiceDomain',41:'NetworkInformationServiceServers',42:'NetworkTimeProtocolServers',43:'VendorSpecificInformation',44:'Option_44',45:'Option_45',46:'Option_46',47:'Option_47',48:'Option_48',49:'Option_49',51:'IPAddressLeaseTime',64:'Option_64',65:'Option_65',66:'TFTPServerName',67:'BootfileName',68:'Option_68',69:'Option_69',70:'Option_70',71:'Option_71',72:'Option_72',73:'Option_73',74:'Option_74',75:'Option_75',119:'Option_119'}
+   _NameMap={1:'SubnetMask',2:'TimeOffset',3:'Routers',4:'TimeServers',5:'NameServers',6:'DomainNameServers',7:'LogServers',8:'CookieServers',9:'LPRServers',10:'ImpressServers',11:'ResourseLocationServers',12:'HostName',13:'BootFileSize',14:'MeritDumpFile',15:'DomainName',16:'SwapServer',17:'RootPath',18:'ExtensionPath',19:'IPForwarding',20:'OptNonLocalSourceRouting',21:'PolicyFilter',22:'MaxDgramReassemblySize',23:'DefaultIPTTL',24:'PathMTUAgingTimeout',25:'PathMTUPlateauTable',26:'InterfaceMTU',27:'AllSubnetsAreLocal',28:'BroadcastAddress',29:'PerformMaskDiscovery',30:'MaskSupplier',31:'PerformRouterDiscovery',32:'RouterSolicitationAddress',33:'StaticRoute',34:'TrailerEncapsulation',35:'ARPCacheTimeout',36:'EthernetEncapsulation',37:'TCPDefaultTTL',38:'TCPKeepaliveInterval',39:'TCPKeepaliveGarbage',40:'NISDomain',41:'NISServers',42:'NTPServers',43:'VendorSpecificInfo',44:'NetBIOSNameServers',45:'NetBIOSDatagramServers',46:'NetBIOSNodeType',47:'NetBIOSScope',48:'XWindowsFontServers',49:'XWindowsDisplayManager',62:'NetWareIPDomainName',63:'NetWareIPInformation',64:'NISPlusDomain',65:'NISPlusServers',66:'TFTPServerName',67:'BootfileName',68:'MobileIPHomeAgents',69:'SMTPServers',70:'POP3Servers',71:'NNTPServers',72:'WWWServers',73:'FingerServers',74:'IRCServers',75:'StreetTalkServers',76:'STDAServers',78:'SLPDirectoryAgent',79:'SLPServiceScope',119:'DomainSearch'}
    _ValueMap={
               'SubnetMask':1,
               'TimeOffset':2,
-              'Router':3,
-              'TimeServer':4,
-              'NameServer':5,
-              'DomainNameServer':6,
-              'LogServer':7,
-              'Cookie':8,
-              'LPRServer':9,
-              'ImpressServer':10,
-              'ResourseLocationServer':11,
+              'Routers':3,
+              'TimeServers':4,
+              'NameServers':5,
+              'DomainNameServers':6,
+              'LogServers':7,
+              'CookieServers':8,
+              'LPRServers':9,
+              'ImpressServers':10,
+              'ResourseLocationServers':11,
               'HostName':12,
               'BootFileSize':13,
               'MeritDumpFile':14,
@@ -26679,63 +29020,67 @@ class DhcpOpt:
               'SwapServer':16,
               'RootPath':17,
               'ExtensionPath':18,
-              'IPForwardingEnableDisable':19,
-              'NonLocalSourceRoutingEnableDisable':20,
+              'IPForwarding':19,
+              'OptNonLocalSourceRouting':20,
               'PolicyFilter':21,
-              'MaximumDatagramReassemblySize':22,
-              'DefaultIPTime2Live':23,
+              'MaxDgramReassemblySize':22,
+              'DefaultIPTTL':23,
               'PathMTUAgingTimeout':24,
-              'IPLayerParametersPerInterface':25,
+              'PathMTUPlateauTable':25,
               'InterfaceMTU':26,
               'AllSubnetsAreLocal':27,
               'BroadcastAddress':28,
               'PerformMaskDiscovery':29,
               'MaskSupplier':30,
-              'PerformRouteDiscovery':31,
+              'PerformRouterDiscovery':31,
               'RouterSolicitationAddress':32,
               'StaticRoute':33,
               'TrailerEncapsulation':34,
               'ARPCacheTimeout':35,
               'EthernetEncapsulation':36,
               'TCPDefaultTTL':37,
-              'TCPKeepAliveInterval':38,
-              'TCPKeepAliveGarbage':39,
-              'NetworkInformationServiceDomain':40,
-              'NetworkInformationServiceServers':41,
-              'NetworkTimeProtocolServers':42,
-              'VendorSpecificInformation':43,
-              'Option_44':44,
-              'Option_45':45,
-              'Option_46':46,
-              'Option_47':47,
-              'Option_48':48,
-              'Option_49':49,
-              'IPAddressLeaseTime':51,
-              'Option_64':64,
-              'Option_65':65,
+              'TCPKeepaliveInterval':38,
+              'TCPKeepaliveGarbage':39,
+              'NISDomain':40,
+              'NISServers':41,
+              'NTPServers':42,
+              'VendorSpecificInfo':43,
+              'NetBIOSNameServers':44,
+              'NetBIOSDatagramServers':45,
+              'NetBIOSNodeType':46,
+              'NetBIOSScope':47,
+              'XWindowsFontServers':48,
+              'XWindowsDisplayManager':49,
+              'NetWareIPDomainName':62,
+              'NetWareIPInformation':63,
+              'NISPlusDomain':64,
+              'NISPlusServers':65,
               'TFTPServerName':66,
               'BootfileName':67,
-              'Option_68':68,
-              'Option_69':69,
-              'Option_70':70,
-              'Option_71':71,
-              'Option_72':72,
-              'Option_73':73,
-              'Option_74':74,
-              'Option_75':75,
-              'Option_119':119}
+              'MobileIPHomeAgents':68,
+              'SMTPServers':69,
+              'POP3Servers':70,
+              'NNTPServers':71,
+              'WWWServers':72,
+              'FingerServers':73,
+              'IRCServers':74,
+              'StreetTalkServers':75,
+              'STDAServers':76,
+              'SLPDirectoryAgent':78,
+              'SLPServiceScope':79,
+              'DomainSearch':119}
 
    SubnetMask=1
    TimeOffset=2
-   Router=3
-   TimeServer=4
-   NameServer=5
-   DomainNameServer=6
-   LogServer=7
-   Cookie=8
-   LPRServer=9
-   ImpressServer=10
-   ResourseLocationServer=11
+   Routers=3
+   TimeServers=4
+   NameServers=5
+   DomainNameServers=6
+   LogServers=7
+   CookieServers=8
+   LPRServers=9
+   ImpressServers=10
+   ResourseLocationServers=11
    HostName=12
    BootFileSize=13
    MeritDumpFile=14
@@ -26743,62 +29088,66 @@ class DhcpOpt:
    SwapServer=16
    RootPath=17
    ExtensionPath=18
-   IPForwardingEnableDisable=19
-   NonLocalSourceRoutingEnableDisable=20
+   IPForwarding=19
+   OptNonLocalSourceRouting=20
    PolicyFilter=21
-   MaximumDatagramReassemblySize=22
-   DefaultIPTime2Live=23
+   MaxDgramReassemblySize=22
+   DefaultIPTTL=23
    PathMTUAgingTimeout=24
-   IPLayerParametersPerInterface=25
+   PathMTUPlateauTable=25
    InterfaceMTU=26
    AllSubnetsAreLocal=27
    BroadcastAddress=28
    PerformMaskDiscovery=29
    MaskSupplier=30
-   PerformRouteDiscovery=31
+   PerformRouterDiscovery=31
    RouterSolicitationAddress=32
    StaticRoute=33
    TrailerEncapsulation=34
    ARPCacheTimeout=35
    EthernetEncapsulation=36
    TCPDefaultTTL=37
-   TCPKeepAliveInterval=38
-   TCPKeepAliveGarbage=39
-   NetworkInformationServiceDomain=40
-   NetworkInformationServiceServers=41
-   NetworkTimeProtocolServers=42
-   VendorSpecificInformation=43
-   Option_44=44
-   Option_45=45
-   Option_46=46
-   Option_47=47
-   Option_48=48
-   Option_49=49
-   IPAddressLeaseTime=51
-   Option_64=64
-   Option_65=65
+   TCPKeepaliveInterval=38
+   TCPKeepaliveGarbage=39
+   NISDomain=40
+   NISServers=41
+   NTPServers=42
+   VendorSpecificInfo=43
+   NetBIOSNameServers=44
+   NetBIOSDatagramServers=45
+   NetBIOSNodeType=46
+   NetBIOSScope=47
+   XWindowsFontServers=48
+   XWindowsDisplayManager=49
+   NetWareIPDomainName=62
+   NetWareIPInformation=63
+   NISPlusDomain=64
+   NISPlusServers=65
    TFTPServerName=66
    BootfileName=67
-   Option_68=68
-   Option_69=69
-   Option_70=70
-   Option_71=71
-   Option_72=72
-   Option_73=73
-   Option_74=74
-   Option_75=75
-   Option_119=119
+   MobileIPHomeAgents=68
+   SMTPServers=69
+   POP3Servers=70
+   NNTPServers=71
+   WWWServers=72
+   FingerServers=73
+   IRCServers=74
+   StreetTalkServers=75
+   STDAServers=76
+   SLPDirectoryAgent=78
+   SLPServiceScope=79
+   DomainSearch=119
 
-class DhcpOptEncoding:
+class DHCPOptionEncoding:
    def __init__(self,mgr,handle):
        self.mgr=mgr
        if isinstance(handle,basestring):
-           self.handle=DhcpOptEncoding._ValueMap[handle]
+           self.handle=DHCPOptionEncoding._ValueMap[handle]
        else:
            self.handle=handle
 
    def __eq__(self,other):
-      if isinstance(other,DhcpOptEncoding):
+      if isinstance(other,DHCPOptionEncoding):
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
@@ -26807,7 +29156,7 @@ class DhcpOptEncoding:
       return False
 
    def __ne__(self,other):
-      if isinstance(other,DhcpOptEncoding):
+      if isinstance(other,DHCPOptionEncoding):
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
@@ -26816,18 +29165,110 @@ class DhcpOptEncoding:
       return True
 
    def __str__(self):
-        return DhcpOptEncoding._NameMap[self.handle]
+        return DHCPOptionEncoding._NameMap[self.handle]
 
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Legacy',1:'Hex'}
+   _NameMap={0:'Normal',1:'Hex'}
    _ValueMap={
-              'Legacy':0,
+              'Normal':0,
               'Hex':1}
 
-   Legacy=0
+   Normal=0
    Hex=1
+
+class DHCPConfigScope:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=DHCPConfigScope._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,DHCPConfigScope):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,DHCPConfigScope):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return DHCPConfigScope._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Global',1:'Group',2:'MachineNIC',3:'MAC'}
+   _ValueMap={
+              'Global':0,
+              'Group':1,
+              'MachineNIC':2,
+              'MAC':3}
+
+   Global=0
+   Group=1
+   MachineNIC=2
+   MAC=3
+
+class DHCPGroupConditionType:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=DHCPGroupConditionType._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,DHCPGroupConditionType):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,DHCPGroupConditionType):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return DHCPGroupConditionType._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'MAC',1:'MACWildcard',2:'vendorClassID',3:'vendorClassIDWildcard',4:'userClassID',5:'userClassIDWildcard'}
+   _ValueMap={
+              'MAC':0,
+              'MACWildcard':1,
+              'vendorClassID':2,
+              'vendorClassIDWildcard':3,
+              'userClassID':4,
+              'userClassIDWildcard':5}
+
+   MAC=0
+   MACWildcard=1
+   vendorClassID=2
+   vendorClassIDWildcard=3
+   userClassID=4
+   userClassIDWildcard=5
 
 class VFSType:
    def __init__(self,mgr,handle):
@@ -26861,19 +29302,17 @@ class VFSType:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'File',2:'Cloud',3:'S3',4:'WebDav',5:'OCI'}
+   _NameMap={1:'File',2:'Cloud',3:'S3',4:'WebDav'}
    _ValueMap={
               'File':1,
               'Cloud':2,
               'S3':3,
-              'WebDav':4,
-              'OCI':5}
+              'WebDav':4}
 
    File=1
    Cloud=2
    S3=3
    WebDav=4
-   OCI=5
 
 class ImportOptions:
    def __init__(self,mgr,handle):
@@ -27037,7 +29476,7 @@ class VirtualSystemDescriptionType:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance'}
+   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance',37:'CloudInstanceId',38:'CloudImageId',39:'CloudInstanceState',40:'CloudImageState',41:'CloudInstanceDisplayName',42:'CloudImageDisplayName',43:'CloudOCILaunchMode',44:'CloudPrivateIP',45:'CloudBootVolumeId',46:'CloudOCIVCNCompartment',47:'CloudOCISubnetCompartment',48:'CloudPublicSSHKey',49:'BootingFirmware'}
    _ValueMap={
               'Ignore':1,
               'OS':2,
@@ -27074,7 +29513,20 @@ class VirtualSystemDescriptionType:
               'CloudProfileName':33,
               'CloudOCISubnet':34,
               'CloudKeepObject':35,
-              'CloudLaunchInstance':36}
+              'CloudLaunchInstance':36,
+              'CloudInstanceId':37,
+              'CloudImageId':38,
+              'CloudInstanceState':39,
+              'CloudImageState':40,
+              'CloudInstanceDisplayName':41,
+              'CloudImageDisplayName':42,
+              'CloudOCILaunchMode':43,
+              'CloudPrivateIP':44,
+              'CloudBootVolumeId':45,
+              'CloudOCIVCNCompartment':46,
+              'CloudOCISubnetCompartment':47,
+              'CloudPublicSSHKey':48,
+              'BootingFirmware':49}
 
    Ignore=1
    OS=2
@@ -27112,6 +29564,19 @@ class VirtualSystemDescriptionType:
    CloudOCISubnet=34
    CloudKeepObject=35
    CloudLaunchInstance=36
+   CloudInstanceId=37
+   CloudImageId=38
+   CloudInstanceState=39
+   CloudImageState=40
+   CloudInstanceDisplayName=41
+   CloudImageDisplayName=42
+   CloudOCILaunchMode=43
+   CloudPrivateIP=44
+   CloudBootVolumeId=45
+   CloudOCIVCNCompartment=46
+   CloudOCISubnetCompartment=47
+   CloudPublicSSHKey=48
+   BootingFirmware=49
 
 class VirtualSystemDescriptionValueType:
    def __init__(self,mgr,handle):
@@ -27628,6 +30093,54 @@ class AutostopType:
    SaveState=2
    PowerOff=3
    AcpiShutdown=4
+
+class VMProcPriority:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=VMProcPriority._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,VMProcPriority):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,VMProcPriority):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return VMProcPriority._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Invalid',1:'Default',2:'Flat',3:'Low',5:'Normal',6:'High'}
+   _ValueMap={
+              'Invalid':0,
+              'Default':1,
+              'Flat':2,
+              'Low':3,
+              'Normal':5,
+              'High':6}
+
+   Invalid=0
+   Default=1
+   Flat=2
+   Low=3
+   Normal=5
+   High=6
 
 class HostNetworkInterfaceMediumType:
    def __init__(self,mgr,handle):
@@ -30027,15 +32540,17 @@ class ScreenLayoutMode:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Apply',1:'Reset',2:'Attach'}
+   _NameMap={0:'Apply',1:'Reset',2:'Attach',3:'Silent'}
    _ValueMap={
               'Apply':0,
               'Reset':1,
-              'Attach':2}
+              'Attach':2,
+              'Silent':3}
 
    Apply=0
    Reset=1
    Attach=2
+   Silent=3
 
 class NetworkAttachmentType:
    def __init__(self,mgr,handle):
@@ -30069,7 +32584,7 @@ class NetworkAttachmentType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'NAT',2:'Bridged',3:'Internal',4:'HostOnly',5:'Generic',6:'NATNetwork'}
+   _NameMap={0:'Null',1:'NAT',2:'Bridged',3:'Internal',4:'HostOnly',5:'Generic',6:'NATNetwork',7:'Cloud'}
    _ValueMap={
               'Null':0,
               'NAT':1,
@@ -30077,7 +32592,8 @@ class NetworkAttachmentType:
               'Internal':3,
               'HostOnly':4,
               'Generic':5,
-              'NATNetwork':6}
+              'NATNetwork':6,
+              'Cloud':7}
 
    Null=0
    NAT=1
@@ -30086,6 +32602,7 @@ class NetworkAttachmentType:
    HostOnly=4
    Generic=5
    NATNetwork=6
+   Cloud=7
 
 class NetworkAdapterType:
    def __init__(self,mgr,handle):
@@ -30119,7 +32636,7 @@ class NetworkAdapterType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'Am79C970A',2:'Am79C973',3:'I82540EM',4:'I82543GC',5:'I82545EM',6:'Virtio'}
+   _NameMap={0:'Null',1:'Am79C970A',2:'Am79C973',3:'I82540EM',4:'I82543GC',5:'I82545EM',6:'Virtio',7:'Am79C960'}
    _ValueMap={
               'Null':0,
               'Am79C970A':1,
@@ -30127,7 +32644,8 @@ class NetworkAdapterType:
               'I82540EM':3,
               'I82543GC':4,
               'I82545EM':5,
-              'Virtio':6}
+              'Virtio':6,
+              'Am79C960':7}
 
    Null=0
    Am79C970A=1
@@ -30136,6 +32654,7 @@ class NetworkAdapterType:
    I82543GC=4
    I82545EM=5
    Virtio=6
+   Am79C960=7
 
 class NetworkAdapterPromiscModePolicy:
    def __init__(self,mgr,handle):
@@ -30757,7 +33276,7 @@ class StorageBus:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'IDE',2:'SATA',3:'SCSI',4:'Floppy',5:'SAS',6:'USB',7:'PCIe'}
+   _NameMap={0:'Null',1:'IDE',2:'SATA',3:'SCSI',4:'Floppy',5:'SAS',6:'USB',7:'PCIe',8:'VirtioSCSI'}
    _ValueMap={
               'Null':0,
               'IDE':1,
@@ -30766,7 +33285,8 @@ class StorageBus:
               'Floppy':4,
               'SAS':5,
               'USB':6,
-              'PCIe':7}
+              'PCIe':7,
+              'VirtioSCSI':8}
 
    Null=0
    IDE=1
@@ -30776,6 +33296,7 @@ class StorageBus:
    SAS=5
    USB=6
    PCIe=7
+   VirtioSCSI=8
 
 class StorageControllerType:
    def __init__(self,mgr,handle):
@@ -30809,7 +33330,7 @@ class StorageControllerType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'LsiLogic',2:'BusLogic',3:'IntelAhci',4:'PIIX3',5:'PIIX4',6:'ICH6',7:'I82078',8:'LsiLogicSas',9:'USB',10:'NVMe'}
+   _NameMap={0:'Null',1:'LsiLogic',2:'BusLogic',3:'IntelAhci',4:'PIIX3',5:'PIIX4',6:'ICH6',7:'I82078',8:'LsiLogicSas',9:'USB',10:'NVMe',11:'VirtioSCSI'}
    _ValueMap={
               'Null':0,
               'LsiLogic':1,
@@ -30821,7 +33342,8 @@ class StorageControllerType:
               'I82078':7,
               'LsiLogicSas':8,
               'USB':9,
-              'NVMe':10}
+              'NVMe':10,
+              'VirtioSCSI':11}
 
    Null=0
    LsiLogic=1
@@ -30834,6 +33356,7 @@ class StorageControllerType:
    LsiLogicSas=8
    USB=9
    NVMe=10
+   VirtioSCSI=11
 
 class ChipsetType:
    def __init__(self,mgr,handle):
@@ -31033,7 +33556,7 @@ class VBoxEventType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'OnGuestAdditionsStatusChanged',102:'OnGuestFileSizeChanged',103:'Last'}
+   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'OnGuestAdditionsStatusChanged',102:'OnGuestMonitorInfoChanged',103:'OnGuestFileSizeChanged',104:'OnClipboardFileTransferModeChanged',105:'Last'}
    _ValueMap={
               'Invalid':0,
               'Any':1,
@@ -31112,8 +33635,10 @@ class VBoxEventType:
               'OnProgressTaskCompleted':99,
               'OnCursorPositionChanged':100,
               'OnGuestAdditionsStatusChanged':101,
-              'OnGuestFileSizeChanged':102,
-              'Last':103}
+              'OnGuestMonitorInfoChanged':102,
+              'OnGuestFileSizeChanged':103,
+              'OnClipboardFileTransferModeChanged':104,
+              'Last':105}
 
    Invalid=0
    Any=1
@@ -31192,8 +33717,10 @@ class VBoxEventType:
    OnProgressTaskCompleted=99
    OnCursorPositionChanged=100
    OnGuestAdditionsStatusChanged=101
-   OnGuestFileSizeChanged=102
-   Last=103
+   OnGuestMonitorInfoChanged=102
+   OnGuestFileSizeChanged=103
+   OnClipboardFileTransferModeChanged=104
+   Last=105
 
 class GuestMouseEventMode:
    def __init__(self,mgr,handle):
@@ -31276,6 +33803,154 @@ class GuestMonitorChangedEventType:
    Enabled=0
    Disabled=1
    NewOrigin=2
+
+class FormValueType:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=FormValueType._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,FormValueType):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,FormValueType):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return FormValueType._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Boolean',1:'String',2:'Choice',3:'RangedInteger'}
+   _ValueMap={
+              'Boolean':0,
+              'String':1,
+              'Choice':2,
+              'RangedInteger':3}
+
+   Boolean=0
+   String=1
+   Choice=2
+   RangedInteger=3
+
+class CloudMachineState:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=CloudMachineState._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,CloudMachineState):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,CloudMachineState):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return CloudMachineState._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Invalid',1:'Provisioning',2:'Running',3:'Starting',4:'Stopping',5:'Stopped',6:'CreatingImage',7:'Terminating',8:'Terminated'}
+   _ValueMap={
+              'Invalid':0,
+              'Provisioning':1,
+              'Running':2,
+              'Starting':3,
+              'Stopping':4,
+              'Stopped':5,
+              'CreatingImage':6,
+              'Terminating':7,
+              'Terminated':8}
+
+   Invalid=0
+   Provisioning=1
+   Running=2
+   Starting=3
+   Stopping=4
+   Stopped=5
+   CreatingImage=6
+   Terminating=7
+   Terminated=8
+
+class CloudImageState:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=CloudImageState._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,CloudImageState):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,CloudImageState):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return CloudImageState._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Invalid',1:'Provisioning',2:'Importing',3:'Available',4:'Exporting',5:'Disabled',6:'Deleted'}
+   _ValueMap={
+              'Invalid':0,
+              'Provisioning':1,
+              'Importing':2,
+              'Available':3,
+              'Exporting':4,
+              'Disabled':5,
+              'Deleted':6}
+
+   Invalid=0
+   Provisioning=1
+   Importing=2
+   Available=3
+   Exporting=4
+   Disabled=5
+   Deleted=6
 
 
 import base64
