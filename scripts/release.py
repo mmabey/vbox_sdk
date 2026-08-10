@@ -6,7 +6,7 @@ as local branches (an `actions/checkout` with `fetch-depth: 0` in CI satisfies
 this). Uses temporary git worktrees for main/pylibsonly so this script's own
 checkout, on `automation`, is left alone.
 
-    uv run scripts/release.py                  # release every new version found
+    uv run scripts/release.py                  # release the newest version, if not already published
     uv run scripts/release.py --version 7.2.14  # release one specific version (backfill)
     uv run scripts/release.py --dry-run         # do everything except push/publish/gh release
 """
@@ -34,7 +34,26 @@ def run(cmd: list[str], cwd: Path, dry_run: bool = False) -> None:
         subprocess.run(cmd, cwd=cwd, check=True)
 
 
+def tag_exists(tag: str) -> bool:
+    result = subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", f"refs/tags/{tag}"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+    )
+    return result.returncode == 0
+
+
 def update_main(worktree: Path, sdk_zip: Path, release: SdkRelease, dry_run: bool) -> None:
+    # A prior run may have already committed+tagged+pushed this -- e.g. if it
+    # got this far and then failed on update_pylibsonly (as happened on the
+    # very first live run: SDK layout change broke extract_vboxapi.py after
+    # main was already updated). Re-running git add/commit/tag against an
+    # unchanged tree, or re-creating an existing tag, would just error.
+    tag = f"sdk-v{release.version}"
+    if tag_exists(tag):
+        print(f"{tag} already exists -- main is already up to date for {release.version}, skipping")
+        return
+
     for entry in worktree.iterdir():
         if entry.name == ".git":
             continue
@@ -54,6 +73,11 @@ def update_main(worktree: Path, sdk_zip: Path, release: SdkRelease, dry_run: boo
 
 
 def update_pylibsonly(worktree: Path, sdk_zip: Path, pkg_version: str, dry_run: bool) -> None:
+    tag = f"v{pkg_version}"
+    if tag_exists(tag):
+        print(f"{tag} already exists -- pylibsonly is already up to date for {pkg_version}, skipping")
+        return
+
     extract_vboxapi(sdk_zip, worktree)
     pyproject = worktree / "pyproject.toml"
     text = pyproject.read_text()
