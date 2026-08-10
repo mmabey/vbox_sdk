@@ -1,6 +1,27 @@
-#!/usr/bin/env python
+#!/bin/sh
 # -*- coding: utf-8 -*-
-# $Id: vboxshell.py 155244 2023-01-17 14:15:46Z bird $
+# $Id: vboxshell.py 162975 2024-04-30 12:02:58Z vgalitsy $
+
+# The following checks for the right (i.e. most recent) Python binary available
+# and re-starts the script using that binary (like a shell wrapper).
+#
+# Using a shebang like "#!/bin/env python" on newer Fedora/Debian distros is banned [1]
+# and also won't work on other newer distros (Ubuntu >= 23.10), as those only ship
+# python3 without a python->python3 symlink anymore.
+#
+# Note: As Python 2 is EOL, we consider this last (and hope for the best).
+#
+# [1] https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/2PD5RNJRKPN2DVTNGJSBHR5RUSVZSDZI/
+''':'
+for python_bin in python3 python python2
+do
+    type "$python_bin" > /dev/null 2>&1 && exec "$python_bin" "$0" "$@"
+done
+echo >&2 "ERROR: Python not found! Please install this first in order to run this program."
+exit 1
+':'''
+
+from __future__ import print_function
 
 """
 VirtualBox Python Shell.
@@ -18,8 +39,6 @@ Finally, shell allows arbitrary custom extensions, just create
 
 P.S. Our apologies for the code quality.
 """
-
-from __future__ import print_function
 
 __copyright__ = \
 """
@@ -43,7 +62,7 @@ along with this program; if not, see <https://www.gnu.org/licenses>.
 
 SPDX-License-Identifier: GPL-3.0-only
 """
-__version__ = "$Revision: 155244 $"
+__version__ = "$Revision: 162975 $"
 
 
 import gc
