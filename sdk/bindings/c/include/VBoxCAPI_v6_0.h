@@ -3265,7 +3265,9 @@ typedef enum FramebufferCapabilities
 {
     FramebufferCapabilities_UpdateImage = 0x01,
     FramebufferCapabilities_VHWA = 0x02,
-    FramebufferCapabilities_VisibleRegion = 0x04
+    FramebufferCapabilities_VisibleRegion = 0x04,
+    FramebufferCapabilities_RenderCursor = 0x08,
+    FramebufferCapabilities_MoveCursor = 0x10
 } FramebufferCapabilities;
 /* End of enum FramebufferCapabilities declaration */
 #define FramebufferCapabilities_T PRUint32

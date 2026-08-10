@@ -10,7 +10,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Fri Jan 25 20:44:12 2019
+/* at Tue Apr 16 10:21:01 2019
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.0-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -3349,7 +3349,9 @@ typedef /* [public][public][v1_enum][uuid] */  DECLSPEC_UUID("cc395839-30fa-4ca5
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0091
     {	FramebufferCapabilities_UpdateImage	= 0x1,
 	FramebufferCapabilities_VHWA	= 0x2,
-	FramebufferCapabilities_VisibleRegion	= 0x4
+	FramebufferCapabilities_VisibleRegion	= 0x4,
+	FramebufferCapabilities_RenderCursor	= 0x8,
+	FramebufferCapabilities_MoveCursor	= 0x10
     } 	FramebufferCapabilities;
 
 #define FramebufferCapabilities_T FramebufferCapabilities

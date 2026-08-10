@@ -29739,15 +29739,19 @@ class FramebufferCapabilities:
    def __int__(self):
         return self.handle
 
-   _NameMap={0x01:'UpdateImage',0x02:'VHWA',0x04:'VisibleRegion'}
+   _NameMap={0x01:'UpdateImage',0x02:'VHWA',0x04:'VisibleRegion',0x08:'RenderCursor',0x10:'MoveCursor'}
    _ValueMap={
               'UpdateImage':0x01,
               'VHWA':0x02,
-              'VisibleRegion':0x04}
+              'VisibleRegion':0x04,
+              'RenderCursor':0x08,
+              'MoveCursor':0x10}
 
    UpdateImage=0x01
    VHWA=0x02
    VisibleRegion=0x04
+   RenderCursor=0x08
+   MoveCursor=0x10
 
 class GuestMonitorStatus:
    def __init__(self,mgr,handle):

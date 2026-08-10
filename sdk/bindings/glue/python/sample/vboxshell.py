@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# $Id: vboxshell.py 127855 2019-01-01 01:45:53Z bird $
+# $Id: vboxshell.py 129735 2019-04-01 13:10:36Z klaus $
 
 """
 VirtualBox Python Shell.
@@ -33,7 +33,7 @@ Foundation, in version 2 as it comes in the "COPYING" file of the
 VirtualBox OSE distribution. VirtualBox OSE is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
 """
-__version__ = "$Revision: 127855 $"
+__version__ = "$Revision: 129735 $"
 
 
 import gc
@@ -1005,7 +1005,7 @@ def infoCmd(ctx, args):
 
     print("  Keyboard [keyboardHIDType]: %s (%s)" % (asEnumElem(ctx, "KeyboardHIDType", mach.keyboardHIDType), mach.keyboardHIDType))
     print("  Pointing device [pointingHIDType]: %s (%s)" % (asEnumElem(ctx, "PointingHIDType", mach.pointingHIDType), mach.pointingHIDType))
-    print("  Last changed [n/a]: " + time.asctime(time.localtime(mach.lastStateChange/1000)))
+    print("  Last changed [n/a]: " + time.asctime(time.localtime(int(mach.lastStateChange)/1000)))
     # OSE has no VRDE
     try:
         print("  VRDE server [VRDEServer.enabled]: %s" % (asState(mach.VRDEServer.enabled)))

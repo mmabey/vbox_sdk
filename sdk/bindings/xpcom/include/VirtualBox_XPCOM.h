@@ -9094,6 +9094,10 @@ class NS_NO_VTABLE FramebufferCapabilities {
 
   enum { VisibleRegion = 4U };
 
+  enum { RenderCursor = 8U };
+
+  enum { MoveCursor = 16U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -9146,11 +9150,15 @@ typedef PRUint32 FramebufferCapabilities_T;
 # define FramebufferCapabilities_UpdateImage FramebufferCapabilities::UpdateImage
 # define FramebufferCapabilities_VHWA FramebufferCapabilities::VHWA
 # define FramebufferCapabilities_VisibleRegion FramebufferCapabilities::VisibleRegion
+# define FramebufferCapabilities_RenderCursor FramebufferCapabilities::RenderCursor
+# define FramebufferCapabilities_MoveCursor FramebufferCapabilities::MoveCursor
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum FramebufferCapabilities_T {
     FramebufferCapabilities_UpdateImage = FramebufferCapabilities::UpdateImage,
     FramebufferCapabilities_VHWA = FramebufferCapabilities::VHWA,
     FramebufferCapabilities_VisibleRegion = FramebufferCapabilities::VisibleRegion,
+    FramebufferCapabilities_RenderCursor = FramebufferCapabilities::RenderCursor,
+    FramebufferCapabilities_MoveCursor = FramebufferCapabilities::MoveCursor,
     FramebufferCapabilities_32BitHack = 0x7fffffff
 } FramebufferCapabilities_T;
 # ifdef AssertCompileSize

@@ -1697,12 +1697,16 @@
             UpdateImage: 0x01 -
             VHWA: 0x02 -
             VisibleRegion: 0x04 -
+            RenderCursor: 0x08 -
+            MoveCursor: 0x10 -
             -->
       <xsd:simpleType name="FramebufferCapabilities">
         <xsd:restriction base="xsd:string">
           <xsd:enumeration value="UpdateImage"/>
           <xsd:enumeration value="VHWA"/>
           <xsd:enumeration value="VisibleRegion"/>
+          <xsd:enumeration value="RenderCursor"/>
+          <xsd:enumeration value="MoveCursor"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: GuestMonitorStatus -

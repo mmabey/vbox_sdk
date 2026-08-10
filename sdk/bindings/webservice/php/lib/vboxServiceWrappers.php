@@ -18806,8 +18806,8 @@ class TouchContactStateCollection extends VBox_EnumCollection
  */
 class FramebufferCapabilities extends VBox_Enum
 {
-    public $NameMap = array(0x01 => 'UpdateImage', 0x02 => 'VHWA', 0x04 => 'VisibleRegion');
-    public $ValueMap = array('UpdateImage' => 0x01, 'VHWA' => 0x02, 'VisibleRegion' => 0x04);
+    public $NameMap = array(0x01 => 'UpdateImage', 0x02 => 'VHWA', 0x04 => 'VisibleRegion', 0x08 => 'RenderCursor', 0x10 => 'MoveCursor');
+    public $ValueMap = array('UpdateImage' => 0x01, 'VHWA' => 0x02, 'VisibleRegion' => 0x04, 'RenderCursor' => 0x08, 'MoveCursor' => 0x10);
 }
 
 /**
