@@ -25621,7 +25621,7 @@ class CPUPropertyType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'PAE',2:'LongMode',3:'TripleFaultReset',4:'APIC',5:'X2APIC',6:'IBPBOnVMExit',7:'IBPBOnVMEntry',8:'HWVirt',9:'SpecCtrl',10:'SpecCtrlByHost',11:'L1DFlushOnEMTScheduling',12:'L1DFlushOnVMEntry'}
+   _NameMap={0:'Null',1:'PAE',2:'LongMode',3:'TripleFaultReset',4:'APIC',5:'X2APIC',6:'IBPBOnVMExit',7:'IBPBOnVMEntry',8:'HWVirt',9:'SpecCtrl',10:'SpecCtrlByHost',11:'L1DFlushOnEMTScheduling',12:'L1DFlushOnVMEntry',13:'MDSClearOnEMTScheduling',14:'MDSClearOnVMEntry'}
    _ValueMap={
               'Null':0,
               'PAE':1,
@@ -25635,7 +25635,9 @@ class CPUPropertyType:
               'SpecCtrl':9,
               'SpecCtrlByHost':10,
               'L1DFlushOnEMTScheduling':11,
-              'L1DFlushOnVMEntry':12}
+              'L1DFlushOnVMEntry':12,
+              'MDSClearOnEMTScheduling':13,
+              'MDSClearOnVMEntry':14}
 
    Null=0
    PAE=1
@@ -25650,6 +25652,8 @@ class CPUPropertyType:
    SpecCtrlByHost=10
    L1DFlushOnEMTScheduling=11
    L1DFlushOnVMEntry=12
+   MDSClearOnEMTScheduling=13
+   MDSClearOnVMEntry=14
 
 class HWVirtExPropertyType:
    def __init__(self,mgr,handle):

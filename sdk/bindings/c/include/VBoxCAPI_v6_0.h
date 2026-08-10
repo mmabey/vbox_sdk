@@ -1646,7 +1646,9 @@ typedef enum CPUPropertyType
     CPUPropertyType_SpecCtrl = 9,
     CPUPropertyType_SpecCtrlByHost = 10,
     CPUPropertyType_L1DFlushOnEMTScheduling = 11,
-    CPUPropertyType_L1DFlushOnVMEntry = 12
+    CPUPropertyType_L1DFlushOnVMEntry = 12,
+    CPUPropertyType_MDSClearOnEMTScheduling = 13,
+    CPUPropertyType_MDSClearOnVMEntry = 14
 } CPUPropertyType;
 /* End of enum CPUPropertyType declaration */
 #define CPUPropertyType_T PRUint32

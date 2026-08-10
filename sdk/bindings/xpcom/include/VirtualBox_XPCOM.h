@@ -1050,6 +1050,10 @@ class NS_NO_VTABLE CPUPropertyType {
 
   enum { L1DFlushOnVMEntry = 12U };
 
+  enum { MDSClearOnEMTScheduling = 13U };
+
+  enum { MDSClearOnVMEntry = 14U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -1112,6 +1116,8 @@ typedef PRUint32 CPUPropertyType_T;
 # define CPUPropertyType_SpecCtrlByHost CPUPropertyType::SpecCtrlByHost
 # define CPUPropertyType_L1DFlushOnEMTScheduling CPUPropertyType::L1DFlushOnEMTScheduling
 # define CPUPropertyType_L1DFlushOnVMEntry CPUPropertyType::L1DFlushOnVMEntry
+# define CPUPropertyType_MDSClearOnEMTScheduling CPUPropertyType::MDSClearOnEMTScheduling
+# define CPUPropertyType_MDSClearOnVMEntry CPUPropertyType::MDSClearOnVMEntry
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum CPUPropertyType_T {
     CPUPropertyType_Null = CPUPropertyType::Null,
@@ -1127,6 +1133,8 @@ typedef enum CPUPropertyType_T {
     CPUPropertyType_SpecCtrlByHost = CPUPropertyType::SpecCtrlByHost,
     CPUPropertyType_L1DFlushOnEMTScheduling = CPUPropertyType::L1DFlushOnEMTScheduling,
     CPUPropertyType_L1DFlushOnVMEntry = CPUPropertyType::L1DFlushOnVMEntry,
+    CPUPropertyType_MDSClearOnEMTScheduling = CPUPropertyType::MDSClearOnEMTScheduling,
+    CPUPropertyType_MDSClearOnVMEntry = CPUPropertyType::MDSClearOnVMEntry,
     CPUPropertyType_32BitHack = 0x7fffffff
 } CPUPropertyType_T;
 # ifdef AssertCompileSize
