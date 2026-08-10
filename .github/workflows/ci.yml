@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [pylibsonly]
+  pull_request:
+    branches: [pylibsonly]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install ${{ matrix.python-version }}
+      - run: uv run --python ${{ matrix.python-version }} pytest -v
+      - run: uv build
+      - run: uvx twine check dist/*
+
+  # Best-effort functional smoke test: installs a real VirtualBox and exercises
+  # the actual COM/XPCOM dynamic-dispatch path through VirtualBoxManager, which
+  # a plain `import vboxapi` can't catch. This is new and unverified against
+  # GitHub's real runner environment -- marked non-blocking (continue-on-error)
+  # until it's proven reliable there; if it turns out VirtualBox's installed
+  # xpcom bindings live somewhere other than the path below, this job will need
+  # adjusting rather than the release pipeline being blocked by it.
+  virtualbox-smoke-test:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - name: Install VirtualBox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y virtualbox
+      - run: uv sync
+      - name: Query the running VirtualBox instance through vboxapi
+        env:
+          VBOX_PROGRAM_PATH: /usr/lib/virtualbox
+          VBOX_SDK_PATH: /usr/lib/virtualbox/sdk
+          PYTHONPATH: /usr/lib/virtualbox/sdk/bindings/xpcom/python
+        run: |
+          uv run python -c "
+          from vboxapi import VirtualBoxManager
+          mgr = VirtualBoxManager(None, None)
+          vbox = mgr.vbox
+          print('VirtualBox version reported via vboxapi:', vbox.version)
+          print(f'{len(vbox.machines)} machines registered')
+          "
