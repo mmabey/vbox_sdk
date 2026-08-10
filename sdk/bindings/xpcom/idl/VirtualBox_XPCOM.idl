@@ -965,6 +965,7 @@ interface DeviceType
     const PRUint32 USB = 5;
     const PRUint32 SharedFolder = 6;
     const PRUint32 Graphics3D = 7;
+    const PRUint32 End = 8;
 };
 
 
@@ -982,6 +983,7 @@ typedef PRUint32 DeviceType_T;
 # define DeviceType_USB DeviceType::USB
 # define DeviceType_SharedFolder DeviceType::SharedFolder
 # define DeviceType_Graphics3D DeviceType::Graphics3D
+# define DeviceType_End DeviceType::End
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum DeviceType_T {
     DeviceType_Null = DeviceType::Null,
@@ -992,6 +994,7 @@ typedef enum DeviceType_T {
     DeviceType_USB = DeviceType::USB,
     DeviceType_SharedFolder = DeviceType::SharedFolder,
     DeviceType_Graphics3D = DeviceType::Graphics3D,
+    DeviceType_End = DeviceType::End,
     DeviceType_32BitHack = 0x7fffffff
 } DeviceType_T;
 # ifdef AssertCompileSize
@@ -10379,6 +10382,13 @@ interface IUefiVariableStore : nsISupports
 
     void enrollDefaultMsSignatures();
 
+    void addSignatureToMok (
+        in unsigned long signatureSize,
+        [array, size_is(signatureSize)] in octet signature,
+        in wstring owner,
+        in SignatureType_T signatureType
+    );
+
     void InternalAndReservedMethod1IUefiVariableStore();
 
     void InternalAndReservedMethod2IUefiVariableStore();
@@ -10396,8 +10406,6 @@ interface IUefiVariableStore : nsISupports
     void InternalAndReservedMethod8IUefiVariableStore();
 
     void InternalAndReservedMethod9IUefiVariableStore();
-
-    void InternalAndReservedMethod10IUefiVariableStore();
 
 }; /* interface IUefiVariableStore */
 
@@ -10442,6 +10450,9 @@ interface IUefiVariableStore : nsISupports
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO(smth) NS_IMETHOD EnrollDefaultMsSignatures() { return smth EnrollDefaultMsSignatures(); }
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO ((obj)->)
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_BASE(base) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO(smth) NS_IMETHOD AddSignatureToMok (PRUint32 aSignatureSize, PRUint8 * aSignature, PRUnichar * aOwner, PRUint32 aSignatureType) { return smth AddSignatureToMok (aSignatureSize+++, aSignature, aOwner, aSignatureType); }
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO (base::)
 #define COM_FORWARD_IUefiVariableStore_TO(smth) NS_FORWARD_IUEFIVARIABLESTORE (smth)
 #define COM_FORWARD_IUefiVariableStore_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_TO ((obj)->)
 #define COM_FORWARD_IUefiVariableStore_TO_BASE(base) COM_FORWARD_IUefiVariableStore_TO (base::)

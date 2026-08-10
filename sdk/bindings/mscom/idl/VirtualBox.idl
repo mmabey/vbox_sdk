@@ -492,7 +492,8 @@ typedef enum
     DeviceType_Network = 4,
     DeviceType_USB = 5,
     DeviceType_SharedFolder = 6,
-    DeviceType_Graphics3D = 7
+    DeviceType_Graphics3D = 7,
+    DeviceType_End = 8
 } DeviceType;
 
 /* cross-platform type name for DeviceType */
@@ -6251,6 +6252,12 @@ interface IUefiVariableStore : IDispatch
 
     HRESULT EnrollDefaultMsSignatures();
 
+    HRESULT AddSignatureToMok (
+        [in] SAFEARRAY(BYTE) aSignature,
+        [in] BSTR aOwner,
+        [in] SignatureType aSignatureType
+    );
+
     HRESULT InternalAndReservedMethod1IUefiVariableStore();
 
     HRESULT InternalAndReservedMethod2IUefiVariableStore();
@@ -6268,8 +6275,6 @@ interface IUefiVariableStore : IDispatch
     HRESULT InternalAndReservedMethod8IUefiVariableStore();
 
     HRESULT InternalAndReservedMethod9IUefiVariableStore();
-
-    HRESULT InternalAndReservedMethod10IUefiVariableStore();
 
 }; /* interface IUefiVariableStore */
 
@@ -6313,7 +6318,10 @@ cpp_quote("#define COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO_BASE(base
 cpp_quote("#define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO(smth) HRESULT STDMETHODCALLTYPE EnrollDefaultMsSignatures() { return smth EnrollDefaultMsSignatures(); }")
 cpp_quote("#define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_BASE(base) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (base::)")
-cpp_quote("#define COM_FORWARD_IUefiVariableStore_TO(smth) COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_AddVariable_TO (smth) COM_FORWARD_IUefiVariableStore_DeleteVariable_TO (smth) COM_FORWARD_IUefiVariableStore_ChangeVariable_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariables_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_AddKek_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO(smth) HRESULT STDMETHODCALLTYPE AddSignatureToMok (SAFEARRAY * * aSignature, BSTR aOwner, SignatureType aSignatureType) { return smth AddSignatureToMok (aSignature, aOwner, aSignatureType); }")
+cpp_quote("#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO (base::)")
+cpp_quote("#define COM_FORWARD_IUefiVariableStore_TO(smth) COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_AddVariable_TO (smth) COM_FORWARD_IUefiVariableStore_DeleteVariable_TO (smth) COM_FORWARD_IUefiVariableStore_ChangeVariable_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariables_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_AddKek_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IUefiVariableStore_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IUefiVariableStore_TO_BASE(base) COM_FORWARD_IUefiVariableStore_TO (base::)")
 

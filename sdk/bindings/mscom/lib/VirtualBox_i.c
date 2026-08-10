@@ -18,9 +18,9 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Jan 11 14:33:37 2023
+/* at Mon Apr 17 15:41:40 2023
  */
-/* Compiler settings for Z:\home\vbox\tinderbox\sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
+/* Compiler settings for Z:\home\vbox\tinderbox\7.0-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 

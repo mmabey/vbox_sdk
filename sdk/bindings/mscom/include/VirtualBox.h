@@ -16,9 +16,9 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Jan 11 14:33:37 2023
+/* at Mon Apr 17 15:41:40 2023
  */
-/* Compiler settings for Z:\home\vbox\tinderbox\sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
+/* Compiler settings for Z:\home\vbox\tinderbox\7.0-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
@@ -3155,7 +3155,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0011
 	DeviceType_Network	= 4,
 	DeviceType_USB	= 5,
 	DeviceType_SharedFolder	= 6,
-	DeviceType_Graphics3D	= 7
+	DeviceType_Graphics3D	= 7,
+	DeviceType_End	= 8
     } 	DeviceType;
 
 #define DeviceType_T DeviceType
@@ -3708,7 +3709,7 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0042
     } 	RecordingRateControlMode;
 
 #define RecordingRateControlMode_T RecordingRateControlMode
-typedef /* [public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("6f6e67ef-9a32-4084-af84-5702679f882a") 
+typedef /* [public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("6f6e67ef-9a32-4084-af84-5702679f882a") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0043
     {	SignatureType_X509	= 0,
 	SignatureType_Sha256	= 1
@@ -16092,6 +16093,11 @@ EXTERN_C const IID IID_IUefiVariableStore;
         
         virtual HRESULT STDMETHODCALLTYPE EnrollDefaultMsSignatures( void) = 0;
         
+        virtual HRESULT STDMETHODCALLTYPE AddSignatureToMok( 
+            /* [in] */ SAFEARRAY * aSignature,
+            /* [in] */ BSTR aOwner,
+            /* [in] */ SignatureType aSignatureType) = 0;
+        
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod1IUefiVariableStore( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod2IUefiVariableStore( void) = 0;
@@ -16109,8 +16115,6 @@ EXTERN_C const IID IID_IUefiVariableStore;
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod8IUefiVariableStore( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod9IUefiVariableStore( void) = 0;
-        
-        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod10IUefiVariableStore( void) = 0;
         
     };
     
@@ -16247,6 +16251,12 @@ EXTERN_C const IID IID_IUefiVariableStore;
         HRESULT ( STDMETHODCALLTYPE *EnrollDefaultMsSignatures )( 
             IUefiVariableStore * This);
         
+        HRESULT ( STDMETHODCALLTYPE *AddSignatureToMok )( 
+            IUefiVariableStore * This,
+            /* [in] */ SAFEARRAY * aSignature,
+            /* [in] */ BSTR aOwner,
+            /* [in] */ SignatureType aSignatureType);
+        
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod1IUefiVariableStore )( 
             IUefiVariableStore * This);
         
@@ -16272,9 +16282,6 @@ EXTERN_C const IID IID_IUefiVariableStore;
             IUefiVariableStore * This);
         
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod9IUefiVariableStore )( 
-            IUefiVariableStore * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod10IUefiVariableStore )( 
             IUefiVariableStore * This);
         
         END_INTERFACE
@@ -16367,6 +16374,9 @@ EXTERN_C const IID IID_IUefiVariableStore;
 #define IUefiVariableStore_EnrollDefaultMsSignatures(This)	\
     ( (This)->lpVtbl -> EnrollDefaultMsSignatures(This) ) 
 
+#define IUefiVariableStore_AddSignatureToMok(This,aSignature,aOwner,aSignatureType)	\
+    ( (This)->lpVtbl -> AddSignatureToMok(This,aSignature,aOwner,aSignatureType) ) 
+
 #define IUefiVariableStore_InternalAndReservedMethod1IUefiVariableStore(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod1IUefiVariableStore(This) ) 
 
@@ -16393,9 +16403,6 @@ EXTERN_C const IID IID_IUefiVariableStore;
 
 #define IUefiVariableStore_InternalAndReservedMethod9IUefiVariableStore(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod9IUefiVariableStore(This) ) 
-
-#define IUefiVariableStore_InternalAndReservedMethod10IUefiVariableStore(This)	\
-    ( (This)->lpVtbl -> InternalAndReservedMethod10IUefiVariableStore(This) ) 
 
 #endif /* COBJMACROS */
 
@@ -16450,7 +16457,10 @@ EXTERN_C const IID IID_IUefiVariableStore;
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO(smth) HRESULT STDMETHODCALLTYPE EnrollDefaultMsSignatures() { return smth EnrollDefaultMsSignatures(); }
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO ((obj)->)
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_BASE(base) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (base::)
-#define COM_FORWARD_IUefiVariableStore_TO(smth) COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_AddVariable_TO (smth) COM_FORWARD_IUefiVariableStore_DeleteVariable_TO (smth) COM_FORWARD_IUefiVariableStore_ChangeVariable_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariables_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_AddKek_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (smth) 
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO(smth) HRESULT STDMETHODCALLTYPE AddSignatureToMok (SAFEARRAY * * aSignature, BSTR aOwner, SignatureType aSignatureType) { return smth AddSignatureToMok (aSignature, aOwner, aSignatureType); }
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_TO(smth) COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO (smth) COM_FORWARD_IUefiVariableStore_AddVariable_TO (smth) COM_FORWARD_IUefiVariableStore_DeleteVariable_TO (smth) COM_FORWARD_IUefiVariableStore_ChangeVariable_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO (smth) COM_FORWARD_IUefiVariableStore_QueryVariables_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO (smth) COM_FORWARD_IUefiVariableStore_AddKek_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO (smth) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (smth) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO (smth) 
 #define COM_FORWARD_IUefiVariableStore_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_TO ((obj)->)
 #define COM_FORWARD_IUefiVariableStore_TO_BASE(base) COM_FORWARD_IUefiVariableStore_TO (base::)
 

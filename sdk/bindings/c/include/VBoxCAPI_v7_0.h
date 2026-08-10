@@ -20,7 +20,7 @@
  */
 
 /*
- * Copyright (C) 2008-2022 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2023 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -1874,7 +1874,8 @@ typedef enum DeviceType
     DeviceType_Network = 4,
     DeviceType_USB = 5,
     DeviceType_SharedFolder = 6,
-    DeviceType_Graphics3D = 7
+    DeviceType_Graphics3D = 7,
+    DeviceType_End = 8
 } DeviceType;
 /* End of enum DeviceType declaration */
 #define DeviceType_T PRUint32
@@ -9479,6 +9480,14 @@ struct IUefiVariableStore_vtbl
 
     nsresult (*EnrollDefaultMsSignatures)(IUefiVariableStore *pThis );
 
+    nsresult (*AddSignatureToMok)(
+        IUefiVariableStore *pThis,
+        PRUint32 signatureSize,
+        PRUint8* signature,
+        PRUnichar * owner,
+        PRUint32 signatureType
+    );
+
     nsresult (*InternalAndReservedMethod1IUefiVariableStore)(IUefiVariableStore *pThis);
 
     nsresult (*InternalAndReservedMethod2IUefiVariableStore)(IUefiVariableStore *pThis);
@@ -9496,8 +9505,6 @@ struct IUefiVariableStore_vtbl
     nsresult (*InternalAndReservedMethod8IUefiVariableStore)(IUefiVariableStore *pThis);
 
     nsresult (*InternalAndReservedMethod9IUefiVariableStore)(IUefiVariableStore *pThis);
-
-    nsresult (*InternalAndReservedMethod10IUefiVariableStore)(IUefiVariableStore *pThis);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -9595,6 +9602,14 @@ struct IUefiVariableStoreVtbl
 
     nsresult (*EnrollDefaultMsSignatures)(IUefiVariableStore *pThis );
 
+    nsresult (*AddSignatureToMok)(
+        IUefiVariableStore *pThis,
+        PRUint32 signatureSize,
+        PRUint8* signature,
+        PRUnichar * owner,
+        PRUint32 signatureType
+    );
+
     nsresult (*InternalAndReservedMethod1IUefiVariableStore)(IUefiVariableStore *pThis);
 
     nsresult (*InternalAndReservedMethod2IUefiVariableStore)(IUefiVariableStore *pThis);
@@ -9612,8 +9627,6 @@ struct IUefiVariableStoreVtbl
     nsresult (*InternalAndReservedMethod8IUefiVariableStore)(IUefiVariableStore *pThis);
 
     nsresult (*InternalAndReservedMethod9IUefiVariableStore)(IUefiVariableStore *pThis);
-
-    nsresult (*InternalAndReservedMethod10IUefiVariableStore)(IUefiVariableStore *pThis);
 
 };
 #define IUefiVariableStore_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
@@ -9634,6 +9647,7 @@ struct IUefiVariableStoreVtbl
 #define IUefiVariableStore_AddSignatureToDb(p, aSignature, aOwner, aSignatureType) ((p)->lpVtbl->AddSignatureToDb(p, aSignature, aOwner, aSignatureType))
 #define IUefiVariableStore_AddSignatureToDbx(p, aSignature, aOwner, aSignatureType) ((p)->lpVtbl->AddSignatureToDbx(p, aSignature, aOwner, aSignatureType))
 #define IUefiVariableStore_EnrollDefaultMsSignatures(p) ((p)->lpVtbl->EnrollDefaultMsSignatures(p))
+#define IUefiVariableStore_AddSignatureToMok(p, aSignature, aOwner, aSignatureType) ((p)->lpVtbl->AddSignatureToMok(p, aSignature, aOwner, aSignatureType))
 #endif /* VBOX_WITH_GLUE */
 
 interface IUefiVariableStore

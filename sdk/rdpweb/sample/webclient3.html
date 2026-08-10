@@ -15,13 +15,13 @@
     function Init()
     {
       document.getElementById("Information").innerHTML = "Loading Flash...";
-      
+
       RDPWebClient.embedSWF ("RDPClientUI.swf", FlashId);
     }
-    
+
     var fFlashLoaded = false;
     var FlashVersion = "";
-    
+
     function getFlashProperty(id, name)
     {
       var value = "";
@@ -32,7 +32,7 @@
       }
       return value;
     }
-    
+
     /*
      * RDP client event handlers.
      * They will be called when the flash movie is ready and some event occurs.
@@ -65,8 +65,8 @@
       document.InputForm.onsubmit=function() {return Connect();}
       document.getElementById("Information").innerHTML = "Version: " + FlashVersion;
     }
-    
-    /* 
+
+    /*
      * Examples how to call a flash method from HTML.
      */
     function Connect()
@@ -75,7 +75,7 @@
       {
           return false;
       }
-      
+
       /* Do something with the input form:
        *
        * to hide:      document.getElementById("InputForm").style.display = 'none';
@@ -85,7 +85,7 @@
        */
       document.InputForm.connectionButton.value = "Disconnect";
       document.InputForm.onsubmit=function() {return Disconnect();}
-      
+
       var flash = RDPWebClient.getFlashById(FlashId);
       if (flash)
       {
@@ -94,7 +94,7 @@
         flash.setProperty("serverAddress", document.InputForm.serverAddress.value);
         flash.setProperty("logonUsername", document.InputForm.logonUsername.value);
         flash.setProperty("logonPassword", document.InputForm.logonPassword.value);
-        
+
         if (document.InputForm.desktopSize.value == "800")
         {
             flash.setProperty("displayWidth", "800");
@@ -110,20 +110,20 @@
             flash.setProperty("displayWidth", "1280");
             flash.setProperty("displayHeight", "1024");
         }
-      
+
         flash.setProperty("keyboardLayout", document.InputForm.keyboardLayout.value);
 
         document.getElementById("Information").innerHTML =
             "Version: " + FlashVersion +". Connecting to " + getFlashProperty(FlashId, "serverAddress") + "...";
-        
+
         /* Establish the connection. */
         flash.connect();
       }
-      
+
       /* If false is returned, the form will not be submitted and we stay on the same page. */
       return false;
     }
-    
+
     function Disconnect()
     {
       var flash = RDPWebClient.getFlashById(FlashId);
@@ -131,11 +131,11 @@
       {
         flash.disconnect();
       }
-      
+
       /* Restore the "Connect" form. */
       document.InputForm.connectionButton.value = "Connect";
       document.InputForm.onsubmit=function() {return Connect();}
-      
+
       /* If false is returned, the form will not be submitted and we stay on the same page. */
       return false;
     }
@@ -146,7 +146,7 @@
       {
         flash.keyboardSendCAD();
       }
-      
+
       /* If false is returned, the form will not be submitted and we stay on the same page. */
       return false;
     }
@@ -157,7 +157,7 @@
       {
         flash.keyboardSendScancodes('1f 9f 2e ae 1e 9e 31 b1');
       }
-      
+
       /* If false is returned, the form will not be submitted and we stay on the same page. */
       return false;
     }
@@ -168,7 +168,7 @@
       {
         flash.setProperty("keyboardLayout", document.InputForm.keyboardLayout.value);
       }
-      
+
       /* If false is returned, the form will not be submitted and we stay on the same page. */
       return false;
     }
@@ -177,7 +177,7 @@
 
 <body onload="Init()">
   <h2>RDP Web Client</h2>
-  
+
   <form name="InputForm" onsubmit="return Connect()">
     <p>
     Computer: <input type=text size=20 name=serverAddress value="">
@@ -202,16 +202,16 @@
     <input name=scanButton type=button value="Scancodes test" onClick="return sendScancodes()">
     </p>
   </form>
-  
+
   <div id="FlashRDPContainer">
     <div id="FlashRDP">
     </div>
   </div>
-  
+
   <div id="Information"></div>
-  
-  <br>Copyright &copy; 2009-2022 Oracle and/or its affiliates.
-  
+
+  <br>Copyright &copy; 2009-2023 Oracle and/or its affiliates.
+
   <iframe style="height:0px;width:0px;visibility:hidden" src="about:blank">
      this frame prevents back forward cache in Safari
   </iframe>

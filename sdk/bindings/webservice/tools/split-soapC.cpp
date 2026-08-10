@@ -1,10 +1,10 @@
-/* $Id: split-soapC.cpp 153224 2022-08-22 17:43:14Z klaus $ */
+/* $Id: split-soapC.cpp 155502 2023-01-25 01:59:25Z bird $ */
 /** @file
  * Splits soapC.cpp and soapH-noinline.cpp into more manageable portions.
  */
 
 /*
- * Copyright (C) 2009-2022 Oracle and/or its affiliates.
+ * Copyright (C) 2009-2023 Oracle and/or its affiliates.
  *
  * This file is part of VirtualBox base platform packages, as
  * available from https://www.virtualbox.org.
@@ -43,10 +43,10 @@ static char *readfileIntoBuffer(const char *pszFile, size_t *pcbFile)
     FILE *pFileIn = fopen(pszFile, "rb");
     if (pFileIn)
     {
-        int rc2 = fseek(pFileIn, 0, SEEK_END);
+        int iRc2 = fseek(pFileIn, 0, SEEK_END);
         long cbFileIn = ftell(pFileIn);
-        int rc3 = fseek(pFileIn, 0, SEEK_SET);
-        if (rc3 != -1 && rc2 != -1 && cbFileIn >= 0)
+        int iRc3 = fseek(pFileIn, 0, SEEK_SET);
+        if (iRc3 != -1 && iRc2 != -1 && cbFileIn >= 0)
         {
             char *pBuffer = (char *)malloc(cbFileIn + 1);
             if (pBuffer)

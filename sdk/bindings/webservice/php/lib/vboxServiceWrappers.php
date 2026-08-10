@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2008-2022 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2023 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -4493,6 +4493,17 @@ class IUefiVariableStore extends VBox_ManagedObject
         $request = new stdClass();
         $request->_this = $this->handle;
         $response = $this->connection->__soapCall('IUefiVariableStore_enrollDefaultMsSignatures', array((array)$request));
+        return ;
+    }
+
+    public function addSignatureToMok($arg_signature, $arg_owner, $arg_signatureType)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->signature = $arg_signature;
+        $request->owner = $arg_owner;
+        $request->signatureType = $arg_signatureType;
+        $response = $this->connection->__soapCall('IUefiVariableStore_addSignatureToMok', array((array)$request));
         return ;
     }
 
@@ -21605,8 +21616,8 @@ class SessionTypeCollection extends VBox_EnumCollection
  */
 class DeviceType extends VBox_Enum
 {
-    public $NameMap = array(0 => 'Null', 1 => 'Floppy', 2 => 'DVD', 3 => 'HardDisk', 4 => 'Network', 5 => 'USB', 6 => 'SharedFolder', 7 => 'Graphics3D');
-    public $ValueMap = array('Null' => 0, 'Floppy' => 1, 'DVD' => 2, 'HardDisk' => 3, 'Network' => 4, 'USB' => 5, 'SharedFolder' => 6, 'Graphics3D' => 7);
+    public $NameMap = array(0 => 'Null', 1 => 'Floppy', 2 => 'DVD', 3 => 'HardDisk', 4 => 'Network', 5 => 'USB', 6 => 'SharedFolder', 7 => 'Graphics3D', 8 => 'End');
+    public $ValueMap = array('Null' => 0, 'Floppy' => 1, 'DVD' => 2, 'HardDisk' => 3, 'Network' => 4, 'USB' => 5, 'SharedFolder' => 6, 'Graphics3D' => 7, 'End' => 8);
 }
 
 /**

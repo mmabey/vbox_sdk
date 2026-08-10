@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2022 Oracle and/or its affiliates.
+# Copyright (C) 2008-2023 Oracle and/or its affiliates.
 #
 # This file is part of a free software library; you can redistribute
 # it and/or modify it under the terms of the GNU Lesser General
@@ -5289,6 +5289,18 @@ class IUefiVariableStore(IUnknown):
        req._this=self.handle
        
        val=self.mgr.getPort().IUefiVariableStore_enrollDefaultMsSignatures(req)
+       
+       return 
+
+
+   def addSignatureToMok(self, _arg_signature, _arg_owner, _arg_signatureType):
+       req=IUefiVariableStore_addSignatureToMokRequestMsg()
+       req._this=self.handle
+       
+       req._signature=self.mgr.encodebase64(_arg_signature)
+       req._owner=_arg_owner
+       req._signatureType=_arg_signatureType
+       val=self.mgr.getPort().IUefiVariableStore_addSignatureToMok(req)
        
        return 
 
@@ -32753,7 +32765,7 @@ class DeviceType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'Floppy',2:'DVD',3:'HardDisk',4:'Network',5:'USB',6:'SharedFolder',7:'Graphics3D'}
+   _NameMap={0:'Null',1:'Floppy',2:'DVD',3:'HardDisk',4:'Network',5:'USB',6:'SharedFolder',7:'Graphics3D',8:'End'}
    _ValueMap={
               'Null':0,
               'Floppy':1,
@@ -32762,7 +32774,8 @@ class DeviceType:
               'Network':4,
               'USB':5,
               'SharedFolder':6,
-              'Graphics3D':7}
+              'Graphics3D':7,
+              'End':8}
 
    Null=0
    Floppy=1
@@ -32772,6 +32785,7 @@ class DeviceType:
    USB=5
    SharedFolder=6
    Graphics3D=7
+   End=8
 
 class DeviceActivity:
    def __init__(self,mgr,handle):

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/out/linux.amd64/release/bin/sdk/bindings/xpcom/idl/VirtualBox_XPCOM.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/out/linux.amd64/release/bin/sdk/bindings/xpcom/idl/VirtualBox_XPCOM.idl
  */
 
 #ifndef __gen_VirtualBox_XPCOM_h__
@@ -1735,6 +1735,8 @@ class NS_NO_VTABLE DeviceType {
 
   enum { Graphics3D = 7U };
 
+  enum { End = 8U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -1792,6 +1794,7 @@ typedef PRUint32 DeviceType_T;
 # define DeviceType_USB DeviceType::USB
 # define DeviceType_SharedFolder DeviceType::SharedFolder
 # define DeviceType_Graphics3D DeviceType::Graphics3D
+# define DeviceType_End DeviceType::End
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum DeviceType_T {
     DeviceType_Null = DeviceType::Null,
@@ -1802,6 +1805,7 @@ typedef enum DeviceType_T {
     DeviceType_USB = DeviceType::USB,
     DeviceType_SharedFolder = DeviceType::SharedFolder,
     DeviceType_Graphics3D = DeviceType::Graphics3D,
+    DeviceType_End = DeviceType::End,
     DeviceType_32BitHack = 0x7fffffff
 } DeviceType_T;
 # ifdef AssertCompileSize
@@ -24529,6 +24533,9 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   /* void enrollDefaultMsSignatures (); */
   NS_IMETHOD EnrollDefaultMsSignatures(void) = 0;
 
+  /* void addSignatureToMok (in unsigned long signatureSize, [array, size_is (signatureSize)] in octet signature, in wstring owner, in SignatureType_T signatureType); */
+  NS_IMETHOD AddSignatureToMok(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) = 0;
+
   /* void InternalAndReservedMethod1IUefiVariableStore (); */
   NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void) = 0;
 
@@ -24556,9 +24563,6 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   /* void InternalAndReservedMethod9IUefiVariableStore (); */
   NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) = 0;
 
-  /* void InternalAndReservedMethod10IUefiVariableStore (); */
-  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void) = 0;
-
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -24581,6 +24585,7 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   NS_IMETHOD AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType); \
   NS_IMETHOD AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType); \
   NS_IMETHOD EnrollDefaultMsSignatures(void); \
+  NS_IMETHOD AddSignatureToMok(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType); \
   NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void); \
   NS_IMETHOD InternalAndReservedMethod2IUefiVariableStore(void); \
   NS_IMETHOD InternalAndReservedMethod3IUefiVariableStore(void); \
@@ -24589,8 +24594,7 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod6IUefiVariableStore(void); \
   NS_IMETHOD InternalAndReservedMethod7IUefiVariableStore(void); \
   NS_IMETHOD InternalAndReservedMethod8IUefiVariableStore(void); \
-  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void); \
-  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void); 
+  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IUEFIVARIABLESTORE(_to) \
@@ -24612,6 +24616,7 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   NS_IMETHOD AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return _to AddSignatureToDb(signatureSize, signature, owner, signatureType); } \
   NS_IMETHOD AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return _to AddSignatureToDbx(signatureSize, signature, owner, signatureType); } \
   NS_IMETHOD EnrollDefaultMsSignatures(void) { return _to EnrollDefaultMsSignatures(); } \
+  NS_IMETHOD AddSignatureToMok(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return _to AddSignatureToMok(signatureSize, signature, owner, signatureType); } \
   NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void) { return _to InternalAndReservedMethod1IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod2IUefiVariableStore(void) { return _to InternalAndReservedMethod2IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod3IUefiVariableStore(void) { return _to InternalAndReservedMethod3IUefiVariableStore(); } \
@@ -24620,8 +24625,7 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod6IUefiVariableStore(void) { return _to InternalAndReservedMethod6IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod7IUefiVariableStore(void) { return _to InternalAndReservedMethod7IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod8IUefiVariableStore(void) { return _to InternalAndReservedMethod8IUefiVariableStore(); } \
-  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) { return _to InternalAndReservedMethod9IUefiVariableStore(); } \
-  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void) { return _to InternalAndReservedMethod10IUefiVariableStore(); } 
+  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) { return _to InternalAndReservedMethod9IUefiVariableStore(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IUEFIVARIABLESTORE(_to) \
@@ -24643,6 +24647,7 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   NS_IMETHOD AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddSignatureToDb(signatureSize, signature, owner, signatureType); } \
   NS_IMETHOD AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddSignatureToDbx(signatureSize, signature, owner, signatureType); } \
   NS_IMETHOD EnrollDefaultMsSignatures(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->EnrollDefaultMsSignatures(); } \
+  NS_IMETHOD AddSignatureToMok(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddSignatureToMok(signatureSize, signature, owner, signatureType); } \
   NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod2IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod3IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IUefiVariableStore(); } \
@@ -24651,8 +24656,7 @@ class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod6IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod6IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod7IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod7IUefiVariableStore(); } \
   NS_IMETHOD InternalAndReservedMethod8IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod8IUefiVariableStore(); } \
-  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod9IUefiVariableStore(); } \
-  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod10IUefiVariableStore(); } 
+  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod9IUefiVariableStore(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -24792,6 +24796,12 @@ NS_IMETHODIMP _MYCLASS_::EnrollDefaultMsSignatures()
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void addSignatureToMok (in unsigned long signatureSize, [array, size_is (signatureSize)] in octet signature, in wstring owner, in SignatureType_T signatureType); */
+NS_IMETHODIMP _MYCLASS_::AddSignatureToMok(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void InternalAndReservedMethod1IUefiVariableStore (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IUefiVariableStore()
 {
@@ -24846,12 +24856,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod9IUefiVariableStore()
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod10IUefiVariableStore (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod10IUefiVariableStore()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
 /* End of implementation class template. */
 #endif
 
@@ -24894,6 +24898,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod10IUefiVariableStore()
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO(smth) NS_IMETHOD EnrollDefaultMsSignatures() { return smth EnrollDefaultMsSignatures(); }
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO ((obj)->)
 #define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_BASE(base) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO(smth) NS_IMETHOD AddSignatureToMok (PRUint32 aSignatureSize, PRUint8 * aSignature, PRUnichar * aOwner, PRUint32 aSignatureType) { return smth AddSignatureToMok (aSignatureSize+++, aSignature, aOwner, aSignatureType); }
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddSignatureToMok_TO (base::)
 #define COM_FORWARD_IUefiVariableStore_TO(smth) NS_FORWARD_IUEFIVARIABLESTORE (smth)
 #define COM_FORWARD_IUefiVariableStore_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_TO ((obj)->)
 #define COM_FORWARD_IUefiVariableStore_TO_BASE(base) COM_FORWARD_IUefiVariableStore_TO (base::)

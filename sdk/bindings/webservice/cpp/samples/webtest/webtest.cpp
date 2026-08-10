@@ -1,11 +1,11 @@
-/* $Id: webtest.cpp 153224 2022-08-22 17:43:14Z klaus $ */
+/* $Id: webtest.cpp 155502 2023-01-25 01:59:25Z bird $ */
 /** @file
  * webtest.cpp:
  *      demo webservice client in C++. This mimics some of the
  *      functionality of VBoxManage for testing purposes.
  */
 /*
- * Copyright (C) 2006-2022 Oracle and/or its affiliates.
+ * Copyright (C) 2006-2023 Oracle and/or its affiliates.
  *
  * This file is part of VirtualBox base platform packages, as
  * available from https://www.virtualbox.org.
@@ -93,9 +93,9 @@ int main(int argc, char* argv[])
     const char *pcszArgEndpoint = "http://localhost:18083/";
 
     /* SSL callbacks drag in IPRT sem/thread use, so make sure it is ready. */
-    int rc = RTR3InitExe(argc, &argv, 0);
-    if (RT_FAILURE(rc))
-        return RTMsgInitFailure(rc);
+    int vrc = RTR3InitExe(argc, &argv, 0);
+    if (RT_FAILURE(vrc))
+        return RTMsgInitFailure(vrc);
 
     int ap;
     for (ap = 1; ap < argc; ap++)

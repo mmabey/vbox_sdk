@@ -286,6 +286,7 @@
             USB: 5 -
             SharedFolder: 6 -
             Graphics3D: 7 -
+            End: 8 -
             -->
       <xsd:simpleType name="DeviceType">
         <xsd:restriction base="xsd:string">
@@ -297,6 +298,7 @@
           <xsd:enumeration value="USB"/>
           <xsd:enumeration value="SharedFolder"/>
           <xsd:enumeration value="Graphics3D"/>
+          <xsd:enumeration value="End"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: DeviceActivity -
@@ -8838,6 +8840,22 @@
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="IUefiVariableStore_enrollDefaultMsSignaturesResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method IUefiVariableStore::addSignatureToMok-->
+      <xsd:element name="IUefiVariableStore_addSignatureToMok">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="signature" type="xsd:string"/>
+            <xsd:element name="owner" type="xsd:string"/>
+            <xsd:element name="signatureType" type="vbox:SignatureType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IUefiVariableStore_addSignatureToMokResponse">
         <xsd:complexType>
           <xsd:sequence/>
         </xsd:complexType>
@@ -33531,6 +33549,13 @@
   <wsdl:message name="IUefiVariableStore_enrollDefaultMsSignaturesResultMsg">
     <wsdl:part name="parameters" element="vbox:IUefiVariableStore_enrollDefaultMsSignaturesResponse"/>
   </wsdl:message>
+  <!-- method IUefiVariableStore::addSignatureToMok-->
+  <wsdl:message name="IUefiVariableStore_addSignatureToMokRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IUefiVariableStore_addSignatureToMok"/>
+  </wsdl:message>
+  <wsdl:message name="IUefiVariableStore_addSignatureToMokResultMsg">
+    <wsdl:part name="parameters" element="vbox:IUefiVariableStore_addSignatureToMokResponse"/>
+  </wsdl:message>
   <!--
         *************************************
         messages for interface INvramStore
@@ -46883,6 +46908,12 @@
     <wsdl:operation name="IUefiVariableStore_enrollDefaultMsSignatures">
       <wsdl:input message="vbox:IUefiVariableStore_enrollDefaultMsSignaturesRequestMsg"/>
       <wsdl:output message="vbox:IUefiVariableStore_enrollDefaultMsSignaturesResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IUefiVariableStore_addSignatureToMok">
+      <wsdl:input message="vbox:IUefiVariableStore_addSignatureToMokRequestMsg"/>
+      <wsdl:output message="vbox:IUefiVariableStore_addSignatureToMokResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -62421,6 +62452,21 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="IUefiVariableStore_enrollDefaultMsSignatures">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IUefiVariableStore_addSignatureToMok">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
