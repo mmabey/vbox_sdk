@@ -42,6 +42,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y virtualbox
       - run: uv sync
+      - name: Diagnostics -- confirm the driver + CLI work before touching Python
+        run: |
+          lsmod | grep -i vbox || echo "vboxdrv not loaded"
+          sudo modprobe vboxdrv || echo "modprobe vboxdrv failed"
+          lsmod | grep -i vbox || echo "still not loaded after modprobe"
+          VBoxManage --version || echo "VBoxManage --version failed"
       - name: Query the running VirtualBox instance through vboxapi
         env:
           VBOX_PROGRAM_PATH: /usr/lib/virtualbox
@@ -52,10 +58,19 @@ jobs:
           # first CI run of this workflow.
           LD_LIBRARY_PATH: /usr/lib/virtualbox
         run: |
-          uv run python -c "
+          uv run python -X faulthandler -c "
+          print('step 1: importing xpcom directly')
+          import xpcom
+          print('step 1 OK:', xpcom.__file__)
+          print('step 2: importing vboxapi')
           from vboxapi import VirtualBoxManager
+          print('step 2 OK')
+          print('step 3: constructing VirtualBoxManager')
           mgr = VirtualBoxManager(None, None)
+          print('step 3 OK, mgr.type =', mgr.type)
+          print('step 4: mgr.vbox')
           vbox = mgr.vbox
+          print('step 4 OK')
           print('VirtualBox version reported via vboxapi:', vbox.version)
           print(f'{len(vbox.machines)} machines registered')
           "
