@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2008-2026 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2025 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -601,6 +601,98 @@ class INATNetwork extends VBox_ManagedObject
         $request->_this = $this->handle;
         $response = $this->connection->__soapCall('INATNetwork_getLocalMappings', array((array)$request));
         return (array)$response->returnval;
+    }
+
+    public function getLocalhostReachable()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATNetwork_getLocalhostReachable', array((array)$request));
+        return (bool)$response->returnval;
+    }
+
+    public function setLocalhostReachable($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->localhostReachable = $value;
+        }
+        else
+        {
+            $request->localhostReachable = $value->handle;
+        }
+        $this->connection->__soapCall('INATNetwork_setLocalhostReachable', array((array)$request));
+    }
+
+    public function getForwardBroadcast()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATNetwork_getForwardBroadcast', array((array)$request));
+        return (bool)$response->returnval;
+    }
+
+    public function setForwardBroadcast($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->forwardBroadcast = $value;
+        }
+        else
+        {
+            $request->forwardBroadcast = $value->handle;
+        }
+        $this->connection->__soapCall('INATNetwork_setForwardBroadcast', array((array)$request));
+    }
+
+    public function getNatMTU()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATNetwork_getNatMTU', array((array)$request));
+        return (float)$response->returnval;
+    }
+
+    public function setNatMTU($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->natMTU = $value;
+        }
+        else
+        {
+            $request->natMTU = $value->handle;
+        }
+        $this->connection->__soapCall('INATNetwork_setNatMTU', array((array)$request));
+    }
+
+    public function getNatMRU()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATNetwork_getNatMRU', array((array)$request));
+        return (float)$response->returnval;
+    }
+
+    public function setNatMRU($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->natMRU = $value;
+        }
+        else
+        {
+            $request->natMRU = $value->handle;
+        }
+        $this->connection->__soapCall('INATNetwork_setNatMRU', array((array)$request));
     }
 
     public function getLoopbackIp6()
@@ -1881,6 +1973,24 @@ class IVirtualBox extends VBox_ManagedObject
         return new IProgress ($this->connection, $response->returnval);
     }
 
+    public function getTrackedObject($arg_trObjId)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->trObjId = $arg_trObjId;
+        $response = $this->connection->__soapCall('IVirtualBox_getTrackedObject', array((array)$request));
+        return array(new VBox_ManagedObject ($this->connection, $response->pIface), new TrackedObjectState ($this->connection, $response->state), (float)$response->creationTime, (float)$response->deletionTime);
+    }
+
+    public function getTrackedObjectIds($arg_name)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->name = $arg_name;
+        $response = $this->connection->__soapCall('IVirtualBox_getTrackedObjectIds', array((array)$request));
+        return (array)$response->returnval;
+    }
+
     public function getVersion()
     {
         $request = new stdClass();
@@ -2873,6 +2983,14 @@ class IUnattended extends VBox_ManagedObject
             $request->installGuestAdditions = $value->handle;
         }
         $this->connection->__soapCall('IUnattended_setInstallGuestAdditions', array((array)$request));
+    }
+
+    public function getProductKeyRequired()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('IUnattended_getProductKeyRequired', array((array)$request));
+        return (bool)$response->returnval;
     }
 
     public function getValidationKitIsoPath()
@@ -4424,6 +4542,37 @@ class IRecordingSettings extends VBox_ManagedObject
         return new IProgress ($this->connection, $response->returnval);
     }
 
+    public function resume()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('IRecordingSettings_resume', array((array)$request));
+        return ;
+    }
+
+    public function getPaused()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('IRecordingSettings_getPaused', array((array)$request));
+        return (bool)$response->returnval;
+    }
+
+    public function setPaused($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->paused = $value;
+        }
+        else
+        {
+            $request->paused = $value->handle;
+        }
+        $this->connection->__soapCall('IRecordingSettings_setPaused', array((array)$request));
+    }
+
     public function getEnabled()
     {
         $request = new stdClass();
@@ -5073,12 +5222,23 @@ class IPlatformX86Collection extends VBox_ManagedObjectCollection
 class IPlatformARM extends VBox_ManagedObject
 {
 
-    public function getMidlDoesNotLikeEmptyInterfaces()
+    public function getCPUProperty($arg_property)
     {
         $request = new stdClass();
         $request->_this = $this->handle;
-        $response = $this->connection->__soapCall('IPlatformARM_getMidlDoesNotLikeEmptyInterfaces', array((array)$request));
+        $request->property = $arg_property;
+        $response = $this->connection->__soapCall('IPlatformARM_getCPUProperty', array((array)$request));
         return (bool)$response->returnval;
+    }
+
+    public function setCPUProperty($arg_property, $arg_value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->property = $arg_property;
+        $request->value = $arg_value;
+        $response = $this->connection->__soapCall('IPlatformARM_setCPUProperty', array((array)$request));
+        return ;
     }
 }
 
@@ -16653,6 +16813,98 @@ class INATEngine extends VBox_ManagedObject
         }
         $this->connection->__soapCall('INATEngine_setForwardBroadcast', array((array)$request));
     }
+
+    public function getEnableTFTP()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATEngine_getEnableTFTP', array((array)$request));
+        return (bool)$response->returnval;
+    }
+
+    public function setEnableTFTP($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->enableTFTP = $value;
+        }
+        else
+        {
+            $request->enableTFTP = $value->handle;
+        }
+        $this->connection->__soapCall('INATEngine_setEnableTFTP', array((array)$request));
+    }
+
+    public function getNatMRU()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATEngine_getNatMRU', array((array)$request));
+        return (float)$response->returnval;
+    }
+
+    public function setNatMRU($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->natMRU = $value;
+        }
+        else
+        {
+            $request->natMRU = $value->handle;
+        }
+        $this->connection->__soapCall('INATEngine_setNatMRU', array((array)$request));
+    }
+
+    public function getIPv6Enabled()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATEngine_getIPv6Enabled', array((array)$request));
+        return (bool)$response->returnval;
+    }
+
+    public function setIPv6Enabled($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->IPv6Enabled = $value;
+        }
+        else
+        {
+            $request->IPv6Enabled = $value->handle;
+        }
+        $this->connection->__soapCall('INATEngine_setIPv6Enabled', array((array)$request));
+    }
+
+    public function getIPv6Prefix()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATEngine_getIPv6Prefix', array((array)$request));
+        return (string)$response->returnval;
+    }
+
+    public function setIPv6Prefix($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->IPv6Prefix = $value;
+        }
+        else
+        {
+            $request->IPv6Prefix = $value->handle;
+        }
+        $this->connection->__soapCall('INATEngine_setIPv6Prefix', array((array)$request));
+    }
 }
 
 /**
@@ -18784,12 +19036,12 @@ class IVRDEServerInfoChangedEventCollection extends VBox_ManagedObjectCollection
 class IRecordingStateChangedEvent extends IEvent
 {
 
-    public function getEnabled()
+    public function getState()
     {
         $request = new stdClass();
         $request->_this = $this->handle;
-        $response = $this->connection->__soapCall('IRecordingStateChangedEvent_getEnabled', array((array)$request));
-        return (bool)$response->returnval;
+        $response = $this->connection->__soapCall('IRecordingStateChangedEvent_getState', array((array)$request));
+        return new RecordingState ($this->connection, $response->returnval);
     }
 
     public function getError()
@@ -21981,7 +22233,6 @@ class IGuestOSType extends VBox_Struct
     protected $recommendedRAM;
     protected $recommendedGraphicsController;
     protected $recommendedVRAM;
-    protected $recommended2DVideoAcceleration;
     protected $recommended3DAcceleration;
     protected $recommendedHDD;
     protected $adapterType;
@@ -22025,7 +22276,6 @@ class IGuestOSType extends VBox_Struct
         $this->recommendedRAM = $values->recommendedRAM;
         $this->recommendedGraphicsController = $values->recommendedGraphicsController;
         $this->recommendedVRAM = $values->recommendedVRAM;
-        $this->recommended2DVideoAcceleration = $values->recommended2DVideoAcceleration;
         $this->recommended3DAcceleration = $values->recommended3DAcceleration;
         $this->recommendedHDD = $values->recommendedHDD;
         $this->adapterType = $values->adapterType;
@@ -22102,10 +22352,6 @@ class IGuestOSType extends VBox_Struct
     public function getRecommendedVRAM()
     {
         return (float)$this->recommendedVRAM;
-    }
-    public function getRecommended2DVideoAcceleration()
-    {
-        return (bool)$this->recommended2DVideoAcceleration;
     }
     public function getRecommended3DAcceleration()
     {
@@ -22380,8 +22626,8 @@ class IMediumAttachmentCollection extends VBox_StructCollection
  */
 class SettingsVersion extends VBox_Enum
 {
-    public $NameMap = array(0 => 'Null', 1 => 'v1_0', 2 => 'v1_1', 3 => 'v1_2', 4 => 'v1_3pre', 5 => 'v1_3', 6 => 'v1_4', 7 => 'v1_5', 8 => 'v1_6', 9 => 'v1_7', 10 => 'v1_8', 11 => 'v1_9', 12 => 'v1_10', 13 => 'v1_11', 14 => 'v1_12', 15 => 'v1_13', 16 => 'v1_14', 17 => 'v1_15', 18 => 'v1_16', 19 => 'v1_17', 20 => 'v1_18', 21 => 'v1_19', 22 => 'v1_20', 99999 => 'Future');
-    public $ValueMap = array('Null' => 0, 'v1_0' => 1, 'v1_1' => 2, 'v1_2' => 3, 'v1_3pre' => 4, 'v1_3' => 5, 'v1_4' => 6, 'v1_5' => 7, 'v1_6' => 8, 'v1_7' => 9, 'v1_8' => 10, 'v1_9' => 11, 'v1_10' => 12, 'v1_11' => 13, 'v1_12' => 14, 'v1_13' => 15, 'v1_14' => 16, 'v1_15' => 17, 'v1_16' => 18, 'v1_17' => 19, 'v1_18' => 20, 'v1_19' => 21, 'v1_20' => 22, 'Future' => 99999);
+    public $NameMap = array(0 => 'Null', 1 => 'v1_0', 2 => 'v1_1', 3 => 'v1_2', 4 => 'v1_3pre', 5 => 'v1_3', 6 => 'v1_4', 7 => 'v1_5', 8 => 'v1_6', 9 => 'v1_7', 10 => 'v1_8', 11 => 'v1_9', 12 => 'v1_10', 13 => 'v1_11', 14 => 'v1_12', 15 => 'v1_13', 16 => 'v1_14', 17 => 'v1_15', 18 => 'v1_16', 19 => 'v1_17', 20 => 'v1_18', 21 => 'v1_19', 22 => 'v1_20', 23 => 'v1_21', 99999 => 'Future');
+    public $ValueMap = array('Null' => 0, 'v1_0' => 1, 'v1_1' => 2, 'v1_2' => 3, 'v1_3pre' => 4, 'v1_3' => 5, 'v1_4' => 6, 'v1_5' => 7, 'v1_6' => 8, 'v1_7' => 9, 'v1_8' => 10, 'v1_9' => 11, 'v1_10' => 12, 'v1_11' => 13, 'v1_12' => 14, 'v1_13' => 15, 'v1_14' => 16, 'v1_15' => 17, 'v1_16' => 18, 'v1_17' => 19, 'v1_18' => 20, 'v1_19' => 21, 'v1_20' => 22, 'v1_21' => 23, 'Future' => 99999);
 }
 
 /**
@@ -22492,6 +22738,23 @@ class CPUPropertyTypeX86 extends VBox_Enum
 class CPUPropertyTypeX86Collection extends VBox_EnumCollection
 {
     protected $_interfaceName = "CPUPropertyTypeX86";
+}
+
+/**
+ * Generated VBoxWebService ENUM
+ */
+class CPUPropertyTypeARM extends VBox_Enum
+{
+    public $NameMap = array(0 => 'Null', 1 => 'HWVirt', 2 => 'GICITS');
+    public $ValueMap = array('Null' => 0, 'HWVirt' => 1, 'GICITS' => 2);
+}
+
+/**
+ * Generated VBoxWebService Enum Collection
+ */
+class CPUPropertyTypeARMCollection extends VBox_EnumCollection
+{
+    protected $_interfaceName = "CPUPropertyTypeARM";
 }
 
 /**
@@ -22803,6 +23066,23 @@ class PartitionTypeCollection extends VBox_EnumCollection
 /**
  * Generated VBoxWebService ENUM
  */
+class TrackedObjectState extends VBox_Enum
+{
+    public $NameMap = array(0 => 'None', 1 => 'Alive', 2 => 'Deleted', 3 => 'Invalid');
+    public $ValueMap = array('None' => 0, 'Alive' => 1, 'Deleted' => 2, 'Invalid' => 3);
+}
+
+/**
+ * Generated VBoxWebService Enum Collection
+ */
+class TrackedObjectStateCollection extends VBox_EnumCollection
+{
+    protected $_interfaceName = "TrackedObjectState";
+}
+
+/**
+ * Generated VBoxWebService ENUM
+ */
 class DHCPOption extends VBox_Enum
 {
     public $NameMap = array(1 => 'SubnetMask', 2 => 'TimeOffset', 3 => 'Routers', 4 => 'TimeServers', 5 => 'NameServers', 6 => 'DomainNameServers', 7 => 'LogServers', 8 => 'CookieServers', 9 => 'LPRServers', 10 => 'ImpressServers', 11 => 'ResourseLocationServers', 12 => 'HostName', 13 => 'BootFileSize', 14 => 'MeritDumpFile', 15 => 'DomainName', 16 => 'SwapServer', 17 => 'RootPath', 18 => 'ExtensionPath', 19 => 'IPForwarding', 20 => 'OptNonLocalSourceRouting', 21 => 'PolicyFilter', 22 => 'MaxDgramReassemblySize', 23 => 'DefaultIPTTL', 24 => 'PathMTUAgingTimeout', 25 => 'PathMTUPlateauTable', 26 => 'InterfaceMTU', 27 => 'AllSubnetsAreLocal', 28 => 'BroadcastAddress', 29 => 'PerformMaskDiscovery', 30 => 'MaskSupplier', 31 => 'PerformRouterDiscovery', 32 => 'RouterSolicitationAddress', 33 => 'StaticRoute', 34 => 'TrailerEncapsulation', 35 => 'ARPCacheTimeout', 36 => 'EthernetEncapsulation', 37 => 'TCPDefaultTTL', 38 => 'TCPKeepaliveInterval', 39 => 'TCPKeepaliveGarbage', 40 => 'NISDomain', 41 => 'NISServers', 42 => 'NTPServers', 43 => 'VendorSpecificInfo', 44 => 'NetBIOSNameServers', 45 => 'NetBIOSDatagramServers', 46 => 'NetBIOSNodeType', 47 => 'NetBIOSScope', 48 => 'XWindowsFontServers', 49 => 'XWindowsDisplayManager', 62 => 'NetWareIPDomainName', 63 => 'NetWareIPInformation', 64 => 'NISPlusDomain', 65 => 'NISPlusServers', 66 => 'TFTPServerName', 67 => 'BootfileName', 68 => 'MobileIPHomeAgents', 69 => 'SMTPServers', 70 => 'POP3Servers', 71 => 'NNTPServers', 72 => 'WWWServers', 73 => 'FingerServers', 74 => 'IRCServers', 75 => 'StreetTalkServers', 76 => 'STDAServers', 78 => 'SLPDirectoryAgent', 79 => 'SLPServiceScope', 119 => 'DomainSearch');
@@ -23109,6 +23389,23 @@ class RecordingRateControlModeCollection extends VBox_EnumCollection
 /**
  * Generated VBoxWebService ENUM
  */
+class RecordingState extends VBox_Enum
+{
+    public $NameMap = array(0 => 'Unknown', 1 => 'Initializing', 2 => 'Started', 3 => 'Paused', 4 => 'Resumed', 5 => 'Finalizing', 6 => 'Stopped', 7 => 'Canceled', 8 => 'LimitReached', 9 => 'Error');
+    public $ValueMap = array('Unknown' => 0, 'Initializing' => 1, 'Started' => 2, 'Paused' => 3, 'Resumed' => 4, 'Finalizing' => 5, 'Stopped' => 6, 'Canceled' => 7, 'LimitReached' => 8, 'Error' => 9);
+}
+
+/**
+ * Generated VBoxWebService Enum Collection
+ */
+class RecordingStateCollection extends VBox_EnumCollection
+{
+    protected $_interfaceName = "RecordingState";
+}
+
+/**
+ * Generated VBoxWebService ENUM
+ */
 class SignatureType extends VBox_Enum
 {
     public $NameMap = array(0 => 'X509', 1 => 'Sha256');
@@ -23162,8 +23459,8 @@ class GraphicsControllerTypeCollection extends VBox_EnumCollection
  */
 class GraphicsFeature extends VBox_Enum
 {
-    public $NameMap = array(0 => 'None', 1 => 'Acceleration2DVideo', 2 => 'Acceleration3D');
-    public $ValueMap = array('None' => 0, 'Acceleration2DVideo' => 1, 'Acceleration3D' => 2);
+    public $NameMap = array(0 => 'None', 2 => 'Acceleration3D');
+    public $ValueMap = array('None' => 0, 'Acceleration3D' => 2);
 }
 
 /**
@@ -23332,8 +23629,8 @@ class HostNetworkInterfaceStatusCollection extends VBox_EnumCollection
  */
 class HostNetworkInterfaceType extends VBox_Enum
 {
-    public $NameMap = array(1 => 'Bridged', 2 => 'HostOnly');
-    public $ValueMap = array('Bridged' => 1, 'HostOnly' => 2);
+    public $NameMap = array(0 => 'Invalid', 1 => 'Bridged', 2 => 'HostOnly');
+    public $ValueMap = array('Invalid' => 0, 'Bridged' => 1, 'HostOnly' => 2);
 }
 
 /**
@@ -24284,8 +24581,8 @@ class NetworkAttachmentTypeCollection extends VBox_EnumCollection
  */
 class NetworkAdapterType extends VBox_Enum
 {
-    public $NameMap = array(0 => 'Null', 1 => 'Am79C970A', 2 => 'Am79C973', 3 => 'I82540EM', 4 => 'I82543GC', 5 => 'I82545EM', 6 => 'Virtio', 7 => 'Am79C960', 8 => 'NE2000', 9 => 'NE1000', 10 => 'WD8013', 11 => 'WD8003', 12 => 'ELNK2', 13 => 'ELNK1');
-    public $ValueMap = array('Null' => 0, 'Am79C970A' => 1, 'Am79C973' => 2, 'I82540EM' => 3, 'I82543GC' => 4, 'I82545EM' => 5, 'Virtio' => 6, 'Am79C960' => 7, 'NE2000' => 8, 'NE1000' => 9, 'WD8013' => 10, 'WD8003' => 11, 'ELNK2' => 12, 'ELNK1' => 13);
+    public $NameMap = array(0 => 'Null', 1 => 'Am79C970A', 2 => 'Am79C973', 3 => 'I82540EM', 4 => 'I82543GC', 5 => 'I82545EM', 6 => 'Virtio', 7 => 'Am79C960', 8 => 'NE2000', 9 => 'NE1000', 10 => 'WD8013', 11 => 'WD8003', 12 => 'ELNK2', 13 => 'ELNK1', 14 => 'UsbNet');
+    public $ValueMap = array('Null' => 0, 'Am79C970A' => 1, 'Am79C973' => 2, 'I82540EM' => 3, 'I82543GC' => 4, 'I82545EM' => 5, 'Virtio' => 6, 'Am79C960' => 7, 'NE2000' => 8, 'NE1000' => 9, 'WD8013' => 10, 'WD8003' => 11, 'ELNK2' => 12, 'ELNK1' => 13, 'UsbNet' => 14);
 }
 
 /**

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.1-sdk/src/libs/xpcom18a4/xpcom/ds/nsIObserver.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIObserver.idl
  */
 
 #ifndef __gen_nsIObserver_h__

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.1-sdk/src/libs/xpcom18a4/xpcom/io/nsIBinaryInputStream.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIBinaryInputStream.idl
  */
 
 #ifndef __gen_nsIBinaryInputStream_h__

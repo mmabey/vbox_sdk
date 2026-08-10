@@ -108,10 +108,22 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae377fcf4299092097f1294b5e2a68b66"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_engine.html#ae377fcf4299092097f1294b5e2a68b66">forwardBroadcast</a></td></tr>
 <tr class="memdesc:ae377fcf4299092097f1294b5e2a68b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forwards broadcast packets sent by the guest to the host machine as such.  <br /></td></tr>
 <tr class="separator:ae377fcf4299092097f1294b5e2a68b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e809e946ee92e4b2069a465f91e02bc"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_engine.html#a6e809e946ee92e4b2069a465f91e02bc">enableTFTP</a></td></tr>
+<tr class="memdesc:a6e809e946ee92e4b2069a465f91e02bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables TFTP functionality, and related configuration options.  <br /></td></tr>
+<tr class="separator:a6e809e946ee92e4b2069a465f91e02bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b409b3ca2f62b45e5b6eb79fbee8fc6"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_engine.html#a3b409b3ca2f62b45e5b6eb79fbee8fc6">natMRU</a></td></tr>
+<tr class="memdesc:a3b409b3ca2f62b45e5b6eb79fbee8fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">MRU (maximum receive unit) of the NAT engine in bytes.  <br /></td></tr>
+<tr class="separator:a3b409b3ca2f62b45e5b6eb79fbee8fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86f935d097edf09e4fd18d8ccd64be4c"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_engine.html#a86f935d097edf09e4fd18d8ccd64be4c">IPv6Enabled</a></td></tr>
+<tr class="memdesc:a86f935d097edf09e4fd18d8ccd64be4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute define whether gateway will support IPv6 or not.  <br /></td></tr>
+<tr class="separator:a86f935d097edf09e4fd18d8ccd64be4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d73d800c0531a2f747d9026e4ca53c5"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_engine.html#a7d73d800c0531a2f747d9026e4ca53c5">IPv6Prefix</a></td></tr>
+<tr class="memdesc:a7d73d800c0531a2f747d9026e4ca53c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This a CIDR IPv6 defining prefix for link-local addresses autoconfiguration within network.  <br /></td></tr>
+<tr class="separator:a7d73d800c0531a2f747d9026e4ca53c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for managing a NAT engine which is used with a virtual machine. </p>
-<p>This allows for changing NAT behavior such as port-forwarding rules. This interface is used in the <a class="el" href="interface_i_network_adapter.html#a71d8adf0108cdcf4928e62ce02a6dd69">INetworkAdapter::NATEngine</a><b></b> attribute. </p><dl class="section user"><dt>Interface ID:</dt><dd><code>{A06253A7-DCD2-44E3-8689-9C9C4B6B6234}</code> </dd></dl>
+<p>This allows for changing NAT behavior such as port-forwarding rules. This interface is used in the <a class="el" href="interface_i_network_adapter.html#a71d8adf0108cdcf4928e62ce02a6dd69">INetworkAdapter::NATEngine</a><b></b> attribute. </p><dl class="section user"><dt>Interface ID:</dt><dd><code>{55F6CEDB-141D-41BB-9995-EE2FC7F9101A}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afdf3bfaa7d7fcaabca37434b084beaba" name="afdf3bfaa7d7fcaabca37434b084beaba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afdf3bfaa7d7fcaabca37434b084beaba">&#9670;&#160;</a></span>setNetworkSettings()</h2>
@@ -358,6 +370,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>TFTP prefix attribute which is used with the built-in DHCP server to fill the corresponding fields of DHCP leases. </p>
+<dl class="section note"><dt>Note</dt><dd>Ignored if TFTP is disabled. </dd></dl>
 
 </div>
 </div>
@@ -374,6 +387,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>TFTP boot file attribute which is used with the built-in DHCP server to fill the corresponding fields of DHCP leases. </p>
+<dl class="section note"><dt>Note</dt><dd>Ignored if TFTP is disabled. </dd></dl>
 
 </div>
 </div>
@@ -390,7 +404,9 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>TFTP server attribute which is used with the built-in DHCP server to fill the corresponding fields of DHCP leases. </p>
-<dl class="section note"><dt>Note</dt><dd>The preferred form is IPv4 addresses. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The preferred form is IPv4 addresses.</dd>
+<dd>
+Ignored if TFTP is disabled. </dd></dl>
 
 </div>
 </div>
@@ -503,6 +519,71 @@ Public Attributes</h2></td></tr>
 
 <p>Forwards broadcast packets sent by the guest to the host machine as such. </p>
 <p>IP address will show to host as 255.255.255.255. </p>
+
+</div>
+</div>
+<a id="a6e809e946ee92e4b2069a465f91e02bc" name="a6e809e946ee92e4b2069a465f91e02bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e809e946ee92e4b2069a465f91e02bc">&#9670;&#160;</a></span>enableTFTP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute boolean INATEngine::enableTFTP</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables TFTP functionality, and related configuration options. </p>
+
+</div>
+</div>
+<a id="a3b409b3ca2f62b45e5b6eb79fbee8fc6" name="a3b409b3ca2f62b45e5b6eb79fbee8fc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b409b3ca2f62b45e5b6eb79fbee8fc6">&#9670;&#160;</a></span>natMRU</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute unsigned long INATEngine::natMRU</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MRU (maximum receive unit) of the NAT engine in bytes. </p>
+
+</div>
+</div>
+<a id="a86f935d097edf09e4fd18d8ccd64be4c" name="a86f935d097edf09e4fd18d8ccd64be4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86f935d097edf09e4fd18d8ccd64be4c">&#9670;&#160;</a></span>IPv6Enabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute boolean INATEngine::IPv6Enabled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This attribute define whether gateway will support IPv6 or not. </p>
+
+</div>
+</div>
+<a id="a7d73d800c0531a2f747d9026e4ca53c5" name="a7d73d800c0531a2f747d9026e4ca53c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d73d800c0531a2f747d9026e4ca53c5">&#9670;&#160;</a></span>IPv6Prefix</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute wstring INATEngine::IPv6Prefix</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This a CIDR IPv6 defining prefix for link-local addresses autoconfiguration within network. </p>
+<p>Note: ignored if attribute IPv6Enabled is false. </p>
 
 </div>
 </div>

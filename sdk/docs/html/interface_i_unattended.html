@@ -103,6 +103,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a5a13e39c8c8aebf6a097991556363d98"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a5a13e39c8c8aebf6a097991556363d98">installGuestAdditions</a></td></tr>
 <tr class="memdesc:a5a13e39c8c8aebf6a097991556363d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the Guest Additions should be installed or not.  <br /></td></tr>
 <tr class="separator:a5a13e39c8c8aebf6a097991556363d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d40716ffb253c5461f9964d6e5cb77"><td class="memItemLeft" align="right" valign="top">readonly attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#ab0d40716ffb253c5461f9964d6e5cb77">productKeyRequired</a></td></tr>
+<tr class="memdesc:ab0d40716ffb253c5461f9964d6e5cb77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the product key is required for the installation.  <br /></td></tr>
+<tr class="separator:ab0d40716ffb253c5461f9964d6e5cb77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1643332860f6f34dfa57730e2c5761f5"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a1643332860f6f34dfa57730e2c5761f5">validationKitIsoPath</a></td></tr>
 <tr class="memdesc:a1643332860f6f34dfa57730e2c5761f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">VirtualBox ValidationKit ISO image path.  <br /></td></tr>
 <tr class="separator:a1643332860f6f34dfa57730e2c5761f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,7 +215,7 @@ Call <a class="el" href="interface_i_unattended.html#a1bf66a02cc16214eabc8d7bdad
 Optionally call <a class="el" href="interface_i_unattended.html#a4517dbb414213770edc56be6e88009cc">IUnattended::done</a><b></b> to destroy the internal installer and allow restarting from the second step.</li>
 </ol>
 <p>Note! Step two is currently not implemented.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{A71E5822-365B-49BA-BD14-C8D616E6740D}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{39D1F56C-C1C2-40DF-84E9-468062D84768}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae96f5ffba57e6e0761f78892b1bc6d77" name="ae96f5ffba57e6e0761f78892b1bc6d77"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae96f5ffba57e6e0761f78892b1bc6d77">&#9670;&#160;</a></span>detectIsoOS()</h2>
@@ -462,6 +465,22 @@ Optionally call <a class="el" href="interface_i_unattended.html#a4517dbb41421377
 
 <p>Indicates whether the Guest Additions should be installed or not. </p>
 <p>Setting this to false does not affect additions shipped with the linux distribution, only the installation of additions pointed to by <a class="el" href="interface_i_unattended.html#a8e1dd86b8b85d8d0a852a2ce484974b1">IUnattended::additionsIsoPath</a><b></b>. </p>
+
+</div>
+</div>
+<a id="ab0d40716ffb253c5461f9964d6e5cb77" name="ab0d40716ffb253c5461f9964d6e5cb77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d40716ffb253c5461f9964d6e5cb77">&#9670;&#160;</a></span>productKeyRequired</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute boolean IUnattended::productKeyRequired</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Indicates whether the product key is required for the installation. </p>
 
 </div>
 </div>

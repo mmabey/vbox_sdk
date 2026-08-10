@@ -297,7 +297,7 @@ interface IVBoxSVCRegistration;
 interface IVirtualBoxSDS;
 
 [
-    uuid(6ad3da60-5ed2-49cd-b882-96a72308ebf6),
+    uuid(85d84a63-bda8-424e-95fe-3650b6cf5a95),
     v1_enum
 ]
 typedef enum 
@@ -325,6 +325,7 @@ typedef enum
     SettingsVersion_v1_18 = 20,
     SettingsVersion_v1_19 = 21,
     SettingsVersion_v1_20 = 22,
+    SettingsVersion_v1_21 = 23,
     SettingsVersion_Future = 99999
 } SettingsVersion;
 
@@ -466,6 +467,22 @@ typedef enum
 
 /* cross-platform type name for CPUPropertyTypeX86 */
 cpp_quote("#define CPUPropertyTypeX86_T CPUPropertyTypeX86")
+
+
+
+[
+    uuid(f84eb90a-3e01-47cf-88c1-f8fc559dd37a),
+    v1_enum
+]
+typedef enum 
+{
+    CPUPropertyTypeARM_Null = 0,
+    CPUPropertyTypeARM_HWVirt = 1,
+    CPUPropertyTypeARM_GICITS = 2
+} CPUPropertyTypeARM;
+
+/* cross-platform type name for CPUPropertyTypeARM */
+cpp_quote("#define CPUPropertyTypeARM_T CPUPropertyTypeARM")
 
 
 
@@ -941,6 +958,23 @@ cpp_quote("#define PartitionType_T PartitionType")
 
 
 [
+    uuid(a5ee031d-aba8-4a7f-887a-9a1f12e7cc6c),
+    v1_enum
+]
+typedef enum 
+{
+    TrackedObjectState_None = 0,
+    TrackedObjectState_Alive = 1,
+    TrackedObjectState_Deleted = 2,
+    TrackedObjectState_Invalid = 3
+} TrackedObjectState;
+
+/* cross-platform type name for TrackedObjectState */
+cpp_quote("#define TrackedObjectState_T TrackedObjectState")
+
+
+
+[
     uuid(00f5b10f-0021-4513-00f7-5bf4000982bf),
     v1_enum
 ]
@@ -1369,6 +1403,29 @@ cpp_quote("#define RecordingRateControlMode_T RecordingRateControlMode")
 
 
 [
+    uuid(c8a770a9-0412-467b-8dae-0e861279d0be),
+    v1_enum
+]
+typedef enum 
+{
+    RecordingState_Unknown = 0,
+    RecordingState_Initializing = 1,
+    RecordingState_Started = 2,
+    RecordingState_Paused = 3,
+    RecordingState_Resumed = 4,
+    RecordingState_Finalizing = 5,
+    RecordingState_Stopped = 6,
+    RecordingState_Canceled = 7,
+    RecordingState_LimitReached = 8,
+    RecordingState_Error = 9
+} RecordingState;
+
+/* cross-platform type name for RecordingState */
+cpp_quote("#define RecordingState_T RecordingState")
+
+
+
+[
     uuid(6f6e67ef-9a32-4084-af84-5702679f882a),
     v1_enum
 ]
@@ -1423,13 +1480,12 @@ cpp_quote("#define GraphicsControllerType_T GraphicsControllerType")
 
 
 [
-    uuid(5cd900a5-ec77-4a08-8f8d-c0a36f462a7c),
+    uuid(1BC430F8-D061-45FB-8830-155058FF3F66),
     v1_enum
 ]
 typedef enum 
 {
     GraphicsFeature_None = 0,
-    GraphicsFeature_Acceleration2DVideo = 1,
     GraphicsFeature_Acceleration3D = 2
 } GraphicsFeature;
 
@@ -1601,6 +1657,7 @@ cpp_quote("#define HostNetworkInterfaceStatus_T HostNetworkInterfaceStatus")
 ]
 typedef enum 
 {
+    HostNetworkInterfaceType_Invalid = 0,
     HostNetworkInterfaceType_Bridged = 1,
     HostNetworkInterfaceType_HostOnly = 2
 } HostNetworkInterfaceType;
@@ -2648,7 +2705,8 @@ typedef enum
     NetworkAdapterType_WD8013 = 10,
     NetworkAdapterType_WD8003 = 11,
     NetworkAdapterType_ELNK2 = 12,
-    NetworkAdapterType_ELNK1 = 13
+    NetworkAdapterType_ELNK1 = 13,
+    NetworkAdapterType_UsbNet = 14
 } NetworkAdapterType;
 
 /* cross-platform type name for NetworkAdapterType */
@@ -3359,7 +3417,7 @@ cpp_quote("#define COM_FORWARD_IVirtualBoxErrorInfo_TO_OBJ(obj) COM_FORWARD_IVir
 cpp_quote("#define COM_FORWARD_IVirtualBoxErrorInfo_TO_BASE(base) COM_FORWARD_IVirtualBoxErrorInfo_TO (base::)")
 
 [
-    uuid(4fdebbf0-be30-49c0-b315-e9749e1bded1),
+    uuid(90b89e78-1a61-4e66-af61-b9d2532e5632),
     object,
     dual,
     oleautomation
@@ -3395,6 +3453,18 @@ interface INATNetwork : IDispatch
     [propget] HRESULT PortForwardRules4 ([out, retval] SAFEARRAY(BSTR) * aPortForwardRules4);
 
     [propget] HRESULT LocalMappings ([out, retval] SAFEARRAY(BSTR) * aLocalMappings);
+
+    [propget] HRESULT LocalhostReachable ([out, retval] BOOL * aLocalhostReachable);
+    [propput] HRESULT LocalhostReachable ([in] BOOL aLocalhostReachable);
+
+    [propget] HRESULT ForwardBroadcast ([out, retval] BOOL * aForwardBroadcast);
+    [propput] HRESULT ForwardBroadcast ([in] BOOL aForwardBroadcast);
+
+    [propget] HRESULT NatMTU ([out, retval] ULONG * aNatMTU);
+    [propput] HRESULT NatMTU ([in] ULONG aNatMTU);
+
+    [propget] HRESULT NatMRU ([out, retval] ULONG * aNatMRU);
+    [propput] HRESULT NatMRU ([in] ULONG aNatMRU);
 
     [propget] HRESULT LoopbackIp6 ([out, retval] LONG * aLoopbackIp6);
     [propput] HRESULT LoopbackIp6 ([in] LONG aLoopbackIp6);
@@ -3444,6 +3514,10 @@ interface INATNetwork : IDispatch
     HRESULT InternalAndReservedMethod1INATNetwork();
 
     HRESULT InternalAndReservedMethod2INATNetwork();
+
+    HRESULT InternalAndReservedMethod3INATNetwork();
+
+    HRESULT InternalAndReservedMethod4INATNetwork();
 
 }; /* interface INATNetwork */
 
@@ -3502,6 +3576,30 @@ cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_PortForwardRules4_TO_BASE(base
 cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO(smth) HRESULT STDMETHODCALLTYPE get_LocalMappings (SAFEARRAY * * aLocalMappings) { return smth get_LocalMappings (aLocalMappings); }")
 cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO(smth) HRESULT STDMETHODCALLTYPE get_LocalhostReachable (BOOL * aLocalhostReachable) { return smth get_LocalhostReachable (aLocalhostReachable); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO(smth) HRESULT STDMETHODCALLTYPE put_LocalhostReachable (BOOL aLocalhostReachable) { return smth put_LocalhostReachable (aLocalhostReachable); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO(smth) HRESULT STDMETHODCALLTYPE get_ForwardBroadcast (BOOL * aForwardBroadcast) { return smth get_ForwardBroadcast (aForwardBroadcast); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO(smth) HRESULT STDMETHODCALLTYPE put_ForwardBroadcast (BOOL aForwardBroadcast) { return smth put_ForwardBroadcast (aForwardBroadcast); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_NatMTU_TO(smth) HRESULT STDMETHODCALLTYPE get_NatMTU (ULONG * aNatMTU) { return smth get_NatMTU (aNatMTU); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_NatMTU_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_NatMTU_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_NatMTU_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_NatMTU_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_NatMTU_TO(smth) HRESULT STDMETHODCALLTYPE put_NatMTU (ULONG aNatMTU) { return smth put_NatMTU (aNatMTU); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_NatMTU_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_NatMTU_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_NatMTU_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_NatMTU_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_NatMRU_TO(smth) HRESULT STDMETHODCALLTYPE get_NatMRU (ULONG * aNatMRU) { return smth get_NatMRU (aNatMRU); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_NatMRU_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_NatMRU_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_NatMRU_TO(smth) HRESULT STDMETHODCALLTYPE put_NatMRU (ULONG aNatMRU) { return smth put_NatMRU (aNatMRU); }")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_NatMRU_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATNetwork_SETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_NatMRU_TO (base::)")
 cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO(smth) HRESULT STDMETHODCALLTYPE get_LoopbackIp6 (LONG * aLoopbackIp6) { return smth get_LoopbackIp6 (aLoopbackIp6); }")
 cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO (base::)")
@@ -3526,7 +3624,7 @@ cpp_quote("#define COM_FORWARD_INATNetwork_Start_TO_BASE(base) COM_FORWARD_INATN
 cpp_quote("#define COM_FORWARD_INATNetwork_Stop_TO(smth) HRESULT STDMETHODCALLTYPE Stop() { return smth Stop(); }")
 cpp_quote("#define COM_FORWARD_INATNetwork_Stop_TO_OBJ(obj) COM_FORWARD_INATNetwork_Stop_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATNetwork_Stop_TO_BASE(base) COM_FORWARD_INATNetwork_Stop_TO (base::)")
-cpp_quote("#define COM_FORWARD_INATNetwork_TO(smth) COM_FORWARD_INATNetwork_GETTER_NetworkName_TO (smth) COM_FORWARD_INATNetwork_SETTER_NetworkName_TO (smth) COM_FORWARD_INATNetwork_GETTER_Enabled_TO (smth) COM_FORWARD_INATNetwork_SETTER_Enabled_TO (smth) COM_FORWARD_INATNetwork_GETTER_Network_TO (smth) COM_FORWARD_INATNetwork_SETTER_Network_TO (smth) COM_FORWARD_INATNetwork_GETTER_Gateway_TO (smth) COM_FORWARD_INATNetwork_GETTER_IPv6Enabled_TO (smth) COM_FORWARD_INATNetwork_SETTER_IPv6Enabled_TO (smth) COM_FORWARD_INATNetwork_GETTER_IPv6Prefix_TO (smth) COM_FORWARD_INATNetwork_SETTER_IPv6Prefix_TO (smth) COM_FORWARD_INATNetwork_GETTER_AdvertiseDefaultIPv6RouteEnabled_TO (smth) COM_FORWARD_INATNetwork_SETTER_AdvertiseDefaultIPv6RouteEnabled_TO (smth) COM_FORWARD_INATNetwork_GETTER_NeedDhcpServer_TO (smth) COM_FORWARD_INATNetwork_SETTER_NeedDhcpServer_TO (smth) COM_FORWARD_INATNetwork_GETTER_EventSource_TO (smth) COM_FORWARD_INATNetwork_GETTER_PortForwardRules4_TO (smth) COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO (smth) COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO (smth) COM_FORWARD_INATNetwork_SETTER_LoopbackIp6_TO (smth) COM_FORWARD_INATNetwork_GETTER_PortForwardRules6_TO (smth) COM_FORWARD_INATNetwork_AddLocalMapping_TO (smth) COM_FORWARD_INATNetwork_AddPortForwardRule_TO (smth) COM_FORWARD_INATNetwork_RemovePortForwardRule_TO (smth) COM_FORWARD_INATNetwork_Start_TO (smth) COM_FORWARD_INATNetwork_Stop_TO (smth) ")
+cpp_quote("#define COM_FORWARD_INATNetwork_TO(smth) COM_FORWARD_INATNetwork_GETTER_NetworkName_TO (smth) COM_FORWARD_INATNetwork_SETTER_NetworkName_TO (smth) COM_FORWARD_INATNetwork_GETTER_Enabled_TO (smth) COM_FORWARD_INATNetwork_SETTER_Enabled_TO (smth) COM_FORWARD_INATNetwork_GETTER_Network_TO (smth) COM_FORWARD_INATNetwork_SETTER_Network_TO (smth) COM_FORWARD_INATNetwork_GETTER_Gateway_TO (smth) COM_FORWARD_INATNetwork_GETTER_IPv6Enabled_TO (smth) COM_FORWARD_INATNetwork_SETTER_IPv6Enabled_TO (smth) COM_FORWARD_INATNetwork_GETTER_IPv6Prefix_TO (smth) COM_FORWARD_INATNetwork_SETTER_IPv6Prefix_TO (smth) COM_FORWARD_INATNetwork_GETTER_AdvertiseDefaultIPv6RouteEnabled_TO (smth) COM_FORWARD_INATNetwork_SETTER_AdvertiseDefaultIPv6RouteEnabled_TO (smth) COM_FORWARD_INATNetwork_GETTER_NeedDhcpServer_TO (smth) COM_FORWARD_INATNetwork_SETTER_NeedDhcpServer_TO (smth) COM_FORWARD_INATNetwork_GETTER_EventSource_TO (smth) COM_FORWARD_INATNetwork_GETTER_PortForwardRules4_TO (smth) COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO (smth) COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATNetwork_GETTER_NatMTU_TO (smth) COM_FORWARD_INATNetwork_SETTER_NatMTU_TO (smth) COM_FORWARD_INATNetwork_GETTER_NatMRU_TO (smth) COM_FORWARD_INATNetwork_SETTER_NatMRU_TO (smth) COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO (smth) COM_FORWARD_INATNetwork_SETTER_LoopbackIp6_TO (smth) COM_FORWARD_INATNetwork_GETTER_PortForwardRules6_TO (smth) COM_FORWARD_INATNetwork_AddLocalMapping_TO (smth) COM_FORWARD_INATNetwork_AddPortForwardRule_TO (smth) COM_FORWARD_INATNetwork_RemovePortForwardRule_TO (smth) COM_FORWARD_INATNetwork_Start_TO (smth) COM_FORWARD_INATNetwork_Stop_TO (smth) ")
 cpp_quote("#define COM_FORWARD_INATNetwork_TO_OBJ(obj) COM_FORWARD_INATNetwork_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATNetwork_TO_BASE(base) COM_FORWARD_INATNetwork_TO (base::)")
 
@@ -4249,7 +4347,7 @@ cpp_quote("#define COM_FORWARD_IDHCPIndividualConfig_TO_OBJ(obj) COM_FORWARD_IDH
 cpp_quote("#define COM_FORWARD_IDHCPIndividualConfig_TO_BASE(base) COM_FORWARD_IDHCPIndividualConfig_TO (base::)")
 
 [
-    uuid(d644ad1e-c501-4fc7-9ab6-aa6d763bc540),
+    uuid(2ce10519-3c09-45d8-a12d-e887786146b7),
     object,
     dual,
     oleautomation
@@ -4534,6 +4632,19 @@ interface IVirtualBox : IDispatch
         [out, retval] IProgress * * aProgressObject
     );
 
+    HRESULT GetTrackedObject (
+        [in] BSTR aTrObjId,
+        [out] IUnknown * * aPIface,
+        [out] TrackedObjectState * aState,
+        [out] LONG64 * aCreationTime,
+        [out] LONG64 * aDeletionTime
+    );
+
+    HRESULT GetTrackedObjectIds (
+        [in] BSTR aName,
+        [out, retval] SAFEARRAY(BSTR) * aObjIdsList
+    );
+
     HRESULT InternalAndReservedMethod1IVirtualBox();
 
     HRESULT InternalAndReservedMethod2IVirtualBox();
@@ -4545,10 +4656,6 @@ interface IVirtualBox : IDispatch
     HRESULT InternalAndReservedMethod5IVirtualBox();
 
     HRESULT InternalAndReservedMethod6IVirtualBox();
-
-    HRESULT InternalAndReservedMethod7IVirtualBox();
-
-    HRESULT InternalAndReservedMethod8IVirtualBox();
 
 }; /* interface IVirtualBox */
 
@@ -4748,7 +4855,13 @@ cpp_quote("#define COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO_BASE(base) CO
 cpp_quote("#define COM_FORWARD_IVirtualBox_FindProgressById_TO(smth) HRESULT STDMETHODCALLTYPE FindProgressById (BSTR aId, IProgress * * aProgressObject) { return smth FindProgressById (aId, aProgressObject); }")
 cpp_quote("#define COM_FORWARD_IVirtualBox_FindProgressById_TO_OBJ(obj) COM_FORWARD_IVirtualBox_FindProgressById_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IVirtualBox_FindProgressById_TO_BASE(base) COM_FORWARD_IVirtualBox_FindProgressById_TO (base::)")
-cpp_quote("#define COM_FORWARD_IVirtualBox_TO(smth) COM_FORWARD_IVirtualBox_GETTER_Version_TO (smth) COM_FORWARD_IVirtualBox_GETTER_VersionNormalized_TO (smth) COM_FORWARD_IVirtualBox_GETTER_Revision_TO (smth) COM_FORWARD_IVirtualBox_GETTER_PackageType_TO (smth) COM_FORWARD_IVirtualBox_GETTER_APIVersion_TO (smth) COM_FORWARD_IVirtualBox_GETTER_APIRevision_TO (smth) COM_FORWARD_IVirtualBox_GETTER_HomeFolder_TO (smth) COM_FORWARD_IVirtualBox_GETTER_SettingsFilePath_TO (smth) COM_FORWARD_IVirtualBox_GETTER_Host_TO (smth) COM_FORWARD_IVirtualBox_GETTER_SystemProperties_TO (smth) COM_FORWARD_IVirtualBox_GETTER_Machines_TO (smth) COM_FORWARD_IVirtualBox_GETTER_MachineGroups_TO (smth) COM_FORWARD_IVirtualBox_GETTER_HardDisks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_DVDImages_TO (smth) COM_FORWARD_IVirtualBox_GETTER_FloppyImages_TO (smth) COM_FORWARD_IVirtualBox_GETTER_ProgressOperations_TO (smth) COM_FORWARD_IVirtualBox_GETTER_GuestOSTypes_TO (smth) COM_FORWARD_IVirtualBox_GETTER_GuestOSFamilies_TO (smth) COM_FORWARD_IVirtualBox_GETTER_SharedFolders_TO (smth) COM_FORWARD_IVirtualBox_GETTER_PerformanceCollector_TO (smth) COM_FORWARD_IVirtualBox_GETTER_DHCPServers_TO (smth) COM_FORWARD_IVirtualBox_GETTER_NATNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_EventSource_TO (smth) COM_FORWARD_IVirtualBox_GETTER_ExtensionPackManager_TO (smth) COM_FORWARD_IVirtualBox_GETTER_InternalNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_HostOnlyNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_GenericNetworkDrivers_TO (smth) COM_FORWARD_IVirtualBox_GETTER_CloudNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_CloudProviderManager_TO (smth) COM_FORWARD_IVirtualBox_ComposeMachineFilename_TO (smth) COM_FORWARD_IVirtualBox_GetPlatformProperties_TO (smth) COM_FORWARD_IVirtualBox_CreateMachine_TO (smth) COM_FORWARD_IVirtualBox_OpenMachine_TO (smth) COM_FORWARD_IVirtualBox_RegisterMachine_TO (smth) COM_FORWARD_IVirtualBox_FindMachine_TO (smth) COM_FORWARD_IVirtualBox_GetMachinesByGroups_TO (smth) COM_FORWARD_IVirtualBox_GetMachineStates_TO (smth) COM_FORWARD_IVirtualBox_CreateAppliance_TO (smth) COM_FORWARD_IVirtualBox_CreateUnattendedInstaller_TO (smth) COM_FORWARD_IVirtualBox_CreateMedium_TO (smth) COM_FORWARD_IVirtualBox_OpenMedium_TO (smth) COM_FORWARD_IVirtualBox_GetGuestOSType_TO (smth) COM_FORWARD_IVirtualBox_GetGuestOSSubtypesByFamilyId_TO (smth) COM_FORWARD_IVirtualBox_GetGuestOSDescsBySubtype_TO (smth) COM_FORWARD_IVirtualBox_CreateSharedFolder_TO (smth) COM_FORWARD_IVirtualBox_RemoveSharedFolder_TO (smth) COM_FORWARD_IVirtualBox_GetExtraDataKeys_TO (smth) COM_FORWARD_IVirtualBox_GetExtraData_TO (smth) COM_FORWARD_IVirtualBox_SetExtraData_TO (smth) COM_FORWARD_IVirtualBox_SetSettingsSecret_TO (smth) COM_FORWARD_IVirtualBox_CreateDHCPServer_TO (smth) COM_FORWARD_IVirtualBox_FindDHCPServerByNetworkName_TO (smth) COM_FORWARD_IVirtualBox_RemoveDHCPServer_TO (smth) COM_FORWARD_IVirtualBox_CreateNATNetwork_TO (smth) COM_FORWARD_IVirtualBox_FindNATNetworkByName_TO (smth) COM_FORWARD_IVirtualBox_RemoveNATNetwork_TO (smth) COM_FORWARD_IVirtualBox_CreateHostOnlyNetwork_TO (smth) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkByName_TO (smth) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkById_TO (smth) COM_FORWARD_IVirtualBox_RemoveHostOnlyNetwork_TO (smth) COM_FORWARD_IVirtualBox_CreateCloudNetwork_TO (smth) COM_FORWARD_IVirtualBox_FindCloudNetworkByName_TO (smth) COM_FORWARD_IVirtualBox_RemoveCloudNetwork_TO (smth) COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO (smth) COM_FORWARD_IVirtualBox_FindProgressById_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IVirtualBox_GetTrackedObject_TO(smth) HRESULT STDMETHODCALLTYPE GetTrackedObject (BSTR aTrObjId, IUnknown * * aPIface, TrackedObjectState * aState, LONG64 * aCreationTime, LONG64 * aDeletionTime) { return smth GetTrackedObject (aTrObjId, aPIface, aState, aCreationTime, aDeletionTime); }")
+cpp_quote("#define COM_FORWARD_IVirtualBox_GetTrackedObject_TO_OBJ(obj) COM_FORWARD_IVirtualBox_GetTrackedObject_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IVirtualBox_GetTrackedObject_TO_BASE(base) COM_FORWARD_IVirtualBox_GetTrackedObject_TO (base::)")
+cpp_quote("#define COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO(smth) HRESULT STDMETHODCALLTYPE GetTrackedObjectIds (BSTR aName, SAFEARRAY * * aObjIdsList) { return smth GetTrackedObjectIds (aName, aObjIdsList); }")
+cpp_quote("#define COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO_OBJ(obj) COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO_BASE(base) COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO (base::)")
+cpp_quote("#define COM_FORWARD_IVirtualBox_TO(smth) COM_FORWARD_IVirtualBox_GETTER_Version_TO (smth) COM_FORWARD_IVirtualBox_GETTER_VersionNormalized_TO (smth) COM_FORWARD_IVirtualBox_GETTER_Revision_TO (smth) COM_FORWARD_IVirtualBox_GETTER_PackageType_TO (smth) COM_FORWARD_IVirtualBox_GETTER_APIVersion_TO (smth) COM_FORWARD_IVirtualBox_GETTER_APIRevision_TO (smth) COM_FORWARD_IVirtualBox_GETTER_HomeFolder_TO (smth) COM_FORWARD_IVirtualBox_GETTER_SettingsFilePath_TO (smth) COM_FORWARD_IVirtualBox_GETTER_Host_TO (smth) COM_FORWARD_IVirtualBox_GETTER_SystemProperties_TO (smth) COM_FORWARD_IVirtualBox_GETTER_Machines_TO (smth) COM_FORWARD_IVirtualBox_GETTER_MachineGroups_TO (smth) COM_FORWARD_IVirtualBox_GETTER_HardDisks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_DVDImages_TO (smth) COM_FORWARD_IVirtualBox_GETTER_FloppyImages_TO (smth) COM_FORWARD_IVirtualBox_GETTER_ProgressOperations_TO (smth) COM_FORWARD_IVirtualBox_GETTER_GuestOSTypes_TO (smth) COM_FORWARD_IVirtualBox_GETTER_GuestOSFamilies_TO (smth) COM_FORWARD_IVirtualBox_GETTER_SharedFolders_TO (smth) COM_FORWARD_IVirtualBox_GETTER_PerformanceCollector_TO (smth) COM_FORWARD_IVirtualBox_GETTER_DHCPServers_TO (smth) COM_FORWARD_IVirtualBox_GETTER_NATNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_EventSource_TO (smth) COM_FORWARD_IVirtualBox_GETTER_ExtensionPackManager_TO (smth) COM_FORWARD_IVirtualBox_GETTER_InternalNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_HostOnlyNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_GenericNetworkDrivers_TO (smth) COM_FORWARD_IVirtualBox_GETTER_CloudNetworks_TO (smth) COM_FORWARD_IVirtualBox_GETTER_CloudProviderManager_TO (smth) COM_FORWARD_IVirtualBox_ComposeMachineFilename_TO (smth) COM_FORWARD_IVirtualBox_GetPlatformProperties_TO (smth) COM_FORWARD_IVirtualBox_CreateMachine_TO (smth) COM_FORWARD_IVirtualBox_OpenMachine_TO (smth) COM_FORWARD_IVirtualBox_RegisterMachine_TO (smth) COM_FORWARD_IVirtualBox_FindMachine_TO (smth) COM_FORWARD_IVirtualBox_GetMachinesByGroups_TO (smth) COM_FORWARD_IVirtualBox_GetMachineStates_TO (smth) COM_FORWARD_IVirtualBox_CreateAppliance_TO (smth) COM_FORWARD_IVirtualBox_CreateUnattendedInstaller_TO (smth) COM_FORWARD_IVirtualBox_CreateMedium_TO (smth) COM_FORWARD_IVirtualBox_OpenMedium_TO (smth) COM_FORWARD_IVirtualBox_GetGuestOSType_TO (smth) COM_FORWARD_IVirtualBox_GetGuestOSSubtypesByFamilyId_TO (smth) COM_FORWARD_IVirtualBox_GetGuestOSDescsBySubtype_TO (smth) COM_FORWARD_IVirtualBox_CreateSharedFolder_TO (smth) COM_FORWARD_IVirtualBox_RemoveSharedFolder_TO (smth) COM_FORWARD_IVirtualBox_GetExtraDataKeys_TO (smth) COM_FORWARD_IVirtualBox_GetExtraData_TO (smth) COM_FORWARD_IVirtualBox_SetExtraData_TO (smth) COM_FORWARD_IVirtualBox_SetSettingsSecret_TO (smth) COM_FORWARD_IVirtualBox_CreateDHCPServer_TO (smth) COM_FORWARD_IVirtualBox_FindDHCPServerByNetworkName_TO (smth) COM_FORWARD_IVirtualBox_RemoveDHCPServer_TO (smth) COM_FORWARD_IVirtualBox_CreateNATNetwork_TO (smth) COM_FORWARD_IVirtualBox_FindNATNetworkByName_TO (smth) COM_FORWARD_IVirtualBox_RemoveNATNetwork_TO (smth) COM_FORWARD_IVirtualBox_CreateHostOnlyNetwork_TO (smth) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkByName_TO (smth) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkById_TO (smth) COM_FORWARD_IVirtualBox_RemoveHostOnlyNetwork_TO (smth) COM_FORWARD_IVirtualBox_CreateCloudNetwork_TO (smth) COM_FORWARD_IVirtualBox_FindCloudNetworkByName_TO (smth) COM_FORWARD_IVirtualBox_RemoveCloudNetwork_TO (smth) COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO (smth) COM_FORWARD_IVirtualBox_FindProgressById_TO (smth) COM_FORWARD_IVirtualBox_GetTrackedObject_TO (smth) COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IVirtualBox_TO_OBJ(obj) COM_FORWARD_IVirtualBox_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IVirtualBox_TO_BASE(base) COM_FORWARD_IVirtualBox_TO (base::)")
 
@@ -5233,7 +5346,7 @@ cpp_quote("#define COM_FORWARD_IVirtualSystemDescription_TO_OBJ(obj) COM_FORWARD
 cpp_quote("#define COM_FORWARD_IVirtualSystemDescription_TO_BASE(base) COM_FORWARD_IVirtualSystemDescription_TO (base::)")
 
 [
-    uuid(a71e5822-365b-49ba-bd14-c8d616e6740d),
+    uuid(39d1f56c-c1c2-40df-84e9-468062d84768),
     object,
     dual,
     oleautomation
@@ -5267,6 +5380,8 @@ interface IUnattended : IDispatch
 
     [propget] HRESULT InstallGuestAdditions ([out, retval] BOOL * aInstallGuestAdditions);
     [propput] HRESULT InstallGuestAdditions ([in] BOOL aInstallGuestAdditions);
+
+    [propget] HRESULT ProductKeyRequired ([out, retval] BOOL * aProductKeyRequired);
 
     [propget] HRESULT ValidationKitIsoPath ([out, retval] BSTR * aValidationKitIsoPath);
     [propput] HRESULT ValidationKitIsoPath ([in] BSTR aValidationKitIsoPath);
@@ -5451,6 +5566,9 @@ cpp_quote("#define COM_FORWARD_IUnattended_GETTER_InstallGuestAdditions_TO_BASE(
 cpp_quote("#define COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO(smth) HRESULT STDMETHODCALLTYPE put_InstallGuestAdditions (BOOL aInstallGuestAdditions) { return smth put_InstallGuestAdditions (aInstallGuestAdditions); }")
 cpp_quote("#define COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO_OBJ(obj) COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO_BASE(base) COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO (base::)")
+cpp_quote("#define COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO(smth) HRESULT STDMETHODCALLTYPE get_ProductKeyRequired (BOOL * aProductKeyRequired) { return smth get_ProductKeyRequired (aProductKeyRequired); }")
+cpp_quote("#define COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO (base::)")
 cpp_quote("#define COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO(smth) HRESULT STDMETHODCALLTYPE get_ValidationKitIsoPath (BSTR * aValidationKitIsoPath) { return smth get_ValidationKitIsoPath (aValidationKitIsoPath); }")
 cpp_quote("#define COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO (base::)")
@@ -5610,7 +5728,7 @@ cpp_quote("#define COM_FORWARD_IUnattended_ReconfigureVM_TO_BASE(base) COM_FORWA
 cpp_quote("#define COM_FORWARD_IUnattended_Done_TO(smth) HRESULT STDMETHODCALLTYPE Done() { return smth Done(); }")
 cpp_quote("#define COM_FORWARD_IUnattended_Done_TO_OBJ(obj) COM_FORWARD_IUnattended_Done_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IUnattended_Done_TO_BASE(base) COM_FORWARD_IUnattended_Done_TO (base::)")
-cpp_quote("#define COM_FORWARD_IUnattended_TO(smth) COM_FORWARD_IUnattended_GETTER_IsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_IsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_Machine_TO (smth) COM_FORWARD_IUnattended_SETTER_Machine_TO (smth) COM_FORWARD_IUnattended_GETTER_User_TO (smth) COM_FORWARD_IUnattended_SETTER_User_TO (smth) COM_FORWARD_IUnattended_GETTER_UserPassword_TO (smth) COM_FORWARD_IUnattended_SETTER_UserPassword_TO (smth) COM_FORWARD_IUnattended_GETTER_AdminPassword_TO (smth) COM_FORWARD_IUnattended_SETTER_AdminPassword_TO (smth) COM_FORWARD_IUnattended_GETTER_FullUserName_TO (smth) COM_FORWARD_IUnattended_SETTER_FullUserName_TO (smth) COM_FORWARD_IUnattended_GETTER_ProductKey_TO (smth) COM_FORWARD_IUnattended_SETTER_ProductKey_TO (smth) COM_FORWARD_IUnattended_GETTER_AdditionsIsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_AdditionsIsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_InstallGuestAdditions_TO (smth) COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO (smth) COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_ValidationKitIsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_InstallTestExecService_TO (smth) COM_FORWARD_IUnattended_SETTER_InstallTestExecService_TO (smth) COM_FORWARD_IUnattended_GETTER_UserPayloadIsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_UserPayloadIsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_InstallUserPayload_TO (smth) COM_FORWARD_IUnattended_SETTER_InstallUserPayload_TO (smth) COM_FORWARD_IUnattended_GETTER_TimeZone_TO (smth) COM_FORWARD_IUnattended_SETTER_TimeZone_TO (smth) COM_FORWARD_IUnattended_GETTER_KeyboardLayout_TO (smth) COM_FORWARD_IUnattended_SETTER_KeyboardLayout_TO (smth) COM_FORWARD_IUnattended_GETTER_KeyboardVariant_TO (smth) COM_FORWARD_IUnattended_SETTER_KeyboardVariant_TO (smth) COM_FORWARD_IUnattended_GETTER_Locale_TO (smth) COM_FORWARD_IUnattended_SETTER_Locale_TO (smth) COM_FORWARD_IUnattended_GETTER_Language_TO (smth) COM_FORWARD_IUnattended_SETTER_Language_TO (smth) COM_FORWARD_IUnattended_GETTER_Country_TO (smth) COM_FORWARD_IUnattended_SETTER_Country_TO (smth) COM_FORWARD_IUnattended_GETTER_Proxy_TO (smth) COM_FORWARD_IUnattended_SETTER_Proxy_TO (smth) COM_FORWARD_IUnattended_GETTER_PackageSelectionAdjustments_TO (smth) COM_FORWARD_IUnattended_SETTER_PackageSelectionAdjustments_TO (smth) COM_FORWARD_IUnattended_GETTER_Hostname_TO (smth) COM_FORWARD_IUnattended_SETTER_Hostname_TO (smth) COM_FORWARD_IUnattended_GETTER_AuxiliaryBasePath_TO (smth) COM_FORWARD_IUnattended_SETTER_AuxiliaryBasePath_TO (smth) COM_FORWARD_IUnattended_GETTER_ImageIndex_TO (smth) COM_FORWARD_IUnattended_SETTER_ImageIndex_TO (smth) COM_FORWARD_IUnattended_GETTER_ScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_SETTER_ScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_GETTER_PostInstallScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_SETTER_PostInstallScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_GETTER_PostInstallCommand_TO (smth) COM_FORWARD_IUnattended_SETTER_PostInstallCommand_TO (smth) COM_FORWARD_IUnattended_GETTER_ExtraInstallKernelParameters_TO (smth) COM_FORWARD_IUnattended_SETTER_ExtraInstallKernelParameters_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSTypeId_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSVersion_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSFlavor_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSLanguages_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSHints_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedImageNames_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedImageIndices_TO (smth) COM_FORWARD_IUnattended_GETTER_IsUnattendedInstallSupported_TO (smth) COM_FORWARD_IUnattended_GETTER_AvoidUpdatesOverNetwork_TO (smth) COM_FORWARD_IUnattended_SETTER_AvoidUpdatesOverNetwork_TO (smth) COM_FORWARD_IUnattended_DetectIsoOS_TO (smth) COM_FORWARD_IUnattended_Prepare_TO (smth) COM_FORWARD_IUnattended_ConstructMedia_TO (smth) COM_FORWARD_IUnattended_ReconfigureVM_TO (smth) COM_FORWARD_IUnattended_Done_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IUnattended_TO(smth) COM_FORWARD_IUnattended_GETTER_IsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_IsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_Machine_TO (smth) COM_FORWARD_IUnattended_SETTER_Machine_TO (smth) COM_FORWARD_IUnattended_GETTER_User_TO (smth) COM_FORWARD_IUnattended_SETTER_User_TO (smth) COM_FORWARD_IUnattended_GETTER_UserPassword_TO (smth) COM_FORWARD_IUnattended_SETTER_UserPassword_TO (smth) COM_FORWARD_IUnattended_GETTER_AdminPassword_TO (smth) COM_FORWARD_IUnattended_SETTER_AdminPassword_TO (smth) COM_FORWARD_IUnattended_GETTER_FullUserName_TO (smth) COM_FORWARD_IUnattended_SETTER_FullUserName_TO (smth) COM_FORWARD_IUnattended_GETTER_ProductKey_TO (smth) COM_FORWARD_IUnattended_SETTER_ProductKey_TO (smth) COM_FORWARD_IUnattended_GETTER_AdditionsIsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_AdditionsIsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_InstallGuestAdditions_TO (smth) COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO (smth) COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO (smth) COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_ValidationKitIsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_InstallTestExecService_TO (smth) COM_FORWARD_IUnattended_SETTER_InstallTestExecService_TO (smth) COM_FORWARD_IUnattended_GETTER_UserPayloadIsoPath_TO (smth) COM_FORWARD_IUnattended_SETTER_UserPayloadIsoPath_TO (smth) COM_FORWARD_IUnattended_GETTER_InstallUserPayload_TO (smth) COM_FORWARD_IUnattended_SETTER_InstallUserPayload_TO (smth) COM_FORWARD_IUnattended_GETTER_TimeZone_TO (smth) COM_FORWARD_IUnattended_SETTER_TimeZone_TO (smth) COM_FORWARD_IUnattended_GETTER_KeyboardLayout_TO (smth) COM_FORWARD_IUnattended_SETTER_KeyboardLayout_TO (smth) COM_FORWARD_IUnattended_GETTER_KeyboardVariant_TO (smth) COM_FORWARD_IUnattended_SETTER_KeyboardVariant_TO (smth) COM_FORWARD_IUnattended_GETTER_Locale_TO (smth) COM_FORWARD_IUnattended_SETTER_Locale_TO (smth) COM_FORWARD_IUnattended_GETTER_Language_TO (smth) COM_FORWARD_IUnattended_SETTER_Language_TO (smth) COM_FORWARD_IUnattended_GETTER_Country_TO (smth) COM_FORWARD_IUnattended_SETTER_Country_TO (smth) COM_FORWARD_IUnattended_GETTER_Proxy_TO (smth) COM_FORWARD_IUnattended_SETTER_Proxy_TO (smth) COM_FORWARD_IUnattended_GETTER_PackageSelectionAdjustments_TO (smth) COM_FORWARD_IUnattended_SETTER_PackageSelectionAdjustments_TO (smth) COM_FORWARD_IUnattended_GETTER_Hostname_TO (smth) COM_FORWARD_IUnattended_SETTER_Hostname_TO (smth) COM_FORWARD_IUnattended_GETTER_AuxiliaryBasePath_TO (smth) COM_FORWARD_IUnattended_SETTER_AuxiliaryBasePath_TO (smth) COM_FORWARD_IUnattended_GETTER_ImageIndex_TO (smth) COM_FORWARD_IUnattended_SETTER_ImageIndex_TO (smth) COM_FORWARD_IUnattended_GETTER_ScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_SETTER_ScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_GETTER_PostInstallScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_SETTER_PostInstallScriptTemplatePath_TO (smth) COM_FORWARD_IUnattended_GETTER_PostInstallCommand_TO (smth) COM_FORWARD_IUnattended_SETTER_PostInstallCommand_TO (smth) COM_FORWARD_IUnattended_GETTER_ExtraInstallKernelParameters_TO (smth) COM_FORWARD_IUnattended_SETTER_ExtraInstallKernelParameters_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSTypeId_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSVersion_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSFlavor_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSLanguages_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedOSHints_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedImageNames_TO (smth) COM_FORWARD_IUnattended_GETTER_DetectedImageIndices_TO (smth) COM_FORWARD_IUnattended_GETTER_IsUnattendedInstallSupported_TO (smth) COM_FORWARD_IUnattended_GETTER_AvoidUpdatesOverNetwork_TO (smth) COM_FORWARD_IUnattended_SETTER_AvoidUpdatesOverNetwork_TO (smth) COM_FORWARD_IUnattended_DetectIsoOS_TO (smth) COM_FORWARD_IUnattended_Prepare_TO (smth) COM_FORWARD_IUnattended_ConstructMedia_TO (smth) COM_FORWARD_IUnattended_ReconfigureVM_TO (smth) COM_FORWARD_IUnattended_Done_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IUnattended_TO_OBJ(obj) COM_FORWARD_IUnattended_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IUnattended_TO_BASE(base) COM_FORWARD_IUnattended_TO (base::)")
 
@@ -6294,7 +6412,7 @@ cpp_quote("#define COM_FORWARD_IRecordingScreenSettings_TO_OBJ(obj) COM_FORWARD_
 cpp_quote("#define COM_FORWARD_IRecordingScreenSettings_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_TO (base::)")
 
 [
-    uuid(bea3ef5c-de2f-4b74-aa3a-15d6249371a0),
+    uuid(83cfdc66-4f20-4569-ad39-8722f7d472b3),
     object,
     dual,
     oleautomation
@@ -6302,6 +6420,9 @@ cpp_quote("#define COM_FORWARD_IRecordingScreenSettings_TO_BASE(base) COM_FORWAR
 ]
 interface IRecordingSettings : IDispatch
 {
+    [propget] HRESULT Paused ([out, retval] BOOL * aPaused);
+    [propput] HRESULT Paused ([in] BOOL aPaused);
+
     [propget] HRESULT Enabled ([out, retval] BOOL * aEnabled);
     [propput] HRESULT Enabled ([in] BOOL aEnabled);
 
@@ -6318,9 +6439,17 @@ interface IRecordingSettings : IDispatch
         [out, retval] IProgress * * aProgress
     );
 
+    HRESULT Resume();
+
 }; /* interface IRecordingSettings */
 
 /* Interface implementation forwarder macro */
+cpp_quote("#define COM_FORWARD_IRecordingSettings_GETTER_Paused_TO(smth) HRESULT STDMETHODCALLTYPE get_Paused (BOOL * aPaused) { return smth get_Paused (aPaused); }")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_GETTER_Paused_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_GETTER_Paused_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_GETTER_Paused_TO_BASE(base) COM_FORWARD_IRecordingSettings_GETTER_Paused_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_SETTER_Paused_TO(smth) HRESULT STDMETHODCALLTYPE put_Paused (BOOL aPaused) { return smth put_Paused (aPaused); }")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_SETTER_Paused_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_SETTER_Paused_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_SETTER_Paused_TO_BASE(base) COM_FORWARD_IRecordingSettings_SETTER_Paused_TO (base::)")
 cpp_quote("#define COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO(smth) HRESULT STDMETHODCALLTYPE get_Enabled (BOOL * aEnabled) { return smth get_Enabled (aEnabled); }")
 cpp_quote("#define COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO_BASE(base) COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO (base::)")
@@ -6339,7 +6468,10 @@ cpp_quote("#define COM_FORWARD_IRecordingSettings_GetScreenSettings_TO_BASE(base
 cpp_quote("#define COM_FORWARD_IRecordingSettings_Start_TO(smth) HRESULT STDMETHODCALLTYPE Start (IProgress * * aProgress) { return smth Start (aProgress); }")
 cpp_quote("#define COM_FORWARD_IRecordingSettings_Start_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_Start_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IRecordingSettings_Start_TO_BASE(base) COM_FORWARD_IRecordingSettings_Start_TO (base::)")
-cpp_quote("#define COM_FORWARD_IRecordingSettings_TO(smth) COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO (smth) COM_FORWARD_IRecordingSettings_SETTER_Enabled_TO (smth) COM_FORWARD_IRecordingSettings_GETTER_Screens_TO (smth) COM_FORWARD_IRecordingSettings_GETTER_Progress_TO (smth) COM_FORWARD_IRecordingSettings_GetScreenSettings_TO (smth) COM_FORWARD_IRecordingSettings_Start_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_Resume_TO(smth) HRESULT STDMETHODCALLTYPE Resume() { return smth Resume(); }")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_Resume_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_Resume_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_Resume_TO_BASE(base) COM_FORWARD_IRecordingSettings_Resume_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRecordingSettings_TO(smth) COM_FORWARD_IRecordingSettings_GETTER_Paused_TO (smth) COM_FORWARD_IRecordingSettings_SETTER_Paused_TO (smth) COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO (smth) COM_FORWARD_IRecordingSettings_SETTER_Enabled_TO (smth) COM_FORWARD_IRecordingSettings_GETTER_Screens_TO (smth) COM_FORWARD_IRecordingSettings_GETTER_Progress_TO (smth) COM_FORWARD_IRecordingSettings_GetScreenSettings_TO (smth) COM_FORWARD_IRecordingSettings_Start_TO (smth) COM_FORWARD_IRecordingSettings_Resume_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IRecordingSettings_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IRecordingSettings_TO_BASE(base) COM_FORWARD_IRecordingSettings_TO (base::)")
 
@@ -6922,7 +7054,7 @@ cpp_quote("#define COM_FORWARD_IPlatformX86_TO_OBJ(obj) COM_FORWARD_IPlatformX86
 cpp_quote("#define COM_FORWARD_IPlatformX86_TO_BASE(base) COM_FORWARD_IPlatformX86_TO (base::)")
 
 [
-    uuid(75dff9be-6cb3-4857-bde6-2faf82ed9a8d),
+    uuid(002c75fe-3316-4920-aece-7d21ce6f624b),
     object,
     dual,
     oleautomation
@@ -6930,8 +7062,6 @@ cpp_quote("#define COM_FORWARD_IPlatformX86_TO_BASE(base) COM_FORWARD_IPlatformX
 ]
 interface IPlatformARM : IDispatch
 {
-    [propget] HRESULT MidlDoesNotLikeEmptyInterfaces ([out, retval] BOOL * aMidlDoesNotLikeEmptyInterfaces);
-
     [propget] HRESULT InternalAndReservedAttribute1IPlatformARM ([out, retval] ULONG *aReserved);
 
     [propget] HRESULT InternalAndReservedAttribute2IPlatformARM ([out, retval] ULONG *aReserved);
@@ -6964,6 +7094,16 @@ interface IPlatformARM : IDispatch
 
     [propget] HRESULT InternalAndReservedAttribute16IPlatformARM ([out, retval] ULONG *aReserved);
 
+    HRESULT GetCPUProperty (
+        [in] CPUPropertyTypeARM aProperty,
+        [out, retval] BOOL * aValue
+    );
+
+    HRESULT SetCPUProperty (
+        [in] CPUPropertyTypeARM aProperty,
+        [in] BOOL aValue
+    );
+
     HRESULT InternalAndReservedMethod1IPlatformARM();
 
     HRESULT InternalAndReservedMethod2IPlatformARM();
@@ -6983,10 +7123,13 @@ interface IPlatformARM : IDispatch
 }; /* interface IPlatformARM */
 
 /* Interface implementation forwarder macro */
-cpp_quote("#define COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }")
-cpp_quote("#define COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_OBJ(obj) COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO ((obj)->)")
-cpp_quote("#define COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_BASE(base) COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO (base::)")
-cpp_quote("#define COM_FORWARD_IPlatformARM_TO(smth) COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IPlatformARM_GetCPUProperty_TO(smth) HRESULT STDMETHODCALLTYPE GetCPUProperty (CPUPropertyTypeARM aProperty, BOOL * aValue) { return smth GetCPUProperty (aProperty, aValue); }")
+cpp_quote("#define COM_FORWARD_IPlatformARM_GetCPUProperty_TO_OBJ(obj) COM_FORWARD_IPlatformARM_GetCPUProperty_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IPlatformARM_GetCPUProperty_TO_BASE(base) COM_FORWARD_IPlatformARM_GetCPUProperty_TO (base::)")
+cpp_quote("#define COM_FORWARD_IPlatformARM_SetCPUProperty_TO(smth) HRESULT STDMETHODCALLTYPE SetCPUProperty (CPUPropertyTypeARM aProperty, BOOL aValue) { return smth SetCPUProperty (aProperty, aValue); }")
+cpp_quote("#define COM_FORWARD_IPlatformARM_SetCPUProperty_TO_OBJ(obj) COM_FORWARD_IPlatformARM_SetCPUProperty_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IPlatformARM_SetCPUProperty_TO_BASE(base) COM_FORWARD_IPlatformARM_SetCPUProperty_TO (base::)")
+cpp_quote("#define COM_FORWARD_IPlatformARM_TO(smth) COM_FORWARD_IPlatformARM_GetCPUProperty_TO (smth) COM_FORWARD_IPlatformARM_SetCPUProperty_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IPlatformARM_TO_OBJ(obj) COM_FORWARD_IPlatformARM_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IPlatformARM_TO_BASE(base) COM_FORWARD_IPlatformARM_TO (base::)")
 
@@ -10371,7 +10514,7 @@ cpp_quote("#define COM_FORWARD_ISystemProperties_TO_OBJ(obj) COM_FORWARD_ISystem
 cpp_quote("#define COM_FORWARD_ISystemProperties_TO_BASE(base) COM_FORWARD_ISystemProperties_TO (base::)")
 
 [
-    uuid(ceb482fc-41b9-42a8-8538-9835ea33b6f2),
+    uuid(c6e30023-751e-487d-9bd1-595c22b104ba),
     object,
     dual,
     oleautomation
@@ -10402,8 +10545,6 @@ interface IGuestOSType : IDispatch
     [propget] HRESULT RecommendedGraphicsController ([out, retval] GraphicsControllerType * aRecommendedGraphicsController);
 
     [propget] HRESULT RecommendedVRAM ([out, retval] ULONG * aRecommendedVRAM);
-
-    [propget] HRESULT Recommended2DVideoAcceleration ([out, retval] BOOL * aRecommended2DVideoAcceleration);
 
     [propget] HRESULT Recommended3DAcceleration ([out, retval] BOOL * aRecommended3DAcceleration);
 
@@ -10530,9 +10671,6 @@ cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_RecommendedGraphicsController
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO(smth) HRESULT STDMETHODCALLTYPE get_RecommendedVRAM (ULONG * aRecommendedVRAM) { return smth get_RecommendedVRAM (aRecommendedVRAM); }")
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO (base::)")
-cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO(smth) HRESULT STDMETHODCALLTYPE get_Recommended2DVideoAcceleration (BOOL * aRecommended2DVideoAcceleration) { return smth get_Recommended2DVideoAcceleration (aRecommended2DVideoAcceleration); }")
-cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO ((obj)->)")
-cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO (base::)")
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO(smth) HRESULT STDMETHODCALLTYPE get_Recommended3DAcceleration (BOOL * aRecommended3DAcceleration) { return smth get_Recommended3DAcceleration (aRecommended3DAcceleration); }")
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO (base::)")
@@ -10614,7 +10752,7 @@ cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO_BA
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_GuestAdditionsInstallPackageName_TO(smth) HRESULT STDMETHODCALLTYPE get_GuestAdditionsInstallPackageName (BSTR * aGuestAdditionsInstallPackageName) { return smth get_GuestAdditionsInstallPackageName (aGuestAdditionsInstallPackageName); }")
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_GuestAdditionsInstallPackageName_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_GuestAdditionsInstallPackageName_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IGuestOSType_GETTER_GuestAdditionsInstallPackageName_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_GuestAdditionsInstallPackageName_TO (base::)")
-cpp_quote("#define COM_FORWARD_IGuestOSType_TO(smth) COM_FORWARD_IGuestOSType_GETTER_FamilyId_TO (smth) COM_FORWARD_IGuestOSType_GETTER_FamilyDescription_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Id_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Subtype_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Description_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Is64Bit_TO (smth) COM_FORWARD_IGuestOSType_GETTER_PlatformArchitecture_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedIOAPIC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVirtEx_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedGraphicsController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDD_TO (smth) COM_FORWARD_IGuestOSType_GETTER_AdapterType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedPAE_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFirmware_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBHID_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHPET_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBTablet_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRTCUseUTC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedIommuType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioCodec_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFloppy_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB3_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedTFReset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedTpmType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedSecureBoot_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO (smth) COM_FORWARD_IGuestOSType_GETTER_GuestAdditionsInstallPackageName_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IGuestOSType_TO(smth) COM_FORWARD_IGuestOSType_GETTER_FamilyId_TO (smth) COM_FORWARD_IGuestOSType_GETTER_FamilyDescription_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Id_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Subtype_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Description_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Is64Bit_TO (smth) COM_FORWARD_IGuestOSType_GETTER_PlatformArchitecture_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedIOAPIC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVirtEx_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedGraphicsController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDD_TO (smth) COM_FORWARD_IGuestOSType_GETTER_AdapterType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedPAE_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFirmware_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBHID_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHPET_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBTablet_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRTCUseUTC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedIommuType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioCodec_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFloppy_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB3_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedTFReset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedTpmType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedSecureBoot_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO (smth) COM_FORWARD_IGuestOSType_GETTER_GuestAdditionsInstallPackageName_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IGuestOSType_TO_OBJ(obj) COM_FORWARD_IGuestOSType_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IGuestOSType_TO_BASE(base) COM_FORWARD_IGuestOSType_TO (base::)")
 
@@ -13988,7 +14126,7 @@ cpp_quote("#define COM_FORWARD_IGuestScreenInfo_TO_OBJ(obj) COM_FORWARD_IGuestSc
 cpp_quote("#define COM_FORWARD_IGuestScreenInfo_TO_BASE(base) COM_FORWARD_IGuestScreenInfo_TO (base::)")
 
 [
-    uuid(4680b2de-8690-11e9-b83d-5719e53cf1de),
+    uuid(14fd6676-ee6b-441a-988b-c83025ab693a),
     object,
     dual,
     oleautomation
@@ -14114,10 +14252,6 @@ interface IDisplay : IDispatch
         [in] ULONG aScreenId
     );
 
-    HRESULT CompleteVHWACommand (
-        [in] BYTE * aCommand
-    );
-
     HRESULT ViewportChanged (
         [in] ULONG aScreenId,
         [in] ULONG aX,
@@ -14221,9 +14355,6 @@ cpp_quote("#define COM_FORWARD_IDisplay_InvalidateAndUpdate_TO_BASE(base) COM_FO
 cpp_quote("#define COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO(smth) HRESULT STDMETHODCALLTYPE InvalidateAndUpdateScreen (ULONG aScreenId) { return smth InvalidateAndUpdateScreen (aScreenId); }")
 cpp_quote("#define COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO_OBJ(obj) COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO_BASE(base) COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO (base::)")
-cpp_quote("#define COM_FORWARD_IDisplay_CompleteVHWACommand_TO(smth) HRESULT STDMETHODCALLTYPE CompleteVHWACommand (BYTE * aCommand) { return smth CompleteVHWACommand (aCommand); }")
-cpp_quote("#define COM_FORWARD_IDisplay_CompleteVHWACommand_TO_OBJ(obj) COM_FORWARD_IDisplay_CompleteVHWACommand_TO ((obj)->)")
-cpp_quote("#define COM_FORWARD_IDisplay_CompleteVHWACommand_TO_BASE(base) COM_FORWARD_IDisplay_CompleteVHWACommand_TO (base::)")
 cpp_quote("#define COM_FORWARD_IDisplay_ViewportChanged_TO(smth) HRESULT STDMETHODCALLTYPE ViewportChanged (ULONG aScreenId, ULONG aX, ULONG aY, ULONG aWidth, ULONG aHeight) { return smth ViewportChanged (aScreenId, aX, aY, aWidth, aHeight); }")
 cpp_quote("#define COM_FORWARD_IDisplay_ViewportChanged_TO_OBJ(obj) COM_FORWARD_IDisplay_ViewportChanged_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IDisplay_ViewportChanged_TO_BASE(base) COM_FORWARD_IDisplay_ViewportChanged_TO (base::)")
@@ -14245,7 +14376,7 @@ cpp_quote("#define COM_FORWARD_IDisplay_DetachScreens_TO_BASE(base) COM_FORWARD_
 cpp_quote("#define COM_FORWARD_IDisplay_CreateGuestScreenInfo_TO(smth) HRESULT STDMETHODCALLTYPE CreateGuestScreenInfo (ULONG aDisplay, GuestMonitorStatus aStatus, BOOL aPrimary, BOOL aChangeOrigin, LONG aOriginX, LONG aOriginY, ULONG aWidth, ULONG aHeight, ULONG aBitsPerPixel, IGuestScreenInfo * * aGuestScreenInfo) { return smth CreateGuestScreenInfo (aDisplay, aStatus, aPrimary, aChangeOrigin, aOriginX, aOriginY, aWidth, aHeight, aBitsPerPixel, aGuestScreenInfo); }")
 cpp_quote("#define COM_FORWARD_IDisplay_CreateGuestScreenInfo_TO_OBJ(obj) COM_FORWARD_IDisplay_CreateGuestScreenInfo_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IDisplay_CreateGuestScreenInfo_TO_BASE(base) COM_FORWARD_IDisplay_CreateGuestScreenInfo_TO (base::)")
-cpp_quote("#define COM_FORWARD_IDisplay_TO(smth) COM_FORWARD_IDisplay_GETTER_GuestScreenLayout_TO (smth) COM_FORWARD_IDisplay_GetScreenResolution_TO (smth) COM_FORWARD_IDisplay_AttachFramebuffer_TO (smth) COM_FORWARD_IDisplay_DetachFramebuffer_TO (smth) COM_FORWARD_IDisplay_QueryFramebuffer_TO (smth) COM_FORWARD_IDisplay_SetVideoModeHint_TO (smth) COM_FORWARD_IDisplay_GetVideoModeHint_TO (smth) COM_FORWARD_IDisplay_SetSeamlessMode_TO (smth) COM_FORWARD_IDisplay_TakeScreenShot_TO (smth) COM_FORWARD_IDisplay_TakeScreenShotToArray_TO (smth) COM_FORWARD_IDisplay_DrawToScreen_TO (smth) COM_FORWARD_IDisplay_InvalidateAndUpdate_TO (smth) COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO (smth) COM_FORWARD_IDisplay_CompleteVHWACommand_TO (smth) COM_FORWARD_IDisplay_ViewportChanged_TO (smth) COM_FORWARD_IDisplay_QuerySourceBitmap_TO (smth) COM_FORWARD_IDisplay_NotifyScaleFactorChange_TO (smth) COM_FORWARD_IDisplay_NotifyHiDPIOutputPolicyChange_TO (smth) COM_FORWARD_IDisplay_SetScreenLayout_TO (smth) COM_FORWARD_IDisplay_DetachScreens_TO (smth) COM_FORWARD_IDisplay_CreateGuestScreenInfo_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IDisplay_TO(smth) COM_FORWARD_IDisplay_GETTER_GuestScreenLayout_TO (smth) COM_FORWARD_IDisplay_GetScreenResolution_TO (smth) COM_FORWARD_IDisplay_AttachFramebuffer_TO (smth) COM_FORWARD_IDisplay_DetachFramebuffer_TO (smth) COM_FORWARD_IDisplay_QueryFramebuffer_TO (smth) COM_FORWARD_IDisplay_SetVideoModeHint_TO (smth) COM_FORWARD_IDisplay_GetVideoModeHint_TO (smth) COM_FORWARD_IDisplay_SetSeamlessMode_TO (smth) COM_FORWARD_IDisplay_TakeScreenShot_TO (smth) COM_FORWARD_IDisplay_TakeScreenShotToArray_TO (smth) COM_FORWARD_IDisplay_DrawToScreen_TO (smth) COM_FORWARD_IDisplay_InvalidateAndUpdate_TO (smth) COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO (smth) COM_FORWARD_IDisplay_ViewportChanged_TO (smth) COM_FORWARD_IDisplay_QuerySourceBitmap_TO (smth) COM_FORWARD_IDisplay_NotifyScaleFactorChange_TO (smth) COM_FORWARD_IDisplay_NotifyHiDPIOutputPolicyChange_TO (smth) COM_FORWARD_IDisplay_SetScreenLayout_TO (smth) COM_FORWARD_IDisplay_DetachScreens_TO (smth) COM_FORWARD_IDisplay_CreateGuestScreenInfo_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IDisplay_TO_OBJ(obj) COM_FORWARD_IDisplay_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IDisplay_TO_BASE(base) COM_FORWARD_IDisplay_TO (base::)")
 
@@ -15988,7 +16119,7 @@ cpp_quote("#define COM_FORWARD_ISharedFolder_TO_OBJ(obj) COM_FORWARD_ISharedFold
 cpp_quote("#define COM_FORWARD_ISharedFolder_TO_BASE(base) COM_FORWARD_ISharedFolder_TO (base::)")
 
 [
-    uuid(739160a6-53ea-465b-bb6b-5326c20a3c0c),
+    uuid(84a4e585-4f4a-45bb-99e8-fc9b226376ad),
     object,
     dual,
     oleautomation
@@ -16083,12 +16214,12 @@ interface IInternalSessionControl : IDispatch
     );
 
     HRESULT OnRecordingStateChange (
-        [in] BOOL aEnabled,
+        [in] RecordingState aState,
         [out] IProgress * * aProgress
     );
 
     HRESULT OnRecordingScreenStateChange (
-        [in] BOOL aEnabled,
+        [in] RecordingState aState,
         [in] ULONG aScreen
     );
 
@@ -16248,10 +16379,10 @@ cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnCPUExecutionCapChange_T
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO(smth) HRESULT STDMETHODCALLTYPE OnVRDEServerChange (BOOL aRestart) { return smth OnVRDEServerChange (aRestart); }")
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO (base::)")
-cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO(smth) HRESULT STDMETHODCALLTYPE OnRecordingStateChange (BOOL aEnabled, IProgress * * aProgress) { return smth OnRecordingStateChange (aEnabled, aProgress); }")
+cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO(smth) HRESULT STDMETHODCALLTYPE OnRecordingStateChange (RecordingState aState, IProgress * * aProgress) { return smth OnRecordingStateChange (aState, aProgress); }")
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO (base::)")
-cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO(smth) HRESULT STDMETHODCALLTYPE OnRecordingScreenStateChange (BOOL aEnabled, ULONG aScreen) { return smth OnRecordingScreenStateChange (aEnabled, aScreen); }")
+cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO(smth) HRESULT STDMETHODCALLTYPE OnRecordingScreenStateChange (RecordingState aState, ULONG aScreen) { return smth OnRecordingScreenStateChange (aState, aScreen); }")
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO (base::)")
 cpp_quote("#define COM_FORWARD_IInternalSessionControl_OnUSBControllerChange_TO(smth) HRESULT STDMETHODCALLTYPE OnUSBControllerChange() { return smth OnUSBControllerChange(); }")
@@ -16665,7 +16796,7 @@ cpp_quote("#define COM_FORWARD_IPerformanceCollector_TO_OBJ(obj) COM_FORWARD_IPe
 cpp_quote("#define COM_FORWARD_IPerformanceCollector_TO_BASE(base) COM_FORWARD_IPerformanceCollector_TO (base::)")
 
 [
-    uuid(a06253a7-dcd2-44e3-8689-9c9c4b6b6234),
+    uuid(55f6cedb-141d-41bb-9995-ee2fc7f9101a),
     object,
     dual,
     oleautomation
@@ -16708,6 +16839,18 @@ interface INATEngine : IDispatch
     [propget] HRESULT ForwardBroadcast ([out, retval] BOOL * aForwardBroadcast);
     [propput] HRESULT ForwardBroadcast ([in] BOOL aForwardBroadcast);
 
+    [propget] HRESULT EnableTFTP ([out, retval] BOOL * aEnableTFTP);
+    [propput] HRESULT EnableTFTP ([in] BOOL aEnableTFTP);
+
+    [propget] HRESULT NatMRU ([out, retval] ULONG * aNatMRU);
+    [propput] HRESULT NatMRU ([in] ULONG aNatMRU);
+
+    [propget] HRESULT IPv6Enabled ([out, retval] BOOL * aIPv6Enabled);
+    [propput] HRESULT IPv6Enabled ([in] BOOL aIPv6Enabled);
+
+    [propget] HRESULT IPv6Prefix ([out, retval] BSTR * aIPv6Prefix);
+    [propput] HRESULT IPv6Prefix ([in] BSTR aIPv6Prefix);
+
     [propget] HRESULT InternalAndReservedAttribute1INATEngine ([out, retval] ULONG *aReserved);
 
     [propget] HRESULT InternalAndReservedAttribute2INATEngine ([out, retval] ULONG *aReserved);
@@ -16719,8 +16862,6 @@ interface INATEngine : IDispatch
     [propget] HRESULT InternalAndReservedAttribute5INATEngine ([out, retval] ULONG *aReserved);
 
     [propget] HRESULT InternalAndReservedAttribute6INATEngine ([out, retval] ULONG *aReserved);
-
-    [propget] HRESULT InternalAndReservedAttribute7INATEngine ([out, retval] ULONG *aReserved);
 
     HRESULT SetNetworkSettings (
         [in] ULONG aMtu,
@@ -16831,6 +16972,30 @@ cpp_quote("#define COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO_BASE(base) 
 cpp_quote("#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO(smth) HRESULT STDMETHODCALLTYPE put_ForwardBroadcast (BOOL aForwardBroadcast) { return smth put_ForwardBroadcast (aForwardBroadcast); }")
 cpp_quote("#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO(smth) HRESULT STDMETHODCALLTYPE get_EnableTFTP (BOOL * aEnableTFTP) { return smth get_EnableTFTP (aEnableTFTP); }")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO(smth) HRESULT STDMETHODCALLTYPE put_EnableTFTP (BOOL aEnableTFTP) { return smth put_EnableTFTP (aEnableTFTP); }")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_NatMRU_TO(smth) HRESULT STDMETHODCALLTYPE get_NatMRU (ULONG * aNatMRU) { return smth get_NatMRU (aNatMRU); }")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_NatMRU_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_NatMRU_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_NatMRU_TO(smth) HRESULT STDMETHODCALLTYPE put_NatMRU (ULONG aNatMRU) { return smth put_NatMRU (aNatMRU); }")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_NatMRU_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_NatMRU_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO(smth) HRESULT STDMETHODCALLTYPE get_IPv6Enabled (BOOL * aIPv6Enabled) { return smth get_IPv6Enabled (aIPv6Enabled); }")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO(smth) HRESULT STDMETHODCALLTYPE put_IPv6Enabled (BOOL aIPv6Enabled) { return smth put_IPv6Enabled (aIPv6Enabled); }")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO(smth) HRESULT STDMETHODCALLTYPE get_IPv6Prefix (BSTR * aIPv6Prefix) { return smth get_IPv6Prefix (aIPv6Prefix); }")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO(smth) HRESULT STDMETHODCALLTYPE put_IPv6Prefix (BSTR aIPv6Prefix) { return smth put_IPv6Prefix (aIPv6Prefix); }")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO (base::)")
 cpp_quote("#define COM_FORWARD_INATEngine_SetNetworkSettings_TO(smth) HRESULT STDMETHODCALLTYPE SetNetworkSettings (ULONG aMtu, ULONG aSockSnd, ULONG aSockRcv, ULONG aTcpWndSnd, ULONG aTcpWndRcv) { return smth SetNetworkSettings (aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv); }")
 cpp_quote("#define COM_FORWARD_INATEngine_SetNetworkSettings_TO_OBJ(obj) COM_FORWARD_INATEngine_SetNetworkSettings_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_SetNetworkSettings_TO_BASE(base) COM_FORWARD_INATEngine_SetNetworkSettings_TO (base::)")
@@ -16843,7 +17008,7 @@ cpp_quote("#define COM_FORWARD_INATEngine_AddRedirect_TO_BASE(base) COM_FORWARD_
 cpp_quote("#define COM_FORWARD_INATEngine_RemoveRedirect_TO(smth) HRESULT STDMETHODCALLTYPE RemoveRedirect (BSTR aName) { return smth RemoveRedirect (aName); }")
 cpp_quote("#define COM_FORWARD_INATEngine_RemoveRedirect_TO_OBJ(obj) COM_FORWARD_INATEngine_RemoveRedirect_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_RemoveRedirect_TO_BASE(base) COM_FORWARD_INATEngine_RemoveRedirect_TO (base::)")
-cpp_quote("#define COM_FORWARD_INATEngine_TO(smth) COM_FORWARD_INATEngine_GETTER_Network_TO (smth) COM_FORWARD_INATEngine_SETTER_Network_TO (smth) COM_FORWARD_INATEngine_GETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_SETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_GETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_SETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_GETTER_Redirects_TO (smth) COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATEngine_SetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_GetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_AddRedirect_TO (smth) COM_FORWARD_INATEngine_RemoveRedirect_TO (smth) ")
+cpp_quote("#define COM_FORWARD_INATEngine_TO(smth) COM_FORWARD_INATEngine_GETTER_Network_TO (smth) COM_FORWARD_INATEngine_SETTER_Network_TO (smth) COM_FORWARD_INATEngine_GETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_SETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_GETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_SETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_GETTER_Redirects_TO (smth) COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO (smth) COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO (smth) COM_FORWARD_INATEngine_GETTER_NatMRU_TO (smth) COM_FORWARD_INATEngine_SETTER_NatMRU_TO (smth) COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO (smth) COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO (smth) COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO (smth) COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO (smth) COM_FORWARD_INATEngine_SetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_GetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_AddRedirect_TO (smth) COM_FORWARD_INATEngine_RemoveRedirect_TO (smth) ")
 cpp_quote("#define COM_FORWARD_INATEngine_TO_OBJ(obj) COM_FORWARD_INATEngine_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_TO_BASE(base) COM_FORWARD_INATEngine_TO (base::)")
 
@@ -18997,7 +19162,7 @@ cpp_quote("#define COM_FORWARD_IVRDEServerInfoChangedEvent_TO_OBJ(obj) COM_FORWA
 cpp_quote("#define COM_FORWARD_IVRDEServerInfoChangedEvent_TO_BASE(base) COM_FORWARD_IVRDEServerInfoChangedEvent_TO (base::)")
 
 [
-    uuid(e578bb9c-e88d-416b-bb45-08a4e7a5b463),
+    uuid(210498ae-c922-4e86-9c45-8cfb51395fc3),
     object,
     dual,
     oleautomation
@@ -19005,20 +19170,20 @@ cpp_quote("#define COM_FORWARD_IVRDEServerInfoChangedEvent_TO_BASE(base) COM_FOR
 ]
 interface IRecordingStateChangedEvent : IEvent
 {
-    [propget] HRESULT Enabled ([out, retval] BOOL * aEnabled);
+    [propget] HRESULT State ([out, retval] RecordingState * aState);
 
     [propget] HRESULT Error ([out, retval] IVirtualBoxErrorInfo * * aError);
 
 }; /* interface IRecordingStateChangedEvent */
 
 /* Interface implementation forwarder macro */
-cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO(smth) HRESULT STDMETHODCALLTYPE get_Enabled (BOOL * aEnabled) { return smth get_Enabled (aEnabled); }")
-cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO ((obj)->)")
-cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO_BASE(base) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO(smth) HRESULT STDMETHODCALLTYPE get_State (RecordingState * aState) { return smth get_State (aState); }")
+cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO_OBJ(obj) COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO_BASE(base) COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO (base::)")
 cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO(smth) HRESULT STDMETHODCALLTYPE get_Error (IVirtualBoxErrorInfo * * aError) { return smth get_Error (aError); }")
 cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO_OBJ(obj) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO_BASE(base) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO (base::)")
-cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_TO(smth) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO (smth) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_TO(smth) COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO (smth) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_TO_OBJ(obj) COM_FORWARD_IRecordingStateChangedEvent_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IRecordingStateChangedEvent_TO_BASE(base) COM_FORWARD_IRecordingStateChangedEvent_TO (base::)")
 
@@ -22134,6 +22299,8 @@ enum CPUArchitecture;
 
 enum CPUPropertyTypeX86;
 
+enum CPUPropertyTypeARM;
+
 enum HWVirtExPropertyType;
 
 enum ParavirtProvider;
@@ -22170,6 +22337,8 @@ enum PartitioningType;
 
 enum PartitionType;
 
+enum TrackedObjectState;
+
 enum DHCPOption;
 
 enum DHCPOptionEncoding;
@@ -22205,6 +22374,8 @@ enum RecordingVideoCodec;
 enum RecordingVideoScalingMode;
 
 enum RecordingRateControlMode;
+
+enum RecordingState;
 
 enum SignatureType;
 

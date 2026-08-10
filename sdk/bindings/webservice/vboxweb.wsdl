@@ -43,6 +43,7 @@
             v1_18: 20 -
             v1_19: 21 -
             v1_20: 22 -
+            v1_21: 23 -
             Future: 99999 -
             -->
       <xsd:simpleType name="SettingsVersion">
@@ -70,6 +71,7 @@
           <xsd:enumeration value="v1_18"/>
           <xsd:enumeration value="v1_19"/>
           <xsd:enumeration value="v1_20"/>
+          <xsd:enumeration value="v1_21"/>
           <xsd:enumeration value="Future"/>
         </xsd:restriction>
       </xsd:simpleType>
@@ -223,6 +225,18 @@
           <xsd:enumeration value="L1DFlushOnVMEntry"/>
           <xsd:enumeration value="MDSClearOnEMTScheduling"/>
           <xsd:enumeration value="MDSClearOnVMEntry"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <!-- enum: CPUPropertyTypeARM -
+            Null: 0 -
+            HWVirt: 1 -
+            GICITS: 2 -
+            -->
+      <xsd:simpleType name="CPUPropertyTypeARM">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Null"/>
+          <xsd:enumeration value="HWVirt"/>
+          <xsd:enumeration value="GICITS"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: HWVirtExPropertyType -
@@ -807,6 +821,20 @@
           <xsd:enumeration value="CephOSDDmcLUKS"/>
         </xsd:restriction>
       </xsd:simpleType>
+      <!-- enum: TrackedObjectState -
+            None: 0 -
+            Alive: 1 -
+            Deleted: 2 -
+            Invalid: 3 -
+            -->
+      <xsd:simpleType name="TrackedObjectState">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="None"/>
+          <xsd:enumeration value="Alive"/>
+          <xsd:enumeration value="Deleted"/>
+          <xsd:enumeration value="Invalid"/>
+        </xsd:restriction>
+      </xsd:simpleType>
       <!-- enum: DHCPOption -
             SubnetMask: 1 -
             TimeOffset: 2 -
@@ -1303,6 +1331,32 @@
           <xsd:enumeration value="VBR"/>
         </xsd:restriction>
       </xsd:simpleType>
+      <!-- enum: RecordingState -
+            Unknown: 0 -
+            Initializing: 1 -
+            Started: 2 -
+            Paused: 3 -
+            Resumed: 4 -
+            Finalizing: 5 -
+            Stopped: 6 -
+            Canceled: 7 -
+            LimitReached: 8 -
+            Error: 9 -
+            -->
+      <xsd:simpleType name="RecordingState">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Unknown"/>
+          <xsd:enumeration value="Initializing"/>
+          <xsd:enumeration value="Started"/>
+          <xsd:enumeration value="Paused"/>
+          <xsd:enumeration value="Resumed"/>
+          <xsd:enumeration value="Finalizing"/>
+          <xsd:enumeration value="Stopped"/>
+          <xsd:enumeration value="Canceled"/>
+          <xsd:enumeration value="LimitReached"/>
+          <xsd:enumeration value="Error"/>
+        </xsd:restriction>
+      </xsd:simpleType>
       <!-- enum: SignatureType -
             X509: 0 -
             Sha256: 1 -
@@ -1353,13 +1407,11 @@
       </xsd:simpleType>
       <!-- enum: GraphicsFeature -
             None: 0 -
-            Acceleration2DVideo: 1 -
             Acceleration3D: 2 -
             -->
       <xsd:simpleType name="GraphicsFeature">
         <xsd:restriction base="xsd:string">
           <xsd:enumeration value="None"/>
-          <xsd:enumeration value="Acceleration2DVideo"/>
           <xsd:enumeration value="Acceleration3D"/>
         </xsd:restriction>
       </xsd:simpleType>
@@ -1498,11 +1550,13 @@
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: HostNetworkInterfaceType -
+            Invalid: 0 -
             Bridged: 1 -
             HostOnly: 2 -
             -->
       <xsd:simpleType name="HostNetworkInterfaceType">
         <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Invalid"/>
           <xsd:enumeration value="Bridged"/>
           <xsd:enumeration value="HostOnly"/>
         </xsd:restriction>
@@ -2460,6 +2514,7 @@
             WD8003: 11 -
             ELNK2: 12 -
             ELNK1: 13 -
+            UsbNet: 14 -
             -->
       <xsd:simpleType name="NetworkAdapterType">
         <xsd:restriction base="xsd:string">
@@ -2477,6 +2532,7 @@
           <xsd:enumeration value="WD8003"/>
           <xsd:enumeration value="ELNK2"/>
           <xsd:enumeration value="ELNK1"/>
+          <xsd:enumeration value="UsbNet"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: NetworkAdapterPromiscModePolicy -
@@ -3240,7 +3296,6 @@
           <xsd:element name="recommendedRAM" type="xsd:unsignedInt"/>
           <xsd:element name="recommendedGraphicsController" type="vbox:GraphicsControllerType"/>
           <xsd:element name="recommendedVRAM" type="xsd:unsignedInt"/>
-          <xsd:element name="recommended2DVideoAcceleration" type="xsd:boolean"/>
           <xsd:element name="recommended3DAcceleration" type="xsd:boolean"/>
           <xsd:element name="recommendedHDD" type="xsd:long"/>
           <xsd:element name="adapterType" type="vbox:NetworkAdapterType"/>
@@ -3649,6 +3704,118 @@
           <xsd:sequence>
             <xsd:element name="returnval" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
           </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute INATNetwork::localhostReachable-->
+      <xsd:element name="INATNetwork_getLocalhostReachable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_getLocalhostReachableResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setLocalhostReachable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="localhostReachable" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setLocalhostReachableResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute INATNetwork::forwardBroadcast-->
+      <xsd:element name="INATNetwork_getForwardBroadcast">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_getForwardBroadcastResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setForwardBroadcast">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="forwardBroadcast" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setForwardBroadcastResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute INATNetwork::natMTU-->
+      <xsd:element name="INATNetwork_getNatMTU">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_getNatMTUResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setNatMTU">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="natMTU" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setNatMTUResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute INATNetwork::natMRU-->
+      <xsd:element name="INATNetwork_getNatMRU">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_getNatMRUResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setNatMRU">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="natMRU" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATNetwork_setNatMRUResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
         </xsd:complexType>
       </xsd:element>
       <!-- read/write attribute INATNetwork::loopbackIp6-->
@@ -5854,6 +6021,41 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <!-- method IVirtualBox::getTrackedObject-->
+      <xsd:element name="IVirtualBox_getTrackedObject">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="trObjId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IVirtualBox_getTrackedObjectResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="pIface" type="xsd:string"/>
+            <xsd:element name="state" type="vbox:TrackedObjectState"/>
+            <xsd:element name="creationTime" type="xsd:long"/>
+            <xsd:element name="deletionTime" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method IVirtualBox::getTrackedObjectIds-->
+      <xsd:element name="IVirtualBox_getTrackedObjectIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="name" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IVirtualBox_getTrackedObjectIdsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <!--Interface IVFSExplorer-->
       <!-- readonly attribute IVFSExplorer::path-->
       <xsd:element name="IVFSExplorer_getPath">
@@ -6929,6 +7131,21 @@
       <xsd:element name="IUnattended_setInstallGuestAdditionsResponse">
         <xsd:complexType>
           <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute IUnattended::productKeyRequired-->
+      <xsd:element name="IUnattended_getProductKeyRequired">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IUnattended_getProductKeyRequiredResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <!-- read/write attribute IUnattended::validationKitIsoPath-->
@@ -8835,6 +9052,34 @@
         </xsd:complexType>
       </xsd:element>
       <!--Interface IRecordingSettings-->
+      <!-- read/write attribute IRecordingSettings::paused-->
+      <xsd:element name="IRecordingSettings_getPaused">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRecordingSettings_getPausedResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRecordingSettings_setPaused">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="paused" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRecordingSettings_setPausedResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
       <!-- read/write attribute IRecordingSettings::enabled-->
       <xsd:element name="IRecordingSettings_getEnabled">
         <xsd:complexType>
@@ -8922,6 +9167,19 @@
           <xsd:sequence>
             <xsd:element name="returnval" type="xsd:string"/>
           </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method IRecordingSettings::resume-->
+      <xsd:element name="IRecordingSettings_resume">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRecordingSettings_resumeResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
         </xsd:complexType>
       </xsd:element>
       <!--Interface IPCIAddress-->
@@ -9682,19 +9940,35 @@
         </xsd:complexType>
       </xsd:element>
       <!--Interface IPlatformARM-->
-      <!-- readonly attribute IPlatformARM::midlDoesNotLikeEmptyInterfaces-->
-      <xsd:element name="IPlatformARM_getMidlDoesNotLikeEmptyInterfaces">
+      <!-- method IPlatformARM::getCPUProperty-->
+      <xsd:element name="IPlatformARM_getCPUProperty">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="property" type="vbox:CPUPropertyTypeARM"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="IPlatformARM_getMidlDoesNotLikeEmptyInterfacesResponse">
+      <xsd:element name="IPlatformARM_getCPUPropertyResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="returnval" type="xsd:boolean"/>
           </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method IPlatformARM::setCPUProperty-->
+      <xsd:element name="IPlatformARM_setCPUProperty">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="property" type="vbox:CPUPropertyTypeARM"/>
+            <xsd:element name="value" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IPlatformARM_setCPUPropertyResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
         </xsd:complexType>
       </xsd:element>
       <!--Interface IMachine-->
@@ -21886,8 +22160,6 @@
           <xsd:sequence/>
         </xsd:complexType>
       </xsd:element>
-      <!-- method IDisplay::completeVHWACommand-->
-      <!--skipping method completeVHWACommand for it has parameters with suppressed types-->
       <!-- method IDisplay::viewportChanged-->
       <xsd:element name="IDisplay_viewportChanged">
         <xsd:complexType>
@@ -26233,6 +26505,118 @@
           <xsd:sequence/>
         </xsd:complexType>
       </xsd:element>
+      <!-- read/write attribute INATEngine::enableTFTP-->
+      <xsd:element name="INATEngine_getEnableTFTP">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_getEnableTFTPResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setEnableTFTP">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="enableTFTP" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setEnableTFTPResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute INATEngine::natMRU-->
+      <xsd:element name="INATEngine_getNatMRU">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_getNatMRUResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setNatMRU">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="natMRU" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setNatMRUResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute INATEngine::IPv6Enabled-->
+      <xsd:element name="INATEngine_getIPv6Enabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_getIPv6EnabledResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setIPv6Enabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="IPv6Enabled" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setIPv6EnabledResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute INATEngine::IPv6Prefix-->
+      <xsd:element name="INATEngine_getIPv6Prefix">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_getIPv6PrefixResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setIPv6Prefix">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="IPv6Prefix" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setIPv6PrefixResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
       <!-- method INATEngine::setNetworkSettings-->
       <xsd:element name="INATEngine_setNetworkSettings">
         <xsd:complexType>
@@ -28372,18 +28756,18 @@
         </xsd:complexType>
       </xsd:element>
       <!--Interface IRecordingStateChangedEvent-->
-      <!-- readonly attribute IRecordingStateChangedEvent::enabled-->
-      <xsd:element name="IRecordingStateChangedEvent_getEnabled">
+      <!-- readonly attribute IRecordingStateChangedEvent::state-->
+      <xsd:element name="IRecordingStateChangedEvent_getState">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="_this" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="IRecordingStateChangedEvent_getEnabledResponse">
+      <xsd:element name="IRecordingStateChangedEvent_getStateResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="returnval" type="xsd:boolean"/>
+            <xsd:element name="returnval" type="vbox:RecordingState"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -32261,6 +32645,58 @@
   <wsdl:message name="INATNetwork_getLocalMappingsResultMsg">
     <wsdl:part name="parameters" element="vbox:INATNetwork_getLocalMappingsResponse"/>
   </wsdl:message>
+  <!-- read/write attribute INATNetwork::localhostReachable-->
+  <wsdl:message name="INATNetwork_getLocalhostReachableRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getLocalhostReachable"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_getLocalhostReachableResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getLocalhostReachableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setLocalhostReachableRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setLocalhostReachable"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setLocalhostReachableResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setLocalhostReachableResponse"/>
+  </wsdl:message>
+  <!-- read/write attribute INATNetwork::forwardBroadcast-->
+  <wsdl:message name="INATNetwork_getForwardBroadcastRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getForwardBroadcast"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_getForwardBroadcastResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getForwardBroadcastResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setForwardBroadcastRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setForwardBroadcast"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setForwardBroadcastResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setForwardBroadcastResponse"/>
+  </wsdl:message>
+  <!-- read/write attribute INATNetwork::natMTU-->
+  <wsdl:message name="INATNetwork_getNatMTURequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getNatMTU"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_getNatMTUResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getNatMTUResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setNatMTURequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setNatMTU"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setNatMTUResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setNatMTUResponse"/>
+  </wsdl:message>
+  <!-- read/write attribute INATNetwork::natMRU-->
+  <wsdl:message name="INATNetwork_getNatMRURequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getNatMRU"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_getNatMRUResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_getNatMRUResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setNatMRURequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setNatMRU"/>
+  </wsdl:message>
+  <wsdl:message name="INATNetwork_setNatMRUResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATNetwork_setNatMRUResponse"/>
+  </wsdl:message>
   <!-- read/write attribute INATNetwork::loopbackIp6-->
   <wsdl:message name="INATNetwork_getLoopbackIp6RequestMsg">
     <wsdl:part name="parameters" element="vbox:INATNetwork_getLoopbackIp6"/>
@@ -33306,6 +33742,20 @@
   <wsdl:message name="IVirtualBox_findProgressByIdResultMsg">
     <wsdl:part name="parameters" element="vbox:IVirtualBox_findProgressByIdResponse"/>
   </wsdl:message>
+  <!-- method IVirtualBox::getTrackedObject-->
+  <wsdl:message name="IVirtualBox_getTrackedObjectRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IVirtualBox_getTrackedObject"/>
+  </wsdl:message>
+  <wsdl:message name="IVirtualBox_getTrackedObjectResultMsg">
+    <wsdl:part name="parameters" element="vbox:IVirtualBox_getTrackedObjectResponse"/>
+  </wsdl:message>
+  <!-- method IVirtualBox::getTrackedObjectIds-->
+  <wsdl:message name="IVirtualBox_getTrackedObjectIdsRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IVirtualBox_getTrackedObjectIds"/>
+  </wsdl:message>
+  <wsdl:message name="IVirtualBox_getTrackedObjectIdsResultMsg">
+    <wsdl:part name="parameters" element="vbox:IVirtualBox_getTrackedObjectIdsResponse"/>
+  </wsdl:message>
   <!--
         *************************************
         messages for interface IVFSExplorer
@@ -33818,6 +34268,13 @@
   </wsdl:message>
   <wsdl:message name="IUnattended_setInstallGuestAdditionsResultMsg">
     <wsdl:part name="parameters" element="vbox:IUnattended_setInstallGuestAdditionsResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute IUnattended::productKeyRequired-->
+  <wsdl:message name="IUnattended_getProductKeyRequiredRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IUnattended_getProductKeyRequired"/>
+  </wsdl:message>
+  <wsdl:message name="IUnattended_getProductKeyRequiredResultMsg">
+    <wsdl:part name="parameters" element="vbox:IUnattended_getProductKeyRequiredResponse"/>
   </wsdl:message>
   <!-- read/write attribute IUnattended::validationKitIsoPath-->
   <wsdl:message name="IUnattended_getValidationKitIsoPathRequestMsg">
@@ -34735,6 +35192,19 @@
         messages for interface IRecordingSettings
         *************************************
       -->
+  <!-- read/write attribute IRecordingSettings::paused-->
+  <wsdl:message name="IRecordingSettings_getPausedRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingSettings_getPaused"/>
+  </wsdl:message>
+  <wsdl:message name="IRecordingSettings_getPausedResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingSettings_getPausedResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRecordingSettings_setPausedRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingSettings_setPaused"/>
+  </wsdl:message>
+  <wsdl:message name="IRecordingSettings_setPausedResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingSettings_setPausedResponse"/>
+  </wsdl:message>
   <!-- read/write attribute IRecordingSettings::enabled-->
   <wsdl:message name="IRecordingSettings_getEnabledRequestMsg">
     <wsdl:part name="parameters" element="vbox:IRecordingSettings_getEnabled"/>
@@ -34775,6 +35245,13 @@
   </wsdl:message>
   <wsdl:message name="IRecordingSettings_startResultMsg">
     <wsdl:part name="parameters" element="vbox:IRecordingSettings_startResponse"/>
+  </wsdl:message>
+  <!-- method IRecordingSettings::resume-->
+  <wsdl:message name="IRecordingSettings_resumeRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingSettings_resume"/>
+  </wsdl:message>
+  <wsdl:message name="IRecordingSettings_resumeResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingSettings_resumeResponse"/>
   </wsdl:message>
   <!--
         *************************************
@@ -35157,12 +35634,19 @@
         messages for interface IPlatformARM
         *************************************
       -->
-  <!-- readonly attribute IPlatformARM::midlDoesNotLikeEmptyInterfaces-->
-  <wsdl:message name="IPlatformARM_getMidlDoesNotLikeEmptyInterfacesRequestMsg">
-    <wsdl:part name="parameters" element="vbox:IPlatformARM_getMidlDoesNotLikeEmptyInterfaces"/>
+  <!-- method IPlatformARM::getCPUProperty-->
+  <wsdl:message name="IPlatformARM_getCPUPropertyRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IPlatformARM_getCPUProperty"/>
   </wsdl:message>
-  <wsdl:message name="IPlatformARM_getMidlDoesNotLikeEmptyInterfacesResultMsg">
-    <wsdl:part name="parameters" element="vbox:IPlatformARM_getMidlDoesNotLikeEmptyInterfacesResponse"/>
+  <wsdl:message name="IPlatformARM_getCPUPropertyResultMsg">
+    <wsdl:part name="parameters" element="vbox:IPlatformARM_getCPUPropertyResponse"/>
+  </wsdl:message>
+  <!-- method IPlatformARM::setCPUProperty-->
+  <wsdl:message name="IPlatformARM_setCPUPropertyRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IPlatformARM_setCPUProperty"/>
+  </wsdl:message>
+  <wsdl:message name="IPlatformARM_setCPUPropertyResultMsg">
+    <wsdl:part name="parameters" element="vbox:IPlatformARM_setCPUPropertyResponse"/>
   </wsdl:message>
   <!--
         *************************************
@@ -40918,8 +41402,6 @@
   <wsdl:message name="IDisplay_invalidateAndUpdateScreenResultMsg">
     <wsdl:part name="parameters" element="vbox:IDisplay_invalidateAndUpdateScreenResponse"/>
   </wsdl:message>
-  <!-- method IDisplay::completeVHWACommand-->
-  <!--skipping method completeVHWACommand for it has parameters with suppressed types-->
   <!-- method IDisplay::viewportChanged-->
   <wsdl:message name="IDisplay_viewportChangedRequestMsg">
     <wsdl:part name="parameters" element="vbox:IDisplay_viewportChanged"/>
@@ -43028,6 +43510,58 @@
   <wsdl:message name="INATEngine_setForwardBroadcastResultMsg">
     <wsdl:part name="parameters" element="vbox:INATEngine_setForwardBroadcastResponse"/>
   </wsdl:message>
+  <!-- read/write attribute INATEngine::enableTFTP-->
+  <wsdl:message name="INATEngine_getEnableTFTPRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getEnableTFTP"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_getEnableTFTPResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getEnableTFTPResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setEnableTFTPRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setEnableTFTP"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setEnableTFTPResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setEnableTFTPResponse"/>
+  </wsdl:message>
+  <!-- read/write attribute INATEngine::natMRU-->
+  <wsdl:message name="INATEngine_getNatMRURequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getNatMRU"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_getNatMRUResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getNatMRUResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setNatMRURequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setNatMRU"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setNatMRUResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setNatMRUResponse"/>
+  </wsdl:message>
+  <!-- read/write attribute INATEngine::IPv6Enabled-->
+  <wsdl:message name="INATEngine_getIPv6EnabledRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getIPv6Enabled"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_getIPv6EnabledResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getIPv6EnabledResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setIPv6EnabledRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setIPv6Enabled"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setIPv6EnabledResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setIPv6EnabledResponse"/>
+  </wsdl:message>
+  <!-- read/write attribute INATEngine::IPv6Prefix-->
+  <wsdl:message name="INATEngine_getIPv6PrefixRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getIPv6Prefix"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_getIPv6PrefixResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getIPv6PrefixResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setIPv6PrefixRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setIPv6Prefix"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setIPv6PrefixResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setIPv6PrefixResponse"/>
+  </wsdl:message>
   <!-- method INATEngine::setNetworkSettings-->
   <wsdl:message name="INATEngine_setNetworkSettingsRequestMsg">
     <wsdl:part name="parameters" element="vbox:INATEngine_setNetworkSettings"/>
@@ -44354,12 +44888,12 @@
         messages for interface IRecordingStateChangedEvent
         *************************************
       -->
-  <!-- readonly attribute IRecordingStateChangedEvent::enabled-->
-  <wsdl:message name="IRecordingStateChangedEvent_getEnabledRequestMsg">
-    <wsdl:part name="parameters" element="vbox:IRecordingStateChangedEvent_getEnabled"/>
+  <!-- readonly attribute IRecordingStateChangedEvent::state-->
+  <wsdl:message name="IRecordingStateChangedEvent_getStateRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingStateChangedEvent_getState"/>
   </wsdl:message>
-  <wsdl:message name="IRecordingStateChangedEvent_getEnabledResultMsg">
-    <wsdl:part name="parameters" element="vbox:IRecordingStateChangedEvent_getEnabledResponse"/>
+  <wsdl:message name="IRecordingStateChangedEvent_getStateResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRecordingStateChangedEvent_getStateResponse"/>
   </wsdl:message>
   <!-- readonly attribute IRecordingStateChangedEvent::error-->
   <wsdl:message name="IRecordingStateChangedEvent_getErrorRequestMsg">
@@ -46483,6 +47017,54 @@
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getLocalhostReachable">
+      <wsdl:input message="vbox:INATNetwork_getLocalhostReachableRequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_getLocalhostReachableResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setLocalhostReachable">
+      <wsdl:input message="vbox:INATNetwork_setLocalhostReachableRequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_setLocalhostReachableResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getForwardBroadcast">
+      <wsdl:input message="vbox:INATNetwork_getForwardBroadcastRequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_getForwardBroadcastResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setForwardBroadcast">
+      <wsdl:input message="vbox:INATNetwork_setForwardBroadcastRequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_setForwardBroadcastResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getNatMTU">
+      <wsdl:input message="vbox:INATNetwork_getNatMTURequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_getNatMTUResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setNatMTU">
+      <wsdl:input message="vbox:INATNetwork_setNatMTURequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_setNatMTUResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getNatMRU">
+      <wsdl:input message="vbox:INATNetwork_getNatMRURequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_getNatMRUResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setNatMRU">
+      <wsdl:input message="vbox:INATNetwork_setNatMRURequestMsg"/>
+      <wsdl:output message="vbox:INATNetwork_setNatMRUResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
     <wsdl:operation name="INATNetwork_getLoopbackIp6">
       <wsdl:input message="vbox:INATNetwork_getLoopbackIp6RequestMsg"/>
       <wsdl:output message="vbox:INATNetwork_getLoopbackIp6ResultMsg"/>
@@ -47405,6 +47987,18 @@
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
+    <wsdl:operation name="IVirtualBox_getTrackedObject">
+      <wsdl:input message="vbox:IVirtualBox_getTrackedObjectRequestMsg"/>
+      <wsdl:output message="vbox:IVirtualBox_getTrackedObjectResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IVirtualBox_getTrackedObjectIds">
+      <wsdl:input message="vbox:IVirtualBox_getTrackedObjectIdsRequestMsg"/>
+      <wsdl:output message="vbox:IVirtualBox_getTrackedObjectIdsResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
     <!--
           *************************************
           operations in portType for interface IVFSExplorer
@@ -47853,6 +48447,12 @@
     <wsdl:operation name="IUnattended_setInstallGuestAdditions">
       <wsdl:input message="vbox:IUnattended_setInstallGuestAdditionsRequestMsg"/>
       <wsdl:output message="vbox:IUnattended_setInstallGuestAdditionsResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IUnattended_getProductKeyRequired">
+      <wsdl:input message="vbox:IUnattended_getProductKeyRequiredRequestMsg"/>
+      <wsdl:output message="vbox:IUnattended_getProductKeyRequiredResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -48696,6 +49296,18 @@
           operations in portType for interface IRecordingSettings
           *************************************
         -->
+    <wsdl:operation name="IRecordingSettings_getPaused">
+      <wsdl:input message="vbox:IRecordingSettings_getPausedRequestMsg"/>
+      <wsdl:output message="vbox:IRecordingSettings_getPausedResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IRecordingSettings_setPaused">
+      <wsdl:input message="vbox:IRecordingSettings_setPausedRequestMsg"/>
+      <wsdl:output message="vbox:IRecordingSettings_setPausedResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
     <wsdl:operation name="IRecordingSettings_getEnabled">
       <wsdl:input message="vbox:IRecordingSettings_getEnabledRequestMsg"/>
       <wsdl:output message="vbox:IRecordingSettings_getEnabledResultMsg"/>
@@ -48729,6 +49341,12 @@
     <wsdl:operation name="IRecordingSettings_start">
       <wsdl:input message="vbox:IRecordingSettings_startRequestMsg"/>
       <wsdl:output message="vbox:IRecordingSettings_startResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IRecordingSettings_resume">
+      <wsdl:input message="vbox:IRecordingSettings_resumeRequestMsg"/>
+      <wsdl:output message="vbox:IRecordingSettings_resumeResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -49072,9 +49690,15 @@
           operations in portType for interface IPlatformARM
           *************************************
         -->
-    <wsdl:operation name="IPlatformARM_getMidlDoesNotLikeEmptyInterfaces">
-      <wsdl:input message="vbox:IPlatformARM_getMidlDoesNotLikeEmptyInterfacesRequestMsg"/>
-      <wsdl:output message="vbox:IPlatformARM_getMidlDoesNotLikeEmptyInterfacesResultMsg"/>
+    <wsdl:operation name="IPlatformARM_getCPUProperty">
+      <wsdl:input message="vbox:IPlatformARM_getCPUPropertyRequestMsg"/>
+      <wsdl:output message="vbox:IPlatformARM_getCPUPropertyResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IPlatformARM_setCPUProperty">
+      <wsdl:input message="vbox:IPlatformARM_setCPUPropertyRequestMsg"/>
+      <wsdl:output message="vbox:IPlatformARM_setCPUPropertyResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -54109,7 +54733,6 @@
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
-    <!--skipping method completeVHWACommand for it has parameters with suppressed types-->
     <wsdl:operation name="IDisplay_viewportChanged">
       <wsdl:input message="vbox:IDisplay_viewportChangedRequestMsg"/>
       <wsdl:output message="vbox:IDisplay_viewportChangedResultMsg"/>
@@ -56008,6 +56631,54 @@
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
+    <wsdl:operation name="INATEngine_getEnableTFTP">
+      <wsdl:input message="vbox:INATEngine_getEnableTFTPRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_getEnableTFTPResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setEnableTFTP">
+      <wsdl:input message="vbox:INATEngine_setEnableTFTPRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_setEnableTFTPResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getNatMRU">
+      <wsdl:input message="vbox:INATEngine_getNatMRURequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_getNatMRUResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setNatMRU">
+      <wsdl:input message="vbox:INATEngine_setNatMRURequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_setNatMRUResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getIPv6Enabled">
+      <wsdl:input message="vbox:INATEngine_getIPv6EnabledRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_getIPv6EnabledResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setIPv6Enabled">
+      <wsdl:input message="vbox:INATEngine_setIPv6EnabledRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_setIPv6EnabledResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getIPv6Prefix">
+      <wsdl:input message="vbox:INATEngine_getIPv6PrefixRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_getIPv6PrefixResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setIPv6Prefix">
+      <wsdl:input message="vbox:INATEngine_setIPv6PrefixRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_setIPv6PrefixResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
     <wsdl:operation name="INATEngine_setNetworkSettings">
       <wsdl:input message="vbox:INATEngine_setNetworkSettingsRequestMsg"/>
       <wsdl:output message="vbox:INATEngine_setNetworkSettingsResultMsg"/>
@@ -57201,9 +57872,9 @@
           operations in portType for interface IRecordingStateChangedEvent
           *************************************
         -->
-    <wsdl:operation name="IRecordingStateChangedEvent_getEnabled">
-      <wsdl:input message="vbox:IRecordingStateChangedEvent_getEnabledRequestMsg"/>
-      <wsdl:output message="vbox:IRecordingStateChangedEvent_getEnabledResultMsg"/>
+    <wsdl:operation name="IRecordingStateChangedEvent_getState">
+      <wsdl:input message="vbox:IRecordingStateChangedEvent_getStateRequestMsg"/>
+      <wsdl:output message="vbox:IRecordingStateChangedEvent_getStateResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -59299,6 +59970,126 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="INATNetwork_getLocalMappings">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getLocalhostReachable">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setLocalhostReachable">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getForwardBroadcast">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setForwardBroadcast">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getNatMTU">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setNatMTU">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_getNatMRU">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATNetwork_setNatMRU">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
@@ -61549,6 +62340,36 @@
         <soap:fault name="RuntimeFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="IVirtualBox_getTrackedObject">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IVirtualBox_getTrackedObjectIds">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <!--
           *************************************
           operations in portType for interface IVFSExplorer
@@ -62625,6 +63446,21 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="IUnattended_setInstallGuestAdditions">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IUnattended_getProductKeyRequired">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
@@ -64694,6 +65530,36 @@
           operations in portType for interface IRecordingSettings
           *************************************
         -->
+    <wsdl:operation name="IRecordingSettings_getPaused">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IRecordingSettings_setPaused">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="IRecordingSettings_getEnabled">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
@@ -64770,6 +65636,21 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="IRecordingSettings_start">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IRecordingSettings_resume">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
@@ -65574,7 +66455,22 @@
           operations in portType for interface IPlatformARM
           *************************************
         -->
-    <wsdl:operation name="IPlatformARM_getMidlDoesNotLikeEmptyInterfaces">
+    <wsdl:operation name="IPlatformARM_getCPUProperty">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IPlatformARM_setCPUProperty">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
@@ -77775,7 +78671,6 @@
         <soap:fault name="RuntimeFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
-    <!--skipping method completeVHWACommand for it has parameters with suppressed types-->
     <wsdl:operation name="IDisplay_viewportChanged">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
@@ -82338,6 +83233,126 @@
         <soap:fault name="RuntimeFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="INATEngine_getEnableTFTP">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setEnableTFTP">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getNatMRU">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setNatMRU">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getIPv6Enabled">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setIPv6Enabled">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getIPv6Prefix">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setIPv6Prefix">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="INATEngine_setNetworkSettings">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
@@ -84773,7 +85788,7 @@
           operations in portType for interface IRecordingStateChangedEvent
           *************************************
         -->
-    <wsdl:operation name="IRecordingStateChangedEvent_getEnabled">
+    <wsdl:operation name="IRecordingStateChangedEvent_getState">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

@@ -104,7 +104,6 @@ Global definitions</li>
 </ol>
 <p>For example, if MyMachine has a shared folder named <code>C_DRIVE</code> (that points to <code>C:\</code>), then creating a transient shared folder named <code>C_DRIVE</code> (that points to <code>C:\\WINDOWS</code>) will change the definition of <code>C_DRIVE</code> in the guest OS so that <code>\\VBOXSVR\C_DRIVE</code> will give access to <code>C:\WINDOWS</code> instead of <code>C:\</code> on the host PC. Removing the transient shared folder <code>C_DRIVE</code> will restore the previous (permanent) definition of <code>C_DRIVE</code> that points to <code>C:\</code> if it still exists.</p>
 <p>Note that permanent and transient shared folders of different machines are in different name spaces, so they don't overlap and don't need to have unique logical names.</p>
-<dl class="section note"><dt>Note</dt><dd>Global shared folders are not implemented in the current version of the product.</dd></dl>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{0B108B8C-62E0-4E06-9DFA-2F1A2AD70774}</code> </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a4bcbf19bd76a256cead5b008df71cc30" name="a4bcbf19bd76a256cead5b008df71cc30"></a>

@@ -1,10 +1,10 @@
-/* $Id: split-soapC.cpp 164827 2024-09-16 14:03:52Z bird $ */
+/* $Id: split-soapC.cpp 170187 2025-08-11 17:18:47Z klaus $ */
 /** @file
  * Splits soapC.cpp and soapH-noinline.cpp into more manageable portions.
  */
 
 /*
- * Copyright (C) 2009-2024 Oracle and/or its affiliates.
+ * Copyright (C) 2009-2025 Oracle and/or its affiliates.
  *
  * This file is part of VirtualBox base platform packages, as
  * available from https://www.virtualbox.org.
@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
         {
             /* construct output filename */
             char szFilename[1024];
-            sprintf(szFilename, "%s%lu.cpp", argv[2], ++cFiles);
+            snprintf(szFilename, sizeof(szFilename), "%s%lu.cpp", argv[2], ++cFiles);
             szFilename[sizeof(szFilename)-1] = '\0';
 
             size_t offName = strlen(szFilename);

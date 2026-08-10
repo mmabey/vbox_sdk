@@ -479,7 +479,7 @@ interface ICloudProfileChangedEvent;
 interface ILanguageChangedEvent;
 
 [
-    uuid(6ad3da60-5ed2-49cd-b882-96a72308ebf6),
+    uuid(85d84a63-bda8-424e-95fe-3650b6cf5a95),
     scriptable
 ]
 interface SettingsVersion
@@ -507,6 +507,7 @@ interface SettingsVersion
     const PRUint32 v1_18 = 20;
     const PRUint32 v1_19 = 21;
     const PRUint32 v1_20 = 22;
+    const PRUint32 v1_21 = 23;
     const PRUint32 Future = 99999;
 };
 
@@ -540,6 +541,7 @@ typedef PRUint32 SettingsVersion_T;
 # define SettingsVersion_v1_18 SettingsVersion::v1_18
 # define SettingsVersion_v1_19 SettingsVersion::v1_19
 # define SettingsVersion_v1_20 SettingsVersion::v1_20
+# define SettingsVersion_v1_21 SettingsVersion::v1_21
 # define SettingsVersion_Future SettingsVersion::Future
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum SettingsVersion_T {
@@ -566,6 +568,7 @@ typedef enum SettingsVersion_T {
     SettingsVersion_v1_18 = SettingsVersion::v1_18,
     SettingsVersion_v1_19 = SettingsVersion::v1_19,
     SettingsVersion_v1_20 = SettingsVersion::v1_20,
+    SettingsVersion_v1_21 = SettingsVersion::v1_21,
     SettingsVersion_Future = SettingsVersion::Future,
     SettingsVersion_32BitHack = 0x7fffffff
 } SettingsVersion_T;
@@ -895,6 +898,40 @@ typedef enum CPUPropertyTypeX86_T {
 } CPUPropertyTypeX86_T;
 # ifdef AssertCompileSize
 AssertCompileSize(CPUPropertyTypeX86_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+%}
+
+[
+    uuid(f84eb90a-3e01-47cf-88c1-f8fc559dd37a),
+    scriptable
+]
+interface CPUPropertyTypeARM
+{
+    const PRUint32 Null = 0;
+    const PRUint32 HWVirt = 1;
+    const PRUint32 GICITS = 2;
+};
+
+
+/* IDL typedef for enum CPUPropertyTypeARM and C++ mappings. */
+%{C++
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+%}
+typedef PRUint32 CPUPropertyTypeARM_T;
+%{C++
+# define CPUPropertyTypeARM_Null CPUPropertyTypeARM::Null
+# define CPUPropertyTypeARM_HWVirt CPUPropertyTypeARM::HWVirt
+# define CPUPropertyTypeARM_GICITS CPUPropertyTypeARM::GICITS
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum CPUPropertyTypeARM_T {
+    CPUPropertyTypeARM_Null = CPUPropertyTypeARM::Null,
+    CPUPropertyTypeARM_HWVirt = CPUPropertyTypeARM::HWVirt,
+    CPUPropertyTypeARM_GICITS = CPUPropertyTypeARM::GICITS,
+    CPUPropertyTypeARM_32BitHack = 0x7fffffff
+} CPUPropertyTypeARM_T;
+# ifdef AssertCompileSize
+AssertCompileSize(CPUPropertyTypeARM_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 %}
@@ -2061,6 +2098,43 @@ AssertCompileSize(PartitionType_T, sizeof(PRUint32));
 %}
 
 [
+    uuid(a5ee031d-aba8-4a7f-887a-9a1f12e7cc6c),
+    scriptable
+]
+interface TrackedObjectState
+{
+    const PRUint32 None = 0;
+    const PRUint32 Alive = 1;
+    const PRUint32 Deleted = 2;
+    const PRUint32 Invalid = 3;
+};
+
+
+/* IDL typedef for enum TrackedObjectState and C++ mappings. */
+%{C++
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+%}
+typedef PRUint32 TrackedObjectState_T;
+%{C++
+# define TrackedObjectState_None TrackedObjectState::None
+# define TrackedObjectState_Alive TrackedObjectState::Alive
+# define TrackedObjectState_Deleted TrackedObjectState::Deleted
+# define TrackedObjectState_Invalid TrackedObjectState::Invalid
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum TrackedObjectState_T {
+    TrackedObjectState_None = TrackedObjectState::None,
+    TrackedObjectState_Alive = TrackedObjectState::Alive,
+    TrackedObjectState_Deleted = TrackedObjectState::Deleted,
+    TrackedObjectState_Invalid = TrackedObjectState::Invalid,
+    TrackedObjectState_32BitHack = 0x7fffffff
+} TrackedObjectState_T;
+# ifdef AssertCompileSize
+AssertCompileSize(TrackedObjectState_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+%}
+
+[
     uuid(00f5b10f-0021-4513-00f7-5bf4000982bf),
     scriptable
 ]
@@ -3093,6 +3167,61 @@ AssertCompileSize(RecordingRateControlMode_T, sizeof(PRUint32));
 %}
 
 [
+    uuid(c8a770a9-0412-467b-8dae-0e861279d0be),
+    scriptable
+]
+interface RecordingState
+{
+    const PRUint32 Unknown = 0;
+    const PRUint32 Initializing = 1;
+    const PRUint32 Started = 2;
+    const PRUint32 Paused = 3;
+    const PRUint32 Resumed = 4;
+    const PRUint32 Finalizing = 5;
+    const PRUint32 Stopped = 6;
+    const PRUint32 Canceled = 7;
+    const PRUint32 LimitReached = 8;
+    const PRUint32 Error = 9;
+};
+
+
+/* IDL typedef for enum RecordingState and C++ mappings. */
+%{C++
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+%}
+typedef PRUint32 RecordingState_T;
+%{C++
+# define RecordingState_Unknown RecordingState::Unknown
+# define RecordingState_Initializing RecordingState::Initializing
+# define RecordingState_Started RecordingState::Started
+# define RecordingState_Paused RecordingState::Paused
+# define RecordingState_Resumed RecordingState::Resumed
+# define RecordingState_Finalizing RecordingState::Finalizing
+# define RecordingState_Stopped RecordingState::Stopped
+# define RecordingState_Canceled RecordingState::Canceled
+# define RecordingState_LimitReached RecordingState::LimitReached
+# define RecordingState_Error RecordingState::Error
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum RecordingState_T {
+    RecordingState_Unknown = RecordingState::Unknown,
+    RecordingState_Initializing = RecordingState::Initializing,
+    RecordingState_Started = RecordingState::Started,
+    RecordingState_Paused = RecordingState::Paused,
+    RecordingState_Resumed = RecordingState::Resumed,
+    RecordingState_Finalizing = RecordingState::Finalizing,
+    RecordingState_Stopped = RecordingState::Stopped,
+    RecordingState_Canceled = RecordingState::Canceled,
+    RecordingState_LimitReached = RecordingState::LimitReached,
+    RecordingState_Error = RecordingState::Error,
+    RecordingState_32BitHack = 0x7fffffff
+} RecordingState_T;
+# ifdef AssertCompileSize
+AssertCompileSize(RecordingState_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+%}
+
+[
     uuid(6f6e67ef-9a32-4084-af84-5702679f882a),
     scriptable
 ]
@@ -3213,13 +3342,12 @@ AssertCompileSize(GraphicsControllerType_T, sizeof(PRUint32));
 %}
 
 [
-    uuid(5cd900a5-ec77-4a08-8f8d-c0a36f462a7c),
+    uuid(1BC430F8-D061-45FB-8830-155058FF3F66),
     scriptable
 ]
 interface GraphicsFeature
 {
     const PRUint32 None = 0;
-    const PRUint32 Acceleration2DVideo = 1;
     const PRUint32 Acceleration3D = 2;
 };
 
@@ -3231,12 +3359,10 @@ interface GraphicsFeature
 typedef PRUint32 GraphicsFeature_T;
 %{C++
 # define GraphicsFeature_None GraphicsFeature::None
-# define GraphicsFeature_Acceleration2DVideo GraphicsFeature::Acceleration2DVideo
 # define GraphicsFeature_Acceleration3D GraphicsFeature::Acceleration3D
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum GraphicsFeature_T {
     GraphicsFeature_None = GraphicsFeature::None,
-    GraphicsFeature_Acceleration2DVideo = GraphicsFeature::Acceleration2DVideo,
     GraphicsFeature_Acceleration3D = GraphicsFeature::Acceleration3D,
     GraphicsFeature_32BitHack = 0x7fffffff
 } GraphicsFeature_T;
@@ -3597,6 +3723,7 @@ AssertCompileSize(HostNetworkInterfaceStatus_T, sizeof(PRUint32));
 ]
 interface HostNetworkInterfaceType
 {
+    const PRUint32 Invalid = 0;
     const PRUint32 Bridged = 1;
     const PRUint32 HostOnly = 2;
 };
@@ -3608,10 +3735,12 @@ interface HostNetworkInterfaceType
 %}
 typedef PRUint32 HostNetworkInterfaceType_T;
 %{C++
+# define HostNetworkInterfaceType_Invalid HostNetworkInterfaceType::Invalid
 # define HostNetworkInterfaceType_Bridged HostNetworkInterfaceType::Bridged
 # define HostNetworkInterfaceType_HostOnly HostNetworkInterfaceType::HostOnly
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum HostNetworkInterfaceType_T {
+    HostNetworkInterfaceType_Invalid = HostNetworkInterfaceType::Invalid,
     HostNetworkInterfaceType_Bridged = HostNetworkInterfaceType::Bridged,
     HostNetworkInterfaceType_HostOnly = HostNetworkInterfaceType::HostOnly,
     HostNetworkInterfaceType_32BitHack = 0x7fffffff
@@ -5929,6 +6058,7 @@ interface NetworkAdapterType
     const PRUint32 WD8003 = 11;
     const PRUint32 ELNK2 = 12;
     const PRUint32 ELNK1 = 13;
+    const PRUint32 UsbNet = 14;
 };
 
 
@@ -5952,6 +6082,7 @@ typedef PRUint32 NetworkAdapterType_T;
 # define NetworkAdapterType_WD8003 NetworkAdapterType::WD8003
 # define NetworkAdapterType_ELNK2 NetworkAdapterType::ELNK2
 # define NetworkAdapterType_ELNK1 NetworkAdapterType::ELNK1
+# define NetworkAdapterType_UsbNet NetworkAdapterType::UsbNet
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum NetworkAdapterType_T {
     NetworkAdapterType_Null = NetworkAdapterType::Null,
@@ -5968,6 +6099,7 @@ typedef enum NetworkAdapterType_T {
     NetworkAdapterType_WD8003 = NetworkAdapterType::WD8003,
     NetworkAdapterType_ELNK2 = NetworkAdapterType::ELNK2,
     NetworkAdapterType_ELNK1 = NetworkAdapterType::ELNK1,
+    NetworkAdapterType_UsbNet = NetworkAdapterType::UsbNet,
     NetworkAdapterType_32BitHack = 0x7fffffff
 } NetworkAdapterType_T;
 # ifdef AssertCompileSize
@@ -7559,7 +7691,7 @@ VBOX_EXTERN_C const nsID IID_IVirtualBoxErrorInfo;
 %}
 
 [
-    uuid(4fdebbf0-be30-49c0-b315-e9749e1bded1),
+    uuid(90b89e78-1a61-4e66-af61-b9d2532e5632),
     scriptable
 ]
 interface INATNetwork : nsISupports
@@ -7591,6 +7723,14 @@ interface INATNetwork : nsISupports
         out unsigned long localMappingsSize,
         [array, size_is(localMappingsSize), retval] out wstring localMappings
     );
+
+    attribute boolean localhostReachable;
+
+    attribute boolean forwardBroadcast;
+
+    attribute unsigned long natMTU;
+
+    attribute unsigned long natMRU;
 
     attribute long loopbackIp6;
 
@@ -7642,6 +7782,10 @@ interface INATNetwork : nsISupports
     void InternalAndReservedMethod1INATNetwork();
 
     void InternalAndReservedMethod2INATNetwork();
+
+    void InternalAndReservedMethod3INATNetwork();
+
+    void InternalAndReservedMethod4INATNetwork();
 
 }; /* interface INATNetwork */
 
@@ -7701,6 +7845,30 @@ interface INATNetwork : nsISupports
 #define COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO(smth) NS_IMETHOD GetLocalMappings (PRUint32 * aLocalMappingsSize, PRUnichar * * * aLocalMappings) { return smth GetLocalMappings (aLocalMappingsSize, aLocalMappings); }
 #define COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO ((obj)->)
 #define COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_LocalMappings_TO (base::)
+#define COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO(smth) NS_IMETHOD GetLocalhostReachable (PRBool * aLocalhostReachable) { return smth GetLocalhostReachable (aLocalhostReachable); }
+#define COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_LocalhostReachable_TO (base::)
+#define COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO(smth) NS_IMETHOD SetLocalhostReachable (PRBool aLocalhostReachable) { return smth SetLocalhostReachable (aLocalhostReachable); }
+#define COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_LocalhostReachable_TO (base::)
+#define COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO(smth) NS_IMETHOD GetForwardBroadcast (PRBool * aForwardBroadcast) { return smth GetForwardBroadcast (aForwardBroadcast); }
+#define COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_ForwardBroadcast_TO (base::)
+#define COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO(smth) NS_IMETHOD SetForwardBroadcast (PRBool aForwardBroadcast) { return smth SetForwardBroadcast (aForwardBroadcast); }
+#define COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_ForwardBroadcast_TO (base::)
+#define COM_FORWARD_INATNetwork_GETTER_NatMTU_TO(smth) NS_IMETHOD GetNatMTU (PRUint32 * aNatMTU) { return smth GetNatMTU (aNatMTU); }
+#define COM_FORWARD_INATNetwork_GETTER_NatMTU_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_NatMTU_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_GETTER_NatMTU_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_NatMTU_TO (base::)
+#define COM_FORWARD_INATNetwork_SETTER_NatMTU_TO(smth) NS_IMETHOD SetNatMTU (PRUint32 aNatMTU) { return smth SetNatMTU (aNatMTU); }
+#define COM_FORWARD_INATNetwork_SETTER_NatMTU_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_NatMTU_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_SETTER_NatMTU_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_NatMTU_TO (base::)
+#define COM_FORWARD_INATNetwork_GETTER_NatMRU_TO(smth) NS_IMETHOD GetNatMRU (PRUint32 * aNatMRU) { return smth GetNatMRU (aNatMRU); }
+#define COM_FORWARD_INATNetwork_GETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_NatMRU_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_GETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_NatMRU_TO (base::)
+#define COM_FORWARD_INATNetwork_SETTER_NatMRU_TO(smth) NS_IMETHOD SetNatMRU (PRUint32 aNatMRU) { return smth SetNatMRU (aNatMRU); }
+#define COM_FORWARD_INATNetwork_SETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATNetwork_SETTER_NatMRU_TO ((obj)->)
+#define COM_FORWARD_INATNetwork_SETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATNetwork_SETTER_NatMRU_TO (base::)
 #define COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO(smth) NS_IMETHOD GetLoopbackIp6 (PRInt32 * aLoopbackIp6) { return smth GetLoopbackIp6 (aLoopbackIp6); }
 #define COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO_OBJ(obj) COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO ((obj)->)
 #define COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO_BASE(base) COM_FORWARD_INATNetwork_GETTER_LoopbackIp6_TO (base::)
@@ -8472,7 +8640,7 @@ VBOX_EXTERN_C const nsID IID_IDHCPIndividualConfig;
 %}
 
 [
-    uuid(d644ad1e-c501-4fc7-9ab6-aa6d763bc540),
+    uuid(2ce10519-3c09-45d8-a12d-e887786146b7),
     scriptable
 ]
 interface IVirtualBox : nsISupports
@@ -8807,6 +8975,20 @@ interface IVirtualBox : nsISupports
         [retval] out IProgress progressObject
     );
 
+    void getTrackedObject (
+        in wstring trObjId,
+        out nsISupports pIface,
+        out TrackedObjectState_T state,
+        out long long creationTime,
+        out long long deletionTime
+    );
+
+    void getTrackedObjectIds (
+        in wstring name,
+        out unsigned long objIdsListSize,
+        [array, size_is(objIdsListSize) , retval] out wstring objIdsList
+    );
+
     void InternalAndReservedMethod1IVirtualBox();
 
     void InternalAndReservedMethod2IVirtualBox();
@@ -8818,10 +9000,6 @@ interface IVirtualBox : nsISupports
     void InternalAndReservedMethod5IVirtualBox();
 
     void InternalAndReservedMethod6IVirtualBox();
-
-    void InternalAndReservedMethod7IVirtualBox();
-
-    void InternalAndReservedMethod8IVirtualBox();
 
 }; /* interface IVirtualBox */
 
@@ -9022,6 +9200,12 @@ interface IVirtualBox : nsISupports
 #define COM_FORWARD_IVirtualBox_FindProgressById_TO(smth) NS_IMETHOD FindProgressById (PRUnichar * aId, IProgress * * aProgressObject) { return smth FindProgressById (aId, aProgressObject); }
 #define COM_FORWARD_IVirtualBox_FindProgressById_TO_OBJ(obj) COM_FORWARD_IVirtualBox_FindProgressById_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_FindProgressById_TO_BASE(base) COM_FORWARD_IVirtualBox_FindProgressById_TO (base::)
+#define COM_FORWARD_IVirtualBox_GetTrackedObject_TO(smth) NS_IMETHOD GetTrackedObject (PRUnichar * aTrObjId, nsISupports * * aPIface, PRUint32 * aState, PRInt64 * aCreationTime, PRInt64 * aDeletionTime) { return smth GetTrackedObject (aTrObjId, aPIface, aState, aCreationTime, aDeletionTime); }
+#define COM_FORWARD_IVirtualBox_GetTrackedObject_TO_OBJ(obj) COM_FORWARD_IVirtualBox_GetTrackedObject_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_GetTrackedObject_TO_BASE(base) COM_FORWARD_IVirtualBox_GetTrackedObject_TO (base::)
+#define COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO(smth) NS_IMETHOD GetTrackedObjectIds (PRUnichar * aName, PRUint32 * aObjIdsListSize, PRUnichar * * * aObjIdsList) { return smth GetTrackedObjectIds (aName, aObjIdsListSize, aObjIdsList); }
+#define COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO_OBJ(obj) COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO_BASE(base) COM_FORWARD_IVirtualBox_GetTrackedObjectIds_TO (base::)
 #define COM_FORWARD_IVirtualBox_TO(smth) NS_FORWARD_IVIRTUALBOX (smth)
 #define COM_FORWARD_IVirtualBox_TO_OBJ(obj) COM_FORWARD_IVirtualBox_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_TO_BASE(base) COM_FORWARD_IVirtualBox_TO (base::)
@@ -9571,7 +9755,7 @@ VBOX_EXTERN_C const nsID IID_IVirtualSystemDescription;
 %}
 
 [
-    uuid(a71e5822-365b-49ba-bd14-c8d616e6740d),
+    uuid(39d1f56c-c1c2-40df-84e9-468062d84768),
     scriptable
 ]
 interface IUnattended : nsISupports
@@ -9593,6 +9777,8 @@ interface IUnattended : nsISupports
     attribute wstring additionsIsoPath;
 
     attribute boolean installGuestAdditions;
+
+    readonly attribute boolean productKeyRequired;
 
     attribute wstring validationKitIsoPath;
 
@@ -9764,6 +9950,9 @@ interface IUnattended : nsISupports
 #define COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO(smth) NS_IMETHOD SetInstallGuestAdditions (PRBool aInstallGuestAdditions) { return smth SetInstallGuestAdditions (aInstallGuestAdditions); }
 #define COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO_OBJ(obj) COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO ((obj)->)
 #define COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO_BASE(base) COM_FORWARD_IUnattended_SETTER_InstallGuestAdditions_TO (base::)
+#define COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO(smth) NS_IMETHOD GetProductKeyRequired (PRBool * aProductKeyRequired) { return smth GetProductKeyRequired (aProductKeyRequired); }
+#define COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO ((obj)->)
+#define COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_ProductKeyRequired_TO (base::)
 #define COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO(smth) NS_IMETHOD GetValidationKitIsoPath (PRUnichar * * aValidationKitIsoPath) { return smth GetValidationKitIsoPath (aValidationKitIsoPath); }
 #define COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO ((obj)->)
 #define COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_ValidationKitIsoPath_TO (base::)
@@ -10594,11 +10783,13 @@ VBOX_EXTERN_C const nsID IID_IRecordingScreenSettings;
 %}
 
 [
-    uuid(bea3ef5c-de2f-4b74-aa3a-15d6249371a0),
+    uuid(83cfdc66-4f20-4569-ad39-8722f7d472b3),
     scriptable
 ]
 interface IRecordingSettings : nsISupports
 {
+    attribute boolean paused;
+
     attribute boolean enabled;
 
     void getScreens (
@@ -10617,10 +10808,18 @@ interface IRecordingSettings : nsISupports
         [retval] out IProgress progress
     );
 
+    void resume();
+
 }; /* interface IRecordingSettings */
 
 /* Interface implementation forwarder macro */
 %{C++
+#define COM_FORWARD_IRecordingSettings_GETTER_Paused_TO(smth) NS_IMETHOD GetPaused (PRBool * aPaused) { return smth GetPaused (aPaused); }
+#define COM_FORWARD_IRecordingSettings_GETTER_Paused_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_GETTER_Paused_TO ((obj)->)
+#define COM_FORWARD_IRecordingSettings_GETTER_Paused_TO_BASE(base) COM_FORWARD_IRecordingSettings_GETTER_Paused_TO (base::)
+#define COM_FORWARD_IRecordingSettings_SETTER_Paused_TO(smth) NS_IMETHOD SetPaused (PRBool aPaused) { return smth SetPaused (aPaused); }
+#define COM_FORWARD_IRecordingSettings_SETTER_Paused_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_SETTER_Paused_TO ((obj)->)
+#define COM_FORWARD_IRecordingSettings_SETTER_Paused_TO_BASE(base) COM_FORWARD_IRecordingSettings_SETTER_Paused_TO (base::)
 #define COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO(smth) NS_IMETHOD GetEnabled (PRBool * aEnabled) { return smth GetEnabled (aEnabled); }
 #define COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO ((obj)->)
 #define COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO_BASE(base) COM_FORWARD_IRecordingSettings_GETTER_Enabled_TO (base::)
@@ -10639,6 +10838,9 @@ interface IRecordingSettings : nsISupports
 #define COM_FORWARD_IRecordingSettings_Start_TO(smth) NS_IMETHOD Start (IProgress * * aProgress) { return smth Start (aProgress); }
 #define COM_FORWARD_IRecordingSettings_Start_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_Start_TO ((obj)->)
 #define COM_FORWARD_IRecordingSettings_Start_TO_BASE(base) COM_FORWARD_IRecordingSettings_Start_TO (base::)
+#define COM_FORWARD_IRecordingSettings_Resume_TO(smth) NS_IMETHOD Resume() { return smth Resume(); }
+#define COM_FORWARD_IRecordingSettings_Resume_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_Resume_TO ((obj)->)
+#define COM_FORWARD_IRecordingSettings_Resume_TO_BASE(base) COM_FORWARD_IRecordingSettings_Resume_TO (base::)
 #define COM_FORWARD_IRecordingSettings_TO(smth) NS_FORWARD_IRECORDINGSETTINGS (smth)
 #define COM_FORWARD_IRecordingSettings_TO_OBJ(obj) COM_FORWARD_IRecordingSettings_TO ((obj)->)
 #define COM_FORWARD_IRecordingSettings_TO_BASE(base) COM_FORWARD_IRecordingSettings_TO (base::)
@@ -11243,13 +11445,11 @@ VBOX_EXTERN_C const nsID IID_IPlatformX86;
 %}
 
 [
-    uuid(75dff9be-6cb3-4857-bde6-2faf82ed9a8d),
+    uuid(002c75fe-3316-4920-aece-7d21ce6f624b),
     scriptable
 ]
 interface IPlatformARM : nsISupports
 {
-    readonly attribute boolean midlDoesNotLikeEmptyInterfaces;
-
     readonly attribute unsigned long InternalAndReservedAttribute1IPlatformARM;
 
     readonly attribute unsigned long InternalAndReservedAttribute2IPlatformARM;
@@ -11282,6 +11482,16 @@ interface IPlatformARM : nsISupports
 
     readonly attribute unsigned long InternalAndReservedAttribute16IPlatformARM;
 
+    void getCPUProperty (
+        in CPUPropertyTypeARM_T property,
+        [retval] out boolean value
+    );
+
+    void setCPUProperty (
+        in CPUPropertyTypeARM_T property,
+        in boolean value
+    );
+
     void InternalAndReservedMethod1IPlatformARM();
 
     void InternalAndReservedMethod2IPlatformARM();
@@ -11302,9 +11512,12 @@ interface IPlatformARM : nsISupports
 
 /* Interface implementation forwarder macro */
 %{C++
-#define COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces (PRBool * aMidlDoesNotLikeEmptyInterfaces) { return smth GetMidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
-#define COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_OBJ(obj) COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO ((obj)->)
-#define COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_BASE(base) COM_FORWARD_IPlatformARM_GETTER_MidlDoesNotLikeEmptyInterfaces_TO (base::)
+#define COM_FORWARD_IPlatformARM_GetCPUProperty_TO(smth) NS_IMETHOD GetCPUProperty (PRUint32 aProperty, PRBool * aValue) { return smth GetCPUProperty (aProperty, aValue); }
+#define COM_FORWARD_IPlatformARM_GetCPUProperty_TO_OBJ(obj) COM_FORWARD_IPlatformARM_GetCPUProperty_TO ((obj)->)
+#define COM_FORWARD_IPlatformARM_GetCPUProperty_TO_BASE(base) COM_FORWARD_IPlatformARM_GetCPUProperty_TO (base::)
+#define COM_FORWARD_IPlatformARM_SetCPUProperty_TO(smth) NS_IMETHOD SetCPUProperty (PRUint32 aProperty, PRBool aValue) { return smth SetCPUProperty (aProperty, aValue); }
+#define COM_FORWARD_IPlatformARM_SetCPUProperty_TO_OBJ(obj) COM_FORWARD_IPlatformARM_SetCPUProperty_TO ((obj)->)
+#define COM_FORWARD_IPlatformARM_SetCPUProperty_TO_BASE(base) COM_FORWARD_IPlatformARM_SetCPUProperty_TO (base::)
 #define COM_FORWARD_IPlatformARM_TO(smth) NS_FORWARD_IPLATFORMARM (smth)
 #define COM_FORWARD_IPlatformARM_TO_OBJ(obj) COM_FORWARD_IPlatformARM_TO ((obj)->)
 #define COM_FORWARD_IPlatformARM_TO_BASE(base) COM_FORWARD_IPlatformARM_TO (base::)
@@ -14886,7 +15099,7 @@ VBOX_EXTERN_C const nsID IID_ISystemProperties;
 %}
 
 [
-    uuid(ceb482fc-41b9-42a8-8538-9835ea33b6f2),
+    uuid(c6e30023-751e-487d-9bd1-595c22b104ba),
     scriptable
 ]
 interface IGuestOSType : nsISupports
@@ -14914,8 +15127,6 @@ interface IGuestOSType : nsISupports
     readonly attribute GraphicsControllerType_T recommendedGraphicsController;
 
     readonly attribute unsigned long recommendedVRAM;
-
-    readonly attribute boolean recommended2DVideoAcceleration;
 
     readonly attribute boolean recommended3DAcceleration;
 
@@ -15043,9 +15254,6 @@ interface IGuestOSType : nsISupports
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO(smth) NS_IMETHOD GetRecommendedVRAM (PRUint32 * aRecommendedVRAM) { return smth GetRecommendedVRAM (aRecommendedVRAM); }
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO (base::)
-#define COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO(smth) NS_IMETHOD GetRecommended2DVideoAcceleration (PRBool * aRecommended2DVideoAcceleration) { return smth GetRecommended2DVideoAcceleration (aRecommended2DVideoAcceleration); }
-#define COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO ((obj)->)
-#define COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO (base::)
 #define COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO(smth) NS_IMETHOD GetRecommended3DAcceleration (PRBool * aRecommended3DAcceleration) { return smth GetRecommended3DAcceleration (aRecommended3DAcceleration); }
 #define COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO (base::)
@@ -18710,7 +18918,7 @@ VBOX_EXTERN_C const nsID IID_IGuestScreenInfo;
 %}
 
 [
-    uuid(4680b2de-8690-11e9-b83d-5719e53cf1de),
+    uuid(14fd6676-ee6b-441a-988b-c83025ab693a),
     scriptable
 ]
 interface IDisplay : nsISupports
@@ -18839,11 +19047,6 @@ interface IDisplay : nsISupports
         in unsigned long screenId
     );
 
-    [noscript]
-    void completeVHWACommand (
-        in octetPtr command
-    );
-
     void viewportChanged (
         in unsigned long screenId,
         in unsigned long x,
@@ -18950,9 +19153,6 @@ interface IDisplay : nsISupports
 #define COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO(smth) NS_IMETHOD InvalidateAndUpdateScreen (PRUint32 aScreenId) { return smth InvalidateAndUpdateScreen (aScreenId); }
 #define COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO_OBJ(obj) COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO ((obj)->)
 #define COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO_BASE(base) COM_FORWARD_IDisplay_InvalidateAndUpdateScreen_TO (base::)
-#define COM_FORWARD_IDisplay_CompleteVHWACommand_TO(smth) NS_IMETHOD CompleteVHWACommand (PRUint8 * aCommand) { return smth CompleteVHWACommand (aCommand); }
-#define COM_FORWARD_IDisplay_CompleteVHWACommand_TO_OBJ(obj) COM_FORWARD_IDisplay_CompleteVHWACommand_TO ((obj)->)
-#define COM_FORWARD_IDisplay_CompleteVHWACommand_TO_BASE(base) COM_FORWARD_IDisplay_CompleteVHWACommand_TO (base::)
 #define COM_FORWARD_IDisplay_ViewportChanged_TO(smth) NS_IMETHOD ViewportChanged (PRUint32 aScreenId, PRUint32 aX, PRUint32 aY, PRUint32 aWidth, PRUint32 aHeight) { return smth ViewportChanged (aScreenId, aX, aY, aWidth, aHeight); }
 #define COM_FORWARD_IDisplay_ViewportChanged_TO_OBJ(obj) COM_FORWARD_IDisplay_ViewportChanged_TO ((obj)->)
 #define COM_FORWARD_IDisplay_ViewportChanged_TO_BASE(base) COM_FORWARD_IDisplay_ViewportChanged_TO (base::)
@@ -20704,7 +20904,7 @@ VBOX_EXTERN_C const nsID IID_ISharedFolder;
 %}
 
 [
-    uuid(739160a6-53ea-465b-bb6b-5326c20a3c0c),
+    uuid(84a4e585-4f4a-45bb-99e8-fc9b226376ad),
     scriptable
 ]
 interface IInternalSessionControl : nsISupports
@@ -20796,12 +20996,12 @@ interface IInternalSessionControl : nsISupports
     );
 
     void onRecordingStateChange (
-        in boolean enabled,
+        in RecordingState_T state,
         out IProgress progress
     );
 
     void onRecordingScreenStateChange (
-        in boolean enabled,
+        in RecordingState_T state,
         in unsigned long screen
     );
 
@@ -20967,10 +21167,10 @@ interface IInternalSessionControl : nsISupports
 #define COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO(smth) NS_IMETHOD OnVRDEServerChange (PRBool aRestart) { return smth OnVRDEServerChange (aRestart); }
 #define COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO ((obj)->)
 #define COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnVRDEServerChange_TO (base::)
-#define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO(smth) NS_IMETHOD OnRecordingStateChange (PRBool aEnabled, IProgress * * aProgress) { return smth OnRecordingStateChange (aEnabled, aProgress); }
+#define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO(smth) NS_IMETHOD OnRecordingStateChange (PRUint32 aState, IProgress * * aProgress) { return smth OnRecordingStateChange (aState, aProgress); }
 #define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO ((obj)->)
 #define COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnRecordingStateChange_TO (base::)
-#define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO(smth) NS_IMETHOD OnRecordingScreenStateChange (PRBool aEnabled, PRUint32 aScreen) { return smth OnRecordingScreenStateChange (aEnabled, aScreen); }
+#define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO(smth) NS_IMETHOD OnRecordingScreenStateChange (PRUint32 aState, PRUint32 aScreen) { return smth OnRecordingScreenStateChange (aState, aScreen); }
 #define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO ((obj)->)
 #define COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnRecordingScreenStateChange_TO (base::)
 #define COM_FORWARD_IInternalSessionControl_OnUSBControllerChange_TO(smth) NS_IMETHOD OnUSBControllerChange() { return smth OnUSBControllerChange(); }
@@ -21415,7 +21615,7 @@ VBOX_EXTERN_C const nsID IID_IPerformanceCollector;
 %}
 
 [
-    uuid(a06253a7-dcd2-44e3-8689-9c9c4b6b6234),
+    uuid(55f6cedb-141d-41bb-9995-ee2fc7f9101a),
     scriptable
 ]
 interface INATEngine : nsISupports
@@ -21447,6 +21647,14 @@ interface INATEngine : nsISupports
 
     attribute boolean forwardBroadcast;
 
+    attribute boolean enableTFTP;
+
+    attribute unsigned long natMRU;
+
+    attribute boolean IPv6Enabled;
+
+    attribute wstring IPv6Prefix;
+
     readonly attribute unsigned long InternalAndReservedAttribute1INATEngine;
 
     readonly attribute unsigned long InternalAndReservedAttribute2INATEngine;
@@ -21458,8 +21666,6 @@ interface INATEngine : nsISupports
     readonly attribute unsigned long InternalAndReservedAttribute5INATEngine;
 
     readonly attribute unsigned long InternalAndReservedAttribute6INATEngine;
-
-    readonly attribute unsigned long InternalAndReservedAttribute7INATEngine;
 
     void setNetworkSettings (
         in unsigned long mtu,
@@ -21571,6 +21777,30 @@ interface INATEngine : nsISupports
 #define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO(smth) NS_IMETHOD SetForwardBroadcast (PRBool aForwardBroadcast) { return smth SetForwardBroadcast (aForwardBroadcast); }
 #define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO ((obj)->)
 #define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO (base::)
+#define COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO(smth) NS_IMETHOD GetEnableTFTP (PRBool * aEnableTFTP) { return smth GetEnableTFTP (aEnableTFTP); }
+#define COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO ((obj)->)
+#define COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_EnableTFTP_TO (base::)
+#define COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO(smth) NS_IMETHOD SetEnableTFTP (PRBool aEnableTFTP) { return smth SetEnableTFTP (aEnableTFTP); }
+#define COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO ((obj)->)
+#define COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_EnableTFTP_TO (base::)
+#define COM_FORWARD_INATEngine_GETTER_NatMRU_TO(smth) NS_IMETHOD GetNatMRU (PRUint32 * aNatMRU) { return smth GetNatMRU (aNatMRU); }
+#define COM_FORWARD_INATEngine_GETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_NatMRU_TO ((obj)->)
+#define COM_FORWARD_INATEngine_GETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_NatMRU_TO (base::)
+#define COM_FORWARD_INATEngine_SETTER_NatMRU_TO(smth) NS_IMETHOD SetNatMRU (PRUint32 aNatMRU) { return smth SetNatMRU (aNatMRU); }
+#define COM_FORWARD_INATEngine_SETTER_NatMRU_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_NatMRU_TO ((obj)->)
+#define COM_FORWARD_INATEngine_SETTER_NatMRU_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_NatMRU_TO (base::)
+#define COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO(smth) NS_IMETHOD GetIPv6Enabled (PRBool * aIPv6Enabled) { return smth GetIPv6Enabled (aIPv6Enabled); }
+#define COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO ((obj)->)
+#define COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_IPv6Enabled_TO (base::)
+#define COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO(smth) NS_IMETHOD SetIPv6Enabled (PRBool aIPv6Enabled) { return smth SetIPv6Enabled (aIPv6Enabled); }
+#define COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO ((obj)->)
+#define COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_IPv6Enabled_TO (base::)
+#define COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO(smth) NS_IMETHOD GetIPv6Prefix (PRUnichar * * aIPv6Prefix) { return smth GetIPv6Prefix (aIPv6Prefix); }
+#define COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO ((obj)->)
+#define COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_IPv6Prefix_TO (base::)
+#define COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO(smth) NS_IMETHOD SetIPv6Prefix (const PRUnichar * aIPv6Prefix) { return smth SetIPv6Prefix (aIPv6Prefix); }
+#define COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO ((obj)->)
+#define COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_IPv6Prefix_TO (base::)
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO(smth) NS_IMETHOD SetNetworkSettings (PRUint32 aMtu, PRUint32 aSockSnd, PRUint32 aSockRcv, PRUint32 aTcpWndSnd, PRUint32 aTcpWndRcv) { return smth SetNetworkSettings (aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv); }
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO_OBJ(obj) COM_FORWARD_INATEngine_SetNetworkSettings_TO ((obj)->)
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO_BASE(base) COM_FORWARD_INATEngine_SetNetworkSettings_TO (base::)
@@ -23914,12 +24144,12 @@ VBOX_EXTERN_C const nsID IID_IVRDEServerInfoChangedEvent;
 %}
 
 [
-    uuid(e578bb9c-e88d-416b-bb45-08a4e7a5b463),
+    uuid(210498ae-c922-4e86-9c45-8cfb51395fc3),
     scriptable
 ]
 interface IRecordingStateChangedEvent : IEvent
 {
-    readonly attribute boolean enabled;
+    readonly attribute RecordingState_T state;
 
     readonly attribute IVirtualBoxErrorInfo error;
 
@@ -23927,9 +24157,9 @@ interface IRecordingStateChangedEvent : IEvent
 
 /* Interface implementation forwarder macro */
 %{C++
-#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO(smth) NS_IMETHOD GetEnabled (PRBool * aEnabled) { return smth GetEnabled (aEnabled); }
-#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO ((obj)->)
-#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO_BASE(base) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Enabled_TO (base::)
+#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO(smth) NS_IMETHOD GetState (PRUint32 * aState) { return smth GetState (aState); }
+#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO_OBJ(obj) COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO ((obj)->)
+#define COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO_BASE(base) COM_FORWARD_IRecordingStateChangedEvent_GETTER_State_TO (base::)
 #define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO(smth) NS_IMETHOD GetError (IVirtualBoxErrorInfo * * aError) { return smth GetError (aError); }
 #define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO_OBJ(obj) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO ((obj)->)
 #define COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO_BASE(base) COM_FORWARD_IRecordingStateChangedEvent_GETTER_Error_TO (base::)

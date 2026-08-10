@@ -157,6 +157,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a63c678334dd2ee7fe809c495249c324b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a63c678334dd2ee7fe809c495249c324b">findProgressById</a> (in wstringUUID id, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progressObject)</td></tr>
 <tr class="memdesc:a63c678334dd2ee7fe809c495249c324b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches through all progress objects known to VBoxSVC for an instance with the given GUID.  <br /></td></tr>
 <tr class="separator:a63c678334dd2ee7fe809c495249c324b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40de62f8924e69d5ddfc46ad64a945c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a40de62f8924e69d5ddfc46ad64a945c6">getTrackedObject</a> (in wstring trObjId, out $unknown pIface, out <a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4">TrackedObjectState</a> state, out long long creationTime, out long long deletionTime)</td></tr>
+<tr class="memdesc:a40de62f8924e69d5ddfc46ad64a945c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries the IUnknown interface to an object from the tracked object list.  <br /></td></tr>
+<tr class="separator:a40de62f8924e69d5ddfc46ad64a945c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5bbeecdd57559dbe0121c10ac583390"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#aa5bbeecdd57559dbe0121c10ac583390">getTrackedObjectIds</a> (in wstring name, [retval] out wstring[] objIdsList)</td></tr>
+<tr class="memdesc:aa5bbeecdd57559dbe0121c10ac583390"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the tracked object Ids list associated with the passed interface name.  <br /></td></tr>
+<tr class="separator:aa5bbeecdd57559dbe0121c10ac583390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -251,7 +257,7 @@ Public Attributes</h2></td></tr>
 <p>An instance of <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a> is required for the product to do anything useful. Even though the interface does not expose this, internally, <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a> is implemented as a singleton and actually lives in the process of the VirtualBox server (VBoxSVC.exe). This makes sure that <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a> can track the state of all virtual machines on a particular host, regardless of which frontend started them.</p>
 <p>To enumerate all the virtual machines on the host, use the <a class="el" href="interface_i_virtual_box.html#aad58f4626e004e340e418dae6f4cd1c0">IVirtualBox::machines</a><b></b> attribute.</p>
 <p>Error information handling is a bit special with <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a>: creating an instance will always succeed. The return of the actual error code/information is postponed to any attribute or method call. The reason for this is that COM likes to mutilate the error code and lose the detailed error information returned by instance creation.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{D644AD1E-C501-4FC7-9AB6-AA6D763BC540}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{2CE10519-3C09-45D8-A12D-E887786146B7}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1119c0bb89806de2606498a57a25fb20" name="a1119c0bb89806de2606498a57a25fb20"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1119c0bb89806de2606498a57a25fb20">&#9670;&#160;</a></span>composeMachineFilename()</h2>
@@ -1090,7 +1096,13 @@ With a "Floppy" device type, the file must be an RAW floppy image. After this me
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>In the current implementation, this operation is not implemented. </dd></dl>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_OBJECT_IN_USE</td><td>Shared folder already exists. </td></tr>
+<tr>
+<td>VBOX_E_FILE_ERROR</td><td>Shared folder <em>hostPath</em> not accessible. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -1117,7 +1129,11 @@ With a "Floppy" device type, the file must be an RAW floppy image. After this me
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>In the current implementation, this operation is not implemented. </dd></dl>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_OBJECT_NOT_FOUND</td><td>Shared folder <em>name</em> does not exist. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -1757,6 +1773,101 @@ On success, the <a class="el" href="interface_i_extra_data_changed_event.html">I
 
 </div>
 </div>
+<a id="a40de62f8924e69d5ddfc46ad64a945c6" name="a40de62f8924e69d5ddfc46ad64a945c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40de62f8924e69d5ddfc46ad64a945c6">&#9670;&#160;</a></span>getTrackedObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IVirtualBox::getTrackedObject </td>
+          <td>(</td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>trObjId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out $unknown&#160;</td>
+          <td class="paramname"><em>pIface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out <a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4">TrackedObjectState</a>&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out long long&#160;</td>
+          <td class="paramname"><em>creationTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out long long&#160;</td>
+          <td class="paramname"><em>deletionTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Queries the IUnknown interface to an object from the tracked object list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trObjId</td><td>The object Id.</td></tr>
+    <tr><td class="paramname">pIface</td><td>The found interface.</td></tr>
+    <tr><td class="paramname">state</td><td>The object state.</td></tr>
+    <tr><td class="paramname">creationTime</td><td>Creation time.</td></tr>
+    <tr><td class="paramname">deletionTime</td><td>Deletion time. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5bbeecdd57559dbe0121c10ac583390" name="aa5bbeecdd57559dbe0121c10ac583390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5bbeecdd57559dbe0121c10ac583390">&#9670;&#160;</a></span>getTrackedObjectIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IVirtualBox::getTrackedObjectIds </td>
+          <td>(</td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out wstring[]&#160;</td>
+          <td class="paramname"><em>objIdsList</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the tracked object Ids list associated with the passed interface name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The interface name.</td></tr>
+    <tr><td class="paramname">objIdsList</td><td>Array of the tracked object Ids associated with the specified interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="aa39d78ffaa90c1abe9d340a1a0738ed9" name="aa39d78ffaa90c1abe9d340a1a0738ed9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa39d78ffaa90c1abe9d340a1a0738ed9">&#9670;&#160;</a></span>version</h2>
@@ -2072,8 +2183,7 @@ On success, the <a class="el" href="interface_i_extra_data_changed_event.html">I
 
 <p>Collection of global shared folders. </p>
 <p>Global shared folders are available to all virtual machines.</p>
-<p>New shared folders are added to the collection using <a class="el" href="interface_i_virtual_box.html#abdd1cb34ac391e01eaff4bd5ad399d21">createSharedFolder</a><b></b>. Existing shared folders can be removed using <a class="el" href="interface_i_virtual_box.html#a27fb00872e826aad8a879617e6514d90">removeSharedFolder</a><b></b>.</p>
-<dl class="section note"><dt>Note</dt><dd>In the current version of the product, global shared folders are not implemented and therefore this collection is always empty. </dd></dl>
+<p>New shared folders are added to the collection using <a class="el" href="interface_i_virtual_box.html#abdd1cb34ac391e01eaff4bd5ad399d21">createSharedFolder</a><b></b>. Existing shared folders can be removed using <a class="el" href="interface_i_virtual_box.html#a27fb00872e826aad8a879617e6514d90">removeSharedFolder</a><b></b>. </p>
 
 </div>
 </div>

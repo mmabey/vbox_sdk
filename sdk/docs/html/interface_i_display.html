@@ -94,9 +94,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abe621842261b59bea24400826cf91af2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_display.html#abe621842261b59bea24400826cf91af2">invalidateAndUpdateScreen</a> (in unsigned long screenId)</td></tr>
 <tr class="memdesc:abe621842261b59bea24400826cf91af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redraw the specified VM screen.  <br /></td></tr>
 <tr class="separator:abe621842261b59bea24400826cf91af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acec4d4138daf56f5d520366c61579733"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_display.html#acec4d4138daf56f5d520366c61579733">completeVHWACommand</a> (in octetPtr command)</td></tr>
-<tr class="memdesc:acec4d4138daf56f5d520366c61579733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals that the Video HW Acceleration command has completed.  <br /></td></tr>
-<tr class="separator:acec4d4138daf56f5d520366c61579733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accb40d82b0d6d8db8d655929797713ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_display.html#accb40d82b0d6d8db8d655929797713ce">viewportChanged</a> (in unsigned long screenId, in unsigned long x, in unsigned long y, in unsigned long width, in unsigned long height)</td></tr>
 <tr class="memdesc:accb40d82b0d6d8db8d655929797713ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals that framebuffer window viewport has changed.  <br /></td></tr>
 <tr class="separator:accb40d82b0d6d8db8d655929797713ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,7 +126,7 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>The <a class="el" href="interface_i_display.html" title="The IDisplay interface represents the virtual machine&#39;s display.">IDisplay</a> interface represents the virtual machine's display. </p>
 <p>The object implementing this interface is contained in each <a class="el" href="interface_i_console.html#a57b6e398132075bfc31a14f291c9535b">IConsole::display</a><b></b> attribute and represents the visual output of the virtual machine.</p>
 <p>The virtual display supports pluggable output targets represented by the <a class="el" href="interface_i_framebuffer.html">IFramebuffer</a> interface. Examples of the output target are a window on the host computer or an RDP session's display on a remote computer.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{4680B2DE-8690-11E9-B83D-5719E53CF1DE}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{14FD6676-EE6B-441A-988B-C83025AB693A}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1a6bacf8fe27f888031276aff8511a2a" name="a1a6bacf8fe27f888031276aff8511a2a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a6bacf8fe27f888031276aff8511a2a">&#9670;&#160;</a></span>getScreenResolution()</h2>
@@ -724,33 +721,6 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="acec4d4138daf56f5d520366c61579733" name="acec4d4138daf56f5d520366c61579733"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acec4d4138daf56f5d520366c61579733">&#9670;&#160;</a></span>completeVHWACommand()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IDisplay::completeVHWACommand </td>
-          <td>(</td>
-          <td class="paramtype">in octetPtr&#160;</td>
-          <td class="paramname"><em>command</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Signals that the Video HW Acceleration command has completed. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">command</td><td>Pointer to VBOXVHWACMD containing the completed command.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section warning"><dt>Warning</dt><dd>This method is non-scriptable. In particular, this also means that an attempt to call it from a process other than the process that has created and owns the object will most likely fail or crash your application. </dd></dl>
 
 </div>
 </div>

@@ -773,7 +773,9 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15a506d1446312a5c48686e56b761658ef7">SettingsVersion_v1_18</a> = 20
 , <a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15a8568d9b579b993d844b88447051c1879">SettingsVersion_v1_19</a> = 21
 , <a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15a38d2b6945bdbd0bb8c12bce0d2bb03d2">SettingsVersion_v1_20</a> = 22
-, <a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613">SettingsVersion_Future</a> = 99999
+, <a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15a210f103889e3d8537525d63991c4cdbd">SettingsVersion_v1_21</a> = 23
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613">SettingsVersion_Future</a> = 99999
 <br />
  }</td></tr>
 <tr class="memdesc:aa906f6514b8178462bebfb8a66a41a15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Settings version of VirtualBox settings files.  <a href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15">More...</a><br /></td></tr>
@@ -873,6 +875,12 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a530334d917b49982d1f4c724116c4c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual CPU property type for x86-based CPUs.  <a href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65">More...</a><br /></td></tr>
 <tr class="separator:a530334d917b49982d1f4c724116c4c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa53e8e19964a198a6546d504b8faae1d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#aa53e8e19964a198a6546d504b8faae1d">CPUPropertyTypeARM</a> { <a class="el" href="_virtual_box_8idl.html#aa53e8e19964a198a6546d504b8faae1daa25076be0324016bf5c79b09e055a13f">CPUPropertyTypeARM_Null</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#aa53e8e19964a198a6546d504b8faae1da4e5bfd4770525b89c0fb706f535bb47a">CPUPropertyTypeARM_HWVirt</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#aa53e8e19964a198a6546d504b8faae1da8993747c713ec2d60f7e76e3ded4c5d9">CPUPropertyTypeARM_GICITS</a> = 2
+ }</td></tr>
+<tr class="memdesc:aa53e8e19964a198a6546d504b8faae1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual CPU property type for ARM-based CPUs.  <a href="_virtual_box_8idl.html#aa53e8e19964a198a6546d504b8faae1d">More...</a><br /></td></tr>
+<tr class="separator:aa53e8e19964a198a6546d504b8faae1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90b543d84f42a1e477aafa7303079cb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cb">HWVirtExPropertyType</a> { <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cbab852198092627add1894d15574a92382">HWVirtExPropertyType_Null</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cba9c78077ab3a020d7a513570d6ac5b8c9">HWVirtExPropertyType_Enabled</a> = 1
@@ -1225,6 +1233,13 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a0be685e8703e6aa82a6433302f11c1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3774dc14080d6175572cb489ada17aa4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4">TrackedObjectState</a> { <a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4af5cfc0e2ca40fcb1e5ec8216d30fe9ee">TrackedObjectState_None</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4af22487f2e5cd7ddb8457baf53a4b6323">TrackedObjectState_Alive</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4a2940d1556c27187d6a7b920ee5e33b2e">TrackedObjectState_Deleted</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4a32d6d132cf35d2a200317eff9fe1a7c6">TrackedObjectState_Invalid</a> = 3
+ }</td></tr>
+<tr class="memdesc:a3774dc14080d6175572cb489ada17aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tracked Object State.  <a href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4">More...</a><br /></td></tr>
+<tr class="separator:a3774dc14080d6175572cb489ada17aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aa07ba542bbdee1fd67178ec1882eac"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a3aa07ba542bbdee1fd67178ec1882eac">DHCPOption</a> { <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#a3aa07ba542bbdee1fd67178ec1882eaca1c5c5769ad25bca0c32a505cb6a70b8d">DHCPOption_SubnetMask</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a3aa07ba542bbdee1fd67178ec1882eacac5ee16420c4c6aa23cc498b419e01831">DHCPOption_TimeOffset</a> = 2
@@ -1516,6 +1531,23 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ac04d655863db457f01a66b86b191de3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recording video rate control mode enumeration.  <a href="_virtual_box_8idl.html#ac04d655863db457f01a66b86b191de3f">More...</a><br /></td></tr>
 <tr class="separator:ac04d655863db457f01a66b86b191de3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77efeb5a39ee7f2d9c2d7603eddcc926"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926">RecordingState</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926a9ee44aca2afc8f7b4489cd2468b00f26">RecordingState_Unknown</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926ab138145209e0a116ba661cade1fa346e">RecordingState_Initializing</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926a3120ac67ef001bb16e23b68b7925c209">RecordingState_Started</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926ae753a43b82172c4b23beb3922b93152a">RecordingState_Paused</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926a85d9166d11b0ea7e26bb46cabc1c9dc5">RecordingState_Resumed</a> = 4
+, <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926ab61dd893c48e206bf96b5c1f757b2130">RecordingState_Finalizing</a> = 5
+, <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926abafefcfa107fc805fd6a9c0239be8d90">RecordingState_Stopped</a> = 6
+, <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926afe6cf521b280aab05ad0760130d9de7d">RecordingState_Canceled</a> = 7
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926a8a7f8ab1e078e9bb303482d79fb518c3">RecordingState_LimitReached</a> = 8
+, <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926ace2c4bd71a4ce0dd9deade758f040a9c">RecordingState_Error</a> = 9
+<br />
+ }</td></tr>
+<tr class="memdesc:a77efeb5a39ee7f2d9c2d7603eddcc926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recording state enumeration.  <a href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926">More...</a><br /></td></tr>
+<tr class="separator:a77efeb5a39ee7f2d9c2d7603eddcc926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7456a1be27da2089f984a0ede62c6c50"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a7456a1be27da2089f984a0ede62c6c50">SignatureType</a> { <a class="el" href="_virtual_box_8idl.html#a7456a1be27da2089f984a0ede62c6c50ac04b3c2c67075b730e6e01f68083e915">SignatureType_X509</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a7456a1be27da2089f984a0ede62c6c50a72c389a4676d59fe9484a65b86645b7a">SignatureType_Sha256</a> = 1
  }</td></tr>
@@ -1547,7 +1579,6 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:a77bfcf0f72330ee7a747ebae6a6ce265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphics controller type, used with <a class="el" href="interface_i_graphics_adapter.html#a0dfb69337c32ff6b610d227e2364d944">IGraphicsAdapter::graphicsControllerType</a><b></b>.  <a href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265">More...</a><br /></td></tr>
 <tr class="separator:a77bfcf0f72330ee7a747ebae6a6ce265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24a4dc7346d7db440e929b06dd39785d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785d">GraphicsFeature</a> { <a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785da744307d3d35821949b2ca20aa840e28f">GraphicsFeature_None</a> = 0
-, <a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785da04dee963a28bd397138cd05b82a7c268">GraphicsFeature_Acceleration2DVideo</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785da16ba700a5caabce54d918026826d96fb">GraphicsFeature_Acceleration3D</a> = 2
  }</td></tr>
 <tr class="memdesc:a24a4dc7346d7db440e929b06dd39785d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphics features.  <a href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785d">More...</a><br /></td></tr>
@@ -1631,7 +1662,8 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aacde444027113127ae0d658f6d2e1513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current status of the interface.  <a href="_virtual_box_8idl.html#aacde444027113127ae0d658f6d2e1513">More...</a><br /></td></tr>
 <tr class="separator:aacde444027113127ae0d658f6d2e1513"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82cd070887093a79bba24ada15d0d73a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a82cd070887093a79bba24ada15d0d73a">HostNetworkInterfaceType</a> { <a class="el" href="_virtual_box_8idl.html#a82cd070887093a79bba24ada15d0d73aa0d65170033a8706a0b069a63a768e79f">HostNetworkInterfaceType_Bridged</a> = 1
+<tr class="memitem:a82cd070887093a79bba24ada15d0d73a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a82cd070887093a79bba24ada15d0d73a">HostNetworkInterfaceType</a> { <a class="el" href="_virtual_box_8idl.html#a82cd070887093a79bba24ada15d0d73aa415cfd00b620f5daf23b55edea838518">HostNetworkInterfaceType_Invalid</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a82cd070887093a79bba24ada15d0d73aa0d65170033a8706a0b069a63a768e79f">HostNetworkInterfaceType_Bridged</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a82cd070887093a79bba24ada15d0d73aa83b991fc2b0667e11723e97e34a83640">HostNetworkInterfaceType_HostOnly</a> = 2
  }</td></tr>
 <tr class="memdesc:a82cd070887093a79bba24ada15d0d73a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network interface type.  <a href="_virtual_box_8idl.html#a82cd070887093a79bba24ada15d0d73a">More...</a><br /></td></tr>
@@ -2216,6 +2248,7 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1a9f7b01f4b7879dfc6588c53f3ac487e3">NetworkAdapterType_ELNK2</a> = 12
 , <a class="el" href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1ab7cac34b7c794fbb2186fc4dfa465366">NetworkAdapterType_ELNK1</a> = 13
+, <a class="el" href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1ac65622e540ae9d825a5ac8c98bb64808">NetworkAdapterType_UsbNet</a> = 14
 <br />
  }</td></tr>
 <tr class="memdesc:a96c97a415133544e2413087febd964b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network adapter type.  <a href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1">More...</a><br /></td></tr>
@@ -2716,7 +2749,7 @@ Variables</h2></td></tr>
 
 <p>Settings version of VirtualBox settings files. </p>
 <p>This is written to the "version" attribute of the root "VirtualBox" element in the settings file XML and indicates which VirtualBox version wrote the file.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{6AD3DA60-5ED2-49CD-B882-96A72308EBF6}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{85D84A63-BDA8-424E-95FE-3650B6CF5A95}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15ac7438cda6a4ec92b613067984bf8c94a" name="aa906f6514b8178462bebfb8a66a41a15ac7438cda6a4ec92b613067984bf8c94a"></a>SettingsVersion_Null&#160;</td><td class="fielddoc"><p>Null value, indicates invalid version. </p>
 </td></tr>
@@ -2764,7 +2797,9 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15a38d2b6945bdbd0bb8c12bce0d2bb03d2" name="aa906f6514b8178462bebfb8a66a41a15a38d2b6945bdbd0bb8c12bce0d2bb03d2"></a>SettingsVersion_v1_20&#160;</td><td class="fielddoc"><p>Settings version "1.20", written by VirtualBox 7.1.x. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613" name="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613"></a>SettingsVersion_Future&#160;</td><td class="fielddoc"><p>Settings version greater than "1.20", written by a future VirtualBox version. </p>
+<tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15a210f103889e3d8537525d63991c4cdbd" name="aa906f6514b8178462bebfb8a66a41a15a210f103889e3d8537525d63991c4cdbd"></a>SettingsVersion_v1_21&#160;</td><td class="fielddoc"><p>Settings version "1.21", written by VirtualBox 7.2.x. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613" name="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613"></a>SettingsVersion_Future&#160;</td><td class="fielddoc"><p>Settings version greater than "1.21", written by a future VirtualBox version. </p>
 </td></tr>
 </table>
 
@@ -3084,6 +3119,33 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a7070b11565da99f885cb20a69e5702aa" name="a530334d917b49982d1f4c724116c4c65a7070b11565da99f885cb20a69e5702aa"></a>CPUPropertyTypeX86_MDSClearOnVMEntry&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-12126, CVE-2018-12127, or CVE-2018-12130, clears the relevant MDS buffers on every VM entry. </p>
 <p>This setting may slow down workloads causing many VM exits, so it is only recommended for situation where there is a real need to be paranoid. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="aa53e8e19964a198a6546d504b8faae1d" name="aa53e8e19964a198a6546d504b8faae1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa53e8e19964a198a6546d504b8faae1d">&#9670;&#160;</a></span>CPUPropertyTypeARM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#aa53e8e19964a198a6546d504b8faae1d">CPUPropertyTypeARM</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Virtual CPU property type for ARM-based CPUs. </p>
+<p>This enumeration represents possible values of the <a class="el" href="interface_i_platform_a_r_m.html" title="The ARM-specific platform properties for a virtual machine.">IPlatformARM</a> get- and setCPUProperty methods.</p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{F84EB90A-3E01-47CF-88C1-F8FC559DD37A}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa53e8e19964a198a6546d504b8faae1daa25076be0324016bf5c79b09e055a13f" name="aa53e8e19964a198a6546d504b8faae1daa25076be0324016bf5c79b09e055a13f"></a>CPUPropertyTypeARM_Null&#160;</td><td class="fielddoc"><p>Null value (never used by the API). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa53e8e19964a198a6546d504b8faae1da4e5bfd4770525b89c0fb706f535bb47a" name="aa53e8e19964a198a6546d504b8faae1da4e5bfd4770525b89c0fb706f535bb47a"></a>CPUPropertyTypeARM_HWVirt&#160;</td><td class="fielddoc"><p>Enables the hardware virtualization feature on the guest CPU. </p>
+<p>This requires the nested virtualization feature on the host CPU. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa53e8e19964a198a6546d504b8faae1da8993747c713ec2d60f7e76e3ded4c5d9" name="aa53e8e19964a198a6546d504b8faae1da8993747c713ec2d60f7e76e3ded4c5d9"></a>CPUPropertyTypeARM_GICITS&#160;</td><td class="fielddoc"><p>Enables the Interrupt Translation Service (ITS) for the GIC. </p>
 </td></tr>
 </table>
 
@@ -3905,6 +3967,29 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a3774dc14080d6175572cb489ada17aa4" name="a3774dc14080d6175572cb489ada17aa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3774dc14080d6175572cb489ada17aa4">&#9670;&#160;</a></span>TrackedObjectState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a3774dc14080d6175572cb489ada17aa4">TrackedObjectState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tracked Object State. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{A5EE031D-ABA8-4A7F-887A-9A1F12E7CC6C}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3774dc14080d6175572cb489ada17aa4af5cfc0e2ca40fcb1e5ec8216d30fe9ee" name="a3774dc14080d6175572cb489ada17aa4af5cfc0e2ca40fcb1e5ec8216d30fe9ee"></a>TrackedObjectState_None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3774dc14080d6175572cb489ada17aa4af22487f2e5cd7ddb8457baf53a4b6323" name="a3774dc14080d6175572cb489ada17aa4af22487f2e5cd7ddb8457baf53a4b6323"></a>TrackedObjectState_Alive&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3774dc14080d6175572cb489ada17aa4a2940d1556c27187d6a7b920ee5e33b2e" name="a3774dc14080d6175572cb489ada17aa4a2940d1556c27187d6a7b920ee5e33b2e"></a>TrackedObjectState_Deleted&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3774dc14080d6175572cb489ada17aa4a32d6d132cf35d2a200317eff9fe1a7c6" name="a3774dc14080d6175572cb489ada17aa4a32d6d132cf35d2a200317eff9fe1a7c6"></a>TrackedObjectState_Invalid&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a3aa07ba542bbdee1fd67178ec1882eac" name="a3aa07ba542bbdee1fd67178ec1882eac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3aa07ba542bbdee1fd67178ec1882eac">&#9670;&#160;</a></span>DHCPOption</h2>
 
@@ -4579,6 +4664,47 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a77efeb5a39ee7f2d9c2d7603eddcc926" name="a77efeb5a39ee7f2d9c2d7603eddcc926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77efeb5a39ee7f2d9c2d7603eddcc926">&#9670;&#160;</a></span>RecordingState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a77efeb5a39ee7f2d9c2d7603eddcc926">RecordingState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recording state enumeration. </p>
+<dl class="section note"><dt>Note</dt><dd>Not all states might be available / implemented for all codecs.</dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{C8A770A9-0412-467B-8DAE-0E861279D0BE}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926a9ee44aca2afc8f7b4489cd2468b00f26" name="a77efeb5a39ee7f2d9c2d7603eddcc926a9ee44aca2afc8f7b4489cd2468b00f26"></a>RecordingState_Unknown&#160;</td><td class="fielddoc"><p>Recording state is unknown currently, i.e. </p>
+<p>if no recording has been ever started yet. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926ab138145209e0a116ba661cade1fa346e" name="a77efeb5a39ee7f2d9c2d7603eddcc926ab138145209e0a116ba661cade1fa346e"></a>RecordingState_Initializing&#160;</td><td class="fielddoc"><p>Recording has been requested to start (enabled) and is initializing. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926a3120ac67ef001bb16e23b68b7925c209" name="a77efeb5a39ee7f2d9c2d7603eddcc926a3120ac67ef001bb16e23b68b7925c209"></a>RecordingState_Started&#160;</td><td class="fielddoc"><p>Recording has been started and is recording. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926ae753a43b82172c4b23beb3922b93152a" name="a77efeb5a39ee7f2d9c2d7603eddcc926ae753a43b82172c4b23beb3922b93152a"></a>RecordingState_Paused&#160;</td><td class="fielddoc"><p>Recording has been paused. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926a85d9166d11b0ea7e26bb46cabc1c9dc5" name="a77efeb5a39ee7f2d9c2d7603eddcc926a85d9166d11b0ea7e26bb46cabc1c9dc5"></a>RecordingState_Resumed&#160;</td><td class="fielddoc"><p>Recording has been resumed from the paused state. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926ab61dd893c48e206bf96b5c1f757b2130" name="a77efeb5a39ee7f2d9c2d7603eddcc926ab61dd893c48e206bf96b5c1f757b2130"></a>RecordingState_Finalizing&#160;</td><td class="fielddoc"><p>Recording has been requested to stop and currently is in its finalizing stage. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926abafefcfa107fc805fd6a9c0239be8d90" name="a77efeb5a39ee7f2d9c2d7603eddcc926abafefcfa107fc805fd6a9c0239be8d90"></a>RecordingState_Stopped&#160;</td><td class="fielddoc"><p>Recording has been stopped. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926afe6cf521b280aab05ad0760130d9de7d" name="a77efeb5a39ee7f2d9c2d7603eddcc926afe6cf521b280aab05ad0760130d9de7d"></a>RecordingState_Canceled&#160;</td><td class="fielddoc"><p>Recording has been canceled. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926a8a7f8ab1e078e9bb303482d79fb518c3" name="a77efeb5a39ee7f2d9c2d7603eddcc926a8a7f8ab1e078e9bb303482d79fb518c3"></a>RecordingState_LimitReached&#160;</td><td class="fielddoc"><p>A recording limit has been reached (time / size). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77efeb5a39ee7f2d9c2d7603eddcc926ace2c4bd71a4ce0dd9deade758f040a9c" name="a77efeb5a39ee7f2d9c2d7603eddcc926ace2c4bd71a4ce0dd9deade758f040a9c"></a>RecordingState_Error&#160;</td><td class="fielddoc"><p>Recording has reached an unrecoverable error state and can't continue. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="a7456a1be27da2089f984a0ede62c6c50" name="a7456a1be27da2089f984a0ede62c6c50"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7456a1be27da2089f984a0ede62c6c50">&#9670;&#160;</a></span>SignatureType</h2>
 
@@ -4681,11 +4807,9 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Graphics features. </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{5CD900A5-EC77-4A08-8F8D-C0A36F462A7C}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{1BC430F8-D061-45FB-8830-155058FF3F66}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a24a4dc7346d7db440e929b06dd39785da744307d3d35821949b2ca20aa840e28f" name="a24a4dc7346d7db440e929b06dd39785da744307d3d35821949b2ca20aa840e28f"></a>GraphicsFeature_None&#160;</td><td class="fielddoc"><p>No feature specified, invalid. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a24a4dc7346d7db440e929b06dd39785da04dee963a28bd397138cd05b82a7c268" name="a24a4dc7346d7db440e929b06dd39785da04dee963a28bd397138cd05b82a7c268"></a>GraphicsFeature_Acceleration2DVideo&#160;</td><td class="fielddoc"><p>2D video acceleration. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a24a4dc7346d7db440e929b06dd39785da16ba700a5caabce54d918026826d96fb" name="a24a4dc7346d7db440e929b06dd39785da16ba700a5caabce54d918026826d96fb"></a>GraphicsFeature_Acceleration3D&#160;</td><td class="fielddoc"><p>3D acceleration. </p>
 </td></tr>
@@ -4967,7 +5091,8 @@ Variables</h2></td></tr>
 <p>Network interface type. </p>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{67431B00-9946-48A2-BC02-B25C5919F4F3}</code> </dd></dl>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a82cd070887093a79bba24ada15d0d73aa0d65170033a8706a0b069a63a768e79f" name="a82cd070887093a79bba24ada15d0d73aa0d65170033a8706a0b069a63a768e79f"></a>HostNetworkInterfaceType_Bridged&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a82cd070887093a79bba24ada15d0d73aa415cfd00b620f5daf23b55edea838518" name="a82cd070887093a79bba24ada15d0d73aa415cfd00b620f5daf23b55edea838518"></a>HostNetworkInterfaceType_Invalid&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a82cd070887093a79bba24ada15d0d73aa0d65170033a8706a0b069a63a768e79f" name="a82cd070887093a79bba24ada15d0d73aa0d65170033a8706a0b069a63a768e79f"></a>HostNetworkInterfaceType_Bridged&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a82cd070887093a79bba24ada15d0d73aa83b991fc2b0667e11723e97e34a83640" name="a82cd070887093a79bba24ada15d0d73aa83b991fc2b0667e11723e97e34a83640"></a>HostNetworkInterfaceType_HostOnly&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -6719,6 +6844,8 @@ On Windows guests this function currently only supports reporting contiguous idl
 </td></tr>
 <tr><td class="fieldname"><a id="a96c97a415133544e2413087febd964b1ab7cac34b7c794fbb2186fc4dfa465366" name="a96c97a415133544e2413087febd964b1ab7cac34b7c794fbb2186fc4dfa465366"></a>NetworkAdapterType_ELNK1&#160;</td><td class="fielddoc"><p>3Com EtherLink network card (3C501/3C500). </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a96c97a415133544e2413087febd964b1ac65622e540ae9d825a5ac8c98bb64808" name="a96c97a415133544e2413087febd964b1ac65622e540ae9d825a5ac8c98bb64808"></a>NetworkAdapterType_UsbNet&#160;</td><td class="fielddoc"><p>Ethernet over USB device (usbnet). </p>
+</td></tr>
 </table>
 
 </div>
@@ -6956,7 +7083,7 @@ On Windows guests this function currently only supports reporting contiguous idl
 </td></tr>
 <tr><td class="fieldname"><a id="ad10f87f11247e640ab600da02f0f0bbaabfea1f487d1c9518748e29ad32f6e0c2" name="ad10f87f11247e640ab600da02f0f0bbaabfea1f487d1c9518748e29ad32f6e0c2"></a>AudioDriverType_Pulse&#160;</td><td class="fielddoc"><p>PulseAudio (Linux hosts only). </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ad10f87f11247e640ab600da02f0f0bbaac6da0ab4fca38a32cfb76e2e2186985d" name="ad10f87f11247e640ab600da02f0f0bbaac6da0ab4fca38a32cfb76e2e2186985d"></a>AudioDriverType_WinMM&#160;</td><td class="fielddoc"><p>Windows multimedia (Windows hosts only, not supported at the moment). </p>
+<tr><td class="fieldname"><a id="ad10f87f11247e640ab600da02f0f0bbaac6da0ab4fca38a32cfb76e2e2186985d" name="ad10f87f11247e640ab600da02f0f0bbaac6da0ab4fca38a32cfb76e2e2186985d"></a>AudioDriverType_WinMM&#160;</td><td class="fielddoc"><p>Reserved for historical reasons. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ad10f87f11247e640ab600da02f0f0bbaa48baf06505e11194cf17f3059783edaa" name="ad10f87f11247e640ab600da02f0f0bbaa48baf06505e11194cf17f3059783edaa"></a>AudioDriverType_DirectSound&#160;</td><td class="fielddoc"><p>DirectSound (Windows hosts only). </p>
 </td></tr>

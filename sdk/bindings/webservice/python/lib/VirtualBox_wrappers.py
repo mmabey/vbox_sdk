@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2026 Oracle and/or its affiliates.
+# Copyright (C) 2008-2025 Oracle and/or its affiliates.
 #
 # This file is part of a free software library; you can redistribute
 # it and/or modify it under the terms of the GNU Lesser General
@@ -756,6 +756,62 @@ class INATNetwork(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().INATNetwork_getLocalMappings(req)
        return String(self.mgr,val._returnval, True)
+   def getLocalhostReachable(self):
+       req=INATNetwork_getLocalhostReachableRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATNetwork_getLocalhostReachable(req)
+       return Boolean(self.mgr,val._returnval)
+   def setLocalhostReachable(self, value):
+       req=INATNetwork_setLocalhostReachableRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._localhostReachable = value
+       else:
+            req._localhostReachable = value.handle
+       self.mgr.getPort().INATNetwork_setLocalhostReachable(req)
+
+   def getForwardBroadcast(self):
+       req=INATNetwork_getForwardBroadcastRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATNetwork_getForwardBroadcast(req)
+       return Boolean(self.mgr,val._returnval)
+   def setForwardBroadcast(self, value):
+       req=INATNetwork_setForwardBroadcastRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._forwardBroadcast = value
+       else:
+            req._forwardBroadcast = value.handle
+       self.mgr.getPort().INATNetwork_setForwardBroadcast(req)
+
+   def getNatMTU(self):
+       req=INATNetwork_getNatMTURequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATNetwork_getNatMTU(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setNatMTU(self, value):
+       req=INATNetwork_setNatMTURequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._natMTU = value
+       else:
+            req._natMTU = value.handle
+       self.mgr.getPort().INATNetwork_setNatMTU(req)
+
+   def getNatMRU(self):
+       req=INATNetwork_getNatMRURequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATNetwork_getNatMRU(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setNatMRU(self, value):
+       req=INATNetwork_setNatMRURequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._natMRU = value
+       else:
+            req._natMRU = value.handle
+       self.mgr.getPort().INATNetwork_setNatMRU(req)
+
    def getLoopbackIp6(self):
        req=INATNetwork_getLoopbackIp6RequestMsg()
        req._this=self.handle
@@ -795,6 +851,14 @@ class INATNetwork(IUnknown):
          'eventSource':[getEventSource,None],
          'portForwardRules4':[getPortForwardRules4,None],
          'localMappings':[getLocalMappings,None],
+         'localhostReachable':[getLocalhostReachable,setLocalhostReachable,
+        ],
+         'forwardBroadcast':[getForwardBroadcast,setForwardBroadcast,
+        ],
+         'natMTU':[getNatMTU,setNatMTU,
+        ],
+         'natMRU':[getNatMRU,setNatMRU,
+        ],
          'loopbackIp6':[getLoopbackIp6,setLoopbackIp6,
         ],
          'portForwardRules6':[getPortForwardRules6,None]}
@@ -2478,6 +2542,26 @@ class IVirtualBox(IUnknown):
        return IProgress(self.mgr,val._returnval)
 
 
+   def getTrackedObject(self, _arg_trObjId):
+       req=IVirtualBox_getTrackedObjectRequestMsg()
+       req._this=self.handle
+       
+       req._trObjId=_arg_trObjId
+       val=self.mgr.getPort().IVirtualBox_getTrackedObject(req)
+       
+       return IUnknown(self.mgr,val._pIface), TrackedObjectState(self.mgr,val._state), Long(self.mgr,val._creationTime), Long(self.mgr,val._deletionTime)
+
+
+   def getTrackedObjectIds(self, _arg_name):
+       req=IVirtualBox_getTrackedObjectIdsRequestMsg()
+       req._this=self.handle
+       
+       req._name=_arg_name
+       val=self.mgr.getPort().IVirtualBox_getTrackedObjectIds(req)
+       
+       return String(self.mgr,val._returnval, True)
+
+
    def getVersion(self):
        req=IVirtualBox_getVersionRequestMsg()
        req._this=self.handle
@@ -3621,6 +3705,11 @@ class IUnattended(IUnknown):
             req._installGuestAdditions = value.handle
        self.mgr.getPort().IUnattended_setInstallGuestAdditions(req)
 
+   def getProductKeyRequired(self):
+       req=IUnattended_getProductKeyRequiredRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IUnattended_getProductKeyRequired(req)
+       return Boolean(self.mgr,val._returnval)
    def getValidationKitIsoPath(self):
        req=IUnattended_getValidationKitIsoPathRequestMsg()
        req._this=self.handle
@@ -3961,6 +4050,7 @@ class IUnattended(IUnknown):
         ],
          'installGuestAdditions':[getInstallGuestAdditions,setInstallGuestAdditions,
         ],
+         'productKeyRequired':[getProductKeyRequired,None],
          'validationKitIsoPath':[getValidationKitIsoPath,setValidationKitIsoPath,
         ],
          'installTestExecService':[getInstallTestExecService,setInstallTestExecService,
@@ -5077,6 +5167,29 @@ class IRecordingSettings(IUnknown):
        return IProgress(self.mgr,val._returnval)
 
 
+   def resume(self):
+       req=IRecordingSettings_resumeRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IRecordingSettings_resume(req)
+       
+       return 
+
+
+   def getPaused(self):
+       req=IRecordingSettings_getPausedRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRecordingSettings_getPaused(req)
+       return Boolean(self.mgr,val._returnval)
+   def setPaused(self, value):
+       req=IRecordingSettings_setPausedRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._paused = value
+       else:
+            req._paused = value.handle
+       self.mgr.getPort().IRecordingSettings_setPaused(req)
+
    def getEnabled(self):
        req=IRecordingSettings_getEnabledRequestMsg()
        req._this=self.handle
@@ -5103,7 +5216,9 @@ class IRecordingSettings(IUnknown):
        return IProgress(self.mgr,val._returnval)
 
 
-   _Attrs_={         'enabled':[getEnabled,setEnabled,
+   _Attrs_={         'paused':[getPaused,setPaused,
+        ],
+         'enabled':[getEnabled,setEnabled,
         ],
          'screens':[getScreens,None],
          'progress':[getProgress,None]}
@@ -6101,14 +6216,30 @@ class IPlatformARM(IUnknown):
          self.__dict__[name] = val
 
    
-   def getMidlDoesNotLikeEmptyInterfaces(self):
-       req=IPlatformARM_getMidlDoesNotLikeEmptyInterfacesRequestMsg()
+   def getCPUProperty(self, _arg_property):
+       req=IPlatformARM_getCPUPropertyRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IPlatformARM_getMidlDoesNotLikeEmptyInterfaces(req)
+       
+       req._property=_arg_property
+       val=self.mgr.getPort().IPlatformARM_getCPUProperty(req)
+       
        return Boolean(self.mgr,val._returnval)
 
 
-   _Attrs_={         'midlDoesNotLikeEmptyInterfaces':[getMidlDoesNotLikeEmptyInterfaces,None]}
+   def setCPUProperty(self, _arg_property, _arg_value):
+       req=IPlatformARM_setCPUPropertyRequestMsg()
+       req._this=self.handle
+       
+       req._property=_arg_property
+       req._value=_arg_value
+       val=self.mgr.getPort().IPlatformARM_setCPUProperty(req)
+       
+       return 
+
+
+
+
+   _Attrs_={}
 
 class IMachine(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -16102,16 +16233,6 @@ class IDisplay(IUnknown):
        return 
 
 
-   def completeVHWACommand(self, _arg_command):
-       req=IDisplay_completeVHWACommandRequestMsg()
-       req._this=self.handle
-       
-       req._command=self.mgr.encodebase64(_arg_command)
-       val=self.mgr.getPort().IDisplay_completeVHWACommand(req)
-       
-       return 
-
-
    def viewportChanged(self, _arg_screenId, _arg_x, _arg_y, _arg_width, _arg_height):
        req=IDisplay_viewportChangedRequestMsg()
        req._this=self.handle
@@ -20349,6 +20470,62 @@ class INATEngine(IUnknown):
             req._forwardBroadcast = value.handle
        self.mgr.getPort().INATEngine_setForwardBroadcast(req)
 
+   def getEnableTFTP(self):
+       req=INATEngine_getEnableTFTPRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATEngine_getEnableTFTP(req)
+       return Boolean(self.mgr,val._returnval)
+   def setEnableTFTP(self, value):
+       req=INATEngine_setEnableTFTPRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._enableTFTP = value
+       else:
+            req._enableTFTP = value.handle
+       self.mgr.getPort().INATEngine_setEnableTFTP(req)
+
+   def getNatMRU(self):
+       req=INATEngine_getNatMRURequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATEngine_getNatMRU(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def setNatMRU(self, value):
+       req=INATEngine_setNatMRURequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._natMRU = value
+       else:
+            req._natMRU = value.handle
+       self.mgr.getPort().INATEngine_setNatMRU(req)
+
+   def getIPv6Enabled(self):
+       req=INATEngine_getIPv6EnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATEngine_getIPv6Enabled(req)
+       return Boolean(self.mgr,val._returnval)
+   def setIPv6Enabled(self, value):
+       req=INATEngine_setIPv6EnabledRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._IPv6Enabled = value
+       else:
+            req._IPv6Enabled = value.handle
+       self.mgr.getPort().INATEngine_setIPv6Enabled(req)
+
+   def getIPv6Prefix(self):
+       req=INATEngine_getIPv6PrefixRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATEngine_getIPv6Prefix(req)
+       return String(self.mgr,val._returnval)
+   def setIPv6Prefix(self, value):
+       req=INATEngine_setIPv6PrefixRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._IPv6Prefix = value
+       else:
+            req._IPv6Prefix = value.handle
+       self.mgr.getPort().INATEngine_setIPv6Prefix(req)
+
 
 
    _Attrs_={         'network':[getNetwork,setNetwork,
@@ -20373,6 +20550,14 @@ class INATEngine(IUnknown):
          'localhostReachable':[getLocalhostReachable,setLocalhostReachable,
         ],
          'forwardBroadcast':[getForwardBroadcast,setForwardBroadcast,
+        ],
+         'enableTFTP':[getEnableTFTP,setEnableTFTP,
+        ],
+         'natMRU':[getNatMRU,setNatMRU,
+        ],
+         'IPv6Enabled':[getIPv6Enabled,setIPv6Enabled,
+        ],
+         'IPv6Prefix':[getIPv6Prefix,setIPv6Prefix,
         ]}
 
 class IBandwidthGroup(IUnknown):
@@ -26487,11 +26672,11 @@ class IRecordingStateChangedEvent(IEvent):
          self.__dict__[name] = val
 
    
-   def getEnabled(self):
-       req=IRecordingStateChangedEvent_getEnabledRequestMsg()
+   def getState(self):
+       req=IRecordingStateChangedEvent_getStateRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IRecordingStateChangedEvent_getEnabled(req)
-       return Boolean(self.mgr,val._returnval)
+       val=self.mgr.getPort().IRecordingStateChangedEvent_getState(req)
+       return RecordingState(self.mgr,val._returnval)
    def getError(self):
        req=IRecordingStateChangedEvent_getErrorRequestMsg()
        req._this=self.handle
@@ -26499,7 +26684,7 @@ class IRecordingStateChangedEvent(IEvent):
        return IVirtualBoxErrorInfo(self.mgr,val._returnval)
 
 
-   _Attrs_={         'enabled':[getEnabled,None],
+   _Attrs_={         'state':[getState,None],
          'error':[getError,None]}
 
 class IRecordingScreenStateChangedEvent(IRecordingStateChangedEvent):
@@ -33477,8 +33662,6 @@ class IGuestOSType:
        
           self.recommendedVRAM = UnsignedInt(self.mgr, handle._recommendedVRAM)
        
-          self.recommended2DVideoAcceleration = Boolean(self.mgr, handle._recommended2DVideoAcceleration)
-       
           self.recommended3DAcceleration = Boolean(self.mgr, handle._recommended3DAcceleration)
        
           self.recommendedHDD = Long(self.mgr, handle._recommendedHDD)
@@ -33606,12 +33789,6 @@ class IGuestOSType:
        return self.recommendedVRAM
 
     def setRecommendedVRAM(self):
-       raise Error('setters not supported')
-    
-    def getRecommended2DVideoAcceleration(self):
-       return self.recommended2DVideoAcceleration
-
-    def setRecommended2DVideoAcceleration(self):
        raise Error('setters not supported')
     
     def getRecommended3DAcceleration(self):
@@ -34040,7 +34217,7 @@ class SettingsVersion:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'v1_0',2:'v1_1',3:'v1_2',4:'v1_3pre',5:'v1_3',6:'v1_4',7:'v1_5',8:'v1_6',9:'v1_7',10:'v1_8',11:'v1_9',12:'v1_10',13:'v1_11',14:'v1_12',15:'v1_13',16:'v1_14',17:'v1_15',18:'v1_16',19:'v1_17',20:'v1_18',21:'v1_19',22:'v1_20',99999:'Future'}
+   _NameMap={0:'Null',1:'v1_0',2:'v1_1',3:'v1_2',4:'v1_3pre',5:'v1_3',6:'v1_4',7:'v1_5',8:'v1_6',9:'v1_7',10:'v1_8',11:'v1_9',12:'v1_10',13:'v1_11',14:'v1_12',15:'v1_13',16:'v1_14',17:'v1_15',18:'v1_16',19:'v1_17',20:'v1_18',21:'v1_19',22:'v1_20',23:'v1_21',99999:'Future'}
    _ValueMap={
               'Null':0,
               'v1_0':1,
@@ -34065,6 +34242,7 @@ class SettingsVersion:
               'v1_18':20,
               'v1_19':21,
               'v1_20':22,
+              'v1_21':23,
               'Future':99999}
 
    Null=0
@@ -34090,6 +34268,7 @@ class SettingsVersion:
    v1_18=20
    v1_19=21
    v1_20=22
+   v1_21=23
    Future=99999
 
 class AccessMode:
@@ -34423,6 +34602,48 @@ class CPUPropertyTypeX86:
    L1DFlushOnVMEntry=12
    MDSClearOnEMTScheduling=13
    MDSClearOnVMEntry=14
+
+class CPUPropertyTypeARM:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=CPUPropertyTypeARM._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,CPUPropertyTypeARM):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,CPUPropertyTypeARM):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return CPUPropertyTypeARM._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Null',1:'HWVirt',2:'GICITS'}
+   _ValueMap={
+              'Null':0,
+              'HWVirt':1,
+              'GICITS':2}
+
+   Null=0
+   HWVirt=1
+   GICITS=2
 
 class HWVirtExPropertyType:
    def __init__(self,mgr,handle):
@@ -35546,6 +35767,50 @@ class PartitionType:
    CephOSDDmc=853
    CephOSDDmcLUKS=854
 
+class TrackedObjectState:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=TrackedObjectState._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,TrackedObjectState):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,TrackedObjectState):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return TrackedObjectState._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'None',1:'Alive',2:'Deleted',3:'Invalid'}
+   _ValueMap={
+              'None':0,
+              'Alive':1,
+              'Deleted':2,
+              'Invalid':3}
+
+   _None=0
+   Alive=1
+   Deleted=2
+   Invalid=3
+
 class DHCPOption:
    def __init__(self,mgr,handle):
        self.mgr=mgr
@@ -36582,6 +36847,62 @@ class RecordingRateControlMode:
    CBR=1
    VBR=2
 
+class RecordingState:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=RecordingState._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,RecordingState):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,RecordingState):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return RecordingState._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Unknown',1:'Initializing',2:'Started',3:'Paused',4:'Resumed',5:'Finalizing',6:'Stopped',7:'Canceled',8:'LimitReached',9:'Error'}
+   _ValueMap={
+              'Unknown':0,
+              'Initializing':1,
+              'Started':2,
+              'Paused':3,
+              'Resumed':4,
+              'Finalizing':5,
+              'Stopped':6,
+              'Canceled':7,
+              'LimitReached':8,
+              'Error':9}
+
+   Unknown=0
+   Initializing=1
+   Started=2
+   Paused=3
+   Resumed=4
+   Finalizing=5
+   Stopped=6
+   Canceled=7
+   LimitReached=8
+   Error=9
+
 class SignatureType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
@@ -36752,14 +37073,12 @@ class GraphicsFeature:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'None',1:'Acceleration2DVideo',2:'Acceleration3D'}
+   _NameMap={0:'None',2:'Acceleration3D'}
    _ValueMap={
               'None':0,
-              'Acceleration2DVideo':1,
               'Acceleration3D':2}
 
    _None=0
-   Acceleration2DVideo=1
    Acceleration3D=2
 
 class CleanupMode:
@@ -37198,11 +37517,13 @@ class HostNetworkInterfaceType:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'Bridged',2:'HostOnly'}
+   _NameMap={0:'Invalid',1:'Bridged',2:'HostOnly'}
    _ValueMap={
+              'Invalid':0,
               'Bridged':1,
               'HostOnly':2}
 
+   Invalid=0
    Bridged=1
    HostOnly=2
 
@@ -39826,7 +40147,7 @@ class NetworkAdapterType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'Am79C970A',2:'Am79C973',3:'I82540EM',4:'I82543GC',5:'I82545EM',6:'Virtio',7:'Am79C960',8:'NE2000',9:'NE1000',10:'WD8013',11:'WD8003',12:'ELNK2',13:'ELNK1'}
+   _NameMap={0:'Null',1:'Am79C970A',2:'Am79C973',3:'I82540EM',4:'I82543GC',5:'I82545EM',6:'Virtio',7:'Am79C960',8:'NE2000',9:'NE1000',10:'WD8013',11:'WD8003',12:'ELNK2',13:'ELNK1',14:'UsbNet'}
    _ValueMap={
               'Null':0,
               'Am79C970A':1,
@@ -39841,7 +40162,8 @@ class NetworkAdapterType:
               'WD8013':10,
               'WD8003':11,
               'ELNK2':12,
-              'ELNK1':13}
+              'ELNK1':13,
+              'UsbNet':14}
 
    Null=0
    Am79C970A=1
@@ -39857,6 +40179,7 @@ class NetworkAdapterType:
    WD8003=11
    ELNK2=12
    ELNK1=13
+   UsbNet=14
 
 class NetworkAdapterPromiscModePolicy:
    def __init__(self,mgr,handle):

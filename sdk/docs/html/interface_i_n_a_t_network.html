@@ -97,6 +97,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae8e08192a9c0b397ec3de44ba29e45bb"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_network.html#ae8e08192a9c0b397ec3de44ba29e45bb">localMappings</a></td></tr>
 <tr class="memdesc:ae8e08192a9c0b397ec3de44ba29e45bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of mappings (address,offset),e.g.  <br /></td></tr>
 <tr class="separator:ae8e08192a9c0b397ec3de44ba29e45bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7641f3101765b395744248a7eb955c93"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_network.html#a7641f3101765b395744248a7eb955c93">localhostReachable</a></td></tr>
+<tr class="memdesc:a7641f3101765b395744248a7eb955c93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether traffic from the guest directed to 10.0.2.2 will reach the host's loopback interface, i.e.  <br /></td></tr>
+<tr class="separator:a7641f3101765b395744248a7eb955c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5200a15fccfef1bdd4747e1889e46c55"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_network.html#a5200a15fccfef1bdd4747e1889e46c55">forwardBroadcast</a></td></tr>
+<tr class="memdesc:a5200a15fccfef1bdd4747e1889e46c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forwards broadcast packets sent by the guest to the host machine as such.  <br /></td></tr>
+<tr class="separator:a5200a15fccfef1bdd4747e1889e46c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e7db595b70a341e4596cdacfff01f0"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_network.html#ab8e7db595b70a341e4596cdacfff01f0">natMTU</a></td></tr>
+<tr class="memdesc:ab8e7db595b70a341e4596cdacfff01f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">MTU (maximum transmission unit) of the NAT engine in bytes.  <br /></td></tr>
+<tr class="separator:ab8e7db595b70a341e4596cdacfff01f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9d928632b20292e5991dece7ae2c2a9"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_network.html#ab9d928632b20292e5991dece7ae2c2a9">natMRU</a></td></tr>
+<tr class="memdesc:ab9d928632b20292e5991dece7ae2c2a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">MRU (maximum receive unit) of the NAT engine in bytes.  <br /></td></tr>
+<tr class="separator:ab9d928632b20292e5991dece7ae2c2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9468b9f6a468e30e24e91c9b3df69a45"><td class="memItemLeft" align="right" valign="top">attribute long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_n_a_t_network.html#a9468b9f6a468e30e24e91c9b3df69a45">loopbackIp6</a></td></tr>
 <tr class="memdesc:a9468b9f6a468e30e24e91c9b3df69a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset in ipv6 network from network id for address mapped into loopback6 interface of the host.  <br /></td></tr>
 <tr class="separator:a9468b9f6a468e30e24e91c9b3df69a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -424,6 +436,72 @@ Public Attributes</h2></td></tr>
 
 <p>Array of mappings (address,offset),e.g. </p>
 <p>("127.0.1.1=4") maps 127.0.1.1 to networkid + 4. </p>
+
+</div>
+</div>
+<a id="a7641f3101765b395744248a7eb955c93" name="a7641f3101765b395744248a7eb955c93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7641f3101765b395744248a7eb955c93">&#9670;&#160;</a></span>localhostReachable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute boolean INATNetwork::localhostReachable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Whether traffic from the guest directed to 10.0.2.2 will reach the host's loopback interface, i.e. </p>
+<p>localhost or 127.0.0.1. </p>
+
+</div>
+</div>
+<a id="a5200a15fccfef1bdd4747e1889e46c55" name="a5200a15fccfef1bdd4747e1889e46c55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5200a15fccfef1bdd4747e1889e46c55">&#9670;&#160;</a></span>forwardBroadcast</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute boolean INATNetwork::forwardBroadcast</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Forwards broadcast packets sent by the guest to the host machine as such. </p>
+<p>IP address will show to host as 255.255.255.255. </p>
+
+</div>
+</div>
+<a id="ab8e7db595b70a341e4596cdacfff01f0" name="ab8e7db595b70a341e4596cdacfff01f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e7db595b70a341e4596cdacfff01f0">&#9670;&#160;</a></span>natMTU</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute unsigned long INATNetwork::natMTU</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MTU (maximum transmission unit) of the NAT engine in bytes. </p>
+
+</div>
+</div>
+<a id="ab9d928632b20292e5991dece7ae2c2a9" name="ab9d928632b20292e5991dece7ae2c2a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9d928632b20292e5991dece7ae2c2a9">&#9670;&#160;</a></span>natMRU</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute unsigned long INATNetwork::natMRU</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MRU (maximum receive unit) of the NAT engine in bytes. </p>
 
 </div>
 </div>
