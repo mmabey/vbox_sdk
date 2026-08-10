@@ -46,7 +46,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="interface_i_u_s_b_device_filter.html" title="The IUSBDeviceFilter interface represents an USB device filter used to perform actions on a group of ...">IUSBDeviceFilter</a> interface represents an USB device filter used to perform actions on a group of USB devices.  
+<p>The <a class="el" href="interface_i_u_s_b_device_filter.html" title="The IUSBDeviceFilter interface represents a USB device filter used to perform actions on one or more ...">IUSBDeviceFilter</a> interface represents a USB device filter used to perform actions on one or more USB devices.  
  <a href="interface_i_u_s_b_device_filter.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IUSBDeviceFilter:</div>
@@ -95,22 +95,22 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ab20360999b4cd399c62f683a6a46fd51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="interface_i_u_s_b_device_filter.html" title="The IUSBDeviceFilter interface represents an USB device filter used to perform actions on a group of ...">IUSBDeviceFilter</a> interface represents an USB device filter used to perform actions on a group of USB devices. </p>
-<p>This type of filters is used by running virtual machines to automatically capture selected USB devices once they are physically attached to the host computer.</p>
-<p>A USB device is matched to the given device filter if and only if all attributes of the device match the corresponding attributes of the filter (that is, attributes are joined together using the logical AND operation). On the other hand, all together, filters in the list of filters carry the semantics of the logical OR operation. So if it is desirable to create a match like "this vendor id OR this product id", one needs to create two filters and specify "any match" (see below) for unused attributes.</p>
-<p>All filter attributes used for matching are strings. Each string is an expression representing a set of values of the corresponding device attribute, that will match the given filter. Currently, the following filtering expressions are supported:</p>
+<div class="textblock"><p>The <a class="el" href="interface_i_u_s_b_device_filter.html" title="The IUSBDeviceFilter interface represents a USB device filter used to perform actions on one or more ...">IUSBDeviceFilter</a> interface represents a USB device filter used to perform actions on one or more USB devices. </p>
+<p>USB device filters are used by running virtual machines to automatically capture selected USB devices once they are physically attached to the host computer.</p>
+<p>A USB device is matched to a specific device filter if and only if all attributes of the device filter match the corresponding attributes of the device (that is, attributes are joined together using a logical AND operation). On the other hand filter attributes in separate USB device filters are applied as a logical OR operation. So if one would like to create a match such as "this vendor id OR this product id", then one would need to create two filters and specify "any match" (see below) for the other unused attributes.</p>
+<p>All filter attributes used for matching are strings. The following filtering expressions are currently supported:</p>
 <ul>
 <li>
-<p class="startli"><em>Interval filters</em>. Used to specify valid intervals for integer device attributes (Vendor ID, Product ID and Revision). The format of the string is:</p>
+<p class="startli"><em>Interval filters</em>. Used to specify valid intervals for integer device attributes (Vendor ID, Product ID, Revision and Port). The format of the string is:</p>
 <p class="interli"><code>int:((m)|([m]-[n]))(,(m)|([m]-[n]))*</code></p>
-<p class="endli">where <code>m</code> and <code>n</code> are integer numbers, either in octal (starting from <code>0</code>), hexadecimal (starting from <code>0x</code>) or decimal (otherwise) form, so that <code>m &lt; n</code>. If <code>m</code> is omitted before a dash (<code>-</code>), the minimum possible integer is assumed; if <code>n</code> is omitted after a dash, the maximum possible integer is assumed. </p>
+<p class="endli">where <code>m</code> and <code>n</code> are integer numbers, either in octal (starting with <code>0</code>), hexadecimal (starting with <code>0x</code>) or decimal (otherwise), so that <code>m &lt; n</code>. If <code>m</code> is omitted before a dash (<code>-</code>), the minimum possible integer is assumed; if <code>n</code> is omitted after a dash, the maximum possible integer is assumed. </p>
 </li>
 <li>
 <p class="startli"><em>Boolean filters</em>. Used to specify acceptable values for boolean device attributes. The format of the string is:</p>
 <p class="endli"><code>true|false|yes|no|0|1</code></p>
 </li>
 <li>
-<p class="startli"><em>Exact match</em>. Used to specify a single value for the given device attribute. Any string that doesn't start with <code>int:</code> represents the exact match. String device attributes are compared to this string including case of symbols. Integer attributes are first converted to a string (see individual filter attributes) and then compared ignoring case.</p>
+<p class="startli"><em>Exact match</em>. Used to specify a single value for the given device attribute. Any string that doesn't start with <code>int:</code> represents an exact match. String device attributes are compared to this string in a case-sensitive manner. Integer attributes are first converted to a string (see individual filter attributes) and then compared in a case-insensitive manner.</p>
 <p class="endli"></p>
 </li>
 <li>
@@ -118,7 +118,7 @@ Public Attributes</h2></td></tr>
 <p class="endli"></p>
 </li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>On the Windows host platform, interval filters are not currently available. Also all string filter attributes (<a class="el" href="interface_i_u_s_b_device_filter.html#ab8475f8a5bcae0a99bd1adcb6ad74af9">manufacturer</a><b></b>, <a class="el" href="interface_i_u_s_b_device_filter.html#a34aa9d36f707cbe0a2d82885fa193261">product</a><b></b>, <a class="el" href="interface_i_u_s_b_device_filter.html#aacc6463f190b0254082438d856cbce13">serialNumber</a><b></b>) are ignored, so they behave as <em>any match</em> no matter what string expression is specified.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>On Windows hosts, interval filters are not currently available. Also all string filter attributes (<a class="el" href="interface_i_u_s_b_device_filter.html#ab8475f8a5bcae0a99bd1adcb6ad74af9">manufacturer</a><b></b>, <a class="el" href="interface_i_u_s_b_device_filter.html#a34aa9d36f707cbe0a2d82885fa193261">product</a><b></b>, <a class="el" href="interface_i_u_s_b_device_filter.html#aacc6463f190b0254082438d856cbce13">serialNumber</a><b></b>) are ignored, so they behave as <em>any match</em> no matter what string expression is specified.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="interface_i_u_s_b_device_filters.html#aeea8f51f58c221c10b1ce6beb53c5be7">IUSBDeviceFilters::deviceFilters</a><b></b>, <a class="el" href="interface_i_host_u_s_b_device_filter.html">IHostUSBDeviceFilter</a><b></b></dd></dl>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{45587218-4289-EF4E-8E6A-E5B07816B631}</code> </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>

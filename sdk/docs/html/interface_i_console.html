@@ -95,7 +95,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a684934d114d359e33a4a2106495444e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches a host USB device with the given UUID to the USB controller of the virtual machine.  <br /></td></tr>
 <tr class="separator:a684934d114d359e33a4a2106495444e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa926d4436ed8e394b681ab0854fdd386"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_console.html#aa926d4436ed8e394b681ab0854fdd386">detachUSBDevice</a> (in wstringUUID id, [retval] out <a class="el" href="interface_i_u_s_b_device.html">IUSBDevice</a> device)</td></tr>
-<tr class="memdesc:aa926d4436ed8e394b681ab0854fdd386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detaches an USB device with the given UUID from the USB controller of the virtual machine.  <br /></td></tr>
+<tr class="memdesc:aa926d4436ed8e394b681ab0854fdd386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detaches a USB device with the given UUID from the USB controller of the virtual machine.  <br /></td></tr>
 <tr class="separator:aa926d4436ed8e394b681ab0854fdd386"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9d9024cd6b8e563e84905b4ae551bcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_console.html#ae9d9024cd6b8e563e84905b4ae551bcc">findUSBDeviceByAddress</a> (in wstring name, [retval] out <a class="el" href="interface_i_u_s_b_device.html">IUSBDevice</a> device)</td></tr>
 <tr class="memdesc:ae9d9024cd6b8e563e84905b4ae551bcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for a USB device with the given host address.  <br /></td></tr>
@@ -577,7 +577,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Detaches an USB device with the given UUID from the USB controller of the virtual machine. </p>
+<p>Detaches a USB device with the given UUID from the USB controller of the virtual machine. </p>
 <p>After this method succeeds, the VirtualBox server re-initiates all USB filters as if the device were just physically attached to the host, but filters of this machine are ignored to avoid a possible automatic re-attachment.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
