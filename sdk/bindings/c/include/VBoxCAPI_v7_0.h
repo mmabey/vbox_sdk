@@ -2454,10 +2454,10 @@ typedef enum CertificateVersion
 
 
 /* Start of enum VirtualSystemDescriptionType declaration */
-#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "247f8b6f-1042-4c15-8910-3e3c64395eb7"
+#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "d171d08c-f7bf-4bee-932f-ffbf998f7ac4"
 #define VIRTUALSYSTEMDESCRIPTIONTYPE_IID { \
-    0x247f8b6f, 0x1042, 0x4c15, \
-    { 0x89, 0x10, 0x3e, 0x3c, 0x64, 0x39, 0x5e, 0xb7 } \
+    0xd171d08c, 0xf7bf, 0x4bee, \
+    { 0x93, 0x2f, 0xff, 0xbf, 0x99, 0x8f, 0x7a, 0xc4 } \
 }
 typedef enum VirtualSystemDescriptionType
 {
@@ -2514,6 +2514,9 @@ typedef enum VirtualSystemDescriptionType
     VirtualSystemDescriptionType_CloudCompartmentId = 51,
     VirtualSystemDescriptionType_CloudShapeCpus = 52,
     VirtualSystemDescriptionType_CloudShapeMemory = 53,
+    VirtualSystemDescriptionType_CloudInstanceMetadata = 54,
+    VirtualSystemDescriptionType_CloudInstanceFreeFormTags = 55,
+    VirtualSystemDescriptionType_CloudImageFreeFormTags = 56,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60
 } VirtualSystemDescriptionType;
 /* End of enum VirtualSystemDescriptionType declaration */
@@ -35224,6 +35227,11 @@ struct ICloudMachine_vtbl
         IProgress * * progress
     );
 
+    nsresult (*Reset)(
+        ICloudMachine *pThis,
+        IProgress * * progress
+    );
+
     nsresult (*Shutdown)(
         ICloudMachine *pThis,
         IProgress * * progress
@@ -35295,8 +35303,6 @@ struct ICloudMachine_vtbl
     nsresult (*InternalAndReservedMethod14ICloudMachine)(ICloudMachine *pThis);
 
     nsresult (*InternalAndReservedMethod15ICloudMachine)(ICloudMachine *pThis);
-
-    nsresult (*InternalAndReservedMethod16ICloudMachine)(ICloudMachine *pThis);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -35369,6 +35375,11 @@ struct ICloudMachineVtbl
         IProgress * * progress
     );
 
+    nsresult (*Reset)(
+        ICloudMachine *pThis,
+        IProgress * * progress
+    );
+
     nsresult (*Shutdown)(
         ICloudMachine *pThis,
         IProgress * * progress
@@ -35441,8 +35452,6 @@ struct ICloudMachineVtbl
 
     nsresult (*InternalAndReservedMethod15ICloudMachine)(ICloudMachine *pThis);
 
-    nsresult (*InternalAndReservedMethod16ICloudMachine)(ICloudMachine *pThis);
-
 };
 #define ICloudMachine_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
 #define ICloudMachine_AddRef(p) ((p)->lpVtbl->AddRef(p))
@@ -35474,6 +35483,7 @@ struct ICloudMachineVtbl
 #define ICloudMachine_GetSettingsForm(p, aForm, aProgress) ((p)->lpVtbl->GetSettingsForm(p, aForm, aProgress))
 #define ICloudMachine_PowerUp(p, aProgress) ((p)->lpVtbl->PowerUp(p, aProgress))
 #define ICloudMachine_Reboot(p, aProgress) ((p)->lpVtbl->Reboot(p, aProgress))
+#define ICloudMachine_Reset(p, aProgress) ((p)->lpVtbl->Reset(p, aProgress))
 #define ICloudMachine_Shutdown(p, aProgress) ((p)->lpVtbl->Shutdown(p, aProgress))
 #define ICloudMachine_PowerDown(p, aProgress) ((p)->lpVtbl->PowerDown(p, aProgress))
 #define ICloudMachine_Terminate(p, aProgress) ((p)->lpVtbl->Terminate(p, aProgress))
@@ -35670,6 +35680,12 @@ struct ICloudClient_vtbl
         IProgress * * progress
     );
 
+    nsresult (*ResetInstance)(
+        ICloudClient *pThis,
+        PRUnichar * uid,
+        IProgress * * progress
+    );
+
     nsresult (*CreateImage)(
         ICloudClient *pThis,
         PRUint32 parametersSize,
@@ -35768,8 +35784,6 @@ struct ICloudClient_vtbl
     nsresult (*InternalAndReservedMethod14ICloudClient)(ICloudClient *pThis);
 
     nsresult (*InternalAndReservedMethod15ICloudClient)(ICloudClient *pThis);
-
-    nsresult (*InternalAndReservedMethod16ICloudClient)(ICloudClient *pThis);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -35940,6 +35954,12 @@ struct ICloudClientVtbl
         IProgress * * progress
     );
 
+    nsresult (*ResetInstance)(
+        ICloudClient *pThis,
+        PRUnichar * uid,
+        IProgress * * progress
+    );
+
     nsresult (*CreateImage)(
         ICloudClient *pThis,
         PRUint32 parametersSize,
@@ -36039,8 +36059,6 @@ struct ICloudClientVtbl
 
     nsresult (*InternalAndReservedMethod15ICloudClient)(ICloudClient *pThis);
 
-    nsresult (*InternalAndReservedMethod16ICloudClient)(ICloudClient *pThis);
-
 };
 #define ICloudClient_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
 #define ICloudClient_AddRef(p) ((p)->lpVtbl->AddRef(p))
@@ -36070,6 +36088,7 @@ struct ICloudClientVtbl
 #define ICloudClient_StartInstance(p, aUid, aProgress) ((p)->lpVtbl->StartInstance(p, aUid, aProgress))
 #define ICloudClient_PauseInstance(p, aUid, aProgress) ((p)->lpVtbl->PauseInstance(p, aUid, aProgress))
 #define ICloudClient_TerminateInstance(p, aUid, aProgress) ((p)->lpVtbl->TerminateInstance(p, aUid, aProgress))
+#define ICloudClient_ResetInstance(p, aUid, aProgress) ((p)->lpVtbl->ResetInstance(p, aUid, aProgress))
 #define ICloudClient_CreateImage(p, aParameters, aProgress) ((p)->lpVtbl->CreateImage(p, aParameters, aProgress))
 #define ICloudClient_ExportImage(p, aImage, aParameters, aProgress) ((p)->lpVtbl->ExportImage(p, aImage, aParameters, aProgress))
 #define ICloudClient_ImportImage(p, aUid, aParameters, aProgress) ((p)->lpVtbl->ImportImage(p, aUid, aParameters, aProgress))

@@ -72137,6 +72137,46 @@ class ns0:
             Holder.__name__ = "ICloudMachine_rebootResponse_Holder"
             self.pyclass = Holder
 
+    class ICloudMachine_reset_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudMachine_reset"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudMachine_reset_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudMachine_reset")
+            kw["aname"] = "_ICloudMachine_reset"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "ICloudMachine_reset_Holder"
+            self.pyclass = Holder
+
+    class ICloudMachine_resetResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudMachine_resetResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudMachine_resetResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudMachine_resetResponse")
+            kw["aname"] = "_ICloudMachine_resetResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "ICloudMachine_resetResponse_Holder"
+            self.pyclass = Holder
+
     class ICloudMachine_shutdown_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
         literal = "ICloudMachine_shutdown"
         schema = "http://www.virtualbox.org/"
@@ -73411,6 +73451,47 @@ class ns0:
                     self._returnval = None
                     return
             Holder.__name__ = "ICloudClient_terminateInstanceResponse_Holder"
+            self.pyclass = Holder
+
+    class ICloudClient_resetInstance_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudClient_resetInstance"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudClient_resetInstance_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="uid", aname="_uid", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudClient_resetInstance")
+            kw["aname"] = "_ICloudClient_resetInstance"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    self._uid = None
+                    return
+            Holder.__name__ = "ICloudClient_resetInstance_Holder"
+            self.pyclass = Holder
+
+    class ICloudClient_resetInstanceResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudClient_resetInstanceResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudClient_resetInstanceResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudClient_resetInstanceResponse")
+            kw["aname"] = "_ICloudClient_resetInstanceResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "ICloudClient_resetInstanceResponse_Holder"
             self.pyclass = Holder
 
     class ICloudClient_createImage_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):

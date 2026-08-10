@@ -4480,11 +4480,11 @@ AssertCompileSize(CertificateVersion_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    VirtualSystemDescriptionType */
-#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "247f8b6f-1042-4c15-8910-3e3c64395eb7"
+#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "d171d08c-f7bf-4bee-932f-ffbf998f7ac4"
 
 #define VIRTUALSYSTEMDESCRIPTIONTYPE_IID \
-  {0x247f8b6f, 0x1042, 0x4c15, \
-    { 0x89, 0x10, 0x3e, 0x3c, 0x64, 0x39, 0x5e, 0xb7 }}
+  {0xd171d08c, 0xf7bf, 0x4bee, \
+    { 0x93, 0x2f, 0xff, 0xbf, 0x99, 0x8f, 0x7a, 0xc4 }}
 
 class NS_NO_VTABLE VirtualSystemDescriptionType {
  public: 
@@ -4597,6 +4597,12 @@ class NS_NO_VTABLE VirtualSystemDescriptionType {
 
   enum { CloudShapeMemory = 53U };
 
+  enum { CloudInstanceMetadata = 54U };
+
+  enum { CloudInstanceFreeFormTags = 55U };
+
+  enum { CloudImageFreeFormTags = 56U };
+
   enum { HardDiskControllerVirtioSCSI = 60U };
 
 };
@@ -4701,6 +4707,9 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudCompartmentId VirtualSystemDescriptionType::CloudCompartmentId
 # define VirtualSystemDescriptionType_CloudShapeCpus VirtualSystemDescriptionType::CloudShapeCpus
 # define VirtualSystemDescriptionType_CloudShapeMemory VirtualSystemDescriptionType::CloudShapeMemory
+# define VirtualSystemDescriptionType_CloudInstanceMetadata VirtualSystemDescriptionType::CloudInstanceMetadata
+# define VirtualSystemDescriptionType_CloudInstanceFreeFormTags VirtualSystemDescriptionType::CloudInstanceFreeFormTags
+# define VirtualSystemDescriptionType_CloudImageFreeFormTags VirtualSystemDescriptionType::CloudImageFreeFormTags
 # define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
@@ -4757,6 +4766,9 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudCompartmentId = VirtualSystemDescriptionType::CloudCompartmentId,
     VirtualSystemDescriptionType_CloudShapeCpus = VirtualSystemDescriptionType::CloudShapeCpus,
     VirtualSystemDescriptionType_CloudShapeMemory = VirtualSystemDescriptionType::CloudShapeMemory,
+    VirtualSystemDescriptionType_CloudInstanceMetadata = VirtualSystemDescriptionType::CloudInstanceMetadata,
+    VirtualSystemDescriptionType_CloudInstanceFreeFormTags = VirtualSystemDescriptionType::CloudInstanceFreeFormTags,
+    VirtualSystemDescriptionType_CloudImageFreeFormTags = VirtualSystemDescriptionType::CloudImageFreeFormTags,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
@@ -67730,6 +67742,9 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   /* void reboot ([retval] out IProgress progress); */
   NS_IMETHOD Reboot(IProgress **progress) = 0;
 
+  /* void reset ([retval] out IProgress progress); */
+  NS_IMETHOD Reset(IProgress **progress) = 0;
+
   /* void shutdown ([retval] out IProgress progress); */
   NS_IMETHOD Shutdown(IProgress **progress) = 0;
 
@@ -67799,9 +67814,6 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   /* void InternalAndReservedMethod15ICloudMachine (); */
   NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) = 0;
 
-  /* void InternalAndReservedMethod16ICloudMachine (); */
-  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void) = 0;
-
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -67830,6 +67842,7 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   NS_IMETHOD GetSettingsForm(IForm **form, IProgress **progress); \
   NS_IMETHOD PowerUp(IProgress **progress); \
   NS_IMETHOD Reboot(IProgress **progress); \
+  NS_IMETHOD Reset(IProgress **progress); \
   NS_IMETHOD Shutdown(IProgress **progress); \
   NS_IMETHOD PowerDown(IProgress **progress); \
   NS_IMETHOD Terminate(IProgress **progress); \
@@ -67852,8 +67865,7 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudMachine(void); \
   NS_IMETHOD InternalAndReservedMethod13ICloudMachine(void); \
   NS_IMETHOD InternalAndReservedMethod14ICloudMachine(void); \
-  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void); \
-  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void); 
+  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_ICLOUDMACHINE(_to) \
@@ -67881,6 +67893,7 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   NS_IMETHOD GetSettingsForm(IForm **form, IProgress **progress) { return _to GetSettingsForm(form, progress); } \
   NS_IMETHOD PowerUp(IProgress **progress) { return _to PowerUp(progress); } \
   NS_IMETHOD Reboot(IProgress **progress) { return _to Reboot(progress); } \
+  NS_IMETHOD Reset(IProgress **progress) { return _to Reset(progress); } \
   NS_IMETHOD Shutdown(IProgress **progress) { return _to Shutdown(progress); } \
   NS_IMETHOD PowerDown(IProgress **progress) { return _to PowerDown(progress); } \
   NS_IMETHOD Terminate(IProgress **progress) { return _to Terminate(progress); } \
@@ -67903,8 +67916,7 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudMachine(void) { return _to InternalAndReservedMethod12ICloudMachine(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudMachine(void) { return _to InternalAndReservedMethod13ICloudMachine(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudMachine(void) { return _to InternalAndReservedMethod14ICloudMachine(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) { return _to InternalAndReservedMethod15ICloudMachine(); } \
-  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void) { return _to InternalAndReservedMethod16ICloudMachine(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) { return _to InternalAndReservedMethod15ICloudMachine(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_ICLOUDMACHINE(_to) \
@@ -67932,6 +67944,7 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   NS_IMETHOD GetSettingsForm(IForm **form, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSettingsForm(form, progress); } \
   NS_IMETHOD PowerUp(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->PowerUp(progress); } \
   NS_IMETHOD Reboot(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Reboot(progress); } \
+  NS_IMETHOD Reset(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Reset(progress); } \
   NS_IMETHOD Shutdown(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Shutdown(progress); } \
   NS_IMETHOD PowerDown(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->PowerDown(progress); } \
   NS_IMETHOD Terminate(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Terminate(progress); } \
@@ -67954,8 +67967,7 @@ class NS_NO_VTABLE ICloudMachine : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod12ICloudMachine(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod13ICloudMachine(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod14ICloudMachine(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudMachine(); } \
-  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod16ICloudMachine(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudMachine(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -68133,6 +68145,12 @@ NS_IMETHODIMP _MYCLASS_::Reboot(IProgress **progress)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void reset ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Reset(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void shutdown ([retval] out IProgress progress); */
 NS_IMETHODIMP _MYCLASS_::Shutdown(IProgress **progress)
 {
@@ -68271,12 +68289,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod15ICloudMachine()
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod16ICloudMachine (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudMachine()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
 /* End of implementation class template. */
 #endif
 
@@ -68328,6 +68340,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudMachine()
 #define COM_FORWARD_ICloudMachine_Reboot_TO(smth) NS_IMETHOD Reboot (IProgress * * aProgress) { return smth Reboot (aProgress); }
 #define COM_FORWARD_ICloudMachine_Reboot_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Reboot_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_Reboot_TO_BASE(base) COM_FORWARD_ICloudMachine_Reboot_TO (base::)
+#define COM_FORWARD_ICloudMachine_Reset_TO(smth) NS_IMETHOD Reset (IProgress * * aProgress) { return smth Reset (aProgress); }
+#define COM_FORWARD_ICloudMachine_Reset_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Reset_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Reset_TO_BASE(base) COM_FORWARD_ICloudMachine_Reset_TO (base::)
 #define COM_FORWARD_ICloudMachine_Shutdown_TO(smth) NS_IMETHOD Shutdown (IProgress * * aProgress) { return smth Shutdown (aProgress); }
 #define COM_FORWARD_ICloudMachine_Shutdown_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Shutdown_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_Shutdown_TO_BASE(base) COM_FORWARD_ICloudMachine_Shutdown_TO (base::)
@@ -68463,6 +68478,9 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   /* void terminateInstance (in wstring uid, [retval] out IProgress progress); */
   NS_IMETHOD TerminateInstance(const PRUnichar *uid, IProgress **progress) = 0;
 
+  /* void resetInstance (in wstring uid, [retval] out IProgress progress); */
+  NS_IMETHOD ResetInstance(const PRUnichar *uid, IProgress **progress) = 0;
+
   /* void createImage (in unsigned long parametersSize, [array, size_is (parametersSize)] in wstring parameters, [retval] out IProgress progress); */
   NS_IMETHOD CreateImage(PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress) = 0;
 
@@ -68535,9 +68553,6 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   /* void InternalAndReservedMethod15ICloudClient (); */
   NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) = 0;
 
-  /* void InternalAndReservedMethod16ICloudClient (); */
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) = 0;
-
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -68573,6 +68588,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD StartInstance(const PRUnichar *uid, IProgress **progress); \
   NS_IMETHOD PauseInstance(const PRUnichar *uid, IProgress **progress); \
   NS_IMETHOD TerminateInstance(const PRUnichar *uid, IProgress **progress); \
+  NS_IMETHOD ResetInstance(const PRUnichar *uid, IProgress **progress); \
   NS_IMETHOD CreateImage(PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress); \
   NS_IMETHOD ExportImage(IMedium *image, PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress); \
   NS_IMETHOD ImportImage(const PRUnichar *uid, PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress); \
@@ -68596,8 +68612,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void); \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void); \
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void); 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_ICLOUDCLIENT(_to) \
@@ -68632,6 +68647,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD StartInstance(const PRUnichar *uid, IProgress **progress) { return _to StartInstance(uid, progress); } \
   NS_IMETHOD PauseInstance(const PRUnichar *uid, IProgress **progress) { return _to PauseInstance(uid, progress); } \
   NS_IMETHOD TerminateInstance(const PRUnichar *uid, IProgress **progress) { return _to TerminateInstance(uid, progress); } \
+  NS_IMETHOD ResetInstance(const PRUnichar *uid, IProgress **progress) { return _to ResetInstance(uid, progress); } \
   NS_IMETHOD CreateImage(PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress) { return _to CreateImage(parametersSize, parameters, progress); } \
   NS_IMETHOD ExportImage(IMedium *image, PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress) { return _to ExportImage(image, parametersSize, parameters, progress); } \
   NS_IMETHOD ImportImage(const PRUnichar *uid, PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress) { return _to ImportImage(uid, parametersSize, parameters, progress); } \
@@ -68655,8 +68671,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void) { return _to InternalAndReservedMethod12ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void) { return _to InternalAndReservedMethod13ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void) { return _to InternalAndReservedMethod14ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return _to InternalAndReservedMethod15ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) { return _to InternalAndReservedMethod16ICloudClient(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return _to InternalAndReservedMethod15ICloudClient(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_ICLOUDCLIENT(_to) \
@@ -68691,6 +68706,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD StartInstance(const PRUnichar *uid, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->StartInstance(uid, progress); } \
   NS_IMETHOD PauseInstance(const PRUnichar *uid, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->PauseInstance(uid, progress); } \
   NS_IMETHOD TerminateInstance(const PRUnichar *uid, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->TerminateInstance(uid, progress); } \
+  NS_IMETHOD ResetInstance(const PRUnichar *uid, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ResetInstance(uid, progress); } \
   NS_IMETHOD CreateImage(PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateImage(parametersSize, parameters, progress); } \
   NS_IMETHOD ExportImage(IMedium *image, PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ExportImage(image, parametersSize, parameters, progress); } \
   NS_IMETHOD ImportImage(const PRUnichar *uid, PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ImportImage(uid, parametersSize, parameters, progress); } \
@@ -68714,8 +68730,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod12ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod13ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod14ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod16ICloudClient(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudClient(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -68935,6 +68950,12 @@ NS_IMETHODIMP _MYCLASS_::TerminateInstance(const PRUnichar *uid, IProgress **pro
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void resetInstance (in wstring uid, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ResetInstance(const PRUnichar *uid, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void createImage (in unsigned long parametersSize, [array, size_is (parametersSize)] in wstring parameters, [retval] out IProgress progress); */
 NS_IMETHODIMP _MYCLASS_::CreateImage(PRUint32 parametersSize, const PRUnichar **parameters, IProgress **progress)
 {
@@ -69079,12 +69100,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod15ICloudClient()
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod16ICloudClient (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudClient()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
 /* End of implementation class template. */
 #endif
 
@@ -69157,6 +69172,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudClient()
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO(smth) NS_IMETHOD TerminateInstance (PRUnichar * aUid, IProgress * * aProgress) { return smth TerminateInstance (aUid, aProgress); }
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO_OBJ(obj) COM_FORWARD_ICloudClient_TerminateInstance_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO_BASE(base) COM_FORWARD_ICloudClient_TerminateInstance_TO (base::)
+#define COM_FORWARD_ICloudClient_ResetInstance_TO(smth) NS_IMETHOD ResetInstance (PRUnichar * aUid, IProgress * * aProgress) { return smth ResetInstance (aUid, aProgress); }
+#define COM_FORWARD_ICloudClient_ResetInstance_TO_OBJ(obj) COM_FORWARD_ICloudClient_ResetInstance_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ResetInstance_TO_BASE(base) COM_FORWARD_ICloudClient_ResetInstance_TO (base::)
 #define COM_FORWARD_ICloudClient_CreateImage_TO(smth) NS_IMETHOD CreateImage (PRUint32 aParametersSize, PRUnichar * * aParameters, IProgress * * aProgress) { return smth CreateImage (aParametersSize+++, aParameters, aProgress); }
 #define COM_FORWARD_ICloudClient_CreateImage_TO_OBJ(obj) COM_FORWARD_ICloudClient_CreateImage_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_CreateImage_TO_BASE(base) COM_FORWARD_ICloudClient_CreateImage_TO (base::)

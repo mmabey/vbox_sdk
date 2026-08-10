@@ -19869,6 +19869,14 @@ class ICloudMachine extends VBox_ManagedObject
         return new IProgress ($this->connection, $response->returnval);
     }
 
+    public function reset()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('ICloudMachine_reset', array((array)$request));
+        return new IProgress ($this->connection, $response->returnval);
+    }
+
     public function shutdown()
     {
         $request = new stdClass();
@@ -20221,6 +20229,15 @@ class ICloudClient extends VBox_ManagedObject
         $request->_this = $this->handle;
         $request->uid = $arg_uid;
         $response = $this->connection->__soapCall('ICloudClient_terminateInstance', array((array)$request));
+        return new IProgress ($this->connection, $response->returnval);
+    }
+
+    public function resetInstance($arg_uid)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->uid = $arg_uid;
+        $response = $this->connection->__soapCall('ICloudClient_resetInstance', array((array)$request));
         return new IProgress ($this->connection, $response->returnval);
     }
 
@@ -21990,8 +22007,8 @@ class CertificateVersionCollection extends VBox_EnumCollection
  */
 class VirtualSystemDescriptionType extends VBox_Enum
 {
-    public $NameMap = array(1 => 'Ignore', 2 => 'OS', 3 => 'Name', 4 => 'Product', 5 => 'Vendor', 6 => 'Version', 7 => 'ProductUrl', 8 => 'VendorUrl', 9 => 'Description', 10 => 'License', 11 => 'Miscellaneous', 12 => 'CPU', 13 => 'Memory', 14 => 'HardDiskControllerIDE', 15 => 'HardDiskControllerSATA', 16 => 'HardDiskControllerSCSI', 17 => 'HardDiskControllerSAS', 18 => 'HardDiskImage', 19 => 'Floppy', 20 => 'CDROM', 21 => 'NetworkAdapter', 22 => 'USBController', 23 => 'SoundCard', 24 => 'SettingsFile', 25 => 'BaseFolder', 26 => 'PrimaryGroup', 27 => 'CloudInstanceShape', 28 => 'CloudDomain', 29 => 'CloudBootDiskSize', 30 => 'CloudBucket', 31 => 'CloudOCIVCN', 32 => 'CloudPublicIP', 33 => 'CloudProfileName', 34 => 'CloudOCISubnet', 35 => 'CloudKeepObject', 36 => 'CloudLaunchInstance', 37 => 'CloudInstanceId', 38 => 'CloudImageId', 39 => 'CloudInstanceState', 40 => 'CloudImageState', 41 => 'CloudInstanceDisplayName', 42 => 'CloudImageDisplayName', 43 => 'CloudOCILaunchMode', 44 => 'CloudPrivateIP', 45 => 'CloudBootVolumeId', 46 => 'CloudOCIVCNCompartment', 47 => 'CloudOCISubnetCompartment', 48 => 'CloudPublicSSHKey', 49 => 'BootingFirmware', 50 => 'CloudInitScriptPath', 51 => 'CloudCompartmentId', 52 => 'CloudShapeCpus', 53 => 'CloudShapeMemory', 60 => 'HardDiskControllerVirtioSCSI');
-    public $ValueMap = array('Ignore' => 1, 'OS' => 2, 'Name' => 3, 'Product' => 4, 'Vendor' => 5, 'Version' => 6, 'ProductUrl' => 7, 'VendorUrl' => 8, 'Description' => 9, 'License' => 10, 'Miscellaneous' => 11, 'CPU' => 12, 'Memory' => 13, 'HardDiskControllerIDE' => 14, 'HardDiskControllerSATA' => 15, 'HardDiskControllerSCSI' => 16, 'HardDiskControllerSAS' => 17, 'HardDiskImage' => 18, 'Floppy' => 19, 'CDROM' => 20, 'NetworkAdapter' => 21, 'USBController' => 22, 'SoundCard' => 23, 'SettingsFile' => 24, 'BaseFolder' => 25, 'PrimaryGroup' => 26, 'CloudInstanceShape' => 27, 'CloudDomain' => 28, 'CloudBootDiskSize' => 29, 'CloudBucket' => 30, 'CloudOCIVCN' => 31, 'CloudPublicIP' => 32, 'CloudProfileName' => 33, 'CloudOCISubnet' => 34, 'CloudKeepObject' => 35, 'CloudLaunchInstance' => 36, 'CloudInstanceId' => 37, 'CloudImageId' => 38, 'CloudInstanceState' => 39, 'CloudImageState' => 40, 'CloudInstanceDisplayName' => 41, 'CloudImageDisplayName' => 42, 'CloudOCILaunchMode' => 43, 'CloudPrivateIP' => 44, 'CloudBootVolumeId' => 45, 'CloudOCIVCNCompartment' => 46, 'CloudOCISubnetCompartment' => 47, 'CloudPublicSSHKey' => 48, 'BootingFirmware' => 49, 'CloudInitScriptPath' => 50, 'CloudCompartmentId' => 51, 'CloudShapeCpus' => 52, 'CloudShapeMemory' => 53, 'HardDiskControllerVirtioSCSI' => 60);
+    public $NameMap = array(1 => 'Ignore', 2 => 'OS', 3 => 'Name', 4 => 'Product', 5 => 'Vendor', 6 => 'Version', 7 => 'ProductUrl', 8 => 'VendorUrl', 9 => 'Description', 10 => 'License', 11 => 'Miscellaneous', 12 => 'CPU', 13 => 'Memory', 14 => 'HardDiskControllerIDE', 15 => 'HardDiskControllerSATA', 16 => 'HardDiskControllerSCSI', 17 => 'HardDiskControllerSAS', 18 => 'HardDiskImage', 19 => 'Floppy', 20 => 'CDROM', 21 => 'NetworkAdapter', 22 => 'USBController', 23 => 'SoundCard', 24 => 'SettingsFile', 25 => 'BaseFolder', 26 => 'PrimaryGroup', 27 => 'CloudInstanceShape', 28 => 'CloudDomain', 29 => 'CloudBootDiskSize', 30 => 'CloudBucket', 31 => 'CloudOCIVCN', 32 => 'CloudPublicIP', 33 => 'CloudProfileName', 34 => 'CloudOCISubnet', 35 => 'CloudKeepObject', 36 => 'CloudLaunchInstance', 37 => 'CloudInstanceId', 38 => 'CloudImageId', 39 => 'CloudInstanceState', 40 => 'CloudImageState', 41 => 'CloudInstanceDisplayName', 42 => 'CloudImageDisplayName', 43 => 'CloudOCILaunchMode', 44 => 'CloudPrivateIP', 45 => 'CloudBootVolumeId', 46 => 'CloudOCIVCNCompartment', 47 => 'CloudOCISubnetCompartment', 48 => 'CloudPublicSSHKey', 49 => 'BootingFirmware', 50 => 'CloudInitScriptPath', 51 => 'CloudCompartmentId', 52 => 'CloudShapeCpus', 53 => 'CloudShapeMemory', 54 => 'CloudInstanceMetadata', 55 => 'CloudInstanceFreeFormTags', 56 => 'CloudImageFreeFormTags', 60 => 'HardDiskControllerVirtioSCSI');
+    public $ValueMap = array('Ignore' => 1, 'OS' => 2, 'Name' => 3, 'Product' => 4, 'Vendor' => 5, 'Version' => 6, 'ProductUrl' => 7, 'VendorUrl' => 8, 'Description' => 9, 'License' => 10, 'Miscellaneous' => 11, 'CPU' => 12, 'Memory' => 13, 'HardDiskControllerIDE' => 14, 'HardDiskControllerSATA' => 15, 'HardDiskControllerSCSI' => 16, 'HardDiskControllerSAS' => 17, 'HardDiskImage' => 18, 'Floppy' => 19, 'CDROM' => 20, 'NetworkAdapter' => 21, 'USBController' => 22, 'SoundCard' => 23, 'SettingsFile' => 24, 'BaseFolder' => 25, 'PrimaryGroup' => 26, 'CloudInstanceShape' => 27, 'CloudDomain' => 28, 'CloudBootDiskSize' => 29, 'CloudBucket' => 30, 'CloudOCIVCN' => 31, 'CloudPublicIP' => 32, 'CloudProfileName' => 33, 'CloudOCISubnet' => 34, 'CloudKeepObject' => 35, 'CloudLaunchInstance' => 36, 'CloudInstanceId' => 37, 'CloudImageId' => 38, 'CloudInstanceState' => 39, 'CloudImageState' => 40, 'CloudInstanceDisplayName' => 41, 'CloudImageDisplayName' => 42, 'CloudOCILaunchMode' => 43, 'CloudPrivateIP' => 44, 'CloudBootVolumeId' => 45, 'CloudOCIVCNCompartment' => 46, 'CloudOCISubnetCompartment' => 47, 'CloudPublicSSHKey' => 48, 'BootingFirmware' => 49, 'CloudInitScriptPath' => 50, 'CloudCompartmentId' => 51, 'CloudShapeCpus' => 52, 'CloudShapeMemory' => 53, 'CloudInstanceMetadata' => 54, 'CloudInstanceFreeFormTags' => 55, 'CloudImageFreeFormTags' => 56, 'HardDiskControllerVirtioSCSI' => 60);
 }
 
 /**

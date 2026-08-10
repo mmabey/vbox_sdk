@@ -1079,6 +1079,9 @@
             CloudCompartmentId: 51 -
             CloudShapeCpus: 52 -
             CloudShapeMemory: 53 -
+            CloudInstanceMetadata: 54 -
+            CloudInstanceFreeFormTags: 55 -
+            CloudImageFreeFormTags: 56 -
             HardDiskControllerVirtioSCSI: 60 -
             -->
       <xsd:simpleType name="VirtualSystemDescriptionType">
@@ -1136,6 +1139,9 @@
           <xsd:enumeration value="CloudCompartmentId"/>
           <xsd:enumeration value="CloudShapeCpus"/>
           <xsd:enumeration value="CloudShapeMemory"/>
+          <xsd:enumeration value="CloudInstanceMetadata"/>
+          <xsd:enumeration value="CloudInstanceFreeFormTags"/>
+          <xsd:enumeration value="CloudImageFreeFormTags"/>
           <xsd:enumeration value="HardDiskControllerVirtioSCSI"/>
         </xsd:restriction>
       </xsd:simpleType>
@@ -29589,6 +29595,21 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <!-- method ICloudMachine::reset-->
+      <xsd:element name="ICloudMachine_reset">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ICloudMachine_resetResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <!-- method ICloudMachine::shutdown-->
       <xsd:element name="ICloudMachine_shutdown">
         <xsd:complexType>
@@ -30083,6 +30104,22 @@
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="ICloudClient_terminateInstanceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method ICloudClient::resetInstance-->
+      <xsd:element name="ICloudClient_resetInstance">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="uid" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ICloudClient_resetInstanceResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="returnval" type="xsd:string"/>
@@ -43886,6 +43923,13 @@
   <wsdl:message name="ICloudMachine_rebootResultMsg">
     <wsdl:part name="parameters" element="vbox:ICloudMachine_rebootResponse"/>
   </wsdl:message>
+  <!-- method ICloudMachine::reset-->
+  <wsdl:message name="ICloudMachine_resetRequestMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudMachine_reset"/>
+  </wsdl:message>
+  <wsdl:message name="ICloudMachine_resetResultMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudMachine_resetResponse"/>
+  </wsdl:message>
   <!-- method ICloudMachine::shutdown-->
   <wsdl:message name="ICloudMachine_shutdownRequestMsg">
     <wsdl:part name="parameters" element="vbox:ICloudMachine_shutdown"/>
@@ -44107,6 +44151,13 @@
   </wsdl:message>
   <wsdl:message name="ICloudClient_terminateInstanceResultMsg">
     <wsdl:part name="parameters" element="vbox:ICloudClient_terminateInstanceResponse"/>
+  </wsdl:message>
+  <!-- method ICloudClient::resetInstance-->
+  <wsdl:message name="ICloudClient_resetInstanceRequestMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudClient_resetInstance"/>
+  </wsdl:message>
+  <wsdl:message name="ICloudClient_resetInstanceResultMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudClient_resetInstanceResponse"/>
   </wsdl:message>
   <!-- method ICloudClient::createImage-->
   <wsdl:message name="ICloudClient_createImageRequestMsg">
@@ -56049,6 +56100,12 @@
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
+    <wsdl:operation name="ICloudMachine_reset">
+      <wsdl:input message="vbox:ICloudMachine_resetRequestMsg"/>
+      <wsdl:output message="vbox:ICloudMachine_resetResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
     <wsdl:operation name="ICloudMachine_shutdown">
       <wsdl:input message="vbox:ICloudMachine_shutdownRequestMsg"/>
       <wsdl:output message="vbox:ICloudMachine_shutdownResultMsg"/>
@@ -56237,6 +56294,12 @@
     <wsdl:operation name="ICloudClient_terminateInstance">
       <wsdl:input message="vbox:ICloudClient_terminateInstanceRequestMsg"/>
       <wsdl:output message="vbox:ICloudClient_terminateInstanceResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudClient_resetInstance">
+      <wsdl:input message="vbox:ICloudClient_resetInstanceRequestMsg"/>
+      <wsdl:output message="vbox:ICloudClient_resetInstanceResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -83880,6 +83943,21 @@
         <soap:fault name="RuntimeFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="ICloudMachine_reset">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="ICloudMachine_shutdown">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
@@ -84336,6 +84414,21 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ICloudClient_terminateInstance">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudClient_resetInstance">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

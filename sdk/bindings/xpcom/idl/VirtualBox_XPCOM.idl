@@ -2426,7 +2426,7 @@ AssertCompileSize(CertificateVersion_T, sizeof(PRUint32));
 %}
 
 [
-    uuid(247f8b6f-1042-4c15-8910-3e3c64395eb7),
+    uuid(d171d08c-f7bf-4bee-932f-ffbf998f7ac4),
     scriptable
 ]
 interface VirtualSystemDescriptionType
@@ -2484,6 +2484,9 @@ interface VirtualSystemDescriptionType
     const PRUint32 CloudCompartmentId = 51;
     const PRUint32 CloudShapeCpus = 52;
     const PRUint32 CloudShapeMemory = 53;
+    const PRUint32 CloudInstanceMetadata = 54;
+    const PRUint32 CloudInstanceFreeFormTags = 55;
+    const PRUint32 CloudImageFreeFormTags = 56;
     const PRUint32 HardDiskControllerVirtioSCSI = 60;
 };
 
@@ -2547,6 +2550,9 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudCompartmentId VirtualSystemDescriptionType::CloudCompartmentId
 # define VirtualSystemDescriptionType_CloudShapeCpus VirtualSystemDescriptionType::CloudShapeCpus
 # define VirtualSystemDescriptionType_CloudShapeMemory VirtualSystemDescriptionType::CloudShapeMemory
+# define VirtualSystemDescriptionType_CloudInstanceMetadata VirtualSystemDescriptionType::CloudInstanceMetadata
+# define VirtualSystemDescriptionType_CloudInstanceFreeFormTags VirtualSystemDescriptionType::CloudInstanceFreeFormTags
+# define VirtualSystemDescriptionType_CloudImageFreeFormTags VirtualSystemDescriptionType::CloudImageFreeFormTags
 # define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
@@ -2603,6 +2609,9 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudCompartmentId = VirtualSystemDescriptionType::CloudCompartmentId,
     VirtualSystemDescriptionType_CloudShapeCpus = VirtualSystemDescriptionType::CloudShapeCpus,
     VirtualSystemDescriptionType_CloudShapeMemory = VirtualSystemDescriptionType::CloudShapeMemory,
+    VirtualSystemDescriptionType_CloudInstanceMetadata = VirtualSystemDescriptionType::CloudInstanceMetadata,
+    VirtualSystemDescriptionType_CloudInstanceFreeFormTags = VirtualSystemDescriptionType::CloudInstanceFreeFormTags,
+    VirtualSystemDescriptionType_CloudImageFreeFormTags = VirtualSystemDescriptionType::CloudImageFreeFormTags,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
@@ -24550,6 +24559,10 @@ interface ICloudMachine : nsISupports
         [retval] out IProgress progress
     );
 
+    void reset (
+        [retval] out IProgress progress
+    );
+
     void shutdown (
         [retval] out IProgress progress
     );
@@ -24614,8 +24627,6 @@ interface ICloudMachine : nsISupports
 
     void InternalAndReservedMethod15ICloudMachine();
 
-    void InternalAndReservedMethod16ICloudMachine();
-
 }; /* interface ICloudMachine */
 
 /* Interface implementation forwarder macro */
@@ -24668,6 +24679,9 @@ interface ICloudMachine : nsISupports
 #define COM_FORWARD_ICloudMachine_Reboot_TO(smth) NS_IMETHOD Reboot (IProgress * * aProgress) { return smth Reboot (aProgress); }
 #define COM_FORWARD_ICloudMachine_Reboot_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Reboot_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_Reboot_TO_BASE(base) COM_FORWARD_ICloudMachine_Reboot_TO (base::)
+#define COM_FORWARD_ICloudMachine_Reset_TO(smth) NS_IMETHOD Reset (IProgress * * aProgress) { return smth Reset (aProgress); }
+#define COM_FORWARD_ICloudMachine_Reset_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Reset_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Reset_TO_BASE(base) COM_FORWARD_ICloudMachine_Reset_TO (base::)
 #define COM_FORWARD_ICloudMachine_Shutdown_TO(smth) NS_IMETHOD Shutdown (IProgress * * aProgress) { return smth Shutdown (aProgress); }
 #define COM_FORWARD_ICloudMachine_Shutdown_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Shutdown_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_Shutdown_TO_BASE(base) COM_FORWARD_ICloudMachine_Shutdown_TO (base::)
@@ -24853,6 +24867,11 @@ interface ICloudClient : nsISupports
         [retval] out IProgress progress
     );
 
+    void resetInstance (
+        in wstring uid,
+        [retval] out IProgress progress
+    );
+
     void createImage (
         in unsigned long parametersSize,
         [array, size_is(parametersSize)] in wstring parameters,
@@ -24943,8 +24962,6 @@ interface ICloudClient : nsISupports
 
     void InternalAndReservedMethod15ICloudClient();
 
-    void InternalAndReservedMethod16ICloudClient();
-
 }; /* interface ICloudClient */
 
 /* Interface implementation forwarder macro */
@@ -25018,6 +25035,9 @@ interface ICloudClient : nsISupports
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO(smth) NS_IMETHOD TerminateInstance (PRUnichar * aUid, IProgress * * aProgress) { return smth TerminateInstance (aUid, aProgress); }
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO_OBJ(obj) COM_FORWARD_ICloudClient_TerminateInstance_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO_BASE(base) COM_FORWARD_ICloudClient_TerminateInstance_TO (base::)
+#define COM_FORWARD_ICloudClient_ResetInstance_TO(smth) NS_IMETHOD ResetInstance (PRUnichar * aUid, IProgress * * aProgress) { return smth ResetInstance (aUid, aProgress); }
+#define COM_FORWARD_ICloudClient_ResetInstance_TO_OBJ(obj) COM_FORWARD_ICloudClient_ResetInstance_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ResetInstance_TO_BASE(base) COM_FORWARD_ICloudClient_ResetInstance_TO (base::)
 #define COM_FORWARD_ICloudClient_CreateImage_TO(smth) NS_IMETHOD CreateImage (PRUint32 aParametersSize, PRUnichar * * aParameters, IProgress * * aProgress) { return smth CreateImage (aParametersSize+++, aParameters, aProgress); }
 #define COM_FORWARD_ICloudClient_CreateImage_TO_OBJ(obj) COM_FORWARD_ICloudClient_CreateImage_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_CreateImage_TO_BASE(base) COM_FORWARD_ICloudClient_CreateImage_TO (base::)

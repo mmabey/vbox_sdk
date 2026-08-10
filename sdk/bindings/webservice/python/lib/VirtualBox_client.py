@@ -17521,6 +17521,16 @@ class vboxBindingSOAP:
         response = self.binding.Receive(ICloudMachine_rebootResultMsg.typecode)
         return response
 
+    # op: ICloudMachine_reset
+    def ICloudMachine_reset(self, request, **kw):
+        if isinstance(request, ICloudMachine_resetRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(ICloudMachine_resetResultMsg.typecode)
+        return response
+
     # op: ICloudMachine_shutdown
     def ICloudMachine_shutdown(self, request, **kw):
         if isinstance(request, ICloudMachine_shutdownRequestMsg) is False:
@@ -17829,6 +17839,16 @@ class vboxBindingSOAP:
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
         response = self.binding.Receive(ICloudClient_terminateInstanceResultMsg.typecode)
+        return response
+
+    # op: ICloudClient_resetInstance
+    def ICloudClient_resetInstance(self, request, **kw):
+        if isinstance(request, ICloudClient_resetInstanceRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(ICloudClient_resetInstanceResultMsg.typecode)
         return response
 
     # op: ICloudClient_createImage
@@ -25277,6 +25297,10 @@ ICloudMachine_rebootRequestMsg = GED("http://www.virtualbox.org/", "ICloudMachin
 
 ICloudMachine_rebootResultMsg = GED("http://www.virtualbox.org/", "ICloudMachine_rebootResponse").pyclass
 
+ICloudMachine_resetRequestMsg = GED("http://www.virtualbox.org/", "ICloudMachine_reset").pyclass
+
+ICloudMachine_resetResultMsg = GED("http://www.virtualbox.org/", "ICloudMachine_resetResponse").pyclass
+
 ICloudMachine_shutdownRequestMsg = GED("http://www.virtualbox.org/", "ICloudMachine_shutdown").pyclass
 
 ICloudMachine_shutdownResultMsg = GED("http://www.virtualbox.org/", "ICloudMachine_shutdownResponse").pyclass
@@ -25400,6 +25424,10 @@ ICloudClient_pauseInstanceResultMsg = GED("http://www.virtualbox.org/", "ICloudC
 ICloudClient_terminateInstanceRequestMsg = GED("http://www.virtualbox.org/", "ICloudClient_terminateInstance").pyclass
 
 ICloudClient_terminateInstanceResultMsg = GED("http://www.virtualbox.org/", "ICloudClient_terminateInstanceResponse").pyclass
+
+ICloudClient_resetInstanceRequestMsg = GED("http://www.virtualbox.org/", "ICloudClient_resetInstance").pyclass
+
+ICloudClient_resetInstanceResultMsg = GED("http://www.virtualbox.org/", "ICloudClient_resetInstanceResponse").pyclass
 
 ICloudClient_createImageRequestMsg = GED("http://www.virtualbox.org/", "ICloudClient_createImage").pyclass
 

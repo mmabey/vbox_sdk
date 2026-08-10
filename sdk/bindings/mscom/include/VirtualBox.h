@@ -16,7 +16,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Mon Apr 17 15:41:40 2023
+/* at Wed Jul 12 18:25:40 2023
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\7.0-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -3564,7 +3564,7 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0032
     } 	CertificateVersion;
 
 #define CertificateVersion_T CertificateVersion
-typedef /* [public][public][public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("247f8b6f-1042-4c15-8910-3e3c64395eb7") 
+typedef /* [public][public][public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("d171d08c-f7bf-4bee-932f-ffbf998f7ac4") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0033
     {	VirtualSystemDescriptionType_Ignore	= 1,
 	VirtualSystemDescriptionType_OS	= 2,
@@ -3619,6 +3619,9 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0033
 	VirtualSystemDescriptionType_CloudCompartmentId	= 51,
 	VirtualSystemDescriptionType_CloudShapeCpus	= 52,
 	VirtualSystemDescriptionType_CloudShapeMemory	= 53,
+	VirtualSystemDescriptionType_CloudInstanceMetadata	= 54,
+	VirtualSystemDescriptionType_CloudInstanceFreeFormTags	= 55,
+	VirtualSystemDescriptionType_CloudImageFreeFormTags	= 56,
 	VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI	= 60
     } 	VirtualSystemDescriptionType;
 
@@ -73987,6 +73990,9 @@ EXTERN_C const IID IID_ICloudMachine;
         virtual HRESULT STDMETHODCALLTYPE Reboot( 
             /* [retval][out] */ IProgress **aProgress) = 0;
         
+        virtual HRESULT STDMETHODCALLTYPE Reset( 
+            /* [retval][out] */ IProgress **aProgress) = 0;
+        
         virtual HRESULT STDMETHODCALLTYPE Shutdown( 
             /* [retval][out] */ IProgress **aProgress) = 0;
         
@@ -74042,8 +74048,6 @@ EXTERN_C const IID IID_ICloudMachine;
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod14ICloudMachine( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod15ICloudMachine( void) = 0;
-        
-        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod16ICloudMachine( void) = 0;
         
     };
     
@@ -74191,6 +74195,10 @@ EXTERN_C const IID IID_ICloudMachine;
             ICloudMachine * This,
             /* [retval][out] */ IProgress **aProgress);
         
+        HRESULT ( STDMETHODCALLTYPE *Reset )( 
+            ICloudMachine * This,
+            /* [retval][out] */ IProgress **aProgress);
+        
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             ICloudMachine * This,
             /* [retval][out] */ IProgress **aProgress);
@@ -74268,9 +74276,6 @@ EXTERN_C const IID IID_ICloudMachine;
             ICloudMachine * This);
         
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod15ICloudMachine )( 
-            ICloudMachine * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod16ICloudMachine )( 
             ICloudMachine * This);
         
         END_INTERFACE
@@ -74381,6 +74386,9 @@ EXTERN_C const IID IID_ICloudMachine;
 #define ICloudMachine_Reboot(This,aProgress)	\
     ( (This)->lpVtbl -> Reboot(This,aProgress) ) 
 
+#define ICloudMachine_Reset(This,aProgress)	\
+    ( (This)->lpVtbl -> Reset(This,aProgress) ) 
+
 #define ICloudMachine_Shutdown(This,aProgress)	\
     ( (This)->lpVtbl -> Shutdown(This,aProgress) ) 
 
@@ -74450,9 +74458,6 @@ EXTERN_C const IID IID_ICloudMachine;
 #define ICloudMachine_InternalAndReservedMethod15ICloudMachine(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod15ICloudMachine(This) ) 
 
-#define ICloudMachine_InternalAndReservedMethod16ICloudMachine(This)	\
-    ( (This)->lpVtbl -> InternalAndReservedMethod16ICloudMachine(This) ) 
-
 #endif /* COBJMACROS */
 
 
@@ -74515,6 +74520,9 @@ EXTERN_C const IID IID_ICloudMachine;
 #define COM_FORWARD_ICloudMachine_Reboot_TO(smth) HRESULT STDMETHODCALLTYPE Reboot (IProgress * * aProgress) { return smth Reboot (aProgress); }
 #define COM_FORWARD_ICloudMachine_Reboot_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Reboot_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_Reboot_TO_BASE(base) COM_FORWARD_ICloudMachine_Reboot_TO (base::)
+#define COM_FORWARD_ICloudMachine_Reset_TO(smth) HRESULT STDMETHODCALLTYPE Reset (IProgress * * aProgress) { return smth Reset (aProgress); }
+#define COM_FORWARD_ICloudMachine_Reset_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Reset_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Reset_TO_BASE(base) COM_FORWARD_ICloudMachine_Reset_TO (base::)
 #define COM_FORWARD_ICloudMachine_Shutdown_TO(smth) HRESULT STDMETHODCALLTYPE Shutdown (IProgress * * aProgress) { return smth Shutdown (aProgress); }
 #define COM_FORWARD_ICloudMachine_Shutdown_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Shutdown_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_Shutdown_TO_BASE(base) COM_FORWARD_ICloudMachine_Shutdown_TO (base::)
@@ -74539,7 +74547,7 @@ EXTERN_C const IID IID_ICloudMachine;
 #define COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO(smth) HRESULT STDMETHODCALLTYPE DeleteConsoleConnection (IProgress * * aProgress) { return smth DeleteConsoleConnection (aProgress); }
 #define COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO_OBJ(obj) COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO_BASE(base) COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO (base::)
-#define COM_FORWARD_ICloudMachine_TO(smth) COM_FORWARD_ICloudMachine_GETTER_Id_TO (smth) COM_FORWARD_ICloudMachine_GETTER_Accessible_TO (smth) COM_FORWARD_ICloudMachine_GETTER_AccessError_TO (smth) COM_FORWARD_ICloudMachine_GETTER_Name_TO (smth) COM_FORWARD_ICloudMachine_GETTER_OSTypeId_TO (smth) COM_FORWARD_ICloudMachine_GETTER_State_TO (smth) COM_FORWARD_ICloudMachine_GETTER_ConsoleConnectionFingerprint_TO (smth) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommand_TO (smth) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommandWindows_TO (smth) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommand_TO (smth) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommandWindows_TO (smth) COM_FORWARD_ICloudMachine_Refresh_TO (smth) COM_FORWARD_ICloudMachine_GetDetailsForm_TO (smth) COM_FORWARD_ICloudMachine_GetSettingsForm_TO (smth) COM_FORWARD_ICloudMachine_PowerUp_TO (smth) COM_FORWARD_ICloudMachine_Reboot_TO (smth) COM_FORWARD_ICloudMachine_Shutdown_TO (smth) COM_FORWARD_ICloudMachine_PowerDown_TO (smth) COM_FORWARD_ICloudMachine_Terminate_TO (smth) COM_FORWARD_ICloudMachine_Unregister_TO (smth) COM_FORWARD_ICloudMachine_Remove_TO (smth) COM_FORWARD_ICloudMachine_GetConsoleHistory_TO (smth) COM_FORWARD_ICloudMachine_CreateConsoleConnection_TO (smth) COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO (smth) 
+#define COM_FORWARD_ICloudMachine_TO(smth) COM_FORWARD_ICloudMachine_GETTER_Id_TO (smth) COM_FORWARD_ICloudMachine_GETTER_Accessible_TO (smth) COM_FORWARD_ICloudMachine_GETTER_AccessError_TO (smth) COM_FORWARD_ICloudMachine_GETTER_Name_TO (smth) COM_FORWARD_ICloudMachine_GETTER_OSTypeId_TO (smth) COM_FORWARD_ICloudMachine_GETTER_State_TO (smth) COM_FORWARD_ICloudMachine_GETTER_ConsoleConnectionFingerprint_TO (smth) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommand_TO (smth) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommandWindows_TO (smth) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommand_TO (smth) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommandWindows_TO (smth) COM_FORWARD_ICloudMachine_Refresh_TO (smth) COM_FORWARD_ICloudMachine_GetDetailsForm_TO (smth) COM_FORWARD_ICloudMachine_GetSettingsForm_TO (smth) COM_FORWARD_ICloudMachine_PowerUp_TO (smth) COM_FORWARD_ICloudMachine_Reboot_TO (smth) COM_FORWARD_ICloudMachine_Reset_TO (smth) COM_FORWARD_ICloudMachine_Shutdown_TO (smth) COM_FORWARD_ICloudMachine_PowerDown_TO (smth) COM_FORWARD_ICloudMachine_Terminate_TO (smth) COM_FORWARD_ICloudMachine_Unregister_TO (smth) COM_FORWARD_ICloudMachine_Remove_TO (smth) COM_FORWARD_ICloudMachine_GetConsoleHistory_TO (smth) COM_FORWARD_ICloudMachine_CreateConsoleConnection_TO (smth) COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO (smth) 
 #define COM_FORWARD_ICloudMachine_TO_OBJ(obj) COM_FORWARD_ICloudMachine_TO ((obj)->)
 #define COM_FORWARD_ICloudMachine_TO_BASE(base) COM_FORWARD_ICloudMachine_TO (base::)
 
@@ -74689,6 +74697,10 @@ EXTERN_C const IID IID_ICloudClient;
             /* [in] */ BSTR aUid,
             /* [retval][out] */ IProgress **aProgress) = 0;
         
+        virtual HRESULT STDMETHODCALLTYPE ResetInstance( 
+            /* [in] */ BSTR aUid,
+            /* [retval][out] */ IProgress **aProgress) = 0;
+        
         virtual HRESULT STDMETHODCALLTYPE CreateImage( 
             /* [in] */ SAFEARRAY * aParameters,
             /* [retval][out] */ IProgress **aProgress) = 0;
@@ -74766,8 +74778,6 @@ EXTERN_C const IID IID_ICloudClient;
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod14ICloudClient( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod15ICloudClient( void) = 0;
-        
-        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod16ICloudClient( void) = 0;
         
     };
     
@@ -74976,6 +74986,11 @@ EXTERN_C const IID IID_ICloudClient;
             /* [in] */ BSTR aUid,
             /* [retval][out] */ IProgress **aProgress);
         
+        HRESULT ( STDMETHODCALLTYPE *ResetInstance )( 
+            ICloudClient * This,
+            /* [in] */ BSTR aUid,
+            /* [retval][out] */ IProgress **aProgress);
+        
         HRESULT ( STDMETHODCALLTYPE *CreateImage )( 
             ICloudClient * This,
             /* [in] */ SAFEARRAY * aParameters,
@@ -75076,9 +75091,6 @@ EXTERN_C const IID IID_ICloudClient;
             ICloudClient * This);
         
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod15ICloudClient )( 
-            ICloudClient * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod16ICloudClient )( 
             ICloudClient * This);
         
         END_INTERFACE
@@ -75210,6 +75222,9 @@ EXTERN_C const IID IID_ICloudClient;
 #define ICloudClient_TerminateInstance(This,aUid,aProgress)	\
     ( (This)->lpVtbl -> TerminateInstance(This,aUid,aProgress) ) 
 
+#define ICloudClient_ResetInstance(This,aUid,aProgress)	\
+    ( (This)->lpVtbl -> ResetInstance(This,aUid,aProgress) ) 
+
 #define ICloudClient_CreateImage(This,aParameters,aProgress)	\
     ( (This)->lpVtbl -> CreateImage(This,aParameters,aProgress) ) 
 
@@ -75281,9 +75296,6 @@ EXTERN_C const IID IID_ICloudClient;
 
 #define ICloudClient_InternalAndReservedMethod15ICloudClient(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod15ICloudClient(This) ) 
-
-#define ICloudClient_InternalAndReservedMethod16ICloudClient(This)	\
-    ( (This)->lpVtbl -> InternalAndReservedMethod16ICloudClient(This) ) 
 
 #endif /* COBJMACROS */
 
@@ -75368,6 +75380,9 @@ EXTERN_C const IID IID_ICloudClient;
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO(smth) HRESULT STDMETHODCALLTYPE TerminateInstance (BSTR aUid, IProgress * * aProgress) { return smth TerminateInstance (aUid, aProgress); }
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO_OBJ(obj) COM_FORWARD_ICloudClient_TerminateInstance_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TerminateInstance_TO_BASE(base) COM_FORWARD_ICloudClient_TerminateInstance_TO (base::)
+#define COM_FORWARD_ICloudClient_ResetInstance_TO(smth) HRESULT STDMETHODCALLTYPE ResetInstance (BSTR aUid, IProgress * * aProgress) { return smth ResetInstance (aUid, aProgress); }
+#define COM_FORWARD_ICloudClient_ResetInstance_TO_OBJ(obj) COM_FORWARD_ICloudClient_ResetInstance_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ResetInstance_TO_BASE(base) COM_FORWARD_ICloudClient_ResetInstance_TO (base::)
 #define COM_FORWARD_ICloudClient_CreateImage_TO(smth) HRESULT STDMETHODCALLTYPE CreateImage (SAFEARRAY * * aParameters, IProgress * * aProgress) { return smth CreateImage (aParameters, aProgress); }
 #define COM_FORWARD_ICloudClient_CreateImage_TO_OBJ(obj) COM_FORWARD_ICloudClient_CreateImage_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_CreateImage_TO_BASE(base) COM_FORWARD_ICloudClient_CreateImage_TO (base::)
@@ -75395,7 +75410,7 @@ EXTERN_C const IID IID_ICloudClient;
 #define COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO(smth) HRESULT STDMETHODCALLTYPE GetSubnetSelectionForm (IVirtualSystemDescription * aDescription, IVirtualSystemDescriptionForm * * aForm, IProgress * * aProgress) { return smth GetSubnetSelectionForm (aDescription, aForm, aProgress); }
 #define COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO_OBJ(obj) COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO_BASE(base) COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO (base::)
-#define COM_FORWARD_ICloudClient_TO(smth) COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO (smth) COM_FORWARD_ICloudClient_GETTER_CloudMachineStubList_TO (smth) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ExportVM_TO (smth) COM_FORWARD_ICloudClient_GetLaunchDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_LaunchVM_TO (smth) COM_FORWARD_ICloudClient_GetImportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ImportInstance_TO (smth) COM_FORWARD_ICloudClient_GetCloudMachine_TO (smth) COM_FORWARD_ICloudClient_ReadCloudMachineList_TO (smth) COM_FORWARD_ICloudClient_ReadCloudMachineStubList_TO (smth) COM_FORWARD_ICloudClient_AddCloudMachine_TO (smth) COM_FORWARD_ICloudClient_CreateCloudMachine_TO (smth) COM_FORWARD_ICloudClient_ListInstances_TO (smth) COM_FORWARD_ICloudClient_ListSourceInstances_TO (smth) COM_FORWARD_ICloudClient_ListImages_TO (smth) COM_FORWARD_ICloudClient_ListBootVolumes_TO (smth) COM_FORWARD_ICloudClient_ListSourceBootVolumes_TO (smth) COM_FORWARD_ICloudClient_ListVnicAttachments_TO (smth) COM_FORWARD_ICloudClient_GetInstanceInfo_TO (smth) COM_FORWARD_ICloudClient_StartInstance_TO (smth) COM_FORWARD_ICloudClient_PauseInstance_TO (smth) COM_FORWARD_ICloudClient_TerminateInstance_TO (smth) COM_FORWARD_ICloudClient_CreateImage_TO (smth) COM_FORWARD_ICloudClient_ExportImage_TO (smth) COM_FORWARD_ICloudClient_ImportImage_TO (smth) COM_FORWARD_ICloudClient_DeleteImage_TO (smth) COM_FORWARD_ICloudClient_GetImageInfo_TO (smth) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (smth) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (smth) COM_FORWARD_ICloudClient_GetVnicInfo_TO (smth) COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO (smth) 
+#define COM_FORWARD_ICloudClient_TO(smth) COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO (smth) COM_FORWARD_ICloudClient_GETTER_CloudMachineStubList_TO (smth) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ExportVM_TO (smth) COM_FORWARD_ICloudClient_GetLaunchDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_LaunchVM_TO (smth) COM_FORWARD_ICloudClient_GetImportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ImportInstance_TO (smth) COM_FORWARD_ICloudClient_GetCloudMachine_TO (smth) COM_FORWARD_ICloudClient_ReadCloudMachineList_TO (smth) COM_FORWARD_ICloudClient_ReadCloudMachineStubList_TO (smth) COM_FORWARD_ICloudClient_AddCloudMachine_TO (smth) COM_FORWARD_ICloudClient_CreateCloudMachine_TO (smth) COM_FORWARD_ICloudClient_ListInstances_TO (smth) COM_FORWARD_ICloudClient_ListSourceInstances_TO (smth) COM_FORWARD_ICloudClient_ListImages_TO (smth) COM_FORWARD_ICloudClient_ListBootVolumes_TO (smth) COM_FORWARD_ICloudClient_ListSourceBootVolumes_TO (smth) COM_FORWARD_ICloudClient_ListVnicAttachments_TO (smth) COM_FORWARD_ICloudClient_GetInstanceInfo_TO (smth) COM_FORWARD_ICloudClient_StartInstance_TO (smth) COM_FORWARD_ICloudClient_PauseInstance_TO (smth) COM_FORWARD_ICloudClient_TerminateInstance_TO (smth) COM_FORWARD_ICloudClient_ResetInstance_TO (smth) COM_FORWARD_ICloudClient_CreateImage_TO (smth) COM_FORWARD_ICloudClient_ExportImage_TO (smth) COM_FORWARD_ICloudClient_ImportImage_TO (smth) COM_FORWARD_ICloudClient_DeleteImage_TO (smth) COM_FORWARD_ICloudClient_GetImageInfo_TO (smth) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (smth) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (smth) COM_FORWARD_ICloudClient_GetVnicInfo_TO (smth) COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO (smth) 
 #define COM_FORWARD_ICloudClient_TO_OBJ(obj) COM_FORWARD_ICloudClient_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)
 
