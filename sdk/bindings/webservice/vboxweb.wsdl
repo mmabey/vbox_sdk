@@ -2472,6 +2472,7 @@
           <xsd:element name="recommendedUSB3" type="xsd:boolean"/>
           <xsd:element name="recommendedTFReset" type="xsd:boolean"/>
           <xsd:element name="recommendedX2APIC" type="xsd:boolean"/>
+          <xsd:element name="recommendedCPUCount" type="xsd:unsignedInt"/>
         </xsd:sequence>
       </xsd:complexType>
       <!-- interface IAdditionsFacility as struct: -->

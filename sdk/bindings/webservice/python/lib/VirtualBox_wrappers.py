@@ -27601,6 +27601,8 @@ class IGuestOSType:
        
           self.recommendedX2APIC = Boolean(self.mgr, handle._recommendedX2APIC)
        
+          self.recommendedCPUCount = UnsignedInt(self.mgr, handle._recommendedCPUCount)
+       
           pass
 
    
@@ -27794,6 +27796,12 @@ class IGuestOSType:
        return self.recommendedX2APIC
 
     def setRecommendedX2APIC(self):
+       raise Error('setters not supported')
+    
+    def getRecommendedCPUCount(self):
+       return self.recommendedCPUCount
+
+    def setRecommendedCPUCount(self):
        raise Error('setters not supported')
     
 

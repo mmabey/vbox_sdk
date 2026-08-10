@@ -12810,6 +12810,8 @@ struct IGuestOSType_vtbl
 
     nsresult (*GetRecommendedX2APIC)(IGuestOSType *pThis, PRBool *recommendedX2APIC);
 
+    nsresult (*GetRecommendedCPUCount)(IGuestOSType *pThis, PRUint32 *recommendedCPUCount);
+
     nsresult (*GetInternalAndReservedAttribute1IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
@@ -12839,8 +12841,6 @@ struct IGuestOSType_vtbl
     nsresult (*GetInternalAndReservedAttribute14IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute15IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute16IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -12913,6 +12913,8 @@ struct IGuestOSTypeVtbl
 
     nsresult (*GetRecommendedX2APIC)(IGuestOSType *pThis, PRBool *recommendedX2APIC);
 
+    nsresult (*GetRecommendedCPUCount)(IGuestOSType *pThis, PRUint32 *recommendedCPUCount);
+
     nsresult (*GetInternalAndReservedAttribute1IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
@@ -12942,8 +12944,6 @@ struct IGuestOSTypeVtbl
     nsresult (*GetInternalAndReservedAttribute14IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute15IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute16IGuestOSType)(IGuestOSType *pThis, PRUint32 *reserved);
 
 };
 #define IGuestOSType_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
@@ -13013,6 +13013,8 @@ struct IGuestOSTypeVtbl
 #define IGuestOSType_GetRecommendedTFReset(p, aRecommendedTFReset) ((p)->lpVtbl->GetRecommendedTFReset(p, aRecommendedTFReset))
 #define IGuestOSType_get_RecommendedX2APIC(p, aRecommendedX2APIC) ((p)->lpVtbl->GetRecommendedX2APIC(p, aRecommendedX2APIC))
 #define IGuestOSType_GetRecommendedX2APIC(p, aRecommendedX2APIC) ((p)->lpVtbl->GetRecommendedX2APIC(p, aRecommendedX2APIC))
+#define IGuestOSType_get_RecommendedCPUCount(p, aRecommendedCPUCount) ((p)->lpVtbl->GetRecommendedCPUCount(p, aRecommendedCPUCount))
+#define IGuestOSType_GetRecommendedCPUCount(p, aRecommendedCPUCount) ((p)->lpVtbl->GetRecommendedCPUCount(p, aRecommendedCPUCount))
 #endif /* VBOX_WITH_GLUE */
 
 interface IGuestOSType

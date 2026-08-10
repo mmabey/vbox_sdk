@@ -18427,6 +18427,7 @@ class IGuestOSType extends VBox_Struct
     protected $recommendedUSB3;
     protected $recommendedTFReset;
     protected $recommendedX2APIC;
+    protected $recommendedCPUCount;
 
     public function __construct($connection, $values)
     {
@@ -18463,6 +18464,7 @@ class IGuestOSType extends VBox_Struct
         $this->recommendedUSB3 = $values->recommendedUSB3;
         $this->recommendedTFReset = $values->recommendedTFReset;
         $this->recommendedX2APIC = $values->recommendedX2APIC;
+        $this->recommendedCPUCount = $values->recommendedCPUCount;
     }
 
     public function getFamilyId()
@@ -18592,6 +18594,10 @@ class IGuestOSType extends VBox_Struct
     public function getRecommendedX2APIC()
     {
         return (bool)$this->recommendedX2APIC;
+    }
+    public function getRecommendedCPUCount()
+    {
+        return (float)$this->recommendedCPUCount;
     }
 }
 

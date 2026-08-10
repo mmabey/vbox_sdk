@@ -29560,6 +29560,9 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   /* readonly attribute boolean recommendedX2APIC; */
   NS_IMETHOD GetRecommendedX2APIC(PRBool *aRecommendedX2APIC) = 0;
 
+  /* readonly attribute unsigned long recommendedCPUCount; */
+  NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount) = 0;
+
   /* readonly attribute unsigned long InternalAndReservedAttribute1IGuestOSType; */
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType) = 0;
 
@@ -29605,9 +29608,6 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   /* readonly attribute unsigned long InternalAndReservedAttribute15IGuestOSType; */
   NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute16IGuestOSType; */
-  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType) = 0;
-
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -29644,6 +29644,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedUSB3(PRBool *aRecommendedUSB3); \
   NS_IMETHOD GetRecommendedTFReset(PRBool *aRecommendedTFReset); \
   NS_IMETHOD GetRecommendedX2APIC(PRBool *aRecommendedX2APIC); \
+  NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount); \
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute2IGuestOSType(PRUint32 *aInternalAndReservedAttribute2IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute3IGuestOSType(PRUint32 *aInternalAndReservedAttribute3IGuestOSType); \
@@ -29658,8 +29659,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IGuestOSType(PRUint32 *aInternalAndReservedAttribute12IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute13IGuestOSType(PRUint32 *aInternalAndReservedAttribute13IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute14IGuestOSType(PRUint32 *aInternalAndReservedAttribute14IGuestOSType); \
-  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType); \
-  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType); 
+  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IGUESTOSTYPE(_to) \
@@ -29695,6 +29695,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedUSB3(PRBool *aRecommendedUSB3) { return _to GetRecommendedUSB3(aRecommendedUSB3); } \
   NS_IMETHOD GetRecommendedTFReset(PRBool *aRecommendedTFReset) { return _to GetRecommendedTFReset(aRecommendedTFReset); } \
   NS_IMETHOD GetRecommendedX2APIC(PRBool *aRecommendedX2APIC) { return _to GetRecommendedX2APIC(aRecommendedX2APIC); } \
+  NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount) { return _to GetRecommendedCPUCount(aRecommendedCPUCount); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType) { return _to GetInternalAndReservedAttribute1IGuestOSType(aInternalAndReservedAttribute1IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IGuestOSType(PRUint32 *aInternalAndReservedAttribute2IGuestOSType) { return _to GetInternalAndReservedAttribute2IGuestOSType(aInternalAndReservedAttribute2IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IGuestOSType(PRUint32 *aInternalAndReservedAttribute3IGuestOSType) { return _to GetInternalAndReservedAttribute3IGuestOSType(aInternalAndReservedAttribute3IGuestOSType); } \
@@ -29709,8 +29710,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IGuestOSType(PRUint32 *aInternalAndReservedAttribute12IGuestOSType) { return _to GetInternalAndReservedAttribute12IGuestOSType(aInternalAndReservedAttribute12IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute13IGuestOSType(PRUint32 *aInternalAndReservedAttribute13IGuestOSType) { return _to GetInternalAndReservedAttribute13IGuestOSType(aInternalAndReservedAttribute13IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute14IGuestOSType(PRUint32 *aInternalAndReservedAttribute14IGuestOSType) { return _to GetInternalAndReservedAttribute14IGuestOSType(aInternalAndReservedAttribute14IGuestOSType); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return _to GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } \
-  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType) { return _to GetInternalAndReservedAttribute16IGuestOSType(aInternalAndReservedAttribute16IGuestOSType); } 
+  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return _to GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IGUESTOSTYPE(_to) \
@@ -29746,6 +29746,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedUSB3(PRBool *aRecommendedUSB3) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedUSB3(aRecommendedUSB3); } \
   NS_IMETHOD GetRecommendedTFReset(PRBool *aRecommendedTFReset) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedTFReset(aRecommendedTFReset); } \
   NS_IMETHOD GetRecommendedX2APIC(PRBool *aRecommendedX2APIC) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedX2APIC(aRecommendedX2APIC); } \
+  NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedCPUCount(aRecommendedCPUCount); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IGuestOSType(aInternalAndReservedAttribute1IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IGuestOSType(PRUint32 *aInternalAndReservedAttribute2IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IGuestOSType(aInternalAndReservedAttribute2IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IGuestOSType(PRUint32 *aInternalAndReservedAttribute3IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IGuestOSType(aInternalAndReservedAttribute3IGuestOSType); } \
@@ -29760,8 +29761,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IGuestOSType(PRUint32 *aInternalAndReservedAttribute12IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute12IGuestOSType(aInternalAndReservedAttribute12IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute13IGuestOSType(PRUint32 *aInternalAndReservedAttribute13IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute13IGuestOSType(aInternalAndReservedAttribute13IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute14IGuestOSType(PRUint32 *aInternalAndReservedAttribute14IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute14IGuestOSType(aInternalAndReservedAttribute14IGuestOSType); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } \
-  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute16IGuestOSType(aInternalAndReservedAttribute16IGuestOSType); } 
+  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -29987,6 +29987,12 @@ NS_IMETHODIMP _MYCLASS_::GetRecommendedX2APIC(PRBool *aRecommendedX2APIC)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* readonly attribute unsigned long recommendedCPUCount; */
+NS_IMETHODIMP _MYCLASS_::GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* readonly attribute unsigned long InternalAndReservedAttribute1IGuestOSType; */
 NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType)
 {
@@ -30073,12 +30079,6 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute14IGuestOSType(PRUint32 
 
 /* readonly attribute unsigned long InternalAndReservedAttribute15IGuestOSType; */
 NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* readonly attribute unsigned long InternalAndReservedAttribute16IGuestOSType; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -30182,6 +30182,9 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute16IGuestOSType(PRUint32 
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO(smth) NS_IMETHOD GetRecommendedX2APIC (PRBool * aRecommendedX2APIC) { return smth GetRecommendedX2APIC (aRecommendedX2APIC); }
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO (base::)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO(smth) NS_IMETHOD GetRecommendedCPUCount (PRUint32 * aRecommendedCPUCount) { return smth GetRecommendedCPUCount (aRecommendedCPUCount); }
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO ((obj)->)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO (base::)
 #define COM_FORWARD_IGuestOSType_TO(smth) NS_FORWARD_IGUESTOSTYPE (smth)
 #define COM_FORWARD_IGuestOSType_TO_OBJ(obj) COM_FORWARD_IGuestOSType_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_TO_BASE(base) COM_FORWARD_IGuestOSType_TO (base::)

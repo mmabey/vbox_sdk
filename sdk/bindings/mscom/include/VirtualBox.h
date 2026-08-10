@@ -10,7 +10,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Jul 28 16:52:47 2021
+/* at Mon Oct 18 18:25:29 2021
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.1-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -22598,6 +22598,9 @@ EXTERN_C const IID IID_IGuestOSType;
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RecommendedX2APIC( 
             /* [retval][out] */ BOOL *aRecommendedX2APIC) = 0;
         
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RecommendedCPUCount( 
+            /* [retval][out] */ ULONG *aRecommendedCPUCount) = 0;
+        
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute1IGuestOSType( 
             /* [retval][out] */ ULONG *aReserved) = 0;
         
@@ -22641,9 +22644,6 @@ EXTERN_C const IID IID_IGuestOSType;
             /* [retval][out] */ ULONG *aReserved) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute15IGuestOSType( 
-            /* [retval][out] */ ULONG *aReserved) = 0;
-        
-        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute16IGuestOSType( 
             /* [retval][out] */ ULONG *aReserved) = 0;
         
     };
@@ -22823,6 +22823,10 @@ EXTERN_C const IID IID_IGuestOSType;
             IGuestOSType * This,
             /* [retval][out] */ BOOL *aRecommendedX2APIC);
         
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecommendedCPUCount )( 
+            IGuestOSType * This,
+            /* [retval][out] */ ULONG *aRecommendedCPUCount);
+        
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute1IGuestOSType )( 
             IGuestOSType * This,
             /* [retval][out] */ ULONG *aReserved);
@@ -22880,10 +22884,6 @@ EXTERN_C const IID IID_IGuestOSType;
             /* [retval][out] */ ULONG *aReserved);
         
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute15IGuestOSType )( 
-            IGuestOSType * This,
-            /* [retval][out] */ ULONG *aReserved);
-        
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute16IGuestOSType )( 
             IGuestOSType * This,
             /* [retval][out] */ ULONG *aReserved);
         
@@ -23019,6 +23019,9 @@ EXTERN_C const IID IID_IGuestOSType;
 #define IGuestOSType_get_RecommendedX2APIC(This,aRecommendedX2APIC)	\
     ( (This)->lpVtbl -> get_RecommendedX2APIC(This,aRecommendedX2APIC) ) 
 
+#define IGuestOSType_get_RecommendedCPUCount(This,aRecommendedCPUCount)	\
+    ( (This)->lpVtbl -> get_RecommendedCPUCount(This,aRecommendedCPUCount) ) 
+
 #define IGuestOSType_get_InternalAndReservedAttribute1IGuestOSType(This,aReserved)	\
     ( (This)->lpVtbl -> get_InternalAndReservedAttribute1IGuestOSType(This,aReserved) ) 
 
@@ -23063,9 +23066,6 @@ EXTERN_C const IID IID_IGuestOSType;
 
 #define IGuestOSType_get_InternalAndReservedAttribute15IGuestOSType(This,aReserved)	\
     ( (This)->lpVtbl -> get_InternalAndReservedAttribute15IGuestOSType(This,aReserved) ) 
-
-#define IGuestOSType_get_InternalAndReservedAttribute16IGuestOSType(This,aReserved)	\
-    ( (This)->lpVtbl -> get_InternalAndReservedAttribute16IGuestOSType(This,aReserved) ) 
 
 #endif /* COBJMACROS */
 
@@ -23177,7 +23177,10 @@ EXTERN_C const IID IID_IGuestOSType;
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO(smth) HRESULT STDMETHODCALLTYPE get_RecommendedX2APIC (BOOL * aRecommendedX2APIC) { return smth get_RecommendedX2APIC (aRecommendedX2APIC); }
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO (base::)
-#define COM_FORWARD_IGuestOSType_TO(smth) COM_FORWARD_IGuestOSType_GETTER_FamilyId_TO (smth) COM_FORWARD_IGuestOSType_GETTER_FamilyDescription_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Id_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Description_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Is64Bit_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedIOAPIC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVirtEx_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedGraphicsController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDD_TO (smth) COM_FORWARD_IGuestOSType_GETTER_AdapterType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedPAE_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFirmware_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBHID_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHPET_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBTablet_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRTCUseUTC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioCodec_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFloppy_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB3_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedTFReset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO (smth) 
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO(smth) HRESULT STDMETHODCALLTYPE get_RecommendedCPUCount (ULONG * aRecommendedCPUCount) { return smth get_RecommendedCPUCount (aRecommendedCPUCount); }
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO ((obj)->)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO (base::)
+#define COM_FORWARD_IGuestOSType_TO(smth) COM_FORWARD_IGuestOSType_GETTER_FamilyId_TO (smth) COM_FORWARD_IGuestOSType_GETTER_FamilyDescription_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Id_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Description_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Is64Bit_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedIOAPIC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVirtEx_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedGraphicsController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedVRAM_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Recommended2DVideoAcceleration_TO (smth) COM_FORWARD_IGuestOSType_GETTER_Recommended3DAcceleration_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDD_TO (smth) COM_FORWARD_IGuestOSType_GETTER_AdapterType_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedPAE_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedDVDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHDStorageBus_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFirmware_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBHID_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedHPET_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSBTablet_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedRTCUseUTC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioCodec_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedFloppy_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedUSB3_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedTFReset_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedX2APIC_TO (smth) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO (smth) 
 #define COM_FORWARD_IGuestOSType_TO_OBJ(obj) COM_FORWARD_IGuestOSType_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_TO_BASE(base) COM_FORWARD_IGuestOSType_TO (base::)
 
