@@ -70125,6 +70125,46 @@ class ns0:
             Holder.__name__ = "IGuestDebugControlChangedEvent_getGuestDebugControlResponse_Holder"
             self.pyclass = Holder
 
+    class IMachineGroupsChangedEvent_getDummy_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IMachineGroupsChangedEvent_getDummy"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IMachineGroupsChangedEvent_getDummy_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IMachineGroupsChangedEvent_getDummy")
+            kw["aname"] = "_IMachineGroupsChangedEvent_getDummy"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IMachineGroupsChangedEvent_getDummy_Holder"
+            self.pyclass = Holder
+
+    class IMachineGroupsChangedEvent_getDummyResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IMachineGroupsChangedEvent_getDummyResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IMachineGroupsChangedEvent_getDummyResponse_Dec.schema
+            TClist = [ZSI.TC.Boolean(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IMachineGroupsChangedEvent_getDummyResponse")
+            kw["aname"] = "_IMachineGroupsChangedEvent_getDummyResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IMachineGroupsChangedEvent_getDummyResponse_Holder"
+            self.pyclass = Holder
+
     class IStringArray_getValues_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
         literal = "IStringArray_getValues"
         schema = "http://www.virtualbox.org/"

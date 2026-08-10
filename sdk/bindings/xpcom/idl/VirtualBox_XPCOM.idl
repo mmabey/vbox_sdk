@@ -380,6 +380,7 @@ interface IUpdateAgentErrorEvent;
 interface IUpdateAgentAvailableEvent;
 interface IUpdateAgentStateChangedEvent;
 interface IGuestDebugControlChangedEvent;
+interface IMachineGroupsChangedEvent;
 interface IStringArray;
 interface IFormValue;
 interface IBooleanFormValue;
@@ -6751,7 +6752,8 @@ interface VBoxEventType
     const PRUint32 OnUpdateAgentStateChanged = 115;
     const PRUint32 OnHostAudioDeviceChanged = 116;
     const PRUint32 OnGuestDebugControlChanged = 117;
-    const PRUint32 End = 118;
+    const PRUint32 OnMachineGroupsChanged = 118;
+    const PRUint32 End = 119;
 };
 
 
@@ -6854,6 +6856,7 @@ typedef PRUint32 VBoxEventType_T;
 # define VBoxEventType_OnUpdateAgentStateChanged VBoxEventType::OnUpdateAgentStateChanged
 # define VBoxEventType_OnHostAudioDeviceChanged VBoxEventType::OnHostAudioDeviceChanged
 # define VBoxEventType_OnGuestDebugControlChanged VBoxEventType::OnGuestDebugControlChanged
+# define VBoxEventType_OnMachineGroupsChanged VBoxEventType::OnMachineGroupsChanged
 # define VBoxEventType_End VBoxEventType::End
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VBoxEventType_T {
@@ -6950,6 +6953,7 @@ typedef enum VBoxEventType_T {
     VBoxEventType_OnUpdateAgentStateChanged = VBoxEventType::OnUpdateAgentStateChanged,
     VBoxEventType_OnHostAudioDeviceChanged = VBoxEventType::OnHostAudioDeviceChanged,
     VBoxEventType_OnGuestDebugControlChanged = VBoxEventType::OnGuestDebugControlChanged,
+    VBoxEventType_OnMachineGroupsChanged = VBoxEventType::OnMachineGroupsChanged,
     VBoxEventType_End = VBoxEventType::End,
     VBoxEventType_32BitHack = 0x7fffffff
 } VBoxEventType_T;
@@ -23907,6 +23911,29 @@ interface IGuestDebugControlChangedEvent : IEvent
 
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IGuestDebugControlChangedEvent;
+%}
+
+[
+    uuid(ee37afb5-7002-4786-a5c4-a9c29e1cce75),
+    scriptable
+]
+interface IMachineGroupsChangedEvent : IMachineEvent
+{
+    readonly attribute boolean dummy;
+
+}; /* interface IMachineGroupsChangedEvent */
+
+/* Interface implementation forwarder macro */
+%{C++
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO(smth) NS_IMETHOD GetDummy (PRBool * aDummy) { return smth GetDummy (aDummy); }
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO ((obj)->)
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO (base::)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO(smth) NS_FORWARD_IMACHINEGROUPSCHANGEDEVENT (smth)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_TO (base::)
+
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IMachineGroupsChangedEvent;
 %}
 
 [

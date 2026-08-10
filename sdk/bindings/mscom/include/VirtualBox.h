@@ -16,7 +16,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Oct 19 20:23:45 2022
+/* at Wed Nov 16 15:14:45 2022
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -1257,6 +1257,12 @@ typedef interface IGuestDebugControlChangedEvent IGuestDebugControlChangedEvent;
 #endif 	/* __IGuestDebugControlChangedEvent_FWD_DEFINED__ */
 
 
+#ifndef __IMachineGroupsChangedEvent_FWD_DEFINED__
+#define __IMachineGroupsChangedEvent_FWD_DEFINED__
+typedef interface IMachineGroupsChangedEvent IMachineGroupsChangedEvent;
+#endif 	/* __IMachineGroupsChangedEvent_FWD_DEFINED__ */
+
+
 #ifndef __IStringArray_FWD_DEFINED__
 #define __IStringArray_FWD_DEFINED__
 typedef interface IStringArray IStringArray;
@@ -2583,6 +2589,12 @@ typedef interface IGuestDebugControlChangedEvent IGuestDebugControlChangedEvent;
 #endif 	/* __IGuestDebugControlChangedEvent_FWD_DEFINED__ */
 
 
+#ifndef __IMachineGroupsChangedEvent_FWD_DEFINED__
+#define __IMachineGroupsChangedEvent_FWD_DEFINED__
+typedef interface IMachineGroupsChangedEvent IMachineGroupsChangedEvent;
+#endif 	/* __IMachineGroupsChangedEvent_FWD_DEFINED__ */
+
+
 #ifndef __IStringArray_FWD_DEFINED__
 #define __IStringArray_FWD_DEFINED__
 typedef interface IStringArray IStringArray;
@@ -2763,6 +2775,7 @@ enum {
     kTypeLibraryMajorVersion = 1,
     kTypeLibraryMinorVersion = 3
 };
+
 
 
 
@@ -4719,7 +4732,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0134
 	VBoxEventType_OnUpdateAgentStateChanged	= 115,
 	VBoxEventType_OnHostAudioDeviceChanged	= 116,
 	VBoxEventType_OnGuestDebugControlChanged	= 117,
-	VBoxEventType_End	= 118
+	VBoxEventType_OnMachineGroupsChanged	= 118,
+	VBoxEventType_End	= 119
     } 	VBoxEventType;
 
 #define VBoxEventType_T VBoxEventType
@@ -70758,6 +70772,185 @@ EXTERN_C const IID IID_IGuestDebugControlChangedEvent;
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0200_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0200_v0_0_s_ifspec;
 
+#ifndef __IMachineGroupsChangedEvent_INTERFACE_DEFINED__
+#define __IMachineGroupsChangedEvent_INTERFACE_DEFINED__
+
+/* interface IMachineGroupsChangedEvent */
+/* [proxy][oleautomation][dual][object][uuid] */ 
+
+
+EXTERN_C const IID IID_IMachineGroupsChangedEvent;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("ee37afb5-7002-4786-a5c4-a9c29e1cce75")
+    IMachineGroupsChangedEvent : public IMachineEvent
+    {
+    public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Dummy( 
+            /* [retval][out] */ BOOL *aDummy) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMachineGroupsChangedEventVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMachineGroupsChangedEvent * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMachineGroupsChangedEvent * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMachineGroupsChangedEvent * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMachineGroupsChangedEvent * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMachineGroupsChangedEvent * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMachineGroupsChangedEvent * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMachineGroupsChangedEvent * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
+            IMachineGroupsChangedEvent * This,
+            /* [retval][out] */ VBoxEventType *aType);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
+            IMachineGroupsChangedEvent * This,
+            /* [retval][out] */ IEventSource **aSource);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Waitable )( 
+            IMachineGroupsChangedEvent * This,
+            /* [retval][out] */ BOOL *aWaitable);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetProcessed )( 
+            IMachineGroupsChangedEvent * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *WaitProcessed )( 
+            IMachineGroupsChangedEvent * This,
+            /* [in] */ LONG aTimeout,
+            /* [retval][out] */ BOOL *aResult);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MachineId )( 
+            IMachineGroupsChangedEvent * This,
+            /* [retval][out] */ BSTR *aMachineId);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dummy )( 
+            IMachineGroupsChangedEvent * This,
+            /* [retval][out] */ BOOL *aDummy);
+        
+        END_INTERFACE
+    } IMachineGroupsChangedEventVtbl;
+
+    interface IMachineGroupsChangedEvent
+    {
+        CONST_VTBL struct IMachineGroupsChangedEventVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMachineGroupsChangedEvent_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMachineGroupsChangedEvent_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMachineGroupsChangedEvent_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMachineGroupsChangedEvent_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IMachineGroupsChangedEvent_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IMachineGroupsChangedEvent_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IMachineGroupsChangedEvent_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IMachineGroupsChangedEvent_get_Type(This,aType)	\
+    ( (This)->lpVtbl -> get_Type(This,aType) ) 
+
+#define IMachineGroupsChangedEvent_get_Source(This,aSource)	\
+    ( (This)->lpVtbl -> get_Source(This,aSource) ) 
+
+#define IMachineGroupsChangedEvent_get_Waitable(This,aWaitable)	\
+    ( (This)->lpVtbl -> get_Waitable(This,aWaitable) ) 
+
+#define IMachineGroupsChangedEvent_SetProcessed(This)	\
+    ( (This)->lpVtbl -> SetProcessed(This) ) 
+
+#define IMachineGroupsChangedEvent_WaitProcessed(This,aTimeout,aResult)	\
+    ( (This)->lpVtbl -> WaitProcessed(This,aTimeout,aResult) ) 
+
+
+#define IMachineGroupsChangedEvent_get_MachineId(This,aMachineId)	\
+    ( (This)->lpVtbl -> get_MachineId(This,aMachineId) ) 
+
+
+#define IMachineGroupsChangedEvent_get_Dummy(This,aDummy)	\
+    ( (This)->lpVtbl -> get_Dummy(This,aDummy) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMachineGroupsChangedEvent_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_VirtualBox_0000_0201 */
+/* [local] */ 
+
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO(smth) HRESULT STDMETHODCALLTYPE get_Dummy (BOOL * aDummy) { return smth get_Dummy (aDummy); }
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO ((obj)->)
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO (base::)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO(smth) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO (smth) 
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_TO (base::)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0201_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0201_v0_0_s_ifspec;
+
 #ifndef __IStringArray_INTERFACE_DEFINED__
 #define __IStringArray_INTERFACE_DEFINED__
 
@@ -70911,7 +71104,7 @@ EXTERN_C const IID IID_IStringArray;
 #endif 	/* __IStringArray_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0201 */
+/* interface __MIDL_itf_VirtualBox_0000_0202 */
 /* [local] */ 
 
 #define COM_FORWARD_IStringArray_GETTER_Values_TO(smth) HRESULT STDMETHODCALLTYPE get_Values (SAFEARRAY * * aValues) { return smth get_Values (aValues); }
@@ -70922,8 +71115,8 @@ EXTERN_C const IID IID_IStringArray;
 #define COM_FORWARD_IStringArray_TO_BASE(base) COM_FORWARD_IStringArray_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0201_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0201_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0202_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0202_v0_0_s_ifspec;
 
 #ifndef __IFormValue_INTERFACE_DEFINED__
 #define __IFormValue_INTERFACE_DEFINED__
@@ -71218,7 +71411,7 @@ EXTERN_C const IID IID_IFormValue;
 #endif 	/* __IFormValue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0202 */
+/* interface __MIDL_itf_VirtualBox_0000_0203 */
 /* [local] */ 
 
 #define COM_FORWARD_IFormValue_GETTER_Type_TO(smth) HRESULT STDMETHODCALLTYPE get_Type (FormValueType * aType) { return smth get_Type (aType); }
@@ -71247,8 +71440,8 @@ EXTERN_C const IID IID_IFormValue;
 #define COM_FORWARD_IFormValue_TO_BASE(base) COM_FORWARD_IFormValue_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0202_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0202_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0203_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0203_v0_0_s_ifspec;
 
 #ifndef __IBooleanFormValue_INTERFACE_DEFINED__
 #define __IBooleanFormValue_INTERFACE_DEFINED__
@@ -71585,7 +71778,7 @@ EXTERN_C const IID IID_IBooleanFormValue;
 #endif 	/* __IBooleanFormValue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0203 */
+/* interface __MIDL_itf_VirtualBox_0000_0204 */
 /* [local] */ 
 
 #define COM_FORWARD_IBooleanFormValue_GetSelected_TO(smth) HRESULT STDMETHODCALLTYPE GetSelected (BOOL * aSelected) { return smth GetSelected (aSelected); }
@@ -71599,8 +71792,8 @@ EXTERN_C const IID IID_IBooleanFormValue;
 #define COM_FORWARD_IBooleanFormValue_TO_BASE(base) COM_FORWARD_IBooleanFormValue_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0203_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0203_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0204_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0204_v0_0_s_ifspec;
 
 #ifndef __IRangedIntegerFormValue_INTERFACE_DEFINED__
 #define __IRangedIntegerFormValue_INTERFACE_DEFINED__
@@ -71967,7 +72160,7 @@ EXTERN_C const IID IID_IRangedIntegerFormValue;
 #endif 	/* __IRangedIntegerFormValue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0204 */
+/* interface __MIDL_itf_VirtualBox_0000_0205 */
 /* [local] */ 
 
 #define COM_FORWARD_IRangedIntegerFormValue_GETTER_Suffix_TO(smth) HRESULT STDMETHODCALLTYPE get_Suffix (BSTR * aSuffix) { return smth get_Suffix (aSuffix); }
@@ -71990,8 +72183,8 @@ EXTERN_C const IID IID_IRangedIntegerFormValue;
 #define COM_FORWARD_IRangedIntegerFormValue_TO_BASE(base) COM_FORWARD_IRangedIntegerFormValue_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0204_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0204_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0205_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0205_v0_0_s_ifspec;
 
 #ifndef __IStringFormValue_INTERFACE_DEFINED__
 #define __IStringFormValue_INTERFACE_DEFINED__
@@ -72348,7 +72541,7 @@ EXTERN_C const IID IID_IStringFormValue;
 #endif 	/* __IStringFormValue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0205 */
+/* interface __MIDL_itf_VirtualBox_0000_0206 */
 /* [local] */ 
 
 #define COM_FORWARD_IStringFormValue_GETTER_Multiline_TO(smth) HRESULT STDMETHODCALLTYPE get_Multiline (BOOL * aMultiline) { return smth get_Multiline (aMultiline); }
@@ -72368,8 +72561,8 @@ EXTERN_C const IID IID_IStringFormValue;
 #define COM_FORWARD_IStringFormValue_TO_BASE(base) COM_FORWARD_IStringFormValue_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0205_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0205_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_s_ifspec;
 
 #ifndef __IChoiceFormValue_INTERFACE_DEFINED__
 #define __IChoiceFormValue_INTERFACE_DEFINED__
@@ -72716,7 +72909,7 @@ EXTERN_C const IID IID_IChoiceFormValue;
 #endif 	/* __IChoiceFormValue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0206 */
+/* interface __MIDL_itf_VirtualBox_0000_0207 */
 /* [local] */ 
 
 #define COM_FORWARD_IChoiceFormValue_GETTER_Values_TO(smth) HRESULT STDMETHODCALLTYPE get_Values (SAFEARRAY * * aValues) { return smth get_Values (aValues); }
@@ -72733,8 +72926,8 @@ EXTERN_C const IID IID_IChoiceFormValue;
 #define COM_FORWARD_IChoiceFormValue_TO_BASE(base) COM_FORWARD_IChoiceFormValue_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_s_ifspec;
 
 #ifndef __IForm_INTERFACE_DEFINED__
 #define __IForm_INTERFACE_DEFINED__
@@ -72951,7 +73144,7 @@ EXTERN_C const IID IID_IForm;
 #endif 	/* __IForm_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0207 */
+/* interface __MIDL_itf_VirtualBox_0000_0208 */
 /* [local] */ 
 
 #define COM_FORWARD_IForm_GETTER_Values_TO(smth) HRESULT STDMETHODCALLTYPE get_Values (SAFEARRAY * * aValues) { return smth get_Values (aValues); }
@@ -72968,8 +73161,8 @@ EXTERN_C const IID IID_IForm;
 #define COM_FORWARD_IForm_TO_BASE(base) COM_FORWARD_IForm_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_s_ifspec;
 
 #ifndef __IVirtualSystemDescriptionForm_INTERFACE_DEFINED__
 #define __IVirtualSystemDescriptionForm_INTERFACE_DEFINED__
@@ -73239,7 +73432,7 @@ EXTERN_C const IID IID_IVirtualSystemDescriptionForm;
 #endif 	/* __IVirtualSystemDescriptionForm_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0208 */
+/* interface __MIDL_itf_VirtualBox_0000_0209 */
 /* [local] */ 
 
 #define COM_FORWARD_IVirtualSystemDescriptionForm_GetVirtualSystemDescription_TO(smth) HRESULT STDMETHODCALLTYPE GetVirtualSystemDescription (IVirtualSystemDescription * * aDescription) { return smth GetVirtualSystemDescription (aDescription); }
@@ -73250,8 +73443,8 @@ EXTERN_C const IID IID_IVirtualSystemDescriptionForm;
 #define COM_FORWARD_IVirtualSystemDescriptionForm_TO_BASE(base) COM_FORWARD_IVirtualSystemDescriptionForm_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_s_ifspec;
 
 #ifndef __ICloudNetworkGatewayInfo_INTERFACE_DEFINED__
 #define __ICloudNetworkGatewayInfo_INTERFACE_DEFINED__
@@ -73454,7 +73647,7 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
 #endif 	/* __ICloudNetworkGatewayInfo_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0209 */
+/* interface __MIDL_itf_VirtualBox_0000_0210 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO(smth) HRESULT STDMETHODCALLTYPE get_PublicIP (BSTR * aPublicIP) { return smth get_PublicIP (aPublicIP); }
@@ -73474,8 +73667,8 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
 #define COM_FORWARD_ICloudNetworkGatewayInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_s_ifspec;
 
 #ifndef __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__
 #define __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__
@@ -73668,7 +73861,7 @@ EXTERN_C const IID IID_ICloudNetworkEnvironmentInfo;
 #endif 	/* __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0210 */
+/* interface __MIDL_itf_VirtualBox_0000_0211 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO(smth) HRESULT STDMETHODCALLTYPE get_TunnelNetworkId (BSTR * aTunnelNetworkId) { return smth get_TunnelNetworkId (aTunnelNetworkId); }
@@ -73679,8 +73872,8 @@ EXTERN_C const IID IID_ICloudNetworkEnvironmentInfo;
 #define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_s_ifspec;
 
 #ifndef __ICloudMachine_INTERFACE_DEFINED__
 #define __ICloudMachine_INTERFACE_DEFINED__
@@ -74247,7 +74440,7 @@ EXTERN_C const IID IID_ICloudMachine;
 #endif 	/* __ICloudMachine_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0211 */
+/* interface __MIDL_itf_VirtualBox_0000_0212 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudMachine_GETTER_Id_TO(smth) HRESULT STDMETHODCALLTYPE get_Id (BSTR * aId) { return smth get_Id (aId); }
@@ -74327,8 +74520,8 @@ EXTERN_C const IID IID_ICloudMachine;
 #define COM_FORWARD_ICloudMachine_TO_BASE(base) COM_FORWARD_ICloudMachine_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_s_ifspec;
 
 #ifndef __ICloudClient_INTERFACE_DEFINED__
 #define __ICloudClient_INTERFACE_DEFINED__
@@ -75079,7 +75272,7 @@ EXTERN_C const IID IID_ICloudClient;
 #endif 	/* __ICloudClient_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0212 */
+/* interface __MIDL_itf_VirtualBox_0000_0213 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO(smth) HRESULT STDMETHODCALLTYPE get_CloudMachineList (SAFEARRAY * * aCloudMachineList) { return smth get_CloudMachineList (aCloudMachineList); }
@@ -75183,8 +75376,8 @@ EXTERN_C const IID IID_ICloudClient;
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_s_ifspec;
 
 #ifndef __ICloudProfile_INTERFACE_DEFINED__
 #define __ICloudProfile_INTERFACE_DEFINED__
@@ -75507,7 +75700,7 @@ EXTERN_C const IID IID_ICloudProfile;
 #endif 	/* __ICloudProfile_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0213 */
+/* interface __MIDL_itf_VirtualBox_0000_0214 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfile_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -75542,8 +75735,8 @@ EXTERN_C const IID IID_ICloudProfile;
 #define COM_FORWARD_ICloudProfile_TO_BASE(base) COM_FORWARD_ICloudProfile_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_s_ifspec;
 
 #ifndef __ICloudProvider_INTERFACE_DEFINED__
 #define __ICloudProvider_INTERFACE_DEFINED__
@@ -76010,7 +76203,7 @@ EXTERN_C const IID IID_ICloudProvider;
 #endif 	/* __ICloudProvider_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0214 */
+/* interface __MIDL_itf_VirtualBox_0000_0215 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProvider_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -76057,8 +76250,8 @@ EXTERN_C const IID IID_ICloudProvider;
 #define COM_FORWARD_ICloudProvider_TO_BASE(base) COM_FORWARD_ICloudProvider_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderManager_INTERFACE_DEFINED__
 #define __ICloudProviderManager_INTERFACE_DEFINED__
@@ -76329,7 +76522,7 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #endif 	/* __ICloudProviderManager_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0215 */
+/* interface __MIDL_itf_VirtualBox_0000_0216 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderManager_GETTER_Providers_TO(smth) HRESULT STDMETHODCALLTYPE get_Providers (SAFEARRAY * * aProviders) { return smth get_Providers (aProviders); }
@@ -76349,8 +76542,8 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #define COM_FORWARD_ICloudProviderManager_TO_BASE(base) COM_FORWARD_ICloudProviderManager_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderListChangedEvent_INTERFACE_DEFINED__
 #define __ICloudProviderListChangedEvent_INTERFACE_DEFINED__
@@ -76509,7 +76702,7 @@ EXTERN_C const IID IID_ICloudProviderListChangedEvent;
 #endif 	/* __ICloudProviderListChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0216 */
+/* interface __MIDL_itf_VirtualBox_0000_0217 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderListChangedEvent_GETTER_Registered_TO(smth) HRESULT STDMETHODCALLTYPE get_Registered (BOOL * aRegistered) { return smth get_Registered (aRegistered); }
@@ -76520,8 +76713,8 @@ EXTERN_C const IID IID_ICloudProviderListChangedEvent;
 #define COM_FORWARD_ICloudProviderListChangedEvent_TO_BASE(base) COM_FORWARD_ICloudProviderListChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderRegisteredEvent_INTERFACE_DEFINED__
 #define __ICloudProviderRegisteredEvent_INTERFACE_DEFINED__
@@ -76690,7 +76883,7 @@ EXTERN_C const IID IID_ICloudProviderRegisteredEvent;
 #endif 	/* __ICloudProviderRegisteredEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0217 */
+/* interface __MIDL_itf_VirtualBox_0000_0218 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Id_TO(smth) HRESULT STDMETHODCALLTYPE get_Id (BSTR * aId) { return smth get_Id (aId); }
@@ -76704,8 +76897,8 @@ EXTERN_C const IID IID_ICloudProviderRegisteredEvent;
 #define COM_FORWARD_ICloudProviderRegisteredEvent_TO_BASE(base) COM_FORWARD_ICloudProviderRegisteredEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderUninstallEvent_INTERFACE_DEFINED__
 #define __ICloudProviderUninstallEvent_INTERFACE_DEFINED__
@@ -76864,7 +77057,7 @@ EXTERN_C const IID IID_ICloudProviderUninstallEvent;
 #endif 	/* __ICloudProviderUninstallEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0218 */
+/* interface __MIDL_itf_VirtualBox_0000_0219 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderUninstallEvent_GETTER_Id_TO(smth) HRESULT STDMETHODCALLTYPE get_Id (BSTR * aId) { return smth get_Id (aId); }
@@ -76875,8 +77068,8 @@ EXTERN_C const IID IID_ICloudProviderUninstallEvent;
 #define COM_FORWARD_ICloudProviderUninstallEvent_TO_BASE(base) COM_FORWARD_ICloudProviderUninstallEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_s_ifspec;
 
 #ifndef __ICloudProfileRegisteredEvent_INTERFACE_DEFINED__
 #define __ICloudProfileRegisteredEvent_INTERFACE_DEFINED__
@@ -77055,7 +77248,7 @@ EXTERN_C const IID IID_ICloudProfileRegisteredEvent;
 #endif 	/* __ICloudProfileRegisteredEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0219 */
+/* interface __MIDL_itf_VirtualBox_0000_0220 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_ProviderId_TO(smth) HRESULT STDMETHODCALLTYPE get_ProviderId (BSTR * aProviderId) { return smth get_ProviderId (aProviderId); }
@@ -77072,8 +77265,8 @@ EXTERN_C const IID IID_ICloudProfileRegisteredEvent;
 #define COM_FORWARD_ICloudProfileRegisteredEvent_TO_BASE(base) COM_FORWARD_ICloudProfileRegisteredEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_s_ifspec;
 
 #ifndef __ICloudProfileChangedEvent_INTERFACE_DEFINED__
 #define __ICloudProfileChangedEvent_INTERFACE_DEFINED__
@@ -77242,7 +77435,7 @@ EXTERN_C const IID IID_ICloudProfileChangedEvent;
 #endif 	/* __ICloudProfileChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0220 */
+/* interface __MIDL_itf_VirtualBox_0000_0221 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfileChangedEvent_GETTER_ProviderId_TO(smth) HRESULT STDMETHODCALLTYPE get_ProviderId (BSTR * aProviderId) { return smth get_ProviderId (aProviderId); }
@@ -77256,8 +77449,8 @@ EXTERN_C const IID IID_ICloudProfileChangedEvent;
 #define COM_FORWARD_ICloudProfileChangedEvent_TO_BASE(base) COM_FORWARD_ICloudProfileChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_s_ifspec;
 
 #ifndef __ILanguageChangedEvent_INTERFACE_DEFINED__
 #define __ILanguageChangedEvent_INTERFACE_DEFINED__
@@ -77416,7 +77609,7 @@ EXTERN_C const IID IID_ILanguageChangedEvent;
 #endif 	/* __ILanguageChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0221 */
+/* interface __MIDL_itf_VirtualBox_0000_0222 */
 /* [local] */ 
 
 #define COM_FORWARD_ILanguageChangedEvent_GETTER_LanguageId_TO(smth) HRESULT STDMETHODCALLTYPE get_LanguageId (BSTR * aLanguageId) { return smth get_LanguageId (aLanguageId); }
@@ -77427,8 +77620,8 @@ EXTERN_C const IID IID_ILanguageChangedEvent;
 #define COM_FORWARD_ILanguageChangedEvent_TO_BASE(base) COM_FORWARD_ILanguageChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_s_ifspec;
 
 
 #ifndef __VirtualBox_LIBRARY_DEFINED__
@@ -77453,6 +77646,7 @@ extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_s_ifspec;
 #define VBOX_E_MAXIMUM_REACHED ((HRESULT)0x80BB000E)
 #define VBOX_E_GSTCTL_GUEST_ERROR ((HRESULT)0x80BB000F)
 #define VBOX_E_TIMEOUT ((HRESULT)0x80BB0010)
+
 
 
 

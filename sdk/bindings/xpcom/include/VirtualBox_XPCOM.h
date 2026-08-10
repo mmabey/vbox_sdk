@@ -565,6 +565,8 @@ class IUpdateAgentStateChangedEvent; /* forward declaration */
 
 class IGuestDebugControlChangedEvent; /* forward declaration */
 
+class IMachineGroupsChangedEvent; /* forward declaration */
+
 class IStringArray; /* forward declaration */
 
 class IFormValue; /* forward declaration */
@@ -14016,7 +14018,9 @@ class NS_NO_VTABLE VBoxEventType {
 
   enum { OnGuestDebugControlChanged = 117U };
 
-  enum { End = 118U };
+  enum { OnMachineGroupsChanged = 118U };
+
+  enum { End = 119U };
 
 };
 
@@ -14160,6 +14164,7 @@ typedef PRUint32 VBoxEventType_T;
 # define VBoxEventType_OnUpdateAgentStateChanged VBoxEventType::OnUpdateAgentStateChanged
 # define VBoxEventType_OnHostAudioDeviceChanged VBoxEventType::OnHostAudioDeviceChanged
 # define VBoxEventType_OnGuestDebugControlChanged VBoxEventType::OnGuestDebugControlChanged
+# define VBoxEventType_OnMachineGroupsChanged VBoxEventType::OnMachineGroupsChanged
 # define VBoxEventType_End VBoxEventType::End
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VBoxEventType_T {
@@ -14256,6 +14261,7 @@ typedef enum VBoxEventType_T {
     VBoxEventType_OnUpdateAgentStateChanged = VBoxEventType::OnUpdateAgentStateChanged,
     VBoxEventType_OnHostAudioDeviceChanged = VBoxEventType::OnHostAudioDeviceChanged,
     VBoxEventType_OnGuestDebugControlChanged = VBoxEventType::OnGuestDebugControlChanged,
+    VBoxEventType_OnMachineGroupsChanged = VBoxEventType::OnMachineGroupsChanged,
     VBoxEventType_End = VBoxEventType::End,
     VBoxEventType_32BitHack = 0x7fffffff
 } VBoxEventType_T;
@@ -65528,6 +65534,85 @@ NS_IMETHODIMP _MYCLASS_::GetGuestDebugControl(IGuestDebugControl * *aGuestDebugC
 #define COM_FORWARD_IGuestDebugControlChangedEvent_TO_BASE(base) COM_FORWARD_IGuestDebugControlChangedEvent_TO (base::)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IGuestDebugControlChangedEvent;
+
+/* starting interface:    IMachineGroupsChangedEvent */
+#define IMACHINEGROUPSCHANGEDEVENT_IID_STR "ee37afb5-7002-4786-a5c4-a9c29e1cce75"
+
+#define IMACHINEGROUPSCHANGEDEVENT_IID \
+  {0xee37afb5, 0x7002, 0x4786, \
+    { 0xa5, 0xc4, 0xa9, 0xc2, 0x9e, 0x1c, 0xce, 0x75 }}
+
+class NS_NO_VTABLE IMachineGroupsChangedEvent : public IMachineEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IMACHINEGROUPSCHANGEDEVENT_IID)
+
+  /* readonly attribute boolean dummy; */
+  NS_IMETHOD GetDummy(PRBool *aDummy) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IMACHINEGROUPSCHANGEDEVENT \
+  NS_IMETHOD GetDummy(PRBool *aDummy); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IMACHINEGROUPSCHANGEDEVENT(_to) \
+  NS_IMETHOD GetDummy(PRBool *aDummy) { return _to GetDummy(aDummy); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IMACHINEGROUPSCHANGEDEVENT(_to) \
+  NS_IMETHOD GetDummy(PRBool *aDummy) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDummy(aDummy); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IMachineGroupsChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IMACHINEGROUPSCHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IMachineGroupsChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute boolean dummy; */
+NS_IMETHODIMP _MYCLASS_::GetDummy(PRBool *aDummy)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO(smth) NS_IMETHOD GetDummy (PRBool * aDummy) { return smth GetDummy (aDummy); }
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO ((obj)->)
+#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO (base::)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO(smth) NS_FORWARD_IMACHINEGROUPSCHANGEDEVENT (smth)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IMachineGroupsChangedEvent_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IMachineGroupsChangedEvent;
 
 /* starting interface:    IStringArray */
 #define ISTRINGARRAY_IID_STR "3890b2c8-604d-11e9-92d3-53cb473db9fb"

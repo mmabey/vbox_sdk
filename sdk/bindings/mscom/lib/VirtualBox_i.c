@@ -18,7 +18,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Oct 19 20:23:45 2022
+/* at Wed Nov 16 15:14:45 2022
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -677,6 +677,9 @@ MIDL_DEFINE_GUID(IID, IID_IUpdateAgentStateChangedEvent,0xeb000a0e,0x2079,0x4f47
 
 
 MIDL_DEFINE_GUID(IID, IID_IGuestDebugControlChangedEvent,0xa3d2799e,0xd3ad,0x4f73,0x91,0xef,0x7d,0x83,0x96,0x89,0xf6,0xd6);
+
+
+MIDL_DEFINE_GUID(IID, IID_IMachineGroupsChangedEvent,0xee37afb5,0x7002,0x4786,0xa5,0xc4,0xa9,0xc2,0x9e,0x1c,0xce,0x75);
 
 
 MIDL_DEFINE_GUID(IID, IID_IStringArray,0x3890b2c8,0x604d,0x11e9,0x92,0xd3,0x53,0xcb,0x47,0x3d,0xb9,0xfb);

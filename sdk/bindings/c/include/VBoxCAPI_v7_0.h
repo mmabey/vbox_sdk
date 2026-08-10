@@ -1386,6 +1386,7 @@ interface IUpdateAgentErrorEvent;
 interface IUpdateAgentAvailableEvent;
 interface IUpdateAgentStateChangedEvent;
 interface IGuestDebugControlChangedEvent;
+interface IMachineGroupsChangedEvent;
 interface IStringArray;
 interface IFormValue;
 interface IBooleanFormValue;
@@ -1605,6 +1606,7 @@ typedef interface IUpdateAgentErrorEvent IUpdateAgentErrorEvent;
 typedef interface IUpdateAgentAvailableEvent IUpdateAgentAvailableEvent;
 typedef interface IUpdateAgentStateChangedEvent IUpdateAgentStateChangedEvent;
 typedef interface IGuestDebugControlChangedEvent IGuestDebugControlChangedEvent;
+typedef interface IMachineGroupsChangedEvent IMachineGroupsChangedEvent;
 typedef interface IStringArray IStringArray;
 typedef interface IFormValue IFormValue;
 typedef interface IBooleanFormValue IBooleanFormValue;
@@ -4432,7 +4434,8 @@ typedef enum VBoxEventType
     VBoxEventType_OnUpdateAgentStateChanged = 115,
     VBoxEventType_OnHostAudioDeviceChanged = 116,
     VBoxEventType_OnGuestDebugControlChanged = 117,
-    VBoxEventType_End = 118
+    VBoxEventType_OnMachineGroupsChanged = 118,
+    VBoxEventType_End = 119
 } VBoxEventType;
 /* End of enum VBoxEventType declaration */
 #define VBoxEventType_T PRUint32
@@ -33871,6 +33874,75 @@ interface IGuestDebugControlChangedEvent
 #endif /* VBOX_WITH_GLUE */
 };
 /* End of struct IGuestDebugControlChangedEvent declaration */
+
+
+/* Start of struct IMachineGroupsChangedEvent declaration */
+#define IMACHINEGROUPSCHANGEDEVENT_IID_STR "ee37afb5-7002-4786-a5c4-a9c29e1cce75"
+#define IMACHINEGROUPSCHANGEDEVENT_IID { \
+    0xee37afb5, 0x7002, 0x4786, \
+    { 0xa5, 0xc4, 0xa9, 0xc2, 0x9e, 0x1c, 0xce, 0x75 } \
+}
+/* COM compatibility */
+VBOX_EXTERN_CONST(nsIID, IID_IMachineGroupsChangedEvent);
+#ifndef VBOX_WITH_GLUE
+struct IMachineGroupsChangedEvent_vtbl
+{
+    struct IMachineEvent_vtbl imachineevent;
+
+    nsresult (*GetDummy)(IMachineGroupsChangedEvent *pThis, PRBool *dummy);
+
+};
+#else /* VBOX_WITH_GLUE */
+struct IMachineGroupsChangedEventVtbl
+{
+    nsresult (*QueryInterface)(IMachineGroupsChangedEvent *pThis, const nsID *iid, void **resultp);
+    nsrefcnt (*AddRef)(IMachineGroupsChangedEvent *pThis);
+    nsrefcnt (*Release)(IMachineGroupsChangedEvent *pThis);
+    nsresult (*GetType)(IMachineGroupsChangedEvent *pThis, PRUint32 *type);
+
+    nsresult (*GetSource)(IMachineGroupsChangedEvent *pThis, IEventSource * *source);
+
+    nsresult (*GetWaitable)(IMachineGroupsChangedEvent *pThis, PRBool *waitable);
+
+    nsresult (*SetProcessed)(IMachineGroupsChangedEvent *pThis );
+
+    nsresult (*WaitProcessed)(
+        IMachineGroupsChangedEvent *pThis,
+        PRInt32 timeout,
+        PRBool * result
+    );
+
+    nsresult (*GetMachineId)(IMachineGroupsChangedEvent *pThis, PRUnichar * *machineId);
+
+    nsresult (*GetDummy)(IMachineGroupsChangedEvent *pThis, PRBool *dummy);
+
+};
+#define IMachineGroupsChangedEvent_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
+#define IMachineGroupsChangedEvent_AddRef(p) ((p)->lpVtbl->AddRef(p))
+#define IMachineGroupsChangedEvent_Release(p) ((p)->lpVtbl->Release(p))
+#define IMachineGroupsChangedEvent_get_Type(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IMachineGroupsChangedEvent_GetType(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IMachineGroupsChangedEvent_get_Source(p, aSource) ((p)->lpVtbl->GetSource(p, aSource))
+#define IMachineGroupsChangedEvent_GetSource(p, aSource) ((p)->lpVtbl->GetSource(p, aSource))
+#define IMachineGroupsChangedEvent_get_Waitable(p, aWaitable) ((p)->lpVtbl->GetWaitable(p, aWaitable))
+#define IMachineGroupsChangedEvent_GetWaitable(p, aWaitable) ((p)->lpVtbl->GetWaitable(p, aWaitable))
+#define IMachineGroupsChangedEvent_SetProcessed(p) ((p)->lpVtbl->SetProcessed(p))
+#define IMachineGroupsChangedEvent_WaitProcessed(p, aTimeout, aResult) ((p)->lpVtbl->WaitProcessed(p, aTimeout, aResult))
+#define IMachineGroupsChangedEvent_get_MachineId(p, aMachineId) ((p)->lpVtbl->GetMachineId(p, aMachineId))
+#define IMachineGroupsChangedEvent_GetMachineId(p, aMachineId) ((p)->lpVtbl->GetMachineId(p, aMachineId))
+#define IMachineGroupsChangedEvent_get_Dummy(p, aDummy) ((p)->lpVtbl->GetDummy(p, aDummy))
+#define IMachineGroupsChangedEvent_GetDummy(p, aDummy) ((p)->lpVtbl->GetDummy(p, aDummy))
+#endif /* VBOX_WITH_GLUE */
+
+interface IMachineGroupsChangedEvent
+{
+#ifndef VBOX_WITH_GLUE
+    struct IMachineGroupsChangedEvent_vtbl *vtbl;
+#else /* VBOX_WITH_GLUE */
+    CONST_VTBL struct IMachineGroupsChangedEventVtbl *lpVtbl;
+#endif /* VBOX_WITH_GLUE */
+};
+/* End of struct IMachineGroupsChangedEvent declaration */
 
 
 /* Start of struct IStringArray declaration */

@@ -17021,6 +17021,16 @@ class vboxBindingSOAP:
         response = self.binding.Receive(IGuestDebugControlChangedEvent_getGuestDebugControlResultMsg.typecode)
         return response
 
+    # op: IMachineGroupsChangedEvent_getDummy
+    def IMachineGroupsChangedEvent_getDummy(self, request, **kw):
+        if isinstance(request, IMachineGroupsChangedEvent_getDummyRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IMachineGroupsChangedEvent_getDummyResultMsg.typecode)
+        return response
+
     # op: IStringArray_getValues
     def IStringArray_getValues(self, request, **kw):
         if isinstance(request, IStringArray_getValuesRequestMsg) is False:
@@ -25046,6 +25056,10 @@ IUpdateAgentStateChangedEvent_getStateResultMsg = GED("http://www.virtualbox.org
 IGuestDebugControlChangedEvent_getGuestDebugControlRequestMsg = GED("http://www.virtualbox.org/", "IGuestDebugControlChangedEvent_getGuestDebugControl").pyclass
 
 IGuestDebugControlChangedEvent_getGuestDebugControlResultMsg = GED("http://www.virtualbox.org/", "IGuestDebugControlChangedEvent_getGuestDebugControlResponse").pyclass
+
+IMachineGroupsChangedEvent_getDummyRequestMsg = GED("http://www.virtualbox.org/", "IMachineGroupsChangedEvent_getDummy").pyclass
+
+IMachineGroupsChangedEvent_getDummyResultMsg = GED("http://www.virtualbox.org/", "IMachineGroupsChangedEvent_getDummyResponse").pyclass
 
 IStringArray_getValuesRequestMsg = GED("http://www.virtualbox.org/", "IStringArray_getValues").pyclass
 

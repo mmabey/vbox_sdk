@@ -28510,6 +28510,90 @@ class IGuestDebugControlChangedEvent(IEvent):
 
    _Attrs_={         'guestDebugControl':[getGuestDebugControl,None]}
 
+class IMachineGroupsChangedEvent(IMachineEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IMachineGroupsChangedEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IMachineGroupsChangedEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IMachineEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IMachineGroupsChangedEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getDummy(self):
+       req=IMachineGroupsChangedEvent_getDummyRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IMachineGroupsChangedEvent_getDummy(req)
+       return Boolean(self.mgr,val._returnval)
+
+
+   _Attrs_={         'dummy':[getDummy,None]}
+
 class IStringArray(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -38836,7 +38920,7 @@ class VBoxEventType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'OnGuestAdditionsStatusChanged',102:'OnGuestMonitorInfoChanged',103:'OnGuestFileSizeChanged',104:'OnClipboardFileTransferModeChanged',105:'OnCloudProviderListChanged',106:'OnCloudProviderRegistered',107:'OnCloudProviderUninstall',108:'OnCloudProfileRegistered',109:'OnCloudProfileChanged',110:'OnProgressCreated',111:'OnLanguageChanged',112:'OnUpdateAgentAvailable',113:'OnUpdateAgentError',114:'OnUpdateAgentSettingsChanged',115:'OnUpdateAgentStateChanged',116:'OnHostAudioDeviceChanged',117:'OnGuestDebugControlChanged',118:'End'}
+   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'OnGuestAdditionsStatusChanged',102:'OnGuestMonitorInfoChanged',103:'OnGuestFileSizeChanged',104:'OnClipboardFileTransferModeChanged',105:'OnCloudProviderListChanged',106:'OnCloudProviderRegistered',107:'OnCloudProviderUninstall',108:'OnCloudProfileRegistered',109:'OnCloudProfileChanged',110:'OnProgressCreated',111:'OnLanguageChanged',112:'OnUpdateAgentAvailable',113:'OnUpdateAgentError',114:'OnUpdateAgentSettingsChanged',115:'OnUpdateAgentStateChanged',116:'OnHostAudioDeviceChanged',117:'OnGuestDebugControlChanged',118:'OnMachineGroupsChanged',119:'End'}
    _ValueMap={
               'Invalid':0,
               'Any':1,
@@ -38931,7 +39015,8 @@ class VBoxEventType:
               'OnUpdateAgentStateChanged':115,
               'OnHostAudioDeviceChanged':116,
               'OnGuestDebugControlChanged':117,
-              'End':118}
+              'OnMachineGroupsChanged':118,
+              'End':119}
 
    Invalid=0
    Any=1
@@ -39026,7 +39111,8 @@ class VBoxEventType:
    OnUpdateAgentStateChanged=115
    OnHostAudioDeviceChanged=116
    OnGuestDebugControlChanged=117
-   End=118
+   OnMachineGroupsChanged=118
+   End=119
 
 class GuestMouseEventMode:
    def __init__(self,mgr,handle):

@@ -227,6 +227,7 @@ interface IUpdateAgentErrorEvent;
 interface IUpdateAgentAvailableEvent;
 interface IUpdateAgentStateChangedEvent;
 interface IGuestDebugControlChangedEvent;
+interface IMachineGroupsChangedEvent;
 interface IStringArray;
 interface IFormValue;
 interface IBooleanFormValue;
@@ -3052,7 +3053,8 @@ typedef enum
     VBoxEventType_OnUpdateAgentStateChanged = 115,
     VBoxEventType_OnHostAudioDeviceChanged = 116,
     VBoxEventType_OnGuestDebugControlChanged = 117,
-    VBoxEventType_End = 118
+    VBoxEventType_OnMachineGroupsChanged = 118,
+    VBoxEventType_End = 119
 } VBoxEventType;
 
 /* cross-platform type name for VBoxEventType */
@@ -19151,6 +19153,27 @@ cpp_quote("#define COM_FORWARD_IGuestDebugControlChangedEvent_TO_OBJ(obj) COM_FO
 cpp_quote("#define COM_FORWARD_IGuestDebugControlChangedEvent_TO_BASE(base) COM_FORWARD_IGuestDebugControlChangedEvent_TO (base::)")
 
 [
+    uuid(ee37afb5-7002-4786-a5c4-a9c29e1cce75),
+    object,
+    dual,
+    oleautomation
+    , proxy
+]
+interface IMachineGroupsChangedEvent : IMachineEvent
+{
+    [propget] HRESULT Dummy ([out, retval] BOOL * aDummy);
+
+}; /* interface IMachineGroupsChangedEvent */
+
+/* Interface implementation forwarder macro */
+cpp_quote("#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO(smth) HRESULT STDMETHODCALLTYPE get_Dummy (BOOL * aDummy) { return smth get_Dummy (aDummy); }")
+cpp_quote("#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO (base::)")
+cpp_quote("#define COM_FORWARD_IMachineGroupsChangedEvent_TO(smth) COM_FORWARD_IMachineGroupsChangedEvent_GETTER_Dummy_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IMachineGroupsChangedEvent_TO_OBJ(obj) COM_FORWARD_IMachineGroupsChangedEvent_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IMachineGroupsChangedEvent_TO_BASE(base) COM_FORWARD_IMachineGroupsChangedEvent_TO (base::)")
+
+[
     uuid(3890b2c8-604d-11e9-92d3-53cb473db9fb),
     object,
     dual,
@@ -20879,6 +20902,7 @@ interface IUpdateAgentErrorEvent;
 interface IUpdateAgentAvailableEvent;
 interface IUpdateAgentStateChangedEvent;
 interface IGuestDebugControlChangedEvent;
+interface IMachineGroupsChangedEvent;
 interface IStringArray;
 interface IFormValue;
 interface IBooleanFormValue;
