@@ -239,6 +239,7 @@ class VirtualBoxReflectionInfo:
         'VERR_PATH_IS_NOT_RELATIVE': -144,
         'VERR_PATH_ZERO_LENGTH': -145,
         'VERR_FILE_AIO_INSUFFICIENT_EVENTS': -146,
+        'VERR_STALE_FILE_HANDLE': -147,
         'VERR_DISK_IO_ERROR': -150,
         'VERR_INVALID_DRIVE': -151,
         'VERR_DISK_FULL': -152,
