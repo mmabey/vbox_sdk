@@ -1311,6 +1311,7 @@ interface IGuestFileRegisteredEvent;
 interface IGuestFileStateChangedEvent;
 interface IGuestFileIOEvent;
 interface IGuestFileOffsetChangedEvent;
+interface IGuestFileSizeChangedEvent;
 interface IGuestFileReadEvent;
 interface IGuestFileWriteEvent;
 interface IVRDEServerChangedEvent;
@@ -1344,6 +1345,7 @@ interface IProgressEvent;
 interface IProgressPercentageChangedEvent;
 interface IProgressTaskCompletedEvent;
 interface ICursorPositionChangedEvent;
+interface IGuestAdditionsStatusChangedEvent;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;
@@ -1480,6 +1482,7 @@ typedef interface IGuestFileRegisteredEvent IGuestFileRegisteredEvent;
 typedef interface IGuestFileStateChangedEvent IGuestFileStateChangedEvent;
 typedef interface IGuestFileIOEvent IGuestFileIOEvent;
 typedef interface IGuestFileOffsetChangedEvent IGuestFileOffsetChangedEvent;
+typedef interface IGuestFileSizeChangedEvent IGuestFileSizeChangedEvent;
 typedef interface IGuestFileReadEvent IGuestFileReadEvent;
 typedef interface IGuestFileWriteEvent IGuestFileWriteEvent;
 typedef interface IVRDEServerChangedEvent IVRDEServerChangedEvent;
@@ -1513,6 +1516,7 @@ typedef interface IProgressEvent IProgressEvent;
 typedef interface IProgressPercentageChangedEvent IProgressPercentageChangedEvent;
 typedef interface IProgressTaskCompletedEvent IProgressTaskCompletedEvent;
 typedef interface ICursorPositionChangedEvent ICursorPositionChangedEvent;
+typedef interface IGuestAdditionsStatusChangedEvent IGuestAdditionsStatusChangedEvent;
 typedef interface ICloudClient ICloudClient;
 typedef interface ICloudProfile ICloudProfile;
 typedef interface ICloudProvider ICloudProvider;
@@ -3768,7 +3772,9 @@ typedef enum VBoxEventType
     VBoxEventType_OnProgressPercentageChanged = 98,
     VBoxEventType_OnProgressTaskCompleted = 99,
     VBoxEventType_OnCursorPositionChanged = 100,
-    VBoxEventType_Last = 101
+    VBoxEventType_OnGuestAdditionsStatusChanged = 101,
+    VBoxEventType_OnGuestFileSizeChanged = 102,
+    VBoxEventType_Last = 103
 } VBoxEventType;
 /* End of enum VBoxEventType declaration */
 #define VBoxEventType_T PRUint32
@@ -25688,6 +25694,79 @@ interface IGuestFileOffsetChangedEvent
 /* End of struct IGuestFileOffsetChangedEvent declaration */
 
 
+/* Start of struct IGuestFileSizeChangedEvent declaration */
+#define IGUESTFILESIZECHANGEDEVENT_IID_STR "d78374e9-486e-472f-481b-969746af2480"
+#define IGUESTFILESIZECHANGEDEVENT_IID { \
+    0xd78374e9, 0x486e, 0x472f, \
+    { 0x48, 0x1b, 0x96, 0x97, 0x46, 0xaf, 0x24, 0x80 } \
+}
+/* COM compatibility */
+VBOX_EXTERN_CONST(nsIID, IID_IGuestFileSizeChangedEvent);
+#ifndef VBOX_WITH_GLUE
+struct IGuestFileSizeChangedEvent_vtbl
+{
+    struct IGuestFileEvent_vtbl iguestfileevent;
+
+    nsresult (*GetNewSize)(IGuestFileSizeChangedEvent *pThis, PRInt64 *newSize);
+
+};
+#else /* VBOX_WITH_GLUE */
+struct IGuestFileSizeChangedEventVtbl
+{
+    nsresult (*QueryInterface)(IGuestFileSizeChangedEvent *pThis, const nsID *iid, void **resultp);
+    nsrefcnt (*AddRef)(IGuestFileSizeChangedEvent *pThis);
+    nsrefcnt (*Release)(IGuestFileSizeChangedEvent *pThis);
+    nsresult (*GetType)(IGuestFileSizeChangedEvent *pThis, PRUint32 *type);
+
+    nsresult (*GetSource)(IGuestFileSizeChangedEvent *pThis, IEventSource * *source);
+
+    nsresult (*GetWaitable)(IGuestFileSizeChangedEvent *pThis, PRBool *waitable);
+
+    nsresult (*SetProcessed)(IGuestFileSizeChangedEvent *pThis );
+
+    nsresult (*WaitProcessed)(
+        IGuestFileSizeChangedEvent *pThis,
+        PRInt32 timeout,
+        PRBool * result
+    );
+
+    nsresult (*GetSession)(IGuestFileSizeChangedEvent *pThis, IGuestSession * *session);
+
+    nsresult (*GetFile)(IGuestFileSizeChangedEvent *pThis, IGuestFile * *file);
+
+    nsresult (*GetNewSize)(IGuestFileSizeChangedEvent *pThis, PRInt64 *newSize);
+
+};
+#define IGuestFileSizeChangedEvent_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
+#define IGuestFileSizeChangedEvent_AddRef(p) ((p)->lpVtbl->AddRef(p))
+#define IGuestFileSizeChangedEvent_Release(p) ((p)->lpVtbl->Release(p))
+#define IGuestFileSizeChangedEvent_get_Type(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IGuestFileSizeChangedEvent_GetType(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IGuestFileSizeChangedEvent_get_Source(p, aSource) ((p)->lpVtbl->GetSource(p, aSource))
+#define IGuestFileSizeChangedEvent_GetSource(p, aSource) ((p)->lpVtbl->GetSource(p, aSource))
+#define IGuestFileSizeChangedEvent_get_Waitable(p, aWaitable) ((p)->lpVtbl->GetWaitable(p, aWaitable))
+#define IGuestFileSizeChangedEvent_GetWaitable(p, aWaitable) ((p)->lpVtbl->GetWaitable(p, aWaitable))
+#define IGuestFileSizeChangedEvent_SetProcessed(p) ((p)->lpVtbl->SetProcessed(p))
+#define IGuestFileSizeChangedEvent_WaitProcessed(p, aTimeout, aResult) ((p)->lpVtbl->WaitProcessed(p, aTimeout, aResult))
+#define IGuestFileSizeChangedEvent_get_Session(p, aSession) ((p)->lpVtbl->GetSession(p, aSession))
+#define IGuestFileSizeChangedEvent_GetSession(p, aSession) ((p)->lpVtbl->GetSession(p, aSession))
+#define IGuestFileSizeChangedEvent_get_File(p, aFile) ((p)->lpVtbl->GetFile(p, aFile))
+#define IGuestFileSizeChangedEvent_GetFile(p, aFile) ((p)->lpVtbl->GetFile(p, aFile))
+#define IGuestFileSizeChangedEvent_get_NewSize(p, aNewSize) ((p)->lpVtbl->GetNewSize(p, aNewSize))
+#define IGuestFileSizeChangedEvent_GetNewSize(p, aNewSize) ((p)->lpVtbl->GetNewSize(p, aNewSize))
+#endif /* VBOX_WITH_GLUE */
+
+interface IGuestFileSizeChangedEvent
+{
+#ifndef VBOX_WITH_GLUE
+    struct IGuestFileSizeChangedEvent_vtbl *vtbl;
+#else /* VBOX_WITH_GLUE */
+    CONST_VTBL struct IGuestFileSizeChangedEventVtbl *lpVtbl;
+#endif /* VBOX_WITH_GLUE */
+};
+/* End of struct IGuestFileSizeChangedEvent declaration */
+
+
 /* Start of struct IGuestFileReadEvent declaration */
 #define IGUESTFILEREADEVENT_IID_STR "4ee3cbcb-486f-40db-9150-deee3fd24189"
 #define IGUESTFILEREADEVENT_IID { \
@@ -28307,6 +28386,93 @@ interface ICursorPositionChangedEvent
 #endif /* VBOX_WITH_GLUE */
 };
 /* End of struct ICursorPositionChangedEvent declaration */
+
+
+/* Start of struct IGuestAdditionsStatusChangedEvent declaration */
+#define IGUESTADDITIONSSTATUSCHANGEDEVENT_IID_STR "fd1a34ad-0b74-4e2b-ed0f-46222de8a883"
+#define IGUESTADDITIONSSTATUSCHANGEDEVENT_IID { \
+    0xfd1a34ad, 0x0b74, 0x4e2b, \
+    { 0xed, 0x0f, 0x46, 0x22, 0x2d, 0xe8, 0xa8, 0x83 } \
+}
+/* COM compatibility */
+VBOX_EXTERN_CONST(nsIID, IID_IGuestAdditionsStatusChangedEvent);
+#ifndef VBOX_WITH_GLUE
+struct IGuestAdditionsStatusChangedEvent_vtbl
+{
+    struct IEvent_vtbl ievent;
+
+    nsresult (*GetFacility)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 *facility);
+    nsresult (*SetFacility)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 facility);
+
+    nsresult (*GetStatus)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 *status);
+
+    nsresult (*GetRunLevel)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 *runLevel);
+
+    nsresult (*GetTimestamp)(IGuestAdditionsStatusChangedEvent *pThis, PRInt64 *timestamp);
+
+};
+#else /* VBOX_WITH_GLUE */
+struct IGuestAdditionsStatusChangedEventVtbl
+{
+    nsresult (*QueryInterface)(IGuestAdditionsStatusChangedEvent *pThis, const nsID *iid, void **resultp);
+    nsrefcnt (*AddRef)(IGuestAdditionsStatusChangedEvent *pThis);
+    nsrefcnt (*Release)(IGuestAdditionsStatusChangedEvent *pThis);
+    nsresult (*GetType)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 *type);
+
+    nsresult (*GetSource)(IGuestAdditionsStatusChangedEvent *pThis, IEventSource * *source);
+
+    nsresult (*GetWaitable)(IGuestAdditionsStatusChangedEvent *pThis, PRBool *waitable);
+
+    nsresult (*SetProcessed)(IGuestAdditionsStatusChangedEvent *pThis );
+
+    nsresult (*WaitProcessed)(
+        IGuestAdditionsStatusChangedEvent *pThis,
+        PRInt32 timeout,
+        PRBool * result
+    );
+
+    nsresult (*GetFacility)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 *facility);
+    nsresult (*SetFacility)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 facility);
+
+    nsresult (*GetStatus)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 *status);
+
+    nsresult (*GetRunLevel)(IGuestAdditionsStatusChangedEvent *pThis, PRUint32 *runLevel);
+
+    nsresult (*GetTimestamp)(IGuestAdditionsStatusChangedEvent *pThis, PRInt64 *timestamp);
+
+};
+#define IGuestAdditionsStatusChangedEvent_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
+#define IGuestAdditionsStatusChangedEvent_AddRef(p) ((p)->lpVtbl->AddRef(p))
+#define IGuestAdditionsStatusChangedEvent_Release(p) ((p)->lpVtbl->Release(p))
+#define IGuestAdditionsStatusChangedEvent_get_Type(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IGuestAdditionsStatusChangedEvent_GetType(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IGuestAdditionsStatusChangedEvent_get_Source(p, aSource) ((p)->lpVtbl->GetSource(p, aSource))
+#define IGuestAdditionsStatusChangedEvent_GetSource(p, aSource) ((p)->lpVtbl->GetSource(p, aSource))
+#define IGuestAdditionsStatusChangedEvent_get_Waitable(p, aWaitable) ((p)->lpVtbl->GetWaitable(p, aWaitable))
+#define IGuestAdditionsStatusChangedEvent_GetWaitable(p, aWaitable) ((p)->lpVtbl->GetWaitable(p, aWaitable))
+#define IGuestAdditionsStatusChangedEvent_SetProcessed(p) ((p)->lpVtbl->SetProcessed(p))
+#define IGuestAdditionsStatusChangedEvent_WaitProcessed(p, aTimeout, aResult) ((p)->lpVtbl->WaitProcessed(p, aTimeout, aResult))
+#define IGuestAdditionsStatusChangedEvent_get_Facility(p, aFacility) ((p)->lpVtbl->GetFacility(p, aFacility))
+#define IGuestAdditionsStatusChangedEvent_GetFacility(p, aFacility) ((p)->lpVtbl->GetFacility(p, aFacility))
+#define IGuestAdditionsStatusChangedEvent_put_Facility(p, aFacility) ((p)->lpVtbl->SetFacility(p, aFacility))
+#define IGuestAdditionsStatusChangedEvent_SetFacility(p, aFacility) ((p)->lpVtbl->SetFacility(p, aFacility))
+#define IGuestAdditionsStatusChangedEvent_get_Status(p, aStatus) ((p)->lpVtbl->GetStatus(p, aStatus))
+#define IGuestAdditionsStatusChangedEvent_GetStatus(p, aStatus) ((p)->lpVtbl->GetStatus(p, aStatus))
+#define IGuestAdditionsStatusChangedEvent_get_RunLevel(p, aRunLevel) ((p)->lpVtbl->GetRunLevel(p, aRunLevel))
+#define IGuestAdditionsStatusChangedEvent_GetRunLevel(p, aRunLevel) ((p)->lpVtbl->GetRunLevel(p, aRunLevel))
+#define IGuestAdditionsStatusChangedEvent_get_Timestamp(p, aTimestamp) ((p)->lpVtbl->GetTimestamp(p, aTimestamp))
+#define IGuestAdditionsStatusChangedEvent_GetTimestamp(p, aTimestamp) ((p)->lpVtbl->GetTimestamp(p, aTimestamp))
+#endif /* VBOX_WITH_GLUE */
+
+interface IGuestAdditionsStatusChangedEvent
+{
+#ifndef VBOX_WITH_GLUE
+    struct IGuestAdditionsStatusChangedEvent_vtbl *vtbl;
+#else /* VBOX_WITH_GLUE */
+    CONST_VTBL struct IGuestAdditionsStatusChangedEventVtbl *lpVtbl;
+#endif /* VBOX_WITH_GLUE */
+};
+/* End of struct IGuestAdditionsStatusChangedEvent declaration */
 
 
 /* Start of struct ICloudClient declaration */

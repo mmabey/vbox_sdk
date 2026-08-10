@@ -433,6 +433,8 @@ class IGuestFileIOEvent; /* forward declaration */
 
 class IGuestFileOffsetChangedEvent; /* forward declaration */
 
+class IGuestFileSizeChangedEvent; /* forward declaration */
+
 class IGuestFileReadEvent; /* forward declaration */
 
 class IGuestFileWriteEvent; /* forward declaration */
@@ -498,6 +500,8 @@ class IProgressPercentageChangedEvent; /* forward declaration */
 class IProgressTaskCompletedEvent; /* forward declaration */
 
 class ICursorPositionChangedEvent; /* forward declaration */
+
+class IGuestAdditionsStatusChangedEvent; /* forward declaration */
 
 class ICloudClient; /* forward declaration */
 
@@ -11388,7 +11392,11 @@ class NS_NO_VTABLE VBoxEventType {
 
   enum { OnCursorPositionChanged = 100U };
 
-  enum { Last = 101U };
+  enum { OnGuestAdditionsStatusChanged = 101U };
+
+  enum { OnGuestFileSizeChanged = 102U };
+
+  enum { Last = 103U };
 
 };
 
@@ -11515,6 +11523,8 @@ typedef PRUint32 VBoxEventType_T;
 # define VBoxEventType_OnProgressPercentageChanged VBoxEventType::OnProgressPercentageChanged
 # define VBoxEventType_OnProgressTaskCompleted VBoxEventType::OnProgressTaskCompleted
 # define VBoxEventType_OnCursorPositionChanged VBoxEventType::OnCursorPositionChanged
+# define VBoxEventType_OnGuestAdditionsStatusChanged VBoxEventType::OnGuestAdditionsStatusChanged
+# define VBoxEventType_OnGuestFileSizeChanged VBoxEventType::OnGuestFileSizeChanged
 # define VBoxEventType_Last VBoxEventType::Last
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VBoxEventType_T {
@@ -11594,6 +11604,8 @@ typedef enum VBoxEventType_T {
     VBoxEventType_OnProgressPercentageChanged = VBoxEventType::OnProgressPercentageChanged,
     VBoxEventType_OnProgressTaskCompleted = VBoxEventType::OnProgressTaskCompleted,
     VBoxEventType_OnCursorPositionChanged = VBoxEventType::OnCursorPositionChanged,
+    VBoxEventType_OnGuestAdditionsStatusChanged = VBoxEventType::OnGuestAdditionsStatusChanged,
+    VBoxEventType_OnGuestFileSizeChanged = VBoxEventType::OnGuestFileSizeChanged,
     VBoxEventType_Last = VBoxEventType::Last,
     VBoxEventType_32BitHack = 0x7fffffff
 } VBoxEventType_T;
@@ -50656,6 +50668,85 @@ NS_IMETHODIMP _MYCLASS_::GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotL
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IGuestFileOffsetChangedEvent;
 
+/* starting interface:    IGuestFileSizeChangedEvent */
+#define IGUESTFILESIZECHANGEDEVENT_IID_STR "d78374e9-486e-472f-481b-969746af2480"
+
+#define IGUESTFILESIZECHANGEDEVENT_IID \
+  {0xd78374e9, 0x486e, 0x472f, \
+    { 0x48, 0x1b, 0x96, 0x97, 0x46, 0xaf, 0x24, 0x80 }}
+
+class NS_NO_VTABLE IGuestFileSizeChangedEvent : public IGuestFileEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IGUESTFILESIZECHANGEDEVENT_IID)
+
+  /* readonly attribute long long newSize; */
+  NS_IMETHOD GetNewSize(PRInt64 *aNewSize) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IGUESTFILESIZECHANGEDEVENT \
+  NS_IMETHOD GetNewSize(PRInt64 *aNewSize); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IGUESTFILESIZECHANGEDEVENT(_to) \
+  NS_IMETHOD GetNewSize(PRInt64 *aNewSize) { return _to GetNewSize(aNewSize); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IGUESTFILESIZECHANGEDEVENT(_to) \
+  NS_IMETHOD GetNewSize(PRInt64 *aNewSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNewSize(aNewSize); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IGuestFileSizeChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IGUESTFILESIZECHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IGuestFileSizeChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute long long newSize; */
+NS_IMETHODIMP _MYCLASS_::GetNewSize(PRInt64 *aNewSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO(smth) NS_IMETHOD GetNewSize (PRInt64 * aNewSize) { return smth GetNewSize (aNewSize); }
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO ((obj)->)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO (base::)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO(smth) NS_FORWARD_IGUESTFILESIZECHANGEDEVENT (smth)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IGuestFileSizeChangedEvent;
+
 /* starting interface:    IGuestFileReadEvent */
 #define IGUESTFILEREADEVENT_IID_STR "4ee3cbcb-486f-40db-9150-deee3fd24189"
 
@@ -53978,6 +54069,141 @@ NS_IMETHODIMP _MYCLASS_::GetY(PRUint32 *aY)
 #define COM_FORWARD_ICursorPositionChangedEvent_TO_BASE(base) COM_FORWARD_ICursorPositionChangedEvent_TO (base::)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_ICursorPositionChangedEvent;
+
+/* starting interface:    IGuestAdditionsStatusChangedEvent */
+#define IGUESTADDITIONSSTATUSCHANGEDEVENT_IID_STR "fd1a34ad-0b74-4e2b-ed0f-46222de8a883"
+
+#define IGUESTADDITIONSSTATUSCHANGEDEVENT_IID \
+  {0xfd1a34ad, 0x0b74, 0x4e2b, \
+    { 0xed, 0x0f, 0x46, 0x22, 0x2d, 0xe8, 0xa8, 0x83 }}
+
+class NS_NO_VTABLE IGuestAdditionsStatusChangedEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IGUESTADDITIONSSTATUSCHANGEDEVENT_IID)
+
+  /* attribute AdditionsFacilityType_T facility; */
+  NS_IMETHOD GetFacility(AdditionsFacilityType_T *aFacility) = 0;
+  NS_IMETHOD SetFacility(AdditionsFacilityType_T aFacility) = 0;
+
+  /* readonly attribute AdditionsFacilityStatus_T status; */
+  NS_IMETHOD GetStatus(AdditionsFacilityStatus_T *aStatus) = 0;
+
+  /* readonly attribute AdditionsRunLevelType_T runLevel; */
+  NS_IMETHOD GetRunLevel(AdditionsRunLevelType_T *aRunLevel) = 0;
+
+  /* readonly attribute long long timestamp; */
+  NS_IMETHOD GetTimestamp(PRInt64 *aTimestamp) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IGUESTADDITIONSSTATUSCHANGEDEVENT \
+  NS_IMETHOD GetFacility(AdditionsFacilityType_T *aFacility); \
+  NS_IMETHOD SetFacility(AdditionsFacilityType_T aFacility); \
+  NS_IMETHOD GetStatus(AdditionsFacilityStatus_T *aStatus); \
+  NS_IMETHOD GetRunLevel(AdditionsRunLevelType_T *aRunLevel); \
+  NS_IMETHOD GetTimestamp(PRInt64 *aTimestamp); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IGUESTADDITIONSSTATUSCHANGEDEVENT(_to) \
+  NS_IMETHOD GetFacility(AdditionsFacilityType_T *aFacility) { return _to GetFacility(aFacility); } \
+  NS_IMETHOD SetFacility(AdditionsFacilityType_T aFacility) { return _to SetFacility(aFacility); } \
+  NS_IMETHOD GetStatus(AdditionsFacilityStatus_T *aStatus) { return _to GetStatus(aStatus); } \
+  NS_IMETHOD GetRunLevel(AdditionsRunLevelType_T *aRunLevel) { return _to GetRunLevel(aRunLevel); } \
+  NS_IMETHOD GetTimestamp(PRInt64 *aTimestamp) { return _to GetTimestamp(aTimestamp); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IGUESTADDITIONSSTATUSCHANGEDEVENT(_to) \
+  NS_IMETHOD GetFacility(AdditionsFacilityType_T *aFacility) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFacility(aFacility); } \
+  NS_IMETHOD SetFacility(AdditionsFacilityType_T aFacility) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetFacility(aFacility); } \
+  NS_IMETHOD GetStatus(AdditionsFacilityStatus_T *aStatus) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStatus(aStatus); } \
+  NS_IMETHOD GetRunLevel(AdditionsRunLevelType_T *aRunLevel) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRunLevel(aRunLevel); } \
+  NS_IMETHOD GetTimestamp(PRInt64 *aTimestamp) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTimestamp(aTimestamp); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IGuestAdditionsStatusChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IGUESTADDITIONSSTATUSCHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IGuestAdditionsStatusChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* attribute AdditionsFacilityType_T facility; */
+NS_IMETHODIMP _MYCLASS_::GetFacility(AdditionsFacilityType_T *aFacility)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetFacility(AdditionsFacilityType_T aFacility)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute AdditionsFacilityStatus_T status; */
+NS_IMETHODIMP _MYCLASS_::GetStatus(AdditionsFacilityStatus_T *aStatus)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute AdditionsRunLevelType_T runLevel; */
+NS_IMETHODIMP _MYCLASS_::GetRunLevel(AdditionsRunLevelType_T *aRunLevel)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long long timestamp; */
+NS_IMETHODIMP _MYCLASS_::GetTimestamp(PRInt64 *aTimestamp)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO(smth) NS_IMETHOD GetFacility (PRUint32 * aFacility) { return smth GetFacility (aFacility); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO(smth) NS_IMETHOD SetFacility (PRUint32 aFacility) { return smth SetFacility (aFacility); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO(smth) NS_IMETHOD GetStatus (PRUint32 * aStatus) { return smth GetStatus (aStatus); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO(smth) NS_IMETHOD GetRunLevel (PRUint32 * aRunLevel) { return smth GetRunLevel (aRunLevel); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO(smth) NS_IMETHOD GetTimestamp (PRInt64 * aTimestamp) { return smth GetTimestamp (aTimestamp); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO(smth) NS_FORWARD_IGUESTADDITIONSSTATUSCHANGEDEVENT (smth)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IGuestAdditionsStatusChangedEvent;
 
 /* starting interface:    ICloudClient */
 #define ICLOUDCLIENT_IID_STR "3d9aacbe-b3bc-4126-9633-5634bad24ad7"

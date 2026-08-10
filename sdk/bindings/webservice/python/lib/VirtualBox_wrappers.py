@@ -20984,6 +20984,90 @@ class IGuestFileOffsetChangedEvent(IGuestFileIOEvent):
 
    _Attrs_={         'midlDoesNotLikeEmptyInterfaces':[getMidlDoesNotLikeEmptyInterfaces,None]}
 
+class IGuestFileSizeChangedEvent(IGuestFileEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGuestFileSizeChangedEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGuestFileSizeChangedEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IGuestFileEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGuestFileSizeChangedEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getNewSize(self):
+       req=IGuestFileSizeChangedEvent_getNewSizeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestFileSizeChangedEvent_getNewSize(req)
+       return Long(self.mgr,val._returnval)
+
+
+   _Attrs_={         'newSize':[getNewSize,None]}
+
 class IGuestFileReadEvent(IGuestFileIOEvent):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -24068,6 +24152,118 @@ class ICursorPositionChangedEvent(IEvent):
    _Attrs_={         'hasData':[getHasData,None],
          'x':[getX,None],
          'y':[getY,None]}
+
+class IGuestAdditionsStatusChangedEvent(IEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGuestAdditionsStatusChangedEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGuestAdditionsStatusChangedEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGuestAdditionsStatusChangedEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getFacility(self):
+       req=IGuestAdditionsStatusChangedEvent_getFacilityRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestAdditionsStatusChangedEvent_getFacility(req)
+       return AdditionsFacilityType(self.mgr,val._returnval)
+   def setFacility(self, value):
+       req=IGuestAdditionsStatusChangedEvent_setFacilityRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._facility = value
+       else:
+            req._facility = value.handle
+       self.mgr.getPort().IGuestAdditionsStatusChangedEvent_setFacility(req)
+
+   def getStatus(self):
+       req=IGuestAdditionsStatusChangedEvent_getStatusRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestAdditionsStatusChangedEvent_getStatus(req)
+       return AdditionsFacilityStatus(self.mgr,val._returnval)
+   def getRunLevel(self):
+       req=IGuestAdditionsStatusChangedEvent_getRunLevelRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestAdditionsStatusChangedEvent_getRunLevel(req)
+       return AdditionsRunLevelType(self.mgr,val._returnval)
+   def getTimestamp(self):
+       req=IGuestAdditionsStatusChangedEvent_getTimestampRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestAdditionsStatusChangedEvent_getTimestamp(req)
+       return Long(self.mgr,val._returnval)
+
+
+   _Attrs_={         'facility':[getFacility,setFacility,
+        ],
+         'status':[getStatus,None],
+         'runLevel':[getRunLevel,None],
+         'timestamp':[getTimestamp,None]}
 
 class ICloudClient(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -30837,7 +31033,7 @@ class VBoxEventType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'Last'}
+   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'OnGuestAdditionsStatusChanged',102:'OnGuestFileSizeChanged',103:'Last'}
    _ValueMap={
               'Invalid':0,
               'Any':1,
@@ -30915,7 +31111,9 @@ class VBoxEventType:
               'OnProgressPercentageChanged':98,
               'OnProgressTaskCompleted':99,
               'OnCursorPositionChanged':100,
-              'Last':101}
+              'OnGuestAdditionsStatusChanged':101,
+              'OnGuestFileSizeChanged':102,
+              'Last':103}
 
    Invalid=0
    Any=1
@@ -30993,7 +31191,9 @@ class VBoxEventType:
    OnProgressPercentageChanged=98
    OnProgressTaskCompleted=99
    OnCursorPositionChanged=100
-   Last=101
+   OnGuestAdditionsStatusChanged=101
+   OnGuestFileSizeChanged=102
+   Last=103
 
 class GuestMouseEventMode:
    def __init__(self,mgr,handle):

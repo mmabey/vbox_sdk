@@ -161,6 +161,7 @@ interface IGuestFileRegisteredEvent;
 interface IGuestFileStateChangedEvent;
 interface IGuestFileIOEvent;
 interface IGuestFileOffsetChangedEvent;
+interface IGuestFileSizeChangedEvent;
 interface IGuestFileReadEvent;
 interface IGuestFileWriteEvent;
 interface IVRDEServerChangedEvent;
@@ -194,6 +195,7 @@ interface IProgressEvent;
 interface IProgressPercentageChangedEvent;
 interface IProgressTaskCompletedEvent;
 interface ICursorPositionChangedEvent;
+interface IGuestAdditionsStatusChangedEvent;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;
@@ -2447,7 +2449,9 @@ typedef enum
     VBoxEventType_OnProgressPercentageChanged = 98,
     VBoxEventType_OnProgressTaskCompleted = 99,
     VBoxEventType_OnCursorPositionChanged = 100,
-    VBoxEventType_Last = 101
+    VBoxEventType_OnGuestAdditionsStatusChanged = 101,
+    VBoxEventType_OnGuestFileSizeChanged = 102,
+    VBoxEventType_Last = 103
 } VBoxEventType;
 
 /* cross-platform type name for VBoxEventType */
@@ -15066,6 +15070,27 @@ cpp_quote("#define COM_FORWARD_IGuestFileOffsetChangedEvent_TO_OBJ(obj) COM_FORW
 cpp_quote("#define COM_FORWARD_IGuestFileOffsetChangedEvent_TO_BASE(base) COM_FORWARD_IGuestFileOffsetChangedEvent_TO (base::)")
 
 [
+    uuid(d78374e9-486e-472f-481b-969746af2480),
+    object,
+    dual,
+    oleautomation
+    , proxy
+]
+interface IGuestFileSizeChangedEvent : IGuestFileEvent
+{
+    [propget] HRESULT NewSize ([out, retval] LONG64 * aNewSize);
+
+}; /* interface IGuestFileSizeChangedEvent */
+
+/* Interface implementation forwarder macro */
+cpp_quote("#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO(smth) HRESULT STDMETHODCALLTYPE get_NewSize (LONG64 * aNewSize) { return smth get_NewSize (aNewSize); }")
+cpp_quote("#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO (base::)")
+cpp_quote("#define COM_FORWARD_IGuestFileSizeChangedEvent_TO(smth) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_TO (base::)")
+
+[
     uuid(4ee3cbcb-486f-40db-9150-deee3fd24189),
     object,
     dual,
@@ -16010,6 +16035,46 @@ cpp_quote("#define COM_FORWARD_ICursorPositionChangedEvent_TO_OBJ(obj) COM_FORWA
 cpp_quote("#define COM_FORWARD_ICursorPositionChangedEvent_TO_BASE(base) COM_FORWARD_ICursorPositionChangedEvent_TO (base::)")
 
 [
+    uuid(fd1a34ad-0b74-4e2b-ed0f-46222de8a883),
+    object,
+    dual,
+    oleautomation
+    , proxy
+]
+interface IGuestAdditionsStatusChangedEvent : IEvent
+{
+    [propget] HRESULT Facility ([out, retval] AdditionsFacilityType * aFacility);
+    [propput] HRESULT Facility ([in] AdditionsFacilityType aFacility);
+
+    [propget] HRESULT Status ([out, retval] AdditionsFacilityStatus * aStatus);
+
+    [propget] HRESULT RunLevel ([out, retval] AdditionsRunLevelType * aRunLevel);
+
+    [propget] HRESULT Timestamp ([out, retval] LONG64 * aTimestamp);
+
+}; /* interface IGuestAdditionsStatusChangedEvent */
+
+/* Interface implementation forwarder macro */
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO(smth) HRESULT STDMETHODCALLTYPE get_Facility (AdditionsFacilityType * aFacility) { return smth get_Facility (aFacility); }")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO (base::)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO(smth) HRESULT STDMETHODCALLTYPE put_Facility (AdditionsFacilityType aFacility) { return smth put_Facility (aFacility); }")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO (base::)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO(smth) HRESULT STDMETHODCALLTYPE get_Status (AdditionsFacilityStatus * aStatus) { return smth get_Status (aStatus); }")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO (base::)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO(smth) HRESULT STDMETHODCALLTYPE get_RunLevel (AdditionsRunLevelType * aRunLevel) { return smth get_RunLevel (aRunLevel); }")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO (base::)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO(smth) HRESULT STDMETHODCALLTYPE get_Timestamp (LONG64 * aTimestamp) { return smth get_Timestamp (aTimestamp); }")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO (base::)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO(smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO (base::)")
+
+[
     uuid(3d9aacbe-b3bc-4126-9633-5634bad24ad7),
     object,
     dual,
@@ -16560,6 +16625,7 @@ interface IGuestFileRegisteredEvent;
 interface IGuestFileStateChangedEvent;
 interface IGuestFileIOEvent;
 interface IGuestFileOffsetChangedEvent;
+interface IGuestFileSizeChangedEvent;
 interface IGuestFileReadEvent;
 interface IGuestFileWriteEvent;
 interface IVRDEServerChangedEvent;
@@ -16593,6 +16659,7 @@ interface IProgressEvent;
 interface IProgressPercentageChangedEvent;
 interface IProgressTaskCompletedEvent;
 interface ICursorPositionChangedEvent;
+interface IGuestAdditionsStatusChangedEvent;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;

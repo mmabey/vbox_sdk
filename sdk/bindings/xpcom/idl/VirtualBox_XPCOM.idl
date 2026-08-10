@@ -314,6 +314,7 @@ interface IGuestFileRegisteredEvent;
 interface IGuestFileStateChangedEvent;
 interface IGuestFileIOEvent;
 interface IGuestFileOffsetChangedEvent;
+interface IGuestFileSizeChangedEvent;
 interface IGuestFileReadEvent;
 interface IGuestFileWriteEvent;
 interface IVRDEServerChangedEvent;
@@ -347,6 +348,7 @@ interface IProgressEvent;
 interface IProgressPercentageChangedEvent;
 interface IProgressTaskCompletedEvent;
 interface ICursorPositionChangedEvent;
+interface IGuestAdditionsStatusChangedEvent;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;
@@ -5336,7 +5338,9 @@ interface VBoxEventType
     const PRUint32 OnProgressPercentageChanged = 98;
     const PRUint32 OnProgressTaskCompleted = 99;
     const PRUint32 OnCursorPositionChanged = 100;
-    const PRUint32 Last = 101;
+    const PRUint32 OnGuestAdditionsStatusChanged = 101;
+    const PRUint32 OnGuestFileSizeChanged = 102;
+    const PRUint32 Last = 103;
 };
 
 
@@ -5422,6 +5426,8 @@ typedef PRUint32 VBoxEventType_T;
 # define VBoxEventType_OnProgressPercentageChanged VBoxEventType::OnProgressPercentageChanged
 # define VBoxEventType_OnProgressTaskCompleted VBoxEventType::OnProgressTaskCompleted
 # define VBoxEventType_OnCursorPositionChanged VBoxEventType::OnCursorPositionChanged
+# define VBoxEventType_OnGuestAdditionsStatusChanged VBoxEventType::OnGuestAdditionsStatusChanged
+# define VBoxEventType_OnGuestFileSizeChanged VBoxEventType::OnGuestFileSizeChanged
 # define VBoxEventType_Last VBoxEventType::Last
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VBoxEventType_T {
@@ -5501,6 +5507,8 @@ typedef enum VBoxEventType_T {
     VBoxEventType_OnProgressPercentageChanged = VBoxEventType::OnProgressPercentageChanged,
     VBoxEventType_OnProgressTaskCompleted = VBoxEventType::OnProgressTaskCompleted,
     VBoxEventType_OnCursorPositionChanged = VBoxEventType::OnCursorPositionChanged,
+    VBoxEventType_OnGuestAdditionsStatusChanged = VBoxEventType::OnGuestAdditionsStatusChanged,
+    VBoxEventType_OnGuestFileSizeChanged = VBoxEventType::OnGuestFileSizeChanged,
     VBoxEventType_Last = VBoxEventType::Last,
     VBoxEventType_32BitHack = 0x7fffffff
 } VBoxEventType_T;
@@ -18649,6 +18657,29 @@ VBOX_EXTERN_C const nsID IID_IGuestFileOffsetChangedEvent;
 %}
 
 [
+    uuid(d78374e9-486e-472f-481b-969746af2480),
+    scriptable
+]
+interface IGuestFileSizeChangedEvent : IGuestFileEvent
+{
+    readonly attribute long long newSize;
+
+}; /* interface IGuestFileSizeChangedEvent */
+
+/* Interface implementation forwarder macro */
+%{C++
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO(smth) NS_IMETHOD GetNewSize (PRInt64 * aNewSize) { return smth GetNewSize (aNewSize); }
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO ((obj)->)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO (base::)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO(smth) NS_FORWARD_IGUESTFILESIZECHANGEDEVENT (smth)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_TO (base::)
+
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IGuestFileSizeChangedEvent;
+%}
+
+[
     uuid(4ee3cbcb-486f-40db-9150-deee3fd24189),
     scriptable
 ]
@@ -19660,6 +19691,47 @@ interface ICursorPositionChangedEvent : IEvent
 
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_ICursorPositionChangedEvent;
+%}
+
+[
+    uuid(fd1a34ad-0b74-4e2b-ed0f-46222de8a883),
+    scriptable
+]
+interface IGuestAdditionsStatusChangedEvent : IEvent
+{
+    attribute AdditionsFacilityType_T facility;
+
+    readonly attribute AdditionsFacilityStatus_T status;
+
+    readonly attribute AdditionsRunLevelType_T runLevel;
+
+    readonly attribute long long timestamp;
+
+}; /* interface IGuestAdditionsStatusChangedEvent */
+
+/* Interface implementation forwarder macro */
+%{C++
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO(smth) NS_IMETHOD GetFacility (PRUint32 * aFacility) { return smth GetFacility (aFacility); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO(smth) NS_IMETHOD SetFacility (PRUint32 aFacility) { return smth SetFacility (aFacility); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO(smth) NS_IMETHOD GetStatus (PRUint32 * aStatus) { return smth GetStatus (aStatus); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO(smth) NS_IMETHOD GetRunLevel (PRUint32 * aRunLevel) { return smth GetRunLevel (aRunLevel); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO(smth) NS_IMETHOD GetTimestamp (PRInt64 * aTimestamp) { return smth GetTimestamp (aTimestamp); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO(smth) NS_FORWARD_IGUESTADDITIONSSTATUSCHANGEDEVENT (smth)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO (base::)
+
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IGuestAdditionsStatusChangedEvent;
 %}
 
 [

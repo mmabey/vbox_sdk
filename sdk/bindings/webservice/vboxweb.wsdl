@@ -2148,7 +2148,9 @@
             OnProgressPercentageChanged: 98 -
             OnProgressTaskCompleted: 99 -
             OnCursorPositionChanged: 100 -
-            Last: 101 -
+            OnGuestAdditionsStatusChanged: 101 -
+            OnGuestFileSizeChanged: 102 -
+            Last: 103 -
             -->
       <xsd:simpleType name="VBoxEventType">
         <xsd:restriction base="xsd:string">
@@ -2228,6 +2230,8 @@
           <xsd:enumeration value="OnProgressPercentageChanged"/>
           <xsd:enumeration value="OnProgressTaskCompleted"/>
           <xsd:enumeration value="OnCursorPositionChanged"/>
+          <xsd:enumeration value="OnGuestAdditionsStatusChanged"/>
+          <xsd:enumeration value="OnGuestFileSizeChanged"/>
           <xsd:enumeration value="Last"/>
         </xsd:restriction>
       </xsd:simpleType>
@@ -22862,6 +22866,22 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <!--Interface IGuestFileSizeChangedEvent-->
+      <!-- readonly attribute IGuestFileSizeChangedEvent::newSize-->
+      <xsd:element name="IGuestFileSizeChangedEvent_getNewSize">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IGuestFileSizeChangedEvent_getNewSizeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <!--Interface IGuestFileReadEvent-->
       <!-- readonly attribute IGuestFileReadEvent::data-->
       <xsd:element name="IGuestFileReadEvent_getData">
@@ -24103,6 +24123,80 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="returnval" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!--Interface IGuestAdditionsStatusChangedEvent-->
+      <!-- read/write attribute IGuestAdditionsStatusChangedEvent::facility-->
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getFacility">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getFacilityResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="vbox:AdditionsFacilityType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_setFacility">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="facility" type="vbox:AdditionsFacilityType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_setFacilityResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute IGuestAdditionsStatusChangedEvent::status-->
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="vbox:AdditionsFacilityStatus"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute IGuestAdditionsStatusChangedEvent::runLevel-->
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getRunLevel">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getRunLevelResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="vbox:AdditionsRunLevelType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute IGuestAdditionsStatusChangedEvent::timestamp-->
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getTimestamp">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IGuestAdditionsStatusChangedEvent_getTimestampResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:long"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -34540,6 +34634,18 @@
   </wsdl:message>
   <!--
         *************************************
+        messages for interface IGuestFileSizeChangedEvent
+        *************************************
+      -->
+  <!-- readonly attribute IGuestFileSizeChangedEvent::newSize-->
+  <wsdl:message name="IGuestFileSizeChangedEvent_getNewSizeRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestFileSizeChangedEvent_getNewSize"/>
+  </wsdl:message>
+  <wsdl:message name="IGuestFileSizeChangedEvent_getNewSizeResultMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestFileSizeChangedEvent_getNewSizeResponse"/>
+  </wsdl:message>
+  <!--
+        *************************************
         messages for interface IGuestFileReadEvent
         *************************************
       -->
@@ -35268,6 +35374,45 @@
   </wsdl:message>
   <wsdl:message name="ICursorPositionChangedEvent_getYResultMsg">
     <wsdl:part name="parameters" element="vbox:ICursorPositionChangedEvent_getYResponse"/>
+  </wsdl:message>
+  <!--
+        *************************************
+        messages for interface IGuestAdditionsStatusChangedEvent
+        *************************************
+      -->
+  <!-- read/write attribute IGuestAdditionsStatusChangedEvent::facility-->
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getFacilityRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getFacility"/>
+  </wsdl:message>
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getFacilityResultMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getFacilityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_setFacilityRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_setFacility"/>
+  </wsdl:message>
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_setFacilityResultMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_setFacilityResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute IGuestAdditionsStatusChangedEvent::status-->
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getStatusRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getStatus"/>
+  </wsdl:message>
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getStatusResultMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getStatusResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute IGuestAdditionsStatusChangedEvent::runLevel-->
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getRunLevelRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getRunLevel"/>
+  </wsdl:message>
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getRunLevelResultMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getRunLevelResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute IGuestAdditionsStatusChangedEvent::timestamp-->
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getTimestampRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getTimestamp"/>
+  </wsdl:message>
+  <wsdl:message name="IGuestAdditionsStatusChangedEvent_getTimestampResultMsg">
+    <wsdl:part name="parameters" element="vbox:IGuestAdditionsStatusChangedEvent_getTimestampResponse"/>
   </wsdl:message>
   <!--
         *************************************
@@ -44332,6 +44477,17 @@
     </wsdl:operation>
     <!--
           *************************************
+          operations in portType for interface IGuestFileSizeChangedEvent
+          *************************************
+        -->
+    <wsdl:operation name="IGuestFileSizeChangedEvent_getNewSize">
+      <wsdl:input message="vbox:IGuestFileSizeChangedEvent_getNewSizeRequestMsg"/>
+      <wsdl:output message="vbox:IGuestFileSizeChangedEvent_getNewSizeResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <!--
+          *************************************
           operations in portType for interface IGuestFileReadEvent
           *************************************
         -->
@@ -44978,6 +45134,41 @@
     <wsdl:operation name="ICursorPositionChangedEvent_getY">
       <wsdl:input message="vbox:ICursorPositionChangedEvent_getYRequestMsg"/>
       <wsdl:output message="vbox:ICursorPositionChangedEvent_getYResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <!--
+          *************************************
+          operations in portType for interface IGuestAdditionsStatusChangedEvent
+          *************************************
+        -->
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getFacility">
+      <wsdl:input message="vbox:IGuestAdditionsStatusChangedEvent_getFacilityRequestMsg"/>
+      <wsdl:output message="vbox:IGuestAdditionsStatusChangedEvent_getFacilityResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_setFacility">
+      <wsdl:input message="vbox:IGuestAdditionsStatusChangedEvent_setFacilityRequestMsg"/>
+      <wsdl:output message="vbox:IGuestAdditionsStatusChangedEvent_setFacilityResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getStatus">
+      <wsdl:input message="vbox:IGuestAdditionsStatusChangedEvent_getStatusRequestMsg"/>
+      <wsdl:output message="vbox:IGuestAdditionsStatusChangedEvent_getStatusResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getRunLevel">
+      <wsdl:input message="vbox:IGuestAdditionsStatusChangedEvent_getRunLevelRequestMsg"/>
+      <wsdl:output message="vbox:IGuestAdditionsStatusChangedEvent_getRunLevelResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getTimestamp">
+      <wsdl:input message="vbox:IGuestAdditionsStatusChangedEvent_getTimestampRequestMsg"/>
+      <wsdl:output message="vbox:IGuestAdditionsStatusChangedEvent_getTimestampResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -66241,6 +66432,26 @@
     </wsdl:operation>
     <!--
           *************************************
+          operations in portType for interface IGuestFileSizeChangedEvent
+          *************************************
+        -->
+    <wsdl:operation name="IGuestFileSizeChangedEvent_getNewSize">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <!--
+          *************************************
           operations in portType for interface IGuestFileReadEvent
           *************************************
         -->
@@ -67605,6 +67816,86 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ICursorPositionChangedEvent_getY">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <!--
+          *************************************
+          operations in portType for interface IGuestAdditionsStatusChangedEvent
+          *************************************
+        -->
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getFacility">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_setFacility">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getStatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getRunLevel">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IGuestAdditionsStatusChangedEvent_getTimestamp">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

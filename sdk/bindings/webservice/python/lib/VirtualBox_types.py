@@ -56185,6 +56185,46 @@ class ns0:
             Holder.__name__ = "IGuestFileOffsetChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse_Holder"
             self.pyclass = Holder
 
+    class IGuestFileSizeChangedEvent_getNewSize_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestFileSizeChangedEvent_getNewSize"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestFileSizeChangedEvent_getNewSize_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestFileSizeChangedEvent_getNewSize")
+            kw["aname"] = "_IGuestFileSizeChangedEvent_getNewSize"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IGuestFileSizeChangedEvent_getNewSize_Holder"
+            self.pyclass = Holder
+
+    class IGuestFileSizeChangedEvent_getNewSizeResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestFileSizeChangedEvent_getNewSizeResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestFileSizeChangedEvent_getNewSizeResponse_Dec.schema
+            TClist = [ZSI.TCnumbers.Ilong(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestFileSizeChangedEvent_getNewSizeResponse")
+            kw["aname"] = "_IGuestFileSizeChangedEvent_getNewSizeResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IGuestFileSizeChangedEvent_getNewSizeResponse_Holder"
+            self.pyclass = Holder
+
     class IGuestFileReadEvent_getData_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
         literal = "IGuestFileReadEvent_getData"
         schema = "http://www.virtualbox.org/"
@@ -59423,6 +59463,206 @@ class ns0:
                     self._returnval = None
                     return
             Holder.__name__ = "ICursorPositionChangedEvent_getYResponse_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getFacility_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getFacility"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getFacility_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getFacility")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getFacility"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getFacility_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getFacilityResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getFacilityResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getFacilityResponse_Dec.schema
+            TClist = [GTD("http://www.virtualbox.org/","AdditionsFacilityType",lazy=False)(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getFacilityResponse")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getFacilityResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getFacilityResponse_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_setFacility_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_setFacility"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_setFacility_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), GTD("http://www.virtualbox.org/","AdditionsFacilityType",lazy=False)(pname="facility", aname="_facility", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_setFacility")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_setFacility"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    self._facility = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_setFacility_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_setFacilityResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_setFacilityResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_setFacilityResponse_Dec.schema
+            TClist = []
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_setFacilityResponse")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_setFacilityResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_setFacilityResponse_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getStatus_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getStatus"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getStatus_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getStatus")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getStatus"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getStatus_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getStatusResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getStatusResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getStatusResponse_Dec.schema
+            TClist = [GTD("http://www.virtualbox.org/","AdditionsFacilityStatus",lazy=False)(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getStatusResponse")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getStatusResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getStatusResponse_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getRunLevel_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getRunLevel"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getRunLevel_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getRunLevel")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getRunLevel"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getRunLevel_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getRunLevelResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getRunLevelResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getRunLevelResponse_Dec.schema
+            TClist = [GTD("http://www.virtualbox.org/","AdditionsRunLevelType",lazy=False)(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getRunLevelResponse")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getRunLevelResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getRunLevelResponse_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getTimestamp_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getTimestamp"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getTimestamp_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getTimestamp")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getTimestamp"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getTimestamp_Holder"
+            self.pyclass = Holder
+
+    class IGuestAdditionsStatusChangedEvent_getTimestampResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IGuestAdditionsStatusChangedEvent_getTimestampResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IGuestAdditionsStatusChangedEvent_getTimestampResponse_Dec.schema
+            TClist = [ZSI.TCnumbers.Ilong(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IGuestAdditionsStatusChangedEvent_getTimestampResponse")
+            kw["aname"] = "_IGuestAdditionsStatusChangedEvent_getTimestampResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IGuestAdditionsStatusChangedEvent_getTimestampResponse_Holder"
             self.pyclass = Holder
 
     class ICloudClient_getExportLaunchParameters_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):

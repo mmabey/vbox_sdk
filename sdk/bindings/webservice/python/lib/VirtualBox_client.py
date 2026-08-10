@@ -13611,6 +13611,16 @@ class vboxBindingSOAP:
         response = self.binding.Receive(IGuestFileOffsetChangedEvent_getMidlDoesNotLikeEmptyInterfacesResultMsg.typecode)
         return response
 
+    # op: IGuestFileSizeChangedEvent_getNewSize
+    def IGuestFileSizeChangedEvent_getNewSize(self, request, **kw):
+        if isinstance(request, IGuestFileSizeChangedEvent_getNewSizeRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IGuestFileSizeChangedEvent_getNewSizeResultMsg.typecode)
+        return response
+
     # op: IGuestFileReadEvent_getData
     def IGuestFileReadEvent_getData(self, request, **kw):
         if isinstance(request, IGuestFileReadEvent_getDataRequestMsg) is False:
@@ -14419,6 +14429,56 @@ class vboxBindingSOAP:
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
         response = self.binding.Receive(ICursorPositionChangedEvent_getYResultMsg.typecode)
+        return response
+
+    # op: IGuestAdditionsStatusChangedEvent_getFacility
+    def IGuestAdditionsStatusChangedEvent_getFacility(self, request, **kw):
+        if isinstance(request, IGuestAdditionsStatusChangedEvent_getFacilityRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IGuestAdditionsStatusChangedEvent_getFacilityResultMsg.typecode)
+        return response
+
+    # op: IGuestAdditionsStatusChangedEvent_setFacility
+    def IGuestAdditionsStatusChangedEvent_setFacility(self, request, **kw):
+        if isinstance(request, IGuestAdditionsStatusChangedEvent_setFacilityRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IGuestAdditionsStatusChangedEvent_setFacilityResultMsg.typecode)
+        return response
+
+    # op: IGuestAdditionsStatusChangedEvent_getStatus
+    def IGuestAdditionsStatusChangedEvent_getStatus(self, request, **kw):
+        if isinstance(request, IGuestAdditionsStatusChangedEvent_getStatusRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IGuestAdditionsStatusChangedEvent_getStatusResultMsg.typecode)
+        return response
+
+    # op: IGuestAdditionsStatusChangedEvent_getRunLevel
+    def IGuestAdditionsStatusChangedEvent_getRunLevel(self, request, **kw):
+        if isinstance(request, IGuestAdditionsStatusChangedEvent_getRunLevelRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IGuestAdditionsStatusChangedEvent_getRunLevelResultMsg.typecode)
+        return response
+
+    # op: IGuestAdditionsStatusChangedEvent_getTimestamp
+    def IGuestAdditionsStatusChangedEvent_getTimestamp(self, request, **kw):
+        if isinstance(request, IGuestAdditionsStatusChangedEvent_getTimestampRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IGuestAdditionsStatusChangedEvent_getTimestampResultMsg.typecode)
         return response
 
     # op: ICloudClient_getExportLaunchParameters
@@ -20133,6 +20193,10 @@ IGuestFileOffsetChangedEvent_getMidlDoesNotLikeEmptyInterfacesRequestMsg = GED("
 
 IGuestFileOffsetChangedEvent_getMidlDoesNotLikeEmptyInterfacesResultMsg = GED("http://www.virtualbox.org/", "IGuestFileOffsetChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse").pyclass
 
+IGuestFileSizeChangedEvent_getNewSizeRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileSizeChangedEvent_getNewSize").pyclass
+
+IGuestFileSizeChangedEvent_getNewSizeResultMsg = GED("http://www.virtualbox.org/", "IGuestFileSizeChangedEvent_getNewSizeResponse").pyclass
+
 IGuestFileReadEvent_getDataRequestMsg = GED("http://www.virtualbox.org/", "IGuestFileReadEvent_getData").pyclass
 
 IGuestFileReadEvent_getDataResultMsg = GED("http://www.virtualbox.org/", "IGuestFileReadEvent_getDataResponse").pyclass
@@ -20456,6 +20520,26 @@ ICursorPositionChangedEvent_getXResultMsg = GED("http://www.virtualbox.org/", "I
 ICursorPositionChangedEvent_getYRequestMsg = GED("http://www.virtualbox.org/", "ICursorPositionChangedEvent_getY").pyclass
 
 ICursorPositionChangedEvent_getYResultMsg = GED("http://www.virtualbox.org/", "ICursorPositionChangedEvent_getYResponse").pyclass
+
+IGuestAdditionsStatusChangedEvent_getFacilityRequestMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getFacility").pyclass
+
+IGuestAdditionsStatusChangedEvent_getFacilityResultMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getFacilityResponse").pyclass
+
+IGuestAdditionsStatusChangedEvent_setFacilityRequestMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_setFacility").pyclass
+
+IGuestAdditionsStatusChangedEvent_setFacilityResultMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_setFacilityResponse").pyclass
+
+IGuestAdditionsStatusChangedEvent_getStatusRequestMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getStatus").pyclass
+
+IGuestAdditionsStatusChangedEvent_getStatusResultMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getStatusResponse").pyclass
+
+IGuestAdditionsStatusChangedEvent_getRunLevelRequestMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getRunLevel").pyclass
+
+IGuestAdditionsStatusChangedEvent_getRunLevelResultMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getRunLevelResponse").pyclass
+
+IGuestAdditionsStatusChangedEvent_getTimestampRequestMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getTimestamp").pyclass
+
+IGuestAdditionsStatusChangedEvent_getTimestampResultMsg = GED("http://www.virtualbox.org/", "IGuestAdditionsStatusChangedEvent_getTimestampResponse").pyclass
 
 ICloudClient_getExportLaunchParametersRequestMsg = GED("http://www.virtualbox.org/", "ICloudClient_getExportLaunchParameters").pyclass
 

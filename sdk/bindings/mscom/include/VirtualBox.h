@@ -10,7 +10,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Mon May 13 13:14:26 2019
+/* at Fri Jul 12 09:18:37 2019
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.0-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -855,6 +855,12 @@ typedef interface IGuestFileOffsetChangedEvent IGuestFileOffsetChangedEvent;
 #endif 	/* __IGuestFileOffsetChangedEvent_FWD_DEFINED__ */
 
 
+#ifndef __IGuestFileSizeChangedEvent_FWD_DEFINED__
+#define __IGuestFileSizeChangedEvent_FWD_DEFINED__
+typedef interface IGuestFileSizeChangedEvent IGuestFileSizeChangedEvent;
+#endif 	/* __IGuestFileSizeChangedEvent_FWD_DEFINED__ */
+
+
 #ifndef __IGuestFileReadEvent_FWD_DEFINED__
 #define __IGuestFileReadEvent_FWD_DEFINED__
 typedef interface IGuestFileReadEvent IGuestFileReadEvent;
@@ -1051,6 +1057,12 @@ typedef interface IProgressTaskCompletedEvent IProgressTaskCompletedEvent;
 #define __ICursorPositionChangedEvent_FWD_DEFINED__
 typedef interface ICursorPositionChangedEvent ICursorPositionChangedEvent;
 #endif 	/* __ICursorPositionChangedEvent_FWD_DEFINED__ */
+
+
+#ifndef __IGuestAdditionsStatusChangedEvent_FWD_DEFINED__
+#define __IGuestAdditionsStatusChangedEvent_FWD_DEFINED__
+typedef interface IGuestAdditionsStatusChangedEvent IGuestAdditionsStatusChangedEvent;
+#endif 	/* __IGuestAdditionsStatusChangedEvent_FWD_DEFINED__ */
 
 
 #ifndef __ICloudClient_FWD_DEFINED__
@@ -1881,6 +1893,12 @@ typedef interface IGuestFileOffsetChangedEvent IGuestFileOffsetChangedEvent;
 #endif 	/* __IGuestFileOffsetChangedEvent_FWD_DEFINED__ */
 
 
+#ifndef __IGuestFileSizeChangedEvent_FWD_DEFINED__
+#define __IGuestFileSizeChangedEvent_FWD_DEFINED__
+typedef interface IGuestFileSizeChangedEvent IGuestFileSizeChangedEvent;
+#endif 	/* __IGuestFileSizeChangedEvent_FWD_DEFINED__ */
+
+
 #ifndef __IGuestFileReadEvent_FWD_DEFINED__
 #define __IGuestFileReadEvent_FWD_DEFINED__
 typedef interface IGuestFileReadEvent IGuestFileReadEvent;
@@ -2079,6 +2097,12 @@ typedef interface ICursorPositionChangedEvent ICursorPositionChangedEvent;
 #endif 	/* __ICursorPositionChangedEvent_FWD_DEFINED__ */
 
 
+#ifndef __IGuestAdditionsStatusChangedEvent_FWD_DEFINED__
+#define __IGuestAdditionsStatusChangedEvent_FWD_DEFINED__
+typedef interface IGuestAdditionsStatusChangedEvent IGuestAdditionsStatusChangedEvent;
+#endif 	/* __IGuestAdditionsStatusChangedEvent_FWD_DEFINED__ */
+
+
 #ifndef __ICloudClient_FWD_DEFINED__
 #define __ICloudClient_FWD_DEFINED__
 typedef interface ICloudClient ICloudClient;
@@ -2157,6 +2181,8 @@ enum {
     kTypeLibraryMajorVersion = 1,
     kTypeLibraryMinorVersion = 3
 };
+
+
 
 
 
@@ -2877,7 +2903,7 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0045
     } 	ProxyMode;
 
 #define ProxyMode_T ProxyMode
-typedef /* [public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("c4b10d74-dd48-4ff4-9a40-785a2a389ade") 
+typedef /* [public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("c4b10d74-dd48-4ff4-9a40-785a2a389ade") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0046
     {	AdditionsFacilityType_None	= 0,
 	AdditionsFacilityType_VBoxGuestDriver	= 20,
@@ -2903,7 +2929,7 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0047
     } 	AdditionsFacilityClass;
 
 #define AdditionsFacilityClass_T AdditionsFacilityClass
-typedef /* [public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("ce06f9e1-394e-4fe9-9368-5a88c567dbde") 
+typedef /* [public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("ce06f9e1-394e-4fe9-9368-5a88c567dbde") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0048
     {	AdditionsFacilityStatus_Inactive	= 0,
 	AdditionsFacilityStatus_Paused	= 1,
@@ -2917,7 +2943,7 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0048
     } 	AdditionsFacilityStatus;
 
 #define AdditionsFacilityStatus_T AdditionsFacilityStatus
-typedef /* [public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("a25417ee-a9dd-4f5b-b0dc-377860087754") 
+typedef /* [public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("a25417ee-a9dd-4f5b-b0dc-377860087754") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0049
     {	AdditionsRunLevelType_None	= 0,
 	AdditionsRunLevelType_System	= 1,
@@ -3660,7 +3686,9 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0115
 	VBoxEventType_OnProgressPercentageChanged	= 98,
 	VBoxEventType_OnProgressTaskCompleted	= 99,
 	VBoxEventType_OnCursorPositionChanged	= 100,
-	VBoxEventType_Last	= 101
+	VBoxEventType_OnGuestAdditionsStatusChanged	= 101,
+	VBoxEventType_OnGuestFileSizeChanged	= 102,
+	VBoxEventType_Last	= 103
     } 	VBoxEventType;
 
 #define VBoxEventType_T VBoxEventType
@@ -51748,6 +51776,193 @@ EXTERN_C const IID IID_IGuestFileOffsetChangedEvent;
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0134_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0134_v0_0_s_ifspec;
 
+#ifndef __IGuestFileSizeChangedEvent_INTERFACE_DEFINED__
+#define __IGuestFileSizeChangedEvent_INTERFACE_DEFINED__
+
+/* interface IGuestFileSizeChangedEvent */
+/* [proxy][oleautomation][dual][object][uuid] */ 
+
+
+EXTERN_C const IID IID_IGuestFileSizeChangedEvent;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("d78374e9-486e-472f-481b-969746af2480")
+    IGuestFileSizeChangedEvent : public IGuestFileEvent
+    {
+    public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_NewSize( 
+            /* [retval][out] */ LONG64 *aNewSize) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IGuestFileSizeChangedEventVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IGuestFileSizeChangedEvent * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IGuestFileSizeChangedEvent * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [retval][out] */ VBoxEventType *aType);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [retval][out] */ IEventSource **aSource);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Waitable )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [retval][out] */ BOOL *aWaitable);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetProcessed )( 
+            IGuestFileSizeChangedEvent * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *WaitProcessed )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [in] */ LONG aTimeout,
+            /* [retval][out] */ BOOL *aResult);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Session )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [retval][out] */ IGuestSession **aSession);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_File )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [retval][out] */ IGuestFile **aFile);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NewSize )( 
+            IGuestFileSizeChangedEvent * This,
+            /* [retval][out] */ LONG64 *aNewSize);
+        
+        END_INTERFACE
+    } IGuestFileSizeChangedEventVtbl;
+
+    interface IGuestFileSizeChangedEvent
+    {
+        CONST_VTBL struct IGuestFileSizeChangedEventVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IGuestFileSizeChangedEvent_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IGuestFileSizeChangedEvent_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IGuestFileSizeChangedEvent_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IGuestFileSizeChangedEvent_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IGuestFileSizeChangedEvent_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IGuestFileSizeChangedEvent_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IGuestFileSizeChangedEvent_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IGuestFileSizeChangedEvent_get_Type(This,aType)	\
+    ( (This)->lpVtbl -> get_Type(This,aType) ) 
+
+#define IGuestFileSizeChangedEvent_get_Source(This,aSource)	\
+    ( (This)->lpVtbl -> get_Source(This,aSource) ) 
+
+#define IGuestFileSizeChangedEvent_get_Waitable(This,aWaitable)	\
+    ( (This)->lpVtbl -> get_Waitable(This,aWaitable) ) 
+
+#define IGuestFileSizeChangedEvent_SetProcessed(This)	\
+    ( (This)->lpVtbl -> SetProcessed(This) ) 
+
+#define IGuestFileSizeChangedEvent_WaitProcessed(This,aTimeout,aResult)	\
+    ( (This)->lpVtbl -> WaitProcessed(This,aTimeout,aResult) ) 
+
+
+#define IGuestFileSizeChangedEvent_get_Session(This,aSession)	\
+    ( (This)->lpVtbl -> get_Session(This,aSession) ) 
+
+
+#define IGuestFileSizeChangedEvent_get_File(This,aFile)	\
+    ( (This)->lpVtbl -> get_File(This,aFile) ) 
+
+
+#define IGuestFileSizeChangedEvent_get_NewSize(This,aNewSize)	\
+    ( (This)->lpVtbl -> get_NewSize(This,aNewSize) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IGuestFileSizeChangedEvent_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_VirtualBox_0000_0135 */
+/* [local] */ 
+
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO(smth) HRESULT STDMETHODCALLTYPE get_NewSize (LONG64 * aNewSize) { return smth get_NewSize (aNewSize); }
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO ((obj)->)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO (base::)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO(smth) COM_FORWARD_IGuestFileSizeChangedEvent_GETTER_NewSize_TO (smth) 
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestFileSizeChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IGuestFileSizeChangedEvent_TO_BASE(base) COM_FORWARD_IGuestFileSizeChangedEvent_TO (base::)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0135_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0135_v0_0_s_ifspec;
+
 #ifndef __IGuestFileReadEvent_INTERFACE_DEFINED__
 #define __IGuestFileReadEvent_INTERFACE_DEFINED__
 
@@ -51936,7 +52151,7 @@ EXTERN_C const IID IID_IGuestFileReadEvent;
 #endif 	/* __IGuestFileReadEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0135 */
+/* interface __MIDL_itf_VirtualBox_0000_0136 */
 /* [local] */ 
 
 #define COM_FORWARD_IGuestFileReadEvent_GETTER_Data_TO(smth) HRESULT STDMETHODCALLTYPE get_Data (SAFEARRAY * * aData) { return smth get_Data (aData); }
@@ -51947,8 +52162,8 @@ EXTERN_C const IID IID_IGuestFileReadEvent;
 #define COM_FORWARD_IGuestFileReadEvent_TO_BASE(base) COM_FORWARD_IGuestFileReadEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0135_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0135_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0136_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0136_v0_0_s_ifspec;
 
 #ifndef __IGuestFileWriteEvent_INTERFACE_DEFINED__
 #define __IGuestFileWriteEvent_INTERFACE_DEFINED__
@@ -52138,7 +52353,7 @@ EXTERN_C const IID IID_IGuestFileWriteEvent;
 #endif 	/* __IGuestFileWriteEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0136 */
+/* interface __MIDL_itf_VirtualBox_0000_0137 */
 /* [local] */ 
 
 #define COM_FORWARD_IGuestFileWriteEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -52149,8 +52364,8 @@ EXTERN_C const IID IID_IGuestFileWriteEvent;
 #define COM_FORWARD_IGuestFileWriteEvent_TO_BASE(base) COM_FORWARD_IGuestFileWriteEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0136_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0136_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0137_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0137_v0_0_s_ifspec;
 
 #ifndef __IVRDEServerChangedEvent_INTERFACE_DEFINED__
 #define __IVRDEServerChangedEvent_INTERFACE_DEFINED__
@@ -52309,7 +52524,7 @@ EXTERN_C const IID IID_IVRDEServerChangedEvent;
 #endif 	/* __IVRDEServerChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0137 */
+/* interface __MIDL_itf_VirtualBox_0000_0138 */
 /* [local] */ 
 
 #define COM_FORWARD_IVRDEServerChangedEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -52320,8 +52535,8 @@ EXTERN_C const IID IID_IVRDEServerChangedEvent;
 #define COM_FORWARD_IVRDEServerChangedEvent_TO_BASE(base) COM_FORWARD_IVRDEServerChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0137_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0137_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0138_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0138_v0_0_s_ifspec;
 
 #ifndef __IVRDEServerInfoChangedEvent_INTERFACE_DEFINED__
 #define __IVRDEServerInfoChangedEvent_INTERFACE_DEFINED__
@@ -52480,7 +52695,7 @@ EXTERN_C const IID IID_IVRDEServerInfoChangedEvent;
 #endif 	/* __IVRDEServerInfoChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0138 */
+/* interface __MIDL_itf_VirtualBox_0000_0139 */
 /* [local] */ 
 
 #define COM_FORWARD_IVRDEServerInfoChangedEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -52491,8 +52706,8 @@ EXTERN_C const IID IID_IVRDEServerInfoChangedEvent;
 #define COM_FORWARD_IVRDEServerInfoChangedEvent_TO_BASE(base) COM_FORWARD_IVRDEServerInfoChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0138_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0138_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0139_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0139_v0_0_s_ifspec;
 
 #ifndef __IRecordingChangedEvent_INTERFACE_DEFINED__
 #define __IRecordingChangedEvent_INTERFACE_DEFINED__
@@ -52651,7 +52866,7 @@ EXTERN_C const IID IID_IRecordingChangedEvent;
 #endif 	/* __IRecordingChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0139 */
+/* interface __MIDL_itf_VirtualBox_0000_0140 */
 /* [local] */ 
 
 #define COM_FORWARD_IRecordingChangedEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -52662,8 +52877,8 @@ EXTERN_C const IID IID_IRecordingChangedEvent;
 #define COM_FORWARD_IRecordingChangedEvent_TO_BASE(base) COM_FORWARD_IRecordingChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0139_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0139_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0140_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0140_v0_0_s_ifspec;
 
 #ifndef __IUSBControllerChangedEvent_INTERFACE_DEFINED__
 #define __IUSBControllerChangedEvent_INTERFACE_DEFINED__
@@ -52822,7 +53037,7 @@ EXTERN_C const IID IID_IUSBControllerChangedEvent;
 #endif 	/* __IUSBControllerChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0140 */
+/* interface __MIDL_itf_VirtualBox_0000_0141 */
 /* [local] */ 
 
 #define COM_FORWARD_IUSBControllerChangedEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -52833,8 +53048,8 @@ EXTERN_C const IID IID_IUSBControllerChangedEvent;
 #define COM_FORWARD_IUSBControllerChangedEvent_TO_BASE(base) COM_FORWARD_IUSBControllerChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0140_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0140_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0141_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0141_v0_0_s_ifspec;
 
 #ifndef __IUSBDeviceStateChangedEvent_INTERFACE_DEFINED__
 #define __IUSBDeviceStateChangedEvent_INTERFACE_DEFINED__
@@ -53013,7 +53228,7 @@ EXTERN_C const IID IID_IUSBDeviceStateChangedEvent;
 #endif 	/* __IUSBDeviceStateChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0141 */
+/* interface __MIDL_itf_VirtualBox_0000_0142 */
 /* [local] */ 
 
 #define COM_FORWARD_IUSBDeviceStateChangedEvent_GETTER_Device_TO(smth) HRESULT STDMETHODCALLTYPE get_Device (IUSBDevice * * aDevice) { return smth get_Device (aDevice); }
@@ -53030,8 +53245,8 @@ EXTERN_C const IID IID_IUSBDeviceStateChangedEvent;
 #define COM_FORWARD_IUSBDeviceStateChangedEvent_TO_BASE(base) COM_FORWARD_IUSBDeviceStateChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0141_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0141_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0142_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0142_v0_0_s_ifspec;
 
 #ifndef __ISharedFolderChangedEvent_INTERFACE_DEFINED__
 #define __ISharedFolderChangedEvent_INTERFACE_DEFINED__
@@ -53190,7 +53405,7 @@ EXTERN_C const IID IID_ISharedFolderChangedEvent;
 #endif 	/* __ISharedFolderChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0142 */
+/* interface __MIDL_itf_VirtualBox_0000_0143 */
 /* [local] */ 
 
 #define COM_FORWARD_ISharedFolderChangedEvent_GETTER_Scope_TO(smth) HRESULT STDMETHODCALLTYPE get_Scope (Scope * aScope) { return smth get_Scope (aScope); }
@@ -53201,8 +53416,8 @@ EXTERN_C const IID IID_ISharedFolderChangedEvent;
 #define COM_FORWARD_ISharedFolderChangedEvent_TO_BASE(base) COM_FORWARD_ISharedFolderChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0142_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0142_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0143_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0143_v0_0_s_ifspec;
 
 #ifndef __IRuntimeErrorEvent_INTERFACE_DEFINED__
 #define __IRuntimeErrorEvent_INTERFACE_DEFINED__
@@ -53381,7 +53596,7 @@ EXTERN_C const IID IID_IRuntimeErrorEvent;
 #endif 	/* __IRuntimeErrorEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0143 */
+/* interface __MIDL_itf_VirtualBox_0000_0144 */
 /* [local] */ 
 
 #define COM_FORWARD_IRuntimeErrorEvent_GETTER_Fatal_TO(smth) HRESULT STDMETHODCALLTYPE get_Fatal (BOOL * aFatal) { return smth get_Fatal (aFatal); }
@@ -53398,8 +53613,8 @@ EXTERN_C const IID IID_IRuntimeErrorEvent;
 #define COM_FORWARD_IRuntimeErrorEvent_TO_BASE(base) COM_FORWARD_IRuntimeErrorEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0143_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0143_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0144_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0144_v0_0_s_ifspec;
 
 #ifndef __IEventSourceChangedEvent_INTERFACE_DEFINED__
 #define __IEventSourceChangedEvent_INTERFACE_DEFINED__
@@ -53568,7 +53783,7 @@ EXTERN_C const IID IID_IEventSourceChangedEvent;
 #endif 	/* __IEventSourceChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0144 */
+/* interface __MIDL_itf_VirtualBox_0000_0145 */
 /* [local] */ 
 
 #define COM_FORWARD_IEventSourceChangedEvent_GETTER_Listener_TO(smth) HRESULT STDMETHODCALLTYPE get_Listener (IEventListener * * aListener) { return smth get_Listener (aListener); }
@@ -53582,8 +53797,8 @@ EXTERN_C const IID IID_IEventSourceChangedEvent;
 #define COM_FORWARD_IEventSourceChangedEvent_TO_BASE(base) COM_FORWARD_IEventSourceChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0144_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0144_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0145_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0145_v0_0_s_ifspec;
 
 #ifndef __IExtraDataChangedEvent_INTERFACE_DEFINED__
 #define __IExtraDataChangedEvent_INTERFACE_DEFINED__
@@ -53762,7 +53977,7 @@ EXTERN_C const IID IID_IExtraDataChangedEvent;
 #endif 	/* __IExtraDataChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0145 */
+/* interface __MIDL_itf_VirtualBox_0000_0146 */
 /* [local] */ 
 
 #define COM_FORWARD_IExtraDataChangedEvent_GETTER_MachineId_TO(smth) HRESULT STDMETHODCALLTYPE get_MachineId (BSTR * aMachineId) { return smth get_MachineId (aMachineId); }
@@ -53779,8 +53994,8 @@ EXTERN_C const IID IID_IExtraDataChangedEvent;
 #define COM_FORWARD_IExtraDataChangedEvent_TO_BASE(base) COM_FORWARD_IExtraDataChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0145_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0145_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0146_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0146_v0_0_s_ifspec;
 
 #ifndef __IVetoEvent_INTERFACE_DEFINED__
 #define __IVetoEvent_INTERFACE_DEFINED__
@@ -53989,7 +54204,7 @@ EXTERN_C const IID IID_IVetoEvent;
 #endif 	/* __IVetoEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0146 */
+/* interface __MIDL_itf_VirtualBox_0000_0147 */
 /* [local] */ 
 
 #define COM_FORWARD_IVetoEvent_AddVeto_TO(smth) HRESULT STDMETHODCALLTYPE AddVeto (BSTR aReason) { return smth AddVeto (aReason); }
@@ -54015,8 +54230,8 @@ EXTERN_C const IID IID_IVetoEvent;
 #define COM_FORWARD_IVetoEvent_TO_BASE(base) COM_FORWARD_IVetoEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0146_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0146_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0147_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0147_v0_0_s_ifspec;
 
 #ifndef __IExtraDataCanChangeEvent_INTERFACE_DEFINED__
 #define __IExtraDataCanChangeEvent_INTERFACE_DEFINED__
@@ -54238,7 +54453,7 @@ EXTERN_C const IID IID_IExtraDataCanChangeEvent;
 #endif 	/* __IExtraDataCanChangeEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0147 */
+/* interface __MIDL_itf_VirtualBox_0000_0148 */
 /* [local] */ 
 
 #define COM_FORWARD_IExtraDataCanChangeEvent_GETTER_MachineId_TO(smth) HRESULT STDMETHODCALLTYPE get_MachineId (BSTR * aMachineId) { return smth get_MachineId (aMachineId); }
@@ -54255,8 +54470,8 @@ EXTERN_C const IID IID_IExtraDataCanChangeEvent;
 #define COM_FORWARD_IExtraDataCanChangeEvent_TO_BASE(base) COM_FORWARD_IExtraDataCanChangeEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0147_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0147_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0148_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0148_v0_0_s_ifspec;
 
 #ifndef __ICanShowWindowEvent_INTERFACE_DEFINED__
 #define __ICanShowWindowEvent_INTERFACE_DEFINED__
@@ -54458,7 +54673,7 @@ EXTERN_C const IID IID_ICanShowWindowEvent;
 #endif 	/* __ICanShowWindowEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0148 */
+/* interface __MIDL_itf_VirtualBox_0000_0149 */
 /* [local] */ 
 
 #define COM_FORWARD_ICanShowWindowEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -54469,8 +54684,8 @@ EXTERN_C const IID IID_ICanShowWindowEvent;
 #define COM_FORWARD_ICanShowWindowEvent_TO_BASE(base) COM_FORWARD_ICanShowWindowEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0148_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0148_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0149_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0149_v0_0_s_ifspec;
 
 #ifndef __IShowWindowEvent_INTERFACE_DEFINED__
 #define __IShowWindowEvent_INTERFACE_DEFINED__
@@ -54639,7 +54854,7 @@ EXTERN_C const IID IID_IShowWindowEvent;
 #endif 	/* __IShowWindowEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0149 */
+/* interface __MIDL_itf_VirtualBox_0000_0150 */
 /* [local] */ 
 
 #define COM_FORWARD_IShowWindowEvent_GETTER_WinId_TO(smth) HRESULT STDMETHODCALLTYPE get_WinId (LONG64 * aWinId) { return smth get_WinId (aWinId); }
@@ -54653,8 +54868,8 @@ EXTERN_C const IID IID_IShowWindowEvent;
 #define COM_FORWARD_IShowWindowEvent_TO_BASE(base) COM_FORWARD_IShowWindowEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0149_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0149_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0150_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0150_v0_0_s_ifspec;
 
 #ifndef __INATRedirectEvent_INTERFACE_DEFINED__
 #define __INATRedirectEvent_INTERFACE_DEFINED__
@@ -54891,7 +55106,7 @@ EXTERN_C const IID IID_INATRedirectEvent;
 #endif 	/* __INATRedirectEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0150 */
+/* interface __MIDL_itf_VirtualBox_0000_0151 */
 /* [local] */ 
 
 #define COM_FORWARD_INATRedirectEvent_GETTER_Slot_TO(smth) HRESULT STDMETHODCALLTYPE get_Slot (ULONG * aSlot) { return smth get_Slot (aSlot); }
@@ -54923,8 +55138,8 @@ EXTERN_C const IID IID_INATRedirectEvent;
 #define COM_FORWARD_INATRedirectEvent_TO_BASE(base) COM_FORWARD_INATRedirectEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0150_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0150_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0151_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0151_v0_0_s_ifspec;
 
 #ifndef __IHostPCIDevicePlugEvent_INTERFACE_DEFINED__
 #define __IHostPCIDevicePlugEvent_INTERFACE_DEFINED__
@@ -55121,7 +55336,7 @@ EXTERN_C const IID IID_IHostPCIDevicePlugEvent;
 #endif 	/* __IHostPCIDevicePlugEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0151 */
+/* interface __MIDL_itf_VirtualBox_0000_0152 */
 /* [local] */ 
 
 #define COM_FORWARD_IHostPCIDevicePlugEvent_GETTER_Plugged_TO(smth) HRESULT STDMETHODCALLTYPE get_Plugged (BOOL * aPlugged) { return smth get_Plugged (aPlugged); }
@@ -55141,8 +55356,8 @@ EXTERN_C const IID IID_IHostPCIDevicePlugEvent;
 #define COM_FORWARD_IHostPCIDevicePlugEvent_TO_BASE(base) COM_FORWARD_IHostPCIDevicePlugEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0151_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0151_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0152_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0152_v0_0_s_ifspec;
 
 #ifndef __IVBoxSVCAvailabilityChangedEvent_INTERFACE_DEFINED__
 #define __IVBoxSVCAvailabilityChangedEvent_INTERFACE_DEFINED__
@@ -55301,7 +55516,7 @@ EXTERN_C const IID IID_IVBoxSVCAvailabilityChangedEvent;
 #endif 	/* __IVBoxSVCAvailabilityChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0152 */
+/* interface __MIDL_itf_VirtualBox_0000_0153 */
 /* [local] */ 
 
 #define COM_FORWARD_IVBoxSVCAvailabilityChangedEvent_GETTER_Available_TO(smth) HRESULT STDMETHODCALLTYPE get_Available (BOOL * aAvailable) { return smth get_Available (aAvailable); }
@@ -55312,8 +55527,8 @@ EXTERN_C const IID IID_IVBoxSVCAvailabilityChangedEvent;
 #define COM_FORWARD_IVBoxSVCAvailabilityChangedEvent_TO_BASE(base) COM_FORWARD_IVBoxSVCAvailabilityChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0152_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0152_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0153_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0153_v0_0_s_ifspec;
 
 #ifndef __IBandwidthGroupChangedEvent_INTERFACE_DEFINED__
 #define __IBandwidthGroupChangedEvent_INTERFACE_DEFINED__
@@ -55472,7 +55687,7 @@ EXTERN_C const IID IID_IBandwidthGroupChangedEvent;
 #endif 	/* __IBandwidthGroupChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0153 */
+/* interface __MIDL_itf_VirtualBox_0000_0154 */
 /* [local] */ 
 
 #define COM_FORWARD_IBandwidthGroupChangedEvent_GETTER_BandwidthGroup_TO(smth) HRESULT STDMETHODCALLTYPE get_BandwidthGroup (IBandwidthGroup * * aBandwidthGroup) { return smth get_BandwidthGroup (aBandwidthGroup); }
@@ -55483,8 +55698,8 @@ EXTERN_C const IID IID_IBandwidthGroupChangedEvent;
 #define COM_FORWARD_IBandwidthGroupChangedEvent_TO_BASE(base) COM_FORWARD_IBandwidthGroupChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0153_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0153_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0154_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0154_v0_0_s_ifspec;
 
 #ifndef __IGuestMonitorChangedEvent_INTERFACE_DEFINED__
 #define __IGuestMonitorChangedEvent_INTERFACE_DEFINED__
@@ -55693,7 +55908,7 @@ EXTERN_C const IID IID_IGuestMonitorChangedEvent;
 #endif 	/* __IGuestMonitorChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0154 */
+/* interface __MIDL_itf_VirtualBox_0000_0155 */
 /* [local] */ 
 
 #define COM_FORWARD_IGuestMonitorChangedEvent_GETTER_ChangeType_TO(smth) HRESULT STDMETHODCALLTYPE get_ChangeType (GuestMonitorChangedEventType * aChangeType) { return smth get_ChangeType (aChangeType); }
@@ -55719,8 +55934,8 @@ EXTERN_C const IID IID_IGuestMonitorChangedEvent;
 #define COM_FORWARD_IGuestMonitorChangedEvent_TO_BASE(base) COM_FORWARD_IGuestMonitorChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0154_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0154_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0155_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0155_v0_0_s_ifspec;
 
 #ifndef __IGuestUserStateChangedEvent_INTERFACE_DEFINED__
 #define __IGuestUserStateChangedEvent_INTERFACE_DEFINED__
@@ -55909,7 +56124,7 @@ EXTERN_C const IID IID_IGuestUserStateChangedEvent;
 #endif 	/* __IGuestUserStateChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0155 */
+/* interface __MIDL_itf_VirtualBox_0000_0156 */
 /* [local] */ 
 
 #define COM_FORWARD_IGuestUserStateChangedEvent_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -55929,8 +56144,8 @@ EXTERN_C const IID IID_IGuestUserStateChangedEvent;
 #define COM_FORWARD_IGuestUserStateChangedEvent_TO_BASE(base) COM_FORWARD_IGuestUserStateChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0155_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0155_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0156_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0156_v0_0_s_ifspec;
 
 #ifndef __IStorageDeviceChangedEvent_INTERFACE_DEFINED__
 #define __IStorageDeviceChangedEvent_INTERFACE_DEFINED__
@@ -56109,7 +56324,7 @@ EXTERN_C const IID IID_IStorageDeviceChangedEvent;
 #endif 	/* __IStorageDeviceChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0156 */
+/* interface __MIDL_itf_VirtualBox_0000_0157 */
 /* [local] */ 
 
 #define COM_FORWARD_IStorageDeviceChangedEvent_GETTER_StorageDevice_TO(smth) HRESULT STDMETHODCALLTYPE get_StorageDevice (IMediumAttachment * * aStorageDevice) { return smth get_StorageDevice (aStorageDevice); }
@@ -56126,8 +56341,8 @@ EXTERN_C const IID IID_IStorageDeviceChangedEvent;
 #define COM_FORWARD_IStorageDeviceChangedEvent_TO_BASE(base) COM_FORWARD_IStorageDeviceChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0156_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0156_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0157_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0157_v0_0_s_ifspec;
 
 #ifndef __INATNetworkChangedEvent_INTERFACE_DEFINED__
 #define __INATNetworkChangedEvent_INTERFACE_DEFINED__
@@ -56286,7 +56501,7 @@ EXTERN_C const IID IID_INATNetworkChangedEvent;
 #endif 	/* __INATNetworkChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0157 */
+/* interface __MIDL_itf_VirtualBox_0000_0158 */
 /* [local] */ 
 
 #define COM_FORWARD_INATNetworkChangedEvent_GETTER_NetworkName_TO(smth) HRESULT STDMETHODCALLTYPE get_NetworkName (BSTR * aNetworkName) { return smth get_NetworkName (aNetworkName); }
@@ -56297,8 +56512,8 @@ EXTERN_C const IID IID_INATNetworkChangedEvent;
 #define COM_FORWARD_INATNetworkChangedEvent_TO_BASE(base) COM_FORWARD_INATNetworkChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0157_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0157_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0158_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0158_v0_0_s_ifspec;
 
 #ifndef __INATNetworkStartStopEvent_INTERFACE_DEFINED__
 #define __INATNetworkStartStopEvent_INTERFACE_DEFINED__
@@ -56465,7 +56680,7 @@ EXTERN_C const IID IID_INATNetworkStartStopEvent;
 #endif 	/* __INATNetworkStartStopEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0158 */
+/* interface __MIDL_itf_VirtualBox_0000_0159 */
 /* [local] */ 
 
 #define COM_FORWARD_INATNetworkStartStopEvent_GETTER_StartEvent_TO(smth) HRESULT STDMETHODCALLTYPE get_StartEvent (BOOL * aStartEvent) { return smth get_StartEvent (aStartEvent); }
@@ -56476,8 +56691,8 @@ EXTERN_C const IID IID_INATNetworkStartStopEvent;
 #define COM_FORWARD_INATNetworkStartStopEvent_TO_BASE(base) COM_FORWARD_INATNetworkStartStopEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0158_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0158_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0159_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0159_v0_0_s_ifspec;
 
 #ifndef __INATNetworkAlterEvent_INTERFACE_DEFINED__
 #define __INATNetworkAlterEvent_INTERFACE_DEFINED__
@@ -56644,7 +56859,7 @@ EXTERN_C const IID IID_INATNetworkAlterEvent;
 #endif 	/* __INATNetworkAlterEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0159 */
+/* interface __MIDL_itf_VirtualBox_0000_0160 */
 /* [local] */ 
 
 #define COM_FORWARD_INATNetworkAlterEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -56655,8 +56870,8 @@ EXTERN_C const IID IID_INATNetworkAlterEvent;
 #define COM_FORWARD_INATNetworkAlterEvent_TO_BASE(base) COM_FORWARD_INATNetworkAlterEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0159_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0159_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0160_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0160_v0_0_s_ifspec;
 
 #ifndef __INATNetworkCreationDeletionEvent_INTERFACE_DEFINED__
 #define __INATNetworkCreationDeletionEvent_INTERFACE_DEFINED__
@@ -56831,7 +57046,7 @@ EXTERN_C const IID IID_INATNetworkCreationDeletionEvent;
 #endif 	/* __INATNetworkCreationDeletionEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0160 */
+/* interface __MIDL_itf_VirtualBox_0000_0161 */
 /* [local] */ 
 
 #define COM_FORWARD_INATNetworkCreationDeletionEvent_GETTER_CreationEvent_TO(smth) HRESULT STDMETHODCALLTYPE get_CreationEvent (BOOL * aCreationEvent) { return smth get_CreationEvent (aCreationEvent); }
@@ -56842,8 +57057,8 @@ EXTERN_C const IID IID_INATNetworkCreationDeletionEvent;
 #define COM_FORWARD_INATNetworkCreationDeletionEvent_TO_BASE(base) COM_FORWARD_INATNetworkCreationDeletionEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0160_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0160_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0161_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0161_v0_0_s_ifspec;
 
 #ifndef __INATNetworkSettingEvent_INTERFACE_DEFINED__
 #define __INATNetworkSettingEvent_INTERFACE_DEFINED__
@@ -57058,7 +57273,7 @@ EXTERN_C const IID IID_INATNetworkSettingEvent;
 #endif 	/* __INATNetworkSettingEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0161 */
+/* interface __MIDL_itf_VirtualBox_0000_0162 */
 /* [local] */ 
 
 #define COM_FORWARD_INATNetworkSettingEvent_GETTER_Enabled_TO(smth) HRESULT STDMETHODCALLTYPE get_Enabled (BOOL * aEnabled) { return smth get_Enabled (aEnabled); }
@@ -57081,8 +57296,8 @@ EXTERN_C const IID IID_INATNetworkSettingEvent;
 #define COM_FORWARD_INATNetworkSettingEvent_TO_BASE(base) COM_FORWARD_INATNetworkSettingEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0161_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0161_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0162_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0162_v0_0_s_ifspec;
 
 #ifndef __INATNetworkPortForwardEvent_INTERFACE_DEFINED__
 #define __INATNetworkPortForwardEvent_INTERFACE_DEFINED__
@@ -57327,7 +57542,7 @@ EXTERN_C const IID IID_INATNetworkPortForwardEvent;
 #endif 	/* __INATNetworkPortForwardEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0162 */
+/* interface __MIDL_itf_VirtualBox_0000_0163 */
 /* [local] */ 
 
 #define COM_FORWARD_INATNetworkPortForwardEvent_GETTER_Create_TO(smth) HRESULT STDMETHODCALLTYPE get_Create (BOOL * aCreate) { return smth get_Create (aCreate); }
@@ -57359,8 +57574,8 @@ EXTERN_C const IID IID_INATNetworkPortForwardEvent;
 #define COM_FORWARD_INATNetworkPortForwardEvent_TO_BASE(base) COM_FORWARD_INATNetworkPortForwardEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0162_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0162_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0163_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0163_v0_0_s_ifspec;
 
 #ifndef __IHostNameResolutionConfigurationChangeEvent_INTERFACE_DEFINED__
 #define __IHostNameResolutionConfigurationChangeEvent_INTERFACE_DEFINED__
@@ -57519,7 +57734,7 @@ EXTERN_C const IID IID_IHostNameResolutionConfigurationChangeEvent;
 #endif 	/* __IHostNameResolutionConfigurationChangeEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0163 */
+/* interface __MIDL_itf_VirtualBox_0000_0164 */
 /* [local] */ 
 
 #define COM_FORWARD_IHostNameResolutionConfigurationChangeEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -57530,8 +57745,8 @@ EXTERN_C const IID IID_IHostNameResolutionConfigurationChangeEvent;
 #define COM_FORWARD_IHostNameResolutionConfigurationChangeEvent_TO_BASE(base) COM_FORWARD_IHostNameResolutionConfigurationChangeEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0163_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0163_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0164_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0164_v0_0_s_ifspec;
 
 #ifndef __IProgressEvent_INTERFACE_DEFINED__
 #define __IProgressEvent_INTERFACE_DEFINED__
@@ -57690,7 +57905,7 @@ EXTERN_C const IID IID_IProgressEvent;
 #endif 	/* __IProgressEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0164 */
+/* interface __MIDL_itf_VirtualBox_0000_0165 */
 /* [local] */ 
 
 #define COM_FORWARD_IProgressEvent_GETTER_ProgressId_TO(smth) HRESULT STDMETHODCALLTYPE get_ProgressId (BSTR * aProgressId) { return smth get_ProgressId (aProgressId); }
@@ -57701,8 +57916,8 @@ EXTERN_C const IID IID_IProgressEvent;
 #define COM_FORWARD_IProgressEvent_TO_BASE(base) COM_FORWARD_IProgressEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0164_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0164_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0165_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0165_v0_0_s_ifspec;
 
 #ifndef __IProgressPercentageChangedEvent_INTERFACE_DEFINED__
 #define __IProgressPercentageChangedEvent_INTERFACE_DEFINED__
@@ -57869,7 +58084,7 @@ EXTERN_C const IID IID_IProgressPercentageChangedEvent;
 #endif 	/* __IProgressPercentageChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0165 */
+/* interface __MIDL_itf_VirtualBox_0000_0166 */
 /* [local] */ 
 
 #define COM_FORWARD_IProgressPercentageChangedEvent_GETTER_Percent_TO(smth) HRESULT STDMETHODCALLTYPE get_Percent (LONG * aPercent) { return smth get_Percent (aPercent); }
@@ -57880,8 +58095,8 @@ EXTERN_C const IID IID_IProgressPercentageChangedEvent;
 #define COM_FORWARD_IProgressPercentageChangedEvent_TO_BASE(base) COM_FORWARD_IProgressPercentageChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0165_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0165_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0166_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0166_v0_0_s_ifspec;
 
 #ifndef __IProgressTaskCompletedEvent_INTERFACE_DEFINED__
 #define __IProgressTaskCompletedEvent_INTERFACE_DEFINED__
@@ -58048,7 +58263,7 @@ EXTERN_C const IID IID_IProgressTaskCompletedEvent;
 #endif 	/* __IProgressTaskCompletedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0166 */
+/* interface __MIDL_itf_VirtualBox_0000_0167 */
 /* [local] */ 
 
 #define COM_FORWARD_IProgressTaskCompletedEvent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) HRESULT STDMETHODCALLTYPE get_MidlDoesNotLikeEmptyInterfaces (BOOL * aMidlDoesNotLikeEmptyInterfaces) { return smth get_MidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
@@ -58059,8 +58274,8 @@ EXTERN_C const IID IID_IProgressTaskCompletedEvent;
 #define COM_FORWARD_IProgressTaskCompletedEvent_TO_BASE(base) COM_FORWARD_IProgressTaskCompletedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0166_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0166_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0167_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0167_v0_0_s_ifspec;
 
 #ifndef __ICursorPositionChangedEvent_INTERFACE_DEFINED__
 #define __ICursorPositionChangedEvent_INTERFACE_DEFINED__
@@ -58239,7 +58454,7 @@ EXTERN_C const IID IID_ICursorPositionChangedEvent;
 #endif 	/* __ICursorPositionChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0167 */
+/* interface __MIDL_itf_VirtualBox_0000_0168 */
 /* [local] */ 
 
 #define COM_FORWARD_ICursorPositionChangedEvent_GETTER_HasData_TO(smth) HRESULT STDMETHODCALLTYPE get_HasData (BOOL * aHasData) { return smth get_HasData (aHasData); }
@@ -58256,8 +58471,231 @@ EXTERN_C const IID IID_ICursorPositionChangedEvent;
 #define COM_FORWARD_ICursorPositionChangedEvent_TO_BASE(base) COM_FORWARD_ICursorPositionChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0167_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0167_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0168_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0168_v0_0_s_ifspec;
+
+#ifndef __IGuestAdditionsStatusChangedEvent_INTERFACE_DEFINED__
+#define __IGuestAdditionsStatusChangedEvent_INTERFACE_DEFINED__
+
+/* interface IGuestAdditionsStatusChangedEvent */
+/* [proxy][oleautomation][dual][object][uuid] */ 
+
+
+EXTERN_C const IID IID_IGuestAdditionsStatusChangedEvent;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("fd1a34ad-0b74-4e2b-ed0f-46222de8a883")
+    IGuestAdditionsStatusChangedEvent : public IEvent
+    {
+    public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Facility( 
+            /* [retval][out] */ AdditionsFacilityType *aFacility) = 0;
+        
+        virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Facility( 
+            /* [in] */ AdditionsFacilityType aFacility) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
+            /* [retval][out] */ AdditionsFacilityStatus *aStatus) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RunLevel( 
+            /* [retval][out] */ AdditionsRunLevelType *aRunLevel) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
+            /* [retval][out] */ LONG64 *aTimestamp) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IGuestAdditionsStatusChangedEventVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IGuestAdditionsStatusChangedEvent * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IGuestAdditionsStatusChangedEvent * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [retval][out] */ VBoxEventType *aType);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [retval][out] */ IEventSource **aSource);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Waitable )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [retval][out] */ BOOL *aWaitable);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetProcessed )( 
+            IGuestAdditionsStatusChangedEvent * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *WaitProcessed )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [in] */ LONG aTimeout,
+            /* [retval][out] */ BOOL *aResult);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Facility )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [retval][out] */ AdditionsFacilityType *aFacility);
+        
+        /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Facility )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [in] */ AdditionsFacilityType aFacility);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [retval][out] */ AdditionsFacilityStatus *aStatus);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunLevel )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [retval][out] */ AdditionsRunLevelType *aRunLevel);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
+            IGuestAdditionsStatusChangedEvent * This,
+            /* [retval][out] */ LONG64 *aTimestamp);
+        
+        END_INTERFACE
+    } IGuestAdditionsStatusChangedEventVtbl;
+
+    interface IGuestAdditionsStatusChangedEvent
+    {
+        CONST_VTBL struct IGuestAdditionsStatusChangedEventVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IGuestAdditionsStatusChangedEvent_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IGuestAdditionsStatusChangedEvent_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IGuestAdditionsStatusChangedEvent_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IGuestAdditionsStatusChangedEvent_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IGuestAdditionsStatusChangedEvent_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IGuestAdditionsStatusChangedEvent_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IGuestAdditionsStatusChangedEvent_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IGuestAdditionsStatusChangedEvent_get_Type(This,aType)	\
+    ( (This)->lpVtbl -> get_Type(This,aType) ) 
+
+#define IGuestAdditionsStatusChangedEvent_get_Source(This,aSource)	\
+    ( (This)->lpVtbl -> get_Source(This,aSource) ) 
+
+#define IGuestAdditionsStatusChangedEvent_get_Waitable(This,aWaitable)	\
+    ( (This)->lpVtbl -> get_Waitable(This,aWaitable) ) 
+
+#define IGuestAdditionsStatusChangedEvent_SetProcessed(This)	\
+    ( (This)->lpVtbl -> SetProcessed(This) ) 
+
+#define IGuestAdditionsStatusChangedEvent_WaitProcessed(This,aTimeout,aResult)	\
+    ( (This)->lpVtbl -> WaitProcessed(This,aTimeout,aResult) ) 
+
+
+#define IGuestAdditionsStatusChangedEvent_get_Facility(This,aFacility)	\
+    ( (This)->lpVtbl -> get_Facility(This,aFacility) ) 
+
+#define IGuestAdditionsStatusChangedEvent_put_Facility(This,aFacility)	\
+    ( (This)->lpVtbl -> put_Facility(This,aFacility) ) 
+
+#define IGuestAdditionsStatusChangedEvent_get_Status(This,aStatus)	\
+    ( (This)->lpVtbl -> get_Status(This,aStatus) ) 
+
+#define IGuestAdditionsStatusChangedEvent_get_RunLevel(This,aRunLevel)	\
+    ( (This)->lpVtbl -> get_RunLevel(This,aRunLevel) ) 
+
+#define IGuestAdditionsStatusChangedEvent_get_Timestamp(This,aTimestamp)	\
+    ( (This)->lpVtbl -> get_Timestamp(This,aTimestamp) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IGuestAdditionsStatusChangedEvent_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_VirtualBox_0000_0169 */
+/* [local] */ 
+
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO(smth) HRESULT STDMETHODCALLTYPE get_Facility (AdditionsFacilityType * aFacility) { return smth get_Facility (aFacility); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO(smth) HRESULT STDMETHODCALLTYPE put_Facility (AdditionsFacilityType aFacility) { return smth put_Facility (aFacility); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO(smth) HRESULT STDMETHODCALLTYPE get_Status (AdditionsFacilityStatus * aStatus) { return smth get_Status (aStatus); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO(smth) HRESULT STDMETHODCALLTYPE get_RunLevel (AdditionsRunLevelType * aRunLevel) { return smth get_RunLevel (aRunLevel); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO(smth) HRESULT STDMETHODCALLTYPE get_Timestamp (LONG64 * aTimestamp) { return smth get_Timestamp (aTimestamp); }
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO (base::)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO(smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Facility_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_SETTER_Facility_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Status_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_RunLevel_TO (smth) COM_FORWARD_IGuestAdditionsStatusChangedEvent_GETTER_Timestamp_TO (smth) 
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO_BASE(base) COM_FORWARD_IGuestAdditionsStatusChangedEvent_TO (base::)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0169_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0169_v0_0_s_ifspec;
 
 #ifndef __ICloudClient_INTERFACE_DEFINED__
 #define __ICloudClient_INTERFACE_DEFINED__
@@ -58602,7 +59040,7 @@ EXTERN_C const IID IID_ICloudClient;
 #endif 	/* __ICloudClient_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0168 */
+/* interface __MIDL_itf_VirtualBox_0000_0170 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudClient_GetExportLaunchParameters_TO(smth) HRESULT STDMETHODCALLTYPE GetExportLaunchParameters (BSTR * aJsonString) { return smth GetExportLaunchParameters (aJsonString); }
@@ -58616,8 +59054,8 @@ EXTERN_C const IID IID_ICloudClient;
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0168_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0168_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0170_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0170_v0_0_s_ifspec;
 
 #ifndef __ICloudProfile_INTERFACE_DEFINED__
 #define __ICloudProfile_INTERFACE_DEFINED__
@@ -58940,7 +59378,7 @@ EXTERN_C const IID IID_ICloudProfile;
 #endif 	/* __ICloudProfile_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0169 */
+/* interface __MIDL_itf_VirtualBox_0000_0171 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfile_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -58975,8 +59413,8 @@ EXTERN_C const IID IID_ICloudProfile;
 #define COM_FORWARD_ICloudProfile_TO_BASE(base) COM_FORWARD_ICloudProfile_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0169_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0169_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0171_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0171_v0_0_s_ifspec;
 
 #ifndef __ICloudProvider_INTERFACE_DEFINED__
 #define __ICloudProvider_INTERFACE_DEFINED__
@@ -59443,7 +59881,7 @@ EXTERN_C const IID IID_ICloudProvider;
 #endif 	/* __ICloudProvider_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0170 */
+/* interface __MIDL_itf_VirtualBox_0000_0172 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProvider_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -59490,8 +59928,8 @@ EXTERN_C const IID IID_ICloudProvider;
 #define COM_FORWARD_ICloudProvider_TO_BASE(base) COM_FORWARD_ICloudProvider_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0170_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0170_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0172_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0172_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderManager_INTERFACE_DEFINED__
 #define __ICloudProviderManager_INTERFACE_DEFINED__
@@ -59762,7 +60200,7 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #endif 	/* __ICloudProviderManager_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0171 */
+/* interface __MIDL_itf_VirtualBox_0000_0173 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderManager_GETTER_Providers_TO(smth) HRESULT STDMETHODCALLTYPE get_Providers (SAFEARRAY * * aProviders) { return smth get_Providers (aProviders); }
@@ -59782,8 +60220,8 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #define COM_FORWARD_ICloudProviderManager_TO_BASE(base) COM_FORWARD_ICloudProviderManager_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0171_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0171_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0173_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0173_v0_0_s_ifspec;
 
 
 #ifndef __VirtualBox_LIBRARY_DEFINED__
@@ -59808,6 +60246,8 @@ extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0171_v0_0_s_ifspec;
 #define VBOX_E_MAXIMUM_REACHED ((HRESULT)0x80BB000E)
 #define VBOX_E_GSTCTL_GUEST_ERROR ((HRESULT)0x80BB000F)
 #define VBOX_E_TIMEOUT ((HRESULT)0x80BB0010)
+
+
 
 
 
