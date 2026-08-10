@@ -1392,6 +1392,7 @@ interface IStringArray;
 interface IFormValue;
 interface IBooleanFormValue;
 interface IRangedIntegerFormValue;
+interface IRangedInteger64FormValue;
 interface IStringFormValue;
 interface IChoiceFormValue;
 interface IForm;
@@ -1612,6 +1613,7 @@ typedef interface IStringArray IStringArray;
 typedef interface IFormValue IFormValue;
 typedef interface IBooleanFormValue IBooleanFormValue;
 typedef interface IRangedIntegerFormValue IRangedIntegerFormValue;
+typedef interface IRangedInteger64FormValue IRangedInteger64FormValue;
 typedef interface IStringFormValue IStringFormValue;
 typedef interface IChoiceFormValue IChoiceFormValue;
 typedef interface IForm IForm;
@@ -2517,7 +2519,8 @@ typedef enum VirtualSystemDescriptionType
     VirtualSystemDescriptionType_CloudInstanceMetadata = 54,
     VirtualSystemDescriptionType_CloudInstanceFreeFormTags = 55,
     VirtualSystemDescriptionType_CloudImageFreeFormTags = 56,
-    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60
+    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60,
+    VirtualSystemDescriptionType_HardDiskControllerNVMe = 61
 } VirtualSystemDescriptionType;
 /* End of enum VirtualSystemDescriptionType declaration */
 #define VirtualSystemDescriptionType_T PRUint32
@@ -4479,17 +4482,18 @@ typedef enum GuestMonitorChangedEventType
 
 
 /* Start of enum FormValueType declaration */
-#define FORMVALUETYPE_IID_STR "43d794a0-7c98-11e9-a346-a36d5fa858a5"
+#define FORMVALUETYPE_IID_STR "5f10e2f2-911f-4f55-8afb-39c790f7dc42"
 #define FORMVALUETYPE_IID { \
-    0x43d794a0, 0x7c98, 0x11e9, \
-    { 0xa3, 0x46, 0xa3, 0x6d, 0x5f, 0xa8, 0x58, 0xa5 } \
+    0x5f10e2f2, 0x911f, 0x4f55, \
+    { 0x8a, 0xfb, 0x39, 0xc7, 0x90, 0xf7, 0xdc, 0x42 } \
 }
 typedef enum FormValueType
 {
     FormValueType_Boolean = 0,
     FormValueType_String = 1,
     FormValueType_Choice = 2,
-    FormValueType_RangedInteger = 3
+    FormValueType_RangedInteger = 3,
+    FormValueType_RangedInteger64 = 4
 } FormValueType;
 /* End of enum FormValueType declaration */
 #define FormValueType_T PRUint32
@@ -34473,6 +34477,169 @@ interface IRangedIntegerFormValue
 #endif /* VBOX_WITH_GLUE */
 };
 /* End of struct IRangedIntegerFormValue declaration */
+
+
+/* Start of struct IRangedInteger64FormValue declaration */
+#define IRANGEDINTEGER64FORMVALUE_IID_STR "f01e8b48-f44d-42cc-8a83-512f6a8552f1"
+#define IRANGEDINTEGER64FORMVALUE_IID { \
+    0xf01e8b48, 0xf44d, 0x42cc, \
+    { 0x8a, 0x83, 0x51, 0x2f, 0x6a, 0x85, 0x52, 0xf1 } \
+}
+/* COM compatibility */
+VBOX_EXTERN_CONST(nsIID, IID_IRangedInteger64FormValue);
+#ifndef VBOX_WITH_GLUE
+struct IRangedInteger64FormValue_vtbl
+{
+    struct IFormValue_vtbl iformvalue;
+
+    nsresult (*GetSuffix)(IRangedInteger64FormValue *pThis, PRUnichar * *suffix);
+
+    nsresult (*GetMinimum)(IRangedInteger64FormValue *pThis, PRInt64 *minimum);
+
+    nsresult (*GetMaximum)(IRangedInteger64FormValue *pThis, PRInt64 *maximum);
+
+    nsresult (*GetInternalAndReservedAttribute1IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute2IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute3IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute4IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInteger)(
+        IRangedInteger64FormValue *pThis,
+        PRInt64 * value
+    );
+
+    nsresult (*SetInteger)(
+        IRangedInteger64FormValue *pThis,
+        PRInt64 value,
+        IProgress * * progress
+    );
+
+    nsresult (*InternalAndReservedMethod1IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod2IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod3IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod4IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+};
+#else /* VBOX_WITH_GLUE */
+struct IRangedInteger64FormValueVtbl
+{
+    nsresult (*QueryInterface)(IRangedInteger64FormValue *pThis, const nsID *iid, void **resultp);
+    nsrefcnt (*AddRef)(IRangedInteger64FormValue *pThis);
+    nsrefcnt (*Release)(IRangedInteger64FormValue *pThis);
+    nsresult (*GetType)(IRangedInteger64FormValue *pThis, PRUint32 *type);
+
+    nsresult (*GetGeneration)(IRangedInteger64FormValue *pThis, PRInt32 *generation);
+
+    nsresult (*GetEnabled)(IRangedInteger64FormValue *pThis, PRBool *enabled);
+
+    nsresult (*GetVisible)(IRangedInteger64FormValue *pThis, PRBool *visible);
+
+    nsresult (*GetLabel)(IRangedInteger64FormValue *pThis, PRUnichar * *label);
+
+    nsresult (*GetDescription)(IRangedInteger64FormValue *pThis, PRUnichar * *description);
+
+    nsresult (*GetHelp)(IRangedInteger64FormValue *pThis, PRUnichar * *help);
+
+    nsresult (*GetInternalAndReservedAttribute1IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute2IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute3IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute4IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute5IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute6IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute7IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute8IFormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*InternalAndReservedMethod1IFormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod2IFormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod3IFormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod4IFormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*GetSuffix)(IRangedInteger64FormValue *pThis, PRUnichar * *suffix);
+
+    nsresult (*GetMinimum)(IRangedInteger64FormValue *pThis, PRInt64 *minimum);
+
+    nsresult (*GetMaximum)(IRangedInteger64FormValue *pThis, PRInt64 *maximum);
+
+    nsresult (*GetInternalAndReservedAttribute1IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute2IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute3IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute4IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInteger)(
+        IRangedInteger64FormValue *pThis,
+        PRInt64 * value
+    );
+
+    nsresult (*SetInteger)(
+        IRangedInteger64FormValue *pThis,
+        PRInt64 value,
+        IProgress * * progress
+    );
+
+    nsresult (*InternalAndReservedMethod1IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod2IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod3IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+    nsresult (*InternalAndReservedMethod4IRangedInteger64FormValue)(IRangedInteger64FormValue *pThis);
+
+};
+#define IRangedInteger64FormValue_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
+#define IRangedInteger64FormValue_AddRef(p) ((p)->lpVtbl->AddRef(p))
+#define IRangedInteger64FormValue_Release(p) ((p)->lpVtbl->Release(p))
+#define IRangedInteger64FormValue_get_Type(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IRangedInteger64FormValue_GetType(p, aType) ((p)->lpVtbl->GetType(p, aType))
+#define IRangedInteger64FormValue_get_Generation(p, aGeneration) ((p)->lpVtbl->GetGeneration(p, aGeneration))
+#define IRangedInteger64FormValue_GetGeneration(p, aGeneration) ((p)->lpVtbl->GetGeneration(p, aGeneration))
+#define IRangedInteger64FormValue_get_Enabled(p, aEnabled) ((p)->lpVtbl->GetEnabled(p, aEnabled))
+#define IRangedInteger64FormValue_GetEnabled(p, aEnabled) ((p)->lpVtbl->GetEnabled(p, aEnabled))
+#define IRangedInteger64FormValue_get_Visible(p, aVisible) ((p)->lpVtbl->GetVisible(p, aVisible))
+#define IRangedInteger64FormValue_GetVisible(p, aVisible) ((p)->lpVtbl->GetVisible(p, aVisible))
+#define IRangedInteger64FormValue_get_Label(p, aLabel) ((p)->lpVtbl->GetLabel(p, aLabel))
+#define IRangedInteger64FormValue_GetLabel(p, aLabel) ((p)->lpVtbl->GetLabel(p, aLabel))
+#define IRangedInteger64FormValue_get_Description(p, aDescription) ((p)->lpVtbl->GetDescription(p, aDescription))
+#define IRangedInteger64FormValue_GetDescription(p, aDescription) ((p)->lpVtbl->GetDescription(p, aDescription))
+#define IRangedInteger64FormValue_get_Help(p, aHelp) ((p)->lpVtbl->GetHelp(p, aHelp))
+#define IRangedInteger64FormValue_GetHelp(p, aHelp) ((p)->lpVtbl->GetHelp(p, aHelp))
+#define IRangedInteger64FormValue_get_Suffix(p, aSuffix) ((p)->lpVtbl->GetSuffix(p, aSuffix))
+#define IRangedInteger64FormValue_GetSuffix(p, aSuffix) ((p)->lpVtbl->GetSuffix(p, aSuffix))
+#define IRangedInteger64FormValue_get_Minimum(p, aMinimum) ((p)->lpVtbl->GetMinimum(p, aMinimum))
+#define IRangedInteger64FormValue_GetMinimum(p, aMinimum) ((p)->lpVtbl->GetMinimum(p, aMinimum))
+#define IRangedInteger64FormValue_get_Maximum(p, aMaximum) ((p)->lpVtbl->GetMaximum(p, aMaximum))
+#define IRangedInteger64FormValue_GetMaximum(p, aMaximum) ((p)->lpVtbl->GetMaximum(p, aMaximum))
+#define IRangedInteger64FormValue_GetInteger(p, aValue) ((p)->lpVtbl->GetInteger(p, aValue))
+#define IRangedInteger64FormValue_SetInteger(p, aValue, aProgress) ((p)->lpVtbl->SetInteger(p, aValue, aProgress))
+#endif /* VBOX_WITH_GLUE */
+
+interface IRangedInteger64FormValue
+{
+#ifndef VBOX_WITH_GLUE
+    struct IRangedInteger64FormValue_vtbl *vtbl;
+#else /* VBOX_WITH_GLUE */
+    CONST_VTBL struct IRangedInteger64FormValueVtbl *lpVtbl;
+#endif /* VBOX_WITH_GLUE */
+};
+/* End of struct IRangedInteger64FormValue declaration */
 
 
 /* Start of struct IStringFormValue declaration */

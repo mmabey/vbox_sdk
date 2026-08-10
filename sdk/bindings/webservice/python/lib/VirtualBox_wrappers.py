@@ -29036,6 +29036,121 @@ class IRangedIntegerFormValue(IFormValue):
          'minimum':[getMinimum,None],
          'maximum':[getMaximum,None]}
 
+class IRangedInteger64FormValue(IFormValue):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IRangedInteger64FormValue(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IRangedInteger64FormValue._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IFormValue.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IRangedInteger64FormValue._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getInteger(self):
+       req=IRangedInteger64FormValue_getIntegerRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IRangedInteger64FormValue_getInteger(req)
+       
+       return Long(self.mgr,val._returnval)
+
+
+   def setInteger(self, _arg_value):
+       req=IRangedInteger64FormValue_setIntegerRequestMsg()
+       req._this=self.handle
+       
+       req._value=_arg_value
+       val=self.mgr.getPort().IRangedInteger64FormValue_setInteger(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
+   def getSuffix(self):
+       req=IRangedInteger64FormValue_getSuffixRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRangedInteger64FormValue_getSuffix(req)
+       return String(self.mgr,val._returnval)
+   def getMinimum(self):
+       req=IRangedInteger64FormValue_getMinimumRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRangedInteger64FormValue_getMinimum(req)
+       return Long(self.mgr,val._returnval)
+   def getMaximum(self):
+       req=IRangedInteger64FormValue_getMaximumRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRangedInteger64FormValue_getMaximum(req)
+       return Long(self.mgr,val._returnval)
+
+
+   _Attrs_={         'suffix':[getSuffix,None],
+         'minimum':[getMinimum,None],
+         'maximum':[getMaximum,None]}
+
 class IStringFormValue(IFormValue):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -34192,7 +34307,7 @@ class VirtualSystemDescriptionType:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance',37:'CloudInstanceId',38:'CloudImageId',39:'CloudInstanceState',40:'CloudImageState',41:'CloudInstanceDisplayName',42:'CloudImageDisplayName',43:'CloudOCILaunchMode',44:'CloudPrivateIP',45:'CloudBootVolumeId',46:'CloudOCIVCNCompartment',47:'CloudOCISubnetCompartment',48:'CloudPublicSSHKey',49:'BootingFirmware',50:'CloudInitScriptPath',51:'CloudCompartmentId',52:'CloudShapeCpus',53:'CloudShapeMemory',54:'CloudInstanceMetadata',55:'CloudInstanceFreeFormTags',56:'CloudImageFreeFormTags',60:'HardDiskControllerVirtioSCSI'}
+   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance',37:'CloudInstanceId',38:'CloudImageId',39:'CloudInstanceState',40:'CloudImageState',41:'CloudInstanceDisplayName',42:'CloudImageDisplayName',43:'CloudOCILaunchMode',44:'CloudPrivateIP',45:'CloudBootVolumeId',46:'CloudOCIVCNCompartment',47:'CloudOCISubnetCompartment',48:'CloudPublicSSHKey',49:'BootingFirmware',50:'CloudInitScriptPath',51:'CloudCompartmentId',52:'CloudShapeCpus',53:'CloudShapeMemory',54:'CloudInstanceMetadata',55:'CloudInstanceFreeFormTags',56:'CloudImageFreeFormTags',60:'HardDiskControllerVirtioSCSI',61:'HardDiskControllerNVMe'}
    _ValueMap={
               'Ignore':1,
               'OS':2,
@@ -34250,7 +34365,8 @@ class VirtualSystemDescriptionType:
               'CloudInstanceMetadata':54,
               'CloudInstanceFreeFormTags':55,
               'CloudImageFreeFormTags':56,
-              'HardDiskControllerVirtioSCSI':60}
+              'HardDiskControllerVirtioSCSI':60,
+              'HardDiskControllerNVMe':61}
 
    Ignore=1
    OS=2
@@ -34309,6 +34425,7 @@ class VirtualSystemDescriptionType:
    CloudInstanceFreeFormTags=55
    CloudImageFreeFormTags=56
    HardDiskControllerVirtioSCSI=60
+   HardDiskControllerNVMe=61
 
 class VirtualSystemDescriptionValueType:
    def __init__(self,mgr,handle):
@@ -39282,17 +39399,19 @@ class FormValueType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Boolean',1:'String',2:'Choice',3:'RangedInteger'}
+   _NameMap={0:'Boolean',1:'String',2:'Choice',3:'RangedInteger',4:'RangedInteger64'}
    _ValueMap={
               'Boolean':0,
               'String':1,
               'Choice':2,
-              'RangedInteger':3}
+              'RangedInteger':3,
+              'RangedInteger64':4}
 
    Boolean=0
    String=1
    Choice=2
    RangedInteger=3
+   RangedInteger64=4
 
 class CloudMachineState:
    def __init__(self,mgr,handle):

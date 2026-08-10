@@ -18,7 +18,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Oct 12 16:18:44 2023
+/* at Mon Jan 15 16:36:42 2024
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\7.0-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -692,6 +692,9 @@ MIDL_DEFINE_GUID(IID, IID_IBooleanFormValue,0x4f4adcf6,0x3e87,0x11e9,0x8a,0xf2,0
 
 
 MIDL_DEFINE_GUID(IID, IID_IRangedIntegerFormValue,0xb31c4052,0x7bdc,0x11e9,0x8b,0xc2,0x8f,0xfd,0xb8,0xb1,0x92,0x19);
+
+
+MIDL_DEFINE_GUID(IID, IID_IRangedInteger64FormValue,0xf01e8b48,0xf44d,0x42cc,0x8a,0x83,0x51,0x2f,0x6a,0x85,0x52,0xf1);
 
 
 MIDL_DEFINE_GUID(IID, IID_IStringFormValue,0xcb6f0f2c,0x8384,0x11e9,0x92,0x1d,0x8b,0x98,0x4e,0x28,0xa6,0x86);

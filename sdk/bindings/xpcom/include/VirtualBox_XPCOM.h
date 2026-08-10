@@ -576,6 +576,8 @@ class IBooleanFormValue; /* forward declaration */
 
 class IRangedIntegerFormValue; /* forward declaration */
 
+class IRangedInteger64FormValue; /* forward declaration */
+
 class IStringFormValue; /* forward declaration */
 
 class IChoiceFormValue; /* forward declaration */
@@ -4605,6 +4607,8 @@ class NS_NO_VTABLE VirtualSystemDescriptionType {
 
   enum { HardDiskControllerVirtioSCSI = 60U };
 
+  enum { HardDiskControllerNVMe = 61U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -4711,6 +4715,7 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudInstanceFreeFormTags VirtualSystemDescriptionType::CloudInstanceFreeFormTags
 # define VirtualSystemDescriptionType_CloudImageFreeFormTags VirtualSystemDescriptionType::CloudImageFreeFormTags
 # define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
+# define VirtualSystemDescriptionType_HardDiskControllerNVMe VirtualSystemDescriptionType::HardDiskControllerNVMe
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -4770,6 +4775,7 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudInstanceFreeFormTags = VirtualSystemDescriptionType::CloudInstanceFreeFormTags,
     VirtualSystemDescriptionType_CloudImageFreeFormTags = VirtualSystemDescriptionType::CloudImageFreeFormTags,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
+    VirtualSystemDescriptionType_HardDiskControllerNVMe = VirtualSystemDescriptionType::HardDiskControllerNVMe,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize
@@ -14452,11 +14458,11 @@ AssertCompileSize(GuestMonitorChangedEventType_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    FormValueType */
-#define FORMVALUETYPE_IID_STR "43d794a0-7c98-11e9-a346-a36d5fa858a5"
+#define FORMVALUETYPE_IID_STR "5f10e2f2-911f-4f55-8afb-39c790f7dc42"
 
 #define FORMVALUETYPE_IID \
-  {0x43d794a0, 0x7c98, 0x11e9, \
-    { 0xa3, 0x46, 0xa3, 0x6d, 0x5f, 0xa8, 0x58, 0xa5 }}
+  {0x5f10e2f2, 0x911f, 0x4f55, \
+    { 0x8a, 0xfb, 0x39, 0xc7, 0x90, 0xf7, 0xdc, 0x42 }}
 
 class NS_NO_VTABLE FormValueType {
  public: 
@@ -14470,6 +14476,8 @@ class NS_NO_VTABLE FormValueType {
   enum { Choice = 2U };
 
   enum { RangedInteger = 3U };
+
+  enum { RangedInteger64 = 4U };
 
 };
 
@@ -14524,12 +14532,14 @@ typedef PRUint32 FormValueType_T;
 # define FormValueType_String FormValueType::String
 # define FormValueType_Choice FormValueType::Choice
 # define FormValueType_RangedInteger FormValueType::RangedInteger
+# define FormValueType_RangedInteger64 FormValueType::RangedInteger64
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum FormValueType_T {
     FormValueType_Boolean = FormValueType::Boolean,
     FormValueType_String = FormValueType::String,
     FormValueType_Choice = FormValueType::Choice,
     FormValueType_RangedInteger = FormValueType::RangedInteger,
+    FormValueType_RangedInteger64 = FormValueType::RangedInteger64,
     FormValueType_32BitHack = 0x7fffffff
 } FormValueType_T;
 # ifdef AssertCompileSize
@@ -66505,6 +66515,241 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IRangedIntegerFormValue()
 #define COM_FORWARD_IRangedIntegerFormValue_TO_BASE(base) COM_FORWARD_IRangedIntegerFormValue_TO (base::)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IRangedIntegerFormValue;
+
+/* starting interface:    IRangedInteger64FormValue */
+#define IRANGEDINTEGER64FORMVALUE_IID_STR "f01e8b48-f44d-42cc-8a83-512f6a8552f1"
+
+#define IRANGEDINTEGER64FORMVALUE_IID \
+  {0xf01e8b48, 0xf44d, 0x42cc, \
+    { 0x8a, 0x83, 0x51, 0x2f, 0x6a, 0x85, 0x52, 0xf1 }}
+
+class NS_NO_VTABLE IRangedInteger64FormValue : public IFormValue {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IRANGEDINTEGER64FORMVALUE_IID)
+
+  /* readonly attribute wstring suffix; */
+  NS_IMETHOD GetSuffix(PRUnichar * *aSuffix) = 0;
+
+  /* readonly attribute long long minimum; */
+  NS_IMETHOD GetMinimum(PRInt64 *aMinimum) = 0;
+
+  /* readonly attribute long long maximum; */
+  NS_IMETHOD GetMaximum(PRInt64 *aMaximum) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IRangedInteger64FormValue; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute1IRangedInteger64FormValue) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IRangedInteger64FormValue; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute2IRangedInteger64FormValue) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IRangedInteger64FormValue; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute3IRangedInteger64FormValue) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IRangedInteger64FormValue; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute4IRangedInteger64FormValue) = 0;
+
+  /* void getInteger ([retval] out long long value); */
+  NS_IMETHOD GetInteger(PRInt64 *value) = 0;
+
+  /* void setInteger (in long long value, [retval] out IProgress progress); */
+  NS_IMETHOD SetInteger(PRInt64 value, IProgress **progress) = 0;
+
+  /* void InternalAndReservedMethod1IRangedInteger64FormValue (); */
+  NS_IMETHOD InternalAndReservedMethod1IRangedInteger64FormValue(void) = 0;
+
+  /* void InternalAndReservedMethod2IRangedInteger64FormValue (); */
+  NS_IMETHOD InternalAndReservedMethod2IRangedInteger64FormValue(void) = 0;
+
+  /* void InternalAndReservedMethod3IRangedInteger64FormValue (); */
+  NS_IMETHOD InternalAndReservedMethod3IRangedInteger64FormValue(void) = 0;
+
+  /* void InternalAndReservedMethod4IRangedInteger64FormValue (); */
+  NS_IMETHOD InternalAndReservedMethod4IRangedInteger64FormValue(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IRANGEDINTEGER64FORMVALUE \
+  NS_IMETHOD GetSuffix(PRUnichar * *aSuffix); \
+  NS_IMETHOD GetMinimum(PRInt64 *aMinimum); \
+  NS_IMETHOD GetMaximum(PRInt64 *aMaximum); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute1IRangedInteger64FormValue); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute2IRangedInteger64FormValue); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute3IRangedInteger64FormValue); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute4IRangedInteger64FormValue); \
+  NS_IMETHOD GetInteger(PRInt64 *value); \
+  NS_IMETHOD SetInteger(PRInt64 value, IProgress **progress); \
+  NS_IMETHOD InternalAndReservedMethod1IRangedInteger64FormValue(void); \
+  NS_IMETHOD InternalAndReservedMethod2IRangedInteger64FormValue(void); \
+  NS_IMETHOD InternalAndReservedMethod3IRangedInteger64FormValue(void); \
+  NS_IMETHOD InternalAndReservedMethod4IRangedInteger64FormValue(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IRANGEDINTEGER64FORMVALUE(_to) \
+  NS_IMETHOD GetSuffix(PRUnichar * *aSuffix) { return _to GetSuffix(aSuffix); } \
+  NS_IMETHOD GetMinimum(PRInt64 *aMinimum) { return _to GetMinimum(aMinimum); } \
+  NS_IMETHOD GetMaximum(PRInt64 *aMaximum) { return _to GetMaximum(aMaximum); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute1IRangedInteger64FormValue) { return _to GetInternalAndReservedAttribute1IRangedInteger64FormValue(aInternalAndReservedAttribute1IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute2IRangedInteger64FormValue) { return _to GetInternalAndReservedAttribute2IRangedInteger64FormValue(aInternalAndReservedAttribute2IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute3IRangedInteger64FormValue) { return _to GetInternalAndReservedAttribute3IRangedInteger64FormValue(aInternalAndReservedAttribute3IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute4IRangedInteger64FormValue) { return _to GetInternalAndReservedAttribute4IRangedInteger64FormValue(aInternalAndReservedAttribute4IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInteger(PRInt64 *value) { return _to GetInteger(value); } \
+  NS_IMETHOD SetInteger(PRInt64 value, IProgress **progress) { return _to SetInteger(value, progress); } \
+  NS_IMETHOD InternalAndReservedMethod1IRangedInteger64FormValue(void) { return _to InternalAndReservedMethod1IRangedInteger64FormValue(); } \
+  NS_IMETHOD InternalAndReservedMethod2IRangedInteger64FormValue(void) { return _to InternalAndReservedMethod2IRangedInteger64FormValue(); } \
+  NS_IMETHOD InternalAndReservedMethod3IRangedInteger64FormValue(void) { return _to InternalAndReservedMethod3IRangedInteger64FormValue(); } \
+  NS_IMETHOD InternalAndReservedMethod4IRangedInteger64FormValue(void) { return _to InternalAndReservedMethod4IRangedInteger64FormValue(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IRANGEDINTEGER64FORMVALUE(_to) \
+  NS_IMETHOD GetSuffix(PRUnichar * *aSuffix) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSuffix(aSuffix); } \
+  NS_IMETHOD GetMinimum(PRInt64 *aMinimum) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMinimum(aMinimum); } \
+  NS_IMETHOD GetMaximum(PRInt64 *aMaximum) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMaximum(aMaximum); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute1IRangedInteger64FormValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IRangedInteger64FormValue(aInternalAndReservedAttribute1IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute2IRangedInteger64FormValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IRangedInteger64FormValue(aInternalAndReservedAttribute2IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute3IRangedInteger64FormValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IRangedInteger64FormValue(aInternalAndReservedAttribute3IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute4IRangedInteger64FormValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IRangedInteger64FormValue(aInternalAndReservedAttribute4IRangedInteger64FormValue); } \
+  NS_IMETHOD GetInteger(PRInt64 *value) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInteger(value); } \
+  NS_IMETHOD SetInteger(PRInt64 value, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetInteger(value, progress); } \
+  NS_IMETHOD InternalAndReservedMethod1IRangedInteger64FormValue(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IRangedInteger64FormValue(); } \
+  NS_IMETHOD InternalAndReservedMethod2IRangedInteger64FormValue(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IRangedInteger64FormValue(); } \
+  NS_IMETHOD InternalAndReservedMethod3IRangedInteger64FormValue(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IRangedInteger64FormValue(); } \
+  NS_IMETHOD InternalAndReservedMethod4IRangedInteger64FormValue(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IRangedInteger64FormValue(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IRangedInteger64FormValue
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IRANGEDINTEGER64FORMVALUE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IRangedInteger64FormValue)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring suffix; */
+NS_IMETHODIMP _MYCLASS_::GetSuffix(PRUnichar * *aSuffix)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long long minimum; */
+NS_IMETHODIMP _MYCLASS_::GetMinimum(PRInt64 *aMinimum)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long long maximum; */
+NS_IMETHODIMP _MYCLASS_::GetMaximum(PRInt64 *aMaximum)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IRangedInteger64FormValue; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute1IRangedInteger64FormValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IRangedInteger64FormValue; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute2IRangedInteger64FormValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3IRangedInteger64FormValue; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute3IRangedInteger64FormValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4IRangedInteger64FormValue; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IRangedInteger64FormValue(PRUint32 *aInternalAndReservedAttribute4IRangedInteger64FormValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getInteger ([retval] out long long value); */
+NS_IMETHODIMP _MYCLASS_::GetInteger(PRInt64 *value)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setInteger (in long long value, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::SetInteger(PRInt64 value, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1IRangedInteger64FormValue (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IRangedInteger64FormValue()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2IRangedInteger64FormValue (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IRangedInteger64FormValue()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod3IRangedInteger64FormValue (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3IRangedInteger64FormValue()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod4IRangedInteger64FormValue (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IRangedInteger64FormValue()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO(smth) NS_IMETHOD GetSuffix (PRUnichar * * aSuffix) { return smth GetSuffix (aSuffix); }
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO(smth) NS_IMETHOD GetMinimum (PRInt64 * aMinimum) { return smth GetMinimum (aMinimum); }
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO(smth) NS_IMETHOD GetMaximum (PRInt64 * aMaximum) { return smth GetMaximum (aMaximum); }
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO(smth) NS_IMETHOD GetInteger (PRInt64 * aValue) { return smth GetInteger (aValue); }
+#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO(smth) NS_IMETHOD SetInteger (PRInt64 aValue, IProgress * * aProgress) { return smth SetInteger (aValue, aProgress); }
+#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_TO(smth) NS_FORWARD_IRANGEDINTEGER64FORMVALUE (smth)
+#define COM_FORWARD_IRangedInteger64FormValue_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IRangedInteger64FormValue;
 
 /* starting interface:    IStringFormValue */
 #define ISTRINGFORMVALUE_IID_STR "cb6f0f2c-8384-11e9-921d-8b984e28a686"

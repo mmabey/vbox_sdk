@@ -232,6 +232,7 @@ interface IStringArray;
 interface IFormValue;
 interface IBooleanFormValue;
 interface IRangedIntegerFormValue;
+interface IRangedInteger64FormValue;
 interface IStringFormValue;
 interface IChoiceFormValue;
 interface IForm;
@@ -1135,7 +1136,8 @@ typedef enum
     VirtualSystemDescriptionType_CloudInstanceMetadata = 54,
     VirtualSystemDescriptionType_CloudInstanceFreeFormTags = 55,
     VirtualSystemDescriptionType_CloudImageFreeFormTags = 56,
-    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60
+    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60,
+    VirtualSystemDescriptionType_HardDiskControllerNVMe = 61
 } VirtualSystemDescriptionType;
 
 /* cross-platform type name for VirtualSystemDescriptionType */
@@ -3099,7 +3101,7 @@ cpp_quote("#define GuestMonitorChangedEventType_T GuestMonitorChangedEventType")
 
 
 [
-    uuid(43d794a0-7c98-11e9-a346-a36d5fa858a5),
+    uuid(5f10e2f2-911f-4f55-8afb-39c790f7dc42),
     v1_enum
 ]
 typedef enum 
@@ -3107,7 +3109,8 @@ typedef enum
     FormValueType_Boolean = 0,
     FormValueType_String = 1,
     FormValueType_Choice = 2,
-    FormValueType_RangedInteger = 3
+    FormValueType_RangedInteger = 3,
+    FormValueType_RangedInteger64 = 4
 } FormValueType;
 
 /* cross-platform type name for FormValueType */
@@ -19408,6 +19411,68 @@ cpp_quote("#define COM_FORWARD_IRangedIntegerFormValue_TO_OBJ(obj) COM_FORWARD_I
 cpp_quote("#define COM_FORWARD_IRangedIntegerFormValue_TO_BASE(base) COM_FORWARD_IRangedIntegerFormValue_TO (base::)")
 
 [
+    uuid(f01e8b48-f44d-42cc-8a83-512f6a8552f1),
+    object,
+    dual,
+    oleautomation
+    , proxy
+]
+interface IRangedInteger64FormValue : IFormValue
+{
+    [propget] HRESULT Suffix ([out, retval] BSTR * aSuffix);
+
+    [propget] HRESULT Minimum ([out, retval] LONG64 * aMinimum);
+
+    [propget] HRESULT Maximum ([out, retval] LONG64 * aMaximum);
+
+    [propget] HRESULT InternalAndReservedAttribute1IRangedInteger64FormValue ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute2IRangedInteger64FormValue ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute3IRangedInteger64FormValue ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute4IRangedInteger64FormValue ([out, retval] ULONG *aReserved);
+
+    HRESULT GetInteger (
+        [out, retval] LONG64 * aValue
+    );
+
+    HRESULT SetInteger (
+        [in] LONG64 aValue,
+        [out, retval] IProgress * * aProgress
+    );
+
+    HRESULT InternalAndReservedMethod1IRangedInteger64FormValue();
+
+    HRESULT InternalAndReservedMethod2IRangedInteger64FormValue();
+
+    HRESULT InternalAndReservedMethod3IRangedInteger64FormValue();
+
+    HRESULT InternalAndReservedMethod4IRangedInteger64FormValue();
+
+}; /* interface IRangedInteger64FormValue */
+
+/* Interface implementation forwarder macro */
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO(smth) HRESULT STDMETHODCALLTYPE get_Suffix (BSTR * aSuffix) { return smth get_Suffix (aSuffix); }")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO(smth) HRESULT STDMETHODCALLTYPE get_Minimum (LONG64 * aMinimum) { return smth get_Minimum (aMinimum); }")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO(smth) HRESULT STDMETHODCALLTYPE get_Maximum (LONG64 * aMaximum) { return smth get_Maximum (aMaximum); }")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO(smth) HRESULT STDMETHODCALLTYPE GetInteger (LONG64 * aValue) { return smth GetInteger (aValue); }")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO(smth) HRESULT STDMETHODCALLTYPE SetInteger (LONG64 aValue, IProgress * * aProgress) { return smth SetInteger (aValue, aProgress); }")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO (base::)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_TO(smth) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO (smth) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO (smth) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO (smth) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO (smth) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IRangedInteger64FormValue_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_TO (base::)")
+
+[
     uuid(cb6f0f2c-8384-11e9-921d-8b984e28a686),
     object,
     dual,
@@ -20940,6 +21005,7 @@ interface IStringArray;
 interface IFormValue;
 interface IBooleanFormValue;
 interface IRangedIntegerFormValue;
+interface IRangedInteger64FormValue;
 interface IStringFormValue;
 interface IChoiceFormValue;
 interface IForm;

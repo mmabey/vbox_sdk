@@ -1083,6 +1083,7 @@
             CloudInstanceFreeFormTags: 55 -
             CloudImageFreeFormTags: 56 -
             HardDiskControllerVirtioSCSI: 60 -
+            HardDiskControllerNVMe: 61 -
             -->
       <xsd:simpleType name="VirtualSystemDescriptionType">
         <xsd:restriction base="xsd:string">
@@ -1143,6 +1144,7 @@
           <xsd:enumeration value="CloudInstanceFreeFormTags"/>
           <xsd:enumeration value="CloudImageFreeFormTags"/>
           <xsd:enumeration value="HardDiskControllerVirtioSCSI"/>
+          <xsd:enumeration value="HardDiskControllerNVMe"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: VirtualSystemDescriptionValueType -
@@ -3000,6 +3002,7 @@
             String: 1 -
             Choice: 2 -
             RangedInteger: 3 -
+            RangedInteger64: 4 -
             -->
       <xsd:simpleType name="FormValueType">
         <xsd:restriction base="xsd:string">
@@ -3007,6 +3010,7 @@
           <xsd:enumeration value="String"/>
           <xsd:enumeration value="Choice"/>
           <xsd:enumeration value="RangedInteger"/>
+          <xsd:enumeration value="RangedInteger64"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: CloudMachineState -
@@ -29104,6 +29108,83 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <!--Interface IRangedInteger64FormValue-->
+      <!-- readonly attribute IRangedInteger64FormValue::suffix-->
+      <xsd:element name="IRangedInteger64FormValue_getSuffix">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRangedInteger64FormValue_getSuffixResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute IRangedInteger64FormValue::minimum-->
+      <xsd:element name="IRangedInteger64FormValue_getMinimum">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRangedInteger64FormValue_getMinimumResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute IRangedInteger64FormValue::maximum-->
+      <xsd:element name="IRangedInteger64FormValue_getMaximum">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRangedInteger64FormValue_getMaximumResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method IRangedInteger64FormValue::getInteger-->
+      <xsd:element name="IRangedInteger64FormValue_getInteger">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRangedInteger64FormValue_getIntegerResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method IRangedInteger64FormValue::setInteger-->
+      <xsd:element name="IRangedInteger64FormValue_setInteger">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="value" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IRangedInteger64FormValue_setIntegerResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <!--Interface IStringFormValue-->
       <!-- readonly attribute IStringFormValue::multiline-->
       <xsd:element name="IStringFormValue_getMultiline">
@@ -43666,6 +43747,46 @@
   </wsdl:message>
   <!--
         *************************************
+        messages for interface IRangedInteger64FormValue
+        *************************************
+      -->
+  <!-- readonly attribute IRangedInteger64FormValue::suffix-->
+  <wsdl:message name="IRangedInteger64FormValue_getSuffixRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getSuffix"/>
+  </wsdl:message>
+  <wsdl:message name="IRangedInteger64FormValue_getSuffixResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getSuffixResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute IRangedInteger64FormValue::minimum-->
+  <wsdl:message name="IRangedInteger64FormValue_getMinimumRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getMinimum"/>
+  </wsdl:message>
+  <wsdl:message name="IRangedInteger64FormValue_getMinimumResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getMinimumResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute IRangedInteger64FormValue::maximum-->
+  <wsdl:message name="IRangedInteger64FormValue_getMaximumRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getMaximum"/>
+  </wsdl:message>
+  <wsdl:message name="IRangedInteger64FormValue_getMaximumResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getMaximumResponse"/>
+  </wsdl:message>
+  <!-- method IRangedInteger64FormValue::getInteger-->
+  <wsdl:message name="IRangedInteger64FormValue_getIntegerRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getInteger"/>
+  </wsdl:message>
+  <wsdl:message name="IRangedInteger64FormValue_getIntegerResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_getIntegerResponse"/>
+  </wsdl:message>
+  <!-- method IRangedInteger64FormValue::setInteger-->
+  <wsdl:message name="IRangedInteger64FormValue_setIntegerRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_setInteger"/>
+  </wsdl:message>
+  <wsdl:message name="IRangedInteger64FormValue_setIntegerResultMsg">
+    <wsdl:part name="parameters" element="vbox:IRangedInteger64FormValue_setIntegerResponse"/>
+  </wsdl:message>
+  <!--
+        *************************************
         messages for interface IStringFormValue
         *************************************
       -->
@@ -55870,6 +55991,41 @@
     <wsdl:operation name="IRangedIntegerFormValue_setInteger">
       <wsdl:input message="vbox:IRangedIntegerFormValue_setIntegerRequestMsg"/>
       <wsdl:output message="vbox:IRangedIntegerFormValue_setIntegerResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <!--
+          *************************************
+          operations in portType for interface IRangedInteger64FormValue
+          *************************************
+        -->
+    <wsdl:operation name="IRangedInteger64FormValue_getSuffix">
+      <wsdl:input message="vbox:IRangedInteger64FormValue_getSuffixRequestMsg"/>
+      <wsdl:output message="vbox:IRangedInteger64FormValue_getSuffixResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_getMinimum">
+      <wsdl:input message="vbox:IRangedInteger64FormValue_getMinimumRequestMsg"/>
+      <wsdl:output message="vbox:IRangedInteger64FormValue_getMinimumResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_getMaximum">
+      <wsdl:input message="vbox:IRangedInteger64FormValue_getMaximumRequestMsg"/>
+      <wsdl:output message="vbox:IRangedInteger64FormValue_getMaximumResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_getInteger">
+      <wsdl:input message="vbox:IRangedInteger64FormValue_getIntegerRequestMsg"/>
+      <wsdl:output message="vbox:IRangedInteger64FormValue_getIntegerResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_setInteger">
+      <wsdl:input message="vbox:IRangedInteger64FormValue_setIntegerRequestMsg"/>
+      <wsdl:output message="vbox:IRangedInteger64FormValue_setIntegerResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -83414,6 +83570,86 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="IRangedIntegerFormValue_setInteger">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <!--
+          *************************************
+          operations in portType for interface IRangedInteger64FormValue
+          *************************************
+        -->
+    <wsdl:operation name="IRangedInteger64FormValue_getSuffix">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_getMinimum">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_getMaximum">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_getInteger">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IRangedInteger64FormValue_setInteger">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

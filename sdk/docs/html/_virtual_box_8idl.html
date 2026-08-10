@@ -649,6 +649,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_ranged_integer_form_value.html">IRangedIntegerFormValue</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_ranged_integer64_form_value.html">IRangedInteger64FormValue</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_string_form_value.html">IStringFormValue</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_choice_form_value.html">IChoiceFormValue</a></td></tr>
@@ -1372,6 +1374,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="_virtual_box_8idl.html#aebba9db8464791c40ede1179e8fa1d18a6289d9e51e692e15cfeaf9d91e7e6a97">VirtualSystemDescriptionType_CloudImageFreeFormTags</a> = 56
 , <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#aebba9db8464791c40ede1179e8fa1d18aeab3aa619a85d6eeef4d67bc28e67dc8">VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI</a> = 60
+, <a class="el" href="_virtual_box_8idl.html#aebba9db8464791c40ede1179e8fa1d18ad1f3b397083e79027bd8a642ee1ec8cf">VirtualSystemDescriptionType_HardDiskControllerNVMe</a> = 61
 <br />
  }</td></tr>
 <tr class="memdesc:aebba9db8464791c40ede1179e8fa1d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used with <a class="el" href="interface_i_virtual_system_description.html">IVirtualSystemDescription</a><b></b> to describe the type of a configuration value.  <a href="_virtual_box_8idl.html#aebba9db8464791c40ede1179e8fa1d18">More...</a><br /></td></tr>
@@ -2475,10 +2478,14 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a04cd7a0c3ff09364b134a78244fdb030"><td class="mdescLeft">&#160;</td><td class="mdescRight">How the guest monitor has been changed.  <a href="_virtual_box_8idl.html#a04cd7a0c3ff09364b134a78244fdb030">More...</a><br /></td></tr>
 <tr class="separator:a04cd7a0c3ff09364b134a78244fdb030"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0a2101360f2a7d4808437579cca29b6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6">FormValueType</a> { <a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6a5ce7396a9f12de8883abbef1634788d6">FormValueType_Boolean</a> = 0
+<tr class="memitem:ae0a2101360f2a7d4808437579cca29b6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6">FormValueType</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6a5ce7396a9f12de8883abbef1634788d6">FormValueType_Boolean</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6a03c752d480326528e0de383272e82741">FormValueType_String</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6a59b8d12a3e8db77fd45bc552051f3418">FormValueType_Choice</a> = 2
 , <a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6a4b5adb0f75d078255c45069c76946f37">FormValueType_RangedInteger</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#ae0a2101360f2a7d4808437579cca29b6abc8ea0e5a8e05b575c7d4dd3971770b0">FormValueType_RangedInteger64</a> = 4
+<br />
  }</td></tr>
 <tr class="separator:ae0a2101360f2a7d4808437579cca29b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bcc582f1a8d35f939a0e565360ac6db"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a3bcc582f1a8d35f939a0e565360ac6db">CloudMachineState</a> { <br />
@@ -4140,6 +4147,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="aebba9db8464791c40ede1179e8fa1d18ae415b187ae212cbca8532796a8ce9aee" name="aebba9db8464791c40ede1179e8fa1d18ae415b187ae212cbca8532796a8ce9aee"></a>VirtualSystemDescriptionType_CloudInstanceFreeFormTags&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aebba9db8464791c40ede1179e8fa1d18a6289d9e51e692e15cfeaf9d91e7e6a97" name="aebba9db8464791c40ede1179e8fa1d18a6289d9e51e692e15cfeaf9d91e7e6a97"></a>VirtualSystemDescriptionType_CloudImageFreeFormTags&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aebba9db8464791c40ede1179e8fa1d18aeab3aa619a85d6eeef4d67bc28e67dc8" name="aebba9db8464791c40ede1179e8fa1d18aeab3aa619a85d6eeef4d67bc28e67dc8"></a>VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aebba9db8464791c40ede1179e8fa1d18ad1f3b397083e79027bd8a642ee1ec8cf" name="aebba9db8464791c40ede1179e8fa1d18ad1f3b397083e79027bd8a642ee1ec8cf"></a>VirtualSystemDescriptionType_HardDiskControllerNVMe&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -7411,6 +7419,7 @@ On Windows guests this function currently only supports reporting contiguous idl
 <tr><td class="fieldname"><a id="ae0a2101360f2a7d4808437579cca29b6a03c752d480326528e0de383272e82741" name="ae0a2101360f2a7d4808437579cca29b6a03c752d480326528e0de383272e82741"></a>FormValueType_String&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ae0a2101360f2a7d4808437579cca29b6a59b8d12a3e8db77fd45bc552051f3418" name="ae0a2101360f2a7d4808437579cca29b6a59b8d12a3e8db77fd45bc552051f3418"></a>FormValueType_Choice&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ae0a2101360f2a7d4808437579cca29b6a4b5adb0f75d078255c45069c76946f37" name="ae0a2101360f2a7d4808437579cca29b6a4b5adb0f75d078255c45069c76946f37"></a>FormValueType_RangedInteger&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae0a2101360f2a7d4808437579cca29b6abc8ea0e5a8e05b575c7d4dd3971770b0" name="ae0a2101360f2a7d4808437579cca29b6abc8ea0e5a8e05b575c7d4dd3971770b0"></a>FormValueType_RangedInteger64&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

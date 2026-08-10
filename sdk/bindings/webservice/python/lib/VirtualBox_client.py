@@ -17201,6 +17201,56 @@ class vboxBindingSOAP:
         response = self.binding.Receive(IRangedIntegerFormValue_setIntegerResultMsg.typecode)
         return response
 
+    # op: IRangedInteger64FormValue_getSuffix
+    def IRangedInteger64FormValue_getSuffix(self, request, **kw):
+        if isinstance(request, IRangedInteger64FormValue_getSuffixRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IRangedInteger64FormValue_getSuffixResultMsg.typecode)
+        return response
+
+    # op: IRangedInteger64FormValue_getMinimum
+    def IRangedInteger64FormValue_getMinimum(self, request, **kw):
+        if isinstance(request, IRangedInteger64FormValue_getMinimumRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IRangedInteger64FormValue_getMinimumResultMsg.typecode)
+        return response
+
+    # op: IRangedInteger64FormValue_getMaximum
+    def IRangedInteger64FormValue_getMaximum(self, request, **kw):
+        if isinstance(request, IRangedInteger64FormValue_getMaximumRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IRangedInteger64FormValue_getMaximumResultMsg.typecode)
+        return response
+
+    # op: IRangedInteger64FormValue_getInteger
+    def IRangedInteger64FormValue_getInteger(self, request, **kw):
+        if isinstance(request, IRangedInteger64FormValue_getIntegerRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IRangedInteger64FormValue_getIntegerResultMsg.typecode)
+        return response
+
+    # op: IRangedInteger64FormValue_setInteger
+    def IRangedInteger64FormValue_setInteger(self, request, **kw):
+        if isinstance(request, IRangedInteger64FormValue_setIntegerRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IRangedInteger64FormValue_setIntegerResultMsg.typecode)
+        return response
+
     # op: IStringFormValue_getMultiline
     def IStringFormValue_getMultiline(self, request, **kw):
         if isinstance(request, IStringFormValue_getMultilineRequestMsg) is False:
@@ -25168,6 +25218,26 @@ IRangedIntegerFormValue_getIntegerResultMsg = GED("http://www.virtualbox.org/", 
 IRangedIntegerFormValue_setIntegerRequestMsg = GED("http://www.virtualbox.org/", "IRangedIntegerFormValue_setInteger").pyclass
 
 IRangedIntegerFormValue_setIntegerResultMsg = GED("http://www.virtualbox.org/", "IRangedIntegerFormValue_setIntegerResponse").pyclass
+
+IRangedInteger64FormValue_getSuffixRequestMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getSuffix").pyclass
+
+IRangedInteger64FormValue_getSuffixResultMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getSuffixResponse").pyclass
+
+IRangedInteger64FormValue_getMinimumRequestMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getMinimum").pyclass
+
+IRangedInteger64FormValue_getMinimumResultMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getMinimumResponse").pyclass
+
+IRangedInteger64FormValue_getMaximumRequestMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getMaximum").pyclass
+
+IRangedInteger64FormValue_getMaximumResultMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getMaximumResponse").pyclass
+
+IRangedInteger64FormValue_getIntegerRequestMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getInteger").pyclass
+
+IRangedInteger64FormValue_getIntegerResultMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_getIntegerResponse").pyclass
+
+IRangedInteger64FormValue_setIntegerRequestMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_setInteger").pyclass
+
+IRangedInteger64FormValue_setIntegerResultMsg = GED("http://www.virtualbox.org/", "IRangedInteger64FormValue_setIntegerResponse").pyclass
 
 IStringFormValue_getMultilineRequestMsg = GED("http://www.virtualbox.org/", "IStringFormValue_getMultiline").pyclass
 

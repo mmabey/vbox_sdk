@@ -70853,6 +70853,207 @@ class ns0:
             Holder.__name__ = "IRangedIntegerFormValue_setIntegerResponse_Holder"
             self.pyclass = Holder
 
+    class IRangedInteger64FormValue_getSuffix_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getSuffix"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getSuffix_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getSuffix")
+            kw["aname"] = "_IRangedInteger64FormValue_getSuffix"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getSuffix_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_getSuffixResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getSuffixResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getSuffixResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getSuffixResponse")
+            kw["aname"] = "_IRangedInteger64FormValue_getSuffixResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getSuffixResponse_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_getMinimum_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getMinimum"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getMinimum_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getMinimum")
+            kw["aname"] = "_IRangedInteger64FormValue_getMinimum"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getMinimum_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_getMinimumResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getMinimumResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getMinimumResponse_Dec.schema
+            TClist = [ZSI.TCnumbers.Ilong(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getMinimumResponse")
+            kw["aname"] = "_IRangedInteger64FormValue_getMinimumResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getMinimumResponse_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_getMaximum_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getMaximum"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getMaximum_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getMaximum")
+            kw["aname"] = "_IRangedInteger64FormValue_getMaximum"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getMaximum_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_getMaximumResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getMaximumResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getMaximumResponse_Dec.schema
+            TClist = [ZSI.TCnumbers.Ilong(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getMaximumResponse")
+            kw["aname"] = "_IRangedInteger64FormValue_getMaximumResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getMaximumResponse_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_getInteger_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getInteger"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getInteger_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getInteger")
+            kw["aname"] = "_IRangedInteger64FormValue_getInteger"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getInteger_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_getIntegerResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_getIntegerResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_getIntegerResponse_Dec.schema
+            TClist = [ZSI.TCnumbers.Ilong(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_getIntegerResponse")
+            kw["aname"] = "_IRangedInteger64FormValue_getIntegerResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_getIntegerResponse_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_setInteger_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_setInteger"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_setInteger_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TCnumbers.Ilong(pname="value", aname="_value", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_setInteger")
+            kw["aname"] = "_IRangedInteger64FormValue_setInteger"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    self._value = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_setInteger_Holder"
+            self.pyclass = Holder
+
+    class IRangedInteger64FormValue_setIntegerResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IRangedInteger64FormValue_setIntegerResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IRangedInteger64FormValue_setIntegerResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IRangedInteger64FormValue_setIntegerResponse")
+            kw["aname"] = "_IRangedInteger64FormValue_setIntegerResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IRangedInteger64FormValue_setIntegerResponse_Holder"
+            self.pyclass = Holder
+
     class IStringFormValue_getMultiline_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
         literal = "IStringFormValue_getMultiline"
         schema = "http://www.virtualbox.org/"

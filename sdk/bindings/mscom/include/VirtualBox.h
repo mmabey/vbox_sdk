@@ -16,7 +16,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Oct 12 16:18:44 2023
+/* at Mon Jan 15 16:36:42 2024
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\7.0-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -1287,6 +1287,12 @@ typedef interface IRangedIntegerFormValue IRangedIntegerFormValue;
 #endif 	/* __IRangedIntegerFormValue_FWD_DEFINED__ */
 
 
+#ifndef __IRangedInteger64FormValue_FWD_DEFINED__
+#define __IRangedInteger64FormValue_FWD_DEFINED__
+typedef interface IRangedInteger64FormValue IRangedInteger64FormValue;
+#endif 	/* __IRangedInteger64FormValue_FWD_DEFINED__ */
+
+
 #ifndef __IStringFormValue_FWD_DEFINED__
 #define __IStringFormValue_FWD_DEFINED__
 typedef interface IStringFormValue IStringFormValue;
@@ -2619,6 +2625,12 @@ typedef interface IRangedIntegerFormValue IRangedIntegerFormValue;
 #endif 	/* __IRangedIntegerFormValue_FWD_DEFINED__ */
 
 
+#ifndef __IRangedInteger64FormValue_FWD_DEFINED__
+#define __IRangedInteger64FormValue_FWD_DEFINED__
+typedef interface IRangedInteger64FormValue IRangedInteger64FormValue;
+#endif 	/* __IRangedInteger64FormValue_FWD_DEFINED__ */
+
+
 #ifndef __IStringFormValue_FWD_DEFINED__
 #define __IStringFormValue_FWD_DEFINED__
 typedef interface IStringFormValue IStringFormValue;
@@ -2775,6 +2787,7 @@ enum {
     kTypeLibraryMajorVersion = 1,
     kTypeLibraryMinorVersion = 3
 };
+
 
 
 
@@ -3622,7 +3635,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0033
 	VirtualSystemDescriptionType_CloudInstanceMetadata	= 54,
 	VirtualSystemDescriptionType_CloudInstanceFreeFormTags	= 55,
 	VirtualSystemDescriptionType_CloudImageFreeFormTags	= 56,
-	VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI	= 60
+	VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI	= 60,
+	VirtualSystemDescriptionType_HardDiskControllerNVMe	= 61
     } 	VirtualSystemDescriptionType;
 
 #define VirtualSystemDescriptionType_T VirtualSystemDescriptionType
@@ -4757,12 +4771,13 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0136
     } 	GuestMonitorChangedEventType;
 
 #define GuestMonitorChangedEventType_T GuestMonitorChangedEventType
-typedef /* [public][public][v1_enum][uuid] */  DECLSPEC_UUID("43d794a0-7c98-11e9-a346-a36d5fa858a5") 
+typedef /* [public][public][v1_enum][uuid] */  DECLSPEC_UUID("5f10e2f2-911f-4f55-8afb-39c790f7dc42") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0137
     {	FormValueType_Boolean	= 0,
 	FormValueType_String	= 1,
 	FormValueType_Choice	= 2,
-	FormValueType_RangedInteger	= 3
+	FormValueType_RangedInteger	= 3,
+	FormValueType_RangedInteger64	= 4
     } 	FormValueType;
 
 #define FormValueType_T FormValueType
@@ -72213,6 +72228,397 @@ EXTERN_C const IID IID_IRangedIntegerFormValue;
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0205_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0205_v0_0_s_ifspec;
 
+#ifndef __IRangedInteger64FormValue_INTERFACE_DEFINED__
+#define __IRangedInteger64FormValue_INTERFACE_DEFINED__
+
+/* interface IRangedInteger64FormValue */
+/* [proxy][oleautomation][dual][object][uuid] */ 
+
+
+EXTERN_C const IID IID_IRangedInteger64FormValue;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("f01e8b48-f44d-42cc-8a83-512f6a8552f1")
+    IRangedInteger64FormValue : public IFormValue
+    {
+    public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Suffix( 
+            /* [retval][out] */ BSTR *aSuffix) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Minimum( 
+            /* [retval][out] */ LONG64 *aMinimum) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Maximum( 
+            /* [retval][out] */ LONG64 *aMaximum) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute1IRangedInteger64FormValue( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute2IRangedInteger64FormValue( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute3IRangedInteger64FormValue( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute4IRangedInteger64FormValue( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetInteger( 
+            /* [retval][out] */ LONG64 *aValue) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SetInteger( 
+            /* [in] */ LONG64 aValue,
+            /* [retval][out] */ IProgress **aProgress) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod1IRangedInteger64FormValue( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod2IRangedInteger64FormValue( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod3IRangedInteger64FormValue( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod4IRangedInteger64FormValue( void) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IRangedInteger64FormValueVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IRangedInteger64FormValue * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IRangedInteger64FormValue * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IRangedInteger64FormValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IRangedInteger64FormValue * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IRangedInteger64FormValue * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IRangedInteger64FormValue * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IRangedInteger64FormValue * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ FormValueType *aType);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Generation )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ LONG *aGeneration);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ BOOL *aEnabled);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Visible )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ BOOL *aVisible);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ BSTR *aLabel);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ BSTR *aDescription);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Help )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ BSTR *aHelp);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute1IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute2IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute3IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute4IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute5IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute6IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute7IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute8IFormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod1IFormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod2IFormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod3IFormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod4IFormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Suffix )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ BSTR *aSuffix);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Minimum )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ LONG64 *aMinimum);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Maximum )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ LONG64 *aMaximum);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute1IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute2IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute3IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute4IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetInteger )( 
+            IRangedInteger64FormValue * This,
+            /* [retval][out] */ LONG64 *aValue);
+        
+        HRESULT ( STDMETHODCALLTYPE *SetInteger )( 
+            IRangedInteger64FormValue * This,
+            /* [in] */ LONG64 aValue,
+            /* [retval][out] */ IProgress **aProgress);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod1IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod2IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod3IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod4IRangedInteger64FormValue )( 
+            IRangedInteger64FormValue * This);
+        
+        END_INTERFACE
+    } IRangedInteger64FormValueVtbl;
+
+    interface IRangedInteger64FormValue
+    {
+        CONST_VTBL struct IRangedInteger64FormValueVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IRangedInteger64FormValue_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IRangedInteger64FormValue_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IRangedInteger64FormValue_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IRangedInteger64FormValue_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IRangedInteger64FormValue_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IRangedInteger64FormValue_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IRangedInteger64FormValue_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IRangedInteger64FormValue_get_Type(This,aType)	\
+    ( (This)->lpVtbl -> get_Type(This,aType) ) 
+
+#define IRangedInteger64FormValue_get_Generation(This,aGeneration)	\
+    ( (This)->lpVtbl -> get_Generation(This,aGeneration) ) 
+
+#define IRangedInteger64FormValue_get_Enabled(This,aEnabled)	\
+    ( (This)->lpVtbl -> get_Enabled(This,aEnabled) ) 
+
+#define IRangedInteger64FormValue_get_Visible(This,aVisible)	\
+    ( (This)->lpVtbl -> get_Visible(This,aVisible) ) 
+
+#define IRangedInteger64FormValue_get_Label(This,aLabel)	\
+    ( (This)->lpVtbl -> get_Label(This,aLabel) ) 
+
+#define IRangedInteger64FormValue_get_Description(This,aDescription)	\
+    ( (This)->lpVtbl -> get_Description(This,aDescription) ) 
+
+#define IRangedInteger64FormValue_get_Help(This,aHelp)	\
+    ( (This)->lpVtbl -> get_Help(This,aHelp) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute1IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute1IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute2IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute2IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute3IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute3IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute4IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute4IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute5IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute5IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute6IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute6IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute7IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute7IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute8IFormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute8IFormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod1IFormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod1IFormValue(This) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod2IFormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod2IFormValue(This) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod3IFormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod3IFormValue(This) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod4IFormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod4IFormValue(This) ) 
+
+
+#define IRangedInteger64FormValue_get_Suffix(This,aSuffix)	\
+    ( (This)->lpVtbl -> get_Suffix(This,aSuffix) ) 
+
+#define IRangedInteger64FormValue_get_Minimum(This,aMinimum)	\
+    ( (This)->lpVtbl -> get_Minimum(This,aMinimum) ) 
+
+#define IRangedInteger64FormValue_get_Maximum(This,aMaximum)	\
+    ( (This)->lpVtbl -> get_Maximum(This,aMaximum) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute1IRangedInteger64FormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute1IRangedInteger64FormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute2IRangedInteger64FormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute2IRangedInteger64FormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute3IRangedInteger64FormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute3IRangedInteger64FormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_get_InternalAndReservedAttribute4IRangedInteger64FormValue(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute4IRangedInteger64FormValue(This,aReserved) ) 
+
+#define IRangedInteger64FormValue_GetInteger(This,aValue)	\
+    ( (This)->lpVtbl -> GetInteger(This,aValue) ) 
+
+#define IRangedInteger64FormValue_SetInteger(This,aValue,aProgress)	\
+    ( (This)->lpVtbl -> SetInteger(This,aValue,aProgress) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod1IRangedInteger64FormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod1IRangedInteger64FormValue(This) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod2IRangedInteger64FormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod2IRangedInteger64FormValue(This) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod3IRangedInteger64FormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod3IRangedInteger64FormValue(This) ) 
+
+#define IRangedInteger64FormValue_InternalAndReservedMethod4IRangedInteger64FormValue(This)	\
+    ( (This)->lpVtbl -> InternalAndReservedMethod4IRangedInteger64FormValue(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IRangedInteger64FormValue_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_VirtualBox_0000_0206 */
+/* [local] */ 
+
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO(smth) HRESULT STDMETHODCALLTYPE get_Suffix (BSTR * aSuffix) { return smth get_Suffix (aSuffix); }
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO(smth) HRESULT STDMETHODCALLTYPE get_Minimum (LONG64 * aMinimum) { return smth get_Minimum (aMinimum); }
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO(smth) HRESULT STDMETHODCALLTYPE get_Maximum (LONG64 * aMaximum) { return smth get_Maximum (aMaximum); }
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO(smth) HRESULT STDMETHODCALLTYPE GetInteger (LONG64 * aValue) { return smth GetInteger (aValue); }
+#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO(smth) HRESULT STDMETHODCALLTYPE SetInteger (LONG64 aValue, IProgress * * aProgress) { return smth SetInteger (aValue, aProgress); }
+#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO (base::)
+#define COM_FORWARD_IRangedInteger64FormValue_TO(smth) COM_FORWARD_IRangedInteger64FormValue_GETTER_Suffix_TO (smth) COM_FORWARD_IRangedInteger64FormValue_GETTER_Minimum_TO (smth) COM_FORWARD_IRangedInteger64FormValue_GETTER_Maximum_TO (smth) COM_FORWARD_IRangedInteger64FormValue_GetInteger_TO (smth) COM_FORWARD_IRangedInteger64FormValue_SetInteger_TO (smth) 
+#define COM_FORWARD_IRangedInteger64FormValue_TO_OBJ(obj) COM_FORWARD_IRangedInteger64FormValue_TO ((obj)->)
+#define COM_FORWARD_IRangedInteger64FormValue_TO_BASE(base) COM_FORWARD_IRangedInteger64FormValue_TO (base::)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_s_ifspec;
+
 #ifndef __IStringFormValue_INTERFACE_DEFINED__
 #define __IStringFormValue_INTERFACE_DEFINED__
 
@@ -72568,7 +72974,7 @@ EXTERN_C const IID IID_IStringFormValue;
 #endif 	/* __IStringFormValue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0206 */
+/* interface __MIDL_itf_VirtualBox_0000_0207 */
 /* [local] */ 
 
 #define COM_FORWARD_IStringFormValue_GETTER_Multiline_TO(smth) HRESULT STDMETHODCALLTYPE get_Multiline (BOOL * aMultiline) { return smth get_Multiline (aMultiline); }
@@ -72588,8 +72994,8 @@ EXTERN_C const IID IID_IStringFormValue;
 #define COM_FORWARD_IStringFormValue_TO_BASE(base) COM_FORWARD_IStringFormValue_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0206_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_s_ifspec;
 
 #ifndef __IChoiceFormValue_INTERFACE_DEFINED__
 #define __IChoiceFormValue_INTERFACE_DEFINED__
@@ -72936,7 +73342,7 @@ EXTERN_C const IID IID_IChoiceFormValue;
 #endif 	/* __IChoiceFormValue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0207 */
+/* interface __MIDL_itf_VirtualBox_0000_0208 */
 /* [local] */ 
 
 #define COM_FORWARD_IChoiceFormValue_GETTER_Values_TO(smth) HRESULT STDMETHODCALLTYPE get_Values (SAFEARRAY * * aValues) { return smth get_Values (aValues); }
@@ -72953,8 +73359,8 @@ EXTERN_C const IID IID_IChoiceFormValue;
 #define COM_FORWARD_IChoiceFormValue_TO_BASE(base) COM_FORWARD_IChoiceFormValue_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0207_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_s_ifspec;
 
 #ifndef __IForm_INTERFACE_DEFINED__
 #define __IForm_INTERFACE_DEFINED__
@@ -73171,7 +73577,7 @@ EXTERN_C const IID IID_IForm;
 #endif 	/* __IForm_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0208 */
+/* interface __MIDL_itf_VirtualBox_0000_0209 */
 /* [local] */ 
 
 #define COM_FORWARD_IForm_GETTER_Values_TO(smth) HRESULT STDMETHODCALLTYPE get_Values (SAFEARRAY * * aValues) { return smth get_Values (aValues); }
@@ -73188,8 +73594,8 @@ EXTERN_C const IID IID_IForm;
 #define COM_FORWARD_IForm_TO_BASE(base) COM_FORWARD_IForm_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0208_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_s_ifspec;
 
 #ifndef __IVirtualSystemDescriptionForm_INTERFACE_DEFINED__
 #define __IVirtualSystemDescriptionForm_INTERFACE_DEFINED__
@@ -73459,7 +73865,7 @@ EXTERN_C const IID IID_IVirtualSystemDescriptionForm;
 #endif 	/* __IVirtualSystemDescriptionForm_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0209 */
+/* interface __MIDL_itf_VirtualBox_0000_0210 */
 /* [local] */ 
 
 #define COM_FORWARD_IVirtualSystemDescriptionForm_GetVirtualSystemDescription_TO(smth) HRESULT STDMETHODCALLTYPE GetVirtualSystemDescription (IVirtualSystemDescription * * aDescription) { return smth GetVirtualSystemDescription (aDescription); }
@@ -73470,8 +73876,8 @@ EXTERN_C const IID IID_IVirtualSystemDescriptionForm;
 #define COM_FORWARD_IVirtualSystemDescriptionForm_TO_BASE(base) COM_FORWARD_IVirtualSystemDescriptionForm_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0209_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_s_ifspec;
 
 #ifndef __ICloudNetworkGatewayInfo_INTERFACE_DEFINED__
 #define __ICloudNetworkGatewayInfo_INTERFACE_DEFINED__
@@ -73674,7 +74080,7 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
 #endif 	/* __ICloudNetworkGatewayInfo_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0210 */
+/* interface __MIDL_itf_VirtualBox_0000_0211 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO(smth) HRESULT STDMETHODCALLTYPE get_PublicIP (BSTR * aPublicIP) { return smth get_PublicIP (aPublicIP); }
@@ -73694,8 +74100,8 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
 #define COM_FORWARD_ICloudNetworkGatewayInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0210_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_s_ifspec;
 
 #ifndef __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__
 #define __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__
@@ -73888,7 +74294,7 @@ EXTERN_C const IID IID_ICloudNetworkEnvironmentInfo;
 #endif 	/* __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0211 */
+/* interface __MIDL_itf_VirtualBox_0000_0212 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO(smth) HRESULT STDMETHODCALLTYPE get_TunnelNetworkId (BSTR * aTunnelNetworkId) { return smth get_TunnelNetworkId (aTunnelNetworkId); }
@@ -73899,8 +74305,8 @@ EXTERN_C const IID IID_ICloudNetworkEnvironmentInfo;
 #define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0211_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_s_ifspec;
 
 #ifndef __ICloudMachine_INTERFACE_DEFINED__
 #define __ICloudMachine_INTERFACE_DEFINED__
@@ -74469,7 +74875,7 @@ EXTERN_C const IID IID_ICloudMachine;
 #endif 	/* __ICloudMachine_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0212 */
+/* interface __MIDL_itf_VirtualBox_0000_0213 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudMachine_GETTER_Id_TO(smth) HRESULT STDMETHODCALLTYPE get_Id (BSTR * aId) { return smth get_Id (aId); }
@@ -74552,8 +74958,8 @@ EXTERN_C const IID IID_ICloudMachine;
 #define COM_FORWARD_ICloudMachine_TO_BASE(base) COM_FORWARD_ICloudMachine_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0212_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_s_ifspec;
 
 #ifndef __ICloudClient_INTERFACE_DEFINED__
 #define __ICloudClient_INTERFACE_DEFINED__
@@ -75308,7 +75714,7 @@ EXTERN_C const IID IID_ICloudClient;
 #endif 	/* __ICloudClient_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0213 */
+/* interface __MIDL_itf_VirtualBox_0000_0214 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO(smth) HRESULT STDMETHODCALLTYPE get_CloudMachineList (SAFEARRAY * * aCloudMachineList) { return smth get_CloudMachineList (aCloudMachineList); }
@@ -75415,8 +75821,8 @@ EXTERN_C const IID IID_ICloudClient;
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0213_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_s_ifspec;
 
 #ifndef __ICloudProfile_INTERFACE_DEFINED__
 #define __ICloudProfile_INTERFACE_DEFINED__
@@ -75739,7 +76145,7 @@ EXTERN_C const IID IID_ICloudProfile;
 #endif 	/* __ICloudProfile_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0214 */
+/* interface __MIDL_itf_VirtualBox_0000_0215 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfile_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -75774,8 +76180,8 @@ EXTERN_C const IID IID_ICloudProfile;
 #define COM_FORWARD_ICloudProfile_TO_BASE(base) COM_FORWARD_ICloudProfile_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0214_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_s_ifspec;
 
 #ifndef __ICloudProvider_INTERFACE_DEFINED__
 #define __ICloudProvider_INTERFACE_DEFINED__
@@ -76242,7 +76648,7 @@ EXTERN_C const IID IID_ICloudProvider;
 #endif 	/* __ICloudProvider_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0215 */
+/* interface __MIDL_itf_VirtualBox_0000_0216 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProvider_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -76289,8 +76695,8 @@ EXTERN_C const IID IID_ICloudProvider;
 #define COM_FORWARD_ICloudProvider_TO_BASE(base) COM_FORWARD_ICloudProvider_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0215_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderManager_INTERFACE_DEFINED__
 #define __ICloudProviderManager_INTERFACE_DEFINED__
@@ -76561,7 +76967,7 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #endif 	/* __ICloudProviderManager_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0216 */
+/* interface __MIDL_itf_VirtualBox_0000_0217 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderManager_GETTER_Providers_TO(smth) HRESULT STDMETHODCALLTYPE get_Providers (SAFEARRAY * * aProviders) { return smth get_Providers (aProviders); }
@@ -76581,8 +76987,8 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #define COM_FORWARD_ICloudProviderManager_TO_BASE(base) COM_FORWARD_ICloudProviderManager_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0216_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderListChangedEvent_INTERFACE_DEFINED__
 #define __ICloudProviderListChangedEvent_INTERFACE_DEFINED__
@@ -76741,7 +77147,7 @@ EXTERN_C const IID IID_ICloudProviderListChangedEvent;
 #endif 	/* __ICloudProviderListChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0217 */
+/* interface __MIDL_itf_VirtualBox_0000_0218 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderListChangedEvent_GETTER_Registered_TO(smth) HRESULT STDMETHODCALLTYPE get_Registered (BOOL * aRegistered) { return smth get_Registered (aRegistered); }
@@ -76752,8 +77158,8 @@ EXTERN_C const IID IID_ICloudProviderListChangedEvent;
 #define COM_FORWARD_ICloudProviderListChangedEvent_TO_BASE(base) COM_FORWARD_ICloudProviderListChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0217_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderRegisteredEvent_INTERFACE_DEFINED__
 #define __ICloudProviderRegisteredEvent_INTERFACE_DEFINED__
@@ -76922,7 +77328,7 @@ EXTERN_C const IID IID_ICloudProviderRegisteredEvent;
 #endif 	/* __ICloudProviderRegisteredEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0218 */
+/* interface __MIDL_itf_VirtualBox_0000_0219 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Id_TO(smth) HRESULT STDMETHODCALLTYPE get_Id (BSTR * aId) { return smth get_Id (aId); }
@@ -76936,8 +77342,8 @@ EXTERN_C const IID IID_ICloudProviderRegisteredEvent;
 #define COM_FORWARD_ICloudProviderRegisteredEvent_TO_BASE(base) COM_FORWARD_ICloudProviderRegisteredEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0218_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderUninstallEvent_INTERFACE_DEFINED__
 #define __ICloudProviderUninstallEvent_INTERFACE_DEFINED__
@@ -77096,7 +77502,7 @@ EXTERN_C const IID IID_ICloudProviderUninstallEvent;
 #endif 	/* __ICloudProviderUninstallEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0219 */
+/* interface __MIDL_itf_VirtualBox_0000_0220 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderUninstallEvent_GETTER_Id_TO(smth) HRESULT STDMETHODCALLTYPE get_Id (BSTR * aId) { return smth get_Id (aId); }
@@ -77107,8 +77513,8 @@ EXTERN_C const IID IID_ICloudProviderUninstallEvent;
 #define COM_FORWARD_ICloudProviderUninstallEvent_TO_BASE(base) COM_FORWARD_ICloudProviderUninstallEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0219_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_s_ifspec;
 
 #ifndef __ICloudProfileRegisteredEvent_INTERFACE_DEFINED__
 #define __ICloudProfileRegisteredEvent_INTERFACE_DEFINED__
@@ -77287,7 +77693,7 @@ EXTERN_C const IID IID_ICloudProfileRegisteredEvent;
 #endif 	/* __ICloudProfileRegisteredEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0220 */
+/* interface __MIDL_itf_VirtualBox_0000_0221 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_ProviderId_TO(smth) HRESULT STDMETHODCALLTYPE get_ProviderId (BSTR * aProviderId) { return smth get_ProviderId (aProviderId); }
@@ -77304,8 +77710,8 @@ EXTERN_C const IID IID_ICloudProfileRegisteredEvent;
 #define COM_FORWARD_ICloudProfileRegisteredEvent_TO_BASE(base) COM_FORWARD_ICloudProfileRegisteredEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0220_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_s_ifspec;
 
 #ifndef __ICloudProfileChangedEvent_INTERFACE_DEFINED__
 #define __ICloudProfileChangedEvent_INTERFACE_DEFINED__
@@ -77474,7 +77880,7 @@ EXTERN_C const IID IID_ICloudProfileChangedEvent;
 #endif 	/* __ICloudProfileChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0221 */
+/* interface __MIDL_itf_VirtualBox_0000_0222 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfileChangedEvent_GETTER_ProviderId_TO(smth) HRESULT STDMETHODCALLTYPE get_ProviderId (BSTR * aProviderId) { return smth get_ProviderId (aProviderId); }
@@ -77488,8 +77894,8 @@ EXTERN_C const IID IID_ICloudProfileChangedEvent;
 #define COM_FORWARD_ICloudProfileChangedEvent_TO_BASE(base) COM_FORWARD_ICloudProfileChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0221_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_s_ifspec;
 
 #ifndef __ILanguageChangedEvent_INTERFACE_DEFINED__
 #define __ILanguageChangedEvent_INTERFACE_DEFINED__
@@ -77648,7 +78054,7 @@ EXTERN_C const IID IID_ILanguageChangedEvent;
 #endif 	/* __ILanguageChangedEvent_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0222 */
+/* interface __MIDL_itf_VirtualBox_0000_0223 */
 /* [local] */ 
 
 #define COM_FORWARD_ILanguageChangedEvent_GETTER_LanguageId_TO(smth) HRESULT STDMETHODCALLTYPE get_LanguageId (BSTR * aLanguageId) { return smth get_LanguageId (aLanguageId); }
@@ -77659,8 +78065,8 @@ EXTERN_C const IID IID_ILanguageChangedEvent;
 #define COM_FORWARD_ILanguageChangedEvent_TO_BASE(base) COM_FORWARD_ILanguageChangedEvent_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0223_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0223_v0_0_s_ifspec;
 
 
 #ifndef __VirtualBox_LIBRARY_DEFINED__
@@ -77686,6 +78092,7 @@ extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_s_ifspec;
 #define VBOX_E_GSTCTL_GUEST_ERROR ((HRESULT)0x80BB000F)
 #define VBOX_E_TIMEOUT ((HRESULT)0x80BB0010)
 #define VBOX_E_DND_ERROR ((HRESULT)0x80BB0011)
+
 
 
 
