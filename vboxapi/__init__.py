@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# $Id: vboxapi.py 136275 2020-02-25 18:05:04Z bird $
+# $Id: vboxapi.py 131696 2019-07-01 15:34:26Z bird $
 """
 VirtualBox Python API Glue.
 """
@@ -25,7 +25,7 @@ CDDL are applicable instead of those of the GPL.
 You may elect to license modified versions of this file under the
 terms and conditions of either the GPL or the CDDL or both.
 """
-__version__ = "$Revision: 136275 $"
+__version__ = "$Revision: 131696 $"
 
 
 # Note! To set Python bitness on OSX use 'export VERSIONER_PYTHON_PREFER_32_BIT=yes'
@@ -452,12 +452,12 @@ class PlatformMSCOM(PlatformBase):
             if isinstance(oXcpt, pythoncom.com_error) and self.xcptGetStatus(oXcpt) == -2147417831: # RPC_E_TOO_LATE
                 print("Warning: CoInitializeSecurity was already called");
             else:
-                print("Warning: CoInitializeSecurity failed: ", oXcpt);
+                print("Warning: CoInitializeSecurity failed: ", oXctp);
 
         # Remember this thread ID and get its handle so we can wait on it in waitForEvents().
         self.tid = GetCurrentThreadId()
         pid = GetCurrentProcess()
-        self.aoHandles = [DuplicateHandle(pid, GetCurrentThread(), pid, 0, 0, DUPLICATE_SAME_ACCESS),]; # type: list[PyHANDLE]
+        self.aoHandles = [DuplicateHandle(pid, GetCurrentThread(), pid, 0, 0, DUPLICATE_SAME_ACCESS),] # type: list[PyHANDLE]
 
         # Hack the COM dispatcher base class so we can modify method and
         # attribute names to match those in xpcom.
@@ -959,7 +959,7 @@ class PlatformWEBSERVICE(PlatformBase):
 # was used.  Most clients does talk to multiple VBox instance on different
 # platforms at the same time, so this should be sufficent for most uses and
 # be way simpler to use than VirtualBoxManager::oXcptClass.
-CurXcptClass = None
+CurXctpClass = None
 
 
 class VirtualBoxManager(object):
@@ -1254,6 +1254,12 @@ class VirtualBoxManager(object):
                     oValue = getattr(self.statuses, sKey)
                     if isinstance(oValue, (int, long)):
                         dErrorValToName[int(oValue)] = sKey
+            # Always prefer the COM names (see aliasing in platform specific code):
+            for sKey in ('S_OK', 'E_FAIL', 'E_ABORT', 'E_POINTER', 'E_NOINTERFACE', 'E_INVALIDARG',
+                         'E_OUTOFMEMORY', 'E_NOTIMPL', 'E_UNEXPECTED',):
+                oValue = getattr(self.statuses, sKey, None)
+                if oValue is not None:
+                    dErrorValToName[oValue] = sKey
             self._dErrorValToName = dErrorValToName
 
         # Do the lookup, falling back on formatting the status number.
