@@ -48,6 +48,13 @@ jobs:
           sudo modprobe vboxdrv || echo "modprobe vboxdrv failed"
           lsmod | grep -i vbox || echo "still not loaded after modprobe"
           VBoxManage --version || echo "VBoxManage --version failed"
+          echo "--- compiled xpcom extensions shipped by the distro package ---"
+          find /usr/lib/virtualbox -iname "*xpcom*" -o -iname "_xpcom*"
+          echo "--- shared library resolution for each ---"
+          for so in $(find /usr/lib/virtualbox -iname "_xpcom*.so"); do
+            echo "== $so =="
+            ldd "$so" || true
+          done
       - name: Query the running VirtualBox instance through vboxapi
         env:
           VBOX_PROGRAM_PATH: /usr/lib/virtualbox
