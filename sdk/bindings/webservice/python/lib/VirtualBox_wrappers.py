@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2025 Oracle and/or its affiliates.
+# Copyright (C) 2008-2026 Oracle and/or its affiliates.
 #
 # This file is part of a free software library; you can redistribute
 # it and/or modify it under the terms of the GNU Lesser General
@@ -10149,6 +10149,16 @@ class IPlatformProperties(IUnknown):
        return UnsignedInt(self.mgr,val._returnval)
 
 
+   def getMinGuestRAM(self, _arg_firmware):
+       req=IPlatformProperties_getMinGuestRAMRequestMsg()
+       req._this=self.handle
+       
+       req._firmware=_arg_firmware
+       val=self.mgr.getPort().IPlatformProperties_getMinGuestRAM(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
    def getRawModeSupported(self):
        req=IPlatformProperties_getRawModeSupportedRequestMsg()
        req._this=self.handle
@@ -17558,6 +17568,20 @@ class IMachineDebugger(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IMachineDebugger_getUptime(req)
        return Long(self.mgr,val._returnval)
+   def getRecompiledIEMExecution(self):
+       req=IMachineDebugger_getRecompiledIEMExecutionRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IMachineDebugger_getRecompiledIEMExecution(req)
+       return Boolean(self.mgr,val._returnval)
+   def setRecompiledIEMExecution(self, value):
+       req=IMachineDebugger_setRecompiledIEMExecutionRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._recompiledIEMExecution = value
+       else:
+            req._recompiledIEMExecution = value.handle
+       self.mgr.getPort().IMachineDebugger_setRecompiledIEMExecution(req)
+
 
 
    _Attrs_={         'singleStep':[getSingleStep,setSingleStep,
@@ -17581,7 +17605,9 @@ class IMachineDebugger(IUnknown):
          'PAEEnabled':[getPAEEnabled,None],
          'virtualTimeRate':[getVirtualTimeRate,setVirtualTimeRate,
         ],
-         'uptime':[getUptime,None]}
+         'uptime':[getUptime,None],
+         'recompiledIEMExecution':[getRecompiledIEMExecution,setRecompiledIEMExecution,
+        ]}
 
 class IUSBDeviceFilters(IUnknown):
    def __init__(self, mgr, handle, isarray = False):

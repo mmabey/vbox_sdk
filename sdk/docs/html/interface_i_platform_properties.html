@@ -97,6 +97,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afb47cb6142198fa54f71959df63eaa1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_platform_properties.html#afb47cb6142198fa54f71959df63eaa1c">getMaxInstancesOfUSBControllerType</a> (in <a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffa">ChipsetType</a> chipset, in <a class="el" href="_virtual_box_8idl.html#aa23093dc281cfe164756f86b5ebf7b97">USBControllerType</a> type, [retval] out unsigned long maxInstances)</td></tr>
 <tr class="memdesc:afb47cb6142198fa54f71959df63eaa1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum number of USB controller instances which can be configured for each VM.  <br /></td></tr>
 <tr class="separator:afb47cb6142198fa54f71959df63eaa1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b5b2bf241f7654fc35b1f6fed690071"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_platform_properties.html#a9b5b2bf241f7654fc35b1f6fed690071">getMinGuestRAM</a> (in <a class="el" href="_virtual_box_8idl.html#afddb85483810aea160a6bf2c90259b55">FirmwareType</a> firmware, [retval] out unsigned long minMegabytes)</td></tr>
+<tr class="memdesc:a9b5b2bf241f7654fc35b1f6fed690071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns minimum guest system memory size in Megabytes for the given firmware choice.  <br /></td></tr>
+<tr class="separator:a9b5b2bf241f7654fc35b1f6fed690071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -682,6 +685,43 @@ Public Attributes</h2></td></tr>
     <tr><td class="paramname">chipset</td><td>The chipset type to get the value for.</td></tr>
     <tr><td class="paramname">type</td><td>The USB controller type to get the value for.</td></tr>
     <tr><td class="paramname">maxInstances</td><td>The maximum number of instances for the given USB controller type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9b5b2bf241f7654fc35b1f6fed690071" name="a9b5b2bf241f7654fc35b1f6fed690071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b5b2bf241f7654fc35b1f6fed690071">&#9670;&#160;</a></span>getMinGuestRAM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IPlatformProperties::getMinGuestRAM </td>
+          <td>(</td>
+          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#afddb85483810aea160a6bf2c90259b55">FirmwareType</a>&#160;</td>
+          <td class="paramname"><em>firmware</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out unsigned long&#160;</td>
+          <td class="paramname"><em>minMegabytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns minimum guest system memory size in Megabytes for the given firmware choice. </p>
+<p>The firmwares have built-in expectations about how much memory must be present in the system for them to work. These limits are not enforced anywhere, so you can still configure a VM with as little as <a class="el" href="interface_i_system_properties.html#a273961c754ccca415483416c0167c227">ISystemProperties::minGuestRAM</a><b></b> specifies, it just is not very likely to boot up. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">firmware</td><td>The chipset type to get the value for.</td></tr>
+    <tr><td class="paramname">minMegabytes</td><td>Minimum number of megabytes (mebibytes). </td></tr>
   </table>
   </dd>
 </dl>

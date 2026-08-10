@@ -15674,6 +15674,22 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <!-- method IPlatformProperties::getMinGuestRAM-->
+      <xsd:element name="IPlatformProperties_getMinGuestRAM">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="firmware" type="vbox:FirmwareType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IPlatformProperties_getMinGuestRAMResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:unsignedInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <!--Interface ISystemProperties-->
       <!-- readonly attribute ISystemProperties::platform-->
       <xsd:element name="ISystemProperties_getPlatform">
@@ -23509,6 +23525,34 @@
           <xsd:sequence>
             <xsd:element name="returnval" type="xsd:long"/>
           </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- read/write attribute IMachineDebugger::recompiledIEMExecution-->
+      <xsd:element name="IMachineDebugger_getRecompiledIEMExecution">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IMachineDebugger_getRecompiledIEMExecutionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IMachineDebugger_setRecompiledIEMExecution">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="recompiledIEMExecution" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IMachineDebugger_setRecompiledIEMExecutionResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
         </xsd:complexType>
       </xsd:element>
       <!-- method IMachineDebugger::dumpGuestCore-->
@@ -38314,6 +38358,13 @@
   <wsdl:message name="IPlatformProperties_getMaxInstancesOfUSBControllerTypeResultMsg">
     <wsdl:part name="parameters" element="vbox:IPlatformProperties_getMaxInstancesOfUSBControllerTypeResponse"/>
   </wsdl:message>
+  <!-- method IPlatformProperties::getMinGuestRAM-->
+  <wsdl:message name="IPlatformProperties_getMinGuestRAMRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IPlatformProperties_getMinGuestRAM"/>
+  </wsdl:message>
+  <wsdl:message name="IPlatformProperties_getMinGuestRAMResultMsg">
+    <wsdl:part name="parameters" element="vbox:IPlatformProperties_getMinGuestRAMResponse"/>
+  </wsdl:message>
   <!--
         *************************************
         messages for interface ISystemProperties
@@ -42043,6 +42094,19 @@
   </wsdl:message>
   <wsdl:message name="IMachineDebugger_getUptimeResultMsg">
     <wsdl:part name="parameters" element="vbox:IMachineDebugger_getUptimeResponse"/>
+  </wsdl:message>
+  <!-- read/write attribute IMachineDebugger::recompiledIEMExecution-->
+  <wsdl:message name="IMachineDebugger_getRecompiledIEMExecutionRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IMachineDebugger_getRecompiledIEMExecution"/>
+  </wsdl:message>
+  <wsdl:message name="IMachineDebugger_getRecompiledIEMExecutionResultMsg">
+    <wsdl:part name="parameters" element="vbox:IMachineDebugger_getRecompiledIEMExecutionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IMachineDebugger_setRecompiledIEMExecutionRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IMachineDebugger_setRecompiledIEMExecution"/>
+  </wsdl:message>
+  <wsdl:message name="IMachineDebugger_setRecompiledIEMExecutionResultMsg">
+    <wsdl:part name="parameters" element="vbox:IMachineDebugger_setRecompiledIEMExecutionResponse"/>
   </wsdl:message>
   <!-- method IMachineDebugger::dumpGuestCore-->
   <wsdl:message name="IMachineDebugger_dumpGuestCoreRequestMsg">
@@ -52036,6 +52100,12 @@
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
+    <wsdl:operation name="IPlatformProperties_getMinGuestRAM">
+      <wsdl:input message="vbox:IPlatformProperties_getMinGuestRAMRequestMsg"/>
+      <wsdl:output message="vbox:IPlatformProperties_getMinGuestRAMResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
     <!--
           *************************************
           operations in portType for interface ISystemProperties
@@ -55311,6 +55381,18 @@
     <wsdl:operation name="IMachineDebugger_getUptime">
       <wsdl:input message="vbox:IMachineDebugger_getUptimeRequestMsg"/>
       <wsdl:output message="vbox:IMachineDebugger_getUptimeResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IMachineDebugger_getRecompiledIEMExecution">
+      <wsdl:input message="vbox:IMachineDebugger_getRecompiledIEMExecutionRequestMsg"/>
+      <wsdl:output message="vbox:IMachineDebugger_getRecompiledIEMExecutionResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IMachineDebugger_setRecompiledIEMExecution">
+      <wsdl:input message="vbox:IMachineDebugger_setRecompiledIEMExecutionRequestMsg"/>
+      <wsdl:output message="vbox:IMachineDebugger_setRecompiledIEMExecutionResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -72212,6 +72294,21 @@
         <soap:fault name="RuntimeFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="IPlatformProperties_getMinGuestRAM">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <!--
           *************************************
           operations in portType for interface ISystemProperties
@@ -80075,6 +80172,36 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="IMachineDebugger_getUptime">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IMachineDebugger_getRecompiledIEMExecution">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IMachineDebugger_setRecompiledIEMExecution">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

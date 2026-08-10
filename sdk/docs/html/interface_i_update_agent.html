@@ -180,10 +180,15 @@ Public Attributes</h2></td></tr>
 <p>Downloads the update. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">progress</td><td>Progress object to track operation completion. </td></tr>
+    <tr><td class="paramname">progress</td><td>Progress object to track operation completion.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_NOT_SUPPORTED</td><td>Downloading update not supported. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -206,10 +211,15 @@ Public Attributes</h2></td></tr>
 <p>Installs the update. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">progress</td><td>Progress object to track operation completion. </td></tr>
+    <tr><td class="paramname">progress</td><td>Progress object to track operation completion.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_NOT_SUPPORTED</td><td>Installing update not supported. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -278,6 +288,12 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Order hint the update component needs to run at, in conjunction with other update components. </p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>0</td><td>No order preferred / disabled. </td></tr>
+</table>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Lower numbers mean higher priority. 0 means no order or disabled. </dd></dl>
 
 </div>
 </div>
@@ -294,6 +310,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Array of other update component names this component depends on before being able to get installed. </p>
+<dl class="section note"><dt>Note</dt><dd>Ordered entries, highest priority first. No dependencies when array is empty. Dependency entries also can contain a minimum version number after the update component name, separated by an "@", e.g. "Guest Additions@7.1.0_BETA2". </dd></dl>
 
 </div>
 </div>
@@ -310,6 +327,11 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Version the update contains. </p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_INVALID_OBJECT_STATE</td><td>Result not available yet. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -326,6 +348,11 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Download URL of the update. </p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_INVALID_OBJECT_STATE</td><td>Result not available yet. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -342,6 +369,11 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Web URL of the update. </p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_INVALID_OBJECT_STATE</td><td>Result not available yet. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -358,6 +390,11 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Release notes of the update. </p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_INVALID_OBJECT_STATE</td><td>Result not available yet. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>
@@ -454,6 +491,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Update repository URL to use for retrieving the update. </p>
+<dl class="section note"><dt>Note</dt><dd>Only repositories with the <a href="https://">https://</a> URL scheme are allowed. </dd></dl>
 
 </div>
 </div>
@@ -470,6 +508,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Date of last update check. </p>
+<dl class="section note"><dt>Note</dt><dd>In ISO 8601 format (e.g. 2020-05-11T21:13:39.348416000Z). </dd></dl>
 
 </div>
 </div>

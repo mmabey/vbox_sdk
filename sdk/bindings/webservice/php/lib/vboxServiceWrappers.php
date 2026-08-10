@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2008-2025 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2026 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -8798,6 +8798,15 @@ class IPlatformProperties extends VBox_ManagedObject
         return (float)$response->returnval;
     }
 
+    public function getMinGuestRAM($arg_firmware)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->firmware = $arg_firmware;
+        $response = $this->connection->__soapCall('IPlatformProperties_getMinGuestRAM', array((array)$request));
+        return (float)$response->returnval;
+    }
+
     public function getRawModeSupported()
     {
         $request = new stdClass();
@@ -14644,6 +14653,29 @@ class IMachineDebugger extends VBox_ManagedObject
         $request->_this = $this->handle;
         $response = $this->connection->__soapCall('IMachineDebugger_getUptime', array((array)$request));
         return (float)$response->returnval;
+    }
+
+    public function getRecompiledIEMExecution()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('IMachineDebugger_getRecompiledIEMExecution', array((array)$request));
+        return (bool)$response->returnval;
+    }
+
+    public function setRecompiledIEMExecution($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->recompiledIEMExecution = $value;
+        }
+        else
+        {
+            $request->recompiledIEMExecution = $value->handle;
+        }
+        $this->connection->__soapCall('IMachineDebugger_setRecompiledIEMExecution', array((array)$request));
     }
 }
 

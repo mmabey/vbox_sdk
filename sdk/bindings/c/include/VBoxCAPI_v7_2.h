@@ -20,7 +20,7 @@
  */
 
 /*
- * Copyright (C) 2008-2025 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2026 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -15273,13 +15273,17 @@ struct IPlatformProperties_vtbl
         PRUint32 * maxInstances
     );
 
+    nsresult (*GetMinGuestRAM)(
+        IPlatformProperties *pThis,
+        PRUint32 firmware,
+        PRUint32 * minMegabytes
+    );
+
     nsresult (*InternalAndReservedMethod1IPlatformProperties)(IPlatformProperties *pThis);
 
     nsresult (*InternalAndReservedMethod2IPlatformProperties)(IPlatformProperties *pThis);
 
     nsresult (*InternalAndReservedMethod3IPlatformProperties)(IPlatformProperties *pThis);
-
-    nsresult (*InternalAndReservedMethod4IPlatformProperties)(IPlatformProperties *pThis);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -15448,13 +15452,17 @@ struct IPlatformPropertiesVtbl
         PRUint32 * maxInstances
     );
 
+    nsresult (*GetMinGuestRAM)(
+        IPlatformProperties *pThis,
+        PRUint32 firmware,
+        PRUint32 * minMegabytes
+    );
+
     nsresult (*InternalAndReservedMethod1IPlatformProperties)(IPlatformProperties *pThis);
 
     nsresult (*InternalAndReservedMethod2IPlatformProperties)(IPlatformProperties *pThis);
 
     nsresult (*InternalAndReservedMethod3IPlatformProperties)(IPlatformProperties *pThis);
-
-    nsresult (*InternalAndReservedMethod4IPlatformProperties)(IPlatformProperties *pThis);
 
 };
 #define IPlatformProperties_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
@@ -15515,6 +15523,7 @@ struct IPlatformPropertiesVtbl
 #define IPlatformProperties_GetStorageControllerTypesForBus(p, aStorageBus, aStorageControllerType) ((p)->lpVtbl->GetStorageControllerTypesForBus(p, aStorageBus, aStorageControllerType))
 #define IPlatformProperties_GetStorageControllerHotplugCapable(p, aControllerType, aHotplugCapable) ((p)->lpVtbl->GetStorageControllerHotplugCapable(p, aControllerType, aHotplugCapable))
 #define IPlatformProperties_GetMaxInstancesOfUSBControllerType(p, aChipset, aType, aMaxInstances) ((p)->lpVtbl->GetMaxInstancesOfUSBControllerType(p, aChipset, aType, aMaxInstances))
+#define IPlatformProperties_GetMinGuestRAM(p, aFirmware, aMinMegabytes) ((p)->lpVtbl->GetMinGuestRAM(p, aFirmware, aMinMegabytes))
 #endif /* VBOX_WITH_GLUE */
 
 interface IPlatformProperties
@@ -23850,6 +23859,9 @@ struct IMachineDebugger_vtbl
 
     nsresult (*GetUptime)(IMachineDebugger *pThis, PRInt64 *uptime);
 
+    nsresult (*GetRecompiledIEMExecution)(IMachineDebugger *pThis, PRBool *recompiledIEMExecution);
+    nsresult (*SetRecompiledIEMExecution)(IMachineDebugger *pThis, PRBool recompiledIEMExecution);
+
     nsresult (*GetInternalAndReservedAttribute1IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
@@ -23877,10 +23889,6 @@ struct IMachineDebugger_vtbl
     nsresult (*GetInternalAndReservedAttribute13IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute14IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute15IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute16IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
 
     nsresult (*DumpGuestCore)(
         IMachineDebugger *pThis,
@@ -24132,6 +24140,9 @@ struct IMachineDebuggerVtbl
 
     nsresult (*GetUptime)(IMachineDebugger *pThis, PRInt64 *uptime);
 
+    nsresult (*GetRecompiledIEMExecution)(IMachineDebugger *pThis, PRBool *recompiledIEMExecution);
+    nsresult (*SetRecompiledIEMExecution)(IMachineDebugger *pThis, PRBool recompiledIEMExecution);
+
     nsresult (*GetInternalAndReservedAttribute1IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
@@ -24159,10 +24170,6 @@ struct IMachineDebuggerVtbl
     nsresult (*GetInternalAndReservedAttribute13IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute14IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute15IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute16IMachineDebugger)(IMachineDebugger *pThis, PRUint32 *reserved);
 
     nsresult (*DumpGuestCore)(
         IMachineDebugger *pThis,
@@ -24415,6 +24422,10 @@ struct IMachineDebuggerVtbl
 #define IMachineDebugger_SetVirtualTimeRate(p, aVirtualTimeRate) ((p)->lpVtbl->SetVirtualTimeRate(p, aVirtualTimeRate))
 #define IMachineDebugger_get_Uptime(p, aUptime) ((p)->lpVtbl->GetUptime(p, aUptime))
 #define IMachineDebugger_GetUptime(p, aUptime) ((p)->lpVtbl->GetUptime(p, aUptime))
+#define IMachineDebugger_get_RecompiledIEMExecution(p, aRecompiledIEMExecution) ((p)->lpVtbl->GetRecompiledIEMExecution(p, aRecompiledIEMExecution))
+#define IMachineDebugger_GetRecompiledIEMExecution(p, aRecompiledIEMExecution) ((p)->lpVtbl->GetRecompiledIEMExecution(p, aRecompiledIEMExecution))
+#define IMachineDebugger_put_RecompiledIEMExecution(p, aRecompiledIEMExecution) ((p)->lpVtbl->SetRecompiledIEMExecution(p, aRecompiledIEMExecution))
+#define IMachineDebugger_SetRecompiledIEMExecution(p, aRecompiledIEMExecution) ((p)->lpVtbl->SetRecompiledIEMExecution(p, aRecompiledIEMExecution))
 #define IMachineDebugger_DumpGuestCore(p, aFilename, aCompression) ((p)->lpVtbl->DumpGuestCore(p, aFilename, aCompression))
 #define IMachineDebugger_DumpHostProcessCore(p, aFilename, aCompression) ((p)->lpVtbl->DumpHostProcessCore(p, aFilename, aCompression))
 #define IMachineDebugger_Info(p, aName, aArgs, aInfo) ((p)->lpVtbl->Info(p, aName, aArgs, aInfo))

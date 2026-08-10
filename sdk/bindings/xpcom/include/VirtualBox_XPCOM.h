@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/out/linux.amd64/release/bin/sdk/bindings/xpcom/idl/VirtualBox_XPCOM.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/out/linux.amd64/release/bin/sdk/bindings/xpcom/idl/VirtualBox_XPCOM.idl
  */
 
 #ifndef __gen_VirtualBox_XPCOM_h__
@@ -21803,6 +21803,9 @@ class NS_NO_VTABLE IPlatformProperties : public nsISupports {
   /* void getMaxInstancesOfUSBControllerType (in ChipsetType_T chipset, in USBControllerType_T type, [retval] out unsigned long maxInstances); */
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances) = 0;
 
+  /* void getMinGuestRAM (in FirmwareType_T firmware, [retval] out unsigned long minMegabytes); */
+  NS_IMETHOD GetMinGuestRAM(FirmwareType_T firmware, PRUint32 *minMegabytes) = 0;
+
   /* void InternalAndReservedMethod1IPlatformProperties (); */
   NS_IMETHOD InternalAndReservedMethod1IPlatformProperties(void) = 0;
 
@@ -21811,9 +21814,6 @@ class NS_NO_VTABLE IPlatformProperties : public nsISupports {
 
   /* void InternalAndReservedMethod3IPlatformProperties (); */
   NS_IMETHOD InternalAndReservedMethod3IPlatformProperties(void) = 0;
-
-  /* void InternalAndReservedMethod4IPlatformProperties (); */
-  NS_IMETHOD InternalAndReservedMethod4IPlatformProperties(void) = 0;
 
 };
 
@@ -21869,10 +21869,10 @@ class NS_NO_VTABLE IPlatformProperties : public nsISupports {
   NS_IMETHOD GetStorageControllerTypesForBus(StorageBus_T storageBus, PRUint32 *storageControllerTypeSize, StorageControllerType_T **storageControllerType) NS_OVERRIDE; \
   NS_IMETHOD GetStorageControllerHotplugCapable(StorageControllerType_T controllerType, PRBool *hotplugCapable) NS_OVERRIDE; \
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances) NS_OVERRIDE; \
+  NS_IMETHOD GetMinGuestRAM(FirmwareType_T firmware, PRUint32 *minMegabytes) NS_OVERRIDE; \
   NS_IMETHOD InternalAndReservedMethod1IPlatformProperties(void) NS_OVERRIDE; \
   NS_IMETHOD InternalAndReservedMethod2IPlatformProperties(void) NS_OVERRIDE; \
-  NS_IMETHOD InternalAndReservedMethod3IPlatformProperties(void) NS_OVERRIDE; \
-  NS_IMETHOD InternalAndReservedMethod4IPlatformProperties(void) NS_OVERRIDE; 
+  NS_IMETHOD InternalAndReservedMethod3IPlatformProperties(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IPLATFORMPROPERTIES(_to) \
@@ -21926,10 +21926,10 @@ class NS_NO_VTABLE IPlatformProperties : public nsISupports {
   NS_IMETHOD GetStorageControllerTypesForBus(StorageBus_T storageBus, PRUint32 *storageControllerTypeSize, StorageControllerType_T **storageControllerType) { return _to GetStorageControllerTypesForBus(storageBus, storageControllerTypeSize, storageControllerType); } \
   NS_IMETHOD GetStorageControllerHotplugCapable(StorageControllerType_T controllerType, PRBool *hotplugCapable) { return _to GetStorageControllerHotplugCapable(controllerType, hotplugCapable); } \
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances) { return _to GetMaxInstancesOfUSBControllerType(chipset, type, maxInstances); } \
+  NS_IMETHOD GetMinGuestRAM(FirmwareType_T firmware, PRUint32 *minMegabytes) { return _to GetMinGuestRAM(firmware, minMegabytes); } \
   NS_IMETHOD InternalAndReservedMethod1IPlatformProperties(void) { return _to InternalAndReservedMethod1IPlatformProperties(); } \
   NS_IMETHOD InternalAndReservedMethod2IPlatformProperties(void) { return _to InternalAndReservedMethod2IPlatformProperties(); } \
-  NS_IMETHOD InternalAndReservedMethod3IPlatformProperties(void) { return _to InternalAndReservedMethod3IPlatformProperties(); } \
-  NS_IMETHOD InternalAndReservedMethod4IPlatformProperties(void) { return _to InternalAndReservedMethod4IPlatformProperties(); } 
+  NS_IMETHOD InternalAndReservedMethod3IPlatformProperties(void) { return _to InternalAndReservedMethod3IPlatformProperties(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IPLATFORMPROPERTIES(_to) \
@@ -21983,10 +21983,10 @@ class NS_NO_VTABLE IPlatformProperties : public nsISupports {
   NS_IMETHOD GetStorageControllerTypesForBus(StorageBus_T storageBus, PRUint32 *storageControllerTypeSize, StorageControllerType_T **storageControllerType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStorageControllerTypesForBus(storageBus, storageControllerTypeSize, storageControllerType); } \
   NS_IMETHOD GetStorageControllerHotplugCapable(StorageControllerType_T controllerType, PRBool *hotplugCapable) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStorageControllerHotplugCapable(controllerType, hotplugCapable); } \
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMaxInstancesOfUSBControllerType(chipset, type, maxInstances); } \
+  NS_IMETHOD GetMinGuestRAM(FirmwareType_T firmware, PRUint32 *minMegabytes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMinGuestRAM(firmware, minMegabytes); } \
   NS_IMETHOD InternalAndReservedMethod1IPlatformProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IPlatformProperties(); } \
   NS_IMETHOD InternalAndReservedMethod2IPlatformProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IPlatformProperties(); } \
-  NS_IMETHOD InternalAndReservedMethod3IPlatformProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IPlatformProperties(); } \
-  NS_IMETHOD InternalAndReservedMethod4IPlatformProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IPlatformProperties(); } 
+  NS_IMETHOD InternalAndReservedMethod3IPlatformProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IPlatformProperties(); } 
 
 #define COM_FORWARD_IPlatformProperties_GETTER_RawModeSupported_TO(smth) NS_IMETHOD GetRawModeSupported (PRBool * aRawModeSupported) { return smth GetRawModeSupported (aRawModeSupported); }
 #define COM_FORWARD_IPlatformProperties_GETTER_RawModeSupported_TO_OBJ(obj) COM_FORWARD_IPlatformProperties_GETTER_RawModeSupported_TO ((obj)->)
@@ -22090,6 +22090,9 @@ class NS_NO_VTABLE IPlatformProperties : public nsISupports {
 #define COM_FORWARD_IPlatformProperties_GetMaxInstancesOfUSBControllerType_TO(smth) NS_IMETHOD GetMaxInstancesOfUSBControllerType (PRUint32 aChipset, PRUint32 aType, PRUint32 * aMaxInstances) { return smth GetMaxInstancesOfUSBControllerType (aChipset, aType, aMaxInstances); }
 #define COM_FORWARD_IPlatformProperties_GetMaxInstancesOfUSBControllerType_TO_OBJ(obj) COM_FORWARD_IPlatformProperties_GetMaxInstancesOfUSBControllerType_TO ((obj)->)
 #define COM_FORWARD_IPlatformProperties_GetMaxInstancesOfUSBControllerType_TO_BASE(base) COM_FORWARD_IPlatformProperties_GetMaxInstancesOfUSBControllerType_TO (base::)
+#define COM_FORWARD_IPlatformProperties_GetMinGuestRAM_TO(smth) NS_IMETHOD GetMinGuestRAM (PRUint32 aFirmware, PRUint32 * aMinMegabytes) { return smth GetMinGuestRAM (aFirmware, aMinMegabytes); }
+#define COM_FORWARD_IPlatformProperties_GetMinGuestRAM_TO_OBJ(obj) COM_FORWARD_IPlatformProperties_GetMinGuestRAM_TO ((obj)->)
+#define COM_FORWARD_IPlatformProperties_GetMinGuestRAM_TO_BASE(base) COM_FORWARD_IPlatformProperties_GetMinGuestRAM_TO (base::)
 #define COM_FORWARD_IPlatformProperties_TO(smth) NS_FORWARD_IPLATFORMPROPERTIES (smth)
 #define COM_FORWARD_IPlatformProperties_TO_OBJ(obj) COM_FORWARD_IPlatformProperties_TO ((obj)->)
 #define COM_FORWARD_IPlatformProperties_TO_BASE(base) COM_FORWARD_IPlatformProperties_TO (base::)
@@ -30177,6 +30180,10 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   /* readonly attribute long long uptime; */
   NS_IMETHOD GetUptime(PRInt64 *aUptime) = 0;
 
+  /* attribute boolean recompiledIEMExecution; */
+  NS_IMETHOD GetRecompiledIEMExecution(PRBool *aRecompiledIEMExecution) = 0;
+  NS_IMETHOD SetRecompiledIEMExecution(PRBool aRecompiledIEMExecution) = 0;
+
   /* readonly attribute unsigned long InternalAndReservedAttribute1IMachineDebugger; */
   NS_IMETHOD GetInternalAndReservedAttribute1IMachineDebugger(PRUint32 *aInternalAndReservedAttribute1IMachineDebugger) = 0;
 
@@ -30218,12 +30225,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
 
   /* readonly attribute unsigned long InternalAndReservedAttribute14IMachineDebugger; */
   NS_IMETHOD GetInternalAndReservedAttribute14IMachineDebugger(PRUint32 *aInternalAndReservedAttribute14IMachineDebugger) = 0;
-
-  /* readonly attribute unsigned long InternalAndReservedAttribute15IMachineDebugger; */
-  NS_IMETHOD GetInternalAndReservedAttribute15IMachineDebugger(PRUint32 *aInternalAndReservedAttribute15IMachineDebugger) = 0;
-
-  /* readonly attribute unsigned long InternalAndReservedAttribute16IMachineDebugger; */
-  NS_IMETHOD GetInternalAndReservedAttribute16IMachineDebugger(PRUint32 *aInternalAndReservedAttribute16IMachineDebugger) = 0;
 
   /* void dumpGuestCore (in wstring filename, in wstring compression); */
   NS_IMETHOD DumpGuestCore(const PRUnichar *filename, const PRUnichar *compression) = 0;
@@ -30377,6 +30378,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetVirtualTimeRate(PRUint32 *aVirtualTimeRate) NS_OVERRIDE; \
   NS_IMETHOD SetVirtualTimeRate(PRUint32 aVirtualTimeRate) NS_OVERRIDE; \
   NS_IMETHOD GetUptime(PRInt64 *aUptime) NS_OVERRIDE; \
+  NS_IMETHOD GetRecompiledIEMExecution(PRBool *aRecompiledIEMExecution) NS_OVERRIDE; \
+  NS_IMETHOD SetRecompiledIEMExecution(PRBool aRecompiledIEMExecution) NS_OVERRIDE; \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachineDebugger(PRUint32 *aInternalAndReservedAttribute1IMachineDebugger) NS_OVERRIDE; \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachineDebugger(PRUint32 *aInternalAndReservedAttribute2IMachineDebugger) NS_OVERRIDE; \
   NS_IMETHOD GetInternalAndReservedAttribute3IMachineDebugger(PRUint32 *aInternalAndReservedAttribute3IMachineDebugger) NS_OVERRIDE; \
@@ -30391,8 +30394,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IMachineDebugger(PRUint32 *aInternalAndReservedAttribute12IMachineDebugger) NS_OVERRIDE; \
   NS_IMETHOD GetInternalAndReservedAttribute13IMachineDebugger(PRUint32 *aInternalAndReservedAttribute13IMachineDebugger) NS_OVERRIDE; \
   NS_IMETHOD GetInternalAndReservedAttribute14IMachineDebugger(PRUint32 *aInternalAndReservedAttribute14IMachineDebugger) NS_OVERRIDE; \
-  NS_IMETHOD GetInternalAndReservedAttribute15IMachineDebugger(PRUint32 *aInternalAndReservedAttribute15IMachineDebugger) NS_OVERRIDE; \
-  NS_IMETHOD GetInternalAndReservedAttribute16IMachineDebugger(PRUint32 *aInternalAndReservedAttribute16IMachineDebugger) NS_OVERRIDE; \
   NS_IMETHOD DumpGuestCore(const PRUnichar *filename, const PRUnichar *compression) NS_OVERRIDE; \
   NS_IMETHOD DumpHostProcessCore(const PRUnichar *filename, const PRUnichar *compression) NS_OVERRIDE; \
   NS_IMETHOD Info(const PRUnichar *name, const PRUnichar *args, PRUnichar **info) NS_OVERRIDE; \
@@ -30460,6 +30461,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetVirtualTimeRate(PRUint32 *aVirtualTimeRate) { return _to GetVirtualTimeRate(aVirtualTimeRate); } \
   NS_IMETHOD SetVirtualTimeRate(PRUint32 aVirtualTimeRate) { return _to SetVirtualTimeRate(aVirtualTimeRate); } \
   NS_IMETHOD GetUptime(PRInt64 *aUptime) { return _to GetUptime(aUptime); } \
+  NS_IMETHOD GetRecompiledIEMExecution(PRBool *aRecompiledIEMExecution) { return _to GetRecompiledIEMExecution(aRecompiledIEMExecution); } \
+  NS_IMETHOD SetRecompiledIEMExecution(PRBool aRecompiledIEMExecution) { return _to SetRecompiledIEMExecution(aRecompiledIEMExecution); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachineDebugger(PRUint32 *aInternalAndReservedAttribute1IMachineDebugger) { return _to GetInternalAndReservedAttribute1IMachineDebugger(aInternalAndReservedAttribute1IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachineDebugger(PRUint32 *aInternalAndReservedAttribute2IMachineDebugger) { return _to GetInternalAndReservedAttribute2IMachineDebugger(aInternalAndReservedAttribute2IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IMachineDebugger(PRUint32 *aInternalAndReservedAttribute3IMachineDebugger) { return _to GetInternalAndReservedAttribute3IMachineDebugger(aInternalAndReservedAttribute3IMachineDebugger); } \
@@ -30474,8 +30477,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IMachineDebugger(PRUint32 *aInternalAndReservedAttribute12IMachineDebugger) { return _to GetInternalAndReservedAttribute12IMachineDebugger(aInternalAndReservedAttribute12IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute13IMachineDebugger(PRUint32 *aInternalAndReservedAttribute13IMachineDebugger) { return _to GetInternalAndReservedAttribute13IMachineDebugger(aInternalAndReservedAttribute13IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute14IMachineDebugger(PRUint32 *aInternalAndReservedAttribute14IMachineDebugger) { return _to GetInternalAndReservedAttribute14IMachineDebugger(aInternalAndReservedAttribute14IMachineDebugger); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IMachineDebugger(PRUint32 *aInternalAndReservedAttribute15IMachineDebugger) { return _to GetInternalAndReservedAttribute15IMachineDebugger(aInternalAndReservedAttribute15IMachineDebugger); } \
-  NS_IMETHOD GetInternalAndReservedAttribute16IMachineDebugger(PRUint32 *aInternalAndReservedAttribute16IMachineDebugger) { return _to GetInternalAndReservedAttribute16IMachineDebugger(aInternalAndReservedAttribute16IMachineDebugger); } \
   NS_IMETHOD DumpGuestCore(const PRUnichar *filename, const PRUnichar *compression) { return _to DumpGuestCore(filename, compression); } \
   NS_IMETHOD DumpHostProcessCore(const PRUnichar *filename, const PRUnichar *compression) { return _to DumpHostProcessCore(filename, compression); } \
   NS_IMETHOD Info(const PRUnichar *name, const PRUnichar *args, PRUnichar **info) { return _to Info(name, args, info); } \
@@ -30543,6 +30544,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetVirtualTimeRate(PRUint32 *aVirtualTimeRate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVirtualTimeRate(aVirtualTimeRate); } \
   NS_IMETHOD SetVirtualTimeRate(PRUint32 aVirtualTimeRate) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVirtualTimeRate(aVirtualTimeRate); } \
   NS_IMETHOD GetUptime(PRInt64 *aUptime) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUptime(aUptime); } \
+  NS_IMETHOD GetRecompiledIEMExecution(PRBool *aRecompiledIEMExecution) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecompiledIEMExecution(aRecompiledIEMExecution); } \
+  NS_IMETHOD SetRecompiledIEMExecution(PRBool aRecompiledIEMExecution) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetRecompiledIEMExecution(aRecompiledIEMExecution); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachineDebugger(PRUint32 *aInternalAndReservedAttribute1IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IMachineDebugger(aInternalAndReservedAttribute1IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachineDebugger(PRUint32 *aInternalAndReservedAttribute2IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IMachineDebugger(aInternalAndReservedAttribute2IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IMachineDebugger(PRUint32 *aInternalAndReservedAttribute3IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IMachineDebugger(aInternalAndReservedAttribute3IMachineDebugger); } \
@@ -30557,8 +30560,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IMachineDebugger(PRUint32 *aInternalAndReservedAttribute12IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute12IMachineDebugger(aInternalAndReservedAttribute12IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute13IMachineDebugger(PRUint32 *aInternalAndReservedAttribute13IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute13IMachineDebugger(aInternalAndReservedAttribute13IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute14IMachineDebugger(PRUint32 *aInternalAndReservedAttribute14IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute14IMachineDebugger(aInternalAndReservedAttribute14IMachineDebugger); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IMachineDebugger(PRUint32 *aInternalAndReservedAttribute15IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute15IMachineDebugger(aInternalAndReservedAttribute15IMachineDebugger); } \
-  NS_IMETHOD GetInternalAndReservedAttribute16IMachineDebugger(PRUint32 *aInternalAndReservedAttribute16IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute16IMachineDebugger(aInternalAndReservedAttribute16IMachineDebugger); } \
   NS_IMETHOD DumpGuestCore(const PRUnichar *filename, const PRUnichar *compression) { return !_to ? NS_ERROR_NULL_POINTER : _to->DumpGuestCore(filename, compression); } \
   NS_IMETHOD DumpHostProcessCore(const PRUnichar *filename, const PRUnichar *compression) { return !_to ? NS_ERROR_NULL_POINTER : _to->DumpHostProcessCore(filename, compression); } \
   NS_IMETHOD Info(const PRUnichar *name, const PRUnichar *args, PRUnichar **info) { return !_to ? NS_ERROR_NULL_POINTER : _to->Info(name, args, info); } \
@@ -30668,6 +30669,12 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
 #define COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO(smth) NS_IMETHOD GetUptime (PRInt64 * aUptime) { return smth GetUptime (aUptime); }
 #define COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO (base::)
+#define COM_FORWARD_IMachineDebugger_GETTER_RecompiledIEMExecution_TO(smth) NS_IMETHOD GetRecompiledIEMExecution (PRBool * aRecompiledIEMExecution) { return smth GetRecompiledIEMExecution (aRecompiledIEMExecution); }
+#define COM_FORWARD_IMachineDebugger_GETTER_RecompiledIEMExecution_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_RecompiledIEMExecution_TO ((obj)->)
+#define COM_FORWARD_IMachineDebugger_GETTER_RecompiledIEMExecution_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_RecompiledIEMExecution_TO (base::)
+#define COM_FORWARD_IMachineDebugger_SETTER_RecompiledIEMExecution_TO(smth) NS_IMETHOD SetRecompiledIEMExecution (PRBool aRecompiledIEMExecution) { return smth SetRecompiledIEMExecution (aRecompiledIEMExecution); }
+#define COM_FORWARD_IMachineDebugger_SETTER_RecompiledIEMExecution_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_RecompiledIEMExecution_TO ((obj)->)
+#define COM_FORWARD_IMachineDebugger_SETTER_RecompiledIEMExecution_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_RecompiledIEMExecution_TO (base::)
 #define COM_FORWARD_IMachineDebugger_DumpGuestCore_TO(smth) NS_IMETHOD DumpGuestCore (PRUnichar * aFilename, PRUnichar * aCompression) { return smth DumpGuestCore (aFilename, aCompression); }
 #define COM_FORWARD_IMachineDebugger_DumpGuestCore_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_DumpGuestCore_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_DumpGuestCore_TO_BASE(base) COM_FORWARD_IMachineDebugger_DumpGuestCore_TO (base::)

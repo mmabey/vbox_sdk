@@ -4387,6 +4387,11 @@ If the machine is in the <a class="el" href="_virtual_box_8idl.html#a80b08f71210
   </table>
   </dd>
 </dl>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_INVALID_VM_STATE</td><td>The VM is not in proper state e.g powered on. </td></tr>
+</table>
+</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If machine becomes inaccessible all passwords are purged. One has to add required passwords again using either <a class="el" href="interface_i_machine.html#a2987389c2cb0041edd49ae80d5b5e3ff">IMachine::addEncryptionPassword</a><b></b> or <a class="el" href="interface_i_machine.html#a6851d6656d1dae72611051a223f1fd76">IMachine::addEncryptionPasswords</a><b></b> methods. </dd></dl>
 
 </div>

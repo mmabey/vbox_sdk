@@ -190,6 +190,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ad9fac11777e5c30fc68302b40a9ee4b4"><td class="memItemLeft" align="right" valign="top">readonly attribute long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine_debugger.html#ad9fac11777e5c30fc68302b40a9ee4b4">uptime</a></td></tr>
 <tr class="memdesc:ad9fac11777e5c30fc68302b40a9ee4b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">VM uptime in milliseconds, i.e.  <br /></td></tr>
 <tr class="separator:ad9fac11777e5c30fc68302b40a9ee4b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fc7ed3ddea6821f2f9cce1131d37193"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine_debugger.html#a7fc7ed3ddea6821f2f9cce1131d37193">recompiledIEMExecution</a></td></tr>
+<tr class="memdesc:a7fc7ed3ddea6821f2f9cce1131d37193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to use the recompiler when executing in the interpreter.  <br /></td></tr>
+<tr class="separator:a7fc7ed3ddea6821f2f9cce1131d37193"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aca096698c0c26e55b73cb42e07c31a0b" name="aca096698c0c26e55b73cb42e07c31a0b"></a>
@@ -1227,7 +1230,9 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Whether to execute all the code in the instruction interpreter. </p>
-<p>This is mainly for testing the interpreter and not an execution mode intended for general consumption. </p>
+<p>When <code>true</code> the VM execution engine changes to <a class="el" href="">VMExecutionEngine::Interpreter</a><b></b> (or <a class="el" href="">VMExecutionEngine::Recompiler</a><b></b> when <a class="el" href="interface_i_machine_debugger.html#a7fc7ed3ddea6821f2f9cce1131d37193">IMachineDebugger::recompiledIEMExecution</a><b></b> is set to <code>true</code>).</p>
+<p>This is mainly for temporarily testing the interpreter and its recompiler.</p>
+<p>See also <a class="el" href="interface_i_machine.html#a87d572badb3f0a926770566b3d1795e7">IMachine::VMExecutionEngine</a><b></b> for how to permanently configure a VM to run in <a class="el" href="">VMExecutionEngine::Interpreter</a><b></b> mode. </p>
 
 </div>
 </div>
@@ -1488,6 +1493,26 @@ Public Attributes</h2></td></tr>
 
 <p>VM uptime in milliseconds, i.e. </p>
 <p>time in which it could have been executing guest code. Excludes the time when the VM was paused. </p>
+
+</div>
+</div>
+<a id="a7fc7ed3ddea6821f2f9cce1131d37193" name="a7fc7ed3ddea6821f2f9cce1131d37193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fc7ed3ddea6821f2f9cce1131d37193">&#9670;&#160;</a></span>recompiledIEMExecution</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute boolean IMachineDebugger::recompiledIEMExecution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Whether to use the recompiler when executing in the interpreter. </p>
+<p>This is used together with <a class="el" href="interface_i_machine_debugger.html#a96451fac6179d24d7bcb66d6048d6730">IMachineDebugger::executeAllInIEM</a><b></b> to temporarily change the main VM execution engine to <a class="el" href="">VMExecutionEngine::Recompiler</a><b></b>.</p>
+<p>If the VM is configured to run in <a class="el" href="">VMExecutionEngine::Interpreter</a><b></b> via <a class="el" href="interface_i_machine.html#a87d572badb3f0a926770566b3d1795e7">IMachine::VMExecutionEngine</a><b></b>, setting this to <code>true</code> temporarily changes it to <a class="el" href="">VMExecutionEngine::Recompiler</a><b></b>.</p>
+<p>This mainly for testing the instruction interpreter in recompiler mode.</p>
+<p>See also <a class="el" href="interface_i_machine.html#a87d572badb3f0a926770566b3d1795e7">IMachine::VMExecutionEngine</a><b></b> for how to permanently configure a VM to run in <a class="el" href="">VMExecutionEngine::Recompiler</a><b></b> mode. </p>
 
 </div>
 </div>
