@@ -1,6 +1,6 @@
 [project]
 name = "vbox-sdk"
-version = "6.1.16"
+version = "6.1.18"
 description = "The VirtualBox Software Developer Kit's Python bindings, as available from https://www.virtualbox.org/wiki/Downloads"
 readme = "README.rst"
 license = "Unlicense"
