@@ -3672,6 +3672,8 @@ class NS_NO_VTABLE VirtualSystemDescriptionType {
 
   enum { HardDiskControllerVirtioSCSI = 60U };
 
+  enum { HardDiskControllerNVMe = 61U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -3772,6 +3774,7 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_BootingFirmware VirtualSystemDescriptionType::BootingFirmware
 # define VirtualSystemDescriptionType_CloudInitScriptPath VirtualSystemDescriptionType::CloudInitScriptPath
 # define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
+# define VirtualSystemDescriptionType_HardDiskControllerNVMe VirtualSystemDescriptionType::HardDiskControllerNVMe
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -3825,6 +3828,7 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_BootingFirmware = VirtualSystemDescriptionType::BootingFirmware,
     VirtualSystemDescriptionType_CloudInitScriptPath = VirtualSystemDescriptionType::CloudInitScriptPath,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
+    VirtualSystemDescriptionType_HardDiskControllerNVMe = VirtualSystemDescriptionType::HardDiskControllerNVMe,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize

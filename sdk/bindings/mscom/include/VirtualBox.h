@@ -10,7 +10,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Oct 12 10:06:06 2023
+/* at Thu Jan 11 12:01:37 2024
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.1-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -3055,7 +3055,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0030
 	VirtualSystemDescriptionType_CloudPublicSSHKey	= 48,
 	VirtualSystemDescriptionType_BootingFirmware	= 49,
 	VirtualSystemDescriptionType_CloudInitScriptPath	= 50,
-	VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI	= 60
+	VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI	= 60,
+	VirtualSystemDescriptionType_HardDiskControllerNVMe	= 61
     } 	VirtualSystemDescriptionType;
 
 #define VirtualSystemDescriptionType_T VirtualSystemDescriptionType

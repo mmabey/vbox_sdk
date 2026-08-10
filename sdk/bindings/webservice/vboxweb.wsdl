@@ -733,6 +733,7 @@
             BootingFirmware: 49 -
             CloudInitScriptPath: 50 -
             HardDiskControllerVirtioSCSI: 60 -
+            HardDiskControllerNVMe: 61 -
             -->
       <xsd:simpleType name="VirtualSystemDescriptionType">
         <xsd:restriction base="xsd:string">
@@ -787,6 +788,7 @@
           <xsd:enumeration value="BootingFirmware"/>
           <xsd:enumeration value="CloudInitScriptPath"/>
           <xsd:enumeration value="HardDiskControllerVirtioSCSI"/>
+          <xsd:enumeration value="HardDiskControllerNVMe"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: VirtualSystemDescriptionValueType -

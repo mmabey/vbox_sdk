@@ -2241,7 +2241,8 @@ typedef enum VirtualSystemDescriptionType
     VirtualSystemDescriptionType_CloudPublicSSHKey = 48,
     VirtualSystemDescriptionType_BootingFirmware = 49,
     VirtualSystemDescriptionType_CloudInitScriptPath = 50,
-    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60
+    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60,
+    VirtualSystemDescriptionType_HardDiskControllerNVMe = 61
 } VirtualSystemDescriptionType;
 /* End of enum VirtualSystemDescriptionType declaration */
 #define VirtualSystemDescriptionType_T PRUint32

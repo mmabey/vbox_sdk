@@ -4026,6 +4026,7 @@
     <const name="BootingFirmware" value="49" />
     <const name="CloudInitScriptPath" value="50" />
     <const name="HardDiskControllerVirtioSCSI" value="60" />
+    <const name="HardDiskControllerNVMe" value="61" />
   </enum>
 
   <enum
