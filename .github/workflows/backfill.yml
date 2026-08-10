@@ -1,0 +1,42 @@
+name: Backfill a historical VirtualBox SDK release
+
+# Manual only -- publishes one specific past VirtualBox version as a pinnable
+# vbox-sdk release, reusing the exact same release.py path check-new-release.yml
+# uses for new versions. Scoped to 6.x/7.x per the backfill decision; nothing
+# stops running it against an older version by hand if that changes later.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "VirtualBox SDK version to release, e.g. 7.0.14"
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation
+          fetch-depth: 0
+
+      - name: Fetch main and pylibsonly so release.py can create worktrees for them
+        run: |
+          git fetch origin main:main pylibsonly:pylibsonly
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - run: uv sync
+
+      - name: Configure git identity for automated commits
+        run: |
+          git config user.name "vbox-sdk release bot"
+          git config user.email "actions@github.com"
+
+      - name: Release the requested version
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: uv run scripts/release.py --version "${{ inputs.version }}"

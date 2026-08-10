@@ -1,0 +1,38 @@
+name: Check for a new VirtualBox SDK release
+
+on:
+  schedule:
+    # Weekly is plenty -- Oracle doesn't ship VirtualBox point releases more
+    # often than that, and this only needs to catch up eventually, not instantly.
+    - cron: "17 6 * * 1"
+  workflow_dispatch: {}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation
+          fetch-depth: 0
+
+      - name: Fetch main and pylibsonly so release.py can create worktrees for them
+        run: |
+          git fetch origin main:main pylibsonly:pylibsonly
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - run: uv sync
+
+      - name: Configure git identity for automated commits
+        run: |
+          git config user.name "vbox-sdk release bot"
+          git config user.email "actions@github.com"
+
+      - name: Check for and publish any new VirtualBox SDK releases
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: uv run scripts/release.py

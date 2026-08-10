@@ -1,0 +1,28 @@
+[project]
+name = "vbox-sdk-automation"
+version = "0"
+description = "Release automation for vbox-sdk: not published anywhere, CI plumbing only."
+requires-python = ">=3.12"
+dependencies = [
+    "requests",
+    "beautifulsoup4",
+    "lxml",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
