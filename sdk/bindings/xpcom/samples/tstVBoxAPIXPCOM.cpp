@@ -1,4 +1,4 @@
-/* $Id: tstVBoxAPIXPCOM.cpp 155244 2023-01-17 14:15:46Z bird $ */
+/* $Id: tstVBoxAPIXPCOM.cpp 161672 2024-02-14 14:19:45Z bird $ */
 /** @file
  *
  * tstVBoxAPIXPCOM - sample program to illustrate the VirtualBox
@@ -103,7 +103,7 @@ void printErrorInfo();
  *
  * @param virtualBox VirtualBox instance object.
  */
-void listVMs(IVirtualBox *virtualBox)
+static void listVMs(IVirtualBox *virtualBox)
 {
     nsresult rc;
 
@@ -187,7 +187,7 @@ void listVMs(IVirtualBox *virtualBox)
  *
  * @param virtualBox VirtualBox instance object.
  */
-void createVM(IVirtualBox *virtualBox)
+static void createVM(IVirtualBox *virtualBox)
 {
     nsresult rc;
     /*
@@ -197,6 +197,7 @@ void createVM(IVirtualBox *virtualBox)
     nsCOMPtr<IMachine> machine;
     rc = virtualBox->CreateMachine(NULL,        /* settings file */
                                    NS_LITERAL_STRING("A brand new name").get(),
+                                   PlatformArchitecture_x86,
                                    0, nsnull,   /* groups (safearray)*/
                                    nsnull,      /* ostype */
                                    nsnull,      /* create flags */
@@ -228,7 +229,7 @@ void createVM(IVirtualBox *virtualBox)
      * guest OS type collection and enumerating it.
      */
     nsCOMPtr<IGuestOSType> osType;
-    rc = virtualBox->GetGuestOSType(NS_LITERAL_STRING("Windows2000").get(),
+    rc = virtualBox->GetGuestOSType(NS_LITERAL_STRING(GUEST_OS_ID_STR_X86("Windows2000")).get(),
                                     getter_AddRefs(osType));
     if (NS_FAILED(rc))
     {
@@ -236,7 +237,7 @@ void createVM(IVirtualBox *virtualBox)
     }
     else
     {
-        machine->SetOSTypeId(NS_LITERAL_STRING("Windows2000").get());
+        machine->SetOSTypeId(NS_LITERAL_STRING(GUEST_OS_ID_STR_X86("Windows2000")).get());
     }
 
     /*
@@ -612,8 +613,7 @@ int main(int argc, char **argv)
  */
 char *nsIDToString(nsID *guid)
 {
-    char *res = (char*)malloc(39);
-
+    char *res = (char *)malloc(39);
     if (res != NULL)
     {
         snprintf(res, 39, "{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
@@ -632,8 +632,7 @@ char *nsIDToString(nsID *guid)
  */
 void printErrorInfo()
 {
-    nsresult rc;
-
+    nsresult rc = NS_ERROR_UNEXPECTED;
     nsCOMPtr<nsIExceptionService> es;
     es = do_GetService(NS_EXCEPTIONSERVICE_CONTRACTID, &rc);
     if (NS_SUCCEEDED(rc))

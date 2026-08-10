@@ -166,33 +166,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a79f89295518cbfcd582c9a63602f795a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a79f89295518cbfcd582c9a63602f795a">setExtraData</a> (in wstring key, in wstring value)</td></tr>
 <tr class="memdesc:a79f89295518cbfcd582c9a63602f795a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets associated machine-specific extra data.  <br /></td></tr>
 <tr class="separator:a79f89295518cbfcd582c9a63602f795a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a816e161212a55bafd2aac65cadd817c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a816e161212a55bafd2aac65cadd817c2">getCPUProperty</a> (in <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175a">CPUPropertyType</a> property, [retval] out boolean value)</td></tr>
-<tr class="memdesc:a816e161212a55bafd2aac65cadd817c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the virtual CPU boolean value of the specified property.  <br /></td></tr>
-<tr class="separator:a816e161212a55bafd2aac65cadd817c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8953644f3d8072c4270c4caf0006c2ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a8953644f3d8072c4270c4caf0006c2ed">setCPUProperty</a> (in <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175a">CPUPropertyType</a> property, in boolean value)</td></tr>
-<tr class="memdesc:a8953644f3d8072c4270c4caf0006c2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the virtual CPU boolean value of the specified property.  <br /></td></tr>
-<tr class="separator:a8953644f3d8072c4270c4caf0006c2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43bc89a0ed0297ea28f2d24aed248403"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a43bc89a0ed0297ea28f2d24aed248403">getCPUIDLeafByOrdinal</a> (in unsigned long ordinal, out unsigned long idx, out unsigned long idxSub, out unsigned long valEax, out unsigned long valEbx, out unsigned long valEcx, out unsigned long valEdx)</td></tr>
-<tr class="memdesc:a43bc89a0ed0297ea28f2d24aed248403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to enumerate CPUID information override values.  <br /></td></tr>
-<tr class="separator:a43bc89a0ed0297ea28f2d24aed248403"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3d134b610b678c03d48a9579516da57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#aa3d134b610b678c03d48a9579516da57">getCPUIDLeaf</a> (in unsigned long idx, in unsigned long idxSub, out unsigned long valEax, out unsigned long valEbx, out unsigned long valEcx, out unsigned long valEdx)</td></tr>
-<tr class="memdesc:aa3d134b610b678c03d48a9579516da57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the virtual CPU cpuid information for the specified leaf.  <br /></td></tr>
-<tr class="separator:aa3d134b610b678c03d48a9579516da57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add7407cb2b9d857df7dc4e923e952a43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#add7407cb2b9d857df7dc4e923e952a43">setCPUIDLeaf</a> (in unsigned long idx, in unsigned long idxSub, in unsigned long valEax, in unsigned long valEbx, in unsigned long valEcx, in unsigned long valEdx)</td></tr>
-<tr class="memdesc:add7407cb2b9d857df7dc4e923e952a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the virtual CPU cpuid information for the specified leaf.  <br /></td></tr>
-<tr class="separator:add7407cb2b9d857df7dc4e923e952a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a708dba94c057bf478742341c8d5ab9d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a708dba94c057bf478742341c8d5ab9d4">removeCPUIDLeaf</a> (in unsigned long idx, in unsigned long idxSub)</td></tr>
-<tr class="memdesc:a708dba94c057bf478742341c8d5ab9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the virtual CPU cpuid leaf for the specified index.  <br /></td></tr>
-<tr class="separator:a708dba94c057bf478742341c8d5ab9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaae582c5edb838dfa96f62a48b496fe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#aaae582c5edb838dfa96f62a48b496fe1">removeAllCPUIDLeaves</a> ()</td></tr>
-<tr class="memdesc:aaae582c5edb838dfa96f62a48b496fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all the virtual CPU cpuid leaves.  <br /></td></tr>
-<tr class="separator:aaae582c5edb838dfa96f62a48b496fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af66a4dbd9632a51946f57c0b8f1cbfbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#af66a4dbd9632a51946f57c0b8f1cbfbf">getHWVirtExProperty</a> (in <a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cb">HWVirtExPropertyType</a> property, [retval] out boolean value)</td></tr>
-<tr class="memdesc:af66a4dbd9632a51946f57c0b8f1cbfbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of the specified hardware virtualization boolean property.  <br /></td></tr>
-<tr class="separator:af66a4dbd9632a51946f57c0b8f1cbfbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e38cff5f3af00bdb490548a82ac7b44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a4e38cff5f3af00bdb490548a82ac7b44">setHWVirtExProperty</a> (in <a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cb">HWVirtExPropertyType</a> property, in boolean value)</td></tr>
-<tr class="memdesc:a4e38cff5f3af00bdb490548a82ac7b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a new value for the specified hardware virtualization boolean property.  <br /></td></tr>
-<tr class="separator:a4e38cff5f3af00bdb490548a82ac7b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a579aa5eb632fd4a0f85e53ed927ec9b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a579aa5eb632fd4a0f85e53ed927ec9b2">setSettingsFilePath</a> (in wstring <a class="el" href="interface_i_machine.html#a7e7b7939c050afa7475e249e06961e75">settingsFilePath</a>, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
 <tr class="memdesc:a579aa5eb632fd4a0f85e53ed927ec9b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Currently, it is an error to change this property on any machine.  <br /></td></tr>
 <tr class="separator:a579aa5eb632fd4a0f85e53ed927ec9b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -391,9 +364,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aabba6fd260612821bb75b86b12292f0c"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_graphics_adapter.html">IGraphicsAdapter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#aabba6fd260612821bb75b86b12292f0c">graphicsAdapter</a></td></tr>
 <tr class="memdesc:aabba6fd260612821bb75b86b12292f0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphics adapter object.  <br /></td></tr>
 <tr class="separator:aabba6fd260612821bb75b86b12292f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72dd7fe9c6a11670842c43d3e4b5736b"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_b_i_o_s_settings.html">IBIOSSettings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a72dd7fe9c6a11670842c43d3e4b5736b">BIOSSettings</a></td></tr>
-<tr class="memdesc:a72dd7fe9c6a11670842c43d3e4b5736b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object containing all BIOS settings.  <br /></td></tr>
-<tr class="separator:a72dd7fe9c6a11670842c43d3e4b5736b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774e1dc666b5f28a0ba43c1ed0a8bdbf"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_platform.html">IPlatform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a774e1dc666b5f28a0ba43c1ed0a8bdbf">platform</a></td></tr>
+<tr class="memdesc:a774e1dc666b5f28a0ba43c1ed0a8bdbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associated platform object.  <br /></td></tr>
+<tr class="separator:a774e1dc666b5f28a0ba43c1ed0a8bdbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca6885010714dd25ffbf00b79c0144c9"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_firmware_settings.html">IFirmwareSettings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#aca6885010714dd25ffbf00b79c0144c9">firmwareSettings</a></td></tr>
+<tr class="memdesc:aca6885010714dd25ffbf00b79c0144c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object containing all firmware settings.  <br /></td></tr>
+<tr class="separator:aca6885010714dd25ffbf00b79c0144c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a235de4969e89db6d7d84c6f8d6bd4353"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_trusted_platform_module.html">ITrustedPlatformModule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a235de4969e89db6d7d84c6f8d6bd4353">trustedPlatformModule</a></td></tr>
 <tr class="memdesc:a235de4969e89db6d7d84c6f8d6bd4353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object containing all TPM settings.  <br /></td></tr>
 <tr class="separator:a235de4969e89db6d7d84c6f8d6bd4353"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -403,24 +379,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a724d49f862f89708a37d0bdcc6d49be1"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_recording_settings.html">IRecordingSettings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a724d49f862f89708a37d0bdcc6d49be1">recordingSettings</a></td></tr>
 <tr class="memdesc:a724d49f862f89708a37d0bdcc6d49be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object containing all recording settings.  <br /></td></tr>
 <tr class="separator:a724d49f862f89708a37d0bdcc6d49be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc5c21a35eabc1db1d3157878a6d9ec6"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#afddb85483810aea160a6bf2c90259b55">FirmwareType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#adc5c21a35eabc1db1d3157878a6d9ec6">firmwareType</a></td></tr>
-<tr class="memdesc:adc5c21a35eabc1db1d3157878a6d9ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of firmware (such as legacy BIOS or EFI), used for initial bootstrap in this VM.  <br /></td></tr>
-<tr class="separator:adc5c21a35eabc1db1d3157878a6d9ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a169cccf5417aa6c90b4515f45b919d2e"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#ae904ea9e2892b3cb117b076fdf4c8897">PointingHIDType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a169cccf5417aa6c90b4515f45b919d2e">pointingHIDType</a></td></tr>
 <tr class="memdesc:a169cccf5417aa6c90b4515f45b919d2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of pointing HID (such as mouse or tablet) used in this VM.  <br /></td></tr>
 <tr class="separator:a169cccf5417aa6c90b4515f45b919d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a837c6f223122e587ff00027346a9f148"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#af8b91ad2ad35847326c7d9d4c9587142">KeyboardHIDType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a837c6f223122e587ff00027346a9f148">keyboardHIDType</a></td></tr>
 <tr class="memdesc:a837c6f223122e587ff00027346a9f148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of keyboard HID used in this VM.  <br /></td></tr>
 <tr class="separator:a837c6f223122e587ff00027346a9f148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80240bbec6fb99a78aa903c5e4047287"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a80240bbec6fb99a78aa903c5e4047287">HPETEnabled</a></td></tr>
-<tr class="memdesc:a80240bbec6fb99a78aa903c5e4047287"><td class="mdescLeft">&#160;</td><td class="mdescRight">This attribute controls if High Precision Event Timer (HPET) is enabled in this VM.  <br /></td></tr>
-<tr class="separator:a80240bbec6fb99a78aa903c5e4047287"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad027bca4612b7bec68db5eb591230e9e"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffa">ChipsetType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#ad027bca4612b7bec68db5eb591230e9e">chipsetType</a></td></tr>
-<tr class="memdesc:ad027bca4612b7bec68db5eb591230e9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chipset type used in this VM.  <br /></td></tr>
-<tr class="separator:ad027bca4612b7bec68db5eb591230e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14b3229a8bd117be25431520a3a95dca"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#a482e887a75aac4b9497c9785bf830b72">IommuType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a14b3229a8bd117be25431520a3a95dca">iommuType</a></td></tr>
-<tr class="memdesc:a14b3229a8bd117be25431520a3a95dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">IOMMU type used in this VM.  <br /></td></tr>
-<tr class="separator:a14b3229a8bd117be25431520a3a95dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfcf2b4359a54f318fa9f17ee521fd50"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#adfcf2b4359a54f318fa9f17ee521fd50">snapshotFolder</a></td></tr>
 <tr class="memdesc:adfcf2b4359a54f318fa9f17ee521fd50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Full path to the directory used to store snapshot data (differencing media and saved state files) of this machine.  <br /></td></tr>
 <tr class="separator:adfcf2b4359a54f318fa9f17ee521fd50"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -510,9 +474,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a97cc37de9ba8da175b44e7c03baa34bd"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#ad4d63f64a610fd190118618ceac0f6ee">ParavirtProvider</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a97cc37de9ba8da175b44e7c03baa34bd">paravirtProvider</a></td></tr>
 <tr class="memdesc:a97cc37de9ba8da175b44e7c03baa34bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The paravirtualized guest interface provider.  <br /></td></tr>
 <tr class="separator:a97cc37de9ba8da175b44e7c03baa34bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1ec62f64a126aa9645ba55e78089f6e"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#ae1ec62f64a126aa9645ba55e78089f6e">RTCUseUTC</a></td></tr>
-<tr class="memdesc:ae1ec62f64a126aa9645ba55e78089f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">When set to <em>true</em>, the RTC device of the virtual machine will run in UTC time, otherwise in local time.  <br /></td></tr>
-<tr class="separator:ae1ec62f64a126aa9645ba55e78089f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9999c5c9eb8eecac98a45bde62fc3bce"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a9999c5c9eb8eecac98a45bde62fc3bce">IOCacheEnabled</a></td></tr>
 <tr class="memdesc:a9999c5c9eb8eecac98a45bde62fc3bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">When set to <em>true</em>, the builtin I/O cache of the virtual machine will be enabled.  <br /></td></tr>
 <tr class="separator:a9999c5c9eb8eecac98a45bde62fc3bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -552,6 +513,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac3d9918ca129ee856a9e17004a3c6daa"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#acc3c8270a58faac4d5121d99a8549c49">VMProcPriority</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#ac3d9918ca129ee856a9e17004a3c6daa">VMProcessPriority</a></td></tr>
 <tr class="memdesc:ac3d9918ca129ee856a9e17004a3c6daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the priority of the VM process.  <br /></td></tr>
 <tr class="separator:ac3d9918ca129ee856a9e17004a3c6daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87d572badb3f0a926770566b3d1795e7"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a87d572badb3f0a926770566b3d1795e7">VMExecutionEngine</a></td></tr>
+<tr class="memdesc:a87d572badb3f0a926770566b3d1795e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The configured VM execution engine.  <br /></td></tr>
+<tr class="separator:a87d572badb3f0a926770566b3d1795e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15ef62440037c084157ace16494cc563"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a15ef62440037c084157ace16494cc563">paravirtDebug</a></td></tr>
 <tr class="memdesc:a15ef62440037c084157ace16494cc563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug parameters for the paravirtualized guest interface provider.  <br /></td></tr>
 <tr class="separator:a15ef62440037c084157ace16494cc563"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -581,7 +545,7 @@ Public Attributes</h2></td></tr>
 <p>In order to change a machine setting, a session for this machine must be opened using one of the <a class="el" href="interface_i_machine.html#af28da645b00a821547d9cb8e92f8b7b0">IMachine::lockMachine</a><b></b> or <a class="el" href="interface_i_machine.html#aa75e76da42ef908795d235d995262c6f">IMachine::launchVMProcess</a><b></b> methods. After the machine has been successfully locked for a session, a mutable machine object needs to be queried from the session object and then the desired settings changes can be applied to the returned object using <a class="el" href="interface_i_machine.html" title="The IMachine interface represents a virtual machine, or guest, created in VirtualBox.">IMachine</a> attributes and methods. See the <a class="el" href="interface_i_session.html">ISession</a><b></b> interface description for more information about sessions.</p>
 <p>Note that <a class="el" href="interface_i_machine.html" title="The IMachine interface represents a virtual machine, or guest, created in VirtualBox.">IMachine</a> does not provide methods to control virtual machine execution (such as start the machine, or power it down) &ndash; these methods are grouped in a separate interface called <a class="el" href="interface_i_console.html">IConsole</a><b></b>.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="interface_i_session.html">ISession</a><b></b>, <a class="el" href="interface_i_console.html">IConsole</a><b></b></dd></dl>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{300763AF-5D6B-46E6-AA96-273EAC15538A}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{E36A5081-A82A-40BD-9E4E-42A44D6CE50F}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af28da645b00a821547d9cb8e92f8b7b0" name="af28da645b00a821547d9cb8e92f8b7b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af28da645b00a821547d9cb8e92f8b7b0">&#9670;&#160;</a></span>lockMachine()</h2>
@@ -780,7 +744,7 @@ Release the write lock by calling <a class="el" href="interface_i_session.html#a
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>setHardDiskBootOrder(), setNetworkBootOrder()</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position</td><td>Position in the boot order (<code>1</code> to the total number of devices the machine can boot from, as returned by <a class="el" href="interface_i_system_properties.html#a056418a5095fdb892039b01f9521feb0">ISystemProperties::maxBootPosition</a><b></b>).</td></tr>
+    <tr><td class="paramname">position</td><td>Position in the boot order (<code>1</code> to the total number of devices the machine can boot from, as returned by <a class="el" href="interface_i_platform_properties.html#aa9db3a7901507491ac39fa8f14cc05ae">IPlatformProperties::maxBootPosition</a><b></b>).</td></tr>
     <tr><td class="paramname">device</td><td>The type of the device used to boot at the given position.</td></tr>
   </table>
   </dd>
@@ -827,7 +791,7 @@ Release the write lock by calling <a class="el" href="interface_i_session.html#a
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>getHardDiskBootOrder(), getNetworkBootOrder()</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position</td><td>Position in the boot order (<code>1</code> to the total number of devices the machine can boot from, as returned by <a class="el" href="interface_i_system_properties.html#a056418a5095fdb892039b01f9521feb0">ISystemProperties::maxBootPosition</a><b></b>).</td></tr>
+    <tr><td class="paramname">position</td><td>Position in the boot order (<code>1</code> to the total number of devices the machine can boot from, as returned by <a class="el" href="interface_i_platform_properties.html#aa9db3a7901507491ac39fa8f14cc05ae">IPlatformProperties::maxBootPosition</a><b></b>).</td></tr>
     <tr><td class="paramname">device</td><td>Device at the given position.</td></tr>
   </table>
   </dd>
@@ -1885,7 +1849,7 @@ Detaching differencing media implicitly created by <a class="el" href="interface
 </div><div class="memdoc">
 
 <p>Returns the network adapter associated with the given slot. </p>
-<p>Slots are numbered sequentially, starting with zero. The total number of adapters per machine is defined by the <a class="el" href="interface_i_system_properties.html#a73115ead09cad44757bcd7c5428c91b2">ISystemProperties::getMaxNetworkAdapters</a><b></b> property, so the maximum slot number is one less than that property's value.</p>
+<p>Slots are numbered sequentially, starting with zero. The total number of adapters per machine is defined by the <a class="el" href="interface_i_platform_properties.html#ac0492d9c0357bb91c18d9e2ea6222d66">IPlatformProperties::getMaxNetworkAdapters</a><b></b> property, so the maximum slot number is one less than that property's value.</p>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
 <td>E_INVALIDARG</td><td>Invalid <em>slot</em> number. </td></tr>
@@ -2239,7 +2203,7 @@ Detaching differencing media implicitly created by <a class="el" href="interface
 </div><div class="memdoc">
 
 <p>Returns the serial port associated with the given slot. </p>
-<p>Slots are numbered sequentially, starting with zero. The total number of serial ports per machine is defined by the <a class="el" href="interface_i_system_properties.html#a072c31ebdafd2d179cc9d849a92d4040">ISystemProperties::serialPortCount</a><b></b> property, so the maximum slot number is one less than that property's value.</p>
+<p>Slots are numbered sequentially, starting with zero. The total number of serial ports per machine is defined by the <a class="el" href="interface_i_platform_properties.html#a45ef6f80b8e7c5cb62c9e7d9558ad4f1">IPlatformProperties::serialPortCount</a><b></b> property, so the maximum slot number is one less than that property's value.</p>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
 <td>E_INVALIDARG</td><td>Invalid <em>slot</em> number. </td></tr>
@@ -2275,7 +2239,7 @@ Detaching differencing media implicitly created by <a class="el" href="interface
 </div><div class="memdoc">
 
 <p>Returns the parallel port associated with the given slot. </p>
-<p>Slots are numbered sequentially, starting with zero. The total number of parallel ports per machine is defined by the <a class="el" href="interface_i_system_properties.html#a60b8b79900e9643db74fad08f6063aea">ISystemProperties::parallelPortCount</a><b></b> property, so the maximum slot number is one less than that property's value.</p>
+<p>Slots are numbered sequentially, starting with zero. The total number of parallel ports per machine is defined by the <a class="el" href="interface_i_platform_properties.html#aaaa86a579dad2108f46af2b886b6543e">IPlatformProperties::parallelPortCount</a><b></b> property, so the maximum slot number is one less than that property's value.</p>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
 <td>E_INVALIDARG</td><td>Invalid <em>slot</em> number. </td></tr>
@@ -2409,459 +2373,6 @@ This method can be called outside the machine session and therefore it's a calle
 
 </div>
 </div>
-<a id="a816e161212a55bafd2aac65cadd817c2" name="a816e161212a55bafd2aac65cadd817c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a816e161212a55bafd2aac65cadd817c2">&#9670;&#160;</a></span>getCPUProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::getCPUProperty </td>
-          <td>(</td>
-          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175a">CPUPropertyType</a>&#160;</td>
-          <td class="paramname"><em>property</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[retval] out boolean&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the virtual CPU boolean value of the specified property. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">property</td><td>Property type to query.</td></tr>
-    <tr><td class="paramname">value</td><td>Property value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid property. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
-<a id="a8953644f3d8072c4270c4caf0006c2ed" name="a8953644f3d8072c4270c4caf0006c2ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8953644f3d8072c4270c4caf0006c2ed">&#9670;&#160;</a></span>setCPUProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::setCPUProperty </td>
-          <td>(</td>
-          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175a">CPUPropertyType</a>&#160;</td>
-          <td class="paramname"><em>property</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in boolean&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets the virtual CPU boolean value of the specified property. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">property</td><td>Property type to query.</td></tr>
-    <tr><td class="paramname">value</td><td>Property value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid property. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
-<a id="a43bc89a0ed0297ea28f2d24aed248403" name="a43bc89a0ed0297ea28f2d24aed248403"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43bc89a0ed0297ea28f2d24aed248403">&#9670;&#160;</a></span>getCPUIDLeafByOrdinal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::getCPUIDLeafByOrdinal </td>
-          <td>(</td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>ordinal</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>idxSub</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEax</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEbx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEcx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEdx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Used to enumerate CPUID information override values. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ordinal</td><td>The ordinal number of the leaf to get.</td></tr>
-    <tr><td class="paramname">idx</td><td>CPUID leaf index.</td></tr>
-    <tr><td class="paramname">idxSub</td><td>CPUID leaf sub-index.</td></tr>
-    <tr><td class="paramname">valEax</td><td>CPUID leaf value for register eax.</td></tr>
-    <tr><td class="paramname">valEbx</td><td>CPUID leaf value for register ebx.</td></tr>
-    <tr><td class="paramname">valEcx</td><td>CPUID leaf value for register ecx.</td></tr>
-    <tr><td class="paramname">valEdx</td><td>CPUID leaf value for register edx.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid ordinal number is out of range. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
-<a id="aa3d134b610b678c03d48a9579516da57" name="aa3d134b610b678c03d48a9579516da57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3d134b610b678c03d48a9579516da57">&#9670;&#160;</a></span>getCPUIDLeaf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::getCPUIDLeaf </td>
-          <td>(</td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>idxSub</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEax</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEbx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEcx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEdx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the virtual CPU cpuid information for the specified leaf. </p>
-<p>Currently supported index values for cpuid: Standard CPUID leaves: 0 - 0x1f Extended CPUID leaves: 0x80000000 - 0x8000001f VIA CPUID leaves: 0xc0000000 - 0xc000000f</p>
-<p>See the Intel, AMD and VIA programmer's manuals for detailed information about the CPUID instruction and its leaves.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">idx</td><td>CPUID leaf index.</td></tr>
-    <tr><td class="paramname">idxSub</td><td>CPUID leaf sub-index (ECX). Set to 0xffffffff (or 0) if not applicable.</td></tr>
-    <tr><td class="paramname">valEax</td><td>CPUID leaf value for register eax.</td></tr>
-    <tr><td class="paramname">valEbx</td><td>CPUID leaf value for register ebx.</td></tr>
-    <tr><td class="paramname">valEcx</td><td>CPUID leaf value for register ecx.</td></tr>
-    <tr><td class="paramname">valEdx</td><td>CPUID leaf value for register edx.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid index. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
-<a id="add7407cb2b9d857df7dc4e923e952a43" name="add7407cb2b9d857df7dc4e923e952a43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add7407cb2b9d857df7dc4e923e952a43">&#9670;&#160;</a></span>setCPUIDLeaf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::setCPUIDLeaf </td>
-          <td>(</td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>idxSub</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>valEax</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>valEbx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>valEcx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>valEdx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets the virtual CPU cpuid information for the specified leaf. </p>
-<p>Note that these values are not passed unmodified. VirtualBox clears features that it doesn't support.</p>
-<p>Currently supported index values for cpuid: Standard CPUID leaves: 0 - 0x1f Extended CPUID leaves: 0x80000000 - 0x8000001f VIA CPUID leaves: 0xc0000000 - 0xc000000f</p>
-<p>The subleaf index is only applicable to certain leaves (see manuals as this is subject to change).</p>
-<p>See the Intel, AMD and VIA programmer's manuals for detailed information about the cpuid instruction and its leaves.</p>
-<p>Do not use this method unless you know exactly what you're doing. Misuse can lead to random crashes inside VMs.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">idx</td><td>CPUID leaf index.</td></tr>
-    <tr><td class="paramname">idxSub</td><td>CPUID leaf sub-index (ECX). Set to 0xffffffff (or 0) if not applicable. The 0xffffffff causes it to remove all other subleaves before adding one with sub-index 0.</td></tr>
-    <tr><td class="paramname">valEax</td><td>CPUID leaf value for register eax.</td></tr>
-    <tr><td class="paramname">valEbx</td><td>CPUID leaf value for register ebx.</td></tr>
-    <tr><td class="paramname">valEcx</td><td>CPUID leaf value for register ecx.</td></tr>
-    <tr><td class="paramname">valEdx</td><td>CPUID leaf value for register edx.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid index. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
-<a id="a708dba94c057bf478742341c8d5ab9d4" name="a708dba94c057bf478742341c8d5ab9d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a708dba94c057bf478742341c8d5ab9d4">&#9670;&#160;</a></span>removeCPUIDLeaf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::removeCPUIDLeaf </td>
-          <td>(</td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>idxSub</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Removes the virtual CPU cpuid leaf for the specified index. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">idx</td><td>CPUID leaf index.</td></tr>
-    <tr><td class="paramname">idxSub</td><td>CPUID leaf sub-index (ECX). Set to 0xffffffff (or 0) if not applicable. The 0xffffffff value works like a wildcard.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid index. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
-<a id="aaae582c5edb838dfa96f62a48b496fe1" name="aaae582c5edb838dfa96f62a48b496fe1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaae582c5edb838dfa96f62a48b496fe1">&#9670;&#160;</a></span>removeAllCPUIDLeaves()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::removeAllCPUIDLeaves </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Removes all the virtual CPU cpuid leaves. </p>
-
-</div>
-</div>
-<a id="af66a4dbd9632a51946f57c0b8f1cbfbf" name="af66a4dbd9632a51946f57c0b8f1cbfbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af66a4dbd9632a51946f57c0b8f1cbfbf">&#9670;&#160;</a></span>getHWVirtExProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::getHWVirtExProperty </td>
-          <td>(</td>
-          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cb">HWVirtExPropertyType</a>&#160;</td>
-          <td class="paramname"><em>property</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[retval] out boolean&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the value of the specified hardware virtualization boolean property. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">property</td><td>Property type to query.</td></tr>
-    <tr><td class="paramname">value</td><td>Property value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid property. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
-<a id="a4e38cff5f3af00bdb490548a82ac7b44" name="a4e38cff5f3af00bdb490548a82ac7b44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e38cff5f3af00bdb490548a82ac7b44">&#9670;&#160;</a></span>setHWVirtExProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IMachine::setHWVirtExProperty </td>
-          <td>(</td>
-          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cb">HWVirtExPropertyType</a>&#160;</td>
-          <td class="paramname"><em>property</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in boolean&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets a new value for the specified hardware virtualization boolean property. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">property</td><td>Property type to set.</td></tr>
-    <tr><td class="paramname">value</td><td>New property value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_INVALIDARG</td><td>Invalid property. </td></tr>
-</table>
-</dd></dl>
-
-</div>
-</div>
 <a id="a579aa5eb632fd4a0f85e53ed927ec9b2" name="a579aa5eb632fd4a0f85e53ed927ec9b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a579aa5eb632fd4a0f85e53ed927ec9b2">&#9670;&#160;</a></span>setSettingsFilePath()</h2>
 
@@ -2934,7 +2445,7 @@ This method can be called outside the machine session and therefore it's a calle
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The method sends <a class="el" href="interface_i_machine_data_changed_event.html">IMachineDataChangedEvent</a><b></b> notification event after the configuration has been successfully saved (only for registered machines).</dd>
 <dd>
-Calling this method is only valid on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b> and on new machines created by <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">IVirtualBox::createMachine</a><b></b> but not yet registered, or on unregistered machines after calling <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">IMachine::unregister</a><b></b>. </dd></dl>
+Calling this method is only valid on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b> and on new machines created by <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">IVirtualBox::createMachine</a><b></b> but not yet registered, or on unregistered machines after calling <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">IMachine::unregister</a><b></b>. </dd></dl>
 
 </div>
 </div>
@@ -2959,7 +2470,7 @@ Calling this method is only valid on instances returned by <a class="el" href="i
 <td>VBOX_E_INVALID_VM_STATE</td><td>Virtual machine is not mutable. </td></tr>
 </table>
 </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Calling this method is only valid on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b> and on new machines created by <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">IVirtualBox::createMachine</a><b></b> or opened by <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">IVirtualBox::openMachine</a><b></b> but not yet registered, or on unregistered machines after calling <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">IMachine::unregister</a><b></b>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Calling this method is only valid on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b> and on new machines created by <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">IVirtualBox::createMachine</a><b></b> or opened by <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">IVirtualBox::openMachine</a><b></b> but not yet registered, or on unregistered machines after calling <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">IMachine::unregister</a><b></b>. </dd></dl>
 
 </div>
 </div>
@@ -3052,7 +2563,7 @@ With "Full", the call will behave like with "DetachAllReturnHardDisksOnly", exce
 
 <p>Deletes the files associated with this machine from disk. </p>
 <p>If medium objects are passed in with the <em>aMedia</em> argument, they are closed and, if closing was successful, their storage files are deleted as well. For convenience, this array of media files can be the same as the one returned from a previous <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">unregister</a><b></b> call.</p>
-<p>This method must only be called on machines which are either write-locked (i.e. on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b>) or on unregistered machines (i.e. not yet registered machines created by <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">IVirtualBox::createMachine</a><b></b> or opened by <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">IVirtualBox::openMachine</a><b></b>, or after having called <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">unregister</a><b></b>).</p>
+<p>This method must only be called on machines which are either write-locked (i.e. on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b>) or on unregistered machines (i.e. not yet registered machines created by <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">IVirtualBox::createMachine</a><b></b> or opened by <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">IVirtualBox::openMachine</a><b></b>, or after having called <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">unregister</a><b></b>).</p>
 <p>The following files will be deleted by this method:</p>
 <ul>
 <li>
@@ -4140,7 +3651,7 @@ Finally, the machine's own XML file will be deleted.</li>
 </div><div class="memdoc">
 
 <p>Creates a clone of this machine, either as a full clone (which means creating independent copies of the hard disk media, save states and so on), or as a linked clone (which uses its own differencing media, sharing the parent media with the source machine). </p>
-<p>The target machine object must have been created previously with <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">IVirtualBox::createMachine</a><b></b>, and all the settings will be transferred except the VM name and the hardware UUID. You can set the VM name and the new hardware UUID when creating the target machine. The network MAC addresses are newly created for all enabled network adapters. You can change that behaviour with the options parameter. The operation is performed asynchronously, so the machine object will be not be usable until the <em>progress</em> object signals completion.</p>
+<p>The target machine object must have been created previously with <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">IVirtualBox::createMachine</a><b></b>, and all the settings will be transferred except the VM name and the hardware UUID. You can set the VM name and the new hardware UUID when creating the target machine. The network MAC addresses are newly created for all enabled network adapters. You can change that behaviour with the options parameter. The operation is performed asynchronously, so the machine object will be not be usable until the <em>progress</em> object signals completion.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">target</td><td>Target machine object.</td></tr>
@@ -5076,7 +4587,7 @@ You cannot change the name of the machine if it is running, or if any file in th
 </div><div class="memdoc">
 
 <p>User-defined identifier of the Guest OS type. </p>
-<p>You may use <a class="el" href="interface_i_virtual_box.html#ae5b3d4b5b0869185c42ba8fb1d64a9cf">IVirtualBox::getGuestOSType</a><b></b> to obtain an <a class="el" href="interface_i_guest_o_s_type.html">IGuestOSType</a> object representing details about the given Guest OS type. All Guest OS types are considered valid, even those which are not known to <a class="el" href="interface_i_virtual_box.html#ae5b3d4b5b0869185c42ba8fb1d64a9cf">IVirtualBox::getGuestOSType</a><b></b>.</p>
+<p>You may use <a class="el" href="interface_i_virtual_box.html#ae5b3d4b5b0869185c42ba8fb1d64a9cf">IVirtualBox::getGuestOSType</a><b></b> to obtain an <a class="el" href="interface_i_guest_o_s_type.html" title="Specifies a guest OS type and its recommendations.">IGuestOSType</a> object representing details about the given Guest OS type. All Guest OS types are considered valid, even those which are not known to <a class="el" href="interface_i_virtual_box.html#ae5b3d4b5b0869185c42ba8fb1d64a9cf">IVirtualBox::getGuestOSType</a><b></b>.</p>
 <dl class="section note"><dt>Note</dt><dd>This value may differ from the value returned by <a class="el" href="interface_i_guest.html#a1836d4706baed01b5de022ac2ca25ab6">IGuest::OSTypeId</a><b></b> if Guest Additions are installed to the guest OS. </dd></dl>
 
 </div>
@@ -5246,19 +4757,35 @@ You cannot change the name of the machine if it is running, or if any file in th
 
 </div>
 </div>
-<a id="a72dd7fe9c6a11670842c43d3e4b5736b" name="a72dd7fe9c6a11670842c43d3e4b5736b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72dd7fe9c6a11670842c43d3e4b5736b">&#9670;&#160;</a></span>BIOSSettings</h2>
+<a id="a774e1dc666b5f28a0ba43c1ed0a8bdbf" name="a774e1dc666b5f28a0ba43c1ed0a8bdbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a774e1dc666b5f28a0ba43c1ed0a8bdbf">&#9670;&#160;</a></span>platform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">readonly attribute <a class="el" href="interface_i_b_i_o_s_settings.html">IBIOSSettings</a> IMachine::BIOSSettings</td>
+          <td class="memname">readonly attribute <a class="el" href="interface_i_platform.html">IPlatform</a> IMachine::platform</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Object containing all BIOS settings. </p>
+<p>Associated platform object. </p>
+
+</div>
+</div>
+<a id="aca6885010714dd25ffbf00b79c0144c9" name="aca6885010714dd25ffbf00b79c0144c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca6885010714dd25ffbf00b79c0144c9">&#9670;&#160;</a></span>firmwareSettings</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute <a class="el" href="interface_i_firmware_settings.html">IFirmwareSettings</a> IMachine::firmwareSettings</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Object containing all firmware settings. </p>
 
 </div>
 </div>
@@ -5310,22 +4837,6 @@ You cannot change the name of the machine if it is running, or if any file in th
 
 </div>
 </div>
-<a id="adc5c21a35eabc1db1d3157878a6d9ec6" name="adc5c21a35eabc1db1d3157878a6d9ec6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc5c21a35eabc1db1d3157878a6d9ec6">&#9670;&#160;</a></span>firmwareType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">attribute <a class="el" href="_virtual_box_8idl.html#afddb85483810aea160a6bf2c90259b55">FirmwareType</a> IMachine::firmwareType</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Type of firmware (such as legacy BIOS or EFI), used for initial bootstrap in this VM. </p>
-
-</div>
-</div>
 <a id="a169cccf5417aa6c90b4515f45b919d2e" name="a169cccf5417aa6c90b4515f45b919d2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a169cccf5417aa6c90b4515f45b919d2e">&#9670;&#160;</a></span>pointingHIDType</h2>
 
@@ -5357,55 +4868,6 @@ You cannot change the name of the machine if it is running, or if any file in th
 
 <p>Type of keyboard HID used in this VM. </p>
 <p>The default is typically "PS2Keyboard" but can vary depending on the requirements of the guest operating system. </p>
-
-</div>
-</div>
-<a id="a80240bbec6fb99a78aa903c5e4047287" name="a80240bbec6fb99a78aa903c5e4047287"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80240bbec6fb99a78aa903c5e4047287">&#9670;&#160;</a></span>HPETEnabled</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">attribute boolean IMachine::HPETEnabled</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This attribute controls if High Precision Event Timer (HPET) is enabled in this VM. </p>
-<p>Use this property if you want to provide guests with additional time source, or if guest requires HPET to function correctly. Default is false. </p>
-
-</div>
-</div>
-<a id="ad027bca4612b7bec68db5eb591230e9e" name="ad027bca4612b7bec68db5eb591230e9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad027bca4612b7bec68db5eb591230e9e">&#9670;&#160;</a></span>chipsetType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">attribute <a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffa">ChipsetType</a> IMachine::chipsetType</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Chipset type used in this VM. </p>
-
-</div>
-</div>
-<a id="a14b3229a8bd117be25431520a3a95dca" name="a14b3229a8bd117be25431520a3a95dca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14b3229a8bd117be25431520a3a95dca">&#9670;&#160;</a></span>iommuType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">attribute <a class="el" href="_virtual_box_8idl.html#a482e887a75aac4b9497c9785bf830b72">IommuType</a> IMachine::iommuType</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>IOMMU type used in this VM. </p>
 
 </div>
 </div>
@@ -5589,7 +5051,7 @@ The specified path may not exist, it will be created when necessary. </dd></dl>
 </div><div class="memdoc">
 
 <p>Whether the settings of this machine have been modified (but neither yet saved nor discarded). </p>
-<dl class="section note"><dt>Note</dt><dd>Reading this property is only valid on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b> and on new machines created by <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">IVirtualBox::createMachine</a><b></b> or opened by <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">IVirtualBox::openMachine</a><b></b> but not yet registered, or on unregistered machines after calling <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">IMachine::unregister</a><b></b>. For all other cases, the settings can never be modified.</dd>
+<dl class="section note"><dt>Note</dt><dd>Reading this property is only valid on instances returned by <a class="el" href="interface_i_session.html#a83d8f53d35e522599b192cac168c3495">ISession::machine</a><b></b> and on new machines created by <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">IVirtualBox::createMachine</a><b></b> or opened by <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">IVirtualBox::openMachine</a><b></b> but not yet registered, or on unregistered machines after calling <a class="el" href="interface_i_machine.html#a939a4b0bf949b0347c9e9d2acf320d1b">IMachine::unregister</a><b></b>. For all other cases, the settings can never be modified.</dd>
 <dd>
 For newly created unregistered machines, the value of this property is always <code>true</code> until <a class="el" href="interface_i_machine.html#a2eb47e1d878566569b26893cc12bd8e1">saveSettings</a><b></b> is called (no matter if any machine settings have been changed after the creation or not). For opened machines the value is set to <code>false</code> (and then follows to normal rules). </dd></dl>
 
@@ -5932,23 +5394,6 @@ an attempt to execute the machine is made</li>
 
 </div>
 </div>
-<a id="ae1ec62f64a126aa9645ba55e78089f6e" name="ae1ec62f64a126aa9645ba55e78089f6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1ec62f64a126aa9645ba55e78089f6e">&#9670;&#160;</a></span>RTCUseUTC</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">attribute boolean IMachine::RTCUseUTC</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>When set to <em>true</em>, the RTC device of the virtual machine will run in UTC time, otherwise in local time. </p>
-<p>Especially Unix guests prefer the time in UTC. </p>
-
-</div>
-</div>
 <a id="a9999c5c9eb8eecac98a45bde62fc3bce" name="a9999c5c9eb8eecac98a45bde62fc3bce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9999c5c9eb8eecac98a45bde62fc3bce">&#9670;&#160;</a></span>IOCacheEnabled</h2>
 
@@ -6169,6 +5614,24 @@ an attempt to execute the machine is made</li>
 <td>E_NOTIMPL</td><td>This attribute is currently not implemented. </td></tr>
 </table>
 </dd></dl>
+
+</div>
+</div>
+<a id="a87d572badb3f0a926770566b3d1795e7" name="a87d572badb3f0a926770566b3d1795e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d572badb3f0a926770566b3d1795e7">&#9670;&#160;</a></span>VMExecutionEngine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a> IMachine::VMExecutionEngine</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The configured VM execution engine. </p>
+<p>It is a VM setting which can be changed both before starting the VM and when a VM is saved.</p>
+<p>The default value is 'Default', which selects the default aka best available execution engine available on the host. </p>
 
 </div>
 </div>

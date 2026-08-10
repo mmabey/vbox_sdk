@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIFactory.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIFactory.idl
  */
 
 #ifndef __gen_nsIFactory_h__
@@ -69,8 +69,8 @@ class NS_NO_VTABLE nsIFactory : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIFACTORY \
-  NS_IMETHOD CreateInstance(nsISupports *aOuter, const nsIID & iid, void * *result); \
-  NS_IMETHOD LockFactory(PRBool lock); 
+  NS_IMETHOD CreateInstance(nsISupports *aOuter, const nsIID & iid, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD LockFactory(PRBool lock) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIFACTORY(_to) \

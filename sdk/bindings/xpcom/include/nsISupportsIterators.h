@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsIterators.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsIterators.idl
  */
 
 #ifndef __gen_nsISupportsIterators_h__
@@ -53,8 +53,8 @@ class NS_NO_VTABLE nsIOutputIterator : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIOUTPUTITERATOR \
-  NS_IMETHOD PutElement(nsISupports *anElementToPut); \
-  NS_IMETHOD StepForward(void); 
+  NS_IMETHOD PutElement(nsISupports *anElementToPut) NS_OVERRIDE; \
+  NS_IMETHOD StepForward(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIOUTPUTITERATOR(_to) \
@@ -170,10 +170,10 @@ class NS_NO_VTABLE nsIInputIterator : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIINPUTITERATOR \
-  NS_IMETHOD GetElement(nsISupports **_retval); \
-  NS_IMETHOD StepForward(void); \
-  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval); \
-  NS_IMETHOD Clone(nsISupports **_retval); 
+  NS_IMETHOD GetElement(nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD StepForward(void) NS_OVERRIDE; \
+  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Clone(nsISupports **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIINPUTITERATOR(_to) \
@@ -318,11 +318,11 @@ class NS_NO_VTABLE nsIForwardIterator : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIFORWARDITERATOR \
-  NS_IMETHOD GetElement(nsISupports **_retval); \
-  NS_IMETHOD PutElement(nsISupports *anElementToPut); \
-  NS_IMETHOD StepForward(void); \
-  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval); \
-  NS_IMETHOD Clone(nsISupports **_retval); 
+  NS_IMETHOD GetElement(nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD PutElement(nsISupports *anElementToPut) NS_OVERRIDE; \
+  NS_IMETHOD StepForward(void) NS_OVERRIDE; \
+  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Clone(nsISupports **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIFORWARDITERATOR(_to) \
@@ -481,12 +481,12 @@ class NS_NO_VTABLE nsIBidirectionalIterator : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIBIDIRECTIONALITERATOR \
-  NS_IMETHOD GetElement(nsISupports **_retval); \
-  NS_IMETHOD PutElement(nsISupports *anElementToPut); \
-  NS_IMETHOD StepForward(void); \
-  NS_IMETHOD StepBackward(void); \
-  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval); \
-  NS_IMETHOD Clone(nsISupports **_retval); 
+  NS_IMETHOD GetElement(nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD PutElement(nsISupports *anElementToPut) NS_OVERRIDE; \
+  NS_IMETHOD StepForward(void) NS_OVERRIDE; \
+  NS_IMETHOD StepBackward(void) NS_OVERRIDE; \
+  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Clone(nsISupports **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIBIDIRECTIONALITERATOR(_to) \
@@ -701,16 +701,16 @@ class NS_NO_VTABLE nsIRandomAccessIterator : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIRANDOMACCESSITERATOR \
-  NS_IMETHOD GetElement(nsISupports **_retval); \
-  NS_IMETHOD GetElementAt(PRInt32 anOffset, nsISupports **_retval); \
-  NS_IMETHOD PutElement(nsISupports *anElementToPut); \
-  NS_IMETHOD PutElementAt(PRInt32 anOffset, nsISupports *anElementToPut); \
-  NS_IMETHOD StepForward(void); \
-  NS_IMETHOD StepForwardBy(PRInt32 anOffset); \
-  NS_IMETHOD StepBackward(void); \
-  NS_IMETHOD StepBackwardBy(PRInt32 anOffset); \
-  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval); \
-  NS_IMETHOD Clone(nsISupports **_retval); 
+  NS_IMETHOD GetElement(nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetElementAt(PRInt32 anOffset, nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD PutElement(nsISupports *anElementToPut) NS_OVERRIDE; \
+  NS_IMETHOD PutElementAt(PRInt32 anOffset, nsISupports *anElementToPut) NS_OVERRIDE; \
+  NS_IMETHOD StepForward(void) NS_OVERRIDE; \
+  NS_IMETHOD StepForwardBy(PRInt32 anOffset) NS_OVERRIDE; \
+  NS_IMETHOD StepBackward(void) NS_OVERRIDE; \
+  NS_IMETHOD StepBackwardBy(PRInt32 anOffset) NS_OVERRIDE; \
+  NS_IMETHOD IsEqualTo(nsISupports *anotherIterator, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Clone(nsISupports **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIRANDOMACCESSITERATOR(_to) \

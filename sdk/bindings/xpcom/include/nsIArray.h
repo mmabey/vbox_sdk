@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsIArray.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIArray.idl
  */
 
 #ifndef __gen_nsIArray_h__
@@ -115,10 +115,10 @@ class NS_NO_VTABLE nsIArray : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIARRAY \
-  NS_IMETHOD GetLength(PRUint32 *aLength); \
-  NS_IMETHOD QueryElementAt(PRUint32 index, const nsIID & uuid, void * *result); \
-  NS_IMETHOD IndexOf(PRUint32 startIndex, nsISupports *element, PRUint32 *_retval); \
-  NS_IMETHOD Enumerate(nsISimpleEnumerator **_retval); 
+  NS_IMETHOD GetLength(PRUint32 *aLength) NS_OVERRIDE; \
+  NS_IMETHOD QueryElementAt(PRUint32 index, const nsIID & uuid, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD IndexOf(PRUint32 startIndex, nsISupports *element, PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Enumerate(nsISimpleEnumerator **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIARRAY(_to) \
@@ -284,10 +284,10 @@ class NS_NO_VTABLE nsIMutableArray : public nsIArray {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIMUTABLEARRAY \
-  NS_IMETHOD AppendElement(nsISupports *element, PRBool weak); \
-  NS_IMETHOD RemoveElementAt(PRUint32 index); \
-  NS_IMETHOD InsertElementAt(nsISupports *element, PRUint32 index, PRBool weak); \
-  NS_IMETHOD Clear(void); 
+  NS_IMETHOD AppendElement(nsISupports *element, PRBool weak) NS_OVERRIDE; \
+  NS_IMETHOD RemoveElementAt(PRUint32 index) NS_OVERRIDE; \
+  NS_IMETHOD InsertElementAt(nsISupports *element, PRUint32 index, PRBool weak) NS_OVERRIDE; \
+  NS_IMETHOD Clear(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIMUTABLEARRAY(_to) \

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIObjectInputStream.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIObjectInputStream.idl
  */
 
 #ifndef __gen_nsIObjectInputStream_h__
@@ -63,10 +63,10 @@ class NS_NO_VTABLE nsIObjectInputStream : public nsIBinaryInputStream {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIOBJECTINPUTSTREAM \
-  NS_IMETHOD ReadObject(PRBool aIsStrongRef, nsISupports **_retval); \
-  NS_IMETHOD_(nsresult) ReadID(nsID *aID); \
-  NS_IMETHOD_(char *) GetBuffer(PRUint32 aLength, PRUint32 aAlignMask); \
-  NS_IMETHOD_(void) PutBuffer(char * aBuffer, PRUint32 aLength); 
+  NS_IMETHOD ReadObject(PRBool aIsStrongRef, nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD_(nsresult) ReadID(nsID *aID) NS_OVERRIDE; \
+  NS_IMETHOD_(char *) GetBuffer(PRUint32 aLength, PRUint32 aAlignMask) NS_OVERRIDE; \
+  NS_IMETHOD_(void) PutBuffer(char * aBuffer, PRUint32 aLength) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIOBJECTINPUTSTREAM(_to) \
@@ -141,6 +141,7 @@ NS_IMETHODIMP_(void) nsObjectInputStream::PutBuffer(char * aBuffer, PRUint32 aLe
 /* End of implementation class template. */
 #endif
 
+
 inline nsresult
 NS_ReadOptionalObject(nsIObjectInputStream* aStream, PRBool aIsStrongRef,
                       nsISupports* *aResult)
@@ -155,5 +156,6 @@ NS_ReadOptionalObject(nsIObjectInputStream* aStream, PRBool aIsStrongRef,
     }
     return rv;
 }
+
 
 #endif /* __gen_nsIObjectInputStream_h__ */

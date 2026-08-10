@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIOutputStream.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIOutputStream.idl
  */
 
 #ifndef __gen_nsIOutputStream_h__
@@ -153,12 +153,12 @@ class NS_NO_VTABLE nsIOutputStream : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIOUTPUTSTREAM \
-  NS_IMETHOD Close(void); \
-  NS_IMETHOD Flush(void); \
-  NS_IMETHOD Write(const char *aBuf, PRUint32 aCount, PRUint32 *_retval); \
-  NS_IMETHOD WriteFrom(nsIInputStream *aFromStream, PRUint32 aCount, PRUint32 *_retval); \
-  NS_IMETHOD WriteSegments(nsReadSegmentFun aReader, void * aClosure, PRUint32 aCount, PRUint32 *_retval); \
-  NS_IMETHOD IsNonBlocking(PRBool *_retval); 
+  NS_IMETHOD Close(void) NS_OVERRIDE; \
+  NS_IMETHOD Flush(void) NS_OVERRIDE; \
+  NS_IMETHOD Write(const char *aBuf, PRUint32 aCount, PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD WriteFrom(nsIInputStream *aFromStream, PRUint32 aCount, PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD WriteSegments(nsReadSegmentFun aReader, void * aClosure, PRUint32 aCount, PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsNonBlocking(PRBool *_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIOUTPUTSTREAM(_to) \

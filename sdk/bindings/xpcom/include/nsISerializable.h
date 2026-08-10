@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsISerializable.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsISerializable.idl
  */
 
 #ifndef __gen_nsISerializable_h__
@@ -56,8 +56,8 @@ class NS_NO_VTABLE nsISerializable : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISERIALIZABLE \
-  NS_IMETHOD Read(nsIObjectInputStream *aInputStream); \
-  NS_IMETHOD Write(nsIObjectOutputStream *aOutputStream); 
+  NS_IMETHOD Read(nsIObjectInputStream *aInputStream) NS_OVERRIDE; \
+  NS_IMETHOD Write(nsIObjectOutputStream *aOutputStream) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISERIALIZABLE(_to) \

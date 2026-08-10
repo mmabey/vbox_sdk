@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/threads/nsIRunnable.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/threads/nsIRunnable.idl
  */
 
 #ifndef __gen_nsIRunnable_h__
@@ -34,7 +34,7 @@ class NS_NO_VTABLE nsIRunnable : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIRUNNABLE \
-  NS_IMETHOD Run(void); 
+  NS_IMETHOD Run(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIRUNNABLE(_to) \

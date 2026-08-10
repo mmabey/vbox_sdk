@@ -109,9 +109,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a86c848b974a9c53b2f772c6c40ded780"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_internal_session_control.html#a86c848b974a9c53b2f772c6c40ded780">onVRDEServerChange</a> (in boolean restart)</td></tr>
 <tr class="memdesc:a86c848b974a9c53b2f772c6c40ded780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggered when settings of the VRDE server object of the associated virtual machine have changed.  <br /></td></tr>
 <tr class="separator:a86c848b974a9c53b2f772c6c40ded780"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08f85dcbb522789a5e5be0928bfd5b79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_internal_session_control.html#a08f85dcbb522789a5e5be0928bfd5b79">onRecordingChange</a> (in boolean enable)</td></tr>
-<tr class="memdesc:a08f85dcbb522789a5e5be0928bfd5b79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggered when recording settings have changed.  <br /></td></tr>
-<tr class="separator:a08f85dcbb522789a5e5be0928bfd5b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4df0ccd7346be8f81609272eb5ae06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_internal_session_control.html#a9e4df0ccd7346be8f81609272eb5ae06">onRecordingStateChange</a> (in boolean enabled, out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
+<tr class="memdesc:a9e4df0ccd7346be8f81609272eb5ae06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggered when a recording state got changed.  <br /></td></tr>
+<tr class="separator:a9e4df0ccd7346be8f81609272eb5ae06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f94a05ab66f155fbfa69323ec843769"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_internal_session_control.html#a2f94a05ab66f155fbfa69323ec843769">onRecordingScreenStateChange</a> (in boolean enabled, in unsigned long screen)</td></tr>
+<tr class="memdesc:a2f94a05ab66f155fbfa69323ec843769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggered when a recording screen state got changed.  <br /></td></tr>
+<tr class="separator:a2f94a05ab66f155fbfa69323ec843769"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afad98736d013c0feccf87be48d7c3d7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_internal_session_control.html#afad98736d013c0feccf87be48d7c3d7a">onUSBControllerChange</a> ()</td></tr>
 <tr class="memdesc:afad98736d013c0feccf87be48d7c3d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggered when settings of the USB controller object of the associated virtual machine have changed.  <br /></td></tr>
 <tr class="separator:afad98736d013c0feccf87be48d7c3d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -785,26 +788,74 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a08f85dcbb522789a5e5be0928bfd5b79" name="a08f85dcbb522789a5e5be0928bfd5b79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08f85dcbb522789a5e5be0928bfd5b79">&#9670;&#160;</a></span>onRecordingChange()</h2>
+<a id="a9e4df0ccd7346be8f81609272eb5ae06" name="a9e4df0ccd7346be8f81609272eb5ae06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4df0ccd7346be8f81609272eb5ae06">&#9670;&#160;</a></span>onRecordingStateChange()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void IInternalSessionControl::onRecordingChange </td>
+          <td class="memname">void IInternalSessionControl::onRecordingStateChange </td>
           <td>(</td>
           <td class="paramtype">in boolean&#160;</td>
-          <td class="paramname"><em>enable</em></td><td>)</td>
+          <td class="paramname"><em>enabled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">out <a class="el" href="interface_i_progress.html">IProgress</a>&#160;</td>
+          <td class="paramname"><em>progress</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Triggered when recording settings have changed. </p>
+<p>Triggered when a recording state got changed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">enable</td><td>TODO </td></tr>
+    <tr><td class="paramname">enabled</td><td>Whether recording was enabled or disabled.</td></tr>
+    <tr><td class="paramname">progress</td><td>Progress object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2f94a05ab66f155fbfa69323ec843769" name="a2f94a05ab66f155fbfa69323ec843769"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f94a05ab66f155fbfa69323ec843769">&#9670;&#160;</a></span>onRecordingScreenStateChange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IInternalSessionControl::onRecordingScreenStateChange </td>
+          <td>(</td>
+          <td class="paramtype">in boolean&#160;</td>
+          <td class="paramname"><em>enabled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in unsigned long&#160;</td>
+          <td class="paramname"><em>screen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Triggered when a recording screen state got changed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enabled</td><td>Whether recording for that screen was enabled or disabled.</td></tr>
+    <tr><td class="paramname">screen</td><td>Number of screen for which the event has happened. </td></tr>
   </table>
   </dd>
 </dl>

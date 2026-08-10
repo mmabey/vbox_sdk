@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIBinaryInputStream.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIBinaryInputStream.idl
  */
 
 #ifndef __gen_nsIBinaryInputStream_h__
@@ -94,18 +94,18 @@ class NS_NO_VTABLE nsIBinaryInputStream : public nsIInputStream {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIBINARYINPUTSTREAM \
-  NS_IMETHOD SetInputStream(nsIInputStream *aInputStream); \
-  NS_IMETHOD ReadBoolean(PRBool *_retval); \
-  NS_IMETHOD Read8(PRUint8 *_retval); \
-  NS_IMETHOD Read16(PRUint16 *_retval); \
-  NS_IMETHOD Read32(PRUint32 *_retval); \
-  NS_IMETHOD Read64(PRUint64 *_retval); \
-  NS_IMETHOD ReadFloat(float *_retval); \
-  NS_IMETHOD ReadDouble(double *_retval); \
-  NS_IMETHOD ReadCString(nsACString & _retval); \
-  NS_IMETHOD ReadString(nsAString & _retval); \
-  NS_IMETHOD ReadBytes(PRUint32 aLength, char **aString); \
-  NS_IMETHOD ReadByteArray(PRUint32 aLength, PRUint8 **aBytes); 
+  NS_IMETHOD SetInputStream(nsIInputStream *aInputStream) NS_OVERRIDE; \
+  NS_IMETHOD ReadBoolean(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Read8(PRUint8 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Read16(PRUint16 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Read32(PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Read64(PRUint64 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD ReadFloat(float *_retval) NS_OVERRIDE; \
+  NS_IMETHOD ReadDouble(double *_retval) NS_OVERRIDE; \
+  NS_IMETHOD ReadCString(nsACString & _retval) NS_OVERRIDE; \
+  NS_IMETHOD ReadString(nsAString & _retval) NS_OVERRIDE; \
+  NS_IMETHOD ReadBytes(PRUint32 aLength, char **aString) NS_OVERRIDE; \
+  NS_IMETHOD ReadByteArray(PRUint32 aLength, PRUint8 **aBytes) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIBINARYINPUTSTREAM(_to) \
@@ -244,6 +244,7 @@ NS_IMETHODIMP nsBinaryInputStream::ReadByteArray(PRUint32 aLength, PRUint8 **aBy
 /* End of implementation class template. */
 #endif
 
+
 inline nsresult
 NS_ReadOptionalCString(nsIBinaryInputStream* aStream, nsACString& aResult)
 {
@@ -257,6 +258,7 @@ NS_ReadOptionalCString(nsIBinaryInputStream* aStream, nsACString& aResult)
     }
     return rv;
 }
+
 inline nsresult
 NS_ReadOptionalString(nsIBinaryInputStream* aStream, nsAString& aResult)
 {
@@ -270,5 +272,6 @@ NS_ReadOptionalString(nsIBinaryInputStream* aStream, nsAString& aResult)
     }
     return rv;
 }
+
 
 #endif /* __gen_nsIBinaryInputStream_h__ */

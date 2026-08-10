@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/threads/nsIEventTarget.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/threads/nsIEventTarget.idl
  */
 
 #ifndef __gen_nsIEventTarget_h__
@@ -54,8 +54,8 @@ class NS_NO_VTABLE nsIEventTarget : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIEVENTTARGET \
-  NS_IMETHOD PostEvent(PLEvent * aEvent); \
-  NS_IMETHOD IsOnCurrentThread(PRBool *_retval); 
+  NS_IMETHOD PostEvent(PLEvent * aEvent) NS_OVERRIDE; \
+  NS_IMETHOD IsOnCurrentThread(PRBool *_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIEVENTTARGET(_to) \

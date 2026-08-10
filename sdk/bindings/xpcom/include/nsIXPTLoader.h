@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/reflect/xptinfo/public/nsIXPTLoader.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/reflect/xptinfo/public/nsIXPTLoader.idl
  */
 
 #ifndef __gen_nsIXPTLoader_h__
@@ -52,7 +52,7 @@ class NS_NO_VTABLE nsIXPTLoaderSink : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIXPTLOADERSINK \
-  NS_IMETHOD FoundEntry(const char *itemName, PRInt32 index, nsIInputStream *xptData); 
+  NS_IMETHOD FoundEntry(const char *itemName, PRInt32 index, nsIInputStream *xptData) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIXPTLOADERSINK(_to) \
@@ -146,8 +146,8 @@ class NS_NO_VTABLE nsIXPTLoader : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIXPTLOADER \
-  NS_IMETHOD EnumerateEntries(nsILocalFile *file, nsIXPTLoaderSink *sink); \
-  NS_IMETHOD LoadEntry(nsILocalFile *file, const char *name, nsIInputStream **_retval); 
+  NS_IMETHOD EnumerateEntries(nsILocalFile *file, nsIXPTLoaderSink *sink) NS_OVERRIDE; \
+  NS_IMETHOD LoadEntry(nsILocalFile *file, const char *name, nsIInputStream **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIXPTLOADER(_to) \
@@ -206,9 +206,11 @@ NS_IMETHODIMP nsXPTLoader::LoadEntry(nsILocalFile *file, const char *name, nsIIn
 /* End of implementation class template. */
 #endif
 
+
 // the first part of the contractID for any loader
 // append the type of loader that you need, such as "zip"
 #define NS_XPTLOADER_CONTRACTID_PREFIX \
    "@mozilla.org/xptinfo/loader;1&type="
+
 
 #endif /* __gen_nsIXPTLoader_h__ */

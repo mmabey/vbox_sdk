@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIBinaryOutputStream.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIBinaryOutputStream.idl
  */
 
 #ifndef __gen_nsIBinaryOutputStream_h__
@@ -101,19 +101,19 @@ class NS_NO_VTABLE nsIBinaryOutputStream : public nsIOutputStream {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIBINARYOUTPUTSTREAM \
-  NS_IMETHOD SetOutputStream(nsIOutputStream *aOutputStream); \
-  NS_IMETHOD WriteBoolean(PRBool aBoolean); \
-  NS_IMETHOD Write8(PRUint8 aByte); \
-  NS_IMETHOD Write16(PRUint16 a16); \
-  NS_IMETHOD Write32(PRUint32 a32); \
-  NS_IMETHOD Write64(PRUint64 a64); \
-  NS_IMETHOD WriteFloat(float aFloat); \
-  NS_IMETHOD WriteDouble(double aDouble); \
-  NS_IMETHOD WriteStringZ(const char *aString); \
-  NS_IMETHOD WriteWStringZ(const PRUnichar *aString); \
-  NS_IMETHOD WriteUtf8Z(const PRUnichar *aString); \
-  NS_IMETHOD WriteBytes(const char *aString, PRUint32 aLength); \
-  NS_IMETHOD WriteByteArray(PRUint8 *aBytes, PRUint32 aLength); 
+  NS_IMETHOD SetOutputStream(nsIOutputStream *aOutputStream) NS_OVERRIDE; \
+  NS_IMETHOD WriteBoolean(PRBool aBoolean) NS_OVERRIDE; \
+  NS_IMETHOD Write8(PRUint8 aByte) NS_OVERRIDE; \
+  NS_IMETHOD Write16(PRUint16 a16) NS_OVERRIDE; \
+  NS_IMETHOD Write32(PRUint32 a32) NS_OVERRIDE; \
+  NS_IMETHOD Write64(PRUint64 a64) NS_OVERRIDE; \
+  NS_IMETHOD WriteFloat(float aFloat) NS_OVERRIDE; \
+  NS_IMETHOD WriteDouble(double aDouble) NS_OVERRIDE; \
+  NS_IMETHOD WriteStringZ(const char *aString) NS_OVERRIDE; \
+  NS_IMETHOD WriteWStringZ(const PRUnichar *aString) NS_OVERRIDE; \
+  NS_IMETHOD WriteUtf8Z(const PRUnichar *aString) NS_OVERRIDE; \
+  NS_IMETHOD WriteBytes(const char *aString, PRUint32 aLength) NS_OVERRIDE; \
+  NS_IMETHOD WriteByteArray(PRUint8 *aBytes, PRUint32 aLength) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIBINARYOUTPUTSTREAM(_to) \
@@ -260,6 +260,7 @@ NS_IMETHODIMP nsBinaryOutputStream::WriteByteArray(PRUint8 *aBytes, PRUint32 aLe
 /* End of implementation class template. */
 #endif
 
+
 inline nsresult
 NS_WriteOptionalStringZ(nsIBinaryOutputStream* aStream, const char* aString)
 {
@@ -269,6 +270,7 @@ NS_WriteOptionalStringZ(nsIBinaryOutputStream* aStream, const char* aString)
         rv = aStream->WriteStringZ(aString);
     return rv;
 }
+
 inline nsresult
 NS_WriteOptionalWStringZ(nsIBinaryOutputStream* aStream, const PRUnichar* aString)
 {
@@ -278,5 +280,6 @@ NS_WriteOptionalWStringZ(nsIBinaryOutputStream* aStream, const PRUnichar* aStrin
         rv = aStream->WriteWStringZ(aString);
     return rv;
 }
+
 
 #endif /* __gen_nsIBinaryOutputStream_h__ */

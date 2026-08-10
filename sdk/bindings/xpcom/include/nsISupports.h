@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsISupports.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsISupports.idl
  */
 
 #ifndef __gen_nsISupports_h__
@@ -44,9 +44,9 @@ class NS_NO_VTABLE nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTS \
-  NS_IMETHOD QueryInterface(const nsIID & uuid, void * *result); \
-  NS_IMETHOD_(nsrefcnt) AddRef(void); \
-  NS_IMETHOD_(nsrefcnt) Release(void); 
+  NS_IMETHOD QueryInterface(const nsIID & uuid, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD_(nsrefcnt) AddRef(void) NS_OVERRIDE; \
+  NS_IMETHOD_(nsrefcnt) Release(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTS(_to) \
@@ -118,6 +118,7 @@ NS_IMETHODIMP_(nsrefcnt) nsSupports::Release()
  */
 #endif
 #include "nsISupportsBase.h"
+
 #ifndef MOZILLA_STRICT_API
 #include "nsISupportsUtils.h"
 #endif

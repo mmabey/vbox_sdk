@@ -83,11 +83,14 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a2e18e9578a304bb2651694bc636e061a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The associated machine object.  <br /></td></tr>
 <tr class="separator:a2e18e9578a304bb2651694bc636e061a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3ff3b376cabe504c0f41ce028b51dbf"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#ae3ff3b376cabe504c0f41ce028b51dbf">user</a></td></tr>
-<tr class="memdesc:ae3ff3b376cabe504c0f41ce028b51dbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign an user login name.  <br /></td></tr>
+<tr class="memdesc:ae3ff3b376cabe504c0f41ce028b51dbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an user login name.  <br /></td></tr>
 <tr class="separator:ae3ff3b376cabe504c0f41ce028b51dbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e4a1eae3cf2546fc5394b86846449d8"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a3e4a1eae3cf2546fc5394b86846449d8">password</a></td></tr>
-<tr class="memdesc:a3e4a1eae3cf2546fc5394b86846449d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a password to the user.  <br /></td></tr>
-<tr class="separator:a3e4a1eae3cf2546fc5394b86846449d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f097522fdb5e6ec797861f103734f1a"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a3f097522fdb5e6ec797861f103734f1a">userPassword</a></td></tr>
+<tr class="memdesc:a3f097522fdb5e6ec797861f103734f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a password to the user.  <br /></td></tr>
+<tr class="separator:a3f097522fdb5e6ec797861f103734f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02f3ea1f41bc53f205d0d60584c2bb23"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a02f3ea1f41bc53f205d0d60584c2bb23">adminPassword</a></td></tr>
+<tr class="memdesc:a02f3ea1f41bc53f205d0d60584c2bb23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a password to the Administrator / 'root' accounts.  <br /></td></tr>
+<tr class="separator:a02f3ea1f41bc53f205d0d60584c2bb23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ea182fd42394dd0db40c32432d1395f"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a3ea182fd42394dd0db40c32432d1395f">fullUserName</a></td></tr>
 <tr class="memdesc:a3ea182fd42394dd0db40c32432d1395f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The full name of the user.  <br /></td></tr>
 <tr class="separator:a3ea182fd42394dd0db40c32432d1395f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,9 +109,21 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a613e200e2fa56cc708d4480bc60a102f"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a613e200e2fa56cc708d4480bc60a102f">installTestExecService</a></td></tr>
 <tr class="memdesc:a613e200e2fa56cc708d4480bc60a102f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the test execution service (TXS) from the VBox ValidationKit should be installed.  <br /></td></tr>
 <tr class="separator:a613e200e2fa56cc708d4480bc60a102f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd836d648bd610540588d1014a08201"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a9bd836d648bd610540588d1014a08201">userPayloadIsoPath</a></td></tr>
+<tr class="memdesc:a9bd836d648bd610540588d1014a08201"><td class="mdescLeft">&#160;</td><td class="mdescRight">User Payload ISO image path.  <br /></td></tr>
+<tr class="separator:a9bd836d648bd610540588d1014a08201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1f5f339263fe301ff776f57ab8600b6"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#ac1f5f339263fe301ff776f57ab8600b6">installUserPayload</a></td></tr>
+<tr class="memdesc:ac1f5f339263fe301ff776f57ab8600b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the User Payload should be installed or not.  <br /></td></tr>
+<tr class="separator:ac1f5f339263fe301ff776f57ab8600b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2f2e895166f8438ae44cda92655473f"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#ab2f2e895166f8438ae44cda92655473f">timeZone</a></td></tr>
 <tr class="memdesc:ab2f2e895166f8438ae44cda92655473f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The guest time zone specifier.  <br /></td></tr>
 <tr class="separator:ab2f2e895166f8438ae44cda92655473f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802dfd82ef4c743c41177efb135d89e7"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a802dfd82ef4c743c41177efb135d89e7">keyboardLayout</a></td></tr>
+<tr class="memdesc:a802dfd82ef4c743c41177efb135d89e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the keyboard layout of the guest, if available.  <br /></td></tr>
+<tr class="separator:a802dfd82ef4c743c41177efb135d89e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a0e17114a10f8a66e283676f9ae75e"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a93a0e17114a10f8a66e283676f9ae75e">keyboardVariant</a></td></tr>
+<tr class="memdesc:a93a0e17114a10f8a66e283676f9ae75e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the keyboard variant of the guest, if available.  <br /></td></tr>
+<tr class="separator:a93a0e17114a10f8a66e283676f9ae75e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fd4b7d0eeb106b6cece2c279e1c54f2"><td class="memItemLeft" align="right" valign="top">attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_unattended.html#a9fd4b7d0eeb106b6cece2c279e1c54f2">locale</a></td></tr>
 <tr class="memdesc:a9fd4b7d0eeb106b6cece2c279e1c54f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The 5 letter locale identifier, no codesets or such.  <br /></td></tr>
 <tr class="separator:a9fd4b7d0eeb106b6cece2c279e1c54f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,7 +212,7 @@ Call <a class="el" href="interface_i_unattended.html#a1bf66a02cc16214eabc8d7bdad
 Optionally call <a class="el" href="interface_i_unattended.html#a4517dbb414213770edc56be6e88009cc">IUnattended::done</a><b></b> to destroy the internal installer and allow restarting from the second step.</li>
 </ol>
 <p>Note! Step two is currently not implemented.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{6F89464F-7773-436A-A4DF-592E4E537FA0}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{A71E5822-365B-49BA-BD14-C8D616E6740D}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae96f5ffba57e6e0761f78892b1bc6d77" name="ae96f5ffba57e6e0761f78892b1bc6d77"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae96f5ffba57e6e0761f78892b1bc6d77">&#9670;&#160;</a></span>detectIsoOS()</h2>
@@ -345,24 +360,40 @@ Optionally call <a class="el" href="interface_i_unattended.html#a4517dbb41421377
       </table>
 </div><div class="memdoc">
 
-<p>Assign an user login name. </p>
+<p>Assigns an user login name. </p>
 
 </div>
 </div>
-<a id="a3e4a1eae3cf2546fc5394b86846449d8" name="a3e4a1eae3cf2546fc5394b86846449d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e4a1eae3cf2546fc5394b86846449d8">&#9670;&#160;</a></span>password</h2>
+<a id="a3f097522fdb5e6ec797861f103734f1a" name="a3f097522fdb5e6ec797861f103734f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f097522fdb5e6ec797861f103734f1a">&#9670;&#160;</a></span>userPassword</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">attribute wstring IUnattended::password</td>
+          <td class="memname">attribute wstring IUnattended::userPassword</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Assign a password to the user. </p>
-<p>The password is the same for both normal user and for Administrator / 'root' accounts. </p>
+<p>Assigns a password to the user. </p>
+
+</div>
+</div>
+<a id="a02f3ea1f41bc53f205d0d60584c2bb23" name="a02f3ea1f41bc53f205d0d60584c2bb23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f3ea1f41bc53f205d0d60584c2bb23">&#9670;&#160;</a></span>adminPassword</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute wstring IUnattended::adminPassword</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assigns a password to the Administrator / 'root' accounts. </p>
+<p>If no Administrator / 'root' password is being set explicitly, the password set via <a class="el" href="interface_i_unattended.html#a3f097522fdb5e6ec797861f103734f1a">IUnattended::userPassword</a><b></b> will be used instead. </p>
 
 </div>
 </div>
@@ -468,6 +499,40 @@ Optionally call <a class="el" href="interface_i_unattended.html#a4517dbb41421377
 
 </div>
 </div>
+<a id="a9bd836d648bd610540588d1014a08201" name="a9bd836d648bd610540588d1014a08201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bd836d648bd610540588d1014a08201">&#9670;&#160;</a></span>userPayloadIsoPath</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute wstring IUnattended::userPayloadIsoPath</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>User Payload ISO image path. </p>
+<p>This is used when <a class="el" href="interface_i_unattended.html#ac1f5f339263fe301ff776f57ab8600b6">IUnattended::installUserPayload</a><b></b> is set to true. </p>
+
+</div>
+</div>
+<a id="ac1f5f339263fe301ff776f57ab8600b6" name="ac1f5f339263fe301ff776f57ab8600b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1f5f339263fe301ff776f57ab8600b6">&#9670;&#160;</a></span>installUserPayload</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute boolean IUnattended::installUserPayload</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Indicates whether the User Payload should be installed or not. </p>
+<p>The User Payload will be taken from the ISO indicated by <a class="el" href="interface_i_unattended.html#a9bd836d648bd610540588d1014a08201">IUnattended::userPayloadIsoPath</a><b></b>. </p>
+
+</div>
+</div>
 <a id="ab2f2e895166f8438ae44cda92655473f" name="ab2f2e895166f8438ae44cda92655473f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab2f2e895166f8438ae44cda92655473f">&#9670;&#160;</a></span>timeZone</h2>
 
@@ -487,6 +552,54 @@ Optionally call <a class="el" href="interface_i_unattended.html#a4517dbb41421377
 <p>Linux usually takes the TZ string from this table: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a></p>
 <p>The default is currently UTC/GMT, but this may change to be same as the host later.</p>
 <p>TODO: Investigate automatic mapping between linux and the two windows time zone formats. TODO: Take default from host (this requires mapping). </p>
+
+</div>
+</div>
+<a id="a802dfd82ef4c743c41177efb135d89e7" name="a802dfd82ef4c743c41177efb135d89e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a802dfd82ef4c743c41177efb135d89e7">&#9670;&#160;</a></span>keyboardLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute wstring IUnattended::keyboardLayout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the keyboard layout of the guest, if available. </p>
+<p>The 2 letter locale identifier, no codesets or such.</p>
+<p>The format is two lower case country letter (ISO 3166-1 alpha-2). For instance 'us', 'de', or 'no'.</p>
+<p>The default is taken from the host if possible, with 'us' as fallback.</p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>E_NOTIMPL</td><td>Not implemented yet. </td></tr>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<a id="a93a0e17114a10f8a66e283676f9ae75e" name="a93a0e17114a10f8a66e283676f9ae75e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a0e17114a10f8a66e283676f9ae75e">&#9670;&#160;</a></span>keyboardVariant</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute wstring IUnattended::keyboardVariant</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the keyboard variant of the guest, if available. </p>
+<p>Leave empty to use the default variant for the current keyboard layout set.</p>
+<p>TODO: Define + document a keyboard variants table (e.g. by using 'localectl list-x11-keymap-variants [layout]' as a base), plus a mapping to Windows-based guests for that.</p>
+<p>This depends on the current keyboard layout being set.</p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>E_NOTIMPL</td><td>Not implemented yet. </td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>

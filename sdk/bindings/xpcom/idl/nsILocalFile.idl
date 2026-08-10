@@ -41,13 +41,10 @@
 #include "nsIFile.idl"
 
 %{C++
-#include "prio.h"
-#include "prlink.h"
-#include <stdio.h>
+#include <iprt/ldr.h>
 %}
 
-[ptr] native PRFileDescStar(PRFileDesc);
-[ptr] native PRLibraryStar(PRLibrary);
+[ptr] native RTLDRMOD(RTLDRMODINTERNAL);
 [ptr] native FILE(FILE);
 
 /**
@@ -101,10 +98,7 @@ interface nsILocalFile : nsIFile
      */
     attribute PRBool followLinks;  
 
-    [noscript] PRFileDescStar openNSPRFileDesc(in long flags, in long mode);
-    [noscript] FILE           openANSIFileDesc(in string mode);
-
-    [noscript] PRLibraryStar  load();
+    [noscript] RTLDRMOD       load();
     
     readonly attribute PRInt64 diskSpaceAvailable;
 

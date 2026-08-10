@@ -37,13 +37,21 @@
 #ifndef nsCRT_h___
 #define nsCRT_h___
 
+#include <iprt/mem.h>
+#include <iprt/string.h>
+
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "plstr.h"
+#include "nsMemory.h"
 #include "nscore.h"
 #include "prtypes.h"
-#include "nsCppSharedAllocator.h"
+
+#ifdef HAVE_CPP_NUMERIC_LIMITS
+#include <limits>
+#else
+#include <limits.h>
+#endif
 
 #ifdef XP_MAC
 #  define NS_LINEBREAK             "\015"
@@ -135,49 +143,17 @@ public:
   static PRUint32 strlen(const char* s) {                                       
     return PRUint32(::strlen(s));                                               
   }                                                                             
-
-  /// Compare s1 and s2.
-  static PRInt32 strcmp(const char* s1, const char* s2) {
-    return PRInt32(PL_strcmp(s1, s2));
-  }
-
-  static PRInt32 strncmp(const char* s1, const char* s2,
-                         PRUint32 aMaxLen) {
-    return PRInt32(PL_strncmp(s1, s2, aMaxLen));
-  }
-
-  /// Case-insensitive string comparison.
-  static PRInt32 strcasecmp(const char* s1, const char* s2) {
-    return PRInt32(PL_strcasecmp(s1, s2));
-  }
-
-  /// Case-insensitive string comparison with length
-  static PRInt32 strncasecmp(const char* s1, const char* s2, PRUint32 aMaxLen) {
-    PRInt32 result=PRInt32(PL_strncasecmp(s1, s2, aMaxLen));
-    //Egads. PL_strncasecmp is returning *very* negative numbers.
-    //Some folks expect -1,0,1, so let's temper its enthusiasm.
-    if (result<0) 
-      result=-1;
-    return result;
-  }
-
-  static PRInt32 strncmp(const char* s1, const char* s2, PRInt32 aMaxLen) {
-    // inline the first test (assumes strings are not null):
-    PRInt32 diff = ((const unsigned char*)s1)[0] - ((const unsigned char*)s2)[0];
-    if (diff != 0) return diff;
-    return PRInt32(PL_strncmp(s1,s2,unsigned(aMaxLen)));
-  }
   
   static char* strdup(const char* str) {
-    return PL_strdup(str);
+    return RTStrDup(str);
   }
 
   static char* strndup(const char* str, PRUint32 len) {
-    return PL_strndup(str, len);
+    return RTStrDupN(str, len);
   }
 
   static void free(char* str) {
-    PL_strfree(str);
+    RTStrFree(str);
   }
 
   /**
@@ -219,8 +195,7 @@ public:
   static PRUnichar* strndup(const PRUnichar* str, PRUint32 len);
 
   static void free(PRUnichar* str) {
-  	nsCppSharedAllocator<PRUnichar> shared_allocator;
-  	shared_allocator.deallocate(str, 0 /*we never new or kept the size*/);
+  	RTMemFree(str);
   }
 
   // Computes the hashcode for a c-string, returns the string length as

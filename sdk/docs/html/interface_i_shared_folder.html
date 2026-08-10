@@ -78,6 +78,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6fe845d8e60fa48e07b9f6de5043d863"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_shared_folder.html#a6fe845d8e60fa48e07b9f6de5043d863">lastAccessError</a></td></tr>
 <tr class="memdesc:a6fe845d8e60fa48e07b9f6de5043d863"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text message that represents the result of the last accessibility check.  <br /></td></tr>
 <tr class="separator:a6fe845d8e60fa48e07b9f6de5043d863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc90ab4b98fe4eb360ab3c310f3675a8"><td class="memItemLeft" align="right" valign="top">attribute <a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52c">SymlinkPolicy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_shared_folder.html#acc90ab4b98fe4eb360ab3c310f3675a8">symlinkPolicy</a></td></tr>
+<tr class="memdesc:acc90ab4b98fe4eb360ab3c310f3675a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The security policy for allowing guest VMs to create symbolic links within a Shared Folder.  <br /></td></tr>
+<tr class="separator:acc90ab4b98fe4eb360ab3c310f3675a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="interface_i_shared_folder.html" title="The ISharedFolder interface represents a folder in the host computer&#39;s file system accessible from th...">ISharedFolder</a> interface represents a folder in the host computer's file system accessible from the guest OS running inside a virtual machine using an associated logical name. </p>
@@ -102,7 +105,7 @@ Global definitions</li>
 <p>For example, if MyMachine has a shared folder named <code>C_DRIVE</code> (that points to <code>C:\</code>), then creating a transient shared folder named <code>C_DRIVE</code> (that points to <code>C:\\WINDOWS</code>) will change the definition of <code>C_DRIVE</code> in the guest OS so that <code>\\VBOXSVR\C_DRIVE</code> will give access to <code>C:\WINDOWS</code> instead of <code>C:\</code> on the host PC. Removing the transient shared folder <code>C_DRIVE</code> will restore the previous (permanent) definition of <code>C_DRIVE</code> that points to <code>C:\</code> if it still exists.</p>
 <p>Note that permanent and transient shared folders of different machines are in different name spaces, so they don't overlap and don't need to have unique logical names.</p>
 <dl class="section note"><dt>Note</dt><dd>Global shared folders are not implemented in the current version of the product.</dd></dl>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{9622225A-5409-414B-BD16-77DF7BA3451E}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{0B108B8C-62E0-4E06-9DFA-2F1A2AD70774}</code> </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a4bcbf19bd76a256cead5b008df71cc30" name="a4bcbf19bd76a256cead5b008df71cc30"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4bcbf19bd76a256cead5b008df71cc30">&#9670;&#160;</a></span>name</h2>
@@ -217,6 +220,22 @@ Global definitions</li>
 
 <p>Text message that represents the result of the last accessibility check. </p>
 <p>Accessibility checks are performed each time the <a class="el" href="interface_i_shared_folder.html#a711c5665318abe1426dbcafd1a5a8ff5">accessible</a><b></b> attribute is read. An empty string is returned if the last accessibility check was successful. A non-empty string indicates a failure and should normally describe a reason of the failure (for example, a file read error). </p>
+
+</div>
+</div>
+<a id="acc90ab4b98fe4eb360ab3c310f3675a8" name="acc90ab4b98fe4eb360ab3c310f3675a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc90ab4b98fe4eb360ab3c310f3675a8">&#9670;&#160;</a></span>symlinkPolicy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">attribute <a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52c">SymlinkPolicy</a> ISharedFolder::symlinkPolicy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The security policy for allowing guest VMs to create symbolic links within a Shared Folder. </p>
 
 </div>
 </div>

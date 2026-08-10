@@ -536,6 +536,11 @@ Public Attributes</h2></td></tr>
 
 <p>Takes a screen shot of the requested size and format and copies it to the buffer allocated by the caller and pointed to by <em>address</em>. </p>
 <p>The buffer size must be enough for a 32 bits per pixel bitmap, i.e. width * height * 4 bytes.</p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_NOT_SUPPORTED</td><td>Current screen configuration does not support taking a screen shot (typically because it is 0x0 in size). </td></tr>
+</table>
+</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This API can be used only locally by a VM process through the COM/XPCOM C++ API as it requires pointer support. It is not available for scripting languages, Java or any webservice clients. Unless you are writing a new VM frontend use <a class="el" href="interface_i_display.html#a225672c8dbbcfcc19a149ecf6f82c639">takeScreenShotToArray</a><b></b>.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This method is non-scriptable. In particular, this also means that an attempt to call it from a process other than the process that has created and owns the object will most likely fail or crash your application. </dd></dl>
 

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsIHashable.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIHashable.idl
  */
 
 #ifndef __gen_nsIHashable_h__
@@ -48,8 +48,8 @@ class NS_NO_VTABLE nsIHashable : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIHASHABLE \
-  NS_IMETHOD Equals(nsIHashable *aOther, PRBool *_retval); \
-  NS_IMETHOD GetHashCode(PRUint32 *aHashCode); 
+  NS_IMETHOD Equals(nsIHashable *aOther, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetHashCode(PRUint32 *aHashCode) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIHASHABLE(_to) \

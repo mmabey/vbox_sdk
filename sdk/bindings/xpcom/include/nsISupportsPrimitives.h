@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsPrimitives.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsPrimitives.idl
  */
 
 #ifndef __gen_nsISupportsPrimitives_h__
@@ -76,7 +76,7 @@ class NS_NO_VTABLE nsISupportsPrimitive : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRIMITIVE \
-  NS_IMETHOD GetType(PRUint16 *aType); 
+  NS_IMETHOD GetType(PRUint16 *aType) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRIMITIVE(_to) \
@@ -156,9 +156,9 @@ class NS_NO_VTABLE nsISupportsID : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSID \
-  NS_IMETHOD GetData(nsID * *aData); \
-  NS_IMETHOD SetData(const nsID * aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(nsID * *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(const nsID * aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSID(_to) \
@@ -252,9 +252,9 @@ class NS_NO_VTABLE nsISupportsCString : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSCSTRING \
-  NS_IMETHOD GetData(nsACString & aData); \
-  NS_IMETHOD SetData(const nsACString & aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(nsACString & aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(const nsACString & aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSCSTRING(_to) \
@@ -348,9 +348,9 @@ class NS_NO_VTABLE nsISupportsString : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSSTRING \
-  NS_IMETHOD GetData(nsAString & aData); \
-  NS_IMETHOD SetData(const nsAString & aData); \
-  NS_IMETHOD ToString(PRUnichar **_retval); 
+  NS_IMETHOD GetData(nsAString & aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(const nsAString & aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(PRUnichar **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSSTRING(_to) \
@@ -447,9 +447,9 @@ class NS_NO_VTABLE nsISupportsPRBool : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRBOOL \
-  NS_IMETHOD GetData(PRBool *aData); \
-  NS_IMETHOD SetData(PRBool aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRBool *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRBool aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRBOOL(_to) \
@@ -543,9 +543,9 @@ class NS_NO_VTABLE nsISupportsPRUint8 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT8 \
-  NS_IMETHOD GetData(PRUint8 *aData); \
-  NS_IMETHOD SetData(PRUint8 aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRUint8 *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRUint8 aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT8(_to) \
@@ -639,9 +639,9 @@ class NS_NO_VTABLE nsISupportsPRUint16 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT16 \
-  NS_IMETHOD GetData(PRUint16 *aData); \
-  NS_IMETHOD SetData(PRUint16 aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRUint16 *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRUint16 aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT16(_to) \
@@ -735,9 +735,9 @@ class NS_NO_VTABLE nsISupportsPRUint32 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT32 \
-  NS_IMETHOD GetData(PRUint32 *aData); \
-  NS_IMETHOD SetData(PRUint32 aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRUint32 *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRUint32 aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT32(_to) \
@@ -831,9 +831,9 @@ class NS_NO_VTABLE nsISupportsPRUint64 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT64 \
-  NS_IMETHOD GetData(PRUint64 *aData); \
-  NS_IMETHOD SetData(PRUint64 aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRUint64 *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRUint64 aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT64(_to) \
@@ -927,9 +927,9 @@ class NS_NO_VTABLE nsISupportsPRTime : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRTIME \
-  NS_IMETHOD GetData(PRTime *aData); \
-  NS_IMETHOD SetData(PRTime aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRTime *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRTime aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRTIME(_to) \
@@ -1024,9 +1024,9 @@ class NS_NO_VTABLE nsISupportsChar : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSCHAR \
-  NS_IMETHOD GetData(char *aData); \
-  NS_IMETHOD SetData(char aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(char *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(char aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSCHAR(_to) \
@@ -1120,9 +1120,9 @@ class NS_NO_VTABLE nsISupportsPRInt16 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRINT16 \
-  NS_IMETHOD GetData(PRInt16 *aData); \
-  NS_IMETHOD SetData(PRInt16 aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRInt16 *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRInt16 aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRINT16(_to) \
@@ -1216,9 +1216,9 @@ class NS_NO_VTABLE nsISupportsPRInt32 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRINT32 \
-  NS_IMETHOD GetData(PRInt32 *aData); \
-  NS_IMETHOD SetData(PRInt32 aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRInt32 *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRInt32 aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRINT32(_to) \
@@ -1312,9 +1312,9 @@ class NS_NO_VTABLE nsISupportsPRInt64 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRINT64 \
-  NS_IMETHOD GetData(PRInt64 *aData); \
-  NS_IMETHOD SetData(PRInt64 aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(PRInt64 *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(PRInt64 aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRINT64(_to) \
@@ -1408,9 +1408,9 @@ class NS_NO_VTABLE nsISupportsFloat : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSFLOAT \
-  NS_IMETHOD GetData(float *aData); \
-  NS_IMETHOD SetData(float aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(float *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(float aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSFLOAT(_to) \
@@ -1504,9 +1504,9 @@ class NS_NO_VTABLE nsISupportsDouble : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSDOUBLE \
-  NS_IMETHOD GetData(double *aData); \
-  NS_IMETHOD SetData(double aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(double *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(double aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSDOUBLE(_to) \
@@ -1600,9 +1600,9 @@ class NS_NO_VTABLE nsISupportsVoid : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSVOID \
-  NS_IMETHOD GetData(void * *aData); \
-  NS_IMETHOD SetData(void * aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(void * *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(void * aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSVOID(_to) \
@@ -1700,11 +1700,11 @@ class NS_NO_VTABLE nsISupportsInterfacePointer : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSINTERFACEPOINTER \
-  NS_IMETHOD GetData(nsISupports * *aData); \
-  NS_IMETHOD SetData(nsISupports * aData); \
-  NS_IMETHOD GetDataIID(nsID * *aDataIID); \
-  NS_IMETHOD SetDataIID(const nsID * aDataIID); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetData(nsISupports * *aData) NS_OVERRIDE; \
+  NS_IMETHOD SetData(nsISupports * aData) NS_OVERRIDE; \
+  NS_IMETHOD GetDataIID(nsID * *aDataIID) NS_OVERRIDE; \
+  NS_IMETHOD SetDataIID(const nsID * aDataIID) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSINTERFACEPOINTER(_to) \

@@ -119,6 +119,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d0b61bee624c9a700bf67f55048310f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_client.html#a2d0b61bee624c9a700bf67f55048310f">resetInstance</a> (in wstring uid, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
 <tr class="memdesc:a2d0b61bee624c9a700bf67f55048310f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset an existing instance with passed id.  <br /></td></tr>
 <tr class="separator:a2d0b61bee624c9a700bf67f55048310f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92e4f035867b598e5bf26d6172a59b2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_client.html#a92e4f035867b598e5bf26d6172a59b2a">cloneInstance</a> (in wstring uid, in wstring newName, out <a class="el" href="interface_i_cloud_machine.html">ICloudMachine</a> clone, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
+<tr class="memdesc:a92e4f035867b598e5bf26d6172a59b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone cloud virtual machine.  <br /></td></tr>
+<tr class="separator:a92e4f035867b598e5bf26d6172a59b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4fccfeb0444b5a76482b47781f1d029"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_client.html#aa4fccfeb0444b5a76482b47781f1d029">createImage</a> (in wstring[] parameters, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
 <tr class="memdesc:aa4fccfeb0444b5a76482b47781f1d029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an image in the Cloud.  <br /></td></tr>
 <tr class="separator:aa4fccfeb0444b5a76482b47781f1d029"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +146,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aca829d8c84cdcd9a26174ff462bae876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac06263d7e38e638f8aee26e9d73542e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_client.html#ac06263d7e38e638f8aee26e9d73542e0">getSubnetSelectionForm</a> (in <a class="el" href="interface_i_virtual_system_description.html">IVirtualSystemDescription</a> description, out <a class="el" href="interface_i_virtual_system_description_form.html">IVirtualSystemDescriptionForm</a> form, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
 <tr class="separator:ac06263d7e38e638f8aee26e9d73542e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a107eac7c638b4aea11b527b0cd25e1d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_client.html#a107eac7c638b4aea11b527b0cd25e1d2">getMetricTypeByName</a> (in wstring metricName, [retval] out <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219">MetricType</a> metricType)</td></tr>
+<tr class="memdesc:a107eac7c638b4aea11b527b0cd25e1d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to find an appropriate metric type for the passed metric name.  <br /></td></tr>
+<tr class="separator:a107eac7c638b4aea11b527b0cd25e1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -1036,6 +1042,57 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a92e4f035867b598e5bf26d6172a59b2a" name="a92e4f035867b598e5bf26d6172a59b2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92e4f035867b598e5bf26d6172a59b2a">&#9670;&#160;</a></span>cloneInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ICloudClient::cloneInstance </td>
+          <td>(</td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>uid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>newName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out <a class="el" href="interface_i_cloud_machine.html">ICloudMachine</a>&#160;</td>
+          <td class="paramname"><em>clone</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out <a class="el" href="interface_i_progress.html">IProgress</a>&#160;</td>
+          <td class="paramname"><em>progress</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clone cloud virtual machine. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uid</td><td>The id of instance in the Cloud that should be cloned. Prerequisities: The instance must be in the list of VirtualBox cloud machines. VirtualBox operates only with those machines which are already known.</td></tr>
+    <tr><td class="paramname">newName</td><td>Name for a cloud machine.</td></tr>
+    <tr><td class="paramname">clone</td><td>Object that represents a cloned cloud machine.</td></tr>
+    <tr><td class="paramname">progress</td><td>Progress object to track the operation completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa4fccfeb0444b5a76482b47781f1d029" name="aa4fccfeb0444b5a76482b47781f1d029"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4fccfeb0444b5a76482b47781f1d029">&#9670;&#160;</a></span>createImage()</h2>
 
@@ -1415,6 +1472,43 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a107eac7c638b4aea11b527b0cd25e1d2" name="a107eac7c638b4aea11b527b0cd25e1d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a107eac7c638b4aea11b527b0cd25e1d2">&#9670;&#160;</a></span>getMetricTypeByName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ICloudClient::getMetricTypeByName </td>
+          <td>(</td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>metricName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219">MetricType</a>&#160;</td>
+          <td class="paramname"><em>metricType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tries to find an appropriate metric type for the passed metric name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metricName</td><td>Metric name (see <a class="el" href="interface_i_cloud_machine.html#a1c10c645289d59ce07adf42f8b08156a">ICloudMachine::listMetricNames</a><b></b>)</td></tr>
+    <tr><td class="paramname">metricType</td><td>Found metric type. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

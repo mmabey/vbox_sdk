@@ -63,9 +63,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a1967d7fa66dc6cbc2389d19ca28369ed"><td class="memItemLeft" align="right" valign="top">attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_serial_port.html#a1967d7fa66dc6cbc2389d19ca28369ed">enabled</a></td></tr>
 <tr class="memdesc:a1967d7fa66dc6cbc2389d19ca28369ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag whether the serial port is enabled.  <br /></td></tr>
 <tr class="separator:a1967d7fa66dc6cbc2389d19ca28369ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacb00b796a7bb37ff841ac05f6181664"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_serial_port.html#aacb00b796a7bb37ff841ac05f6181664">IOBase</a></td></tr>
-<tr class="memdesc:aacb00b796a7bb37ff841ac05f6181664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base I/O address of the serial port.  <br /></td></tr>
-<tr class="separator:aacb00b796a7bb37ff841ac05f6181664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7379970866a40c95f77e94fca5a74c63"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_serial_port.html#a7379970866a40c95f77e94fca5a74c63">IOAddress</a></td></tr>
+<tr class="memdesc:a7379970866a40c95f77e94fca5a74c63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base I/O address of the serial port.  <br /></td></tr>
+<tr class="separator:a7379970866a40c95f77e94fca5a74c63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67e98afcdd9d33dc4849d07f368106dd"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_serial_port.html#a67e98afcdd9d33dc4849d07f368106dd">IRQ</a></td></tr>
 <tr class="memdesc:a67e98afcdd9d33dc4849d07f368106dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">IRQ number of the serial port.  <br /></td></tr>
 <tr class="separator:a67e98afcdd9d33dc4849d07f368106dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,19 +125,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aacb00b796a7bb37ff841ac05f6181664" name="aacb00b796a7bb37ff841ac05f6181664"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacb00b796a7bb37ff841ac05f6181664">&#9670;&#160;</a></span>IOBase</h2>
+<a id="a7379970866a40c95f77e94fca5a74c63" name="a7379970866a40c95f77e94fca5a74c63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7379970866a40c95f77e94fca5a74c63">&#9670;&#160;</a></span>IOAddress</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">attribute unsigned long ISerialPort::IOBase</td>
+          <td class="memname">attribute unsigned long ISerialPort::IOAddress</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Base I/O address of the serial port. </p>
+<p>For x86, this is an I/O port, for ARM this is an MMIO address. </p>
 
 </div>
 </div>

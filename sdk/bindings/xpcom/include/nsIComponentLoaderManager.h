@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentLoaderManager.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentLoaderManager.idl
  */
 
 #ifndef __gen_nsIComponentLoaderManager_h__
@@ -51,12 +51,12 @@ class NS_NO_VTABLE nsIComponentLoaderManager : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICOMPONENTLOADERMANAGER \
-  NS_IMETHOD HasFileChanged(nsIFile *file, const char *loaderString, PRInt64 modDate, PRBool *_retval); \
-  NS_IMETHOD SaveFileInfo(nsIFile *file, const char *loaderString, PRInt64 modDate); \
-  NS_IMETHOD RemoveFileInfo(nsIFile *file, const char *loaderString); \
-  NS_IMETHOD FlushPersistentStore(PRBool now); \
-  NS_IMETHOD GetOptionalData(nsIFile *file, const char *loaderString, char **_retval); \
-  NS_IMETHOD SetOptionalData(nsIFile *file, const char *loaderString, const char *value); 
+  NS_IMETHOD HasFileChanged(nsIFile *file, const char *loaderString, PRInt64 modDate, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD SaveFileInfo(nsIFile *file, const char *loaderString, PRInt64 modDate) NS_OVERRIDE; \
+  NS_IMETHOD RemoveFileInfo(nsIFile *file, const char *loaderString) NS_OVERRIDE; \
+  NS_IMETHOD FlushPersistentStore(PRBool now) NS_OVERRIDE; \
+  NS_IMETHOD GetOptionalData(nsIFile *file, const char *loaderString, char **_retval) NS_OVERRIDE; \
+  NS_IMETHOD SetOptionalData(nsIFile *file, const char *loaderString, const char *value) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICOMPONENTLOADERMANAGER(_to) \

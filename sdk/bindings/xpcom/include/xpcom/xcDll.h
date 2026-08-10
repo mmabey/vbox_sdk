@@ -46,18 +46,15 @@
 #ifndef xcDll_h__
 #define xcDll_h__
 
-#include "prio.h"
-#include "prlink.h"
 #include "nsISupports.h"
 #include "nsILocalFile.h"
 #include "nsCOMPtr.h"
 #include "nsString.h"
 
-class nsNativeComponentLoader;
+#include <iprt/errcore.h>
+#include <iprt/ldr.h>
 
-#if defined(DEBUG) && !defined(XP_BEOS)
-#define SHOULD_IMPLEMENT_BREAKAFTERLOAD
-#endif
+class nsNativeComponentLoader;
 
 class nsIModule;
 class nsIServiceManager;
@@ -74,30 +71,24 @@ typedef enum nsDllStatus
 class nsDll
 {
 private:
-    nsCOMPtr<nsIFile>         m_dllSpec; 
-    PRLibrary                *m_instance;	
+    nsCOMPtr<nsIFile>         m_dllSpec;
+    RTLDRMOD                  m_hMod;
     nsIModule                *m_moduleObject;
     nsNativeComponentLoader  *m_loader;
     PRBool                    m_markForUnload;
 
     void Init(nsIFile *dllSpec);
 
-#ifdef SHOULD_IMPLEMENT_BREAKAFTERLOAD
-    void BreakAfterLoad(const char *nsprPath);
-#endif
-
 public:
- 
-	nsDll(nsIFile *dllSpec, nsNativeComponentLoader* loader);
-	~nsDll(void);
 
-	// Dll Loading
-	PRBool Load(void);
-	PRBool Unload(void);
-	PRBool IsLoaded(void)
-	{
-		return ((m_instance != 0) ? PR_TRUE : PR_FALSE);
-	}
+    nsDll(nsIFile *dllSpec, nsNativeComponentLoader* loader);
+    ~nsDll(void);
+
+    // Dll Loading
+    PRBool Load(void);
+    PRBool Unload(void);
+    PRBool IsLoaded(void) { return ((m_hMod != NIL_RTLDRMOD) ? PR_TRUE : PR_FALSE); }
+
     void MarkForUnload(PRBool mark) { m_markForUnload = mark; }
     PRBool IsMarkedForUnload(void) { return m_markForUnload; }
 
@@ -105,13 +96,15 @@ public:
     // This wont unload the dll. Unload() implicitly calls Shutdown().
     nsresult Shutdown(void);
 
-	void *FindSymbol(const char *symbol);
-	
+    void *FindSymbol(const char *symbol);
+
     PRBool HasChanged(void);
 
     void GetDisplayPath(nsACString& string);
 
-	PRLibrary *GetInstance(void) { return (m_instance); }
+#if 0
+    PRLibrary *GetInstance(void) { return (m_instance); }
+#endif
 
     // NS_RELEASE() is required to be done on objects returned
     nsresult GetDllSpec(nsIFile **dllSpec);

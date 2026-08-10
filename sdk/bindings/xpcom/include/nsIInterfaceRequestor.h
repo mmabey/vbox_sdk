@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsIInterfaceRequestor.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsIInterfaceRequestor.idl
  */
 
 #ifndef __gen_nsIInterfaceRequestor_h__
@@ -57,7 +57,7 @@ class NS_NO_VTABLE nsIInterfaceRequestor : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIINTERFACEREQUESTOR \
-  NS_IMETHOD GetInterface(const nsIID & uuid, void * *result); 
+  NS_IMETHOD GetInterface(const nsIID & uuid, void * *result) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIINTERFACEREQUESTOR(_to) \

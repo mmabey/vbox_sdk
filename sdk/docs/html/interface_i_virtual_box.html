@@ -61,14 +61,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1119c0bb89806de2606498a57a25fb20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a1119c0bb89806de2606498a57a25fb20">composeMachineFilename</a> (in wstring name, in wstring group, in wstring createFlags, in wstring baseFolder, [retval] out wstring file)</td></tr>
 <tr class="memdesc:a1119c0bb89806de2606498a57a25fb20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a recommended full path of the settings file name for a new virtual machine.  <br /></td></tr>
 <tr class="separator:a1119c0bb89806de2606498a57a25fb20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a499afb3df4ee20261d659a59630b8880"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">createMachine</a> (in wstring settingsFile, in wstring name, in wstring[] groups, in wstring osTypeId, in wstring flags, in wstring cipher, in wstring passwordId, in wstring password, [retval] out <a class="el" href="interface_i_machine.html">IMachine</a> machine)</td></tr>
-<tr class="memdesc:a499afb3df4ee20261d659a59630b8880"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new virtual machine by creating a machine settings file at the given location.  <br /></td></tr>
-<tr class="separator:a499afb3df4ee20261d659a59630b8880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2957d5810ec06a76dc14431b941ced2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#aa2957d5810ec06a76dc14431b941ced2">getPlatformProperties</a> (in <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a> architecture, [retval] out <a class="el" href="interface_i_platform_properties.html">IPlatformProperties</a> properties)</td></tr>
+<tr class="memdesc:aa2957d5810ec06a76dc14431b941ced2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the associated properties object for the given VM platform architecture.  <br /></td></tr>
+<tr class="separator:aa2957d5810ec06a76dc14431b941ced2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b70a47863291ef63443df0e49a30265"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">createMachine</a> (in wstring settingsFile, in wstring name, in <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a> platform, in wstring[] groups, in wstring osTypeId, in wstring flags, in wstring cipher, in wstring passwordId, in wstring password, [retval] out <a class="el" href="interface_i_machine.html">IMachine</a> machine)</td></tr>
+<tr class="memdesc:a1b70a47863291ef63443df0e49a30265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new virtual machine by creating a machine settings file at the given location.  <br /></td></tr>
+<tr class="separator:a1b70a47863291ef63443df0e49a30265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abed607b37d5c17bbd73e77b4778f409b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">openMachine</a> (in wstring settingsFile, in wstring password, [retval] out <a class="el" href="interface_i_machine.html">IMachine</a> machine)</td></tr>
 <tr class="memdesc:abed607b37d5c17bbd73e77b4778f409b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a virtual machine from the existing settings file.  <br /></td></tr>
 <tr class="separator:abed607b37d5c17bbd73e77b4778f409b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a67d2e6643990d72949c8d6c806ed35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a7a67d2e6643990d72949c8d6c806ed35">registerMachine</a> (in <a class="el" href="interface_i_machine.html">IMachine</a> machine)</td></tr>
-<tr class="memdesc:a7a67d2e6643990d72949c8d6c806ed35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the machine previously created using <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">createMachine</a><b></b> or opened using <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">openMachine</a><b></b> within this VirtualBox installation.  <br /></td></tr>
+<tr class="memdesc:a7a67d2e6643990d72949c8d6c806ed35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the machine previously created using <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">createMachine</a><b></b> or opened using <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">openMachine</a><b></b> within this VirtualBox installation.  <br /></td></tr>
 <tr class="separator:a7a67d2e6643990d72949c8d6c806ed35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1bdb91613581aaee07fdb023e94b851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#aa1bdb91613581aaee07fdb023e94b851">findMachine</a> (in wstring nameOrId, [retval] out <a class="el" href="interface_i_machine.html">IMachine</a> machine)</td></tr>
 <tr class="memdesc:aa1bdb91613581aaee07fdb023e94b851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to find a virtual machine given its name or UUID.  <br /></td></tr>
@@ -94,6 +97,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae5b3d4b5b0869185c42ba8fb1d64a9cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#ae5b3d4b5b0869185c42ba8fb1d64a9cf">getGuestOSType</a> (in wstring id, [retval] out <a class="el" href="interface_i_guest_o_s_type.html">IGuestOSType</a> type)</td></tr>
 <tr class="memdesc:ae5b3d4b5b0869185c42ba8fb1d64a9cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an object describing the specified guest OS type.  <br /></td></tr>
 <tr class="separator:ae5b3d4b5b0869185c42ba8fb1d64a9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af253a379f7b5011c5e2f47db8ee1aa21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#af253a379f7b5011c5e2f47db8ee1aa21">getGuestOSSubtypesByFamilyId</a> (in wstring family, [retval] out wstring[] OSsubtypes)</td></tr>
+<tr class="memdesc:af253a379f7b5011c5e2f47db8ee1aa21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of guest OS family subtypes for a corresponding guest OS family ID type.  <br /></td></tr>
+<tr class="separator:af253a379f7b5011c5e2f47db8ee1aa21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa49fd75f4b0849c764c72837263fbdff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#aa49fd75f4b0849c764c72837263fbdff">getGuestOSDescsBySubtype</a> (in wstring OSSubtype, [retval] out wstring[] GuestOSDescs)</td></tr>
+<tr class="memdesc:aa49fd75f4b0849c764c72837263fbdff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of guest OS family descriptions for a corresponding guest OS family subtype.  <br /></td></tr>
+<tr class="separator:aa49fd75f4b0849c764c72837263fbdff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdd1cb34ac391e01eaff4bd5ad399d21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#abdd1cb34ac391e01eaff4bd5ad399d21">createSharedFolder</a> (in wstring name, in wstring hostPath, in boolean writable, in boolean automount, in wstring autoMountPoint)</td></tr>
 <tr class="memdesc:abdd1cb34ac391e01eaff4bd5ad399d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new global shared folder by associating the given logical name with the given host path, adds it to the collection of shared folders and starts sharing it.  <br /></td></tr>
 <tr class="separator:abdd1cb34ac391e01eaff4bd5ad399d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,9 +151,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a431df30f7d82c2bc586f5f7c1de8d947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99472515120842cb5bb7b4efe52d8c4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a99472515120842cb5bb7b4efe52d8c4c">removeCloudNetwork</a> (in <a class="el" href="interface_i_cloud_network.html">ICloudNetwork</a> network)</td></tr>
 <tr class="separator:a99472515120842cb5bb7b4efe52d8c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f5c3b4861f2cbc42a70912e9deac87a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a6f5c3b4861f2cbc42a70912e9deac87a">checkFirmwarePresent</a> (in <a class="el" href="_virtual_box_8idl.html#afddb85483810aea160a6bf2c90259b55">FirmwareType</a> firmwareType, in wstring <a class="el" href="interface_i_virtual_box.html#aa39d78ffaa90c1abe9d340a1a0738ed9">version</a>, out wstring url, out wstring file, [retval] out boolean result)</td></tr>
-<tr class="memdesc:a6f5c3b4861f2cbc42a70912e9deac87a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this VirtualBox installation has a firmware of the given type available, either system-wide or per-user.  <br /></td></tr>
-<tr class="separator:a6f5c3b4861f2cbc42a70912e9deac87a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd2d16ec7e0a75e7d20359e99cb93b76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#acd2d16ec7e0a75e7d20359e99cb93b76">checkFirmwarePresent</a> (in <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a> platformArchitecture, in <a class="el" href="_virtual_box_8idl.html#afddb85483810aea160a6bf2c90259b55">FirmwareType</a> firmwareType, in wstring <a class="el" href="interface_i_virtual_box.html#aa39d78ffaa90c1abe9d340a1a0738ed9">version</a>, out wstring url, out wstring file, [retval] out boolean result)</td></tr>
+<tr class="memdesc:acd2d16ec7e0a75e7d20359e99cb93b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this VirtualBox installation has a firmware of the given type available, either system-wide or per-user.  <br /></td></tr>
+<tr class="separator:acd2d16ec7e0a75e7d20359e99cb93b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63c678334dd2ee7fe809c495249c324b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a63c678334dd2ee7fe809c495249c324b">findProgressById</a> (in wstringUUID id, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progressObject)</td></tr>
 <tr class="memdesc:a63c678334dd2ee7fe809c495249c324b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches through all progress objects known to VBoxSVC for an instance with the given GUID.  <br /></td></tr>
 <tr class="separator:a63c678334dd2ee7fe809c495249c324b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,7 +208,11 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7fe92d79c4a1473561ced90d05fbb068"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_progress.html">IProgress</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a7fe92d79c4a1473561ced90d05fbb068">progressOperations</a></td></tr>
 <tr class="separator:a7fe92d79c4a1473561ced90d05fbb068"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b8a63c015cf54efd1ea331824374f25"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_guest_o_s_type.html">IGuestOSType</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a8b8a63c015cf54efd1ea331824374f25">guestOSTypes</a></td></tr>
+<tr class="memdesc:a8b8a63c015cf54efd1ea331824374f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of all guest OS type objects known to this VirtualBox installation.  <br /></td></tr>
 <tr class="separator:a8b8a63c015cf54efd1ea331824374f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5bc9d0abbfb16f011919144a4fded46"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#ad5bc9d0abbfb16f011919144a4fded46">guestOSFamilies</a></td></tr>
+<tr class="memdesc:ad5bc9d0abbfb16f011919144a4fded46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of guest OS family identifiers known to this VirtualBox installation.  <br /></td></tr>
+<tr class="separator:ad5bc9d0abbfb16f011919144a4fded46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8198e5cdeda5dcf6ea39e2060b638e68"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_shared_folder.html">ISharedFolder</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_virtual_box.html#a8198e5cdeda5dcf6ea39e2060b638e68">sharedFolders</a></td></tr>
 <tr class="memdesc:a8198e5cdeda5dcf6ea39e2060b638e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of global shared folders.  <br /></td></tr>
 <tr class="separator:a8198e5cdeda5dcf6ea39e2060b638e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,7 +251,7 @@ Public Attributes</h2></td></tr>
 <p>An instance of <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a> is required for the product to do anything useful. Even though the interface does not expose this, internally, <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a> is implemented as a singleton and actually lives in the process of the VirtualBox server (VBoxSVC.exe). This makes sure that <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a> can track the state of all virtual machines on a particular host, regardless of which frontend started them.</p>
 <p>To enumerate all the virtual machines on the host, use the <a class="el" href="interface_i_virtual_box.html#aad58f4626e004e340e418dae6f4cd1c0">IVirtualBox::machines</a><b></b> attribute.</p>
 <p>Error information handling is a bit special with <a class="el" href="interface_i_virtual_box.html" title="The IVirtualBox interface represents the main interface exposed by the product that provides virtual ...">IVirtualBox</a>: creating an instance will always succeed. The return of the actual error code/information is postponed to any attribute or method call. The reason for this is that COM likes to mutilate the error code and lose the detailed error information returned by instance creation.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{7682D5EB-F00E-44F1-8CA2-99D08B1CD607}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{D644AD1E-C501-4FC7-9AB6-AA6D763BC540}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1119c0bb89806de2606498a57a25fb20" name="a1119c0bb89806de2606498a57a25fb20"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1119c0bb89806de2606498a57a25fb20">&#9670;&#160;</a></span>composeMachineFilename()</h2>
@@ -288,11 +301,11 @@ Public Attributes</h2></td></tr>
 <p>This API serves two purposes:</p>
 <ul>
 <li>
-It gets called by <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">createMachine</a><b></b> if <code>null</code> or empty string (which is recommended) is specified for the <em>settingsFile</em> argument there, which means that API should use a recommended default file name.</li>
+It gets called by <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">createMachine</a><b></b> if <code>null</code> or empty string (which is recommended) is specified for the <em>settingsFile</em> argument there, which means that API should use a recommended default file name.</li>
 <li>
 It can be called manually by a client software before creating a machine, e.g. if that client wants to pre-create the machine directory to create virtual hard disks in that directory together with the new machine settings file. In that case, the file name should be stripped from the full settings file path returned by this function to obtain the machine directory.</li>
 </ul>
-<p>See <a class="el" href="interface_i_machine.html#a0f8041e0562be7a0b32be686384285f5">IMachine::name</a><b></b> and <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">createMachine</a><b></b> for more details about the machine name.</p>
+<p>See <a class="el" href="interface_i_machine.html#a0f8041e0562be7a0b32be686384285f5">IMachine::name</a><b></b> and <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">createMachine</a><b></b> for more details about the machine name.</p>
 <p><em>groupName</em> defines which additional subdirectory levels should be included. It must be either a valid group name or <code>null</code> or empty string which designates that the machine will not be related to a machine group.</p>
 <p>If <em>baseFolder</em> is a <code>null</code> or empty string (which is recommended), the default machine settings folder (see <a class="el" href="interface_i_system_properties.html#a69ff5e6ea2e4858e773769141f92ea6a">ISystemProperties::defaultMachineFolder</a><b></b>) will be used as a base folder for the created machine, resulting in a file name like "/home/user/VirtualBox VMs/name/name.vbox". Otherwise the given base folder will be used.</p>
 <p>This method does not access the host disks. In particular, it does not check for whether a machine with this name already exists.</p>
@@ -300,7 +313,7 @@ It can be called manually by a client software before creating a machine, e.g. i
   <table class="params">
     <tr><td class="paramname">name</td><td>Suggested machine name.</td></tr>
     <tr><td class="paramname">group</td><td>Machine group name for the new machine or machine group. It is used to determine the right subdirectory.</td></tr>
-    <tr><td class="paramname">createFlags</td><td>Machine creation flags, see <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">createMachine</a><b></b> (optional).</td></tr>
+    <tr><td class="paramname">createFlags</td><td>Machine creation flags, see <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">createMachine</a><b></b> (optional).</td></tr>
     <tr><td class="paramname">baseFolder</td><td>Base machine folder (optional).</td></tr>
     <tr><td class="paramname">file</td><td>Fully qualified path where the machine would be created. </td></tr>
   </table>
@@ -309,8 +322,45 @@ It can be called manually by a client software before creating a machine, e.g. i
 
 </div>
 </div>
-<a id="a499afb3df4ee20261d659a59630b8880" name="a499afb3df4ee20261d659a59630b8880"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a499afb3df4ee20261d659a59630b8880">&#9670;&#160;</a></span>createMachine()</h2>
+<a id="aa2957d5810ec06a76dc14431b941ced2" name="aa2957d5810ec06a76dc14431b941ced2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2957d5810ec06a76dc14431b941ced2">&#9670;&#160;</a></span>getPlatformProperties()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IVirtualBox::getPlatformProperties </td>
+          <td>(</td>
+          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a>&#160;</td>
+          <td class="paramname"><em>architecture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out <a class="el" href="interface_i_platform_properties.html">IPlatformProperties</a>&#160;</td>
+          <td class="paramname"><em>properties</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the associated properties object for the given VM platform architecture. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">architecture</td><td>The platform architecture to return the platform properties for.</td></tr>
+    <tr><td class="paramname">properties</td><td>Returned platform properties. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1b70a47863291ef63443df0e49a30265" name="a1b70a47863291ef63443df0e49a30265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b70a47863291ef63443df0e49a30265">&#9670;&#160;</a></span>createMachine()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -326,6 +376,12 @@ It can be called manually by a client software before creating a machine, e.g. i
           <td></td>
           <td class="paramtype">in wstring&#160;</td>
           <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a>&#160;</td>
+          <td class="paramname"><em>platform</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -397,6 +453,7 @@ Call <a class="el" href="interface_i_virtual_box.html#a7a67d2e6643990d72949c8d6c
   <table class="params">
     <tr><td class="paramname">settingsFile</td><td>Fully qualified path where the settings file should be created, empty string or <code>null</code> for a default folder and file based on the <em>name</em> argument and the primary group. (see <a class="el" href="interface_i_virtual_box.html#a1119c0bb89806de2606498a57a25fb20">composeMachineFilename</a><b></b>).</td></tr>
     <tr><td class="paramname">name</td><td>Machine name.</td></tr>
+    <tr><td class="paramname">platform</td><td>The platform architecture for the new VM.</td></tr>
     <tr><td class="paramname">groups</td><td>Array of group names. <code>null</code> or an empty array have the same meaning as an array with just the empty string or <code>"/"</code>, i.e. create a machine without group association.</td></tr>
     <tr><td class="paramname">osTypeId</td><td>Guest OS Type ID.</td></tr>
     <tr><td class="paramname">flags</td><td>Additional property parameters, passed as a comma-separated list of "name=value" type entries. The following ones are recognized: <code>forceOverwrite=1</code> to overwrite an existing machine settings file, <code>UUID=&lt;uuid&gt;</code> to specify a machine UUID and <code>directoryIncludesUUID=1</code> to switch to a special VM directory naming scheme which should not be used unless necessary.</td></tr>
@@ -492,7 +549,7 @@ There is no way to change the name of the settings file or subfolder of the crea
       </table>
 </div><div class="memdoc">
 
-<p>Registers the machine previously created using <a class="el" href="interface_i_virtual_box.html#a499afb3df4ee20261d659a59630b8880">createMachine</a><b></b> or opened using <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">openMachine</a><b></b> within this VirtualBox installation. </p>
+<p>Registers the machine previously created using <a class="el" href="interface_i_virtual_box.html#a1b70a47863291ef63443df0e49a30265">createMachine</a><b></b> or opened using <a class="el" href="interface_i_virtual_box.html#abed607b37d5c17bbd73e77b4778f409b">openMachine</a><b></b> within this VirtualBox installation. </p>
 <p>After successful method invocation, the <a class="el" href="interface_i_machine_registered_event.html">IMachineRegisteredEvent</a><b></b> event is fired.</p>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
@@ -886,6 +943,92 @@ With a "Floppy" device type, the file must be an RAW floppy image. After this me
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
 <td>E_INVALIDARG</td><td><em>id</em> is not a valid Guest OS type. </td></tr>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<a id="af253a379f7b5011c5e2f47db8ee1aa21" name="af253a379f7b5011c5e2f47db8ee1aa21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af253a379f7b5011c5e2f47db8ee1aa21">&#9670;&#160;</a></span>getGuestOSSubtypesByFamilyId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IVirtualBox::getGuestOSSubtypesByFamilyId </td>
+          <td>(</td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>family</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out wstring[]&#160;</td>
+          <td class="paramname"><em>OSsubtypes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of guest OS family subtypes for a corresponding guest OS family ID type. </p>
+<p>The <a class="el" href="interface_i_virtual_box.html#a8b8a63c015cf54efd1ea331824374f25">IVirtualBox::guestOSTypes</a><b></b> collection contains all available guest OS type objects. Each object has an <a class="el" href="interface_i_guest_o_s_type.html#ad22e0bef1b1ee48a18ca4fd8fed11603">IGuestOSType::familyId</a><b></b> attribute which contains a the guest OS family this object describes. The guest OS family subtype is contained in the <a class="el" href="interface_i_guest_o_s_type.html#a6ce9f427afb86df373811a25b455315e">IGuestOSType::subtype</a><b></b> attribute.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">family</td><td>Guest OS type ID string.</td></tr>
+    <tr><td class="paramname">OSsubtypes</td><td>Array of guest OS family subtypes associated with the specified guest OS family ID.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>E_INVALIDARG</td><td><em>family</em> is not a valid guest OS family identifier. </td></tr>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<a id="aa49fd75f4b0849c764c72837263fbdff" name="aa49fd75f4b0849c764c72837263fbdff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa49fd75f4b0849c764c72837263fbdff">&#9670;&#160;</a></span>getGuestOSDescsBySubtype()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IVirtualBox::getGuestOSDescsBySubtype </td>
+          <td>(</td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>OSSubtype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out wstring[]&#160;</td>
+          <td class="paramname"><em>GuestOSDescs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of guest OS family descriptions for a corresponding guest OS family subtype. </p>
+<p>The <a class="el" href="interface_i_virtual_box.html#a8b8a63c015cf54efd1ea331824374f25">IVirtualBox::guestOSTypes</a><b></b> collection contains all available guest OS type objects. Each object has an <a class="el" href="interface_i_guest_o_s_type.html#a6ce9f427afb86df373811a25b455315e">IGuestOSType::subtype</a><b></b> attribute which contains a human readable description of the guest OS subtype this object describes. The guest OS family description is contained in the <a class="el" href="interface_i_guest_o_s_type.html#afc70de6b55c2a13996575ad597774d20">IGuestOSType::familyDescription</a><b></b> attribute.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">OSSubtype</td><td>Guest OS subtype.</td></tr>
+    <tr><td class="paramname">GuestOSDescs</td><td>Array of guest OS descriptions associated with the specified guest OS subtype.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>E_INVALIDARG</td><td><em>OSSubtype</em> is not a valid guest OS subtype. </td></tr>
 </table>
 </dd></dl>
 
@@ -1510,8 +1653,8 @@ On success, the <a class="el" href="interface_i_extra_data_changed_event.html">I
 
 </div>
 </div>
-<a id="a6f5c3b4861f2cbc42a70912e9deac87a" name="a6f5c3b4861f2cbc42a70912e9deac87a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f5c3b4861f2cbc42a70912e9deac87a">&#9670;&#160;</a></span>checkFirmwarePresent()</h2>
+<a id="acd2d16ec7e0a75e7d20359e99cb93b76" name="acd2d16ec7e0a75e7d20359e99cb93b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd2d16ec7e0a75e7d20359e99cb93b76">&#9670;&#160;</a></span>checkFirmwarePresent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1519,6 +1662,12 @@ On success, the <a class="el" href="interface_i_extra_data_changed_event.html">I
         <tr>
           <td class="memname">void IVirtualBox::checkFirmwarePresent </td>
           <td>(</td>
+          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a>&#160;</td>
+          <td class="paramname"><em>platformArchitecture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#afddb85483810aea160a6bf2c90259b55">FirmwareType</a>&#160;</td>
           <td class="paramname"><em>firmwareType</em>, </td>
         </tr>
@@ -1558,6 +1707,7 @@ On success, the <a class="el" href="interface_i_extra_data_changed_event.html">I
 <p>Optionally, this may return a hint where this firmware can be downloaded from.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">platformArchitecture</td><td>Architecture of firmware to check.</td></tr>
     <tr><td class="paramname">firmwareType</td><td>Type of firmware to check.</td></tr>
     <tr><td class="paramname">version</td><td>Expected version number, usually empty string (presently ignored).</td></tr>
     <tr><td class="paramname">url</td><td>Suggested URL to download this firmware from.</td></tr>
@@ -1886,6 +2036,25 @@ On success, the <a class="el" href="interface_i_extra_data_changed_event.html">I
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Array of all guest OS type objects known to this VirtualBox installation. </p>
+
+</div>
+</div>
+<a id="ad5bc9d0abbfb16f011919144a4fded46" name="ad5bc9d0abbfb16f011919144a4fded46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5bc9d0abbfb16f011919144a4fded46">&#9670;&#160;</a></span>guestOSFamilies</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute wstring [] IVirtualBox::guestOSFamilies</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Array of guest OS family identifiers known to this VirtualBox installation. </p>
+<p>The guest OS family identifier corrresponds to the <a class="el" href="interface_i_guest_o_s_type.html#ad22e0bef1b1ee48a18ca4fd8fed11603">IGuestOSType::familyId</a><b></b> attribute. </p>
 
 </div>
 </div>

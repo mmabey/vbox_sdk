@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsIAtomService.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIAtomService.idl
  */
 
 #ifndef __gen_nsIAtomService_h__
@@ -20,6 +20,7 @@
     0x0168,                                  \
     0x4cab,                                  \
     {0x88, 0x18, 0x98, 0xf5, 0x47, 0x5a, 0x49, 0x0c} }
+
 #define NS_ATOMSERVICE_CONTRACTID "@mozilla.org/atom-service;1"
 #define NS_ATOMSERVICE_CLASSNAME "Atom Service"
 
@@ -53,8 +54,8 @@ class NS_NO_VTABLE nsIAtomService : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIATOMSERVICE \
-  NS_IMETHOD GetAtom(const PRUnichar *value, nsIAtom **_retval); \
-  NS_IMETHOD GetPermanentAtom(const PRUnichar *value, nsIAtom **_retval); 
+  NS_IMETHOD GetAtom(const PRUnichar *value, nsIAtom **_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetPermanentAtom(const PRUnichar *value, nsIAtom **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIATOMSERVICE(_to) \

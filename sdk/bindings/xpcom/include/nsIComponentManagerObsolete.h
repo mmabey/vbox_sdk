@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentManagerObsolete.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentManagerObsolete.idl
  */
 
 #ifndef __gen_nsIComponentManagerObsolete_h__
@@ -350,29 +350,29 @@ class NS_NO_VTABLE nsIComponentManagerObsolete : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICOMPONENTMANAGEROBSOLETE \
-  NS_IMETHOD FindFactory(const nsCID & aClass, nsIFactory **_retval); \
-  NS_IMETHOD GetClassObject(const nsCID & aClass, const nsIID & aIID, void * *_retval); \
-  NS_IMETHOD_(nsresult) ContractIDToClassID(const char *aContractID, nsCID *aClass); \
-  NS_IMETHOD CLSIDToContractID(const nsCID & aClass, char **aClassName, char **_retval); \
-  NS_IMETHOD CreateInstance(const nsCID & aClass, nsISupports *aDelegate, const nsIID & aIID, void * *_retval); \
-  NS_IMETHOD CreateInstanceByContractID(const char *aContractID, nsISupports *aDelegate, const nsIID & IID, void * *_retval); \
-  NS_IMETHOD RegistryLocationForSpec(nsIFile *aSpec, char **_retval); \
-  NS_IMETHOD SpecForRegistryLocation(const char *aLocation, nsIFile **_retval); \
-  NS_IMETHOD RegisterFactory(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFactory *aFactory, PRBool aReplace); \
-  NS_IMETHOD RegisterComponent(const nsCID & aClass, const char *aClassName, const char *aContractID, const char *aLocation, PRBool aReplace, PRBool aPersist); \
-  NS_IMETHOD RegisterComponentWithType(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFile *aSpec, const char *aLocation, PRBool aReplace, PRBool aPersist, const char *aType); \
-  NS_IMETHOD RegisterComponentSpec(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFile *aLibrary, PRBool aReplace, PRBool aPersist); \
-  NS_IMETHOD RegisterComponentLib(const nsCID & aClass, const char *aClassName, const char *aContractID, const char *aDllName, PRBool aReplace, PRBool aPersist); \
-  NS_IMETHOD UnregisterFactory(const nsCID & aClass, nsIFactory *aFactory); \
-  NS_IMETHOD UnregisterComponent(const nsCID & aClass, const char *aLocation); \
-  NS_IMETHOD UnregisterComponentSpec(const nsCID & aClass, nsIFile *aLibrarySpec); \
-  NS_IMETHOD FreeLibraries(void); \
-  NS_IMETHOD AutoRegister(PRInt32 when, nsIFile *directory); \
-  NS_IMETHOD AutoRegisterComponent(PRInt32 when, nsIFile *aFileLocation); \
-  NS_IMETHOD AutoUnregisterComponent(PRInt32 when, nsIFile *aFileLocation); \
-  NS_IMETHOD IsRegistered(const nsCID & aClass, PRBool *_retval); \
-  NS_IMETHOD EnumerateCLSIDs(nsIEnumerator **_retval); \
-  NS_IMETHOD EnumerateContractIDs(nsIEnumerator **_retval); 
+  NS_IMETHOD FindFactory(const nsCID & aClass, nsIFactory **_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetClassObject(const nsCID & aClass, const nsIID & aIID, void * *_retval) NS_OVERRIDE; \
+  NS_IMETHOD_(nsresult) ContractIDToClassID(const char *aContractID, nsCID *aClass) NS_OVERRIDE; \
+  NS_IMETHOD CLSIDToContractID(const nsCID & aClass, char **aClassName, char **_retval) NS_OVERRIDE; \
+  NS_IMETHOD CreateInstance(const nsCID & aClass, nsISupports *aDelegate, const nsIID & aIID, void * *_retval) NS_OVERRIDE; \
+  NS_IMETHOD CreateInstanceByContractID(const char *aContractID, nsISupports *aDelegate, const nsIID & IID, void * *_retval) NS_OVERRIDE; \
+  NS_IMETHOD RegistryLocationForSpec(nsIFile *aSpec, char **_retval) NS_OVERRIDE; \
+  NS_IMETHOD SpecForRegistryLocation(const char *aLocation, nsIFile **_retval) NS_OVERRIDE; \
+  NS_IMETHOD RegisterFactory(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFactory *aFactory, PRBool aReplace) NS_OVERRIDE; \
+  NS_IMETHOD RegisterComponent(const nsCID & aClass, const char *aClassName, const char *aContractID, const char *aLocation, PRBool aReplace, PRBool aPersist) NS_OVERRIDE; \
+  NS_IMETHOD RegisterComponentWithType(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFile *aSpec, const char *aLocation, PRBool aReplace, PRBool aPersist, const char *aType) NS_OVERRIDE; \
+  NS_IMETHOD RegisterComponentSpec(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFile *aLibrary, PRBool aReplace, PRBool aPersist) NS_OVERRIDE; \
+  NS_IMETHOD RegisterComponentLib(const nsCID & aClass, const char *aClassName, const char *aContractID, const char *aDllName, PRBool aReplace, PRBool aPersist) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterFactory(const nsCID & aClass, nsIFactory *aFactory) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterComponent(const nsCID & aClass, const char *aLocation) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterComponentSpec(const nsCID & aClass, nsIFile *aLibrarySpec) NS_OVERRIDE; \
+  NS_IMETHOD FreeLibraries(void) NS_OVERRIDE; \
+  NS_IMETHOD AutoRegister(PRInt32 when, nsIFile *directory) NS_OVERRIDE; \
+  NS_IMETHOD AutoRegisterComponent(PRInt32 when, nsIFile *aFileLocation) NS_OVERRIDE; \
+  NS_IMETHOD AutoUnregisterComponent(PRInt32 when, nsIFile *aFileLocation) NS_OVERRIDE; \
+  NS_IMETHOD IsRegistered(const nsCID & aClass, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD EnumerateCLSIDs(nsIEnumerator **_retval) NS_OVERRIDE; \
+  NS_IMETHOD EnumerateContractIDs(nsIEnumerator **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICOMPONENTMANAGEROBSOLETE(_to) \

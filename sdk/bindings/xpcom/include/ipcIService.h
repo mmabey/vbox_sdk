@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/ipc/ipcd/client/public/ipcIService.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/ipc/ipcd/client/public/ipcIService.idl
  */
 
 #ifndef __gen_ipcIService_h__
@@ -111,12 +111,6 @@ class NS_NO_VTABLE ipcIService : public nsISupports {
   /* unsigned long resolveClientName (in string aName); */
   NS_IMETHOD ResolveClientName(const char *aName, PRUint32 *_retval) = 0;
 
-  /**
-     * tests whether a particular client is connected to the IPC daemon.
-     */
-  /* boolean clientExists (in unsigned long aClientID); */
-  NS_IMETHOD ClientExists(PRUint32 aClientID, PRBool *_retval) = 0;
-
   /**************************************************************************
      * message methods
      */
@@ -203,18 +197,17 @@ class NS_NO_VTABLE ipcIService : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_IPCISERVICE \
-  NS_IMETHOD GetID(PRUint32 *aID); \
-  NS_IMETHOD AddName(const char *aName); \
-  NS_IMETHOD RemoveName(const char *aName); \
-  NS_IMETHOD AddClientObserver(ipcIClientObserver *aObserver); \
-  NS_IMETHOD RemoveClientObserver(ipcIClientObserver *aObserver); \
-  NS_IMETHOD ResolveClientName(const char *aName, PRUint32 *_retval); \
-  NS_IMETHOD ClientExists(PRUint32 aClientID, PRBool *_retval); \
-  NS_IMETHOD DefineTarget(const nsID & aTarget, ipcIMessageObserver *aObserver, PRBool aOnCurrentThread); \
-  NS_IMETHOD SendMessage(PRUint32 aReceiverID, const nsID & aTarget, const PRUint8 *aData, PRUint32 aDataLen); \
-  NS_IMETHOD WaitMessage(PRUint32 aSenderID, const nsID & aTarget, ipcIMessageObserver *aObserver, PRUint32 aTimeout); \
-  NS_IMETHOD DisableMessageObserver(const nsID & aTarget); \
-  NS_IMETHOD EnableMessageObserver(const nsID & aTarget); 
+  NS_IMETHOD GetID(PRUint32 *aID) NS_OVERRIDE; \
+  NS_IMETHOD AddName(const char *aName) NS_OVERRIDE; \
+  NS_IMETHOD RemoveName(const char *aName) NS_OVERRIDE; \
+  NS_IMETHOD AddClientObserver(ipcIClientObserver *aObserver) NS_OVERRIDE; \
+  NS_IMETHOD RemoveClientObserver(ipcIClientObserver *aObserver) NS_OVERRIDE; \
+  NS_IMETHOD ResolveClientName(const char *aName, PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD DefineTarget(const nsID & aTarget, ipcIMessageObserver *aObserver, PRBool aOnCurrentThread) NS_OVERRIDE; \
+  NS_IMETHOD SendMessage(PRUint32 aReceiverID, const nsID & aTarget, const PRUint8 *aData, PRUint32 aDataLen) NS_OVERRIDE; \
+  NS_IMETHOD WaitMessage(PRUint32 aSenderID, const nsID & aTarget, ipcIMessageObserver *aObserver, PRUint32 aTimeout) NS_OVERRIDE; \
+  NS_IMETHOD DisableMessageObserver(const nsID & aTarget) NS_OVERRIDE; \
+  NS_IMETHOD EnableMessageObserver(const nsID & aTarget) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IPCISERVICE(_to) \
@@ -224,7 +217,6 @@ class NS_NO_VTABLE ipcIService : public nsISupports {
   NS_IMETHOD AddClientObserver(ipcIClientObserver *aObserver) { return _to AddClientObserver(aObserver); } \
   NS_IMETHOD RemoveClientObserver(ipcIClientObserver *aObserver) { return _to RemoveClientObserver(aObserver); } \
   NS_IMETHOD ResolveClientName(const char *aName, PRUint32 *_retval) { return _to ResolveClientName(aName, _retval); } \
-  NS_IMETHOD ClientExists(PRUint32 aClientID, PRBool *_retval) { return _to ClientExists(aClientID, _retval); } \
   NS_IMETHOD DefineTarget(const nsID & aTarget, ipcIMessageObserver *aObserver, PRBool aOnCurrentThread) { return _to DefineTarget(aTarget, aObserver, aOnCurrentThread); } \
   NS_IMETHOD SendMessage(PRUint32 aReceiverID, const nsID & aTarget, const PRUint8 *aData, PRUint32 aDataLen) { return _to SendMessage(aReceiverID, aTarget, aData, aDataLen); } \
   NS_IMETHOD WaitMessage(PRUint32 aSenderID, const nsID & aTarget, ipcIMessageObserver *aObserver, PRUint32 aTimeout) { return _to WaitMessage(aSenderID, aTarget, aObserver, aTimeout); } \
@@ -239,7 +231,6 @@ class NS_NO_VTABLE ipcIService : public nsISupports {
   NS_IMETHOD AddClientObserver(ipcIClientObserver *aObserver) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddClientObserver(aObserver); } \
   NS_IMETHOD RemoveClientObserver(ipcIClientObserver *aObserver) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveClientObserver(aObserver); } \
   NS_IMETHOD ResolveClientName(const char *aName, PRUint32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ResolveClientName(aName, _retval); } \
-  NS_IMETHOD ClientExists(PRUint32 aClientID, PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClientExists(aClientID, _retval); } \
   NS_IMETHOD DefineTarget(const nsID & aTarget, ipcIMessageObserver *aObserver, PRBool aOnCurrentThread) { return !_to ? NS_ERROR_NULL_POINTER : _to->DefineTarget(aTarget, aObserver, aOnCurrentThread); } \
   NS_IMETHOD SendMessage(PRUint32 aReceiverID, const nsID & aTarget, const PRUint8 *aData, PRUint32 aDataLen) { return !_to ? NS_ERROR_NULL_POINTER : _to->SendMessage(aReceiverID, aTarget, aData, aDataLen); } \
   NS_IMETHOD WaitMessage(PRUint32 aSenderID, const nsID & aTarget, ipcIMessageObserver *aObserver, PRUint32 aTimeout) { return !_to ? NS_ERROR_NULL_POINTER : _to->WaitMessage(aSenderID, aTarget, aObserver, aTimeout); } \
@@ -310,12 +301,6 @@ NS_IMETHODIMP _MYCLASS_::RemoveClientObserver(ipcIClientObserver *aObserver)
 
 /* unsigned long resolveClientName (in string aName); */
 NS_IMETHODIMP _MYCLASS_::ResolveClientName(const char *aName, PRUint32 *_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* boolean clientExists (in unsigned long aClientID); */
-NS_IMETHODIMP _MYCLASS_::ClientExists(PRUint32 aClientID, PRBool *_retval)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }

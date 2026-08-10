@@ -98,12 +98,21 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a010035262e83ba302a16b6b3a4d96334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5561910dd49cc90ae26d1558aa243b57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_machine.html#a5561910dd49cc90ae26d1558aa243b57">deleteConsoleConnection</a> ([retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
 <tr class="separator:a5561910dd49cc90ae26d1558aa243b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c10c645289d59ce07adf42f8b08156a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_machine.html#a1c10c645289d59ce07adf42f8b08156a">listMetricNames</a> (out <a class="el" href="interface_i_string_array.html">IStringArray</a> metricNames, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
+<tr class="memdesc:a1c10c645289d59ce07adf42f8b08156a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the metrics available for the instances in the Cloud.  <br /></td></tr>
+<tr class="separator:a1c10c645289d59ce07adf42f8b08156a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c23a50c1374d052ecd7c03447dc5635"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_machine.html#a7c23a50c1374d052ecd7c03447dc5635">enumerateMetricData</a> (in <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219">MetricType</a> metricType, in unsigned long pointsNumber, out <a class="el" href="interface_i_string_array.html">IStringArray</a> values, out <a class="el" href="interface_i_string_array.html">IStringArray</a> timestamps, out <a class="el" href="interface_i_string_array.html">IStringArray</a> unit, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
+<tr class="memdesc:a7c23a50c1374d052ecd7c03447dc5635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the interested metric history points.  <br /></td></tr>
+<tr class="separator:a7c23a50c1374d052ecd7c03447dc5635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a1d8abac89ebb52995287dc9eed08657d"><td class="memItemLeft" align="right" valign="top">readonly attribute wstringUUID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_machine.html#a1d8abac89ebb52995287dc9eed08657d">id</a></td></tr>
-<tr class="memdesc:a1d8abac89ebb52995287dc9eed08657d"><td class="mdescLeft">&#160;</td><td class="mdescRight">UUID of the cloud machine.  <br /></td></tr>
+<tr class="memdesc:a1d8abac89ebb52995287dc9eed08657d"><td class="mdescLeft">&#160;</td><td class="mdescRight">UUID of the cloud machine within VirtualBox.  <br /></td></tr>
 <tr class="separator:a1d8abac89ebb52995287dc9eed08657d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658f12f64a89d99ca2eedcba08a8a64b"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_machine.html#a658f12f64a89d99ca2eedcba08a8a64b">cloudId</a></td></tr>
+<tr class="memdesc:a658f12f64a89d99ca2eedcba08a8a64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">UUID of the cloud machine within Cloud.  <br /></td></tr>
+<tr class="separator:a658f12f64a89d99ca2eedcba08a8a64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf5df631d61785cf72ae5bde55a3e667"><td class="memItemLeft" align="right" valign="top">readonly attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_cloud_machine.html#acf5df631d61785cf72ae5bde55a3e667">accessible</a></td></tr>
 <tr class="memdesc:acf5df631d61785cf72ae5bde55a3e667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether this virtual machine is currently accessible or not.  <br /></td></tr>
 <tr class="separator:acf5df631d61785cf72ae5bde55a3e667"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -529,6 +538,113 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1c10c645289d59ce07adf42f8b08156a" name="a1c10c645289d59ce07adf42f8b08156a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c10c645289d59ce07adf42f8b08156a">&#9670;&#160;</a></span>listMetricNames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ICloudMachine::listMetricNames </td>
+          <td>(</td>
+          <td class="paramtype">out <a class="el" href="interface_i_string_array.html">IStringArray</a>&#160;</td>
+          <td class="paramname"><em>metricNames</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out <a class="el" href="interface_i_progress.html">IProgress</a>&#160;</td>
+          <td class="paramname"><em>progress</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the metrics available for the instances in the Cloud. </p>
+<p>In instance, CPU utilization, memory utilization, disk read I/O. Not all instances can have such metrics because a special service must be running on the instance. Converting a string representation to a MetricType is done using <a class="el" href="interface_i_cloud_client.html#a107eac7c638b4aea11b527b0cd25e1d2">ICloudClient::getMetricTypeByName</a><b></b>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metricNames</td><td>List of metrics names. May be empty if there are no metrics available on the instance or if the corresponding service is not running on the instance.</td></tr>
+    <tr><td class="paramname">progress</td><td>Progress object to track the operation completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7c23a50c1374d052ecd7c03447dc5635" name="a7c23a50c1374d052ecd7c03447dc5635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c23a50c1374d052ecd7c03447dc5635">&#9670;&#160;</a></span>enumerateMetricData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ICloudMachine::enumerateMetricData </td>
+          <td>(</td>
+          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219">MetricType</a>&#160;</td>
+          <td class="paramname"><em>metricType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in unsigned long&#160;</td>
+          <td class="paramname"><em>pointsNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out <a class="el" href="interface_i_string_array.html">IStringArray</a>&#160;</td>
+          <td class="paramname"><em>values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out <a class="el" href="interface_i_string_array.html">IStringArray</a>&#160;</td>
+          <td class="paramname"><em>timestamps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out <a class="el" href="interface_i_string_array.html">IStringArray</a>&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out <a class="el" href="interface_i_progress.html">IProgress</a>&#160;</td>
+          <td class="paramname"><em>progress</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the interested metric history points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metricType</td><td>The type of the requested metric. Standard usage to get an appropriate MetricType:<ul>
+<li>call <a class="el" href="interface_i_cloud_machine.html#a1c10c645289d59ce07adf42f8b08156a">listMetricNames</a><b></b> function; returns the types in string representation.</li>
+<li>call <a class="el" href="interface_i_cloud_client.html#a107eac7c638b4aea11b527b0cd25e1d2">ICloudClient::getMetricTypeByName</a><b></b> function; converts the string representation into MetricType.</li>
+</ul>
+</td></tr>
+    <tr><td class="paramname">pointsNumber</td><td>History metric point numbers start at 1 and can go backwards as long as history exists. Points are counted from the current time to the past. If user only wants the last actual value he passes the value "1". If 2 values need to be returned (last and second to last), the user passes "2", etc. and etc.</td></tr>
+    <tr><td class="paramname">values</td><td>The values of the metric returned.</td></tr>
+    <tr><td class="paramname">timestamps</td><td>The timestamps of the metric returned. The array entries match the corresponding entries in the <em>array</em>. Time format is represented in Rfc2822.</td></tr>
+    <tr><td class="paramname">unit</td><td>The measurement unit as "byte", "percentage" and etc... The array entries match the corresponding entries in the <em>array</em>.</td></tr>
+    <tr><td class="paramname">progress</td><td>Progress object to track the operation completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a1d8abac89ebb52995287dc9eed08657d" name="a1d8abac89ebb52995287dc9eed08657d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d8abac89ebb52995287dc9eed08657d">&#9670;&#160;</a></span>id</h2>
@@ -542,7 +658,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>UUID of the cloud machine. </p>
+<p>UUID of the cloud machine within VirtualBox. </p>
+
+</div>
+</div>
+<a id="a658f12f64a89d99ca2eedcba08a8a64b" name="a658f12f64a89d99ca2eedcba08a8a64b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a658f12f64a89d99ca2eedcba08a8a64b">&#9670;&#160;</a></span>cloudId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute wstring ICloudMachine::cloudId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>UUID of the cloud machine within Cloud. </p>
 
 </div>
 </div>

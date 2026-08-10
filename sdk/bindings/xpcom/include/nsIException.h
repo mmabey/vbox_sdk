@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsIException.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsIException.idl
  */
 
 #ifndef __gen_nsIException_h__
@@ -59,14 +59,14 @@ class NS_NO_VTABLE nsIStackFrame : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISTACKFRAME \
-  NS_IMETHOD GetLanguage(PRUint32 *aLanguage); \
-  NS_IMETHOD GetLanguageName(char * *aLanguageName); \
-  NS_IMETHOD GetFilename(char * *aFilename); \
-  NS_IMETHOD GetName(char * *aName); \
-  NS_IMETHOD GetLineNumber(PRInt32 *aLineNumber); \
-  NS_IMETHOD GetSourceLine(char * *aSourceLine); \
-  NS_IMETHOD GetCaller(nsIStackFrame * *aCaller); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetLanguage(PRUint32 *aLanguage) NS_OVERRIDE; \
+  NS_IMETHOD GetLanguageName(char * *aLanguageName) NS_OVERRIDE; \
+  NS_IMETHOD GetFilename(char * *aFilename) NS_OVERRIDE; \
+  NS_IMETHOD GetName(char * *aName) NS_OVERRIDE; \
+  NS_IMETHOD GetLineNumber(PRInt32 *aLineNumber) NS_OVERRIDE; \
+  NS_IMETHOD GetSourceLine(char * *aSourceLine) NS_OVERRIDE; \
+  NS_IMETHOD GetCaller(nsIStackFrame * *aCaller) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISTACKFRAME(_to) \
@@ -220,16 +220,16 @@ class NS_NO_VTABLE nsIException : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIEXCEPTION \
-  NS_IMETHOD GetMessage(char * *aMessage); \
-  NS_IMETHOD GetResult(nsresult *aResult); \
-  NS_IMETHOD GetName(char * *aName); \
-  NS_IMETHOD GetFilename(char * *aFilename); \
-  NS_IMETHOD GetLineNumber(PRUint32 *aLineNumber); \
-  NS_IMETHOD GetColumnNumber(PRUint32 *aColumnNumber); \
-  NS_IMETHOD GetLocation(nsIStackFrame * *aLocation); \
-  NS_IMETHOD GetInner(nsIException * *aInner); \
-  NS_IMETHOD GetData(nsISupports * *aData); \
-  NS_IMETHOD ToString(char **_retval); 
+  NS_IMETHOD GetMessage(char * *aMessage) NS_OVERRIDE; \
+  NS_IMETHOD GetResult(nsresult *aResult) NS_OVERRIDE; \
+  NS_IMETHOD GetName(char * *aName) NS_OVERRIDE; \
+  NS_IMETHOD GetFilename(char * *aFilename) NS_OVERRIDE; \
+  NS_IMETHOD GetLineNumber(PRUint32 *aLineNumber) NS_OVERRIDE; \
+  NS_IMETHOD GetColumnNumber(PRUint32 *aColumnNumber) NS_OVERRIDE; \
+  NS_IMETHOD GetLocation(nsIStackFrame * *aLocation) NS_OVERRIDE; \
+  NS_IMETHOD GetInner(nsIException * *aInner) NS_OVERRIDE; \
+  NS_IMETHOD GetData(nsISupports * *aData) NS_OVERRIDE; \
+  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIEXCEPTION(_to) \

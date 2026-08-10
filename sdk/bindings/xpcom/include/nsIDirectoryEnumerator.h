@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIDirectoryEnumerator.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIDirectoryEnumerator.idl
  */
 
 #ifndef __gen_nsIDirectoryEnumerator_h__
@@ -58,8 +58,8 @@ class NS_NO_VTABLE nsIDirectoryEnumerator : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDIRECTORYENUMERATOR \
-  NS_IMETHOD GetNextFile(nsIFile * *aNextFile); \
-  NS_IMETHOD Close(void); 
+  NS_IMETHOD GetNextFile(nsIFile * *aNextFile) NS_OVERRIDE; \
+  NS_IMETHOD Close(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDIRECTORYENUMERATOR(_to) \

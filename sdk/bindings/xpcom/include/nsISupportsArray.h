@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsArray.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsArray.idl
  */
 
 #ifndef __gen_nsISupportsArray_h__
@@ -18,6 +18,7 @@
 #ifndef NS_NO_VTABLE
 #define NS_NO_VTABLE
 #endif
+
 class nsIBidirectionalEnumerator;
  
 #define NS_SUPPORTSARRAY_CID                         \
@@ -119,29 +120,29 @@ class NS_NO_VTABLE nsISupportsArray : public nsICollection {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSARRAY \
-  NS_IMETHOD_(PRBool) Equals(const nsISupportsArray *other); \
-  NS_IMETHOD_(nsISupports *) ElementAt(PRUint32 aIndex); \
-  NS_IMETHOD_(PRInt32) IndexOf(const nsISupports *aPossibleElement); \
-  NS_IMETHOD_(PRInt32) IndexOfStartingAt(const nsISupports *aPossibleElement, PRUint32 aStartIndex); \
-  NS_IMETHOD_(PRInt32) LastIndexOf(const nsISupports *aPossibleElement); \
-  NS_IMETHOD GetIndexOf(nsISupports *aPossibleElement, PRInt32 *_retval); \
-  NS_IMETHOD GetIndexOfStartingAt(nsISupports *aPossibleElement, PRUint32 aStartIndex, PRInt32 *_retval); \
-  NS_IMETHOD GetLastIndexOf(nsISupports *aPossibleElement, PRInt32 *_retval); \
-  NS_IMETHOD_(PRBool) InsertElementAt(nsISupports *aElement, PRUint32 aIndex); \
-  NS_IMETHOD_(PRBool) ReplaceElementAt(nsISupports *aElement, PRUint32 aIndex); \
-  NS_IMETHOD_(PRBool) RemoveElementAt(PRUint32 aIndex); \
-  NS_IMETHOD_(PRBool) RemoveLastElement(const nsISupports *aElement); \
-  NS_IMETHOD DeleteLastElement(nsISupports *aElement); \
-  NS_IMETHOD DeleteElementAt(PRUint32 aIndex); \
-  NS_IMETHOD_(PRBool) AppendElements(nsISupportsArray *aElements); \
-  NS_IMETHOD Compact(void); \
-  NS_IMETHOD_(PRBool) EnumerateForwards(nsISupportsArrayEnumFunc aFunc, void * aData); \
-  NS_IMETHOD_(PRBool) EnumerateBackwards(nsISupportsArrayEnumFunc aFunc, void * aData); \
-  NS_IMETHOD Clone(nsISupportsArray **_retval); \
-  NS_IMETHOD_(PRBool) MoveElement(PRInt32 aFrom, PRInt32 aTo); \
-  NS_IMETHOD_(PRBool) InsertElementsAt(nsISupportsArray *aOther, PRUint32 aIndex); \
-  NS_IMETHOD_(PRBool) RemoveElementsAt(PRUint32 aIndex, PRUint32 aCount); \
-  NS_IMETHOD_(PRBool) SizeTo(PRInt32 aSize); 
+  NS_IMETHOD_(PRBool) Equals(const nsISupportsArray *other) NS_OVERRIDE; \
+  NS_IMETHOD_(nsISupports *) ElementAt(PRUint32 aIndex) NS_OVERRIDE; \
+  NS_IMETHOD_(PRInt32) IndexOf(const nsISupports *aPossibleElement) NS_OVERRIDE; \
+  NS_IMETHOD_(PRInt32) IndexOfStartingAt(const nsISupports *aPossibleElement, PRUint32 aStartIndex) NS_OVERRIDE; \
+  NS_IMETHOD_(PRInt32) LastIndexOf(const nsISupports *aPossibleElement) NS_OVERRIDE; \
+  NS_IMETHOD GetIndexOf(nsISupports *aPossibleElement, PRInt32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetIndexOfStartingAt(nsISupports *aPossibleElement, PRUint32 aStartIndex, PRInt32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetLastIndexOf(nsISupports *aPossibleElement, PRInt32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) InsertElementAt(nsISupports *aElement, PRUint32 aIndex) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) ReplaceElementAt(nsISupports *aElement, PRUint32 aIndex) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) RemoveElementAt(PRUint32 aIndex) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) RemoveLastElement(const nsISupports *aElement) NS_OVERRIDE; \
+  NS_IMETHOD DeleteLastElement(nsISupports *aElement) NS_OVERRIDE; \
+  NS_IMETHOD DeleteElementAt(PRUint32 aIndex) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) AppendElements(nsISupportsArray *aElements) NS_OVERRIDE; \
+  NS_IMETHOD Compact(void) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) EnumerateForwards(nsISupportsArrayEnumFunc aFunc, void * aData) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) EnumerateBackwards(nsISupportsArrayEnumFunc aFunc, void * aData) NS_OVERRIDE; \
+  NS_IMETHOD Clone(nsISupportsArray **_retval) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) MoveElement(PRInt32 aFrom, PRInt32 aTo) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) InsertElementsAt(nsISupportsArray *aOther, PRUint32 aIndex) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) RemoveElementsAt(PRUint32 aIndex, PRUint32 aCount) NS_OVERRIDE; \
+  NS_IMETHOD_(PRBool) SizeTo(PRInt32 aSize) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSARRAY(_to) \
@@ -368,12 +369,16 @@ NS_IMETHODIMP_(PRBool) nsSupportsArray::SizeTo(PRInt32 aSize)
 /* End of implementation class template. */
 #endif
 
+
 // Construct and return a default implementation of nsISupportsArray:
 extern NS_COM nsresult
 NS_NewISupportsArray(nsISupportsArray** aInstancePtrResult);
+
 // Construct and return a default implementation of an enumerator for nsISupportsArrays:
 extern NS_COM nsresult
 NS_NewISupportsArrayEnumerator(nsISupportsArray* array,
                                nsIBidirectionalEnumerator* *aInstancePtrResult);
+
+
 
 #endif /* __gen_nsISupportsArray_h__ */

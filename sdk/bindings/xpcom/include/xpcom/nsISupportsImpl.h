@@ -45,14 +45,12 @@
 #include "nsISupportsBase.h"
 #endif
 
-#include "prthread.h" /* needed for thread-safety checks */
-#include "pratom.h"   /* needed for PR_AtomicIncrement and PR_AtomicDecrement */
-
 #include "nsDebug.h"
 #include "nsTraceRefcnt.h"
 #ifdef VBOX
-# include "iprt/asm.h"
-# include "iprt/assert.h"
+# include <iprt/asm.h>
+# include <iprt/assert.h>
+# include <iprt/thread.h>
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +60,7 @@
 
 class nsAutoOwningThread {
 public:
-    nsAutoOwningThread() { mThread = PR_GetCurrentThread(); }
+    nsAutoOwningThread() { mThread = RTThreadSelf(); }
     void *GetThread() const { return mThread; }
 
 private:
@@ -88,7 +86,11 @@ class nsAutoRefCnt {
         , mState(0)
 #endif
     {}
-    nsAutoRefCnt(nsrefcnt aValue) : mValue(aValue) {}
+    nsAutoRefCnt(nsrefcnt aValue) : mValue(aValue)
+#ifdef VBOX
+        , mState(0)
+#endif
+    {}
 
     // only support prefix increment/decrement
     nsrefcnt operator++() { return ++mValue; }
@@ -122,9 +124,9 @@ class nsAutoRefCnt {
 #define NS_DECL_ISUPPORTS                                                     \
 public:                                                                       \
   NS_IMETHOD QueryInterface(REFNSIID aIID,                                    \
-                            void** aInstancePtr);                             \
-  NS_IMETHOD_(nsrefcnt) AddRef(void);                                         \
-  NS_IMETHOD_(nsrefcnt) Release(void);                                        \
+                            void** aInstancePtr) NS_OVERRIDE;                 \
+  NS_IMETHOD_(nsrefcnt) AddRef(void) NS_OVERRIDE;                             \
+  NS_IMETHOD_(nsrefcnt) Release(void) NS_OVERRIDE;                            \
 protected:                                                                    \
   nsAutoRefCnt mRefCnt;                                                       \
   NS_DECL_OWNINGTHREAD                                                        \
@@ -507,9 +509,9 @@ NS_IMETHODIMP _class::QueryInterface(REFNSIID aIID, void** aInstancePtr)      \
 #define NS_DECL_ISUPPORTS_INHERITED                                           \
 public:                                                                       \
   NS_IMETHOD QueryInterface(REFNSIID aIID,                                    \
-                            void** aInstancePtr);                             \
-  NS_IMETHOD_(nsrefcnt) AddRef(void);                                         \
-  NS_IMETHOD_(nsrefcnt) Release(void);                                        \
+                            void** aInstancePtr) NS_OVERRIDE;                 \
+  NS_IMETHOD_(nsrefcnt) AddRef(void) NS_OVERRIDE;                             \
+  NS_IMETHOD_(nsrefcnt) Release(void) NS_OVERRIDE;                            \
 
 /**
  * These macros can be used in conjunction with NS_DECL_ISUPPORTS_INHERITED
@@ -739,7 +741,7 @@ NS_IMETHODIMP_(nsrefcnt) _class::AddRef(void)                                 \
 {                                                                             \
   NS_PRECONDITION(PRInt32(mRefCnt) >= 0, "illegal refcnt");                   \
   nsrefcnt count;                                                             \
-  count = PR_AtomicIncrement((PRInt32*)&mRefCnt);                             \
+  count = ASMAtomicIncU32((volatile uint32_t *)&mRefCnt);                     \
   NS_LOG_ADDREF(this, count, #_class, sizeof(*this));                         \
   return count;                                                               \
 }
@@ -792,7 +794,7 @@ NS_IMETHODIMP_(nsrefcnt) _class::Release(void)                                \
 {                                                                             \
   nsrefcnt count;                                                             \
   NS_PRECONDITION(0 != mRefCnt, "dup release");                               \
-  count = PR_AtomicDecrement((PRInt32 *)&mRefCnt);                            \
+  count = ASMAtomicDecI32((volatile uint32_t *)&mRefCnt);                     \
   NS_LOG_RELEASE(this, count, #_class);                                       \
   if (0 == count) {                                                           \
     mRefCnt = 1; /* stabilize */                                              \

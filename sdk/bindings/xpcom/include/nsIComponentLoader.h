@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentLoader.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentLoader.idl
  */
 
 #ifndef __gen_nsIComponentLoader_h__
@@ -111,14 +111,14 @@ class NS_NO_VTABLE nsIComponentLoader : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICOMPONENTLOADER \
-  NS_IMETHOD GetFactory(const nsIID & aCID, const char *aLocation, const char *aType, nsIFactory **_retval); \
-  NS_IMETHOD Init(nsIComponentManager *aCompMgr, nsISupports *aRegistry); \
-  NS_IMETHOD OnRegister(const nsIID & aCID, const char *aType, const char *aClassName, const char *aContractID, const char *aLocation, PRBool aReplace, PRBool aPersist); \
-  NS_IMETHOD AutoRegisterComponents(PRInt32 aWhen, nsIFile *aDirectory); \
-  NS_IMETHOD AutoRegisterComponent(PRInt32 aWhen, nsIFile *aComponent, PRBool *_retval); \
-  NS_IMETHOD AutoUnregisterComponent(PRInt32 aWhen, nsIFile *aComponent, PRBool *_retval); \
-  NS_IMETHOD RegisterDeferredComponents(PRInt32 aWhen, PRBool *_retval); \
-  NS_IMETHOD UnloadAll(PRInt32 aWhen); 
+  NS_IMETHOD GetFactory(const nsIID & aCID, const char *aLocation, const char *aType, nsIFactory **_retval) NS_OVERRIDE; \
+  NS_IMETHOD Init(nsIComponentManager *aCompMgr, nsISupports *aRegistry) NS_OVERRIDE; \
+  NS_IMETHOD OnRegister(const nsIID & aCID, const char *aType, const char *aClassName, const char *aContractID, const char *aLocation, PRBool aReplace, PRBool aPersist) NS_OVERRIDE; \
+  NS_IMETHOD AutoRegisterComponents(PRInt32 aWhen, nsIFile *aDirectory) NS_OVERRIDE; \
+  NS_IMETHOD AutoRegisterComponent(PRInt32 aWhen, nsIFile *aComponent, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD AutoUnregisterComponent(PRInt32 aWhen, nsIFile *aComponent, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD RegisterDeferredComponents(PRInt32 aWhen, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD UnloadAll(PRInt32 aWhen) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICOMPONENTLOADER(_to) \

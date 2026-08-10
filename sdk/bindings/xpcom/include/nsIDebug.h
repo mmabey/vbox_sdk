@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsIDebug.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsIDebug.idl
  */
 
 #ifndef __gen_nsIDebug_h__
@@ -51,10 +51,10 @@ class NS_NO_VTABLE nsIDebug : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDEBUG \
-  NS_IMETHOD Assertion(const char *aStr, const char *aExpr, const char *aFile, PRInt32 aLine); \
-  NS_IMETHOD Warning(const char *aStr, const char *aFile, PRInt32 aLine); \
-  NS_IMETHOD Break(const char *aFile, PRInt32 aLine); \
-  NS_IMETHOD Abort(const char *aFile, PRInt32 aLine); 
+  NS_IMETHOD Assertion(const char *aStr, const char *aExpr, const char *aFile, PRInt32 aLine) NS_OVERRIDE; \
+  NS_IMETHOD Warning(const char *aStr, const char *aFile, PRInt32 aLine) NS_OVERRIDE; \
+  NS_IMETHOD Break(const char *aFile, PRInt32 aLine) NS_OVERRIDE; \
+  NS_IMETHOD Abort(const char *aFile, PRInt32 aLine) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDEBUG(_to) \

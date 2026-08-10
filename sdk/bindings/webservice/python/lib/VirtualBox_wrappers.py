@@ -2109,12 +2109,23 @@ class IVirtualBox(IUnknown):
        return String(self.mgr,val._returnval)
 
 
-   def createMachine(self, _arg_settingsFile, _arg_name, _arg_groups, _arg_osTypeId, _arg_flags, _arg_cipher, _arg_passwordId, _arg_password):
+   def getPlatformProperties(self, _arg_architecture):
+       req=IVirtualBox_getPlatformPropertiesRequestMsg()
+       req._this=self.handle
+       
+       req._architecture=_arg_architecture
+       val=self.mgr.getPort().IVirtualBox_getPlatformProperties(req)
+       
+       return IPlatformProperties(self.mgr,val._returnval)
+
+
+   def createMachine(self, _arg_settingsFile, _arg_name, _arg_platform, _arg_groups, _arg_osTypeId, _arg_flags, _arg_cipher, _arg_passwordId, _arg_password):
        req=IVirtualBox_createMachineRequestMsg()
        req._this=self.handle
        
        req._settingsFile=_arg_settingsFile
        req._name=_arg_name
+       req._platform=_arg_platform
        req._groups=_arg_groups
        req._osTypeId=_arg_osTypeId
        req._flags=_arg_flags
@@ -2229,6 +2240,26 @@ class IVirtualBox(IUnknown):
        val=self.mgr.getPort().IVirtualBox_getGuestOSType(req)
        
        return IGuestOSType(self.mgr,val._returnval)
+
+
+   def getGuestOSSubtypesByFamilyId(self, _arg_family):
+       req=IVirtualBox_getGuestOSSubtypesByFamilyIdRequestMsg()
+       req._this=self.handle
+       
+       req._family=_arg_family
+       val=self.mgr.getPort().IVirtualBox_getGuestOSSubtypesByFamilyId(req)
+       
+       return String(self.mgr,val._returnval, True)
+
+
+   def getGuestOSDescsBySubtype(self, _arg_OSSubtype):
+       req=IVirtualBox_getGuestOSDescsBySubtypeRequestMsg()
+       req._this=self.handle
+       
+       req._OSSubtype=_arg_OSSubtype
+       val=self.mgr.getPort().IVirtualBox_getGuestOSDescsBySubtype(req)
+       
+       return String(self.mgr,val._returnval, True)
 
 
    def createSharedFolder(self, _arg_name, _arg_hostPath, _arg_writable, _arg_automount, _arg_autoMountPoint):
@@ -2425,10 +2456,11 @@ class IVirtualBox(IUnknown):
        return 
 
 
-   def checkFirmwarePresent(self, _arg_firmwareType, _arg_version):
+   def checkFirmwarePresent(self, _arg_platformArchitecture, _arg_firmwareType, _arg_version):
        req=IVirtualBox_checkFirmwarePresentRequestMsg()
        req._this=self.handle
        
+       req._platformArchitecture=_arg_platformArchitecture
        req._firmwareType=_arg_firmwareType
        req._version=_arg_version
        val=self.mgr.getPort().IVirtualBox_checkFirmwarePresent(req)
@@ -2531,6 +2563,11 @@ class IVirtualBox(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IVirtualBox_getGuestOSTypes(req)
        return IGuestOSType(self.mgr,val._returnval, True)
+   def getGuestOSFamilies(self):
+       req=IVirtualBox_getGuestOSFamiliesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IVirtualBox_getGuestOSFamilies(req)
+       return String(self.mgr,val._returnval, True)
    def getSharedFolders(self):
        req=IVirtualBox_getSharedFoldersRequestMsg()
        req._this=self.handle
@@ -2600,6 +2637,7 @@ class IVirtualBox(IUnknown):
          'floppyImages':[getFloppyImages,None],
          'progressOperations':[getProgressOperations,None],
          'guestOSTypes':[getGuestOSTypes,None],
+         'guestOSFamilies':[getGuestOSFamilies,None],
          'sharedFolders':[getSharedFolders,None],
          'performanceCollector':[getPerformanceCollector,None],
          'DHCPServers':[getDHCPServers,None],
@@ -3499,19 +3537,33 @@ class IUnattended(IUnknown):
             req._user = value.handle
        self.mgr.getPort().IUnattended_setUser(req)
 
-   def getPassword(self):
-       req=IUnattended_getPasswordRequestMsg()
+   def getUserPassword(self):
+       req=IUnattended_getUserPasswordRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IUnattended_getPassword(req)
+       val=self.mgr.getPort().IUnattended_getUserPassword(req)
        return String(self.mgr,val._returnval)
-   def setPassword(self, value):
-       req=IUnattended_setPasswordRequestMsg()
+   def setUserPassword(self, value):
+       req=IUnattended_setUserPasswordRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
-            req._password = value
+            req._userPassword = value
        else:
-            req._password = value.handle
-       self.mgr.getPort().IUnattended_setPassword(req)
+            req._userPassword = value.handle
+       self.mgr.getPort().IUnattended_setUserPassword(req)
+
+   def getAdminPassword(self):
+       req=IUnattended_getAdminPasswordRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IUnattended_getAdminPassword(req)
+       return String(self.mgr,val._returnval)
+   def setAdminPassword(self, value):
+       req=IUnattended_setAdminPasswordRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._adminPassword = value
+       else:
+            req._adminPassword = value.handle
+       self.mgr.getPort().IUnattended_setAdminPassword(req)
 
    def getFullUserName(self):
        req=IUnattended_getFullUserNameRequestMsg()
@@ -3597,6 +3649,34 @@ class IUnattended(IUnknown):
             req._installTestExecService = value.handle
        self.mgr.getPort().IUnattended_setInstallTestExecService(req)
 
+   def getUserPayloadIsoPath(self):
+       req=IUnattended_getUserPayloadIsoPathRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IUnattended_getUserPayloadIsoPath(req)
+       return String(self.mgr,val._returnval)
+   def setUserPayloadIsoPath(self, value):
+       req=IUnattended_setUserPayloadIsoPathRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._userPayloadIsoPath = value
+       else:
+            req._userPayloadIsoPath = value.handle
+       self.mgr.getPort().IUnattended_setUserPayloadIsoPath(req)
+
+   def getInstallUserPayload(self):
+       req=IUnattended_getInstallUserPayloadRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IUnattended_getInstallUserPayload(req)
+       return Boolean(self.mgr,val._returnval)
+   def setInstallUserPayload(self, value):
+       req=IUnattended_setInstallUserPayloadRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._installUserPayload = value
+       else:
+            req._installUserPayload = value.handle
+       self.mgr.getPort().IUnattended_setInstallUserPayload(req)
+
    def getTimeZone(self):
        req=IUnattended_getTimeZoneRequestMsg()
        req._this=self.handle
@@ -3610,6 +3690,34 @@ class IUnattended(IUnknown):
        else:
             req._timeZone = value.handle
        self.mgr.getPort().IUnattended_setTimeZone(req)
+
+   def getKeyboardLayout(self):
+       req=IUnattended_getKeyboardLayoutRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IUnattended_getKeyboardLayout(req)
+       return String(self.mgr,val._returnval)
+   def setKeyboardLayout(self, value):
+       req=IUnattended_setKeyboardLayoutRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._keyboardLayout = value
+       else:
+            req._keyboardLayout = value.handle
+       self.mgr.getPort().IUnattended_setKeyboardLayout(req)
+
+   def getKeyboardVariant(self):
+       req=IUnattended_getKeyboardVariantRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IUnattended_getKeyboardVariant(req)
+       return String(self.mgr,val._returnval)
+   def setKeyboardVariant(self, value):
+       req=IUnattended_setKeyboardVariantRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._keyboardVariant = value
+       else:
+            req._keyboardVariant = value.handle
+       self.mgr.getPort().IUnattended_setKeyboardVariant(req)
 
    def getLocale(self):
        req=IUnattended_getLocaleRequestMsg()
@@ -3841,7 +3949,9 @@ class IUnattended(IUnknown):
         ],
          'user':[getUser,setUser,
         ],
-         'password':[getPassword,setPassword,
+         'userPassword':[getUserPassword,setUserPassword,
+        ],
+         'adminPassword':[getAdminPassword,setAdminPassword,
         ],
          'fullUserName':[getFullUserName,setFullUserName,
         ],
@@ -3855,7 +3965,15 @@ class IUnattended(IUnknown):
         ],
          'installTestExecService':[getInstallTestExecService,setInstallTestExecService,
         ],
+         'userPayloadIsoPath':[getUserPayloadIsoPath,setUserPayloadIsoPath,
+        ],
+         'installUserPayload':[getInstallUserPayload,setInstallUserPayload,
+        ],
          'timeZone':[getTimeZone,setTimeZone,
+        ],
+         'keyboardLayout':[getKeyboardLayout,setKeyboardLayout,
+        ],
+         'keyboardVariant':[getKeyboardVariant,setKeyboardVariant,
         ],
          'locale':[getLocale,setLocale,
         ],
@@ -3967,6 +4085,27 @@ class IGraphicsAdapter(IUnknown):
          self.__dict__[name] = val
 
    
+   def setFeature(self, _arg_feature, _arg_enabled):
+       req=IGraphicsAdapter_setFeatureRequestMsg()
+       req._this=self.handle
+       
+       req._feature=_arg_feature
+       req._enabled=_arg_enabled
+       val=self.mgr.getPort().IGraphicsAdapter_setFeature(req)
+       
+       return 
+
+
+   def isFeatureEnabled(self, _arg_feature):
+       req=IGraphicsAdapter_isFeatureEnabledRequestMsg()
+       req._this=self.handle
+       
+       req._feature=_arg_feature
+       val=self.mgr.getPort().IGraphicsAdapter_isFeatureEnabled(req)
+       
+       return Boolean(self.mgr,val._returnval)
+
+
    def getGraphicsControllerType(self):
        req=IGraphicsAdapter_getGraphicsControllerTypeRequestMsg()
        req._this=self.handle
@@ -3995,34 +4134,6 @@ class IGraphicsAdapter(IUnknown):
             req._VRAMSize = value.handle
        self.mgr.getPort().IGraphicsAdapter_setVRAMSize(req)
 
-   def getAccelerate3DEnabled(self):
-       req=IGraphicsAdapter_getAccelerate3DEnabledRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IGraphicsAdapter_getAccelerate3DEnabled(req)
-       return Boolean(self.mgr,val._returnval)
-   def setAccelerate3DEnabled(self, value):
-       req=IGraphicsAdapter_setAccelerate3DEnabledRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._accelerate3DEnabled = value
-       else:
-            req._accelerate3DEnabled = value.handle
-       self.mgr.getPort().IGraphicsAdapter_setAccelerate3DEnabled(req)
-
-   def getAccelerate2DVideoEnabled(self):
-       req=IGraphicsAdapter_getAccelerate2DVideoEnabledRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IGraphicsAdapter_getAccelerate2DVideoEnabled(req)
-       return Boolean(self.mgr,val._returnval)
-   def setAccelerate2DVideoEnabled(self, value):
-       req=IGraphicsAdapter_setAccelerate2DVideoEnabledRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._accelerate2DVideoEnabled = value
-       else:
-            req._accelerate2DVideoEnabled = value.handle
-       self.mgr.getPort().IGraphicsAdapter_setAccelerate2DVideoEnabled(req)
-
    def getMonitorCount(self):
        req=IGraphicsAdapter_getMonitorCountRequestMsg()
        req._this=self.handle
@@ -4043,14 +4154,10 @@ class IGraphicsAdapter(IUnknown):
         ],
          'VRAMSize':[getVRAMSize,setVRAMSize,
         ],
-         'accelerate3DEnabled':[getAccelerate3DEnabled,setAccelerate3DEnabled,
-        ],
-         'accelerate2DVideoEnabled':[getAccelerate2DVideoEnabled,setAccelerate2DVideoEnabled,
-        ],
          'monitorCount':[getMonitorCount,setMonitorCount,
         ]}
 
-class IBIOSSettings(IUnknown):
+class IFirmwareSettings(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
        if handle is None:
@@ -4095,7 +4202,7 @@ class IBIOSSettings(IUnknown):
 
    def __getitem__(self, index):
       if self.isarray:
-          return IBIOSSettings(self.mgr, self.handle[index])
+          return IFirmwareSettings(self.mgr, self.handle[index])
       raise TypeError("iteration over non-sequence")
 
    def __str__(self):
@@ -4108,7 +4215,7 @@ class IBIOSSettings(IUnknown):
         return self.handle != None and self.handle != ''
 
    def __getattr__(self,name):
-      hndl = IBIOSSettings._Attrs_.get(name, None)
+      hndl = IFirmwareSettings._Attrs_.get(name, None)
       if hndl != None:
          if hndl[0] != None:
            return hndl[0](self)
@@ -4118,170 +4225,200 @@ class IBIOSSettings(IUnknown):
          return IUnknown.__getattr__(self, name)
 
    def __setattr__(self, name, val):
-      hndl = IBIOSSettings._Attrs_.get(name, None)
+      hndl = IFirmwareSettings._Attrs_.get(name, None)
       if (hndl != None and hndl[1] != None):
          hndl[1](self,val)
       else:
          self.__dict__[name] = val
 
    
-   def getLogoFadeIn(self):
-       req=IBIOSSettings_getLogoFadeInRequestMsg()
+   def getFirmwareType(self):
+       req=IFirmwareSettings_getFirmwareTypeRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getLogoFadeIn(req)
+       val=self.mgr.getPort().IFirmwareSettings_getFirmwareType(req)
+       return FirmwareType(self.mgr,val._returnval)
+   def setFirmwareType(self, value):
+       req=IFirmwareSettings_setFirmwareTypeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._firmwareType = value
+       else:
+            req._firmwareType = value.handle
+       self.mgr.getPort().IFirmwareSettings_setFirmwareType(req)
+
+   def getLogoFadeIn(self):
+       req=IFirmwareSettings_getLogoFadeInRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFirmwareSettings_getLogoFadeIn(req)
        return Boolean(self.mgr,val._returnval)
    def setLogoFadeIn(self, value):
-       req=IBIOSSettings_setLogoFadeInRequestMsg()
+       req=IFirmwareSettings_setLogoFadeInRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._logoFadeIn = value
        else:
             req._logoFadeIn = value.handle
-       self.mgr.getPort().IBIOSSettings_setLogoFadeIn(req)
+       self.mgr.getPort().IFirmwareSettings_setLogoFadeIn(req)
 
    def getLogoFadeOut(self):
-       req=IBIOSSettings_getLogoFadeOutRequestMsg()
+       req=IFirmwareSettings_getLogoFadeOutRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getLogoFadeOut(req)
+       val=self.mgr.getPort().IFirmwareSettings_getLogoFadeOut(req)
        return Boolean(self.mgr,val._returnval)
    def setLogoFadeOut(self, value):
-       req=IBIOSSettings_setLogoFadeOutRequestMsg()
+       req=IFirmwareSettings_setLogoFadeOutRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._logoFadeOut = value
        else:
             req._logoFadeOut = value.handle
-       self.mgr.getPort().IBIOSSettings_setLogoFadeOut(req)
+       self.mgr.getPort().IFirmwareSettings_setLogoFadeOut(req)
 
    def getLogoDisplayTime(self):
-       req=IBIOSSettings_getLogoDisplayTimeRequestMsg()
+       req=IFirmwareSettings_getLogoDisplayTimeRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getLogoDisplayTime(req)
+       val=self.mgr.getPort().IFirmwareSettings_getLogoDisplayTime(req)
        return UnsignedInt(self.mgr,val._returnval)
    def setLogoDisplayTime(self, value):
-       req=IBIOSSettings_setLogoDisplayTimeRequestMsg()
+       req=IFirmwareSettings_setLogoDisplayTimeRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._logoDisplayTime = value
        else:
             req._logoDisplayTime = value.handle
-       self.mgr.getPort().IBIOSSettings_setLogoDisplayTime(req)
+       self.mgr.getPort().IFirmwareSettings_setLogoDisplayTime(req)
 
    def getLogoImagePath(self):
-       req=IBIOSSettings_getLogoImagePathRequestMsg()
+       req=IFirmwareSettings_getLogoImagePathRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getLogoImagePath(req)
+       val=self.mgr.getPort().IFirmwareSettings_getLogoImagePath(req)
        return String(self.mgr,val._returnval)
    def setLogoImagePath(self, value):
-       req=IBIOSSettings_setLogoImagePathRequestMsg()
+       req=IFirmwareSettings_setLogoImagePathRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._logoImagePath = value
        else:
             req._logoImagePath = value.handle
-       self.mgr.getPort().IBIOSSettings_setLogoImagePath(req)
+       self.mgr.getPort().IFirmwareSettings_setLogoImagePath(req)
 
    def getBootMenuMode(self):
-       req=IBIOSSettings_getBootMenuModeRequestMsg()
+       req=IFirmwareSettings_getBootMenuModeRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getBootMenuMode(req)
-       return BIOSBootMenuMode(self.mgr,val._returnval)
+       val=self.mgr.getPort().IFirmwareSettings_getBootMenuMode(req)
+       return FirmwareBootMenuMode(self.mgr,val._returnval)
    def setBootMenuMode(self, value):
-       req=IBIOSSettings_setBootMenuModeRequestMsg()
+       req=IFirmwareSettings_setBootMenuModeRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._bootMenuMode = value
        else:
             req._bootMenuMode = value.handle
-       self.mgr.getPort().IBIOSSettings_setBootMenuMode(req)
+       self.mgr.getPort().IFirmwareSettings_setBootMenuMode(req)
 
    def getACPIEnabled(self):
-       req=IBIOSSettings_getACPIEnabledRequestMsg()
+       req=IFirmwareSettings_getACPIEnabledRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getACPIEnabled(req)
+       val=self.mgr.getPort().IFirmwareSettings_getACPIEnabled(req)
        return Boolean(self.mgr,val._returnval)
    def setACPIEnabled(self, value):
-       req=IBIOSSettings_setACPIEnabledRequestMsg()
+       req=IFirmwareSettings_setACPIEnabledRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._ACPIEnabled = value
        else:
             req._ACPIEnabled = value.handle
-       self.mgr.getPort().IBIOSSettings_setACPIEnabled(req)
+       self.mgr.getPort().IFirmwareSettings_setACPIEnabled(req)
 
    def getIOAPICEnabled(self):
-       req=IBIOSSettings_getIOAPICEnabledRequestMsg()
+       req=IFirmwareSettings_getIOAPICEnabledRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getIOAPICEnabled(req)
+       val=self.mgr.getPort().IFirmwareSettings_getIOAPICEnabled(req)
        return Boolean(self.mgr,val._returnval)
    def setIOAPICEnabled(self, value):
-       req=IBIOSSettings_setIOAPICEnabledRequestMsg()
+       req=IFirmwareSettings_setIOAPICEnabledRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._IOAPICEnabled = value
        else:
             req._IOAPICEnabled = value.handle
-       self.mgr.getPort().IBIOSSettings_setIOAPICEnabled(req)
+       self.mgr.getPort().IFirmwareSettings_setIOAPICEnabled(req)
 
    def getAPICMode(self):
-       req=IBIOSSettings_getAPICModeRequestMsg()
+       req=IFirmwareSettings_getAPICModeRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getAPICMode(req)
+       val=self.mgr.getPort().IFirmwareSettings_getAPICMode(req)
        return APICMode(self.mgr,val._returnval)
    def setAPICMode(self, value):
-       req=IBIOSSettings_setAPICModeRequestMsg()
+       req=IFirmwareSettings_setAPICModeRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._APICMode = value
        else:
             req._APICMode = value.handle
-       self.mgr.getPort().IBIOSSettings_setAPICMode(req)
+       self.mgr.getPort().IFirmwareSettings_setAPICMode(req)
 
    def getTimeOffset(self):
-       req=IBIOSSettings_getTimeOffsetRequestMsg()
+       req=IFirmwareSettings_getTimeOffsetRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getTimeOffset(req)
+       val=self.mgr.getPort().IFirmwareSettings_getTimeOffset(req)
        return Long(self.mgr,val._returnval)
    def setTimeOffset(self, value):
-       req=IBIOSSettings_setTimeOffsetRequestMsg()
+       req=IFirmwareSettings_setTimeOffsetRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._timeOffset = value
        else:
             req._timeOffset = value.handle
-       self.mgr.getPort().IBIOSSettings_setTimeOffset(req)
+       self.mgr.getPort().IFirmwareSettings_setTimeOffset(req)
 
    def getPXEDebugEnabled(self):
-       req=IBIOSSettings_getPXEDebugEnabledRequestMsg()
+       req=IFirmwareSettings_getPXEDebugEnabledRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getPXEDebugEnabled(req)
+       val=self.mgr.getPort().IFirmwareSettings_getPXEDebugEnabled(req)
        return Boolean(self.mgr,val._returnval)
    def setPXEDebugEnabled(self, value):
-       req=IBIOSSettings_setPXEDebugEnabledRequestMsg()
+       req=IFirmwareSettings_setPXEDebugEnabledRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._PXEDebugEnabled = value
        else:
             req._PXEDebugEnabled = value.handle
-       self.mgr.getPort().IBIOSSettings_setPXEDebugEnabled(req)
+       self.mgr.getPort().IFirmwareSettings_setPXEDebugEnabled(req)
 
    def getSMBIOSUuidLittleEndian(self):
-       req=IBIOSSettings_getSMBIOSUuidLittleEndianRequestMsg()
+       req=IFirmwareSettings_getSMBIOSUuidLittleEndianRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IBIOSSettings_getSMBIOSUuidLittleEndian(req)
+       val=self.mgr.getPort().IFirmwareSettings_getSMBIOSUuidLittleEndian(req)
        return Boolean(self.mgr,val._returnval)
    def setSMBIOSUuidLittleEndian(self, value):
-       req=IBIOSSettings_setSMBIOSUuidLittleEndianRequestMsg()
+       req=IFirmwareSettings_setSMBIOSUuidLittleEndianRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
             req._SMBIOSUuidLittleEndian = value
        else:
             req._SMBIOSUuidLittleEndian = value.handle
-       self.mgr.getPort().IBIOSSettings_setSMBIOSUuidLittleEndian(req)
+       self.mgr.getPort().IFirmwareSettings_setSMBIOSUuidLittleEndian(req)
+
+   def getAutoSerialNumGen(self):
+       req=IFirmwareSettings_getAutoSerialNumGenRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IFirmwareSettings_getAutoSerialNumGen(req)
+       return Boolean(self.mgr,val._returnval)
+   def setAutoSerialNumGen(self, value):
+       req=IFirmwareSettings_setAutoSerialNumGenRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._AutoSerialNumGen = value
+       else:
+            req._AutoSerialNumGen = value.handle
+       self.mgr.getPort().IFirmwareSettings_setAutoSerialNumGen(req)
 
 
 
-   _Attrs_={         'logoFadeIn':[getLogoFadeIn,setLogoFadeIn,
+   _Attrs_={         'firmwareType':[getFirmwareType,setFirmwareType,
+        ],
+         'logoFadeIn':[getLogoFadeIn,setLogoFadeIn,
         ],
          'logoFadeOut':[getLogoFadeOut,setLogoFadeOut,
         ],
@@ -4302,6 +4439,8 @@ class IBIOSSettings(IUnknown):
          'PXEDebugEnabled':[getPXEDebugEnabled,setPXEDebugEnabled,
         ],
          'SMBIOSUuidLittleEndian':[getSMBIOSUuidLittleEndian,setSMBIOSUuidLittleEndian,
+        ],
+         'AutoSerialNumGen':[getAutoSerialNumGen,setAutoSerialNumGen,
         ]}
 
 class ITrustedPlatformModule(IUnknown):
@@ -4929,6 +5068,15 @@ class IRecordingSettings(IUnknown):
        return IRecordingScreenSettings(self.mgr,val._returnval)
 
 
+   def start(self):
+       req=IRecordingSettings_startRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IRecordingSettings_start(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
    def getEnabled(self):
        req=IRecordingSettings_getEnabledRequestMsg()
        req._this=self.handle
@@ -4948,11 +5096,17 @@ class IRecordingSettings(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IRecordingSettings_getScreens(req)
        return IRecordingScreenSettings(self.mgr,val._returnval, True)
+   def getProgress(self):
+       req=IRecordingSettings_getProgressRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRecordingSettings_getProgress(req)
+       return IProgress(self.mgr,val._returnval)
 
 
    _Attrs_={         'enabled':[getEnabled,setEnabled,
         ],
-         'screens':[getScreens,None]}
+         'screens':[getScreens,None],
+         'progress':[getProgress,None]}
 
 class IPCIAddress(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -5436,6 +5590,526 @@ class INvramStore(IUnknown):
          'keyId':[getKeyId,None],
          'keyStore':[getKeyStore,None]}
 
+class IResourceStore(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IResourceStore(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IResourceStore._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IResourceStore._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getMidlDoesNotLikeEmptyInterfaces(self):
+       req=IResourceStore_getMidlDoesNotLikeEmptyInterfacesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IResourceStore_getMidlDoesNotLikeEmptyInterfaces(req)
+       return Boolean(self.mgr,val._returnval)
+
+
+   _Attrs_={         'midlDoesNotLikeEmptyInterfaces':[getMidlDoesNotLikeEmptyInterfaces,None]}
+
+class IPlatform(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IPlatform(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IPlatform._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IPlatform._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getArchitecture(self):
+       req=IPlatform_getArchitectureRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatform_getArchitecture(req)
+       return PlatformArchitecture(self.mgr,val._returnval)
+   def setArchitecture(self, value):
+       req=IPlatform_setArchitectureRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._architecture = value
+       else:
+            req._architecture = value.handle
+       self.mgr.getPort().IPlatform_setArchitecture(req)
+
+   def getProperties(self):
+       req=IPlatform_getPropertiesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatform_getProperties(req)
+       return IPlatformProperties(self.mgr,val._returnval)
+   def getX86(self):
+       req=IPlatform_getX86RequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatform_getX86(req)
+       return IPlatformX86(self.mgr,val._returnval)
+   def getARM(self):
+       req=IPlatform_getARMRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatform_getARM(req)
+       return IPlatformARM(self.mgr,val._returnval)
+   def getChipsetType(self):
+       req=IPlatform_getChipsetTypeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatform_getChipsetType(req)
+       return ChipsetType(self.mgr,val._returnval)
+   def setChipsetType(self, value):
+       req=IPlatform_setChipsetTypeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._chipsetType = value
+       else:
+            req._chipsetType = value.handle
+       self.mgr.getPort().IPlatform_setChipsetType(req)
+
+   def getIommuType(self):
+       req=IPlatform_getIommuTypeRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatform_getIommuType(req)
+       return IommuType(self.mgr,val._returnval)
+   def setIommuType(self, value):
+       req=IPlatform_setIommuTypeRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._iommuType = value
+       else:
+            req._iommuType = value.handle
+       self.mgr.getPort().IPlatform_setIommuType(req)
+
+   def getRTCUseUTC(self):
+       req=IPlatform_getRTCUseUTCRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatform_getRTCUseUTC(req)
+       return Boolean(self.mgr,val._returnval)
+   def setRTCUseUTC(self, value):
+       req=IPlatform_setRTCUseUTCRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._RTCUseUTC = value
+       else:
+            req._RTCUseUTC = value.handle
+       self.mgr.getPort().IPlatform_setRTCUseUTC(req)
+
+
+
+   _Attrs_={         'architecture':[getArchitecture,setArchitecture,
+        ],
+         'properties':[getProperties,None],
+         'x86':[getX86,None],
+         'ARM':[getARM,None],
+         'chipsetType':[getChipsetType,setChipsetType,
+        ],
+         'iommuType':[getIommuType,setIommuType,
+        ],
+         'RTCUseUTC':[getRTCUseUTC,setRTCUseUTC,
+        ]}
+
+class IPlatformX86(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IPlatformX86(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IPlatformX86._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IPlatformX86._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getCPUProperty(self, _arg_property):
+       req=IPlatformX86_getCPUPropertyRequestMsg()
+       req._this=self.handle
+       
+       req._property=_arg_property
+       val=self.mgr.getPort().IPlatformX86_getCPUProperty(req)
+       
+       return Boolean(self.mgr,val._returnval)
+
+
+   def setCPUProperty(self, _arg_property, _arg_value):
+       req=IPlatformX86_setCPUPropertyRequestMsg()
+       req._this=self.handle
+       
+       req._property=_arg_property
+       req._value=_arg_value
+       val=self.mgr.getPort().IPlatformX86_setCPUProperty(req)
+       
+       return 
+
+
+   def getCPUIDLeafByOrdinal(self, _arg_ordinal):
+       req=IPlatformX86_getCPUIDLeafByOrdinalRequestMsg()
+       req._this=self.handle
+       
+       req._ordinal=_arg_ordinal
+       val=self.mgr.getPort().IPlatformX86_getCPUIDLeafByOrdinal(req)
+       
+       return UnsignedInt(self.mgr,val._idx), UnsignedInt(self.mgr,val._idxSub), UnsignedInt(self.mgr,val._valEax), UnsignedInt(self.mgr,val._valEbx), UnsignedInt(self.mgr,val._valEcx), UnsignedInt(self.mgr,val._valEdx)
+
+
+   def getCPUIDLeaf(self, _arg_idx, _arg_idxSub):
+       req=IPlatformX86_getCPUIDLeafRequestMsg()
+       req._this=self.handle
+       
+       req._idx=_arg_idx
+       req._idxSub=_arg_idxSub
+       val=self.mgr.getPort().IPlatformX86_getCPUIDLeaf(req)
+       
+       return UnsignedInt(self.mgr,val._valEax), UnsignedInt(self.mgr,val._valEbx), UnsignedInt(self.mgr,val._valEcx), UnsignedInt(self.mgr,val._valEdx)
+
+
+   def setCPUIDLeaf(self, _arg_idx, _arg_idxSub, _arg_valEax, _arg_valEbx, _arg_valEcx, _arg_valEdx):
+       req=IPlatformX86_setCPUIDLeafRequestMsg()
+       req._this=self.handle
+       
+       req._idx=_arg_idx
+       req._idxSub=_arg_idxSub
+       req._valEax=_arg_valEax
+       req._valEbx=_arg_valEbx
+       req._valEcx=_arg_valEcx
+       req._valEdx=_arg_valEdx
+       val=self.mgr.getPort().IPlatformX86_setCPUIDLeaf(req)
+       
+       return 
+
+
+   def removeCPUIDLeaf(self, _arg_idx, _arg_idxSub):
+       req=IPlatformX86_removeCPUIDLeafRequestMsg()
+       req._this=self.handle
+       
+       req._idx=_arg_idx
+       req._idxSub=_arg_idxSub
+       val=self.mgr.getPort().IPlatformX86_removeCPUIDLeaf(req)
+       
+       return 
+
+
+   def removeAllCPUIDLeaves(self):
+       req=IPlatformX86_removeAllCPUIDLeavesRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IPlatformX86_removeAllCPUIDLeaves(req)
+       
+       return 
+
+
+   def getHWVirtExProperty(self, _arg_property):
+       req=IPlatformX86_getHWVirtExPropertyRequestMsg()
+       req._this=self.handle
+       
+       req._property=_arg_property
+       val=self.mgr.getPort().IPlatformX86_getHWVirtExProperty(req)
+       
+       return Boolean(self.mgr,val._returnval)
+
+
+   def setHWVirtExProperty(self, _arg_property, _arg_value):
+       req=IPlatformX86_setHWVirtExPropertyRequestMsg()
+       req._this=self.handle
+       
+       req._property=_arg_property
+       req._value=_arg_value
+       val=self.mgr.getPort().IPlatformX86_setHWVirtExProperty(req)
+       
+       return 
+
+
+   def getHPETEnabled(self):
+       req=IPlatformX86_getHPETEnabledRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformX86_getHPETEnabled(req)
+       return Boolean(self.mgr,val._returnval)
+   def setHPETEnabled(self, value):
+       req=IPlatformX86_setHPETEnabledRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._HPETEnabled = value
+       else:
+            req._HPETEnabled = value.handle
+       self.mgr.getPort().IPlatformX86_setHPETEnabled(req)
+
+
+
+   _Attrs_={         'HPETEnabled':[getHPETEnabled,setHPETEnabled,
+        ]}
+
+class IPlatformARM(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IPlatformARM(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IPlatformARM._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IPlatformARM._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getMidlDoesNotLikeEmptyInterfaces(self):
+       req=IPlatformARM_getMidlDoesNotLikeEmptyInterfacesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformARM_getMidlDoesNotLikeEmptyInterfaces(req)
+       return Boolean(self.mgr,val._returnval)
+
+
+   _Attrs_={         'midlDoesNotLikeEmptyInterfaces':[getMidlDoesNotLikeEmptyInterfaces,None]}
+
 class IMachine(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -5917,104 +6591,6 @@ class IMachine(IUnknown):
        req._key=_arg_key
        req._value=_arg_value
        val=self.mgr.getPort().IMachine_setExtraData(req)
-       
-       return 
-
-
-   def getCPUProperty(self, _arg_property):
-       req=IMachine_getCPUPropertyRequestMsg()
-       req._this=self.handle
-       
-       req._property=_arg_property
-       val=self.mgr.getPort().IMachine_getCPUProperty(req)
-       
-       return Boolean(self.mgr,val._returnval)
-
-
-   def setCPUProperty(self, _arg_property, _arg_value):
-       req=IMachine_setCPUPropertyRequestMsg()
-       req._this=self.handle
-       
-       req._property=_arg_property
-       req._value=_arg_value
-       val=self.mgr.getPort().IMachine_setCPUProperty(req)
-       
-       return 
-
-
-   def getCPUIDLeafByOrdinal(self, _arg_ordinal):
-       req=IMachine_getCPUIDLeafByOrdinalRequestMsg()
-       req._this=self.handle
-       
-       req._ordinal=_arg_ordinal
-       val=self.mgr.getPort().IMachine_getCPUIDLeafByOrdinal(req)
-       
-       return UnsignedInt(self.mgr,val._idx), UnsignedInt(self.mgr,val._idxSub), UnsignedInt(self.mgr,val._valEax), UnsignedInt(self.mgr,val._valEbx), UnsignedInt(self.mgr,val._valEcx), UnsignedInt(self.mgr,val._valEdx)
-
-
-   def getCPUIDLeaf(self, _arg_idx, _arg_idxSub):
-       req=IMachine_getCPUIDLeafRequestMsg()
-       req._this=self.handle
-       
-       req._idx=_arg_idx
-       req._idxSub=_arg_idxSub
-       val=self.mgr.getPort().IMachine_getCPUIDLeaf(req)
-       
-       return UnsignedInt(self.mgr,val._valEax), UnsignedInt(self.mgr,val._valEbx), UnsignedInt(self.mgr,val._valEcx), UnsignedInt(self.mgr,val._valEdx)
-
-
-   def setCPUIDLeaf(self, _arg_idx, _arg_idxSub, _arg_valEax, _arg_valEbx, _arg_valEcx, _arg_valEdx):
-       req=IMachine_setCPUIDLeafRequestMsg()
-       req._this=self.handle
-       
-       req._idx=_arg_idx
-       req._idxSub=_arg_idxSub
-       req._valEax=_arg_valEax
-       req._valEbx=_arg_valEbx
-       req._valEcx=_arg_valEcx
-       req._valEdx=_arg_valEdx
-       val=self.mgr.getPort().IMachine_setCPUIDLeaf(req)
-       
-       return 
-
-
-   def removeCPUIDLeaf(self, _arg_idx, _arg_idxSub):
-       req=IMachine_removeCPUIDLeafRequestMsg()
-       req._this=self.handle
-       
-       req._idx=_arg_idx
-       req._idxSub=_arg_idxSub
-       val=self.mgr.getPort().IMachine_removeCPUIDLeaf(req)
-       
-       return 
-
-
-   def removeAllCPUIDLeaves(self):
-       req=IMachine_removeAllCPUIDLeavesRequestMsg()
-       req._this=self.handle
-       
-       val=self.mgr.getPort().IMachine_removeAllCPUIDLeaves(req)
-       
-       return 
-
-
-   def getHWVirtExProperty(self, _arg_property):
-       req=IMachine_getHWVirtExPropertyRequestMsg()
-       req._this=self.handle
-       
-       req._property=_arg_property
-       val=self.mgr.getPort().IMachine_getHWVirtExProperty(req)
-       
-       return Boolean(self.mgr,val._returnval)
-
-
-   def setHWVirtExProperty(self, _arg_property, _arg_value):
-       req=IMachine_setHWVirtExPropertyRequestMsg()
-       req._this=self.handle
-       
-       req._property=_arg_property
-       req._value=_arg_value
-       val=self.mgr.getPort().IMachine_setHWVirtExProperty(req)
        
        return 
 
@@ -6716,11 +7292,16 @@ class IMachine(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IMachine_getGraphicsAdapter(req)
        return IGraphicsAdapter(self.mgr,val._returnval)
-   def getBIOSSettings(self):
-       req=IMachine_getBIOSSettingsRequestMsg()
+   def getPlatform(self):
+       req=IMachine_getPlatformRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IMachine_getBIOSSettings(req)
-       return IBIOSSettings(self.mgr,val._returnval)
+       val=self.mgr.getPort().IMachine_getPlatform(req)
+       return IPlatform(self.mgr,val._returnval)
+   def getFirmwareSettings(self):
+       req=IMachine_getFirmwareSettingsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IMachine_getFirmwareSettings(req)
+       return IFirmwareSettings(self.mgr,val._returnval)
    def getTrustedPlatformModule(self):
        req=IMachine_getTrustedPlatformModuleRequestMsg()
        req._this=self.handle
@@ -6736,20 +7317,6 @@ class IMachine(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IMachine_getRecordingSettings(req)
        return IRecordingSettings(self.mgr,val._returnval)
-   def getFirmwareType(self):
-       req=IMachine_getFirmwareTypeRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getFirmwareType(req)
-       return FirmwareType(self.mgr,val._returnval)
-   def setFirmwareType(self, value):
-       req=IMachine_setFirmwareTypeRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._firmwareType = value
-       else:
-            req._firmwareType = value.handle
-       self.mgr.getPort().IMachine_setFirmwareType(req)
-
    def getPointingHIDType(self):
        req=IMachine_getPointingHIDTypeRequestMsg()
        req._this=self.handle
@@ -6777,48 +7344,6 @@ class IMachine(IUnknown):
        else:
             req._keyboardHIDType = value.handle
        self.mgr.getPort().IMachine_setKeyboardHIDType(req)
-
-   def getHPETEnabled(self):
-       req=IMachine_getHPETEnabledRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getHPETEnabled(req)
-       return Boolean(self.mgr,val._returnval)
-   def setHPETEnabled(self, value):
-       req=IMachine_setHPETEnabledRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._HPETEnabled = value
-       else:
-            req._HPETEnabled = value.handle
-       self.mgr.getPort().IMachine_setHPETEnabled(req)
-
-   def getChipsetType(self):
-       req=IMachine_getChipsetTypeRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getChipsetType(req)
-       return ChipsetType(self.mgr,val._returnval)
-   def setChipsetType(self, value):
-       req=IMachine_setChipsetTypeRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._chipsetType = value
-       else:
-            req._chipsetType = value.handle
-       self.mgr.getPort().IMachine_setChipsetType(req)
-
-   def getIommuType(self):
-       req=IMachine_getIommuTypeRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getIommuType(req)
-       return IommuType(self.mgr,val._returnval)
-   def setIommuType(self, value):
-       req=IMachine_setIommuTypeRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._iommuType = value
-       else:
-            req._iommuType = value.handle
-       self.mgr.getPort().IMachine_setIommuType(req)
 
    def getSnapshotFolder(self):
        req=IMachine_getSnapshotFolderRequestMsg()
@@ -7060,20 +7585,6 @@ class IMachine(IUnknown):
             req._paravirtProvider = value.handle
        self.mgr.getPort().IMachine_setParavirtProvider(req)
 
-   def getRTCUseUTC(self):
-       req=IMachine_getRTCUseUTCRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IMachine_getRTCUseUTC(req)
-       return Boolean(self.mgr,val._returnval)
-   def setRTCUseUTC(self, value):
-       req=IMachine_setRTCUseUTCRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._RTCUseUTC = value
-       else:
-            req._RTCUseUTC = value.handle
-       self.mgr.getPort().IMachine_setRTCUseUTC(req)
-
    def getIOCacheEnabled(self):
        req=IMachine_getIOCacheEnabledRequestMsg()
        req._this=self.handle
@@ -7229,6 +7740,20 @@ class IMachine(IUnknown):
             req._VMProcessPriority = value.handle
        self.mgr.getPort().IMachine_setVMProcessPriority(req)
 
+   def getVMExecutionEngine(self):
+       req=IMachine_getVMExecutionEngineRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IMachine_getVMExecutionEngine(req)
+       return VMExecutionEngine(self.mgr,val._returnval)
+   def setVMExecutionEngine(self, value):
+       req=IMachine_setVMExecutionEngineRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._VMExecutionEngine = value
+       else:
+            req._VMExecutionEngine = value.handle
+       self.mgr.getPort().IMachine_setVMExecutionEngine(req)
+
    def getParavirtDebug(self):
        req=IMachine_getParavirtDebugRequestMsg()
        req._this=self.handle
@@ -7317,21 +7842,14 @@ class IMachine(IUnknown):
          'pageFusionEnabled':[getPageFusionEnabled,setPageFusionEnabled,
         ],
          'graphicsAdapter':[getGraphicsAdapter,None],
-         'BIOSSettings':[getBIOSSettings,None],
+         'platform':[getPlatform,None],
+         'firmwareSettings':[getFirmwareSettings,None],
          'trustedPlatformModule':[getTrustedPlatformModule,None],
          'nonVolatileStore':[getNonVolatileStore,None],
          'recordingSettings':[getRecordingSettings,None],
-         'firmwareType':[getFirmwareType,setFirmwareType,
-        ],
          'pointingHIDType':[getPointingHIDType,setPointingHIDType,
         ],
          'keyboardHIDType':[getKeyboardHIDType,setKeyboardHIDType,
-        ],
-         'HPETEnabled':[getHPETEnabled,setHPETEnabled,
-        ],
-         'chipsetType':[getChipsetType,setChipsetType,
-        ],
-         'iommuType':[getIommuType,setIommuType,
         ],
          'snapshotFolder':[getSnapshotFolder,setSnapshotFolder,
         ],
@@ -7373,8 +7891,6 @@ class IMachine(IUnknown):
         ],
          'paravirtProvider':[getParavirtProvider,setParavirtProvider,
         ],
-         'RTCUseUTC':[getRTCUseUTC,setRTCUseUTC,
-        ],
          'IOCacheEnabled':[getIOCacheEnabled,setIOCacheEnabled,
         ],
          'IOCacheSize':[getIOCacheSize,setIOCacheSize,
@@ -7397,6 +7913,8 @@ class IMachine(IUnknown):
         ],
          'USBProxyAvailable':[getUSBProxyAvailable,None],
          'VMProcessPriority':[getVMProcessPriority,setVMProcessPriority,
+        ],
+         'VMExecutionEngine':[getVMExecutionEngine,setVMExecutionEngine,
         ],
          'paravirtDebug':[getParavirtDebug,setParavirtDebug,
         ],
@@ -8682,6 +9200,97 @@ class IHostDrive(IUnknown):
          'model':[getModel,None],
          'partitions':[getPartitions,None]}
 
+class IHostX86(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IHostX86(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IHostX86._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IHostX86._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getProcessorCPUIDLeaf(self, _arg_cpuId, _arg_leaf, _arg_subLeaf):
+       req=IHostX86_getProcessorCPUIDLeafRequestMsg()
+       req._this=self.handle
+       
+       req._cpuId=_arg_cpuId
+       req._leaf=_arg_leaf
+       req._subLeaf=_arg_subLeaf
+       val=self.mgr.getPort().IHostX86_getProcessorCPUIDLeaf(req)
+       
+       return UnsignedInt(self.mgr,val._valEax), UnsignedInt(self.mgr,val._valEbx), UnsignedInt(self.mgr,val._valEcx), UnsignedInt(self.mgr,val._valEdx)
+
+
+
+
+   _Attrs_={}
+
 class IHost(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -8785,18 +9394,6 @@ class IHost(IUnknown):
        val=self.mgr.getPort().IHost_getProcessorDescription(req)
        
        return String(self.mgr,val._returnval)
-
-
-   def getProcessorCPUIDLeaf(self, _arg_cpuId, _arg_leaf, _arg_subLeaf):
-       req=IHost_getProcessorCPUIDLeafRequestMsg()
-       req._this=self.handle
-       
-       req._cpuId=_arg_cpuId
-       req._leaf=_arg_leaf
-       req._subLeaf=_arg_subLeaf
-       val=self.mgr.getPort().IHost_getProcessorCPUIDLeaf(req)
-       
-       return UnsignedInt(self.mgr,val._valEax), UnsignedInt(self.mgr,val._valEbx), UnsignedInt(self.mgr,val._valEcx), UnsignedInt(self.mgr,val._valEdx)
 
 
    def createHostOnlyNetworkInterface(self):
@@ -8952,6 +9549,27 @@ class IHost(IUnknown):
        return 
 
 
+   def isExecutionEngineSupported(self, _arg_cpuArchitecture, _arg_executionEngine):
+       req=IHost_isExecutionEngineSupportedRequestMsg()
+       req._this=self.handle
+       
+       req._cpuArchitecture=_arg_cpuArchitecture
+       req._executionEngine=_arg_executionEngine
+       val=self.mgr.getPort().IHost_isExecutionEngineSupported(req)
+       
+       return Boolean(self.mgr,val._returnval)
+
+
+   def getArchitecture(self):
+       req=IHost_getArchitectureRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IHost_getArchitecture(req)
+       return PlatformArchitecture(self.mgr,val._returnval)
+   def getX86(self):
+       req=IHost_getX86RequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IHost_getX86(req)
+       return IHostX86(self.mgr,val._returnval)
    def getDVDDrives(self):
        req=IHost_getDVDDrivesRequestMsg()
        req._this=self.handle
@@ -9047,11 +9665,6 @@ class IHost(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IHost_getUTCTime(req)
        return Long(self.mgr,val._returnval)
-   def getAcceleration3DAvailable(self):
-       req=IHost_getAcceleration3DAvailableRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().IHost_getAcceleration3DAvailable(req)
-       return Boolean(self.mgr,val._returnval)
    def getVideoInputDevices(self):
        req=IHost_getVideoInputDevicesRequestMsg()
        req._this=self.handle
@@ -9074,7 +9687,9 @@ class IHost(IUnknown):
        return IUpdateAgent(self.mgr,val._returnval)
 
 
-   _Attrs_={         'DVDDrives':[getDVDDrives,None],
+   _Attrs_={         'architecture':[getArchitecture,None],
+         'x86':[getX86,None],
+         'DVDDrives':[getDVDDrives,None],
          'floppyDrives':[getFloppyDrives,None],
          'audioDevices':[getAudioDevices,None],
          'USBDevices':[getUSBDevices,None],
@@ -9093,7 +9708,6 @@ class IHost(IUnknown):
          'operatingSystem':[getOperatingSystem,None],
          'OSVersion':[getOSVersion,None],
          'UTCTime':[getUTCTime,None],
-         'acceleration3DAvailable':[getAcceleration3DAvailable,None],
          'videoInputDevices':[getVideoInputDevices,None],
          'updateHost':[getUpdateHost,None],
          'updateExtPack':[getUpdateExtPack,None],
@@ -9195,6 +9809,348 @@ class ICPUProfile(IUnknown):
          'fullName':[getFullName,None],
          'architecture':[getArchitecture,None]}
 
+class IPlatformProperties(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IPlatformProperties(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IPlatformProperties._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IPlatformProperties._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getMaxNetworkAdapters(self, _arg_chipset):
+       req=IPlatformProperties_getMaxNetworkAdaptersRequestMsg()
+       req._this=self.handle
+       
+       req._chipset=_arg_chipset
+       val=self.mgr.getPort().IPlatformProperties_getMaxNetworkAdapters(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   def getMaxNetworkAdaptersOfType(self, _arg_chipset, _arg_type):
+       req=IPlatformProperties_getMaxNetworkAdaptersOfTypeRequestMsg()
+       req._this=self.handle
+       
+       req._chipset=_arg_chipset
+       req._type=_arg_type
+       val=self.mgr.getPort().IPlatformProperties_getMaxNetworkAdaptersOfType(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   def getMaxDevicesPerPortForStorageBus(self, _arg_bus):
+       req=IPlatformProperties_getMaxDevicesPerPortForStorageBusRequestMsg()
+       req._this=self.handle
+       
+       req._bus=_arg_bus
+       val=self.mgr.getPort().IPlatformProperties_getMaxDevicesPerPortForStorageBus(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   def getMinPortCountForStorageBus(self, _arg_bus):
+       req=IPlatformProperties_getMinPortCountForStorageBusRequestMsg()
+       req._this=self.handle
+       
+       req._bus=_arg_bus
+       val=self.mgr.getPort().IPlatformProperties_getMinPortCountForStorageBus(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   def getMaxPortCountForStorageBus(self, _arg_bus):
+       req=IPlatformProperties_getMaxPortCountForStorageBusRequestMsg()
+       req._this=self.handle
+       
+       req._bus=_arg_bus
+       val=self.mgr.getPort().IPlatformProperties_getMaxPortCountForStorageBus(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   def getMaxInstancesOfStorageBus(self, _arg_chipset, _arg_bus):
+       req=IPlatformProperties_getMaxInstancesOfStorageBusRequestMsg()
+       req._this=self.handle
+       
+       req._chipset=_arg_chipset
+       req._bus=_arg_bus
+       val=self.mgr.getPort().IPlatformProperties_getMaxInstancesOfStorageBus(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   def getSupportedVRAMRange(self, _arg_graphicsControllerType, _arg_accelerate3DEnabled):
+       req=IPlatformProperties_getSupportedVRAMRangeRequestMsg()
+       req._this=self.handle
+       
+       req._graphicsControllerType=_arg_graphicsControllerType
+       req._accelerate3DEnabled=_arg_accelerate3DEnabled
+       val=self.mgr.getPort().IPlatformProperties_getSupportedVRAMRange(req)
+       
+       return UnsignedInt(self.mgr,val._returnval), UnsignedInt(self.mgr,val._minMB), UnsignedInt(self.mgr,val._maxMB)
+
+
+   def getSupportedGfxFeaturesForType(self, _arg_graphicsControllerType):
+       req=IPlatformProperties_getSupportedGfxFeaturesForTypeRequestMsg()
+       req._this=self.handle
+       
+       req._graphicsControllerType=_arg_graphicsControllerType
+       val=self.mgr.getPort().IPlatformProperties_getSupportedGfxFeaturesForType(req)
+       
+       return GraphicsFeature(self.mgr,val._returnval, True)
+
+
+   def getDeviceTypesForStorageBus(self, _arg_bus):
+       req=IPlatformProperties_getDeviceTypesForStorageBusRequestMsg()
+       req._this=self.handle
+       
+       req._bus=_arg_bus
+       val=self.mgr.getPort().IPlatformProperties_getDeviceTypesForStorageBus(req)
+       
+       return DeviceType(self.mgr,val._returnval, True)
+
+
+   def getStorageBusForControllerType(self, _arg_storageControllerType):
+       req=IPlatformProperties_getStorageBusForControllerTypeRequestMsg()
+       req._this=self.handle
+       
+       req._storageControllerType=_arg_storageControllerType
+       val=self.mgr.getPort().IPlatformProperties_getStorageBusForControllerType(req)
+       
+       return StorageBus(self.mgr,val._returnval)
+
+
+   def getStorageControllerTypesForBus(self, _arg_storageBus):
+       req=IPlatformProperties_getStorageControllerTypesForBusRequestMsg()
+       req._this=self.handle
+       
+       req._storageBus=_arg_storageBus
+       val=self.mgr.getPort().IPlatformProperties_getStorageControllerTypesForBus(req)
+       
+       return StorageControllerType(self.mgr,val._returnval, True)
+
+
+   def getStorageControllerHotplugCapable(self, _arg_controllerType):
+       req=IPlatformProperties_getStorageControllerHotplugCapableRequestMsg()
+       req._this=self.handle
+       
+       req._controllerType=_arg_controllerType
+       val=self.mgr.getPort().IPlatformProperties_getStorageControllerHotplugCapable(req)
+       
+       return Boolean(self.mgr,val._returnval)
+
+
+   def getMaxInstancesOfUSBControllerType(self, _arg_chipset, _arg_type):
+       req=IPlatformProperties_getMaxInstancesOfUSBControllerTypeRequestMsg()
+       req._this=self.handle
+       
+       req._chipset=_arg_chipset
+       req._type=_arg_type
+       val=self.mgr.getPort().IPlatformProperties_getMaxInstancesOfUSBControllerType(req)
+       
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   def getRawModeSupported(self):
+       req=IPlatformProperties_getRawModeSupportedRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getRawModeSupported(req)
+       return Boolean(self.mgr,val._returnval)
+   def getExclusiveHwVirt(self):
+       req=IPlatformProperties_getExclusiveHwVirtRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getExclusiveHwVirt(req)
+       return Boolean(self.mgr,val._returnval)
+   def setExclusiveHwVirt(self, value):
+       req=IPlatformProperties_setExclusiveHwVirtRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._exclusiveHwVirt = value
+       else:
+            req._exclusiveHwVirt = value.handle
+       self.mgr.getPort().IPlatformProperties_setExclusiveHwVirt(req)
+
+   def getSerialPortCount(self):
+       req=IPlatformProperties_getSerialPortCountRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSerialPortCount(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def getParallelPortCount(self):
+       req=IPlatformProperties_getParallelPortCountRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getParallelPortCount(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def getMaxBootPosition(self):
+       req=IPlatformProperties_getMaxBootPositionRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getMaxBootPosition(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def getSupportedParavirtProviders(self):
+       req=IPlatformProperties_getSupportedParavirtProvidersRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedParavirtProviders(req)
+       return ParavirtProvider(self.mgr,val._returnval, True)
+   def getSupportedFirmwareTypes(self):
+       req=IPlatformProperties_getSupportedFirmwareTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedFirmwareTypes(req)
+       return FirmwareType(self.mgr,val._returnval, True)
+   def getSupportedGuestOSTypes(self):
+       req=IPlatformProperties_getSupportedGuestOSTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedGuestOSTypes(req)
+       return IGuestOSType(self.mgr,val._returnval, True)
+   def getSupportedGfxControllerTypes(self):
+       req=IPlatformProperties_getSupportedGfxControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedGfxControllerTypes(req)
+       return GraphicsControllerType(self.mgr,val._returnval, True)
+   def getSupportedNetAdpPromiscModePols(self):
+       req=IPlatformProperties_getSupportedNetAdpPromiscModePolsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedNetAdpPromiscModePols(req)
+       return NetworkAdapterPromiscModePolicy(self.mgr,val._returnval, True)
+   def getSupportedNetworkAdapterTypes(self):
+       req=IPlatformProperties_getSupportedNetworkAdapterTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedNetworkAdapterTypes(req)
+       return NetworkAdapterType(self.mgr,val._returnval, True)
+   def getSupportedUartTypes(self):
+       req=IPlatformProperties_getSupportedUartTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedUartTypes(req)
+       return UartType(self.mgr,val._returnval, True)
+   def getSupportedUSBControllerTypes(self):
+       req=IPlatformProperties_getSupportedUSBControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedUSBControllerTypes(req)
+       return USBControllerType(self.mgr,val._returnval, True)
+   def getSupportedAudioControllerTypes(self):
+       req=IPlatformProperties_getSupportedAudioControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedAudioControllerTypes(req)
+       return AudioControllerType(self.mgr,val._returnval, True)
+   def getSupportedBootDevices(self):
+       req=IPlatformProperties_getSupportedBootDevicesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedBootDevices(req)
+       return DeviceType(self.mgr,val._returnval, True)
+   def getSupportedStorageBuses(self):
+       req=IPlatformProperties_getSupportedStorageBusesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedStorageBuses(req)
+       return StorageBus(self.mgr,val._returnval, True)
+   def getSupportedStorageControllerTypes(self):
+       req=IPlatformProperties_getSupportedStorageControllerTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedStorageControllerTypes(req)
+       return StorageControllerType(self.mgr,val._returnval, True)
+   def getSupportedChipsetTypes(self):
+       req=IPlatformProperties_getSupportedChipsetTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedChipsetTypes(req)
+       return ChipsetType(self.mgr,val._returnval, True)
+   def getSupportedIommuTypes(self):
+       req=IPlatformProperties_getSupportedIommuTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedIommuTypes(req)
+       return IommuType(self.mgr,val._returnval, True)
+   def getSupportedTpmTypes(self):
+       req=IPlatformProperties_getSupportedTpmTypesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IPlatformProperties_getSupportedTpmTypes(req)
+       return TpmType(self.mgr,val._returnval, True)
+
+
+   _Attrs_={         'rawModeSupported':[getRawModeSupported,None],
+         'exclusiveHwVirt':[getExclusiveHwVirt,setExclusiveHwVirt,
+        ],
+         'serialPortCount':[getSerialPortCount,None],
+         'parallelPortCount':[getParallelPortCount,None],
+         'maxBootPosition':[getMaxBootPosition,None],
+         'supportedParavirtProviders':[getSupportedParavirtProviders,None],
+         'supportedFirmwareTypes':[getSupportedFirmwareTypes,None],
+         'supportedGuestOSTypes':[getSupportedGuestOSTypes,None],
+         'supportedGfxControllerTypes':[getSupportedGfxControllerTypes,None],
+         'supportedNetAdpPromiscModePols':[getSupportedNetAdpPromiscModePols,None],
+         'supportedNetworkAdapterTypes':[getSupportedNetworkAdapterTypes,None],
+         'supportedUartTypes':[getSupportedUartTypes,None],
+         'supportedUSBControllerTypes':[getSupportedUSBControllerTypes,None],
+         'supportedAudioControllerTypes':[getSupportedAudioControllerTypes,None],
+         'supportedBootDevices':[getSupportedBootDevices,None],
+         'supportedStorageBuses':[getSupportedStorageBuses,None],
+         'supportedStorageControllerTypes':[getSupportedStorageControllerTypes,None],
+         'supportedChipsetTypes':[getSupportedChipsetTypes,None],
+         'supportedIommuTypes':[getSupportedIommuTypes,None],
+         'supportedTpmTypes':[getSupportedTpmTypes,None]}
+
 class ISystemProperties(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -9270,98 +10226,6 @@ class ISystemProperties(IUnknown):
          self.__dict__[name] = val
 
    
-   def getMaxNetworkAdapters(self, _arg_chipset):
-       req=ISystemProperties_getMaxNetworkAdaptersRequestMsg()
-       req._this=self.handle
-       
-       req._chipset=_arg_chipset
-       val=self.mgr.getPort().ISystemProperties_getMaxNetworkAdapters(req)
-       
-       return UnsignedInt(self.mgr,val._returnval)
-
-
-   def getMaxNetworkAdaptersOfType(self, _arg_chipset, _arg_type):
-       req=ISystemProperties_getMaxNetworkAdaptersOfTypeRequestMsg()
-       req._this=self.handle
-       
-       req._chipset=_arg_chipset
-       req._type=_arg_type
-       val=self.mgr.getPort().ISystemProperties_getMaxNetworkAdaptersOfType(req)
-       
-       return UnsignedInt(self.mgr,val._returnval)
-
-
-   def getMaxDevicesPerPortForStorageBus(self, _arg_bus):
-       req=ISystemProperties_getMaxDevicesPerPortForStorageBusRequestMsg()
-       req._this=self.handle
-       
-       req._bus=_arg_bus
-       val=self.mgr.getPort().ISystemProperties_getMaxDevicesPerPortForStorageBus(req)
-       
-       return UnsignedInt(self.mgr,val._returnval)
-
-
-   def getMinPortCountForStorageBus(self, _arg_bus):
-       req=ISystemProperties_getMinPortCountForStorageBusRequestMsg()
-       req._this=self.handle
-       
-       req._bus=_arg_bus
-       val=self.mgr.getPort().ISystemProperties_getMinPortCountForStorageBus(req)
-       
-       return UnsignedInt(self.mgr,val._returnval)
-
-
-   def getMaxPortCountForStorageBus(self, _arg_bus):
-       req=ISystemProperties_getMaxPortCountForStorageBusRequestMsg()
-       req._this=self.handle
-       
-       req._bus=_arg_bus
-       val=self.mgr.getPort().ISystemProperties_getMaxPortCountForStorageBus(req)
-       
-       return UnsignedInt(self.mgr,val._returnval)
-
-
-   def getMaxInstancesOfStorageBus(self, _arg_chipset, _arg_bus):
-       req=ISystemProperties_getMaxInstancesOfStorageBusRequestMsg()
-       req._this=self.handle
-       
-       req._chipset=_arg_chipset
-       req._bus=_arg_bus
-       val=self.mgr.getPort().ISystemProperties_getMaxInstancesOfStorageBus(req)
-       
-       return UnsignedInt(self.mgr,val._returnval)
-
-
-   def getDeviceTypesForStorageBus(self, _arg_bus):
-       req=ISystemProperties_getDeviceTypesForStorageBusRequestMsg()
-       req._this=self.handle
-       
-       req._bus=_arg_bus
-       val=self.mgr.getPort().ISystemProperties_getDeviceTypesForStorageBus(req)
-       
-       return DeviceType(self.mgr,val._returnval, True)
-
-
-   def getStorageBusForStorageControllerType(self, _arg_storageControllerType):
-       req=ISystemProperties_getStorageBusForStorageControllerTypeRequestMsg()
-       req._this=self.handle
-       
-       req._storageControllerType=_arg_storageControllerType
-       val=self.mgr.getPort().ISystemProperties_getStorageBusForStorageControllerType(req)
-       
-       return StorageBus(self.mgr,val._returnval)
-
-
-   def getStorageControllerTypesForStorageBus(self, _arg_storageBus):
-       req=ISystemProperties_getStorageControllerTypesForStorageBusRequestMsg()
-       req._this=self.handle
-       
-       req._storageBus=_arg_storageBus
-       val=self.mgr.getPort().ISystemProperties_getStorageControllerTypesForStorageBus(req)
-       
-       return StorageControllerType(self.mgr,val._returnval, True)
-
-
    def getDefaultIoCacheSettingForStorageController(self, _arg_controllerType):
        req=ISystemProperties_getDefaultIoCacheSettingForStorageControllerRequestMsg()
        req._this=self.handle
@@ -9370,27 +10234,6 @@ class ISystemProperties(IUnknown):
        val=self.mgr.getPort().ISystemProperties_getDefaultIoCacheSettingForStorageController(req)
        
        return Boolean(self.mgr,val._returnval)
-
-
-   def getStorageControllerHotplugCapable(self, _arg_controllerType):
-       req=ISystemProperties_getStorageControllerHotplugCapableRequestMsg()
-       req._this=self.handle
-       
-       req._controllerType=_arg_controllerType
-       val=self.mgr.getPort().ISystemProperties_getStorageControllerHotplugCapable(req)
-       
-       return Boolean(self.mgr,val._returnval)
-
-
-   def getMaxInstancesOfUSBControllerType(self, _arg_chipset, _arg_type):
-       req=ISystemProperties_getMaxInstancesOfUSBControllerTypeRequestMsg()
-       req._this=self.handle
-       
-       req._chipset=_arg_chipset
-       req._type=_arg_type
-       val=self.mgr.getPort().ISystemProperties_getMaxInstancesOfUSBControllerType(req)
-       
-       return UnsignedInt(self.mgr,val._returnval)
 
 
    def getCPUProfiles(self, _arg_architecture, _arg_namePattern):
@@ -9404,6 +10247,21 @@ class ISystemProperties(IUnknown):
        return ICPUProfile(self.mgr,val._returnval, True)
 
 
+   def getExecutionEnginesForVmCpuArchitecture(self, _arg_cpuArchitecture):
+       req=ISystemProperties_getExecutionEnginesForVmCpuArchitectureRequestMsg()
+       req._this=self.handle
+       
+       req._cpuArchitecture=_arg_cpuArchitecture
+       val=self.mgr.getPort().ISystemProperties_getExecutionEnginesForVmCpuArchitecture(req)
+       
+       return VMExecutionEngine(self.mgr,val._returnval, True)
+
+
+   def getPlatform(self):
+       req=ISystemProperties_getPlatformRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getPlatform(req)
+       return IPlatformProperties(self.mgr,val._returnval)
    def getMinGuestRAM(self):
        req=ISystemProperties_getMinGuestRAMRequestMsg()
        req._this=self.handle
@@ -9444,40 +10302,6 @@ class ISystemProperties(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().ISystemProperties_getInfoVDSize(req)
        return Long(self.mgr,val._returnval)
-   def getSerialPortCount(self):
-       req=ISystemProperties_getSerialPortCountRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSerialPortCount(req)
-       return UnsignedInt(self.mgr,val._returnval)
-   def getParallelPortCount(self):
-       req=ISystemProperties_getParallelPortCountRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getParallelPortCount(req)
-       return UnsignedInt(self.mgr,val._returnval)
-   def getMaxBootPosition(self):
-       req=ISystemProperties_getMaxBootPositionRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getMaxBootPosition(req)
-       return UnsignedInt(self.mgr,val._returnval)
-   def getRawModeSupported(self):
-       req=ISystemProperties_getRawModeSupportedRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getRawModeSupported(req)
-       return Boolean(self.mgr,val._returnval)
-   def getExclusiveHwVirt(self):
-       req=ISystemProperties_getExclusiveHwVirtRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getExclusiveHwVirt(req)
-       return Boolean(self.mgr,val._returnval)
-   def setExclusiveHwVirt(self, value):
-       req=ISystemProperties_setExclusiveHwVirtRequestMsg()
-       req._this=self.handle
-       if type(value) in [int, bool, basestring, str]:
-            req._exclusiveHwVirt = value
-       else:
-            req._exclusiveHwVirt = value.handle
-       self.mgr.getPort().ISystemProperties_setExclusiveHwVirt(req)
-
    def getDefaultMachineFolder(self):
        req=ISystemProperties_getDefaultMachineFolderRequestMsg()
        req._this=self.handle
@@ -9731,11 +10555,11 @@ class ISystemProperties(IUnknown):
             req._proxyURL = value.handle
        self.mgr.getPort().ISystemProperties_setProxyURL(req)
 
-   def getSupportedParavirtProviders(self):
-       req=ISystemProperties_getSupportedParavirtProvidersRequestMsg()
+   def getSupportedPlatformArchitectures(self):
+       req=ISystemProperties_getSupportedPlatformArchitecturesRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedParavirtProviders(req)
-       return ParavirtProvider(self.mgr,val._returnval, True)
+       val=self.mgr.getPort().ISystemProperties_getSupportedPlatformArchitectures(req)
+       return PlatformArchitecture(self.mgr,val._returnval, True)
    def getSupportedClipboardModes(self):
        req=ISystemProperties_getSupportedClipboardModesRequestMsg()
        req._this=self.handle
@@ -9746,11 +10570,6 @@ class ISystemProperties(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().ISystemProperties_getSupportedDnDModes(req)
        return DnDMode(self.mgr,val._returnval, True)
-   def getSupportedFirmwareTypes(self):
-       req=ISystemProperties_getSupportedFirmwareTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedFirmwareTypes(req)
-       return FirmwareType(self.mgr,val._returnval, True)
    def getSupportedPointingHIDTypes(self):
        req=ISystemProperties_getSupportedPointingHIDTypesRequestMsg()
        req._this=self.handle
@@ -9776,6 +10595,11 @@ class ISystemProperties(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().ISystemProperties_getSupportedExportOptions(req)
        return ExportOptions(self.mgr,val._returnval, True)
+   def getSupportedGraphicsFeatures(self):
+       req=ISystemProperties_getSupportedGraphicsFeaturesRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISystemProperties_getSupportedGraphicsFeatures(req)
+       return GraphicsFeature(self.mgr,val._returnval, True)
    def getSupportedRecordingFeatures(self):
        req=ISystemProperties_getSupportedRecordingFeaturesRequestMsg()
        req._this=self.handle
@@ -9806,11 +10630,6 @@ class ISystemProperties(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().ISystemProperties_getSupportedRecordingVRCModes(req)
        return RecordingRateControlMode(self.mgr,val._returnval, True)
-   def getSupportedGraphicsControllerTypes(self):
-       req=ISystemProperties_getSupportedGraphicsControllerTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedGraphicsControllerTypes(req)
-       return GraphicsControllerType(self.mgr,val._returnval, True)
    def getSupportedCloneOptions(self):
        req=ISystemProperties_getSupportedCloneOptionsRequestMsg()
        req._this=self.handle
@@ -9831,61 +10650,16 @@ class ISystemProperties(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().ISystemProperties_getSupportedNetworkAttachmentTypes(req)
        return NetworkAttachmentType(self.mgr,val._returnval, True)
-   def getSupportedNetworkAdapterTypes(self):
-       req=ISystemProperties_getSupportedNetworkAdapterTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedNetworkAdapterTypes(req)
-       return NetworkAdapterType(self.mgr,val._returnval, True)
    def getSupportedPortModes(self):
        req=ISystemProperties_getSupportedPortModesRequestMsg()
        req._this=self.handle
        val=self.mgr.getPort().ISystemProperties_getSupportedPortModes(req)
        return PortMode(self.mgr,val._returnval, True)
-   def getSupportedUartTypes(self):
-       req=ISystemProperties_getSupportedUartTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedUartTypes(req)
-       return UartType(self.mgr,val._returnval, True)
-   def getSupportedUSBControllerTypes(self):
-       req=ISystemProperties_getSupportedUSBControllerTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedUSBControllerTypes(req)
-       return USBControllerType(self.mgr,val._returnval, True)
    def getSupportedAudioDriverTypes(self):
        req=ISystemProperties_getSupportedAudioDriverTypesRequestMsg()
        req._this=self.handle
        val=self.mgr.getPort().ISystemProperties_getSupportedAudioDriverTypes(req)
        return AudioDriverType(self.mgr,val._returnval, True)
-   def getSupportedAudioControllerTypes(self):
-       req=ISystemProperties_getSupportedAudioControllerTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedAudioControllerTypes(req)
-       return AudioControllerType(self.mgr,val._returnval, True)
-   def getSupportedStorageBuses(self):
-       req=ISystemProperties_getSupportedStorageBusesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedStorageBuses(req)
-       return StorageBus(self.mgr,val._returnval, True)
-   def getSupportedStorageControllerTypes(self):
-       req=ISystemProperties_getSupportedStorageControllerTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedStorageControllerTypes(req)
-       return StorageControllerType(self.mgr,val._returnval, True)
-   def getSupportedChipsetTypes(self):
-       req=ISystemProperties_getSupportedChipsetTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedChipsetTypes(req)
-       return ChipsetType(self.mgr,val._returnval, True)
-   def getSupportedIommuTypes(self):
-       req=ISystemProperties_getSupportedIommuTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedIommuTypes(req)
-       return IommuType(self.mgr,val._returnval, True)
-   def getSupportedTpmTypes(self):
-       req=ISystemProperties_getSupportedTpmTypesRequestMsg()
-       req._this=self.handle
-       val=self.mgr.getPort().ISystemProperties_getSupportedTpmTypes(req)
-       return TpmType(self.mgr,val._returnval, True)
    def getLanguageId(self):
        req=ISystemProperties_getLanguageIdRequestMsg()
        req._this=self.handle
@@ -9902,7 +10676,8 @@ class ISystemProperties(IUnknown):
 
 
 
-   _Attrs_={         'minGuestRAM':[getMinGuestRAM,None],
+   _Attrs_={         'platform':[getPlatform,None],
+         'minGuestRAM':[getMinGuestRAM,None],
          'maxGuestRAM':[getMaxGuestRAM,None],
          'minGuestVRAM':[getMinGuestVRAM,None],
          'maxGuestVRAM':[getMaxGuestVRAM,None],
@@ -9910,12 +10685,6 @@ class ISystemProperties(IUnknown):
          'maxGuestCPUCount':[getMaxGuestCPUCount,None],
          'maxGuestMonitors':[getMaxGuestMonitors,None],
          'infoVDSize':[getInfoVDSize,None],
-         'serialPortCount':[getSerialPortCount,None],
-         'parallelPortCount':[getParallelPortCount,None],
-         'maxBootPosition':[getMaxBootPosition,None],
-         'rawModeSupported':[getRawModeSupported,None],
-         'exclusiveHwVirt':[getExclusiveHwVirt,setExclusiveHwVirt,
-        ],
          'defaultMachineFolder':[getDefaultMachineFolder,setDefaultMachineFolder,
         ],
          'loggingLevel':[getLoggingLevel,setLoggingLevel,
@@ -9953,37 +10722,27 @@ class ISystemProperties(IUnknown):
         ],
          'proxyURL':[getProxyURL,setProxyURL,
         ],
-         'supportedParavirtProviders':[getSupportedParavirtProviders,None],
+         'supportedPlatformArchitectures':[getSupportedPlatformArchitectures,None],
          'supportedClipboardModes':[getSupportedClipboardModes,None],
          'supportedDnDModes':[getSupportedDnDModes,None],
-         'supportedFirmwareTypes':[getSupportedFirmwareTypes,None],
          'supportedPointingHIDTypes':[getSupportedPointingHIDTypes,None],
          'supportedKeyboardHIDTypes':[getSupportedKeyboardHIDTypes,None],
          'supportedVFSTypes':[getSupportedVFSTypes,None],
          'supportedImportOptions':[getSupportedImportOptions,None],
          'supportedExportOptions':[getSupportedExportOptions,None],
+         'supportedGraphicsFeatures':[getSupportedGraphicsFeatures,None],
          'supportedRecordingFeatures':[getSupportedRecordingFeatures,None],
          'supportedRecordingAudioCodecs':[getSupportedRecordingAudioCodecs,None],
          'supportedRecordingVideoCodecs':[getSupportedRecordingVideoCodecs,None],
          'supportedRecordingVSModes':[getSupportedRecordingVSModes,None],
          'supportedRecordingARCModes':[getSupportedRecordingARCModes,None],
          'supportedRecordingVRCModes':[getSupportedRecordingVRCModes,None],
-         'supportedGraphicsControllerTypes':[getSupportedGraphicsControllerTypes,None],
          'supportedCloneOptions':[getSupportedCloneOptions,None],
          'supportedAutostopTypes':[getSupportedAutostopTypes,None],
          'supportedVMProcPriorities':[getSupportedVMProcPriorities,None],
          'supportedNetworkAttachmentTypes':[getSupportedNetworkAttachmentTypes,None],
-         'supportedNetworkAdapterTypes':[getSupportedNetworkAdapterTypes,None],
          'supportedPortModes':[getSupportedPortModes,None],
-         'supportedUartTypes':[getSupportedUartTypes,None],
-         'supportedUSBControllerTypes':[getSupportedUSBControllerTypes,None],
          'supportedAudioDriverTypes':[getSupportedAudioDriverTypes,None],
-         'supportedAudioControllerTypes':[getSupportedAudioControllerTypes,None],
-         'supportedStorageBuses':[getSupportedStorageBuses,None],
-         'supportedStorageControllerTypes':[getSupportedStorageControllerTypes,None],
-         'supportedChipsetTypes':[getSupportedChipsetTypes,None],
-         'supportedIommuTypes':[getSupportedIommuTypes,None],
-         'supportedTpmTypes':[getSupportedTpmTypes,None],
          'languageId':[getLanguageId,setLanguageId,
         ]}
 
@@ -11011,12 +11770,13 @@ class IGuestSession(IUnknown):
        return IGuestFsInfo(self.mgr,val._returnval)
 
 
-   def processCreate(self, _arg_executable, _arg_arguments, _arg_environmentChanges, _arg_flags, _arg_timeoutMS):
+   def processCreate(self, _arg_executable, _arg_arguments, _arg_cwd, _arg_environmentChanges, _arg_flags, _arg_timeoutMS):
        req=IGuestSession_processCreateRequestMsg()
        req._this=self.handle
        
        req._executable=_arg_executable
        req._arguments=_arg_arguments
+       req._cwd=_arg_cwd
        req._environmentChanges=_arg_environmentChanges
        req._flags=_arg_flags
        req._timeoutMS=_arg_timeoutMS
@@ -11025,12 +11785,13 @@ class IGuestSession(IUnknown):
        return IGuestProcess(self.mgr,val._returnval)
 
 
-   def processCreateEx(self, _arg_executable, _arg_arguments, _arg_environmentChanges, _arg_flags, _arg_timeoutMS, _arg_priority, _arg_affinity):
+   def processCreateEx(self, _arg_executable, _arg_arguments, _arg_cwd, _arg_environmentChanges, _arg_flags, _arg_timeoutMS, _arg_priority, _arg_affinity):
        req=IGuestSession_processCreateExRequestMsg()
        req._this=self.handle
        
        req._executable=_arg_executable
        req._arguments=_arg_arguments
+       req._cwd=_arg_cwd
        req._environmentChanges=_arg_environmentChanges
        req._flags=_arg_flags
        req._timeoutMS=_arg_timeoutMS
@@ -11203,6 +11964,11 @@ class IGuestSession(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().IGuestSession_getUserDocuments(req)
        return String(self.mgr,val._returnval)
+   def getMountPoints(self):
+       req=IGuestSession_getMountPointsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestSession_getMountPoints(req)
+       return String(self.mgr,val._returnval, True)
    def getDirectories(self):
        req=IGuestSession_getDirectoriesRequestMsg()
        req._this=self.handle
@@ -11237,6 +12003,7 @@ class IGuestSession(IUnknown):
         ],
          'userHome':[getUserHome,None],
          'userDocuments':[getUserDocuments,None],
+         'mountPoints':[getMountPoints,None],
          'directories':[getDirectories,None],
          'files':[getFiles,None],
          'eventSource':[getEventSource,None]}
@@ -11604,6 +12371,16 @@ class IDirectory(IUnknown):
        return 
 
 
+   def list(self, _arg_maxEntries):
+       req=IDirectory_listRequestMsg()
+       req._this=self.handle
+       
+       req._maxEntries=_arg_maxEntries
+       val=self.mgr.getPort().IDirectory_list(req)
+       
+       return IFsObjInfo(self.mgr,val._returnval, True)
+
+
    def read(self):
        req=IDirectory_readRequestMsg()
        req._this=self.handle
@@ -11613,20 +12390,47 @@ class IDirectory(IUnknown):
        return IFsObjInfo(self.mgr,val._returnval)
 
 
+   def rewind(self):
+       req=IDirectory_rewindRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().IDirectory_rewind(req)
+       
+       return 
+
+
    def getDirectoryName(self):
        req=IDirectory_getDirectoryNameRequestMsg()
        req._this=self.handle
        val=self.mgr.getPort().IDirectory_getDirectoryName(req)
        return String(self.mgr,val._returnval)
+   def getEventSource(self):
+       req=IDirectory_getEventSourceRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDirectory_getEventSource(req)
+       return IEventSource(self.mgr,val._returnval)
    def getFilter(self):
        req=IDirectory_getFilterRequestMsg()
        req._this=self.handle
        val=self.mgr.getPort().IDirectory_getFilter(req)
        return String(self.mgr,val._returnval)
+   def getId(self):
+       req=IDirectory_getIdRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDirectory_getId(req)
+       return UnsignedInt(self.mgr,val._returnval)
+   def getStatus(self):
+       req=IDirectory_getStatusRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IDirectory_getStatus(req)
+       return DirectoryStatus(self.mgr,val._returnval)
 
 
    _Attrs_={         'directoryName':[getDirectoryName,None],
-         'filter':[getFilter,None]}
+         'eventSource':[getEventSource,None],
+         'filter':[getFilter,None],
+         'id':[getId,None],
+         'status':[getStatus,None]}
 
 class IGuestDirectory(IDirectory):
    def __init__(self, mgr, handle, isarray = False):
@@ -15905,19 +16709,19 @@ class ISerialPort(IUnknown):
             req._enabled = value.handle
        self.mgr.getPort().ISerialPort_setEnabled(req)
 
-   def getIOBase(self):
-       req=ISerialPort_getIOBaseRequestMsg()
+   def getIOAddress(self):
+       req=ISerialPort_getIOAddressRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().ISerialPort_getIOBase(req)
+       val=self.mgr.getPort().ISerialPort_getIOAddress(req)
        return UnsignedInt(self.mgr,val._returnval)
-   def setIOBase(self, value):
-       req=ISerialPort_setIOBaseRequestMsg()
+   def setIOAddress(self, value):
+       req=ISerialPort_setIOAddressRequestMsg()
        req._this=self.handle
        if type(value) in [int, bool, basestring, str]:
-            req._IOBase = value
+            req._IOAddress = value
        else:
-            req._IOBase = value.handle
-       self.mgr.getPort().ISerialPort_setIOBase(req)
+            req._IOAddress = value.handle
+       self.mgr.getPort().ISerialPort_setIOAddress(req)
 
    def getIRQ(self):
        req=ISerialPort_getIRQRequestMsg()
@@ -15994,7 +16798,7 @@ class ISerialPort(IUnknown):
    _Attrs_={         'slot':[getSlot,None],
          'enabled':[getEnabled,setEnabled,
         ],
-         'IOBase':[getIOBase,setIOBase,
+         'IOAddress':[getIOAddress,setIOAddress,
         ],
          'IRQ':[getIRQ,setIRQ,
         ],
@@ -18445,6 +19249,20 @@ class ISharedFolder(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().ISharedFolder_getLastAccessError(req)
        return String(self.mgr,val._returnval)
+   def getSymlinkPolicy(self):
+       req=ISharedFolder_getSymlinkPolicyRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ISharedFolder_getSymlinkPolicy(req)
+       return SymlinkPolicy(self.mgr,val._returnval)
+   def setSymlinkPolicy(self, value):
+       req=ISharedFolder_setSymlinkPolicyRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._symlinkPolicy = value
+       else:
+            req._symlinkPolicy = value.handle
+       self.mgr.getPort().ISharedFolder_setSymlinkPolicy(req)
+
 
 
    _Attrs_={         'name':[getName,None],
@@ -18456,7 +19274,9 @@ class ISharedFolder(IUnknown):
         ],
          'autoMountPoint':[getAutoMountPoint,setAutoMountPoint,
         ],
-         'lastAccessError':[getLastAccessError,None]}
+         'lastAccessError':[getLastAccessError,None],
+         'symlinkPolicy':[getSymlinkPolicy,setSymlinkPolicy,
+        ]}
 
 class ISession(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -20535,6 +21355,174 @@ class IMachineStateChangedEvent(IMachineEvent):
 
 
    _Attrs_={         'state':[getState,None]}
+
+class IExtPackInstalledEvent(IEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IExtPackInstalledEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IExtPackInstalledEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IExtPackInstalledEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getName(self):
+       req=IExtPackInstalledEvent_getNameRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IExtPackInstalledEvent_getName(req)
+       return String(self.mgr,val._returnval)
+
+
+   _Attrs_={         'name':[getName,None]}
+
+class IExtPackUninstalledEvent(IEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IExtPackUninstalledEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IExtPackUninstalledEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IExtPackUninstalledEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getName(self):
+       req=IExtPackUninstalledEvent_getNameRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IExtPackUninstalledEvent_getName(req)
+       return String(self.mgr,val._returnval)
+
+
+   _Attrs_={         'name':[getName,None]}
 
 class IMachineDataChangedEvent(IMachineEvent):
    def __init__(self, mgr, handle, isarray = False):
@@ -22660,6 +23648,180 @@ class IClipboardFileTransferModeChangedEvent(IEvent):
 
    _Attrs_={         'enabled':[getEnabled,None]}
 
+class IClipboardEvent(IEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IClipboardEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IClipboardEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IClipboardEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getId(self):
+       req=IClipboardEvent_getIdRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IClipboardEvent_getId(req)
+       return String(self.mgr,val._returnval)
+
+
+   _Attrs_={         'id':[getId,None]}
+
+class IClipboardErrorEvent(IClipboardEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IClipboardErrorEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IClipboardErrorEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IClipboardEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IClipboardErrorEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getMsg(self):
+       req=IClipboardErrorEvent_getMsgRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IClipboardErrorEvent_getMsg(req)
+       return String(self.mgr,val._returnval)
+   def getRcError(self):
+       req=IClipboardErrorEvent_getRcErrorRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IClipboardErrorEvent_getRcError(req)
+       return Int(self.mgr,val._returnval)
+
+
+   _Attrs_={         'msg':[getMsg,None],
+         'rcError':[getRcError,None]}
+
 class IDnDModeChangedEvent(IEvent):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -24022,6 +25184,366 @@ class IGuestProcessOutputEvent(IGuestProcessIOEvent):
 
    _Attrs_={         'data':[getData,None]}
 
+class IGuestDirectoryEvent(IGuestSessionEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGuestDirectoryEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGuestDirectoryEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IGuestSessionEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGuestDirectoryEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getDirectory(self):
+       req=IGuestDirectoryEvent_getDirectoryRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryEvent_getDirectory(req)
+       return IGuestDirectory(self.mgr,val._returnval)
+
+
+   _Attrs_={         'directory':[getDirectory,None]}
+
+class IGuestDirectoryRegisteredEvent(IGuestDirectoryEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGuestDirectoryRegisteredEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGuestDirectoryRegisteredEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IGuestDirectoryEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGuestDirectoryRegisteredEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getRegistered(self):
+       req=IGuestDirectoryRegisteredEvent_getRegisteredRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryRegisteredEvent_getRegistered(req)
+       return Boolean(self.mgr,val._returnval)
+
+
+   _Attrs_={         'registered':[getRegistered,None]}
+
+class IGuestDirectoryStateChangedEvent(IGuestDirectoryEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGuestDirectoryStateChangedEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGuestDirectoryStateChangedEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IGuestDirectoryEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGuestDirectoryStateChangedEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getStatus(self):
+       req=IGuestDirectoryStateChangedEvent_getStatusRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryStateChangedEvent_getStatus(req)
+       return DirectoryStatus(self.mgr,val._returnval)
+   def getError(self):
+       req=IGuestDirectoryStateChangedEvent_getErrorRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryStateChangedEvent_getError(req)
+       return IVirtualBoxErrorInfo(self.mgr,val._returnval)
+
+
+   _Attrs_={         'status':[getStatus,None],
+         'error':[getError,None]}
+
+class IGuestDirectoryReadEvent(IGuestDirectoryEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IGuestDirectoryReadEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IGuestDirectoryReadEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IGuestDirectoryEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IGuestDirectoryReadEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getPath(self):
+       req=IGuestDirectoryReadEvent_getPathRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryReadEvent_getPath(req)
+       return String(self.mgr,val._returnval)
+   def getObjInfo(self):
+       req=IGuestDirectoryReadEvent_getObjInfoRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryReadEvent_getObjInfo(req)
+       return IFsObjInfo(self.mgr,val._returnval)
+   def getOwner(self):
+       req=IGuestDirectoryReadEvent_getOwnerRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryReadEvent_getOwner(req)
+       return String(self.mgr,val._returnval)
+   def getGroups(self):
+       req=IGuestDirectoryReadEvent_getGroupsRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IGuestDirectoryReadEvent_getGroups(req)
+       return String(self.mgr,val._returnval)
+
+
+   _Attrs_={         'path':[getPath,None],
+         'objInfo':[getObjInfo,None],
+         'owner':[getOwner,None],
+         'groups':[getGroups,None]}
+
 class IGuestFileEvent(IGuestSessionEvent):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
@@ -24874,7 +26396,7 @@ class IVRDEServerInfoChangedEvent(IEvent):
 
    _Attrs_={         'midlDoesNotLikeEmptyInterfaces':[getMidlDoesNotLikeEmptyInterfaces,None]}
 
-class IRecordingChangedEvent(IEvent):
+class IRecordingStateChangedEvent(IEvent):
    def __init__(self, mgr, handle, isarray = False):
        self.mgr = mgr
        if handle is None:
@@ -24919,7 +26441,7 @@ class IRecordingChangedEvent(IEvent):
 
    def __getitem__(self, index):
       if self.isarray:
-          return IRecordingChangedEvent(self.mgr, self.handle[index])
+          return IRecordingStateChangedEvent(self.mgr, self.handle[index])
       raise TypeError("iteration over non-sequence")
 
    def __str__(self):
@@ -24932,7 +26454,7 @@ class IRecordingChangedEvent(IEvent):
         return self.handle != None and self.handle != ''
 
    def __getattr__(self,name):
-      hndl = IRecordingChangedEvent._Attrs_.get(name, None)
+      hndl = IRecordingStateChangedEvent._Attrs_.get(name, None)
       if hndl != None:
          if hndl[0] != None:
            return hndl[0](self)
@@ -24942,21 +26464,111 @@ class IRecordingChangedEvent(IEvent):
          return IEvent.__getattr__(self, name)
 
    def __setattr__(self, name, val):
-      hndl = IRecordingChangedEvent._Attrs_.get(name, None)
+      hndl = IRecordingStateChangedEvent._Attrs_.get(name, None)
       if (hndl != None and hndl[1] != None):
          hndl[1](self,val)
       else:
          self.__dict__[name] = val
 
    
-   def getMidlDoesNotLikeEmptyInterfaces(self):
-       req=IRecordingChangedEvent_getMidlDoesNotLikeEmptyInterfacesRequestMsg()
+   def getEnabled(self):
+       req=IRecordingStateChangedEvent_getEnabledRequestMsg()
        req._this=self.handle
-       val=self.mgr.getPort().IRecordingChangedEvent_getMidlDoesNotLikeEmptyInterfaces(req)
+       val=self.mgr.getPort().IRecordingStateChangedEvent_getEnabled(req)
        return Boolean(self.mgr,val._returnval)
+   def getError(self):
+       req=IRecordingStateChangedEvent_getErrorRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRecordingStateChangedEvent_getError(req)
+       return IVirtualBoxErrorInfo(self.mgr,val._returnval)
 
 
-   _Attrs_={         'midlDoesNotLikeEmptyInterfaces':[getMidlDoesNotLikeEmptyInterfaces,None]}
+   _Attrs_={         'enabled':[getEnabled,None],
+         'error':[getError,None]}
+
+class IRecordingScreenStateChangedEvent(IRecordingStateChangedEvent):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return IRecordingScreenStateChangedEvent(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = IRecordingScreenStateChangedEvent._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IRecordingStateChangedEvent.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = IRecordingScreenStateChangedEvent._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getScreen(self):
+       req=IRecordingScreenStateChangedEvent_getScreenRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().IRecordingScreenStateChangedEvent_getScreen(req)
+       return UnsignedInt(self.mgr,val._returnval)
+
+
+   _Attrs_={         'screen':[getScreen,None]}
 
 class IUSBControllerChangedEvent(IEvent):
    def __init__(self, mgr, handle, isarray = False):
@@ -29942,10 +31554,35 @@ class ICloudMachine(IUnknown):
        return IProgress(self.mgr,val._returnval)
 
 
+   def listMetricNames(self):
+       req=ICloudMachine_listMetricNamesRequestMsg()
+       req._this=self.handle
+       
+       val=self.mgr.getPort().ICloudMachine_listMetricNames(req)
+       
+       return IProgress(self.mgr,val._returnval), IStringArray(self.mgr,val._metricNames)
+
+
+   def enumerateMetricData(self, _arg_metricType, _arg_pointsNumber):
+       req=ICloudMachine_enumerateMetricDataRequestMsg()
+       req._this=self.handle
+       
+       req._metricType=_arg_metricType
+       req._pointsNumber=_arg_pointsNumber
+       val=self.mgr.getPort().ICloudMachine_enumerateMetricData(req)
+       
+       return IProgress(self.mgr,val._returnval), IStringArray(self.mgr,val._values), IStringArray(self.mgr,val._timestamps), IStringArray(self.mgr,val._unit)
+
+
    def getId(self):
        req=ICloudMachine_getIdRequestMsg()
        req._this=self.handle
        val=self.mgr.getPort().ICloudMachine_getId(req)
+       return String(self.mgr,val._returnval)
+   def getCloudId(self):
+       req=ICloudMachine_getCloudIdRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudMachine_getCloudId(req)
        return String(self.mgr,val._returnval)
    def getAccessible(self):
        req=ICloudMachine_getAccessibleRequestMsg()
@@ -30000,6 +31637,7 @@ class ICloudMachine(IUnknown):
 
 
    _Attrs_={         'id':[getId,None],
+         'cloudId':[getCloudId,None],
          'accessible':[getAccessible,None],
          'accessError':[getAccessError,None],
          'name':[getName,None],
@@ -30304,6 +31942,17 @@ class ICloudClient(IUnknown):
        return IProgress(self.mgr,val._returnval)
 
 
+   def cloneInstance(self, _arg_uid, _arg_newName):
+       req=ICloudClient_cloneInstanceRequestMsg()
+       req._this=self.handle
+       
+       req._uid=_arg_uid
+       req._newName=_arg_newName
+       val=self.mgr.getPort().ICloudClient_cloneInstance(req)
+       
+       return IProgress(self.mgr,val._returnval), ICloudMachine(self.mgr,val._clone)
+
+
    def createImage(self, _arg_parameters):
        req=ICloudClient_createImageRequestMsg()
        req._this=self.handle
@@ -30399,6 +32048,16 @@ class ICloudClient(IUnknown):
        val=self.mgr.getPort().ICloudClient_getSubnetSelectionForm(req)
        
        return IProgress(self.mgr,val._returnval), IVirtualSystemDescriptionForm(self.mgr,val._form)
+
+
+   def getMetricTypeByName(self, _arg_metricName):
+       req=ICloudClient_getMetricTypeByNameRequestMsg()
+       req._this=self.handle
+       
+       req._metricName=_arg_metricName
+       val=self.mgr.getPort().ICloudClient_getMetricTypeByName(req)
+       
+       return MetricType(self.mgr,val._returnval)
 
 
    def getCloudMachineList(self):
@@ -31784,9 +33443,13 @@ class IGuestOSType:
        
           self.id = String(self.mgr, handle._id)
        
+          self.subtype = String(self.mgr, handle._subtype)
+       
           self.description = String(self.mgr, handle._description)
        
           self.is64Bit = Boolean(self.mgr, handle._is64Bit)
+       
+          self.platformArchitecture = PlatformArchitecture(self.mgr, handle._platformArchitecture)
        
           self.recommendedIOAPIC = Boolean(self.mgr, handle._recommendedIOAPIC)
        
@@ -31852,6 +33515,8 @@ class IGuestOSType:
        
           self.recommendedWDDMGraphics = Boolean(self.mgr, handle._recommendedWDDMGraphics)
        
+          self.guestAdditionsInstallPackageName = String(self.mgr, handle._guestAdditionsInstallPackageName)
+       
           pass
 
    
@@ -31873,6 +33538,12 @@ class IGuestOSType:
     def setId(self):
        raise Error('setters not supported')
     
+    def getSubtype(self):
+       return self.subtype
+
+    def setSubtype(self):
+       raise Error('setters not supported')
+    
     def getDescription(self):
        return self.description
 
@@ -31883,6 +33554,12 @@ class IGuestOSType:
        return self.is64Bit
 
     def setIs64Bit(self):
+       raise Error('setters not supported')
+    
+    def getPlatformArchitecture(self):
+       return self.platformArchitecture
+
+    def setPlatformArchitecture(self):
        raise Error('setters not supported')
     
     def getRecommendedIOAPIC(self):
@@ -32075,6 +33752,12 @@ class IGuestOSType:
        return self.recommendedWDDMGraphics
 
     def setRecommendedWDDMGraphics(self):
+       raise Error('setters not supported')
+    
+    def getGuestAdditionsInstallPackageName(self):
+       return self.guestAdditionsInstallPackageName
+
+    def setGuestAdditionsInstallPackageName(self):
        raise Error('setters not supported')
     
 
@@ -32341,7 +34024,7 @@ class SettingsVersion:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'v1_0',2:'v1_1',3:'v1_2',4:'v1_3pre',5:'v1_3',6:'v1_4',7:'v1_5',8:'v1_6',9:'v1_7',10:'v1_8',11:'v1_9',12:'v1_10',13:'v1_11',14:'v1_12',15:'v1_13',16:'v1_14',17:'v1_15',18:'v1_16',19:'v1_17',20:'v1_18',21:'v1_19',99999:'Future'}
+   _NameMap={0:'Null',1:'v1_0',2:'v1_1',3:'v1_2',4:'v1_3pre',5:'v1_3',6:'v1_4',7:'v1_5',8:'v1_6',9:'v1_7',10:'v1_8',11:'v1_9',12:'v1_10',13:'v1_11',14:'v1_12',15:'v1_13',16:'v1_14',17:'v1_15',18:'v1_16',19:'v1_17',20:'v1_18',21:'v1_19',22:'v1_20',99999:'Future'}
    _ValueMap={
               'Null':0,
               'v1_0':1,
@@ -32365,6 +34048,7 @@ class SettingsVersion:
               'v1_17':19,
               'v1_18':20,
               'v1_19':21,
+              'v1_20':22,
               'Future':99999}
 
    Null=0
@@ -32389,6 +34073,7 @@ class SettingsVersion:
    v1_17=19
    v1_18=20
    v1_19=21
+   v1_20=22
    Future=99999
 
 class AccessMode:
@@ -32569,6 +34254,48 @@ class SessionState:
    Spawning=3
    Unlocking=4
 
+class PlatformArchitecture:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=PlatformArchitecture._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,PlatformArchitecture):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,PlatformArchitecture):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return PlatformArchitecture._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'None',1:'x86',2:'ARM'}
+   _ValueMap={
+              'None':0,
+              'x86':1,
+              'ARM':2}
+
+   _None=0
+   x86=1
+   ARM=2
+
 class CPUArchitecture:
    def __init__(self,mgr,handle):
        self.mgr=mgr
@@ -32601,26 +34328,30 @@ class CPUArchitecture:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Any',1:'x86',2:'AMD64'}
+   _NameMap={0:'Any',1:'x86',2:'AMD64',3:'ARMv8_32',4:'ARMv8_64'}
    _ValueMap={
               'Any':0,
               'x86':1,
-              'AMD64':2}
+              'AMD64':2,
+              'ARMv8_32':3,
+              'ARMv8_64':4}
 
    Any=0
    x86=1
    AMD64=2
+   ARMv8_32=3
+   ARMv8_64=4
 
-class CPUPropertyType:
+class CPUPropertyTypeX86:
    def __init__(self,mgr,handle):
        self.mgr=mgr
        if isinstance(handle,basestring):
-           self.handle=CPUPropertyType._ValueMap[handle]
+           self.handle=CPUPropertyTypeX86._ValueMap[handle]
        else:
            self.handle=handle
 
    def __eq__(self,other):
-      if isinstance(other,CPUPropertyType):
+      if isinstance(other,CPUPropertyTypeX86):
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
@@ -32629,7 +34360,7 @@ class CPUPropertyType:
       return False
 
    def __ne__(self,other):
-      if isinstance(other,CPUPropertyType):
+      if isinstance(other,CPUPropertyTypeX86):
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
@@ -32638,7 +34369,7 @@ class CPUPropertyType:
       return True
 
    def __str__(self):
-        return CPUPropertyType._NameMap[self.handle]
+        return CPUPropertyTypeX86._NameMap[self.handle]
 
    def __int__(self):
         return self.handle
@@ -33095,16 +34826,16 @@ class Scope:
    Machine=1
    Session=2
 
-class BIOSBootMenuMode:
+class FirmwareBootMenuMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
        if isinstance(handle,basestring):
-           self.handle=BIOSBootMenuMode._ValueMap[handle]
+           self.handle=FirmwareBootMenuMode._ValueMap[handle]
        else:
            self.handle=handle
 
    def __eq__(self,other):
-      if isinstance(other,BIOSBootMenuMode):
+      if isinstance(other,FirmwareBootMenuMode):
          return self.handle == other.handle
       if isinstance(other,int):
          return self.handle == other
@@ -33113,7 +34844,7 @@ class BIOSBootMenuMode:
       return False
 
    def __ne__(self,other):
-      if isinstance(other,BIOSBootMenuMode):
+      if isinstance(other,FirmwareBootMenuMode):
          return self.handle != other.handle
       if isinstance(other,int):
          return self.handle != other
@@ -33122,7 +34853,7 @@ class BIOSBootMenuMode:
       return True
 
    def __str__(self):
-        return BIOSBootMenuMode._NameMap[self.handle]
+        return FirmwareBootMenuMode._NameMap[self.handle]
 
    def __int__(self):
         return self.handle
@@ -34957,17 +36688,61 @@ class GraphicsControllerType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'VBoxVGA',2:'VMSVGA',3:'VBoxSVGA'}
+   _NameMap={0:'Null',1:'VBoxVGA',2:'VMSVGA',3:'VBoxSVGA',4:'QemuRamFB'}
    _ValueMap={
               'Null':0,
               'VBoxVGA':1,
               'VMSVGA':2,
-              'VBoxSVGA':3}
+              'VBoxSVGA':3,
+              'QemuRamFB':4}
 
    Null=0
    VBoxVGA=1
    VMSVGA=2
    VBoxSVGA=3
+   QemuRamFB=4
+
+class GraphicsFeature:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=GraphicsFeature._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,GraphicsFeature):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,GraphicsFeature):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return GraphicsFeature._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'None',1:'Acceleration2DVideo',2:'Acceleration3D'}
+   _ValueMap={
+              'None':0,
+              'Acceleration2DVideo':1,
+              'Acceleration3D':2}
+
+   _None=0
+   Acceleration2DVideo=1
+   Acceleration3D=2
 
 class CleanupMode:
    def __init__(self,mgr,handle):
@@ -35238,6 +37013,54 @@ class IommuType:
    Automatic=1
    AMD=2
    Intel=3
+
+class VMExecutionEngine:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=VMExecutionEngine._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,VMExecutionEngine):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,VMExecutionEngine):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return VMExecutionEngine._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'NotSet',1:'Default',2:'HwVirt',3:'NativeApi',4:'Interpreter',5:'Recompiler'}
+   _ValueMap={
+              'NotSet':0,
+              'Default':1,
+              'HwVirt':2,
+              'NativeApi':3,
+              'Interpreter':4,
+              'Recompiler':5}
+
+   NotSet=0
+   Default=1
+   HwVirt=2
+   NativeApi=3
+   Interpreter=4
+   Recompiler=5
 
 class HostNetworkInterfaceMediumType:
    def __init__(self,mgr,handle):
@@ -36863,6 +38686,54 @@ class PathStyle:
    UNIX=2
    Unknown=8
 
+class DirectoryStatus:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=DirectoryStatus._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,DirectoryStatus):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,DirectoryStatus):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return DirectoryStatus._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Undefined',1:'Open',2:'Close',3:'Rewind',4:'Down',5:'Error'}
+   _ValueMap={
+              'Undefined':0,
+              'Open':1,
+              'Close':2,
+              'Rewind':3,
+              'Down':4,
+              'Error':5}
+
+   Undefined=0
+   Open=1
+   Close=2
+   Rewind=3
+   Down=4
+   Error=5
+
 class FileAccessMode:
    def __init__(self,mgr,handle):
        self.mgr=mgr
@@ -37225,13 +39096,17 @@ class DirectoryOpenFlag:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'None',1:'NoSymlinks'}
+   _NameMap={0:'None',1:'NoSymlinks',2:'DenyAscent',4:'NoFollowSymlinks'}
    _ValueMap={
               'None':0,
-              'NoSymlinks':1}
+              'NoSymlinks':1,
+              'DenyAscent':2,
+              'NoFollowSymlinks':4}
 
    _None=0
    NoSymlinks=1
+   DenyAscent=2
+   NoFollowSymlinks=4
 
 class MediumState:
    def __init__(self,mgr,handle):
@@ -38095,50 +39970,6 @@ class UartType:
    U16550A=1
    U16750=2
 
-class VMExecutionEngine:
-   def __init__(self,mgr,handle):
-       self.mgr=mgr
-       if isinstance(handle,basestring):
-           self.handle=VMExecutionEngine._ValueMap[handle]
-       else:
-           self.handle=handle
-
-   def __eq__(self,other):
-      if isinstance(other,VMExecutionEngine):
-         return self.handle == other.handle
-      if isinstance(other,int):
-         return self.handle == other
-      if isinstance(other,basestring):
-         return str(self) == other
-      return False
-
-   def __ne__(self,other):
-      if isinstance(other,VMExecutionEngine):
-         return self.handle != other.handle
-      if isinstance(other,int):
-         return self.handle != other
-      if isinstance(other,basestring):
-         return str(self) != other
-      return True
-
-   def __str__(self):
-        return VMExecutionEngine._NameMap[self.handle]
-
-   def __int__(self):
-        return self.handle
-
-   _NameMap={0:'NotSet',1:'Emulated',2:'HwVirt',3:'NativeApi'}
-   _ValueMap={
-              'NotSet':0,
-              'Emulated':1,
-              'HwVirt':2,
-              'NativeApi':3}
-
-   NotSet=0
-   Emulated=1
-   HwVirt=2
-   NativeApi=3
-
 class USBControllerType:
    def __init__(self,mgr,handle):
        self.mgr=mgr
@@ -38413,15 +40244,17 @@ class AudioControllerType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'AC97',1:'SB16',2:'HDA'}
+   _NameMap={0:'AC97',1:'SB16',2:'HDA',3:'VirtioSound'}
    _ValueMap={
               'AC97':0,
               'SB16':1,
-              'HDA':2}
+              'HDA':2,
+              'VirtioSound':3}
 
    AC97=0
    SB16=1
    HDA=2
+   VirtioSound=3
 
 class AudioCodecType:
    def __init__(self,mgr,handle):
@@ -38837,15 +40670,17 @@ class ChipsetType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'PIIX3',2:'ICH9'}
+   _NameMap={0:'Null',1:'PIIX3',2:'ICH9',3:'ARMv8Virtual'}
    _ValueMap={
               'Null':0,
               'PIIX3':1,
-              'ICH9':2}
+              'ICH9':2,
+              'ARMv8Virtual':3}
 
    Null=0
    PIIX3=1
    ICH9=2
+   ARMv8Virtual=3
 
 class NATAliasMode:
    def __init__(self,mgr,handle):
@@ -39091,7 +40926,7 @@ class VBoxEventType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'OnGuestAdditionsStatusChanged',102:'OnGuestMonitorInfoChanged',103:'OnGuestFileSizeChanged',104:'OnClipboardFileTransferModeChanged',105:'OnCloudProviderListChanged',106:'OnCloudProviderRegistered',107:'OnCloudProviderUninstall',108:'OnCloudProfileRegistered',109:'OnCloudProfileChanged',110:'OnProgressCreated',111:'OnLanguageChanged',112:'OnUpdateAgentAvailable',113:'OnUpdateAgentError',114:'OnUpdateAgentSettingsChanged',115:'OnUpdateAgentStateChanged',116:'OnHostAudioDeviceChanged',117:'OnGuestDebugControlChanged',118:'OnMachineGroupsChanged',119:'End'}
+   _NameMap={0:'Invalid',1:'Any',2:'Vetoable',3:'MachineEvent',4:'SnapshotEvent',5:'InputEvent',31:'LastWildcard',32:'OnMachineStateChanged',33:'OnMachineDataChanged',34:'OnExtraDataChanged',35:'OnExtraDataCanChange',36:'OnMediumRegistered',37:'OnMachineRegistered',38:'OnSessionStateChanged',39:'OnSnapshotTaken',40:'OnSnapshotDeleted',41:'OnSnapshotChanged',42:'OnGuestPropertyChanged',43:'OnMousePointerShapeChanged',44:'OnMouseCapabilityChanged',45:'OnKeyboardLedsChanged',46:'OnStateChanged',47:'OnAdditionsStateChanged',48:'OnNetworkAdapterChanged',49:'OnSerialPortChanged',50:'OnParallelPortChanged',51:'OnStorageControllerChanged',52:'OnMediumChanged',53:'OnVRDEServerChanged',54:'OnUSBControllerChanged',55:'OnUSBDeviceStateChanged',56:'OnSharedFolderChanged',57:'OnRuntimeError',58:'OnCanShowWindow',59:'OnShowWindow',60:'OnCPUChanged',61:'OnVRDEServerInfoChanged',62:'OnEventSourceChanged',63:'OnCPUExecutionCapChanged',64:'OnGuestKeyboard',65:'OnGuestMouse',66:'OnNATRedirect',67:'OnHostPCIDevicePlug',68:'OnVBoxSVCAvailabilityChanged',69:'OnBandwidthGroupChanged',70:'OnGuestMonitorChanged',71:'OnStorageDeviceChanged',72:'OnClipboardModeChanged',73:'OnDnDModeChanged',74:'OnNATNetworkChanged',75:'OnNATNetworkStartStop',76:'OnNATNetworkAlter',77:'OnNATNetworkCreationDeletion',78:'OnNATNetworkSetting',79:'OnNATNetworkPortForward',80:'OnGuestSessionStateChanged',81:'OnGuestSessionRegistered',82:'OnGuestProcessRegistered',83:'OnGuestProcessStateChanged',84:'OnGuestProcessInputNotify',85:'OnGuestProcessOutput',86:'OnGuestFileRegistered',87:'OnGuestFileStateChanged',88:'OnGuestFileOffsetChanged',89:'OnGuestFileRead',90:'OnGuestFileWrite',91:'OnRecordingStateChanged',92:'OnGuestUserStateChanged',93:'OnGuestMultiTouch',94:'OnHostNameResolutionConfigurationChange',95:'OnSnapshotRestored',96:'OnMediumConfigChanged',97:'OnAudioAdapterChanged',98:'OnProgressPercentageChanged',99:'OnProgressTaskCompleted',100:'OnCursorPositionChanged',101:'OnGuestAdditionsStatusChanged',102:'OnGuestMonitorInfoChanged',103:'OnGuestFileSizeChanged',104:'OnClipboardFileTransferModeChanged',105:'OnCloudProviderListChanged',106:'OnCloudProviderRegistered',107:'OnCloudProviderUninstall',108:'OnCloudProfileRegistered',109:'OnCloudProfileChanged',110:'OnProgressCreated',111:'OnLanguageChanged',112:'OnUpdateAgentAvailable',113:'OnUpdateAgentError',114:'OnUpdateAgentSettingsChanged',115:'OnUpdateAgentStateChanged',116:'OnHostAudioDeviceChanged',117:'OnGuestDebugControlChanged',118:'OnMachineGroupsChanged',119:'OnGuestDirectoryRegistered',120:'OnGuestDirectoryStateChanged',121:'OnGuestDirectoryRead',122:'OnClipboardError',123:'OnExtPackInstalled',124:'OnExtPackUninstalled',125:'OnRecordingScreenStateChanged',126:'End'}
    _ValueMap={
               'Invalid':0,
               'Any':1,
@@ -39159,7 +40994,7 @@ class VBoxEventType:
               'OnGuestFileOffsetChanged':88,
               'OnGuestFileRead':89,
               'OnGuestFileWrite':90,
-              'OnRecordingChanged':91,
+              'OnRecordingStateChanged':91,
               'OnGuestUserStateChanged':92,
               'OnGuestMultiTouch':93,
               'OnHostNameResolutionConfigurationChange':94,
@@ -39187,7 +41022,14 @@ class VBoxEventType:
               'OnHostAudioDeviceChanged':116,
               'OnGuestDebugControlChanged':117,
               'OnMachineGroupsChanged':118,
-              'End':119}
+              'OnGuestDirectoryRegistered':119,
+              'OnGuestDirectoryStateChanged':120,
+              'OnGuestDirectoryRead':121,
+              'OnClipboardError':122,
+              'OnExtPackInstalled':123,
+              'OnExtPackUninstalled':124,
+              'OnRecordingScreenStateChanged':125,
+              'End':126}
 
    Invalid=0
    Any=1
@@ -39255,7 +41097,7 @@ class VBoxEventType:
    OnGuestFileOffsetChanged=88
    OnGuestFileRead=89
    OnGuestFileWrite=90
-   OnRecordingChanged=91
+   OnRecordingStateChanged=91
    OnGuestUserStateChanged=92
    OnGuestMultiTouch=93
    OnHostNameResolutionConfigurationChange=94
@@ -39283,7 +41125,14 @@ class VBoxEventType:
    OnHostAudioDeviceChanged=116
    OnGuestDebugControlChanged=117
    OnMachineGroupsChanged=118
-   End=119
+   OnGuestDirectoryRegistered=119
+   OnGuestDirectoryStateChanged=120
+   OnGuestDirectoryRead=121
+   OnClipboardError=122
+   OnExtPackInstalled=123
+   OnExtPackUninstalled=124
+   OnRecordingScreenStateChanged=125
+   End=126
 
 class GuestMouseEventMode:
    def __init__(self,mgr,handle):
@@ -39516,6 +41365,102 @@ class CloudImageState:
    Exporting=4
    Disabled=5
    Deleted=6
+
+class MetricType:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=MetricType._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,MetricType):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,MetricType):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return MetricType._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'Invalid',1:'CpuUtilization',2:'MemoryUtilization',3:'DiskBytesRead',4:'DiskBytesWritten',5:'NetworksBytesIn',6:'NetworksBytesOut'}
+   _ValueMap={
+              'Invalid':0,
+              'CpuUtilization':1,
+              'MemoryUtilization':2,
+              'DiskBytesRead':3,
+              'DiskBytesWritten':4,
+              'NetworksBytesIn':5,
+              'NetworksBytesOut':6}
+
+   Invalid=0
+   CpuUtilization=1
+   MemoryUtilization=2
+   DiskBytesRead=3
+   DiskBytesWritten=4
+   NetworksBytesIn=5
+   NetworksBytesOut=6
+
+class SymlinkPolicy:
+   def __init__(self,mgr,handle):
+       self.mgr=mgr
+       if isinstance(handle,basestring):
+           self.handle=SymlinkPolicy._ValueMap[handle]
+       else:
+           self.handle=handle
+
+   def __eq__(self,other):
+      if isinstance(other,SymlinkPolicy):
+         return self.handle == other.handle
+      if isinstance(other,int):
+         return self.handle == other
+      if isinstance(other,basestring):
+         return str(self) == other
+      return False
+
+   def __ne__(self,other):
+      if isinstance(other,SymlinkPolicy):
+         return self.handle != other.handle
+      if isinstance(other,int):
+         return self.handle != other
+      if isinstance(other,basestring):
+         return str(self) != other
+      return True
+
+   def __str__(self):
+        return SymlinkPolicy._NameMap[self.handle]
+
+   def __int__(self):
+        return self.handle
+
+   _NameMap={0:'None',1:'Forbidden',2:'AllowedInShareSubtree',3:'AllowedToRelativeTargets',4:'AllowedToAnyTarget'}
+   _ValueMap={
+              'None':0,
+              'Forbidden':1,
+              'AllowedInShareSubtree':2,
+              'AllowedToRelativeTargets':3,
+              'AllowedToAnyTarget':4}
+
+   _None=0
+   Forbidden=1
+   AllowedInShareSubtree=2
+   AllowedToRelativeTargets=3
+   AllowedToAnyTarget=4
 
 
 import base64

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIDirectoryService.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIDirectoryService.idl
  */
 
 #ifndef __gen_nsIDirectoryService_h__
@@ -61,7 +61,7 @@ class NS_NO_VTABLE nsIDirectoryServiceProvider : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDIRECTORYSERVICEPROVIDER \
-  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile **_retval); 
+  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDIRECTORYSERVICEPROVIDER(_to) \
@@ -152,7 +152,7 @@ class NS_NO_VTABLE nsIDirectoryServiceProvider2 : public nsIDirectoryServiceProv
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDIRECTORYSERVICEPROVIDER2 \
-  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator **_retval); 
+  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDIRECTORYSERVICEPROVIDER2(_to) \
@@ -258,9 +258,9 @@ class NS_NO_VTABLE nsIDirectoryService : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDIRECTORYSERVICE \
-  NS_IMETHOD Init(void); \
-  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider *prov); \
-  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider *prov); 
+  NS_IMETHOD Init(void) NS_OVERRIDE; \
+  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider *prov) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider *prov) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDIRECTORYSERVICE(_to) \

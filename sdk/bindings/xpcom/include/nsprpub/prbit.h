@@ -38,80 +38,55 @@
 #ifndef prbit_h___
 #define prbit_h___
 
-#include "prtypes.h"
+#include <iprt/cdefs.h>
 
-#ifdef VBOX_WITH_XPCOM_NAMESPACE_CLEANUP
-#define PR_CeilingLog2 VBoxNsprPR_CeilingLog2
-#define PR_FloorLog2 VBoxNsprPR_FloorLog2
-#endif /* VBOX_WITH_XPCOM_NAMESPACE_CLEANUP */
+#include "prtypes.h"
 
 PR_BEGIN_EXTERN_C
 
 /*
-** A prbitmap_t is a long integer that can be used for bitmaps
-*/
-typedef unsigned long prbitmap_t;
-
-#define PR_TEST_BIT(_map,_bit) \
-    ((_map)[(_bit)>>PR_BITS_PER_LONG_LOG2] & (1L << ((_bit) & (PR_BITS_PER_LONG-1))))
-#define PR_SET_BIT(_map,_bit) \
-    ((_map)[(_bit)>>PR_BITS_PER_LONG_LOG2] |= (1L << ((_bit) & (PR_BITS_PER_LONG-1))))
-#define PR_CLEAR_BIT(_map,_bit) \
-    ((_map)[(_bit)>>PR_BITS_PER_LONG_LOG2] &= ~(1L << ((_bit) & (PR_BITS_PER_LONG-1))))
-
-/*
 ** Compute the log of the least power of 2 greater than or equal to n
 */
-NSPR_API(PRIntn) PR_CeilingLog2(PRUint32 i); 
+DECL_FORCE_INLINE(PRIntn) PR_CeilingLog2(PRUint32 n)
+{
+    PRIntn log2 = 0;
+
+    if (n & (n-1))
+  log2++;
+    if (n >> 16)
+  log2 += 16, n >>= 16;
+    if (n >> 8)
+  log2 += 8, n >>= 8;
+    if (n >> 4)
+  log2 += 4, n >>= 4;
+    if (n >> 2)
+  log2 += 2, n >>= 2;
+    if (n >> 1)
+  log2++;
+    return log2;
+}
 
 /*
-** Compute the log of the greatest power of 2 less than or equal to n
+** Compute the log of the greatest power of 2 less than or equal to n.
+** This really just finds the highest set bit in the word.
 */
-NSPR_API(PRIntn) PR_FloorLog2(PRUint32 i); 
+DECL_FORCE_INLINE(PRIntn) PR_FloorLog2(PRUint32 n)
+{
+    PRIntn log2 = 0;
 
-/*
-** Macro version of PR_CeilingLog2: Compute the log of the least power of
-** 2 greater than or equal to _n. The result is returned in _log2.
-*/
-#define PR_CEILING_LOG2(_log2,_n)   \
-  PR_BEGIN_MACRO                    \
-    PRUint32 j_ = (PRUint32)(_n); 	\
-    (_log2) = 0;                    \
-    if ((j_) & ((j_)-1))            \
-	(_log2) += 1;               \
-    if ((j_) >> 16)                 \
-	(_log2) += 16, (j_) >>= 16; \
-    if ((j_) >> 8)                  \
-	(_log2) += 8, (j_) >>= 8;   \
-    if ((j_) >> 4)                  \
-	(_log2) += 4, (j_) >>= 4;   \
-    if ((j_) >> 2)                  \
-	(_log2) += 2, (j_) >>= 2;   \
-    if ((j_) >> 1)                  \
-	(_log2) += 1;               \
-  PR_END_MACRO
-
-/*
-** Macro version of PR_FloorLog2: Compute the log of the greatest power of
-** 2 less than or equal to _n. The result is returned in _log2.
-**
-** This is equivalent to finding the highest set bit in the word.
-*/
-#define PR_FLOOR_LOG2(_log2,_n)   \
-  PR_BEGIN_MACRO                    \
-    PRUint32 j_ = (PRUint32)(_n); 	\
-    (_log2) = 0;                    \
-    if ((j_) >> 16)                 \
-	(_log2) += 16, (j_) >>= 16; \
-    if ((j_) >> 8)                  \
-	(_log2) += 8, (j_) >>= 8;   \
-    if ((j_) >> 4)                  \
-	(_log2) += 4, (j_) >>= 4;   \
-    if ((j_) >> 2)                  \
-	(_log2) += 2, (j_) >>= 2;   \
-    if ((j_) >> 1)                  \
-	(_log2) += 1;               \
-  PR_END_MACRO
+    if (n >> 16)
+  log2 += 16, n >>= 16;
+    if (n >> 8)
+  log2 += 8, n >>= 8;
+    if (n >> 4)
+  log2 += 4, n >>= 4;
+    if (n >> 2)
+  log2 += 2, n >>= 2;
+    if (n >> 1)
+  log2++;
+    return log2;
+}
 
 PR_END_EXTERN_C
+
 #endif /* prbit_h___ */

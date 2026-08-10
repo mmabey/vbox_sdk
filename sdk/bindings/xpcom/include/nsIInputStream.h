@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIInputStream.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIInputStream.idl
  */
 
 #ifndef __gen_nsIInputStream_h__
@@ -124,11 +124,11 @@ class NS_NO_VTABLE nsIInputStream : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIINPUTSTREAM \
-  NS_IMETHOD Close(void); \
-  NS_IMETHOD Available(PRUint32 *_retval); \
-  NS_IMETHOD Read(char * aBuf, PRUint32 aCount, PRUint32 *_retval); \
-  NS_IMETHOD ReadSegments(nsWriteSegmentFun aWriter, void * aClosure, PRUint32 aCount, PRUint32 *_retval); \
-  NS_IMETHOD IsNonBlocking(PRBool *_retval); 
+  NS_IMETHOD Close(void) NS_OVERRIDE; \
+  NS_IMETHOD Available(PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Read(char * aBuf, PRUint32 aCount, PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD ReadSegments(nsWriteSegmentFun aWriter, void * aClosure, PRUint32 aCount, PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsNonBlocking(PRBool *_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIINPUTSTREAM(_to) \

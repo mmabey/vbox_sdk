@@ -39,7 +39,7 @@ $(function() {
 <div id="main-nav"></div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f09d564695a8a7f5713b0ef37bdf7d31.html">out</a></li><li class="navelem"><a class="el" href="dir_141588c2821602ef8aacc5668e032706.html">linux.amd64</a></li><li class="navelem"><a class="el" href="dir_e963bcb98b584e681f73ef2c94ac2810.html">release</a></li><li class="navelem"><a class="el" href="dir_c889d8e90845bd0b730c0a32d76ce471.html">obj</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f09d564695a8a7f5713b0ef37bdf7d31.html">out</a></li><li class="navelem"><a class="el" href="dir_bbad66ccc451f5e4ebfcaed543227b9e.html">win.amd64</a></li><li class="navelem"><a class="el" href="dir_742101b24c4bec219f9f41c306992456.html">release</a></li><li class="navelem"><a class="el" href="dir_8b7100a637ea6e17efd4c57b053c32a0.html">obj</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -102,8 +102,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_graphics_adapter.html">IGraphicsAdapter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_graphics_adapter.html" title="The IGraphicsAdapter interface represents the graphics adapter of the virtual machine.">IGraphicsAdapter</a> interface represents the graphics adapter of the virtual machine.  <a href="interface_i_graphics_adapter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_b_i_o_s_settings.html">IBIOSSettings</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_b_i_o_s_settings.html" title="The IBIOSSettings interface represents BIOS settings of the virtual machine.">IBIOSSettings</a> interface represents BIOS settings of the virtual machine.  <a href="interface_i_b_i_o_s_settings.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_firmware_settings.html">IFirmwareSettings</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_firmware_settings.html" title="The IFirmwareSettings interface represents firmware settings of the virtual machine.">IFirmwareSettings</a> interface represents firmware settings of the virtual machine.  <a href="interface_i_firmware_settings.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_trusted_platform_module.html">ITrustedPlatformModule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_trusted_platform_module.html" title="The ITrustedPlatformModule interface represents the settings of the virtual machine&#39;s trusted platfor...">ITrustedPlatformModule</a> interface represents the settings of the virtual machine's trusted platform module.  <a href="interface_i_trusted_platform_module.html#details">More...</a><br /></td></tr>
@@ -125,6 +125,18 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_nvram_store.html">INvramStore</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the NVRAM store collecting all permanent states from different sources (UEFI, TPM, etc.).  <a href="interface_i_nvram_store.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_resource_store.html">IResourceStore</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to resources accessed by various device implementations and created when the VM is started (only the FDT currently).  <a href="interface_i_resource_store.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_platform.html">IPlatform</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Platform object for a virtual machine.  <a href="interface_i_platform.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_platform_x86.html">IPlatformX86</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The x86 specific platform properties for a virtual machine.  <a href="interface_i_platform_x86.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_platform_a_r_m.html">IPlatformARM</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ARM-specific platform properties for a virtual machine.  <a href="interface_i_platform_a_r_m.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html">IMachine</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_machine.html" title="The IMachine interface represents a virtual machine, or guest, created in VirtualBox.">IMachine</a> interface represents a virtual machine, or guest, created in VirtualBox.  <a href="interface_i_machine.html#details">More...</a><br /></td></tr>
@@ -156,16 +168,23 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host_drive.html">IHostDrive</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_host_drive.html" title="The IHostDrive interface represents the drive of the physical machine.">IHostDrive</a> interface represents the drive of the physical machine.  <a href="interface_i_host_drive.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host_x86.html">IHostX86</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The x86-specific interface for the physical host machine.  <a href="interface_i_host_x86.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html">IHost</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_host.html" title="The IHost interface represents the physical machine that this VirtualBox installation runs on.">IHost</a> interface represents the physical machine that this VirtualBox installation runs on.  <a href="interface_i_host.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_c_p_u_profile.html">ICPUProfile</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU profile.  <a href="interface_i_c_p_u_profile.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_platform_properties.html">IPlatformProperties</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Properties of a specific virtualization platform.  <a href="interface_i_platform_properties.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_system_properties.html">ISystemProperties</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="interface_i_system_properties.html" title="The ISystemProperties interface represents global properties of the given VirtualBox installation.">ISystemProperties</a> interface represents global properties of the given VirtualBox installation.  <a href="interface_i_system_properties.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html">IGuestOSType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies a guest OS type and its recommendations.  <a href="interface_i_guest_o_s_type.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_additions_facility.html">IAdditionsFacility</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing a Guest Additions facility.  <a href="interface_i_additions_facility.html#details">More...</a><br /></td></tr>
@@ -380,6 +399,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine_state_changed_event.html">IMachineStateChangedEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Machine state change event.  <a href="interface_i_machine_state_changed_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_ext_pack_installed_event.html">IExtPackInstalledEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extension pack installed event.  <a href="interface_i_ext_pack_installed_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_ext_pack_uninstalled_event.html">IExtPackUninstalledEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extension pack uninstalled event.  <a href="interface_i_ext_pack_uninstalled_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine_data_changed_event.html">IMachineDataChangedEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Any of the settings of the given machine has changed.  <a href="interface_i_machine_data_changed_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -452,6 +477,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_clipboard_file_transfer_mode_changed_event.html">IClipboardFileTransferModeChangedEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when the shared clipboard file transfer mode changes.  <a href="interface_i_clipboard_file_transfer_mode_changed_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_clipboard_event.html">IClipboardEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base interface for clipboard events.  <a href="interface_i_clipboard_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_clipboard_error_event.html">IClipboardErrorEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a clipboard error occurred.  <a href="interface_i_clipboard_error_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_dn_d_mode_changed_event.html">IDnDModeChangedEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when the drag'n drop mode changes.  <a href="interface_i_dn_d_mode_changed_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -497,6 +528,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_process_output_event.html">IGuestProcessOutputEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when there is guest process output available for reading.  <a href="interface_i_guest_process_output_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_directory_event.html">IGuestDirectoryEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base abstract interface for all guest directory events.  <a href="interface_i_guest_directory_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_directory_registered_event.html">IGuestDirectoryRegisteredEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a guest directory was registered or unregistered.  <a href="interface_i_guest_directory_registered_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_directory_state_changed_event.html">IGuestDirectoryStateChangedEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a guest directory changed its state.  <a href="interface_i_guest_directory_state_changed_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_directory_read_event.html">IGuestDirectoryReadEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a directory entry has been read.  <a href="interface_i_guest_directory_read_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_file_event.html">IGuestFileEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base abstract interface for all guest file events.  <a href="interface_i_guest_file_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -527,8 +570,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_v_r_d_e_server_info_changed_event.html">IVRDEServerInfoChangedEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when the status of the VRDE server changes.  <a href="interface_i_v_r_d_e_server_info_changed_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_recording_changed_event.html">IRecordingChangedEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when recording settings have changed.  <a href="interface_i_recording_changed_event.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_recording_state_changed_event.html">IRecordingStateChangedEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when the machine's recording state has changed.  <a href="interface_i_recording_state_changed_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_recording_screen_state_changed_event.html">IRecordingScreenStateChangedEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a screen recording state has changed.  <a href="interface_i_recording_screen_state_changed_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_u_s_b_controller_changed_event.html">IUSBControllerChangedEvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a property of the virtual <a class="el" href="interface_i_machine.html#ab2be494c024c890a7c5cd44b33a793c7">USB controllers</a><b></b> changes.  <a href="interface_i_u_s_b_controller_changed_event.html#details">More...</a><br /></td></tr>
@@ -726,6 +772,7 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15a506d1446312a5c48686e56b761658ef7">SettingsVersion_v1_18</a> = 20
 , <a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15a8568d9b579b993d844b88447051c1879">SettingsVersion_v1_19</a> = 21
+, <a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15a38d2b6945bdbd0bb8c12bce0d2bb03d2">SettingsVersion_v1_20</a> = 22
 , <a class="el" href="_virtual_box_8idl.html#aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613">SettingsVersion_Future</a> = 99999
 <br />
  }</td></tr>
@@ -786,35 +833,46 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ac82c179a797c0d7c249d1b98a8e3aa8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Session state.  <a href="_virtual_box_8idl.html#ac82c179a797c0d7c249d1b98a8e3aa8f">More...</a><br /></td></tr>
 <tr class="separator:ac82c179a797c0d7c249d1b98a8e3aa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e97f81ec84656af99aa7ca97aa2c599"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599">CPUArchitecture</a> { <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a43bfb97a28ac56aacbad0bc528808e39">CPUArchitecture_Any</a> = 0
+<tr class="memitem:a9937e77991df73806275e51ccf0b9c6c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a> { <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6ca5e2f1096212c44043977dd164d45326c">PlatformArchitecture_None</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6ca42093adf71a19dd2568005cce846180c">PlatformArchitecture_x86</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6ca9a631a2006161d4f36b3cb09a3fcfdeb">PlatformArchitecture_ARM</a> = 2
+ }</td></tr>
+<tr class="memdesc:a9937e77991df73806275e51ccf0b9c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Platform architecture.  <a href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">More...</a><br /></td></tr>
+<tr class="separator:a9937e77991df73806275e51ccf0b9c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e97f81ec84656af99aa7ca97aa2c599"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599">CPUArchitecture</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a43bfb97a28ac56aacbad0bc528808e39">CPUArchitecture_Any</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a91b41b5c860de5f081d421387f554ca0">CPUArchitecture_x86</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a6352ff3a98f97c1be51d436d779b7175">CPUArchitecture_AMD64</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a3047866494b89e63fe1144684ac2f32a">CPUArchitecture_ARMv8_32</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599acdfd4e18a02421753584d50665a7fdb6">CPUArchitecture_ARMv8_64</a> = 4
+<br />
  }</td></tr>
 <tr class="memdesc:a1e97f81ec84656af99aa7ca97aa2c599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic CPU architecture types.  <a href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599">More...</a><br /></td></tr>
 <tr class="separator:a1e97f81ec84656af99aa7ca97aa2c599"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fa1ad8b7ea677aaf75dda650d27175a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175a">CPUPropertyType</a> { <br />
-&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aa1da5078a0269bc6366243ee29d44caef">CPUPropertyType_Null</a> = 0
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aac587be39d134cc21c91034d4d5870e0e">CPUPropertyType_PAE</a> = 1
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aae5d1b9dda16c8038a0343f0c614a51a7">CPUPropertyType_LongMode</a> = 2
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aac601d9714245515f2bbc122a7b7c1325">CPUPropertyType_TripleFaultReset</a> = 3
+<tr class="memitem:a530334d917b49982d1f4c724116c4c65"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65">CPUPropertyTypeX86</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65aba5e77702bd839d2c1322c8e8b9e3d8a">CPUPropertyTypeX86_Null</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65aacb1ddf50f5fed90baaa9d51a0a27e77">CPUPropertyTypeX86_PAE</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a0be1ece04f838ab05d5ec6527ea43d58">CPUPropertyTypeX86_LongMode</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a0bbf472df3f280b3257900681c8873d0">CPUPropertyTypeX86_TripleFaultReset</a> = 3
 , <br />
-&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aaab4bc75bad5ec0abd9bb9143f0d6651f">CPUPropertyType_APIC</a> = 4
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aa69a4fa0c7c515d677611e8d12b0a06a6">CPUPropertyType_X2APIC</a> = 5
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aa529eef89fb22d02b9ba4542b58ee5922">CPUPropertyType_IBPBOnVMExit</a> = 6
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aab5439f2095a4cac3290c3345af773bdb">CPUPropertyType_IBPBOnVMEntry</a> = 7
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65ac99a33e860f6e14c2bdb7c1de6ddaa35">CPUPropertyTypeX86_APIC</a> = 4
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a58a276075a00233c5a4ee70d1601647c">CPUPropertyTypeX86_X2APIC</a> = 5
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65add3ef61cda267f3ef2e389bcb3a0eb35">CPUPropertyTypeX86_IBPBOnVMExit</a> = 6
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a469020d74c91c41bb76cc39e00df22c0">CPUPropertyTypeX86_IBPBOnVMEntry</a> = 7
 , <br />
-&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aad1e4d5a861c71fa28d96fc2b248e0da1">CPUPropertyType_HWVirt</a> = 8
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aa20384660e5951b403f032b4ec7251e65">CPUPropertyType_SpecCtrl</a> = 9
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aa0a2528b1868c6d1900d6ffe323d0d29a">CPUPropertyType_SpecCtrlByHost</a> = 10
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aa882565baaaf1b95c49315c85d7df91ce">CPUPropertyType_L1DFlushOnEMTScheduling</a> = 11
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65ac0147f48dbad8ac430aeb36e1fb2cacf">CPUPropertyTypeX86_HWVirt</a> = 8
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a76fcfa2da5064d7556858315420b2ba5">CPUPropertyTypeX86_SpecCtrl</a> = 9
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a462f089c107b594e784f692397d138f3">CPUPropertyTypeX86_SpecCtrlByHost</a> = 10
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65aa62e1f237a2a19f12cf516faa16003dc">CPUPropertyTypeX86_L1DFlushOnEMTScheduling</a> = 11
 , <br />
-&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aaada9e10a6fbaf5c52bcaba9946d5ab59">CPUPropertyType_L1DFlushOnVMEntry</a> = 12
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aa0490d5f2c2fa70b66aa4eef25e4546fa">CPUPropertyType_MDSClearOnEMTScheduling</a> = 13
-, <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175aadd00af6820e838438919b1eecef133f9">CPUPropertyType_MDSClearOnVMEntry</a> = 14
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a114860526a72ed3dbef7d8d8dc3e593a">CPUPropertyTypeX86_L1DFlushOnVMEntry</a> = 12
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a4c68adf296ff7af395c04e7aa681ddbe">CPUPropertyTypeX86_MDSClearOnEMTScheduling</a> = 13
+, <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65a7070b11565da99f885cb20a69e5702aa">CPUPropertyTypeX86_MDSClearOnVMEntry</a> = 14
 <br />
  }</td></tr>
-<tr class="memdesc:a5fa1ad8b7ea677aaf75dda650d27175a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual CPU property type.  <a href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175a">More...</a><br /></td></tr>
-<tr class="separator:a5fa1ad8b7ea677aaf75dda650d27175a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a530334d917b49982d1f4c724116c4c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual CPU property type for x86-based CPUs.  <a href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65">More...</a><br /></td></tr>
+<tr class="separator:a530334d917b49982d1f4c724116c4c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90b543d84f42a1e477aafa7303079cb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cb">HWVirtExPropertyType</a> { <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cbab852198092627add1894d15574a92382">HWVirtExPropertyType_Null</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#ae90b543d84f42a1e477aafa7303079cba9c78077ab3a020d7a513570d6ac5b8c9">HWVirtExPropertyType_Enabled</a> = 1
@@ -900,12 +958,12 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aaecc53892786f2fa11e682f633af84c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scope of the operation.  <a href="_virtual_box_8idl.html#aaecc53892786f2fa11e682f633af84c6">More...</a><br /></td></tr>
 <tr class="separator:aaecc53892786f2fa11e682f633af84c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21cba18e133cd199d6301b31a8fe8308"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a21cba18e133cd199d6301b31a8fe8308">BIOSBootMenuMode</a> { <a class="el" href="_virtual_box_8idl.html#a21cba18e133cd199d6301b31a8fe8308abd7cc7921d542d1c94a8ee8f4ba5053a">BIOSBootMenuMode_Disabled</a> = 0
-, <a class="el" href="_virtual_box_8idl.html#a21cba18e133cd199d6301b31a8fe8308a0c8e1ffce29164316c4eda04f39f04b7">BIOSBootMenuMode_MenuOnly</a> = 1
-, <a class="el" href="_virtual_box_8idl.html#a21cba18e133cd199d6301b31a8fe8308a6cac625e791858ece09ac43325a90d21">BIOSBootMenuMode_MessageAndMenu</a> = 2
+<tr class="memitem:afd73b6c1b21a0d4b4ecbaa89fbd1a81a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#afd73b6c1b21a0d4b4ecbaa89fbd1a81a">FirmwareBootMenuMode</a> { <a class="el" href="_virtual_box_8idl.html#afd73b6c1b21a0d4b4ecbaa89fbd1a81aa56f57506ff032550c8bbd571379d6cc6">FirmwareBootMenuMode_Disabled</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#afd73b6c1b21a0d4b4ecbaa89fbd1a81aaae996c220fb1cc3806f31f74fa88d568">FirmwareBootMenuMode_MenuOnly</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#afd73b6c1b21a0d4b4ecbaa89fbd1a81aa32a85027f508c7a3128310283c21249e">FirmwareBootMenuMode_MessageAndMenu</a> = 2
  }</td></tr>
-<tr class="memdesc:a21cba18e133cd199d6301b31a8fe8308"><td class="mdescLeft">&#160;</td><td class="mdescRight">BIOS boot menu mode.  <a href="_virtual_box_8idl.html#a21cba18e133cd199d6301b31a8fe8308">More...</a><br /></td></tr>
-<tr class="separator:a21cba18e133cd199d6301b31a8fe8308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:afd73b6c1b21a0d4b4ecbaa89fbd1a81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware boot menu mode.  <a href="_virtual_box_8idl.html#afd73b6c1b21a0d4b4ecbaa89fbd1a81a">More...</a><br /></td></tr>
+<tr class="separator:afd73b6c1b21a0d4b4ecbaa89fbd1a81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a379cbcd125163739476e839741f6bf35"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a379cbcd125163739476e839741f6bf35">APICMode</a> { <a class="el" href="_virtual_box_8idl.html#a379cbcd125163739476e839741f6bf35aebb55ffc2927bc937e48ff286d4d75bf">APICMode_Disabled</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a379cbcd125163739476e839741f6bf35a90fdf4165dcb254c6df48ca62fd1cdfd">APICMode_APIC</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a379cbcd125163739476e839741f6bf35a78709227f7bcc6d18830b526908d5a7b">APICMode_X2APIC</a> = 2
@@ -1476,13 +1534,23 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:acd5b875728bf93d9df1931c722c64c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Possible variable attributes.  <a href="_virtual_box_8idl.html#acd5b875728bf93d9df1931c722c64c18">More...</a><br /></td></tr>
 <tr class="separator:acd5b875728bf93d9df1931c722c64c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77bfcf0f72330ee7a747ebae6a6ce265"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265">GraphicsControllerType</a> { <a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265ad8ac2fcbd350846c14e36be5788233ca">GraphicsControllerType_Null</a> = 0
+<tr class="memitem:a77bfcf0f72330ee7a747ebae6a6ce265"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265">GraphicsControllerType</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265ad8ac2fcbd350846c14e36be5788233ca">GraphicsControllerType_Null</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265a3efce2d31e121e2dd2d6a448e015aab7">GraphicsControllerType_VBoxVGA</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265ae4c4c1aa1cf7b2f2de8716c6572ad145">GraphicsControllerType_VMSVGA</a> = 2
 , <a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265af299aae0f344d43235d7357fd5f5d335">GraphicsControllerType_VBoxSVGA</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265ad9854aabf0af0c729fa094df3e0919c1">GraphicsControllerType_QemuRamFB</a> = 4
+<br />
  }</td></tr>
 <tr class="memdesc:a77bfcf0f72330ee7a747ebae6a6ce265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphics controller type, used with <a class="el" href="interface_i_graphics_adapter.html#a0dfb69337c32ff6b610d227e2364d944">IGraphicsAdapter::graphicsControllerType</a><b></b>.  <a href="_virtual_box_8idl.html#a77bfcf0f72330ee7a747ebae6a6ce265">More...</a><br /></td></tr>
 <tr class="separator:a77bfcf0f72330ee7a747ebae6a6ce265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24a4dc7346d7db440e929b06dd39785d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785d">GraphicsFeature</a> { <a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785da744307d3d35821949b2ca20aa840e28f">GraphicsFeature_None</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785da04dee963a28bd397138cd05b82a7c268">GraphicsFeature_Acceleration2DVideo</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785da16ba700a5caabce54d918026826d96fb">GraphicsFeature_Acceleration3D</a> = 2
+ }</td></tr>
+<tr class="memdesc:a24a4dc7346d7db440e929b06dd39785d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Graphics features.  <a href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785d">More...</a><br /></td></tr>
+<tr class="separator:a24a4dc7346d7db440e929b06dd39785d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0381acf2db95fe7b709d78553346ea1c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a0381acf2db95fe7b709d78553346ea1c">CleanupMode</a> { <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#a0381acf2db95fe7b709d78553346ea1ca4f8102c0a9febe8cb4ad7ea052922a8a">CleanupMode_UnregisterOnly</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a0381acf2db95fe7b709d78553346ea1ca5fc76b37156ade95190590eb6f7b2ea3">CleanupMode_DetachAllReturnNone</a> = 2
@@ -1537,6 +1605,18 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a482e887a75aac4b9497c9785bf830b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">The IOMMU type.  <a href="_virtual_box_8idl.html#a482e887a75aac4b9497c9785bf830b72">More...</a><br /></td></tr>
 <tr class="separator:a482e887a75aac4b9497c9785bf830b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6b799bf0e81e1dcaeb02803c36f510f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa7bdde199e04c604f1e4cfc87f4d589de">VMExecutionEngine_NotSet</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa9708323d9eb4bc4aa34258c8e052a9b4">VMExecutionEngine_Default</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa42d45c3997d84869d990f895e003ab62">VMExecutionEngine_HwVirt</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fad7c73610380ef495dc772805f39ba6d7">VMExecutionEngine_NativeApi</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa6194f60130fb87d2c0ebc4bcc2fafbcb">VMExecutionEngine_Interpreter</a> = 4
+, <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa241a28f69f20b32c138e90c611ecf2ad">VMExecutionEngine_Recompiler</a> = 5
+<br />
+ }</td></tr>
+<tr class="memdesc:aa6b799bf0e81e1dcaeb02803c36f510f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main execution engine of a VM.  <a href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">More...</a><br /></td></tr>
+<tr class="separator:aa6b799bf0e81e1dcaeb02803c36f510f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99fc64ca328ca1d9057add08c252278b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a99fc64ca328ca1d9057add08c252278b">HostNetworkInterfaceMediumType</a> { <a class="el" href="_virtual_box_8idl.html#a99fc64ca328ca1d9057add08c252278badf4c807a0254b4944751f39c3964b392">HostNetworkInterfaceMediumType_Unknown</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a99fc64ca328ca1d9057add08c252278babc7ec810fb0893abc812f36ac8548165">HostNetworkInterfaceMediumType_Ethernet</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a99fc64ca328ca1d9057add08c252278ba790c8df69f03e1210e2a130e1e513129">HostNetworkInterfaceMediumType_PPP</a> = 2
@@ -1872,6 +1952,18 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a94ac67f2bb53bc85a783a3470b050200"><td class="mdescLeft">&#160;</td><td class="mdescRight">The path style of a system.  <a href="_virtual_box_8idl.html#a94ac67f2bb53bc85a783a3470b050200">More...</a><br /></td></tr>
 <tr class="separator:a94ac67f2bb53bc85a783a3470b050200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3adbad0f21a4206f3236a811487001f5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5">DirectoryStatus</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5a344073e1fc4c5987b2a5f7a41523ab70">DirectoryStatus_Undefined</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5a16aebddcc0c70517b90143ca8320047c">DirectoryStatus_Open</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5a9dc43c8af1e4ca4f9f010e21f962ec4b">DirectoryStatus_Close</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5a5a2f82fac2e33081877246d563087437">DirectoryStatus_Rewind</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5afddadf1f898d8361422c43fefbd055ef">DirectoryStatus_Down</a> = 4
+, <a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5af90f638fa90697236c14658330151d45">DirectoryStatus_Error</a> = 5
+<br />
+ }</td></tr>
+<tr class="memdesc:a3adbad0f21a4206f3236a811487001f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directory statuses.  <a href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5">More...</a><br /></td></tr>
+<tr class="separator:a3adbad0f21a4206f3236a811487001f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a248681daa33e11b68c934862cfe49417"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a248681daa33e11b68c934862cfe49417">FileAccessMode</a> { <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#a248681daa33e11b68c934862cfe49417a648b8089efbf6bfcbd504a8f284aadb0">FileAccessMode_ReadOnly</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a248681daa33e11b68c934862cfe49417a8377c2dcfef0c5ac5303b6109ed807d5">FileAccessMode_WriteOnly</a> = 2
@@ -1950,6 +2042,8 @@ Enumerations</h2></td></tr>
 <tr class="separator:ad0addb8b5a8a91fd1de593541d366e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05d480a759138a9f49cb1dfc34962e8a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a05d480a759138a9f49cb1dfc34962e8a">DirectoryOpenFlag</a> { <a class="el" href="_virtual_box_8idl.html#a05d480a759138a9f49cb1dfc34962e8aa4c64e93429f14742291cde050c614344">DirectoryOpenFlag_None</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a05d480a759138a9f49cb1dfc34962e8aa125f271e28ebe5a9d274363f4ad31e99">DirectoryOpenFlag_NoSymlinks</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a05d480a759138a9f49cb1dfc34962e8aa4c79556a6ddc578ee7834bb5dc7e2e0b">DirectoryOpenFlag_DenyAscent</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a05d480a759138a9f49cb1dfc34962e8aacf33a6b6f2d80c99105a2d41c823b22f">DirectoryOpenFlag_NoFollowSymlinks</a> = 4
  }</td></tr>
 <tr class="memdesc:a05d480a759138a9f49cb1dfc34962e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directory open flags.  <a href="_virtual_box_8idl.html#a05d480a759138a9f49cb1dfc34962e8a">More...</a><br /></td></tr>
 <tr class="separator:a05d480a759138a9f49cb1dfc34962e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2148,13 +2242,6 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aa78f53adb844f0e57baef16e47bb9e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UART type represents the emulated UART chip for the serial port device.  <a href="_virtual_box_8idl.html#aa78f53adb844f0e57baef16e47bb9e74">More...</a><br /></td></tr>
 <tr class="separator:aa78f53adb844f0e57baef16e47bb9e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6b799bf0e81e1dcaeb02803c36f510f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a> { <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa7bdde199e04c604f1e4cfc87f4d589de">VMExecutionEngine_NotSet</a> = 0
-, <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa2baa4ec9e16adaa88abe4317b07e917e">VMExecutionEngine_Emulated</a> = 1
-, <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fa42d45c3997d84869d990f895e003ab62">VMExecutionEngine_HwVirt</a> = 2
-, <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510fad7c73610380ef495dc772805f39ba6d7">VMExecutionEngine_NativeApi</a> = 3
- }</td></tr>
-<tr class="memdesc:aa6b799bf0e81e1dcaeb02803c36f510f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main execution engine of a VM.  <a href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">More...</a><br /></td></tr>
-<tr class="separator:aa6b799bf0e81e1dcaeb02803c36f510f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa23093dc281cfe164756f86b5ebf7b97"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#aa23093dc281cfe164756f86b5ebf7b97">USBControllerType</a> { <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#aa23093dc281cfe164756f86b5ebf7b97ad67b86e77b31db5c55655acc870767ef">USBControllerType_Null</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#aa23093dc281cfe164756f86b5ebf7b97a22f8c766184032a5cf55359ef7336938">USBControllerType_OHCI</a> = 1
@@ -2217,6 +2304,7 @@ Enumerations</h2></td></tr>
 <tr class="memitem:a315a68595f915d18fedc2af9e06c48ea"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a315a68595f915d18fedc2af9e06c48ea">AudioControllerType</a> { <a class="el" href="_virtual_box_8idl.html#a315a68595f915d18fedc2af9e06c48eaa72cedf0bd20221247f42395214406485">AudioControllerType_AC97</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a315a68595f915d18fedc2af9e06c48eaa5c7ef1f765b989e732acd6ffc779ae97">AudioControllerType_SB16</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a315a68595f915d18fedc2af9e06c48eaa89f9094e8ae5cda9fe6b5fd4b770bdf2">AudioControllerType_HDA</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a315a68595f915d18fedc2af9e06c48eaadb112b667ca0a2061f4e900793f94d3d">AudioControllerType_VirtioSound</a> = 3
  }</td></tr>
 <tr class="memdesc:a315a68595f915d18fedc2af9e06c48ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual audio controller type.  <a href="_virtual_box_8idl.html#a315a68595f915d18fedc2af9e06c48ea">More...</a><br /></td></tr>
 <tr class="separator:a315a68595f915d18fedc2af9e06c48ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2311,8 +2399,9 @@ Enumerations</h2></td></tr>
 <tr class="memitem:a0c8eff86d82f71a0a7f2e99a4a702ffa"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffa">ChipsetType</a> { <a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffaa8dac0d2ea57fbfb4d12ad1c24b72a6a7">ChipsetType_Null</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffaa5b93d0ea02673156770229409f7b1c4e">ChipsetType_PIIX3</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffaa82b0c4b1b35899dc5cc79f84e2c8667c">ChipsetType_ICH9</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffaa95ada8916c87c0d3f6c703962150d9b6">ChipsetType_ARMv8Virtual</a> = 3
  }</td></tr>
-<tr class="memdesc:a0c8eff86d82f71a0a7f2e99a4a702ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of emulated chipset (mostly southbridge).  <a href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffa">More...</a><br /></td></tr>
+<tr class="memdesc:a0c8eff86d82f71a0a7f2e99a4a702ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of emulated chipset (think x86 southbridge or ARM SoC/board).  <a href="_virtual_box_8idl.html#a0c8eff86d82f71a0a7f2e99a4a702ffa">More...</a><br /></td></tr>
 <tr class="separator:a0c8eff86d82f71a0a7f2e99a4a702ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeac97503c0559ba035fb2fa812ea122"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#afeac97503c0559ba035fb2fa812ea122">NATAliasMode</a> { <a class="el" href="_virtual_box_8idl.html#afeac97503c0559ba035fb2fa812ea122a1a7ea3490f78d460314768bfdbb786a2">NATAliasMode_AliasLog</a> = 0x1
 , <a class="el" href="_virtual_box_8idl.html#afeac97503c0559ba035fb2fa812ea122a1badc116da27e80f76823472bdb70906">NATAliasMode_AliasProxyOnly</a> = 0x02
@@ -2427,7 +2516,7 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4ad82ea47378e421a946ff0fc62650032b">VBoxEventType_OnGuestFileRead</a> = 89
 , <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a20b5d49aeb7a8ca84ccbad687d7c4ad6">VBoxEventType_OnGuestFileWrite</a> = 90
-, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4aa5f0bb0bb63743437214a11a07c2e42d">VBoxEventType_OnRecordingChanged</a> = 91
+, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4ab7092abce64a9890a8dad501af270771">VBoxEventType_OnRecordingStateChanged</a> = 91
 , <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4ace898f2685726e1ab66b807dc3a24eab">VBoxEventType_OnGuestUserStateChanged</a> = 92
 , <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4aa27faa51d6cd21481055fa9b24b24903">VBoxEventType_OnGuestMultiTouch</a> = 93
@@ -2462,7 +2551,16 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a97c77df742a52eecc89b2ee44a857624">VBoxEventType_OnGuestDebugControlChanged</a> = 117
 , <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a0ff81dcc80695918604fd3146732dd97">VBoxEventType_OnMachineGroupsChanged</a> = 118
-, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a5616d3a08656177bdad55dc1044db2d4">VBoxEventType_End</a> = 119
+, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4ab1f1602a4c2efa946c69f21b78e129f6">VBoxEventType_OnGuestDirectoryRegistered</a> = 119
+, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a267b332ac21716339ab8c5ec17e1e44e">VBoxEventType_OnGuestDirectoryStateChanged</a> = 120
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4aab8e1c537b956ec1a81be879912a263a">VBoxEventType_OnGuestDirectoryRead</a> = 121
+, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4af041d05ceabe863282a0e7e918b679da">VBoxEventType_OnClipboardError</a> = 122
+, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a7096a46296e48f9615f3e2695699d5ab">VBoxEventType_OnExtPackInstalled</a> = 123
+, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a271ba6bd9ee7177fb054b4233a177ae4">VBoxEventType_OnExtPackUninstalled</a> = 124
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a5e45e4baf4cbe79748525736c915b897">VBoxEventType_OnRecordingScreenStateChanged</a> = 125
+, <a class="el" href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4a5616d3a08656177bdad55dc1044db2d4">VBoxEventType_End</a> = 126
 <br />
  }</td></tr>
 <tr class="memdesc:ab869a099f4a40172d197c9adeffe4bd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of an event.  <a href="_virtual_box_8idl.html#ab869a099f4a40172d197c9adeffe4bd4">More...</a><br /></td></tr>
@@ -2517,6 +2615,30 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ade04c1be1867ed8e9db2d8045cc88e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cloud image state.  <a href="_virtual_box_8idl.html#ade04c1be1867ed8e9db2d8045cc88e97">More...</a><br /></td></tr>
 <tr class="separator:ade04c1be1867ed8e9db2d8045cc88e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a73aada416b5b8e3f549fb0caf28219"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219">MetricType</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219af90f990e93e1eb242a5df737eb65a539">MetricType_Invalid</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219a705b02cc43c8fbf5bd4235d87e20e2d2">MetricType_CpuUtilization</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219afdb8c1a7dc4a580f555928cf9592ec8a">MetricType_MemoryUtilization</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219ad3e1a65d1a1e3f337168d2862676f2f6">MetricType_DiskBytesRead</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219a367dd75af8855c295c07434925a0928a">MetricType_DiskBytesWritten</a> = 4
+, <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219aedbefa82a6c0f9d94b296cce7cb85af3">MetricType_NetworksBytesIn</a> = 5
+, <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219afde7d3c1969018ef69521e7d41cfcd16">MetricType_NetworksBytesOut</a> = 6
+<br />
+ }</td></tr>
+<tr class="memdesc:a5a73aada416b5b8e3f549fb0caf28219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metric names.  <a href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219">More...</a><br /></td></tr>
+<tr class="separator:a5a73aada416b5b8e3f549fb0caf28219"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40bc24d8623ad13db8d6cf272e6ac52c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52c">SymlinkPolicy</a> { <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52cae1f7786cfaa188a1550b3712dae1dcd3">SymlinkPolicy_None</a> = 0
+, <a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52ca905351b13050616d6d81239fc221d24c">SymlinkPolicy_Forbidden</a> = 1
+, <a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52cafecb72b5e00de7ddaf15e663dd1bffb5">SymlinkPolicy_AllowedInShareSubtree</a> = 2
+, <a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52ca75aa3a6f399db70433d5c61b16b7235e">SymlinkPolicy_AllowedToRelativeTargets</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52ca584032476ece8ad33e3e85054a5d58be">SymlinkPolicy_AllowedToAnyTarget</a> = 4
+<br />
+ }</td></tr>
+<tr class="memdesc:a40bc24d8623ad13db8d6cf272e6ac52c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared Folder Symbolic Link Security Policies.  <a href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52c">More...</a><br /></td></tr>
+<tr class="separator:a40bc24d8623ad13db8d6cf272e6ac52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -2571,6 +2693,12 @@ Variables</h2></td></tr>
 <tr class="memitem:gaffdefd76cc40ef7988d650a61b95e9c0"><td class="memItemLeft" align="right" valign="top">const HRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_box___c_o_m__result__codes.html#gaffdefd76cc40ef7988d650a61b95e9c0">VBOX_E_DND_ERROR</a> = 0x80BB0011</td></tr>
 <tr class="memdesc:gaffdefd76cc40ef7988d650a61b95e9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A drag and drop error has occurred.  <br /></td></tr>
 <tr class="separator:gaffdefd76cc40ef7988d650a61b95e9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3a0fa584fc8a24afe9dcb7ed7d490635"><td class="memItemLeft" align="right" valign="top">const HRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_box___c_o_m__result__codes.html#ga3a0fa584fc8a24afe9dcb7ed7d490635">VBOX_E_PLATFORM_ARCH_NOT_SUPPORTED</a> = 0x80BB0012</td></tr>
+<tr class="memdesc:ga3a0fa584fc8a24afe9dcb7ed7d490635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Platform architecture is not supported.  <br /></td></tr>
+<tr class="separator:ga3a0fa584fc8a24afe9dcb7ed7d490635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9d8023ebd512ef0956f599ea887d3748"><td class="memItemLeft" align="right" valign="top">const HRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_box___c_o_m__result__codes.html#ga9d8023ebd512ef0956f599ea887d3748">VBOX_E_RECORDING_ERROR</a> = 0x80BB0013</td></tr>
+<tr class="memdesc:ga9d8023ebd512ef0956f599ea887d3748"><td class="mdescLeft">&#160;</td><td class="mdescRight">A recording error has occurred.  <br /></td></tr>
+<tr class="separator:ga9d8023ebd512ef0956f599ea887d3748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="aa906f6514b8178462bebfb8a66a41a15" name="aa906f6514b8178462bebfb8a66a41a15"></a>
@@ -2587,7 +2715,7 @@ Variables</h2></td></tr>
 
 <p>Settings version of VirtualBox settings files. </p>
 <p>This is written to the "version" attribute of the root "VirtualBox" element in the settings file XML and indicates which VirtualBox version wrote the file.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{B4CC23C2-96F2-419D-830B-BD13C1135DFB}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{6AD3DA60-5ED2-49CD-B882-96A72308EBF6}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15ac7438cda6a4ec92b613067984bf8c94a" name="aa906f6514b8178462bebfb8a66a41a15ac7438cda6a4ec92b613067984bf8c94a"></a>SettingsVersion_Null&#160;</td><td class="fielddoc"><p>Null value, indicates invalid version. </p>
 </td></tr>
@@ -2633,7 +2761,9 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15a8568d9b579b993d844b88447051c1879" name="aa906f6514b8178462bebfb8a66a41a15a8568d9b579b993d844b88447051c1879"></a>SettingsVersion_v1_19&#160;</td><td class="fielddoc"><p>Settings version "1.19", written by VirtualBox 7.0.x. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613" name="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613"></a>SettingsVersion_Future&#160;</td><td class="fielddoc"><p>Settings version greater than "1.19", written by a future VirtualBox version. </p>
+<tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15a38d2b6945bdbd0bb8c12bce0d2bb03d2" name="aa906f6514b8178462bebfb8a66a41a15a38d2b6945bdbd0bb8c12bce0d2bb03d2"></a>SettingsVersion_v1_20&#160;</td><td class="fielddoc"><p>Settings version "1.20", written by VirtualBox 7.1.x. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613" name="aa906f6514b8178462bebfb8a66a41a15ad6a64e84f70c070412b7fe7985f23613"></a>SettingsVersion_Future&#160;</td><td class="fielddoc"><p>Settings version greater than "1.20", written by a future VirtualBox version. </p>
 </td></tr>
 </table>
 
@@ -2834,6 +2964,35 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a9937e77991df73806275e51ccf0b9c6c" name="a9937e77991df73806275e51ccf0b9c6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9937e77991df73806275e51ccf0b9c6c">&#9670;&#160;</a></span>PlatformArchitecture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Platform architecture. </p>
+<dl class="section note"><dt>Note</dt><dd>This does not specify the CPU type. See <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599">CPUArchitecture</a><b></b> for more information.</dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{36E21926-1713-413D-8CF5-2F169B2CBCF3}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9937e77991df73806275e51ccf0b9c6ca5e2f1096212c44043977dd164d45326c" name="a9937e77991df73806275e51ccf0b9c6ca5e2f1096212c44043977dd164d45326c"></a>PlatformArchitecture_None&#160;</td><td class="fielddoc"><p>No platform selected. </p>
+<p>Never used by the API. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9937e77991df73806275e51ccf0b9c6ca42093adf71a19dd2568005cce846180c" name="a9937e77991df73806275e51ccf0b9c6ca42093adf71a19dd2568005cce846180c"></a>PlatformArchitecture_x86&#160;</td><td class="fielddoc"><p>x86-based platform (AMD64 / x86). </p>
+<p>Valid CPUArchitecture choices: <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a6352ff3a98f97c1be51d436d779b7175">CPUArchitecture_AMD64</a><b></b>, <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a91b41b5c860de5f081d421387f554ca0">CPUArchitecture_x86</a><b></b> </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9937e77991df73806275e51ccf0b9c6ca9a631a2006161d4f36b3cb09a3fcfdeb" name="a9937e77991df73806275e51ccf0b9c6ca9a631a2006161d4f36b3cb09a3fcfdeb"></a>PlatformArchitecture_ARM&#160;</td><td class="fielddoc"><p>ARM-based platform (AArch32, AArch64). </p>
+<p>Valid CPUArchitecture choices: <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599a3047866494b89e63fe1144684ac2f32a">CPUArchitecture_ARMv8_32</a><b></b>, <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599acdfd4e18a02421753584d50665a7fdb6">CPUArchitecture_ARMv8_64</a><b></b> </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="a1e97f81ec84656af99aa7ca97aa2c599" name="a1e97f81ec84656af99aa7ca97aa2c599"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e97f81ec84656af99aa7ca97aa2c599">&#9670;&#160;</a></span>CPUArchitecture</h2>
 
@@ -2847,7 +3006,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Basic CPU architecture types. </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{4A2C9915-12F1-43B2-BB84-E4BD4D5CA227}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{12906C63-9967-49C8-BA5A-6521ADAF0185}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1e97f81ec84656af99aa7ca97aa2c599a43bfb97a28ac56aacbad0bc528808e39" name="a1e97f81ec84656af99aa7ca97aa2c599a43bfb97a28ac56aacbad0bc528808e39"></a>CPUArchitecture_Any&#160;</td><td class="fielddoc"><p>Matches any CPU architecture. </p>
 </td></tr>
@@ -2856,67 +3015,73 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a1e97f81ec84656af99aa7ca97aa2c599a6352ff3a98f97c1be51d436d779b7175" name="a1e97f81ec84656af99aa7ca97aa2c599a6352ff3a98f97c1be51d436d779b7175"></a>CPUArchitecture_AMD64&#160;</td><td class="fielddoc"><p>64-bit x86. </p>
 <p>(Also known as x86-64 or x64.) </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a1e97f81ec84656af99aa7ca97aa2c599a3047866494b89e63fe1144684ac2f32a" name="a1e97f81ec84656af99aa7ca97aa2c599a3047866494b89e63fe1144684ac2f32a"></a>CPUArchitecture_ARMv8_32&#160;</td><td class="fielddoc"><p>32-bit only ARMv8. </p>
+<p>(Also known as AArch32 or ARM32.) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1e97f81ec84656af99aa7ca97aa2c599acdfd4e18a02421753584d50665a7fdb6" name="a1e97f81ec84656af99aa7ca97aa2c599acdfd4e18a02421753584d50665a7fdb6"></a>CPUArchitecture_ARMv8_64&#160;</td><td class="fielddoc"><p>64-bit only ARMv8. </p>
+<p>(Also known as AArch64 or ARM64.) </p>
+</td></tr>
 </table>
 
 </div>
 </div>
-<a id="a5fa1ad8b7ea677aaf75dda650d27175a" name="a5fa1ad8b7ea677aaf75dda650d27175a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fa1ad8b7ea677aaf75dda650d27175a">&#9670;&#160;</a></span>CPUPropertyType</h2>
+<a id="a530334d917b49982d1f4c724116c4c65" name="a530334d917b49982d1f4c724116c4c65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a530334d917b49982d1f4c724116c4c65">&#9670;&#160;</a></span>CPUPropertyTypeX86</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a5fa1ad8b7ea677aaf75dda650d27175a">CPUPropertyType</a></td>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a530334d917b49982d1f4c724116c4c65">CPUPropertyTypeX86</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Virtual CPU property type. </p>
-<p>This enumeration represents possible values of the <a class="el" href="interface_i_machine.html" title="The IMachine interface represents a virtual machine, or guest, created in VirtualBox.">IMachine</a> get- and setCPUProperty methods.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{3FCFE589-CA66-468F-E313-656F9D0B2EB6}</code> </dd></dl>
+<p>Virtual CPU property type for x86-based CPUs. </p>
+<p>This enumeration represents possible values of the <a class="el" href="interface_i_platform_x86.html" title="The x86 specific platform properties for a virtual machine.">IPlatformX86</a> get- and setCPUProperty methods.</p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{A754B765-3687-4A68-ABB9-78DCF4C07D5F}</code> </dd></dl>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aa1da5078a0269bc6366243ee29d44caef" name="a5fa1ad8b7ea677aaf75dda650d27175aa1da5078a0269bc6366243ee29d44caef"></a>CPUPropertyType_Null&#160;</td><td class="fielddoc"><p>Null value (never used by the API). </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65aba5e77702bd839d2c1322c8e8b9e3d8a" name="a530334d917b49982d1f4c724116c4c65aba5e77702bd839d2c1322c8e8b9e3d8a"></a>CPUPropertyTypeX86_Null&#160;</td><td class="fielddoc"><p>Null value (never used by the API). </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aac587be39d134cc21c91034d4d5870e0e" name="a5fa1ad8b7ea677aaf75dda650d27175aac587be39d134cc21c91034d4d5870e0e"></a>CPUPropertyType_PAE&#160;</td><td class="fielddoc"><p>This setting determines whether VirtualBox will expose the Physical Address Extension (PAE) feature of the host CPU to the guest. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65aacb1ddf50f5fed90baaa9d51a0a27e77" name="a530334d917b49982d1f4c724116c4c65aacb1ddf50f5fed90baaa9d51a0a27e77"></a>CPUPropertyTypeX86_PAE&#160;</td><td class="fielddoc"><p>This setting determines whether VirtualBox will expose the Physical Address Extension (PAE) feature of the host CPU to the guest. </p>
 <p>Note that in case PAE is not available, it will not be reported. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aae5d1b9dda16c8038a0343f0c614a51a7" name="a5fa1ad8b7ea677aaf75dda650d27175aae5d1b9dda16c8038a0343f0c614a51a7"></a>CPUPropertyType_LongMode&#160;</td><td class="fielddoc"><p>This setting determines whether VirtualBox will advertise long mode (i.e. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a0be1ece04f838ab05d5ec6527ea43d58" name="a530334d917b49982d1f4c724116c4c65a0be1ece04f838ab05d5ec6527ea43d58"></a>CPUPropertyTypeX86_LongMode&#160;</td><td class="fielddoc"><p>This setting determines whether VirtualBox will advertise long mode (i.e. </p>
 <p>64-bit guest support) and let the guest enter it. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aac601d9714245515f2bbc122a7b7c1325" name="a5fa1ad8b7ea677aaf75dda650d27175aac601d9714245515f2bbc122a7b7c1325"></a>CPUPropertyType_TripleFaultReset&#160;</td><td class="fielddoc"><p>This setting determines whether a triple fault within a guest will trigger an internal error condition and stop the VM (default) or reset the virtual CPU/VM and continue execution. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a0bbf472df3f280b3257900681c8873d0" name="a530334d917b49982d1f4c724116c4c65a0bbf472df3f280b3257900681c8873d0"></a>CPUPropertyTypeX86_TripleFaultReset&#160;</td><td class="fielddoc"><p>This setting determines whether a triple fault within a guest will trigger an internal error condition and stop the VM (default) or reset the virtual CPU/VM and continue execution. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aaab4bc75bad5ec0abd9bb9143f0d6651f" name="a5fa1ad8b7ea677aaf75dda650d27175aaab4bc75bad5ec0abd9bb9143f0d6651f"></a>CPUPropertyType_APIC&#160;</td><td class="fielddoc"><p>This setting determines whether an APIC is part of the virtual CPU. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65ac99a33e860f6e14c2bdb7c1de6ddaa35" name="a530334d917b49982d1f4c724116c4c65ac99a33e860f6e14c2bdb7c1de6ddaa35"></a>CPUPropertyTypeX86_APIC&#160;</td><td class="fielddoc"><p>This setting determines whether an APIC is part of the virtual CPU. </p>
 <p>This feature can only be turned off when the X2APIC feature is off. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aa69a4fa0c7c515d677611e8d12b0a06a6" name="a5fa1ad8b7ea677aaf75dda650d27175aa69a4fa0c7c515d677611e8d12b0a06a6"></a>CPUPropertyType_X2APIC&#160;</td><td class="fielddoc"><p>This setting determines whether an x2APIC is part of the virtual CPU. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a58a276075a00233c5a4ee70d1601647c" name="a530334d917b49982d1f4c724116c4c65a58a276075a00233c5a4ee70d1601647c"></a>CPUPropertyTypeX86_X2APIC&#160;</td><td class="fielddoc"><p>This setting determines whether an x2APIC is part of the virtual CPU. </p>
 <p>Since this feature implies that the APIC feature is present, it automatically enables the APIC feature when set. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aa529eef89fb22d02b9ba4542b58ee5922" name="a5fa1ad8b7ea677aaf75dda650d27175aa529eef89fb22d02b9ba4542b58ee5922"></a>CPUPropertyType_IBPBOnVMExit&#160;</td><td class="fielddoc"><p>If set, force an indirect branch prediction barrier on VM exits if the host CPU supports it. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65add3ef61cda267f3ef2e389bcb3a0eb35" name="a530334d917b49982d1f4c724116c4c65add3ef61cda267f3ef2e389bcb3a0eb35"></a>CPUPropertyTypeX86_IBPBOnVMExit&#160;</td><td class="fielddoc"><p>If set, force an indirect branch prediction barrier on VM exits if the host CPU supports it. </p>
 <p>This setting will significantly slow down workloads causing many VM exits, so it is only recommended for situation where there is a real need to be paranoid. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aab5439f2095a4cac3290c3345af773bdb" name="a5fa1ad8b7ea677aaf75dda650d27175aab5439f2095a4cac3290c3345af773bdb"></a>CPUPropertyType_IBPBOnVMEntry&#160;</td><td class="fielddoc"><p>If set, force an indirect branch prediction barrier on VM entry if the host CPU supports it. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a469020d74c91c41bb76cc39e00df22c0" name="a530334d917b49982d1f4c724116c4c65a469020d74c91c41bb76cc39e00df22c0"></a>CPUPropertyTypeX86_IBPBOnVMEntry&#160;</td><td class="fielddoc"><p>If set, force an indirect branch prediction barrier on VM entry if the host CPU supports it. </p>
 <p>This setting will significantly slow down workloads causing many VM exits, so it is only recommended for situation where there is a real need to be paranoid. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aad1e4d5a861c71fa28d96fc2b248e0da1" name="a5fa1ad8b7ea677aaf75dda650d27175aad1e4d5a861c71fa28d96fc2b248e0da1"></a>CPUPropertyType_HWVirt&#160;</td><td class="fielddoc"><p>Enabled the hardware virtualization (AMD-V/VT-x) feature on the guest CPU. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65ac0147f48dbad8ac430aeb36e1fb2cacf" name="a530334d917b49982d1f4c724116c4c65ac0147f48dbad8ac430aeb36e1fb2cacf"></a>CPUPropertyTypeX86_HWVirt&#160;</td><td class="fielddoc"><p>Enabled the hardware virtualization (AMD-V/VT-x) feature on the guest CPU. </p>
 <p>This requires hardware virtualization on the host CPU. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aa20384660e5951b403f032b4ec7251e65" name="a5fa1ad8b7ea677aaf75dda650d27175aa20384660e5951b403f032b4ec7251e65"></a>CPUPropertyType_SpecCtrl&#160;</td><td class="fielddoc"><p>If set, the speculation control CPUID bits and MSRs, when available on the host, are exposed to the guest. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a76fcfa2da5064d7556858315420b2ba5" name="a530334d917b49982d1f4c724116c4c65a76fcfa2da5064d7556858315420b2ba5"></a>CPUPropertyTypeX86_SpecCtrl&#160;</td><td class="fielddoc"><p>If set, the speculation control CPUID bits and MSRs, when available on the host, are exposed to the guest. </p>
 <p>Depending on the host CPU and operating system, this may significantly slow down workloads causing many VM exits. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aa0a2528b1868c6d1900d6ffe323d0d29a" name="a5fa1ad8b7ea677aaf75dda650d27175aa0a2528b1868c6d1900d6ffe323d0d29a"></a>CPUPropertyType_SpecCtrlByHost&#160;</td><td class="fielddoc"><p>If set, the speculation controls are managed by the host. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a462f089c107b594e784f692397d138f3" name="a530334d917b49982d1f4c724116c4c65a462f089c107b594e784f692397d138f3"></a>CPUPropertyTypeX86_SpecCtrlByHost&#160;</td><td class="fielddoc"><p>If set, the speculation controls are managed by the host. </p>
 <p>This is intended for guests which do not set the speculation controls themselves. Note! This has not yet been implemented beyond leaving everything to the host OS. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aa882565baaaf1b95c49315c85d7df91ce" name="a5fa1ad8b7ea677aaf75dda650d27175aa882565baaaf1b95c49315c85d7df91ce"></a>CPUPropertyType_L1DFlushOnEMTScheduling&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-3646, flushes the level 1 data cache when the EMT is scheduled to do ring-0 guest execution. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65aa62e1f237a2a19f12cf516faa16003dc" name="a530334d917b49982d1f4c724116c4c65aa62e1f237a2a19f12cf516faa16003dc"></a>CPUPropertyTypeX86_L1DFlushOnEMTScheduling&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-3646, flushes the level 1 data cache when the EMT is scheduled to do ring-0 guest execution. </p>
 <p>There could be a small performance penalty for certain typs of workloads. For security reasons this setting will be enabled by default. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aaada9e10a6fbaf5c52bcaba9946d5ab59" name="a5fa1ad8b7ea677aaf75dda650d27175aaada9e10a6fbaf5c52bcaba9946d5ab59"></a>CPUPropertyType_L1DFlushOnVMEntry&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-3646, flushes the level 1 data on every VM entry. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a114860526a72ed3dbef7d8d8dc3e593a" name="a530334d917b49982d1f4c724116c4c65a114860526a72ed3dbef7d8d8dc3e593a"></a>CPUPropertyTypeX86_L1DFlushOnVMEntry&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-3646, flushes the level 1 data on every VM entry. </p>
 <p>This setting may significantly slow down workloads causing many VM exits, so it is only recommended for situation where there is a real need to be paranoid. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aa0490d5f2c2fa70b66aa4eef25e4546fa" name="a5fa1ad8b7ea677aaf75dda650d27175aa0490d5f2c2fa70b66aa4eef25e4546fa"></a>CPUPropertyType_MDSClearOnEMTScheduling&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-12126, CVE-2018-12127, or CVE-2018-12130, clears the relevant MDS buffers when the EMT is scheduled to do ring-0 guest execution. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a4c68adf296ff7af395c04e7aa681ddbe" name="a530334d917b49982d1f4c724116c4c65a4c68adf296ff7af395c04e7aa681ddbe"></a>CPUPropertyTypeX86_MDSClearOnEMTScheduling&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-12126, CVE-2018-12127, or CVE-2018-12130, clears the relevant MDS buffers when the EMT is scheduled to do ring-0 guest execution. </p>
 <p>There could be a small performance penalty for certain typs of workloads. For security reasons this setting will be enabled by default. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fa1ad8b7ea677aaf75dda650d27175aadd00af6820e838438919b1eecef133f9" name="a5fa1ad8b7ea677aaf75dda650d27175aadd00af6820e838438919b1eecef133f9"></a>CPUPropertyType_MDSClearOnVMEntry&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-12126, CVE-2018-12127, or CVE-2018-12130, clears the relevant MDS buffers on every VM entry. </p>
+<tr><td class="fieldname"><a id="a530334d917b49982d1f4c724116c4c65a7070b11565da99f885cb20a69e5702aa" name="a530334d917b49982d1f4c724116c4c65a7070b11565da99f885cb20a69e5702aa"></a>CPUPropertyTypeX86_MDSClearOnVMEntry&#160;</td><td class="fielddoc"><p>If set and the host is affected by CVE-2018-12126, CVE-2018-12127, or CVE-2018-12130, clears the relevant MDS buffers on every VM entry. </p>
 <p>This setting may slow down workloads causing many VM exits, so it is only recommended for situation where there is a real need to be paranoid. </p>
 </td></tr>
 </table>
@@ -2936,7 +3101,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Hardware virtualization property type. </p>
-<p>This enumeration represents possible values for the <a class="el" href="interface_i_machine.html#af66a4dbd9632a51946f57c0b8f1cbfbf">IMachine::getHWVirtExProperty</a><b></b> and <a class="el" href="interface_i_machine.html#a4e38cff5f3af00bdb490548a82ac7b44">IMachine::setHWVirtExProperty</a><b></b> methods.</p>
+<p>This enumeration represents possible values for the <a class="el" href="interface_i_platform_x86.html#ab90382f19bfe88fb16099217669041af">IPlatformX86::getHWVirtExProperty</a><b></b> and <a class="el" href="interface_i_platform_x86.html#a1e5cc1c7d5b4021e426e679ab5500cd2">IPlatformX86::setHWVirtExProperty</a><b></b> methods.</p>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{00069D9C-00B5-460C-00DD-64250024F7AA}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae90b543d84f42a1e477aafa7303079cbab852198092627add1894d15574a92382" name="ae90b543d84f42a1e477aafa7303079cbab852198092627add1894d15574a92382"></a>HWVirtExPropertyType_Null&#160;</td><td class="fielddoc"><p>Null value (never used by the API). </p>
@@ -3188,24 +3353,24 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a21cba18e133cd199d6301b31a8fe8308" name="a21cba18e133cd199d6301b31a8fe8308"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21cba18e133cd199d6301b31a8fe8308">&#9670;&#160;</a></span>BIOSBootMenuMode</h2>
+<a id="afd73b6c1b21a0d4b4ecbaa89fbd1a81a" name="afd73b6c1b21a0d4b4ecbaa89fbd1a81a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd73b6c1b21a0d4b4ecbaa89fbd1a81a">&#9670;&#160;</a></span>FirmwareBootMenuMode</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a21cba18e133cd199d6301b31a8fe8308">BIOSBootMenuMode</a></td>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#afd73b6c1b21a0d4b4ecbaa89fbd1a81a">FirmwareBootMenuMode</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>BIOS boot menu mode. </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{AE4FB9F7-29D2-45B4-B2C7-D579603135D5}</code> </dd></dl>
+<p>Firmware boot menu mode. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{BF88EC90-7FBB-4C78-BD71-5F8751D71450}</code> </dd></dl>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a21cba18e133cd199d6301b31a8fe8308abd7cc7921d542d1c94a8ee8f4ba5053a" name="a21cba18e133cd199d6301b31a8fe8308abd7cc7921d542d1c94a8ee8f4ba5053a"></a>BIOSBootMenuMode_Disabled&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a21cba18e133cd199d6301b31a8fe8308a0c8e1ffce29164316c4eda04f39f04b7" name="a21cba18e133cd199d6301b31a8fe8308a0c8e1ffce29164316c4eda04f39f04b7"></a>BIOSBootMenuMode_MenuOnly&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a21cba18e133cd199d6301b31a8fe8308a6cac625e791858ece09ac43325a90d21" name="a21cba18e133cd199d6301b31a8fe8308a6cac625e791858ece09ac43325a90d21"></a>BIOSBootMenuMode_MessageAndMenu&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="afd73b6c1b21a0d4b4ecbaa89fbd1a81aa56f57506ff032550c8bbd571379d6cc6" name="afd73b6c1b21a0d4b4ecbaa89fbd1a81aa56f57506ff032550c8bbd571379d6cc6"></a>FirmwareBootMenuMode_Disabled&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afd73b6c1b21a0d4b4ecbaa89fbd1a81aaae996c220fb1cc3806f31f74fa88d568" name="afd73b6c1b21a0d4b4ecbaa89fbd1a81aaae996c220fb1cc3806f31f74fa88d568"></a>FirmwareBootMenuMode_MenuOnly&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afd73b6c1b21a0d4b4ecbaa89fbd1a81aa32a85027f508c7a3128310283c21249e" name="afd73b6c1b21a0d4b4ecbaa89fbd1a81aa32a85027f508c7a3128310283c21249e"></a>FirmwareBootMenuMode_MessageAndMenu&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -3275,6 +3440,7 @@ Variables</h2></td></tr>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{B903F264-C230-483E-AC74-2B37CE60D371}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="afddb85483810aea160a6bf2c90259b55a6ad208f3a80dea7a6f9ab4156a546c15" name="afddb85483810aea160a6bf2c90259b55a6ad208f3a80dea7a6f9ab4156a546c15"></a>FirmwareType_BIOS&#160;</td><td class="fielddoc"><p>BIOS Firmware. </p>
+<p>Only applicable to x86 platforms. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="afddb85483810aea160a6bf2c90259b55addab04be0e65d22d87f3d73e6f7ea4f0" name="afddb85483810aea160a6bf2c90259b55addab04be0e65d22d87f3d73e6f7ea4f0"></a>FirmwareType_EFI&#160;</td><td class="fielddoc"><p>EFI Firmware, bitness detected basing on OS type. </p>
 </td></tr>
@@ -4484,7 +4650,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Graphics controller type, used with <a class="el" href="interface_i_graphics_adapter.html#a0dfb69337c32ff6b610d227e2364d944">IGraphicsAdapter::graphicsControllerType</a><b></b>. </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{3E009BB0-2B57-4283-A39B-4C363D4F0808}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{E1379BAD-AE01-493D-ABF5-740A95C41676}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a77bfcf0f72330ee7a747ebae6a6ce265ad8ac2fcbd350846c14e36be5788233ca" name="a77bfcf0f72330ee7a747ebae6a6ce265ad8ac2fcbd350846c14e36be5788233ca"></a>GraphicsControllerType_Null&#160;</td><td class="fielddoc"><p>Reserved value, invalid. </p>
 </td></tr>
@@ -4493,6 +4659,33 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a77bfcf0f72330ee7a747ebae6a6ce265ae4c4c1aa1cf7b2f2de8716c6572ad145" name="a77bfcf0f72330ee7a747ebae6a6ce265ae4c4c1aa1cf7b2f2de8716c6572ad145"></a>GraphicsControllerType_VMSVGA&#160;</td><td class="fielddoc"><p>VMware SVGA II device. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a77bfcf0f72330ee7a747ebae6a6ce265af299aae0f344d43235d7357fd5f5d335" name="a77bfcf0f72330ee7a747ebae6a6ce265af299aae0f344d43235d7357fd5f5d335"></a>GraphicsControllerType_VBoxSVGA&#160;</td><td class="fielddoc"><p>VirtualBox VGA device with VMware SVGA II extensions. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77bfcf0f72330ee7a747ebae6a6ce265ad9854aabf0af0c729fa094df3e0919c1" name="a77bfcf0f72330ee7a747ebae6a6ce265ad9854aabf0af0c729fa094df3e0919c1"></a>GraphicsControllerType_QemuRamFB&#160;</td><td class="fielddoc"><p>QEMU RAM based framebuffer based device. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a24a4dc7346d7db440e929b06dd39785d" name="a24a4dc7346d7db440e929b06dd39785d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24a4dc7346d7db440e929b06dd39785d">&#9670;&#160;</a></span>GraphicsFeature</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a24a4dc7346d7db440e929b06dd39785d">GraphicsFeature</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Graphics features. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{5CD900A5-EC77-4A08-8F8D-C0A36F462A7C}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a24a4dc7346d7db440e929b06dd39785da744307d3d35821949b2ca20aa840e28f" name="a24a4dc7346d7db440e929b06dd39785da744307d3d35821949b2ca20aa840e28f"></a>GraphicsFeature_None&#160;</td><td class="fielddoc"><p>No feature specified, invalid. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a24a4dc7346d7db440e929b06dd39785da04dee963a28bd397138cd05b82a7c268" name="a24a4dc7346d7db440e929b06dd39785da04dee963a28bd397138cd05b82a7c268"></a>GraphicsFeature_Acceleration2DVideo&#160;</td><td class="fielddoc"><p>2D video acceleration. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a24a4dc7346d7db440e929b06dd39785da16ba700a5caabce54d918026826d96fb" name="a24a4dc7346d7db440e929b06dd39785da16ba700a5caabce54d918026826d96fb"></a>GraphicsFeature_Acceleration3D&#160;</td><td class="fielddoc"><p>3D acceleration. </p>
 </td></tr>
 </table>
 
@@ -4653,7 +4846,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The IOMMU type. </p>
-<p>This enumeration represents possible values for the <a class="el" href="interface_i_machine.html#a14b3229a8bd117be25431520a3a95dca">IMachine::iommuType</a><b></b> attribute.</p>
+<p>This enumeration represents possible values for the <a class="el" href="interface_i_platform.html#aab6527081c0dc35bbe3bdb17b3113bc2">IPlatform::iommuType</a><b></b> attribute.</p>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{F47339CB-B94E-48FE-B507-2900103D7B9F}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a482e887a75aac4b9497c9785bf830b72a1a53ff9075d0eaeaaa101a11bab3e022" name="a482e887a75aac4b9497c9785bf830b72a1a53ff9075d0eaeaaa101a11bab3e022"></a>IommuType_None&#160;</td><td class="fielddoc"><p>No IOMMU is present. </p>
@@ -4663,6 +4856,40 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a482e887a75aac4b9497c9785bf830b72ae872a19b8fd8bd7725333cd8763e3687" name="a482e887a75aac4b9497c9785bf830b72ae872a19b8fd8bd7725333cd8763e3687"></a>IommuType_AMD&#160;</td><td class="fielddoc"><p>An AMD IOMMU. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a482e887a75aac4b9497c9785bf830b72a0bd48d49ecdd5f2486e3262372dac126" name="a482e887a75aac4b9497c9785bf830b72a0bd48d49ecdd5f2486e3262372dac126"></a>IommuType_Intel&#160;</td><td class="fielddoc"><p>An Intel IOMMU. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="aa6b799bf0e81e1dcaeb02803c36f510f" name="aa6b799bf0e81e1dcaeb02803c36f510f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6b799bf0e81e1dcaeb02803c36f510f">&#9670;&#160;</a></span>VMExecutionEngine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The main execution engine of a VM. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{69485F52-5CD3-40C9-946F-AE7D5C50798B}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa7bdde199e04c604f1e4cfc87f4d589de" name="aa6b799bf0e81e1dcaeb02803c36f510fa7bdde199e04c604f1e4cfc87f4d589de"></a>VMExecutionEngine_NotSet&#160;</td><td class="fielddoc"><p>Has not yet been set (try again later), for reading the actual used execution engine from <a class="el" href="interface_i_machine_debugger.html#aee489c4463ceba08879698b44de162e6">IMachineDebugger::executionEngine</a><b></b>. </p>
+<p>This can not be set through <a class="el" href="interface_i_machine.html#a87d572badb3f0a926770566b3d1795e7">IMachine::VMExecutionEngine</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa9708323d9eb4bc4aa34258c8e052a9b4" name="aa6b799bf0e81e1dcaeb02803c36f510fa9708323d9eb4bc4aa34258c8e052a9b4"></a>VMExecutionEngine_Default&#160;</td><td class="fielddoc"><p>Use the default/best available option for the host. </p>
+<p>This will never be returned by <a class="el" href="interface_i_machine_debugger.html#aee489c4463ceba08879698b44de162e6">IMachineDebugger::executionEngine</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa42d45c3997d84869d990f895e003ab62" name="aa6b799bf0e81e1dcaeb02803c36f510fa42d45c3997d84869d990f895e003ab62"></a>VMExecutionEngine_HwVirt&#160;</td><td class="fielddoc"><p>Hardware assisted virtualization through HM. </p>
+<p>Only for x86-based hosts. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fad7c73610380ef495dc772805f39ba6d7" name="aa6b799bf0e81e1dcaeb02803c36f510fad7c73610380ef495dc772805f39ba6d7"></a>VMExecutionEngine_NativeApi&#160;</td><td class="fielddoc"><p>Hardware assisted virtualization thru native API (NEM). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa6194f60130fb87d2c0ebc4bcc2fafbcb" name="aa6b799bf0e81e1dcaeb02803c36f510fa6194f60130fb87d2c0ebc4bcc2fafbcb"></a>VMExecutionEngine_Interpreter&#160;</td><td class="fielddoc"><p>CPU emulation using the interpreter. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa241a28f69f20b32c138e90c611ecf2ad" name="aa6b799bf0e81e1dcaeb02803c36f510fa241a28f69f20b32c138e90c611ecf2ad"></a>VMExecutionEngine_Recompiler&#160;</td><td class="fielddoc"><p>CPU emulation using the recompiler. </p>
 </td></tr>
 </table>
 
@@ -5323,10 +5550,16 @@ On Windows guests this function currently only supports reporting contiguous idl
 <tr><td class="fieldname"><a id="a888e07c40e844edf282a86878a6f7315ae15993e4312b8f621b3cbfbb8bbe6ac9" name="a888e07c40e844edf282a86878a6f7315ae15993e4312b8f621b3cbfbb8bbe6ac9"></a>ProcessWaitForFlag_Terminate&#160;</td><td class="fielddoc"><p>Wait for the process being terminated. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a888e07c40e844edf282a86878a6f7315a0760f863528fb14a5b3d56b7f8a0ee8e" name="a888e07c40e844edf282a86878a6f7315a0760f863528fb14a5b3d56b7f8a0ee8e"></a>ProcessWaitForFlag_StdIn&#160;</td><td class="fielddoc"><p>Wait for stdin becoming available. </p>
+<p>Not implemented; will currently return <a class="el" href="_virtual_box_8idl.html#ae77799646751c0cb69762f6277521282aae04d93e6e26ab390ff67b0376578633">ProcessWaitResult_WaitFlagNotSupported</a><b></b>.</p>
+<p>Writing process input can be performed via <a class="el" href="interface_i_process.html#a053ff582637ac866c7e69fd5baac0ff4">IProcess::write</a><b></b> or waiting for the <a class="el" href="interface_i_guest_process_input_notify_event.html">IGuestProcessInputNotifyEvent</a><b></b> event. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a888e07c40e844edf282a86878a6f7315aeb2c6d50bf44b8621a36443ddaa06538" name="a888e07c40e844edf282a86878a6f7315aeb2c6d50bf44b8621a36443ddaa06538"></a>ProcessWaitForFlag_StdOut&#160;</td><td class="fielddoc"><p>Wait for data becoming available on stdout. </p>
+<p>Not implemented; will currently return <a class="el" href="_virtual_box_8idl.html#ae77799646751c0cb69762f6277521282aae04d93e6e26ab390ff67b0376578633">ProcessWaitResult_WaitFlagNotSupported</a><b></b>.</p>
+<p>Reading process stdout output can be performed via <a class="el" href="interface_i_process.html#ae3e4a66c88fa9c765167a9611c397e57">IProcess::read</a><b></b> or waiting for the <a class="el" href="interface_i_guest_process_output_event.html">IGuestProcessOutputEvent</a><b></b> event. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a888e07c40e844edf282a86878a6f7315ade4be3a596911b1e7e7216328fa4fbc0" name="a888e07c40e844edf282a86878a6f7315ade4be3a596911b1e7e7216328fa4fbc0"></a>ProcessWaitForFlag_StdErr&#160;</td><td class="fielddoc"><p>Wait for data becoming available on stderr. </p>
+<p>Not implemented; will currently return <a class="el" href="_virtual_box_8idl.html#ae77799646751c0cb69762f6277521282aae04d93e6e26ab390ff67b0376578633">ProcessWaitResult_WaitFlagNotSupported</a><b></b>.</p>
+<p>Reading process stderr output can be performed via <a class="el" href="interface_i_process.html#ae3e4a66c88fa9c765167a9611c397e57">IProcess::read</a><b></b> or waiting for the <a class="el" href="interface_i_guest_process_output_event.html">IGuestProcessOutputEvent</a><b></b> event. </p>
 </td></tr>
 </table>
 
@@ -5346,7 +5579,7 @@ On Windows guests this function currently only supports reporting contiguous idl
 
 <p>Process waiting results. </p>
 <p>Depending on the process waiting flags (for more information see <a class="el" href="_virtual_box_8idl.html#a888e07c40e844edf282a86878a6f7315">ProcessWaitForFlag</a><b></b>) the waiting result can vary based on the processes' current status.</p>
-<p>To wait for a guest process to terminate after it has been created by <a class="el" href="interface_i_guest_session.html#a006e92badda9640284aa4ede708a9502">IGuestSession::processCreate</a><b></b> or <a class="el" href="interface_i_guest_session.html#a93a3a5e8a25c7e115db66402826bf36b">IGuestSession::processCreateEx</a><b></b> one would specify ProcessWaitFor_Terminate.</p>
+<p>To wait for a guest process to terminate after it has been created by <a class="el" href="interface_i_guest_session.html#aa1f9671822302a72f61f3de2f88b5620">IGuestSession::processCreate</a><b></b> or <a class="el" href="interface_i_guest_session.html#a463ec0f6748ce0f4009225b70ee6e4f3">IGuestSession::processCreateEx</a><b></b> one would specify ProcessWaitFor_Terminate.</p>
 <p>If a guest process has been started with ProcessCreateFlag_WaitForStdOut a client can wait with ProcessWaitResult_StdOut for new data to arrive on stdout; same applies for ProcessCreateFlag_WaitForStdErr and ProcessWaitResult_StdErr.</p>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{40719CBE-F192-4FE9-A231-6697B3C8E2B4}</code> </dd></dl>
 <table class="fieldtable">
@@ -5744,6 +5977,37 @@ On Windows guests this function currently only supports reporting contiguous idl
 
 </div>
 </div>
+<a id="a3adbad0f21a4206f3236a811487001f5" name="a3adbad0f21a4206f3236a811487001f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3adbad0f21a4206f3236a811487001f5">&#9670;&#160;</a></span>DirectoryStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a3adbad0f21a4206f3236a811487001f5">DirectoryStatus</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Directory statuses. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{A50CA1FC-85A9-4A7A-B755-68C3DB01CAF1}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3adbad0f21a4206f3236a811487001f5a344073e1fc4c5987b2a5f7a41523ab70" name="a3adbad0f21a4206f3236a811487001f5a344073e1fc4c5987b2a5f7a41523ab70"></a>DirectoryStatus_Undefined&#160;</td><td class="fielddoc"><p>Directory is in an undefined state. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3adbad0f21a4206f3236a811487001f5a16aebddcc0c70517b90143ca8320047c" name="a3adbad0f21a4206f3236a811487001f5a16aebddcc0c70517b90143ca8320047c"></a>DirectoryStatus_Open&#160;</td><td class="fielddoc"><p>Guest directory has been successfully opened. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3adbad0f21a4206f3236a811487001f5a9dc43c8af1e4ca4f9f010e21f962ec4b" name="a3adbad0f21a4206f3236a811487001f5a9dc43c8af1e4ca4f9f010e21f962ec4b"></a>DirectoryStatus_Close&#160;</td><td class="fielddoc"><p>Guest directory has been closed. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3adbad0f21a4206f3236a811487001f5a5a2f82fac2e33081877246d563087437" name="a3adbad0f21a4206f3236a811487001f5a5a2f82fac2e33081877246d563087437"></a>DirectoryStatus_Rewind&#160;</td><td class="fielddoc"><p>Guest directory reading was rewound. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3adbad0f21a4206f3236a811487001f5afddadf1f898d8361422c43fefbd055ef" name="a3adbad0f21a4206f3236a811487001f5afddadf1f898d8361422c43fefbd055ef"></a>DirectoryStatus_Down&#160;</td><td class="fielddoc"><p>Service/OS is stopping, guest directory was closed. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3adbad0f21a4206f3236a811487001f5af90f638fa90697236c14658330151d45" name="a3adbad0f21a4206f3236a811487001f5af90f638fa90697236c14658330151d45"></a>DirectoryStatus_Error&#160;</td><td class="fielddoc"><p>Something went wrong. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="a248681daa33e11b68c934862cfe49417" name="a248681daa33e11b68c934862cfe49417"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a248681daa33e11b68c934862cfe49417">&#9670;&#160;</a></span>FileAccessMode</h2>
 
@@ -5981,11 +6245,17 @@ On Windows guests this function currently only supports reporting contiguous idl
 </div><div class="memdoc">
 
 <p>Directory open flags. </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{5138837A-8FD2-4194-A1B0-08F7BC3949D0}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{92F838F6-CBF9-4760-BB63-92C567773366}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a05d480a759138a9f49cb1dfc34962e8aa4c64e93429f14742291cde050c614344" name="a05d480a759138a9f49cb1dfc34962e8aa4c64e93429f14742291cde050c614344"></a>DirectoryOpenFlag_None&#160;</td><td class="fielddoc"><p>No flag set. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a05d480a759138a9f49cb1dfc34962e8aa125f271e28ebe5a9d274363f4ad31e99" name="a05d480a759138a9f49cb1dfc34962e8aa125f271e28ebe5a9d274363f4ad31e99"></a>DirectoryOpenFlag_NoSymlinks&#160;</td><td class="fielddoc"><p>Don't allow symbolic links as part of the path. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a05d480a759138a9f49cb1dfc34962e8aa4c79556a6ddc578ee7834bb5dc7e2e0b" name="a05d480a759138a9f49cb1dfc34962e8aa4c79556a6ddc578ee7834bb5dc7e2e0b"></a>DirectoryOpenFlag_DenyAscent&#160;</td><td class="fielddoc"><p>Deny relative opening of anything above this directory. </p>
+<p>Not implemented yet. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a05d480a759138a9f49cb1dfc34962e8aacf33a6b6f2d80c99105a2d41c823b22f" name="a05d480a759138a9f49cb1dfc34962e8aacf33a6b6f2d80c99105a2d41c823b22f"></a>DirectoryOpenFlag_NoFollowSymlinks&#160;</td><td class="fielddoc"><p>Don't follow symbolic links in the final component. </p>
+<p>Not implemented yet. </p>
 </td></tr>
 </table>
 
@@ -6530,33 +6800,6 @@ On Windows guests this function currently only supports reporting contiguous idl
 
 </div>
 </div>
-<a id="aa6b799bf0e81e1dcaeb02803c36f510f" name="aa6b799bf0e81e1dcaeb02803c36f510f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6b799bf0e81e1dcaeb02803c36f510f">&#9670;&#160;</a></span>VMExecutionEngine</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The main execution engine of a VM. </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{6E3F78F9-2DFE-4ED7-863D-67CAD351E9D8}</code> </dd></dl>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa7bdde199e04c604f1e4cfc87f4d589de" name="aa6b799bf0e81e1dcaeb02803c36f510fa7bdde199e04c604f1e4cfc87f4d589de"></a>VMExecutionEngine_NotSet&#160;</td><td class="fielddoc"><p>Has not yet been set (try again later). </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa2baa4ec9e16adaa88abe4317b07e917e" name="aa6b799bf0e81e1dcaeb02803c36f510fa2baa4ec9e16adaa88abe4317b07e917e"></a>VMExecutionEngine_Emulated&#160;</td><td class="fielddoc"><p>Emulated thru IEM. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fa42d45c3997d84869d990f895e003ab62" name="aa6b799bf0e81e1dcaeb02803c36f510fa42d45c3997d84869d990f895e003ab62"></a>VMExecutionEngine_HwVirt&#160;</td><td class="fielddoc"><p>Hardware assisted virtualization thru HM. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aa6b799bf0e81e1dcaeb02803c36f510fad7c73610380ef495dc772805f39ba6d7" name="aa6b799bf0e81e1dcaeb02803c36f510fad7c73610380ef495dc772805f39ba6d7"></a>VMExecutionEngine_NativeApi&#160;</td><td class="fielddoc"><p>Hardware assisted virtualization thru native API (NEM). </p>
-</td></tr>
-</table>
-
-</div>
-</div>
 <a id="aa23093dc281cfe164756f86b5ebf7b97" name="aa23093dc281cfe164756f86b5ebf7b97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa23093dc281cfe164756f86b5ebf7b97">&#9670;&#160;</a></span>USBControllerType</h2>
 
@@ -6740,11 +6983,12 @@ On Windows guests this function currently only supports reporting contiguous idl
 </div><div class="memdoc">
 
 <p>Virtual audio controller type. </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{7AFD395C-42C3-444E-8788-3CE80292F36C}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{6389DCC9-4E60-4983-9418-299E602EFAFC}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a315a68595f915d18fedc2af9e06c48eaa72cedf0bd20221247f42395214406485" name="a315a68595f915d18fedc2af9e06c48eaa72cedf0bd20221247f42395214406485"></a>AudioControllerType_AC97&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a315a68595f915d18fedc2af9e06c48eaa5c7ef1f765b989e732acd6ffc779ae97" name="a315a68595f915d18fedc2af9e06c48eaa5c7ef1f765b989e732acd6ffc779ae97"></a>AudioControllerType_SB16&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a315a68595f915d18fedc2af9e06c48eaa89f9094e8ae5cda9fe6b5fd4b770bdf2" name="a315a68595f915d18fedc2af9e06c48eaa89f9094e8ae5cda9fe6b5fd4b770bdf2"></a>AudioControllerType_HDA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a315a68595f915d18fedc2af9e06c48eaadb112b667ca0a2061f4e900793f94d3d" name="a315a68595f915d18fedc2af9e06c48eaadb112b667ca0a2061f4e900793f94d3d"></a>AudioControllerType_VirtioSound&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -7001,15 +7245,17 @@ On Windows guests this function currently only supports reporting contiguous idl
       </table>
 </div><div class="memdoc">
 
-<p>Type of emulated chipset (mostly southbridge). </p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{8B4096A8-A7C3-4D3B-BBB1-05A0A51EC394}</code> </dd></dl>
+<p>Type of emulated chipset (think x86 southbridge or ARM SoC/board). </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{733D5F16-1F47-4E25-B272-D7C138BC2E3D}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0c8eff86d82f71a0a7f2e99a4a702ffaa8dac0d2ea57fbfb4d12ad1c24b72a6a7" name="a0c8eff86d82f71a0a7f2e99a4a702ffaa8dac0d2ea57fbfb4d12ad1c24b72a6a7"></a>ChipsetType_Null&#160;</td><td class="fielddoc"><p><code>null</code> value. </p>
 <p>Never used by the API. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a0c8eff86d82f71a0a7f2e99a4a702ffaa5b93d0ea02673156770229409f7b1c4e" name="a0c8eff86d82f71a0a7f2e99a4a702ffaa5b93d0ea02673156770229409f7b1c4e"></a>ChipsetType_PIIX3&#160;</td><td class="fielddoc"><p>A PIIX3 (PCI IDE ISA Xcelerator) chipset. </p>
+<tr><td class="fieldname"><a id="a0c8eff86d82f71a0a7f2e99a4a702ffaa5b93d0ea02673156770229409f7b1c4e" name="a0c8eff86d82f71a0a7f2e99a4a702ffaa5b93d0ea02673156770229409f7b1c4e"></a>ChipsetType_PIIX3&#160;</td><td class="fielddoc"><p>x86: A PIIX3 (PCI IDE ISA Xcelerator) chipset. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a0c8eff86d82f71a0a7f2e99a4a702ffaa82b0c4b1b35899dc5cc79f84e2c8667c" name="a0c8eff86d82f71a0a7f2e99a4a702ffaa82b0c4b1b35899dc5cc79f84e2c8667c"></a>ChipsetType_ICH9&#160;</td><td class="fielddoc"><p>A ICH9 (I/O Controller Hub) chipset. </p>
+<tr><td class="fieldname"><a id="a0c8eff86d82f71a0a7f2e99a4a702ffaa82b0c4b1b35899dc5cc79f84e2c8667c" name="a0c8eff86d82f71a0a7f2e99a4a702ffaa82b0c4b1b35899dc5cc79f84e2c8667c"></a>ChipsetType_ICH9&#160;</td><td class="fielddoc"><p>x86: A ICH9 (I/O Controller Hub) chipset. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0c8eff86d82f71a0a7f2e99a4a702ffaa95ada8916c87c0d3f6c703962150d9b6" name="a0c8eff86d82f71a0a7f2e99a4a702ffaa95ada8916c87c0d3f6c703962150d9b6"></a>ChipsetType_ARMv8Virtual&#160;</td><td class="fielddoc"><p>ARM: Virtual ARMv8 base platform (board). </p>
 </td></tr>
 </table>
 
@@ -7153,7 +7399,7 @@ On Windows guests this function currently only supports reporting contiguous idl
 
 <p>Type of an event. </p>
 <p>See <a class="el" href="interface_i_event.html">IEvent</a><b></b> for an introduction to VirtualBox event handling.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{E4C5252D-7D1A-4051-8CFB-5B2D7A73D992}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{0C8F8BD7-C5D8-4085-83C2-558A4025B215}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4ab4616608c4a15d68f84f4f16e657b185" name="ab869a099f4a40172d197c9adeffe4bd4ab4616608c4a15d68f84f4f16e657b185"></a>VBoxEventType_Invalid&#160;</td><td class="fielddoc"><p>Invalid event, must be first. </p>
 </td></tr>
@@ -7292,7 +7538,7 @@ On Windows guests this function currently only supports reporting contiguous idl
 </td></tr>
 <tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a20b5d49aeb7a8ca84ccbad687d7c4ad6" name="ab869a099f4a40172d197c9adeffe4bd4a20b5d49aeb7a8ca84ccbad687d7c4ad6"></a>VBoxEventType_OnGuestFileWrite&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_guest_file_write_event.html">IGuestFileWriteEvent</a><b></b>. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4aa5f0bb0bb63743437214a11a07c2e42d" name="ab869a099f4a40172d197c9adeffe4bd4aa5f0bb0bb63743437214a11a07c2e42d"></a>VBoxEventType_OnRecordingChanged&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_recording_changed_event.html">IRecordingChangeEvent</a><b></b>. </p>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4ab7092abce64a9890a8dad501af270771" name="ab869a099f4a40172d197c9adeffe4bd4ab7092abce64a9890a8dad501af270771"></a>VBoxEventType_OnRecordingStateChanged&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_recording_state_changed_event.html">IRecordingStateChangeEvent</a><b></b>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4ace898f2685726e1ab66b807dc3a24eab" name="ab869a099f4a40172d197c9adeffe4bd4ace898f2685726e1ab66b807dc3a24eab"></a>VBoxEventType_OnGuestUserStateChanged&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_guest_user_state_changed_event.html">IGuestUserStateChangedEvent</a><b></b>. </p>
 </td></tr>
@@ -7347,6 +7593,20 @@ On Windows guests this function currently only supports reporting contiguous idl
 <tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a97c77df742a52eecc89b2ee44a857624" name="ab869a099f4a40172d197c9adeffe4bd4a97c77df742a52eecc89b2ee44a857624"></a>VBoxEventType_OnGuestDebugControlChanged&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_guest_debug_control_changed_event.html">IGuestDebugControlChangedEvent</a><b></b>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a0ff81dcc80695918604fd3146732dd97" name="ab869a099f4a40172d197c9adeffe4bd4a0ff81dcc80695918604fd3146732dd97"></a>VBoxEventType_OnMachineGroupsChanged&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_machine_groups_changed_event.html">IMachineGroupsChangedEvent</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4ab1f1602a4c2efa946c69f21b78e129f6" name="ab869a099f4a40172d197c9adeffe4bd4ab1f1602a4c2efa946c69f21b78e129f6"></a>VBoxEventType_OnGuestDirectoryRegistered&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_guest_directory_registered_event.html">IGuestDirectoryRegisteredEvent</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a267b332ac21716339ab8c5ec17e1e44e" name="ab869a099f4a40172d197c9adeffe4bd4a267b332ac21716339ab8c5ec17e1e44e"></a>VBoxEventType_OnGuestDirectoryStateChanged&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_guest_directory_state_changed_event.html">IGuestDirectoryStateChangedEvent</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4aab8e1c537b956ec1a81be879912a263a" name="ab869a099f4a40172d197c9adeffe4bd4aab8e1c537b956ec1a81be879912a263a"></a>VBoxEventType_OnGuestDirectoryRead&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_guest_directory_read_event.html">IGuestDirectoryReadEvent</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4af041d05ceabe863282a0e7e918b679da" name="ab869a099f4a40172d197c9adeffe4bd4af041d05ceabe863282a0e7e918b679da"></a>VBoxEventType_OnClipboardError&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_clipboard_error_event.html">IClipboardErrorEvent</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a7096a46296e48f9615f3e2695699d5ab" name="ab869a099f4a40172d197c9adeffe4bd4a7096a46296e48f9615f3e2695699d5ab"></a>VBoxEventType_OnExtPackInstalled&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_ext_pack_installed_event.html">IExtPackInstalledEvent</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a271ba6bd9ee7177fb054b4233a177ae4" name="ab869a099f4a40172d197c9adeffe4bd4a271ba6bd9ee7177fb054b4233a177ae4"></a>VBoxEventType_OnExtPackUninstalled&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_ext_pack_uninstalled_event.html">IExtPackUninstalledEvent</a><b></b>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a5e45e4baf4cbe79748525736c915b897" name="ab869a099f4a40172d197c9adeffe4bd4a5e45e4baf4cbe79748525736c915b897"></a>VBoxEventType_OnRecordingScreenStateChanged&#160;</td><td class="fielddoc"><p>See <a class="el" href="interface_i_recording_screen_state_changed_event.html">IRecordingScreenStateChangeEvent</a><b></b>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ab869a099f4a40172d197c9adeffe4bd4a5616d3a08656177bdad55dc1044db2d4" name="ab869a099f4a40172d197c9adeffe4bd4a5616d3a08656177bdad55dc1044db2d4"></a>VBoxEventType_End&#160;</td><td class="fielddoc"><p>Must be last event, used for iterations and structures relying on numerical event values. </p>
 </td></tr>
@@ -7489,6 +7749,68 @@ On Windows guests this function currently only supports reporting contiguous idl
 <tr><td class="fieldname"><a id="ade04c1be1867ed8e9db2d8045cc88e97a1590ff0ae56b72c50de83393f2c5c6d3" name="ade04c1be1867ed8e9db2d8045cc88e97a1590ff0ae56b72c50de83393f2c5c6d3"></a>CloudImageState_Disabled&#160;</td><td class="fielddoc"><p>The image is disabled. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ade04c1be1867ed8e9db2d8045cc88e97a9c7971facef1d1f5b6f521ed363370d4" name="ade04c1be1867ed8e9db2d8045cc88e97a9c7971facef1d1f5b6f521ed363370d4"></a>CloudImageState_Deleted&#160;</td><td class="fielddoc"><p>The image was deleted. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a5a73aada416b5b8e3f549fb0caf28219" name="a5a73aada416b5b8e3f549fb0caf28219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a73aada416b5b8e3f549fb0caf28219">&#9670;&#160;</a></span>MetricType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a5a73aada416b5b8e3f549fb0caf28219">MetricType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Metric names. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{ADF26EDC-7E32-11EE-B962-0242AC120002}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5a73aada416b5b8e3f549fb0caf28219af90f990e93e1eb242a5df737eb65a539" name="a5a73aada416b5b8e3f549fb0caf28219af90f990e93e1eb242a5df737eb65a539"></a>MetricType_Invalid&#160;</td><td class="fielddoc"><p>Invalid name. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5a73aada416b5b8e3f549fb0caf28219a705b02cc43c8fbf5bd4235d87e20e2d2" name="a5a73aada416b5b8e3f549fb0caf28219a705b02cc43c8fbf5bd4235d87e20e2d2"></a>MetricType_CpuUtilization&#160;</td><td class="fielddoc"><p>Cpu Utilization. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5a73aada416b5b8e3f549fb0caf28219afdb8c1a7dc4a580f555928cf9592ec8a" name="a5a73aada416b5b8e3f549fb0caf28219afdb8c1a7dc4a580f555928cf9592ec8a"></a>MetricType_MemoryUtilization&#160;</td><td class="fielddoc"><p>Memory Utilization. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5a73aada416b5b8e3f549fb0caf28219ad3e1a65d1a1e3f337168d2862676f2f6" name="a5a73aada416b5b8e3f549fb0caf28219ad3e1a65d1a1e3f337168d2862676f2f6"></a>MetricType_DiskBytesRead&#160;</td><td class="fielddoc"><p>Disk Bytes Read. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5a73aada416b5b8e3f549fb0caf28219a367dd75af8855c295c07434925a0928a" name="a5a73aada416b5b8e3f549fb0caf28219a367dd75af8855c295c07434925a0928a"></a>MetricType_DiskBytesWritten&#160;</td><td class="fielddoc"><p>Disk Bytes Written. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5a73aada416b5b8e3f549fb0caf28219aedbefa82a6c0f9d94b296cce7cb85af3" name="a5a73aada416b5b8e3f549fb0caf28219aedbefa82a6c0f9d94b296cce7cb85af3"></a>MetricType_NetworksBytesIn&#160;</td><td class="fielddoc"><p>Networks Bytes In. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5a73aada416b5b8e3f549fb0caf28219afde7d3c1969018ef69521e7d41cfcd16" name="a5a73aada416b5b8e3f549fb0caf28219afde7d3c1969018ef69521e7d41cfcd16"></a>MetricType_NetworksBytesOut&#160;</td><td class="fielddoc"><p>Networks Bytes Out. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a40bc24d8623ad13db8d6cf272e6ac52c" name="a40bc24d8623ad13db8d6cf272e6ac52c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40bc24d8623ad13db8d6cf272e6ac52c">&#9670;&#160;</a></span>SymlinkPolicy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_virtual_box_8idl.html#a40bc24d8623ad13db8d6cf272e6ac52c">SymlinkPolicy</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Shared Folder Symbolic Link Security Policies. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{A818472E-215D-4279-8AF8-EAC4C0517BCC}</code> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a40bc24d8623ad13db8d6cf272e6ac52cae1f7786cfaa188a1550b3712dae1dcd3" name="a40bc24d8623ad13db8d6cf272e6ac52cae1f7786cfaa188a1550b3712dae1dcd3"></a>SymlinkPolicy_None&#160;</td><td class="fielddoc"><p>No symlink policy set (never used by the API). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a40bc24d8623ad13db8d6cf272e6ac52ca905351b13050616d6d81239fc221d24c" name="a40bc24d8623ad13db8d6cf272e6ac52ca905351b13050616d6d81239fc221d24c"></a>SymlinkPolicy_Forbidden&#160;</td><td class="fielddoc"><p>Users in the guest VM are not able to create symbolic links inside the Shared Folder. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a40bc24d8623ad13db8d6cf272e6ac52cafecb72b5e00de7ddaf15e663dd1bffb5" name="a40bc24d8623ad13db8d6cf272e6ac52cafecb72b5e00de7ddaf15e663dd1bffb5"></a>SymlinkPolicy_AllowedInShareSubtree&#160;</td><td class="fielddoc"><p>Users in the guest VM are allowed to create symbolic links within the Shared Folder so long as the target remains in the Shared Folder or within the subtree of the Shared Folder. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a40bc24d8623ad13db8d6cf272e6ac52ca75aa3a6f399db70433d5c61b16b7235e" name="a40bc24d8623ad13db8d6cf272e6ac52ca75aa3a6f399db70433d5c61b16b7235e"></a>SymlinkPolicy_AllowedToRelativeTargets&#160;</td><td class="fielddoc"><p>Users in the guest VM are allowed to create symbolic links within the Shared Folder to targets within the Shared Folder and its subtree as well as to relative targets (../) outside of the Shared Folder. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a40bc24d8623ad13db8d6cf272e6ac52ca584032476ece8ad33e3e85054a5d58be" name="a40bc24d8623ad13db8d6cf272e6ac52ca584032476ece8ad33e3e85054a5d58be"></a>SymlinkPolicy_AllowedToAnyTarget&#160;</td><td class="fielddoc"><p>Users in the guest VM are allowed to create symbolic links within the Shared Folder and its subtree as well as to other targets via either relative pathnames or absolute pathnames. </p>
 </td></tr>
 </table>
 

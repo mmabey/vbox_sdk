@@ -45,6 +45,9 @@ $(function() {
   <div class="headertitle"><div class="title">IGuestOSType Interface Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Specifies a guest OS type and its recommendations.  
+ <a href="interface_i_guest_o_s_type.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IGuestOSType:</div>
 <div class="dyncontent">
@@ -63,12 +66,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6f86b912693902a263ff50f3a0d7197f"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#a6f86b912693902a263ff50f3a0d7197f">id</a></td></tr>
 <tr class="memdesc:a6f86b912693902a263ff50f3a0d7197f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Guest OS identifier string.  <br /></td></tr>
 <tr class="separator:a6f86b912693902a263ff50f3a0d7197f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ce9f427afb86df373811a25b455315e"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#a6ce9f427afb86df373811a25b455315e">subtype</a></td></tr>
+<tr class="memdesc:a6ce9f427afb86df373811a25b455315e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Guest OS subtype string.  <br /></td></tr>
+<tr class="separator:a6ce9f427afb86df373811a25b455315e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75e870dd07f85568c0652276130ed6de"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#a75e870dd07f85568c0652276130ed6de">description</a></td></tr>
 <tr class="memdesc:a75e870dd07f85568c0652276130ed6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Human readable description of the guest OS.  <br /></td></tr>
 <tr class="separator:a75e870dd07f85568c0652276130ed6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a838f1dbe6ad5d236875c51c7e7f3a115"><td class="memItemLeft" align="right" valign="top">readonly attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#a838f1dbe6ad5d236875c51c7e7f3a115">is64Bit</a></td></tr>
 <tr class="memdesc:a838f1dbe6ad5d236875c51c7e7f3a115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if the given OS is 64-bit.  <br /></td></tr>
 <tr class="separator:a838f1dbe6ad5d236875c51c7e7f3a115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac76f55c79515936c019e880f9e6fd9c5"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#ac76f55c79515936c019e880f9e6fd9c5">platformArchitecture</a></td></tr>
+<tr class="memdesc:ac76f55c79515936c019e880f9e6fd9c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the guest OS platform architecture.  <br /></td></tr>
+<tr class="separator:ac76f55c79515936c019e880f9e6fd9c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ad8564ce9ece465ee3197a6679f4757"><td class="memItemLeft" align="right" valign="top">readonly attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#a1ad8564ce9ece465ee3197a6679f4757">recommendedIOAPIC</a></td></tr>
 <tr class="memdesc:a1ad8564ce9ece465ee3197a6679f4757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if I/O-APIC recommended for this OS type.  <br /></td></tr>
 <tr class="separator:a1ad8564ce9ece465ee3197a6679f4757"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,9 +174,13 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a02e929faf84008cfb180458125985620"><td class="memItemLeft" align="right" valign="top">readonly attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#a02e929faf84008cfb180458125985620">recommendedWDDMGraphics</a></td></tr>
 <tr class="memdesc:a02e929faf84008cfb180458125985620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if this OS usually has a WDDM graphics driver from guest additions.  <br /></td></tr>
 <tr class="separator:a02e929faf84008cfb180458125985620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad46faabff0a8a31b5a85418da4f16a73"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_o_s_type.html#ad46faabff0a8a31b5a85418da4f16a73">guestAdditionsInstallPackageName</a></td></tr>
+<tr class="memdesc:ad46faabff0a8a31b5a85418da4f16a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">The guest additions install package name as a string.  <br /></td></tr>
+<tr class="separator:ad46faabff0a8a31b5a85418da4f16a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section user"><dt>Interface ID:</dt><dd><code>{966303D0-36A8-4180-8971-18650B0D1055}</code> </dd></dl>
+<div class="textblock"><p>Specifies a guest OS type and its recommendations. </p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{CEB482FC-41B9-42A8-8538-9835EA33B6F2}</code> </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="ad22e0bef1b1ee48a18ca4fd8fed11603" name="ad22e0bef1b1ee48a18ca4fd8fed11603"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad22e0bef1b1ee48a18ca4fd8fed11603">&#9670;&#160;</a></span>familyId</h2>
@@ -217,6 +230,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6ce9f427afb86df373811a25b455315e" name="a6ce9f427afb86df373811a25b455315e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ce9f427afb86df373811a25b455315e">&#9670;&#160;</a></span>subtype</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute wstring IGuestOSType::subtype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Guest OS subtype string. </p>
+
+</div>
+</div>
 <a id="a75e870dd07f85568c0652276130ed6de" name="a75e870dd07f85568c0652276130ed6de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a75e870dd07f85568c0652276130ed6de">&#9670;&#160;</a></span>description</h2>
 
@@ -249,6 +278,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac76f55c79515936c019e880f9e6fd9c5" name="ac76f55c79515936c019e880f9e6fd9c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac76f55c79515936c019e880f9e6fd9c5">&#9670;&#160;</a></span>platformArchitecture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a> IGuestOSType::platformArchitecture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the guest OS platform architecture. </p>
+
+</div>
+</div>
 <a id="a1ad8564ce9ece465ee3197a6679f4757" name="a1ad8564ce9ece465ee3197a6679f4757"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ad8564ce9ece465ee3197a6679f4757">&#9670;&#160;</a></span>recommendedIOAPIC</h2>
 
@@ -262,6 +307,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns <code>true</code> if I/O-APIC recommended for this OS type. </p>
+<p>Only applies to x86-based platforms. </p>
 
 </div>
 </div>
@@ -278,6 +324,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns <code>true</code> if VT-x or AMD-V recommended for this OS type. </p>
+<p>Only applies to x86-based platforms. </p>
 
 </div>
 </div>
@@ -406,6 +453,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns <code>true</code> if using PAE is recommended for this OS type. </p>
+<p>Only applies to x86-based platforms. </p>
 
 </div>
 </div>
@@ -518,6 +566,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns <code>true</code> if using HPET is recommended for this OS type. </p>
+<p>Only applies to x86-based platforms. </p>
 
 </div>
 </div>
@@ -694,6 +743,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns <code>true</code> if X2APIC is recommended for this OS type. </p>
+<p>Only applies to x86-based platforms. </p>
 
 </div>
 </div>
@@ -758,6 +808,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns <code>true</code> if this OS usually has a WDDM graphics driver from guest additions. </p>
+
+</div>
+</div>
+<a id="ad46faabff0a8a31b5a85418da4f16a73" name="ad46faabff0a8a31b5a85418da4f16a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad46faabff0a8a31b5a85418da4f16a73">&#9670;&#160;</a></span>guestAdditionsInstallPackageName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute wstring IGuestOSType::guestAdditionsInstallPackageName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The guest additions install package name as a string. </p>
 
 </div>
 </div>

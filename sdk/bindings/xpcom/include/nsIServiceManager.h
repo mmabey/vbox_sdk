@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIServiceManager.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIServiceManager.idl
  */
 
 #ifndef __gen_nsIServiceManager_h__
@@ -80,10 +80,10 @@ class NS_NO_VTABLE nsIServiceManager : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISERVICEMANAGER \
-  NS_IMETHOD GetService(const nsCID & aClass, const nsIID & aIID, void * *result); \
-  NS_IMETHOD GetServiceByContractID(const char *aContractID, const nsIID & aIID, void * *result); \
-  NS_IMETHOD IsServiceInstantiated(const nsCID & aClass, const nsIID & aIID, PRBool *_retval); \
-  NS_IMETHOD IsServiceInstantiatedByContractID(const char *aContractID, const nsIID & aIID, PRBool *_retval); 
+  NS_IMETHOD GetService(const nsCID & aClass, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD GetServiceByContractID(const char *aContractID, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD IsServiceInstantiated(const nsCID & aClass, const nsIID & aIID, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsServiceInstantiatedByContractID(const char *aContractID, const nsIID & aIID, PRBool *_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISERVICEMANAGER(_to) \
@@ -167,12 +167,16 @@ NS_IMETHODIMP nsServiceManager::IsServiceInstantiatedByContractID(const char *aC
  * @status DEPRECATED
  */
 #define NS_ERROR_SERVICE_IN_USE         NS_ERROR_GENERATE_SUCCESS(NS_ERROR_MODULE_XPCOM, 23)
+
 // Observing xpcom startup.  If you component has not been created, it will be.
 #define NS_XPCOM_STARTUP_OBSERVER_ID "xpcom-startup"
+
 // Observing xpcom shutdown
 #define NS_XPCOM_SHUTDOWN_OBSERVER_ID "xpcom-shutdown"
+
 // Observing xpcom autoregistration.  Topics will be 'start' and 'stop'.
 #define NS_XPCOM_AUTOREGISTRATION_OBSERVER_ID "xpcom-autoregistration"
+
 #ifndef MOZILLA_STRICT_API
 #include "nsXPCOM.h"
 #include "nsIServiceManagerUtils.h"

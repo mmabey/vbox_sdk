@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/ipc/ipcd/extensions/dconnect/public/ipcIDConnectService.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/ipc/ipcd/client/public/ipcIDConnectService.idl
  */
 
 #ifndef __gen_ipcIDConnectService_h__
@@ -52,10 +52,10 @@ class NS_NO_VTABLE ipcIDConnectService : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_IPCIDCONNECTSERVICE \
-  NS_IMETHOD CreateInstance(PRUint32 aClientID, const nsCID & aClass, const nsIID & aIID, void * *result); \
-  NS_IMETHOD CreateInstanceByContractID(PRUint32 aClientID, const char *aContractID, const nsIID & aIID, void * *result); \
-  NS_IMETHOD GetService(PRUint32 aClientID, const nsCID & aClass, const nsIID & aIID, void * *result); \
-  NS_IMETHOD GetServiceByContractID(PRUint32 aClientID, const char *aContractID, const nsIID & aIID, void * *result); 
+  NS_IMETHOD CreateInstance(PRUint32 aClientID, const nsCID & aClass, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD CreateInstanceByContractID(PRUint32 aClientID, const char *aContractID, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD GetService(PRUint32 aClientID, const nsCID & aClass, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD GetServiceByContractID(PRUint32 aClientID, const char *aContractID, const nsIID & aIID, void * *result) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IPCIDCONNECTSERVICE(_to) \

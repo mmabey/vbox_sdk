@@ -56,18 +56,6 @@ interface nsIInterfaceInfoManager : nsISupports
     nsIEnumerator enumerateInterfaces();
 
     void autoRegisterInterfaces();
-
-    nsIEnumerator enumerateInterfacesWhoseNamesStartWith(in string prefix);
-};
-
-[uuid(0ee22850-bc6a-11d5-9134-0010a4e73d9a)]
-interface nsIInterfaceInfoSuperManager : nsIInterfaceInfoManager
-{
-    void addAdditionalManager(in nsIInterfaceInfoManager manager);        
-    void removeAdditionalManager(in nsIInterfaceInfoManager manager);        
-
-    PRBool hasAdditionalManagers();
-    nsISimpleEnumerator enumerateAdditionalManagers();
 };
 
 %{C++

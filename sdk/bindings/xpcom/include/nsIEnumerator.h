@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsIEnumerator.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIEnumerator.idl
  */
 
 #ifndef __gen_nsIEnumerator_h__
@@ -15,9 +15,11 @@
 #define NS_NO_VTABLE
 #endif
 #define NS_ENUMERATOR_FALSE 1
+
 #ifdef VBOX_WITH_XPCOM_NAMESPACE_CLEANUP
 #define NS_NewEmptyEnumerator VBoxNsxpNS_NewEmptyEnumerator
 #endif /* VBOX_WITH_XPCOM_NAMESPACE_CLEANUP */
+
 extern "C" NS_COM nsresult
 NS_NewEmptyEnumerator(nsISimpleEnumerator** aResult);
 
@@ -59,10 +61,10 @@ class NS_NO_VTABLE nsIEnumerator : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIENUMERATOR \
-  NS_IMETHOD First(void); \
-  NS_IMETHOD Next(void); \
-  NS_IMETHOD CurrentItem(nsISupports **_retval); \
-  NS_IMETHOD IsDone(void); 
+  NS_IMETHOD First(void) NS_OVERRIDE; \
+  NS_IMETHOD Next(void) NS_OVERRIDE; \
+  NS_IMETHOD CurrentItem(nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsDone(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIENUMERATOR(_to) \
@@ -164,8 +166,8 @@ class NS_NO_VTABLE nsIBidirectionalEnumerator : public nsIEnumerator {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIBIDIRECTIONALENUMERATOR \
-  NS_IMETHOD Last(void); \
-  NS_IMETHOD Prev(void); 
+  NS_IMETHOD Last(void) NS_OVERRIDE; \
+  NS_IMETHOD Prev(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIBIDIRECTIONALENUMERATOR(_to) \

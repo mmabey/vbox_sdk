@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsIErrorService.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsIErrorService.idl
  */
 
 #ifndef __gen_nsIErrorService_h__
@@ -80,12 +80,12 @@ class NS_NO_VTABLE nsIErrorService : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIERRORSERVICE \
-  NS_IMETHOD RegisterErrorStringBundle(PRInt16 errorModule, const char *stringBundleURL); \
-  NS_IMETHOD UnregisterErrorStringBundle(PRInt16 errorModule); \
-  NS_IMETHOD GetErrorStringBundle(PRInt16 errorModule, char **_retval); \
-  NS_IMETHOD RegisterErrorStringBundleKey(nsresult error, const char *stringBundleKey); \
-  NS_IMETHOD UnregisterErrorStringBundleKey(nsresult error); \
-  NS_IMETHOD GetErrorStringBundleKey(nsresult error, char **_retval); 
+  NS_IMETHOD RegisterErrorStringBundle(PRInt16 errorModule, const char *stringBundleURL) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterErrorStringBundle(PRInt16 errorModule) NS_OVERRIDE; \
+  NS_IMETHOD GetErrorStringBundle(PRInt16 errorModule, char **_retval) NS_OVERRIDE; \
+  NS_IMETHOD RegisterErrorStringBundleKey(nsresult error, const char *stringBundleKey) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterErrorStringBundleKey(nsresult error) NS_OVERRIDE; \
+  NS_IMETHOD GetErrorStringBundleKey(nsresult error, char **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIERRORSERVICE(_to) \
@@ -176,6 +176,7 @@ NS_IMETHODIMP nsErrorService::GetErrorStringBundleKey(nsresult error, char **_re
 /* End of implementation class template. */
 #endif
 
+
 // The global nsIErrorService:
 #define NS_ERRORSERVICE_NAME   "Error Service" 
 #define NS_ERRORSERVICE_CONTRACTID "@mozilla.org/xpcom/error-service;1"
@@ -186,5 +187,6 @@ NS_IMETHODIMP nsErrorService::GetErrorStringBundleKey(nsresult error, char **_re
     0x11d4,                                          \
     {0x98, 0x77, 0x00, 0xc0, 0x4f, 0xa0, 0xcf, 0x4a} \
 }
+
 
 #endif /* __gen_nsIErrorService_h__ */

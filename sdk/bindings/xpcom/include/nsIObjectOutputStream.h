@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIObjectOutputStream.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIObjectOutputStream.idl
  */
 
 #ifndef __gen_nsIObjectOutputStream_h__
@@ -87,12 +87,12 @@ class NS_NO_VTABLE nsIObjectOutputStream : public nsIBinaryOutputStream {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIOBJECTOUTPUTSTREAM \
-  NS_IMETHOD WriteObject(nsISupports *aObject, PRBool aIsStrongRef); \
-  NS_IMETHOD WriteSingleRefObject(nsISupports *aObject); \
-  NS_IMETHOD WriteCompoundObject(nsISupports *aObject, const nsIID & aIID, PRBool aIsStrongRef); \
-  NS_IMETHOD WriteID(const nsID & aID); \
-  NS_IMETHOD_(char *) GetBuffer(PRUint32 aLength, PRUint32 aAlignMask); \
-  NS_IMETHOD_(void) PutBuffer(char * aBuffer, PRUint32 aLength); 
+  NS_IMETHOD WriteObject(nsISupports *aObject, PRBool aIsStrongRef) NS_OVERRIDE; \
+  NS_IMETHOD WriteSingleRefObject(nsISupports *aObject) NS_OVERRIDE; \
+  NS_IMETHOD WriteCompoundObject(nsISupports *aObject, const nsIID & aIID, PRBool aIsStrongRef) NS_OVERRIDE; \
+  NS_IMETHOD WriteID(const nsID & aID) NS_OVERRIDE; \
+  NS_IMETHOD_(char *) GetBuffer(PRUint32 aLength, PRUint32 aAlignMask) NS_OVERRIDE; \
+  NS_IMETHOD_(void) PutBuffer(char * aBuffer, PRUint32 aLength) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIOBJECTOUTPUTSTREAM(_to) \
@@ -183,6 +183,7 @@ NS_IMETHODIMP_(void) nsObjectOutputStream::PutBuffer(char * aBuffer, PRUint32 aL
 /* End of implementation class template. */
 #endif
 
+
 inline nsresult
 NS_WriteOptionalObject(nsIObjectOutputStream* aStream, nsISupports* aObject,
                        PRBool aIsStrongRef)
@@ -193,6 +194,7 @@ NS_WriteOptionalObject(nsIObjectOutputStream* aStream, nsISupports* aObject,
         rv = aStream->WriteObject(aObject, aIsStrongRef);
     return rv;
 }
+
 inline nsresult
 NS_WriteOptionalSingleRefObject(nsIObjectOutputStream* aStream,
                                 nsISupports* aObject)
@@ -203,6 +205,7 @@ NS_WriteOptionalSingleRefObject(nsIObjectOutputStream* aStream,
         rv = aStream->WriteSingleRefObject(aObject);
     return rv;
 }
+
 inline nsresult
 NS_WriteOptionalCompoundObject(nsIObjectOutputStream* aStream,
                                nsISupports* aObject,
@@ -215,5 +218,6 @@ NS_WriteOptionalCompoundObject(nsIObjectOutputStream* aStream,
         rv = aStream->WriteCompoundObject(aObject, aIID, aIsStrongRef);
     return rv;
 }
+
 
 #endif /* __gen_nsIObjectOutputStream_h__ */

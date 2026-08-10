@@ -36,7 +36,7 @@
 
 #undef VBOX_WITH_GLUE
 #define VBOX_WITH_GLUE
-#include "VBoxCAPI_v7_0.h"
+#include "VBoxCAPI_v7_1.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsILocalFileMac.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsILocalFileMac.idl
  */
 
 #ifndef __gen_nsILocalFileMac_h__
@@ -244,25 +244,25 @@ class NS_NO_VTABLE nsILocalFileMac : public nsILocalFile {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSILOCALFILEMAC \
-  NS_IMETHOD InitWithCFURL(CFURLRef aCFURL); \
-  NS_IMETHOD InitWithFSRef(const FSRef * aFSRef); \
-  NS_IMETHOD InitWithFSSpec(const FSSpec * aFileSpec); \
-  NS_IMETHOD InitToAppWithCreatorCode(OSType aAppCreator); \
-  NS_IMETHOD GetCFURL(CFURLRef *_retval); \
-  NS_IMETHOD GetFSRef(FSRef *_retval); \
-  NS_IMETHOD GetFSSpec(FSSpec *_retval); \
-  NS_IMETHOD GetFileSizeWithResFork(PRInt64 *aFileSizeWithResFork); \
-  NS_IMETHOD GetFileType(OSType *aFileType); \
-  NS_IMETHOD SetFileType(OSType aFileType); \
-  NS_IMETHOD GetFileCreator(OSType *aFileCreator); \
-  NS_IMETHOD SetFileCreator(OSType aFileCreator); \
-  NS_IMETHOD SetFileTypeAndCreatorFromMIMEType(const char *aMIMEType); \
-  NS_IMETHOD SetFileTypeAndCreatorFromExtension(const char *aExtension); \
-  NS_IMETHOD LaunchWithDoc(nsILocalFile *aDocToLoad, PRBool aLaunchInBackground); \
-  NS_IMETHOD OpenDocWithApp(nsILocalFile *aAppToOpenWith, PRBool aLaunchInBackground); \
-  NS_IMETHOD IsPackage(PRBool *_retval); \
-  NS_IMETHOD GetBundleDisplayName(nsAString & aBundleDisplayName); \
-  NS_IMETHOD GetBundleIdentifier(nsACString & aBundleIdentifier); 
+  NS_IMETHOD InitWithCFURL(CFURLRef aCFURL) NS_OVERRIDE; \
+  NS_IMETHOD InitWithFSRef(const FSRef * aFSRef) NS_OVERRIDE; \
+  NS_IMETHOD InitWithFSSpec(const FSSpec * aFileSpec) NS_OVERRIDE; \
+  NS_IMETHOD InitToAppWithCreatorCode(OSType aAppCreator) NS_OVERRIDE; \
+  NS_IMETHOD GetCFURL(CFURLRef *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetFSRef(FSRef *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetFSSpec(FSSpec *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetFileSizeWithResFork(PRInt64 *aFileSizeWithResFork) NS_OVERRIDE; \
+  NS_IMETHOD GetFileType(OSType *aFileType) NS_OVERRIDE; \
+  NS_IMETHOD SetFileType(OSType aFileType) NS_OVERRIDE; \
+  NS_IMETHOD GetFileCreator(OSType *aFileCreator) NS_OVERRIDE; \
+  NS_IMETHOD SetFileCreator(OSType aFileCreator) NS_OVERRIDE; \
+  NS_IMETHOD SetFileTypeAndCreatorFromMIMEType(const char *aMIMEType) NS_OVERRIDE; \
+  NS_IMETHOD SetFileTypeAndCreatorFromExtension(const char *aExtension) NS_OVERRIDE; \
+  NS_IMETHOD LaunchWithDoc(nsILocalFile *aDocToLoad, PRBool aLaunchInBackground) NS_OVERRIDE; \
+  NS_IMETHOD OpenDocWithApp(nsILocalFile *aAppToOpenWith, PRBool aLaunchInBackground) NS_OVERRIDE; \
+  NS_IMETHOD IsPackage(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetBundleDisplayName(nsAString & aBundleDisplayName) NS_OVERRIDE; \
+  NS_IMETHOD GetBundleIdentifier(nsACString & aBundleIdentifier) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSILOCALFILEMAC(_to) \
@@ -455,10 +455,13 @@ NS_IMETHODIMP nsLocalFileMac::GetBundleIdentifier(nsACString & aBundleIdentifier
 
 extern "C"
 {
+
 #ifndef XP_MACOSX
 NS_EXPORT const char* NS_TruncNodeName(const char *aNode, char *outBuf);
 #endif
+
 NS_EXPORT nsresult NS_NewLocalFileWithFSSpec(const FSSpec* inSpec, PRBool followSymlinks, nsILocalFileMac* *result);
+
 // NS_NewLocalFileWithFSRef is available since Mozilla 1.8.1.
 NS_EXPORT nsresult NS_NewLocalFileWithFSRef(const FSRef* aFSRef, PRBool aFollowSymlinks, nsILocalFileMac** result);
 }

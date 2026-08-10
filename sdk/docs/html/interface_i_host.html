@@ -67,9 +67,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac13fea0a2a040f0914550ec3231bd61b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#ac13fea0a2a040f0914550ec3231bd61b">getProcessorDescription</a> (in unsigned long cpuId, [retval] out wstring description)</td></tr>
 <tr class="memdesc:ac13fea0a2a040f0914550ec3231bd61b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the model string of a specified host CPU.  <br /></td></tr>
 <tr class="separator:ac13fea0a2a040f0914550ec3231bd61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23f1b56da9d93c0c9372134a440b0190"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#a23f1b56da9d93c0c9372134a440b0190">getProcessorCPUIDLeaf</a> (in unsigned long cpuId, in unsigned long leaf, in unsigned long subLeaf, out unsigned long valEax, out unsigned long valEbx, out unsigned long valEcx, out unsigned long valEdx)</td></tr>
-<tr class="memdesc:a23f1b56da9d93c0c9372134a440b0190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the CPU cpuid information for the specified leaf.  <br /></td></tr>
-<tr class="separator:a23f1b56da9d93c0c9372134a440b0190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86aea01b594f81d21ee2664616817175"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#a86aea01b594f81d21ee2664616817175">createHostOnlyNetworkInterface</a> (out <a class="el" href="interface_i_host_network_interface.html">IHostNetworkInterface</a> hostInterface, [retval] out <a class="el" href="interface_i_progress.html">IProgress</a> progress)</td></tr>
 <tr class="memdesc:a86aea01b594f81d21ee2664616817175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new adapter for Host Only Networking.  <br /></td></tr>
 <tr class="separator:a86aea01b594f81d21ee2664616817175"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,9 +112,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a533ab6932560087f87640d79668f2e67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#a533ab6932560087f87640d79668f2e67">removeUSBDeviceSource</a> (in wstring id)</td></tr>
 <tr class="memdesc:a533ab6932560087f87640d79668f2e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a previously added USB device source.  <br /></td></tr>
 <tr class="separator:a533ab6932560087f87640d79668f2e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac485e3652f16cb638194d2ceb28fc30b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#ac485e3652f16cb638194d2ceb28fc30b">isExecutionEngineSupported</a> (in <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599">CPUArchitecture</a> cpuArchitecture, in <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a> executionEngine, [retval] out boolean isSupported)</td></tr>
+<tr class="memdesc:ac485e3652f16cb638194d2ceb28fc30b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the given execution engine is supported on the host.  <br /></td></tr>
+<tr class="separator:ac485e3652f16cb638194d2ceb28fc30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ab10030c602bb2f90ca77fe03a648afdc"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#ab10030c602bb2f90ca77fe03a648afdc">architecture</a></td></tr>
+<tr class="memdesc:ab10030c602bb2f90ca77fe03a648afdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Platform architecture type.  <br /></td></tr>
+<tr class="separator:ab10030c602bb2f90ca77fe03a648afdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa21385ed3eec01654a706efa575fcf77"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_host_x86.html">IHostX86</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#aa21385ed3eec01654a706efa575fcf77">x86</a></td></tr>
+<tr class="memdesc:aa21385ed3eec01654a706efa575fcf77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associated object for x86 host specifics.  <br /></td></tr>
+<tr class="separator:aa21385ed3eec01654a706efa575fcf77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285b1b89c35b67a0bb52b547f5d3ebb3"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_medium.html">IMedium</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#a285b1b89c35b67a0bb52b547f5d3ebb3">DVDDrives</a></td></tr>
 <tr class="memdesc:a285b1b89c35b67a0bb52b547f5d3ebb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of DVD drives available on the host.  <br /></td></tr>
 <tr class="separator:a285b1b89c35b67a0bb52b547f5d3ebb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,9 +181,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aa747ebb7faac6e2e05924d192dbfe2a4"><td class="memItemLeft" align="right" valign="top">readonly attribute long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#aa747ebb7faac6e2e05924d192dbfe2a4">UTCTime</a></td></tr>
 <tr class="memdesc:aa747ebb7faac6e2e05924d192dbfe2a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current host time in milliseconds since 1970-01-01 UTC.  <br /></td></tr>
 <tr class="separator:aa747ebb7faac6e2e05924d192dbfe2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6074762deb6e691206ba6be5d9dc16eb"><td class="memItemLeft" align="right" valign="top">readonly attribute boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#a6074762deb6e691206ba6be5d9dc16eb">acceleration3DAvailable</a></td></tr>
-<tr class="memdesc:a6074762deb6e691206ba6be5d9dc16eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> when the host supports 3D hardware acceleration.  <br /></td></tr>
-<tr class="separator:a6074762deb6e691206ba6be5d9dc16eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95f8d03862efb1436d535487d583f03a"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_host_video_input_device.html">IHostVideoInputDevice</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host.html#a95f8d03862efb1436d535487d583f03a">videoInputDevices</a></td></tr>
 <tr class="memdesc:a95f8d03862efb1436d535487d583f03a"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of currently available host video capture devices.  <br /></td></tr>
 <tr class="separator:a95f8d03862efb1436d535487d583f03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,7 +197,7 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="interface_i_host.html" title="The IHost interface represents the physical machine that this VirtualBox installation runs on.">IHost</a> interface represents the physical machine that this VirtualBox installation runs on. </p>
 <p>An object implementing this interface is returned by the <a class="el" href="interface_i_virtual_box.html#a3990a395752fe51af1730b2269d068a6">IVirtualBox::host</a><b></b> attribute. This interface contains read-only information about the host's physical hardware (such as what processors and disks are available, what the host operating system is, and so on) and also allows for manipulating some of the host's hardware, such as global USB device filters and host interface networking.</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{E54F6256-97A7-4947-8A78-10C013DDF4B8}</code> </dd></dl>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{D5DCECE0-B202-4416-A138-03502784CC07}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3c35bf63cf26d503f093bbdb6d255c2f" name="a3c35bf63cf26d503f093bbdb6d255c2f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c35bf63cf26d503f093bbdb6d255c2f">&#9670;&#160;</a></span>getProcessorSpeed()</h2>
@@ -301,79 +304,6 @@ Public Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">cpuId</td><td>Identifier of the CPU.</td></tr>
     <tr><td class="paramname">description</td><td>Model string. An empty string is returned if value is not known or <em>cpuId</em> is invalid.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>The current implementation might not necessarily return the description for this exact CPU. </dd></dl>
-
-</div>
-</div>
-<a id="a23f1b56da9d93c0c9372134a440b0190" name="a23f1b56da9d93c0c9372134a440b0190"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23f1b56da9d93c0c9372134a440b0190">&#9670;&#160;</a></span>getProcessorCPUIDLeaf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IHost::getProcessorCPUIDLeaf </td>
-          <td>(</td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>cpuId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>leaf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">in unsigned long&#160;</td>
-          <td class="paramname"><em>subLeaf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEax</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEbx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEcx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">out unsigned long&#160;</td>
-          <td class="paramname"><em>valEdx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the CPU cpuid information for the specified leaf. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cpuId</td><td>Identifier of the CPU. The CPU most be online.</td></tr>
-    <tr><td class="paramname">leaf</td><td>CPUID leaf index (eax).</td></tr>
-    <tr><td class="paramname">subLeaf</td><td>CPUID leaf sub index (ecx). This currently only applies to cache information on Intel CPUs. Use 0 if retrieving values for <a class="el" href="interface_i_machine.html#add7407cb2b9d857df7dc4e923e952a43">IMachine::setCPUIDLeaf</a><b></b>.</td></tr>
-    <tr><td class="paramname">valEax</td><td>CPUID leaf value for register eax.</td></tr>
-    <tr><td class="paramname">valEbx</td><td>CPUID leaf value for register ebx.</td></tr>
-    <tr><td class="paramname">valEcx</td><td>CPUID leaf value for register ecx.</td></tr>
-    <tr><td class="paramname">valEdx</td><td>CPUID leaf value for register edx.</td></tr>
   </table>
   </dd>
 </dl>
@@ -981,7 +911,84 @@ If USB functionality is not available in the given edition of VirtualBox, this m
 
 </div>
 </div>
+<a id="ac485e3652f16cb638194d2ceb28fc30b" name="ac485e3652f16cb638194d2ceb28fc30b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac485e3652f16cb638194d2ceb28fc30b">&#9670;&#160;</a></span>isExecutionEngineSupported()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IHost::isExecutionEngineSupported </td>
+          <td>(</td>
+          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#a1e97f81ec84656af99aa7ca97aa2c599">CPUArchitecture</a>&#160;</td>
+          <td class="paramname"><em>cpuArchitecture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in <a class="el" href="_virtual_box_8idl.html#aa6b799bf0e81e1dcaeb02803c36f510f">VMExecutionEngine</a>&#160;</td>
+          <td class="paramname"><em>executionEngine</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[retval] out boolean&#160;</td>
+          <td class="paramname"><em>isSupported</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns whether the given execution engine is supported on the host. </p>
+<p>This is primarily to check whether the native API is supported (think of Hyper-V not being available due to not running in a Hyper-V root partition).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cpuArchitecture</td><td>The guest CPU architecture to check the execution engine for.</td></tr>
+    <tr><td class="paramname">executionEngine</td><td>The execution engine to check.</td></tr>
+    <tr><td class="paramname">isSupported</td><td>Flag indicating whether the given execution engine is supported on the host. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab10030c602bb2f90ca77fe03a648afdc" name="ab10030c602bb2f90ca77fe03a648afdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab10030c602bb2f90ca77fe03a648afdc">&#9670;&#160;</a></span>architecture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute <a class="el" href="_virtual_box_8idl.html#a9937e77991df73806275e51ccf0b9c6c">PlatformArchitecture</a> IHost::architecture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Platform architecture type. </p>
+
+</div>
+</div>
+<a id="aa21385ed3eec01654a706efa575fcf77" name="aa21385ed3eec01654a706efa575fcf77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa21385ed3eec01654a706efa575fcf77">&#9670;&#160;</a></span>x86</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute <a class="el" href="interface_i_host_x86.html">IHostX86</a> IHost::x86</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Associated object for x86 host specifics. </p>
+
+</div>
+</div>
 <a id="a285b1b89c35b67a0bb52b547f5d3ebb3" name="a285b1b89c35b67a0bb52b547f5d3ebb3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a285b1b89c35b67a0bb52b547f5d3ebb3">&#9670;&#160;</a></span>DVDDrives</h2>
 
@@ -1294,22 +1301,6 @@ If USB functionality is not available in the given edition of VirtualBox, this m
 </div><div class="memdoc">
 
 <p>Returns the current host time in milliseconds since 1970-01-01 UTC. </p>
-
-</div>
-</div>
-<a id="a6074762deb6e691206ba6be5d9dc16eb" name="a6074762deb6e691206ba6be5d9dc16eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6074762deb6e691206ba6be5d9dc16eb">&#9670;&#160;</a></span>acceleration3DAvailable</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">readonly attribute boolean IHost::acceleration3DAvailable</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns <code>true</code> when the host supports 3D hardware acceleration. </p>
 
 </div>
 </div>

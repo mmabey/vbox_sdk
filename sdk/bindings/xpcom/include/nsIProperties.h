@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsIProperties.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIProperties.idl
  */
 
 #ifndef __gen_nsIProperties_h__
@@ -67,11 +67,11 @@ class NS_NO_VTABLE nsIProperties : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIPROPERTIES \
-  NS_IMETHOD Get(const char *prop, const nsIID & iid, void * *result); \
-  NS_IMETHOD Set(const char *prop, nsISupports *value); \
-  NS_IMETHOD Has(const char *prop, PRBool *_retval); \
-  NS_IMETHOD Undefine(const char *prop); \
-  NS_IMETHOD GetKeys(PRUint32 *count, char ***keys); 
+  NS_IMETHOD Get(const char *prop, const nsIID & iid, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD Set(const char *prop, nsISupports *value) NS_OVERRIDE; \
+  NS_IMETHOD Has(const char *prop, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Undefine(const char *prop) NS_OVERRIDE; \
+  NS_IMETHOD GetKeys(PRUint32 *count, char ***keys) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIPROPERTIES(_to) \

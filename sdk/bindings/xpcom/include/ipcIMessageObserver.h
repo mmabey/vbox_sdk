@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/ipc/ipcd/client/public/ipcIMessageObserver.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/ipc/ipcd/client/public/ipcIMessageObserver.idl
  */
 
 #ifndef __gen_ipcIMessageObserver_h__
@@ -50,7 +50,7 @@ class NS_NO_VTABLE ipcIMessageObserver : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_IPCIMESSAGEOBSERVER \
-  NS_IMETHOD OnMessageAvailable(PRUint32 aSenderID, const nsID & aTarget, const PRUint8 *aData, PRUint32 aDataLen); 
+  NS_IMETHOD OnMessageAvailable(PRUint32 aSenderID, const nsID & aTarget, const PRUint8 *aData, PRUint32 aDataLen) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IPCIMESSAGEOBSERVER(_to) \

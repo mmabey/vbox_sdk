@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/io/nsIFile.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/io/nsIFile.idl
  */
 
 #ifndef __gen_nsIFile_h__
@@ -386,51 +386,51 @@ class NS_NO_VTABLE nsIFile : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIFILE \
-  NS_IMETHOD Append(const nsAString & node); \
-  NS_IMETHOD AppendNative(const nsACString & node); \
-  NS_IMETHOD Normalize(void); \
-  NS_IMETHOD Create(PRUint32 type, PRUint32 permissions); \
-  NS_IMETHOD GetLeafName(nsAString & aLeafName); \
-  NS_IMETHOD SetLeafName(const nsAString & aLeafName); \
-  NS_IMETHOD GetNativeLeafName(nsACString & aNativeLeafName); \
-  NS_IMETHOD SetNativeLeafName(const nsACString & aNativeLeafName); \
-  NS_IMETHOD CopyTo(nsIFile *newParentDir, const nsAString & newName); \
-  NS_IMETHOD CopyToNative(nsIFile *newParentDir, const nsACString & newName); \
-  NS_IMETHOD CopyToFollowingLinks(nsIFile *newParentDir, const nsAString & newName); \
-  NS_IMETHOD CopyToFollowingLinksNative(nsIFile *newParentDir, const nsACString & newName); \
-  NS_IMETHOD MoveTo(nsIFile *newParentDir, const nsAString & newName); \
-  NS_IMETHOD MoveToNative(nsIFile *newParentDir, const nsACString & newName); \
-  NS_IMETHOD Remove(PRBool recursive); \
-  NS_IMETHOD GetPermissions(PRUint32 *aPermissions); \
-  NS_IMETHOD SetPermissions(PRUint32 aPermissions); \
-  NS_IMETHOD GetPermissionsOfLink(PRUint32 *aPermissionsOfLink); \
-  NS_IMETHOD SetPermissionsOfLink(PRUint32 aPermissionsOfLink); \
-  NS_IMETHOD GetLastModifiedTime(PRInt64 *aLastModifiedTime); \
-  NS_IMETHOD SetLastModifiedTime(PRInt64 aLastModifiedTime); \
-  NS_IMETHOD GetLastModifiedTimeOfLink(PRInt64 *aLastModifiedTimeOfLink); \
-  NS_IMETHOD SetLastModifiedTimeOfLink(PRInt64 aLastModifiedTimeOfLink); \
-  NS_IMETHOD GetFileSize(PRInt64 *aFileSize); \
-  NS_IMETHOD SetFileSize(PRInt64 aFileSize); \
-  NS_IMETHOD GetFileSizeOfLink(PRInt64 *aFileSizeOfLink); \
-  NS_IMETHOD GetTarget(nsAString & aTarget); \
-  NS_IMETHOD GetNativeTarget(nsACString & aNativeTarget); \
-  NS_IMETHOD GetPath(nsAString & aPath); \
-  NS_IMETHOD GetNativePath(nsACString & aNativePath); \
-  NS_IMETHOD Exists(PRBool *_retval); \
-  NS_IMETHOD IsWritable(PRBool *_retval); \
-  NS_IMETHOD IsReadable(PRBool *_retval); \
-  NS_IMETHOD IsExecutable(PRBool *_retval); \
-  NS_IMETHOD IsHidden(PRBool *_retval); \
-  NS_IMETHOD IsDirectory(PRBool *_retval); \
-  NS_IMETHOD IsFile(PRBool *_retval); \
-  NS_IMETHOD IsSymlink(PRBool *_retval); \
-  NS_IMETHOD IsSpecial(PRBool *_retval); \
-  NS_IMETHOD CreateUnique(PRUint32 type, PRUint32 permissions); \
-  NS_IMETHOD Clone(nsIFile **_retval); \
-  NS_IMETHOD Equals(nsIFile *inFile, PRBool *_retval); \
-  NS_IMETHOD Contains(nsIFile *inFile, PRBool recur, PRBool *_retval); \
-  NS_IMETHOD GetParent(nsIFile * *aParent); \
-  NS_IMETHOD GetDirectoryEntries(nsISimpleEnumerator * *aDirectoryEntries); 
+  NS_IMETHOD Append(const nsAString & node) NS_OVERRIDE; \
+  NS_IMETHOD AppendNative(const nsACString & node) NS_OVERRIDE; \
+  NS_IMETHOD Normalize(void) NS_OVERRIDE; \
+  NS_IMETHOD Create(PRUint32 type, PRUint32 permissions) NS_OVERRIDE; \
+  NS_IMETHOD GetLeafName(nsAString & aLeafName) NS_OVERRIDE; \
+  NS_IMETHOD SetLeafName(const nsAString & aLeafName) NS_OVERRIDE; \
+  NS_IMETHOD GetNativeLeafName(nsACString & aNativeLeafName) NS_OVERRIDE; \
+  NS_IMETHOD SetNativeLeafName(const nsACString & aNativeLeafName) NS_OVERRIDE; \
+  NS_IMETHOD CopyTo(nsIFile *newParentDir, const nsAString & newName) NS_OVERRIDE; \
+  NS_IMETHOD CopyToNative(nsIFile *newParentDir, const nsACString & newName) NS_OVERRIDE; \
+  NS_IMETHOD CopyToFollowingLinks(nsIFile *newParentDir, const nsAString & newName) NS_OVERRIDE; \
+  NS_IMETHOD CopyToFollowingLinksNative(nsIFile *newParentDir, const nsACString & newName) NS_OVERRIDE; \
+  NS_IMETHOD MoveTo(nsIFile *newParentDir, const nsAString & newName) NS_OVERRIDE; \
+  NS_IMETHOD MoveToNative(nsIFile *newParentDir, const nsACString & newName) NS_OVERRIDE; \
+  NS_IMETHOD Remove(PRBool recursive) NS_OVERRIDE; \
+  NS_IMETHOD GetPermissions(PRUint32 *aPermissions) NS_OVERRIDE; \
+  NS_IMETHOD SetPermissions(PRUint32 aPermissions) NS_OVERRIDE; \
+  NS_IMETHOD GetPermissionsOfLink(PRUint32 *aPermissionsOfLink) NS_OVERRIDE; \
+  NS_IMETHOD SetPermissionsOfLink(PRUint32 aPermissionsOfLink) NS_OVERRIDE; \
+  NS_IMETHOD GetLastModifiedTime(PRInt64 *aLastModifiedTime) NS_OVERRIDE; \
+  NS_IMETHOD SetLastModifiedTime(PRInt64 aLastModifiedTime) NS_OVERRIDE; \
+  NS_IMETHOD GetLastModifiedTimeOfLink(PRInt64 *aLastModifiedTimeOfLink) NS_OVERRIDE; \
+  NS_IMETHOD SetLastModifiedTimeOfLink(PRInt64 aLastModifiedTimeOfLink) NS_OVERRIDE; \
+  NS_IMETHOD GetFileSize(PRInt64 *aFileSize) NS_OVERRIDE; \
+  NS_IMETHOD SetFileSize(PRInt64 aFileSize) NS_OVERRIDE; \
+  NS_IMETHOD GetFileSizeOfLink(PRInt64 *aFileSizeOfLink) NS_OVERRIDE; \
+  NS_IMETHOD GetTarget(nsAString & aTarget) NS_OVERRIDE; \
+  NS_IMETHOD GetNativeTarget(nsACString & aNativeTarget) NS_OVERRIDE; \
+  NS_IMETHOD GetPath(nsAString & aPath) NS_OVERRIDE; \
+  NS_IMETHOD GetNativePath(nsACString & aNativePath) NS_OVERRIDE; \
+  NS_IMETHOD Exists(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsWritable(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsReadable(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsExecutable(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsHidden(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsDirectory(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsFile(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsSymlink(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsSpecial(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD CreateUnique(PRUint32 type, PRUint32 permissions) NS_OVERRIDE; \
+  NS_IMETHOD Clone(nsIFile **_retval) NS_OVERRIDE; \
+  NS_IMETHOD Equals(nsIFile *inFile, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD Contains(nsIFile *inFile, PRBool recur, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetParent(nsIFile * *aParent) NS_OVERRIDE; \
+  NS_IMETHOD GetDirectoryEntries(nsISimpleEnumerator * *aDirectoryEntries) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIFILE(_to) \

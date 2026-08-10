@@ -41,7 +41,10 @@
 #include "nscore.h"
 #include "nsXPCOMCID.h"
 
+#include <iprt/thread.h>
+
 #ifdef VBOX_WITH_XPCOM_NAMESPACE_CLEANUP
+#define NS_IsXPCOMInitialized VBoxNsxpNS_IsXPCOMInitialized
 #define NS_InitXPCOM2 VBoxNsxpNS_InitXPCOM2
 #define NS_ShutdownXPCOM VBoxNsxpNS_ShutdownXPCOM
 #define NS_NewNativeLocalFile VBoxNsxpNS_NewNativeLocalFile
@@ -63,9 +66,21 @@ class nsIServiceManager;
 class nsIFile;
 class nsILocalFile;
 class nsIDirectoryServiceProvider;
-class nsIMemory;
 class nsIDebug;
 class nsITraceRefcnt;
+
+typedef RTTHREADINT *RTTHREAD;
+
+#ifdef VBOX
+/**
+ * Checks whether XPCOM was initialized by a call to NS_InitXPCOM2().
+ */
+extern "C" NS_COM PRBool
+NS_IsXPCOMInitialized(void);
+
+extern "C" NS_COM nsresult
+NS_GetMainThread(RTTHREAD *phThreadMain);
+#endif
 
 /**
  * Initialises XPCOM. You must call this method before proceeding 
@@ -160,19 +175,6 @@ NS_GetComponentManager(nsIComponentManager* *result);
  */
 extern "C" NS_COM nsresult
 NS_GetComponentRegistrar(nsIComponentRegistrar* *result);
-
-/**
- * Public Method to access to the memory manager.  See nsIMemory
- * 
- * @status FROZEN
- * @param result Interface pointer to the memory manager 
- *
- * @return NS_OK for success;
- *         other error codes indicate a failure during initialisation.
- *
- */
-extern "C" NS_COM nsresult
-NS_GetMemoryManager(nsIMemory* *result);
 
 /**
  * Public Method to create an instance of a nsILocalFile.  This function

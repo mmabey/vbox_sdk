@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentManager.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentManager.idl
  */
 
 #ifndef __gen_nsIComponentManager_h__
@@ -80,10 +80,10 @@ class NS_NO_VTABLE nsIComponentManager : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICOMPONENTMANAGER \
-  NS_IMETHOD GetClassObject(const nsCID & aClass, const nsIID & aIID, void * *result); \
-  NS_IMETHOD GetClassObjectByContractID(const char *aContractID, const nsIID & aIID, void * *result); \
-  NS_IMETHOD CreateInstance(const nsCID & aClass, nsISupports *aDelegate, const nsIID & aIID, void * *result); \
-  NS_IMETHOD CreateInstanceByContractID(const char *aContractID, nsISupports *aDelegate, const nsIID & aIID, void * *result); 
+  NS_IMETHOD GetClassObject(const nsCID & aClass, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD GetClassObjectByContractID(const char *aContractID, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD CreateInstance(const nsCID & aClass, nsISupports *aDelegate, const nsIID & aIID, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD CreateInstanceByContractID(const char *aContractID, nsISupports *aDelegate, const nsIID & aIID, void * *result) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICOMPONENTMANAGER(_to) \

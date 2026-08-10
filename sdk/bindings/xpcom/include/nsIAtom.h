@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsIAtom.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIAtom.idl
  */
 
 #ifndef __gen_nsIAtom_h__
@@ -60,6 +60,7 @@ class nsIAtom : public nsISupports {
     Equals(s, &result);
     return result;
   }
+
   inline PRBool EqualsUTF8(const nsACString& s) {
     PRBool result;
     EqualsUTF8(s, &result);
@@ -69,11 +70,11 @@ class nsIAtom : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIATOM \
-  NS_IMETHOD ToString(nsAString & _retval); \
-  NS_IMETHOD ToUTF8String(nsACString & _retval); \
-  NS_IMETHOD GetUTF8String(const char **aResult); \
-  NS_IMETHOD Equals(const nsAString & aString, PRBool *_retval); \
-  NS_IMETHOD EqualsUTF8(const nsACString & aString, PRBool *_retval); \
+  NS_IMETHOD ToString(nsAString & _retval) NS_OVERRIDE; \
+  NS_IMETHOD ToUTF8String(nsACString & _retval) NS_OVERRIDE; \
+  NS_IMETHOD GetUTF8String(const char **aResult) NS_OVERRIDE; \
+  NS_IMETHOD Equals(const nsAString & aString, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD EqualsUTF8(const nsACString & aString, PRBool *_retval) NS_OVERRIDE; \
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIATOM(_to) \
@@ -171,12 +172,15 @@ NS_IMETHODIMP nsAtom::EqualsUTF8(const nsACString & aString, PRBool *_retval)
  * permanent atoms is that they do not need to maintain a reference
  * count, which requires locking and hurts performance.
  */
+
+
 /**
  * Find an atom that matches the given UTF-8 string.
  * The string is assumed to be zero terminated.
  */
 extern NS_COM nsIAtom* NS_NewAtom(const char* aUTF8String);
 extern NS_COM nsIAtom* NS_NewPermanentAtom(const char* aUTF8String);
+
 inline already_AddRefed<nsIAtom> do_GetAtom(const char* aUTF8String)
     { return NS_NewAtom(aUTF8String); }
 inline already_AddRefed<nsIAtom> do_GetPermanentAtom(const char* aUTF8String)
@@ -187,33 +191,40 @@ inline already_AddRefed<nsIAtom> do_GetPermanentAtom(const char* aUTF8String)
  */
 extern NS_COM nsIAtom* NS_NewAtom(const nsACString& aUTF8String);
 extern NS_COM nsIAtom* NS_NewPermanentAtom(const nsACString& aUTF8String);
+
 inline already_AddRefed<nsIAtom> do_GetAtom(const nsACString& aUTF8String)
     { return NS_NewAtom(aUTF8String); }
 inline already_AddRefed<nsIAtom> do_GetPermanentAtom(const nsACString& aUTF8String)
     { return NS_NewPermanentAtom(aUTF8String); }
+
 /**
  * Find an atom that matches the given UTF-16 string.
  * The string is assumed to be zero terminated.
  */
 extern NS_COM nsIAtom* NS_NewAtom(const PRUnichar* aUTF16String);
 extern NS_COM nsIAtom* NS_NewPermanentAtom(const PRUnichar* aUTF16String);
+
 inline already_AddRefed<nsIAtom> do_GetAtom(const PRUnichar* aUTF16String)
     { return NS_NewAtom(aUTF16String); }
 inline already_AddRefed<nsIAtom> do_GetPermanentAtom(const PRUnichar* aUTF16String)
     { return NS_NewPermanentAtom(aUTF16String); }
+
 /**
  * Find an atom that matches the given UTF-16 string.
  */
 extern NS_COM nsIAtom* NS_NewAtom(const nsAString& aUTF16String);
 extern NS_COM nsIAtom* NS_NewPermanentAtom(const nsAString& aUTF16String);
+
 inline already_AddRefed<nsIAtom> do_GetAtom(const nsAString& aUTF16String)
     { return NS_NewAtom(aUTF16String); }
 inline already_AddRefed<nsIAtom> do_GetPermanentAtom(const nsAString& aUTF16String)
     { return NS_NewPermanentAtom(aUTF16String); }
+
 /**
  * Return a count of the total number of atoms currently
  * alive in the system.
  */
 extern NS_COM nsrefcnt NS_GetNumberOfAtoms(void);
+
 
 #endif /* __gen_nsIAtom_h__ */

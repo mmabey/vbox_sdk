@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsICategoryManager.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsICategoryManager.idl
  */
 
 #ifndef __gen_nsICategoryManager_h__
@@ -90,12 +90,12 @@ class NS_NO_VTABLE nsICategoryManager : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICATEGORYMANAGER \
-  NS_IMETHOD GetCategoryEntry(const char *aCategory, const char *aEntry, char **_retval); \
-  NS_IMETHOD AddCategoryEntry(const char *aCategory, const char *aEntry, const char *aValue, PRBool aPersist, PRBool aReplace, char **_retval); \
-  NS_IMETHOD DeleteCategoryEntry(const char *aCategory, const char *aEntry, PRBool aPersist); \
-  NS_IMETHOD DeleteCategory(const char *aCategory); \
-  NS_IMETHOD EnumerateCategory(const char *aCategory, nsISimpleEnumerator **_retval); \
-  NS_IMETHOD EnumerateCategories(nsISimpleEnumerator **_retval); 
+  NS_IMETHOD GetCategoryEntry(const char *aCategory, const char *aEntry, char **_retval) NS_OVERRIDE; \
+  NS_IMETHOD AddCategoryEntry(const char *aCategory, const char *aEntry, const char *aValue, PRBool aPersist, PRBool aReplace, char **_retval) NS_OVERRIDE; \
+  NS_IMETHOD DeleteCategoryEntry(const char *aCategory, const char *aEntry, PRBool aPersist) NS_OVERRIDE; \
+  NS_IMETHOD DeleteCategory(const char *aCategory) NS_OVERRIDE; \
+  NS_IMETHOD EnumerateCategory(const char *aCategory, nsISimpleEnumerator **_retval) NS_OVERRIDE; \
+  NS_IMETHOD EnumerateCategories(nsISimpleEnumerator **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICATEGORYMANAGER(_to) \

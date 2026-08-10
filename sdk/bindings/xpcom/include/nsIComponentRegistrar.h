@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentRegistrar.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIComponentRegistrar.idl
  */
 
 #ifndef __gen_nsIComponentRegistrar_h__
@@ -221,18 +221,18 @@ class NS_NO_VTABLE nsIComponentRegistrar : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICOMPONENTREGISTRAR \
-  NS_IMETHOD AutoRegister(nsIFile *aSpec); \
-  NS_IMETHOD AutoUnregister(nsIFile *aSpec); \
-  NS_IMETHOD RegisterFactory(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFactory *aFactory); \
-  NS_IMETHOD UnregisterFactory(const nsCID & aClass, nsIFactory *aFactory); \
-  NS_IMETHOD RegisterFactoryLocation(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFile *aFile, const char *aLoaderStr, const char *aType); \
-  NS_IMETHOD UnregisterFactoryLocation(const nsCID & aClass, nsIFile *aFile); \
-  NS_IMETHOD IsCIDRegistered(const nsCID & aClass, PRBool *_retval); \
-  NS_IMETHOD IsContractIDRegistered(const char *aContractID, PRBool *_retval); \
-  NS_IMETHOD EnumerateCIDs(nsISimpleEnumerator **_retval); \
-  NS_IMETHOD EnumerateContractIDs(nsISimpleEnumerator **_retval); \
-  NS_IMETHOD CIDToContractID(const nsCID & aClass, char **_retval); \
-  NS_IMETHOD ContractIDToCID(const char *aContractID, nsCID * *_retval); 
+  NS_IMETHOD AutoRegister(nsIFile *aSpec) NS_OVERRIDE; \
+  NS_IMETHOD AutoUnregister(nsIFile *aSpec) NS_OVERRIDE; \
+  NS_IMETHOD RegisterFactory(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFactory *aFactory) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterFactory(const nsCID & aClass, nsIFactory *aFactory) NS_OVERRIDE; \
+  NS_IMETHOD RegisterFactoryLocation(const nsCID & aClass, const char *aClassName, const char *aContractID, nsIFile *aFile, const char *aLoaderStr, const char *aType) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterFactoryLocation(const nsCID & aClass, nsIFile *aFile) NS_OVERRIDE; \
+  NS_IMETHOD IsCIDRegistered(const nsCID & aClass, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsContractIDRegistered(const char *aContractID, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD EnumerateCIDs(nsISimpleEnumerator **_retval) NS_OVERRIDE; \
+  NS_IMETHOD EnumerateContractIDs(nsISimpleEnumerator **_retval) NS_OVERRIDE; \
+  NS_IMETHOD CIDToContractID(const nsCID & aClass, char **_retval) NS_OVERRIDE; \
+  NS_IMETHOD ContractIDToCID(const char *aContractID, nsCID * *_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICOMPONENTREGISTRAR(_to) \

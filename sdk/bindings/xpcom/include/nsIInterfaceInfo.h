@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/reflect/xptinfo/public/nsIInterfaceInfo.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/reflect/xptinfo/public/nsIInterfaceInfo.idl
  */
 
 #ifndef __gen_nsIInterfaceInfo_h__
@@ -113,27 +113,27 @@ class NS_NO_VTABLE nsIInterfaceInfo : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIINTERFACEINFO \
-  NS_IMETHOD GetName(char * *aName); \
-  NS_IMETHOD GetInterfaceIID(nsIID * *aInterfaceIID); \
-  NS_IMETHOD IsScriptable(PRBool *_retval); \
-  NS_IMETHOD GetParent(nsIInterfaceInfo * *aParent); \
-  NS_IMETHOD GetMethodCount(PRUint16 *aMethodCount); \
-  NS_IMETHOD GetConstantCount(PRUint16 *aConstantCount); \
-  NS_IMETHOD GetMethodInfo(PRUint16 index, const nsXPTMethodInfo * *info); \
-  NS_IMETHOD GetMethodInfoForName(const char *methodName, PRUint16 *index, const nsXPTMethodInfo * *info); \
-  NS_IMETHOD GetConstant(PRUint16 index, const nsXPTConstant * *constant); \
-  NS_IMETHOD GetInfoForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, nsIInterfaceInfo **_retval); \
-  NS_IMETHOD GetIIDForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, nsIID * *_retval); \
-  NS_IMETHOD GetTypeForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint16 dimension, nsXPTType *_retval); \
-  NS_IMETHOD GetSizeIsArgNumberForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint16 dimension, PRUint8 *_retval); \
-  NS_IMETHOD GetLengthIsArgNumberForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint16 dimension, PRUint8 *_retval); \
-  NS_IMETHOD GetInterfaceIsArgNumberForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint8 *_retval); \
-  NS_IMETHOD IsIID(const nsIID * IID, PRBool *_retval); \
-  NS_IMETHOD GetNameShared(const char **name); \
-  NS_IMETHOD GetIIDShared(const nsIID * *iid); \
-  NS_IMETHOD IsFunction(PRBool *_retval); \
-  NS_IMETHOD HasAncestor(const nsIID * iid, PRBool *_retval); \
-  NS_IMETHOD_(nsresult) GetIIDForParamNoAlloc(PRUint16 methodIndex, const nsXPTParamInfo * param, nsIID *iid); 
+  NS_IMETHOD GetName(char * *aName) NS_OVERRIDE; \
+  NS_IMETHOD GetInterfaceIID(nsIID * *aInterfaceIID) NS_OVERRIDE; \
+  NS_IMETHOD IsScriptable(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetParent(nsIInterfaceInfo * *aParent) NS_OVERRIDE; \
+  NS_IMETHOD GetMethodCount(PRUint16 *aMethodCount) NS_OVERRIDE; \
+  NS_IMETHOD GetConstantCount(PRUint16 *aConstantCount) NS_OVERRIDE; \
+  NS_IMETHOD GetMethodInfo(PRUint16 index, const nsXPTMethodInfo * *info) NS_OVERRIDE; \
+  NS_IMETHOD GetMethodInfoForName(const char *methodName, PRUint16 *index, const nsXPTMethodInfo * *info) NS_OVERRIDE; \
+  NS_IMETHOD GetConstant(PRUint16 index, const nsXPTConstant * *constant) NS_OVERRIDE; \
+  NS_IMETHOD GetInfoForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, nsIInterfaceInfo **_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetIIDForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, nsIID * *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetTypeForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint16 dimension, nsXPTType *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetSizeIsArgNumberForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint16 dimension, PRUint8 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetLengthIsArgNumberForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint16 dimension, PRUint8 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetInterfaceIsArgNumberForParam(PRUint16 methodIndex, const nsXPTParamInfo * param, PRUint8 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD IsIID(const nsIID * IID, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetNameShared(const char **name) NS_OVERRIDE; \
+  NS_IMETHOD GetIIDShared(const nsIID * *iid) NS_OVERRIDE; \
+  NS_IMETHOD IsFunction(PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD HasAncestor(const nsIID * iid, PRBool *_retval) NS_OVERRIDE; \
+  NS_IMETHOD_(nsresult) GetIIDForParamNoAlloc(PRUint16 methodIndex, const nsXPTParamInfo * param, nsIID *iid) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIINTERFACEINFO(_to) \

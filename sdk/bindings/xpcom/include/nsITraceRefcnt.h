@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsITraceRefcnt.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsITraceRefcnt.idl
  */
 
 #ifndef __gen_nsITraceRefcnt_h__
@@ -56,12 +56,12 @@ class NS_NO_VTABLE nsITraceRefcnt : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSITRACEREFCNT \
-  NS_IMETHOD LogAddRef(void * aPtr, nsrefcnt aNewRefcnt, const char *aTypeName, PRUint32 aInstanceSize); \
-  NS_IMETHOD LogRelease(void * aPtr, nsrefcnt aNewRefcnt, const char *aTypeName); \
-  NS_IMETHOD LogCtor(void * aPtr, const char *aTypeName, PRUint32 aInstanceSize); \
-  NS_IMETHOD LogDtor(void * aPtr, const char *aTypeName, PRUint32 aInstanceSize); \
-  NS_IMETHOD LogAddCOMPtr(void * aPtr, nsISupports *aObject); \
-  NS_IMETHOD LogReleaseCOMPtr(void * aPtr, nsISupports *aObject); 
+  NS_IMETHOD LogAddRef(void * aPtr, nsrefcnt aNewRefcnt, const char *aTypeName, PRUint32 aInstanceSize) NS_OVERRIDE; \
+  NS_IMETHOD LogRelease(void * aPtr, nsrefcnt aNewRefcnt, const char *aTypeName) NS_OVERRIDE; \
+  NS_IMETHOD LogCtor(void * aPtr, const char *aTypeName, PRUint32 aInstanceSize) NS_OVERRIDE; \
+  NS_IMETHOD LogDtor(void * aPtr, const char *aTypeName, PRUint32 aInstanceSize) NS_OVERRIDE; \
+  NS_IMETHOD LogAddCOMPtr(void * aPtr, nsISupports *aObject) NS_OVERRIDE; \
+  NS_IMETHOD LogReleaseCOMPtr(void * aPtr, nsISupports *aObject) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSITRACEREFCNT(_to) \

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsIObserverService.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIObserverService.idl
  */
 
 #ifndef __gen_nsIObserverService_h__
@@ -97,10 +97,10 @@ class NS_NO_VTABLE nsIObserverService : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIOBSERVERSERVICE \
-  NS_IMETHOD AddObserver(nsIObserver *anObserver, const char *aTopic, PRBool ownsWeak); \
-  NS_IMETHOD RemoveObserver(nsIObserver *anObserver, const char *aTopic); \
-  NS_IMETHOD NotifyObservers(nsISupports *aSubject, const char *aTopic, const PRUnichar *someData); \
-  NS_IMETHOD EnumerateObservers(const char *aTopic, nsISimpleEnumerator **_retval); 
+  NS_IMETHOD AddObserver(nsIObserver *anObserver, const char *aTopic, PRBool ownsWeak) NS_OVERRIDE; \
+  NS_IMETHOD RemoveObserver(nsIObserver *anObserver, const char *aTopic) NS_OVERRIDE; \
+  NS_IMETHOD NotifyObservers(nsISupports *aSubject, const char *aTopic, const PRUnichar *someData) NS_OVERRIDE; \
+  NS_IMETHOD EnumerateObservers(const char *aTopic, nsISimpleEnumerator **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIOBSERVERSERVICE(_to) \

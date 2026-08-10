@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsIWeakReference.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsIWeakReference.idl
  */
 
 #ifndef __gen_nsIWeakReference_h__
@@ -55,7 +55,7 @@ class NS_NO_VTABLE nsIWeakReference : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIWEAKREFERENCE \
-  NS_IMETHOD QueryReferent(const nsIID & uuid, void * *result); 
+  NS_IMETHOD QueryReferent(const nsIID & uuid, void * *result) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIWEAKREFERENCE(_to) \
@@ -145,7 +145,7 @@ class NS_NO_VTABLE nsISupportsWeakReference : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSWEAKREFERENCE \
-  NS_IMETHOD GetWeakReference(nsIWeakReference **_retval); 
+  NS_IMETHOD GetWeakReference(nsIWeakReference **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSWEAKREFERENCE(_to) \

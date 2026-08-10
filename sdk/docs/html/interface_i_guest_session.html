@@ -163,12 +163,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa42b3e1ae5cc8dda6c66222ea0163732"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#aa42b3e1ae5cc8dda6c66222ea0163732">fsQueryInfo</a> (in wstring path, [retval] out <a class="el" href="interface_i_guest_fs_info.html">IGuestFsInfo</a> info)</td></tr>
 <tr class="memdesc:aa42b3e1ae5cc8dda6c66222ea0163732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns file system information for a given path.  <br /></td></tr>
 <tr class="separator:aa42b3e1ae5cc8dda6c66222ea0163732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a006e92badda9640284aa4ede708a9502"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a006e92badda9640284aa4ede708a9502">processCreate</a> (in wstring executable, in wstring[] arguments, in wstring[] <a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">environmentChanges</a>, in <a class="el" href="_virtual_box_8idl.html#a98b478b2b9d4a01d8e6f290565b23806">ProcessCreateFlag</a>[] flags, in unsigned long timeoutMS, [retval] out <a class="el" href="interface_i_guest_process.html">IGuestProcess</a> guestProcess)</td></tr>
-<tr class="memdesc:a006e92badda9640284aa4ede708a9502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new process running in the guest.  <br /></td></tr>
-<tr class="separator:a006e92badda9640284aa4ede708a9502"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a3a5e8a25c7e115db66402826bf36b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a93a3a5e8a25c7e115db66402826bf36b">processCreateEx</a> (in wstring executable, in wstring[] arguments, in wstring[] <a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">environmentChanges</a>, in <a class="el" href="_virtual_box_8idl.html#a98b478b2b9d4a01d8e6f290565b23806">ProcessCreateFlag</a>[] flags, in unsigned long timeoutMS, in <a class="el" href="_virtual_box_8idl.html#a5e14e71e8f5d4107da75207e9f8ebca4">ProcessPriority</a> priority, in long[] affinity, [retval] out <a class="el" href="interface_i_guest_process.html">IGuestProcess</a> guestProcess)</td></tr>
-<tr class="memdesc:a93a3a5e8a25c7e115db66402826bf36b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new process running in the guest with the extended options for setting the process priority and affinity.  <br /></td></tr>
-<tr class="separator:a93a3a5e8a25c7e115db66402826bf36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1f9671822302a72f61f3de2f88b5620"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#aa1f9671822302a72f61f3de2f88b5620">processCreate</a> (in wstring executable, in wstring[] arguments, in wstring cwd, in wstring[] <a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">environmentChanges</a>, in <a class="el" href="_virtual_box_8idl.html#a98b478b2b9d4a01d8e6f290565b23806">ProcessCreateFlag</a>[] flags, in unsigned long timeoutMS, [retval] out <a class="el" href="interface_i_guest_process.html">IGuestProcess</a> guestProcess)</td></tr>
+<tr class="memdesc:aa1f9671822302a72f61f3de2f88b5620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new process running in the guest.  <br /></td></tr>
+<tr class="separator:aa1f9671822302a72f61f3de2f88b5620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a463ec0f6748ce0f4009225b70ee6e4f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a463ec0f6748ce0f4009225b70ee6e4f3">processCreateEx</a> (in wstring executable, in wstring[] arguments, in wstring cwd, in wstring[] <a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">environmentChanges</a>, in <a class="el" href="_virtual_box_8idl.html#a98b478b2b9d4a01d8e6f290565b23806">ProcessCreateFlag</a>[] flags, in unsigned long timeoutMS, in <a class="el" href="_virtual_box_8idl.html#a5e14e71e8f5d4107da75207e9f8ebca4">ProcessPriority</a> priority, in long[] affinity, [retval] out <a class="el" href="interface_i_guest_process.html">IGuestProcess</a> guestProcess)</td></tr>
+<tr class="memdesc:a463ec0f6748ce0f4009225b70ee6e4f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new process running in the guest with the extended options for setting the process priority and affinity.  <br /></td></tr>
+<tr class="separator:a463ec0f6748ce0f4009225b70ee6e4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39cf7130a55c3c4cec1bac45993251ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a39cf7130a55c3c4cec1bac45993251ac">processGet</a> (in unsigned long pid, [retval] out <a class="el" href="interface_i_guest_process.html">IGuestProcess</a> guestProcess)</td></tr>
 <tr class="memdesc:a39cf7130a55c3c4cec1bac45993251ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a certain guest process by its process ID (PID).  <br /></td></tr>
 <tr class="separator:a39cf7130a55c3c4cec1bac45993251ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,7 +203,7 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a1b58f41e34c0d612a9a4bcf79bae1fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the internal session ID.  <br /></td></tr>
 <tr class="separator:a1b58f41e34c0d612a9a4bcf79bae1fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af77e2de857076f00088426c34ea98a08"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#af77e2de857076f00088426c34ea98a08">timeout</a></td></tr>
-<tr class="memdesc:af77e2de857076f00088426c34ea98a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the session timeout (in ms).  <br /></td></tr>
+<tr class="memdesc:af77e2de857076f00088426c34ea98a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the session timeout (in ms).  <br /></td></tr>
 <tr class="separator:af77e2de857076f00088426c34ea98a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a559387061f515ea8237f901c1415f021"><td class="memItemLeft" align="right" valign="top">readonly attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a559387061f515ea8237f901c1415f021">protocolVersion</a></td></tr>
 <tr class="memdesc:a559387061f515ea8237f901c1415f021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the protocol version which is used by this session to communicate with the guest.  <br /></td></tr>
@@ -232,6 +232,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a974774fd86e344bbb996a9b6e562f29d"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a974774fd86e344bbb996a9b6e562f29d">userDocuments</a></td></tr>
 <tr class="memdesc:a974774fd86e344bbb996a9b6e562f29d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the user's documents directory.  <br /></td></tr>
 <tr class="separator:a974774fd86e344bbb996a9b6e562f29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83eb446c36affab2dcac887b0130b619"><td class="memItemLeft" align="right" valign="top">readonly attribute wstring[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a83eb446c36affab2dcac887b0130b619">mountPoints</a></td></tr>
+<tr class="memdesc:a83eb446c36affab2dcac887b0130b619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns all currently accessible (disk-based) mount points.  <br /></td></tr>
+<tr class="separator:a83eb446c36affab2dcac887b0130b619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d8fae1be04f8b663fa25e0d88ee2705"><td class="memItemLeft" align="right" valign="top">readonly attribute <a class="el" href="interface_i_guest_directory.html">IGuestDirectory</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_guest_session.html#a3d8fae1be04f8b663fa25e0d88ee2705">directories</a></td></tr>
 <tr class="memdesc:a3d8fae1be04f8b663fa25e0d88ee2705"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns all currently opened guest directories.  <br /></td></tr>
 <tr class="separator:a3d8fae1be04f8b663fa25e0d88ee2705"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -250,8 +253,8 @@ Public Attributes</h2></td></tr>
 <p>There can be up to 2048 objects (guest processes, files and directories) a time per guest session. Exceeding the limit will result in an error (see the corresponding functions for more).</p>
 <p>When done with either of these objects, including the guest session itself, use the appropriate <a class="el" href="interface_i_guest_session.html#a931fd027935b8381f241c50818d41d0c" title="Closes this session.">close()</a> method to let the object do its cleanup work.</p>
 <p>Closing a session via <a class="el" href="interface_i_guest_session.html#a931fd027935b8381f241c50818d41d0c">IGuestSession::close</a><b></b> will try to close all the mentioned objects above unless these objects are still used by a client.</p>
-<p>A set of environment variables changes is associated with each session (<a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">IGuestSession::environmentChanges</a><b></b>). These are applied to the base environment of the impersonated guest user when creating a new guest process. For additional flexibility the <a class="el" href="interface_i_guest_session.html#a006e92badda9640284aa4ede708a9502">IGuestSession::processCreate</a><b></b> and <a class="el" href="interface_i_guest_session.html#a93a3a5e8a25c7e115db66402826bf36b">IGuestSession::processCreateEx</a><b></b> methods allows you to specify individual environment changes for each process you create. With newer guest addition versions, the base environment is also made available via <a class="el" href="interface_i_guest_session.html#a675fa5f5948f4eda9a63ff971c4916be">IGuestSession::environmentBase</a><b></b>. (One reason for why we record changes to a base environment instead of working directly on an environment block is that we need to be compatible with older Guest Additions. Another reason is that this way it is always possible to undo all the changes you've scheduled.)</p>
-<dl class="section user"><dt>Interface ID:</dt><dd><code>{234F0627-866D-48C2-91A5-4C9D50F04928}</code> </dd></dl>
+<p>A set of environment variables changes is associated with each session (<a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">IGuestSession::environmentChanges</a><b></b>). These are applied to the base environment of the impersonated guest user when creating a new guest process. For additional flexibility the <a class="el" href="interface_i_guest_session.html#aa1f9671822302a72f61f3de2f88b5620">IGuestSession::processCreate</a><b></b> and <a class="el" href="interface_i_guest_session.html#a463ec0f6748ce0f4009225b70ee6e4f3">IGuestSession::processCreateEx</a><b></b> methods allows you to specify individual environment changes for each process you create. With newer guest addition versions, the base environment is also made available via <a class="el" href="interface_i_guest_session.html#a675fa5f5948f4eda9a63ff971c4916be">IGuestSession::environmentBase</a><b></b>. (One reason for why we record changes to a base environment instead of working directly on an environment block is that we need to be compatible with older Guest Additions. Another reason is that this way it is always possible to undo all the changes you've scheduled.)</p>
+<dl class="section user"><dt>Interface ID:</dt><dd><code>{8B2B6773-8B5A-4CD2-95F8-38FAF73913E1}</code> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a931fd027935b8381f241c50818d41d0c" name="a931fd027935b8381f241c50818d41d0c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a931fd027935b8381f241c50818d41d0c">&#9670;&#160;</a></span>close()</h2>
@@ -993,7 +996,7 @@ WARNING! SPECIFYING <a class="el" href="_virtual_box_8idl.html#a6fe363aef90dbf30
 </dl>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
-<td>VBOX_E_NOT_SUPPORTED</td><td>If the Guest Additions does not support the session base environment feature. Support for this was introduced with protocol version XXXX.</td></tr>
+<td>VBOX_E_NOT_SUPPORTED</td><td>If the Guest Additions do not support the session base environment feature. Support for this was introduced with protocol version XXXX.</td></tr>
 <tr>
 <td>VBOX_E_INVALID_OBJECT_STATE</td><td>If the Guest Additions has yet to report the session base environment.</td></tr>
 </table>
@@ -1037,7 +1040,7 @@ WARNING! SPECIFYING <a class="el" href="_virtual_box_8idl.html#a6fe363aef90dbf30
 </dl>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
-<td>VBOX_E_NOT_SUPPORTED</td><td>If the Guest Additions does not support the session base environment feature. Support for this was introduced with protocol version XXXX.</td></tr>
+<td>VBOX_E_NOT_SUPPORTED</td><td>If the Guest Additions do not support the session base environment feature. Support for this was introduced with protocol version XXXX.</td></tr>
 <tr>
 <td>VBOX_E_INVALID_OBJECT_STATE</td><td>If the Guest Additions has yet to report the session base environment.</td></tr>
 </table>
@@ -2025,15 +2028,10 @@ This method will remove symbolic links in the final path component, not follow t
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Full path to return the free space for.</td></tr>
-    <tr><td class="paramname">freeSpace</td><td>Free space (in bytes).</td></tr>
+    <tr><td class="paramname">freeSpace</td><td>Free space (in bytes). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_NOTIMPL</td><td>The method is not implemented yet. </td></tr>
-</table>
-</dd></dl>
 
 </div>
 </div>
@@ -2067,20 +2065,15 @@ This method will remove symbolic links in the final path component, not follow t
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Full path to return file system information for.</td></tr>
-    <tr><td class="paramname">info</td><td><a class="el" href="interface_i_guest_fs_info.html" title="Represents the guest implementation of the IFsInfo object.">IGuestFsInfo</a> object containing the information.</td></tr>
+    <tr><td class="paramname">info</td><td><a class="el" href="interface_i_guest_fs_info.html" title="Represents the guest implementation of the IFsInfo object.">IGuestFsInfo</a> object containing the information. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
-<tr>
-<td>E_NOTIMPL</td><td>The method is not implemented yet. </td></tr>
-</table>
-</dd></dl>
 
 </div>
 </div>
-<a id="a006e92badda9640284aa4ede708a9502" name="a006e92badda9640284aa4ede708a9502"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a006e92badda9640284aa4ede708a9502">&#9670;&#160;</a></span>processCreate()</h2>
+<a id="aa1f9671822302a72f61f3de2f88b5620" name="aa1f9671822302a72f61f3de2f88b5620"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1f9671822302a72f61f3de2f88b5620">&#9670;&#160;</a></span>processCreate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2096,6 +2089,12 @@ This method will remove symbolic links in the final path component, not follow t
           <td></td>
           <td class="paramtype">in wstring[]&#160;</td>
           <td class="paramname"><em>arguments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>cwd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2133,8 +2132,9 @@ This method will remove symbolic links in the final path component, not follow t
 <p>The new process will be started asynchronously, meaning on return of this function it is not be guaranteed that the guest process is in a started state. To wait for successful startup, use the <a class="el" href="interface_i_process.html#ae8908673580b08e1e909a3aa08a6e888">IProcess::waitFor</a><b></b> call.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">executable</td><td>Full path to the file to execute in the guest. The file has to exists in the guest VM with executable right to the session user in order to succeed. If empty/null, the first entry in the <em>arguments</em> array will be used instead (i.e. argv[0]).</td></tr>
+    <tr><td class="paramname">executable</td><td>Full path to the file to execute in the guest. The file has to exist in the guest VM with executable right to the session user in order to succeed. If empty/null, the first entry in the <em>arguments</em> array will be used instead (i.e. argv[0]).</td></tr>
     <tr><td class="paramname">arguments</td><td>Array of arguments passed to the new process.</td></tr>
+    <tr><td class="paramname">cwd</td><td>Path to the directory in which to execute in the guest. The directory has to exist in the guest VM with search rights to the session user in order to succeed. If empty/null, the session user's default (typically 'home') directory is used. If not a full path, it is interpreted relative to the default directory; e.g. 'work' means '$HOME/work' (according to the guest's '$HOME'- like concept).</td></tr>
     <tr><td class="paramname">environmentChanges</td><td>Set of environment changes to complement <a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">IGuestSession::environmentChanges</a><b></b>. Takes precedence over the session ones. The changes are in putenv format, i.e. "VAR=VALUE" for setting and "VAR" for unsetting.</td></tr>
   </table>
   </dd>
@@ -2156,13 +2156,13 @@ This method will remove symbolic links in the final path component, not follow t
 </table>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Starting at VirtualBox 4.2 guest process execution by is default limited to serve up to 255 guest processes at a time. If all 255 guest processes are active and running, creating a new guest process will result in an error.</dd></dl>
-<p>If ProcessCreateFlag_WaitForStdOut and/or ProcessCreateFlag_WaitForStdErr are set, the guest process will not enter the terminated state until all data from the specified streams have been read read.</p>
+<p>If ProcessCreateFlag_WaitForStdOut and/or ProcessCreateFlag_WaitForStdErr are set, the guest process will not enter the terminated state until all data from the specified streams have been read.</p>
 <dl class="section note"><dt>Note</dt><dd>Starting with VirtualBox 5.0 this array starts with argument 0 instead of argument 1 as in previous versions. Whether the zeroth argument can be passed to the guest depends on the VBoxService version running there. If you depend on this, check that the <a class="el" href="interface_i_guest_session.html#a559387061f515ea8237f901c1415f021">IGuestSession::protocolVersion</a><b></b> is 3 or higher. </dd></dl>
 
 </div>
 </div>
-<a id="a93a3a5e8a25c7e115db66402826bf36b" name="a93a3a5e8a25c7e115db66402826bf36b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93a3a5e8a25c7e115db66402826bf36b">&#9670;&#160;</a></span>processCreateEx()</h2>
+<a id="a463ec0f6748ce0f4009225b70ee6e4f3" name="a463ec0f6748ce0f4009225b70ee6e4f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a463ec0f6748ce0f4009225b70ee6e4f3">&#9670;&#160;</a></span>processCreateEx()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2178,6 +2178,12 @@ This method will remove symbolic links in the final path component, not follow t
           <td></td>
           <td class="paramtype">in wstring[]&#160;</td>
           <td class="paramname"><em>arguments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in wstring&#160;</td>
+          <td class="paramname"><em>cwd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2224,11 +2230,12 @@ This method will remove symbolic links in the final path component, not follow t
 </div><div class="memdoc">
 
 <p>Creates a new process running in the guest with the extended options for setting the process priority and affinity. </p>
-<p>See <a class="el" href="interface_i_guest_session.html#a006e92badda9640284aa4ede708a9502">IGuestSession::processCreate</a><b></b> for more information.</p>
+<p>See <a class="el" href="interface_i_guest_session.html#aa1f9671822302a72f61f3de2f88b5620">IGuestSession::processCreate</a><b></b> for more information.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">executable</td><td>Full path to the file to execute in the guest. The file has to exists in the guest VM with executable right to the session user in order to succeed. If empty/null, the first entry in the <em>arguments</em> array will be used instead (i.e. argv[0]).</td></tr>
+    <tr><td class="paramname">executable</td><td>Full path to the file to execute in the guest. The file has to exist in the guest VM with executable right to the session user in order to succeed. If empty/null, the first entry in the <em>arguments</em> array will be used instead (i.e. argv[0]).</td></tr>
     <tr><td class="paramname">arguments</td><td>Array of arguments passed to the new process.</td></tr>
+    <tr><td class="paramname">cwd</td><td>Path to the directory in which to execute in the guest. The directory has to exist in the guest VM with search rights to the session user in order to succeed. If empty/null, the session user's default (typically 'home') directory is used. If not a full path, it is interpreted relative to the default directory; e.g. 'work' means '$HOME/work' (according to the guest's '$HOME'- like concept).</td></tr>
     <tr><td class="paramname">environmentChanges</td><td>Set of environment changes to complement <a class="el" href="interface_i_guest_session.html#a303825d5cd5dd3bd2e76157167c09b64">IGuestSession::environmentChanges</a><b></b>. Takes precedence over the session ones. The changes are in putenv format, i.e. "VAR=VALUE" for setting and "VAR" for unsetting.</td></tr>
   </table>
   </dd>
@@ -2248,7 +2255,7 @@ This method will remove symbolic links in the final path component, not follow t
 <dd>
 This is silently ignored if not supported by Guest Additions.</dd>
 <dd>
-This is silently ignored if the guest does not support setting the affinity of processes, or if the Guest Additions does not implemet this feature. </dd></dl>
+This is silently ignored if the guest does not support setting the affinity of processes, or if the Guest Additions do not implemet this feature. </dd></dl>
 
 </div>
 </div>
@@ -2466,10 +2473,11 @@ This is silently ignored if the guest does not support setting the affinity of p
   <table class="params">
     <tr><td class="paramname">waitFor</td><td>Specifies what to wait for; see <a class="el" href="_virtual_box_8idl.html#ad2b3abf45937a09de1e6e44146a4d914">GuestSessionWaitForFlag</a><b></b> for more information.</td></tr>
     <tr><td class="paramname">timeoutMS</td><td>Timeout (in ms) to wait for the operation to complete. Pass 0 for an infinite timeout.</td></tr>
-    <tr><td class="paramname">reason</td><td>The overall wait result; see <a class="el" href="_virtual_box_8idl.html#a22101bb5198ab2b49d51f2cecdc82b2c">GuestSessionWaitResult</a><b></b> for more information. </td></tr>
+    <tr><td class="paramname">reason</td><td>The overall wait result; see <a class="el" href="_virtual_box_8idl.html#a22101bb5198ab2b49d51f2cecdc82b2c">GuestSessionWaitResult</a><b></b> for more information.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Deprecated and will be removed. Use <a class="el" href="interface_i_guest_session.html#a28e013399abea414111287648b22a08f">IGuestSession::waitForArray</a><b></b> instead. </dd></dl>
 
 </div>
 </div>
@@ -2595,7 +2603,7 @@ This is silently ignored if the guest does not support setting the affinity of p
       </table>
 </div><div class="memdoc">
 
-<p>Returns the session timeout (in ms). </p>
+<p>Gets or sets the session timeout (in ms). </p>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
 <td>E_NOTIMPL</td><td>This attribute is not implemented yet. </td></tr>
@@ -2668,7 +2676,7 @@ This is silently ignored if the guest does not support setting the affinity of p
 
 <p>The base environment of the session. </p>
 <p>They are on the "VAR=VALUE" form, one array entry per variable.</p>
-<p>Access fails with VBOX_E_NOT_SUPPORTED if the Guest Additions does not support the session base environment feature. Support for this was introduced with protocol version XXXX.</p>
+<p>Access fails with VBOX_E_NOT_SUPPORTED if the Guest Additions do not support the session base environment feature. Support for this was introduced with protocol version XXXX.</p>
 <p>Access fails with VBOX_E_INVALID_OBJECT_STATE if the Guest Additions has yet to report the session base environment. </p>
 
 </div>
@@ -2759,6 +2767,29 @@ This is silently ignored if the guest does not support setting the affinity of p
 
 <p>Returns the user's documents directory. </p>
 <p>Guest path style. </p>
+
+</div>
+</div>
+<a id="a83eb446c36affab2dcac887b0130b619" name="a83eb446c36affab2dcac887b0130b619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83eb446c36affab2dcac887b0130b619">&#9670;&#160;</a></span>mountPoints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly attribute wstring [] IGuestSession::mountPoints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns all currently accessible (disk-based) mount points. </p>
+<p>On Windows guests, this returns the currently mapped disk drives.</p>
+<p>Access fails with VBOX_E_NOT_SUPPORTED if the Guest Additions do not support this feature.</p>
+<dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
+<tr>
+<td>VBOX_E_NOT_SUPPORTED</td><td>If the Guest Additions do not support this feature.</td></tr>
+</table>
+</dd></dl>
 
 </div>
 </div>

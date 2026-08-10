@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsrootidl.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsrootidl.idl
  */
 
 #ifndef __gen_nsrootidl_h__
@@ -8,13 +8,16 @@
 #ifndef NS_NO_VTABLE
 #define NS_NO_VTABLE
 #endif
+
 #include "nscore.h"
 #include "prtime.h"
+
 /*
  * Forward declarations for new string types
  */
 class nsAString;
 class nsACString;
+
 /* 
  * Start commenting out the C++ versions of the below in the output header
  */

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/ds/nsICollection.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsICollection.idl
  */
 
 #ifndef __gen_nsICollection_h__
@@ -59,14 +59,14 @@ class NS_NO_VTABLE nsICollection : public nsISerializable {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICOLLECTION \
-  NS_IMETHOD Count(PRUint32 *_retval); \
-  NS_IMETHOD GetElementAt(PRUint32 index, nsISupports **_retval); \
-  NS_IMETHOD QueryElementAt(PRUint32 index, const nsIID & uuid, void * *result); \
-  NS_IMETHOD SetElementAt(PRUint32 index, nsISupports *item); \
-  NS_IMETHOD AppendElement(nsISupports *item); \
-  NS_IMETHOD RemoveElement(nsISupports *item); \
-  NS_IMETHOD Enumerate(nsIEnumerator **_retval); \
-  NS_IMETHOD Clear(void); 
+  NS_IMETHOD Count(PRUint32 *_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetElementAt(PRUint32 index, nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD QueryElementAt(PRUint32 index, const nsIID & uuid, void * *result) NS_OVERRIDE; \
+  NS_IMETHOD SetElementAt(PRUint32 index, nsISupports *item) NS_OVERRIDE; \
+  NS_IMETHOD AppendElement(nsISupports *item) NS_OVERRIDE; \
+  NS_IMETHOD RemoveElement(nsISupports *item) NS_OVERRIDE; \
+  NS_IMETHOD Enumerate(nsIEnumerator **_retval) NS_OVERRIDE; \
+  NS_IMETHOD Clear(void) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICOLLECTION(_to) \
@@ -173,9 +173,11 @@ NS_IMETHODIMP nsCollection::Clear()
 /* End of implementation class template. */
 #endif
 
+
 #ifndef nsCOMPtr_h__
 #include "nsCOMPtr.h"
 #endif
+
 class NS_COM nsQueryElementAt : public nsCOMPtr_helper
   {
     public:
@@ -186,17 +188,21 @@ class NS_COM nsQueryElementAt : public nsCOMPtr_helper
         {
           // nothing else to do here
         }
+
       virtual nsresult NS_FASTCALL operator()( const nsIID& aIID, void** ) const;
+
     private:
       nsICollection*  mCollection;
       PRUint32        mIndex;
       nsresult*       mErrorPtr;
   };
+
 inline
 const nsQueryElementAt
 do_QueryElementAt( nsICollection* aCollection, PRUint32 aIndex, nsresult* aErrorPtr = 0 )
   {
     return nsQueryElementAt(aCollection, aIndex, aErrorPtr);
   }
+
 
 #endif /* __gen_nsICollection_h__ */

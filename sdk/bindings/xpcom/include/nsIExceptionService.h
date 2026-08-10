@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/base/nsIExceptionService.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsIExceptionService.idl
  */
 
 #ifndef __gen_nsIExceptionService_h__
@@ -39,7 +39,7 @@ class NS_NO_VTABLE nsIExceptionProvider : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIEXCEPTIONPROVIDER \
-  NS_IMETHOD GetException(nsresult result, nsIException *defaultException, nsIException **_retval); 
+  NS_IMETHOD GetException(nsresult result, nsIException *defaultException, nsIException **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIEXCEPTIONPROVIDER(_to) \
@@ -120,9 +120,9 @@ class NS_NO_VTABLE nsIExceptionManager : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIEXCEPTIONMANAGER \
-  NS_IMETHOD SetCurrentException(nsIException *error); \
-  NS_IMETHOD GetCurrentException(nsIException **_retval); \
-  NS_IMETHOD GetExceptionFromProvider(nsresult rc, nsIException *defaultException, nsIException **_retval); 
+  NS_IMETHOD SetCurrentException(nsIException *error) NS_OVERRIDE; \
+  NS_IMETHOD GetCurrentException(nsIException **_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetExceptionFromProvider(nsresult rc, nsIException *defaultException, nsIException **_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIEXCEPTIONMANAGER(_to) \
@@ -224,9 +224,9 @@ class NS_NO_VTABLE nsIExceptionService : public nsIExceptionManager {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIEXCEPTIONSERVICE \
-  NS_IMETHOD GetCurrentExceptionManager(nsIExceptionManager * *aCurrentExceptionManager); \
-  NS_IMETHOD RegisterExceptionProvider(nsIExceptionProvider *provider, PRUint32 moduleCode); \
-  NS_IMETHOD UnregisterExceptionProvider(nsIExceptionProvider *provider, PRUint32 moduleCode); 
+  NS_IMETHOD GetCurrentExceptionManager(nsIExceptionManager * *aCurrentExceptionManager) NS_OVERRIDE; \
+  NS_IMETHOD RegisterExceptionProvider(nsIExceptionProvider *provider, PRUint32 moduleCode) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterExceptionProvider(nsIExceptionProvider *provider, PRUint32 moduleCode) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIEXCEPTIONSERVICE(_to) \

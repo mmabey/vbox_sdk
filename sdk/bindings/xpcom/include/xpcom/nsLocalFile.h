@@ -65,52 +65,45 @@
 // so here we will export it.  Other users should not depend
 // on this.
 
+#include <iprt/err.h>
+
 #include <errno.h>
+
 #include "nsILocalFile.h"
 
-#ifdef XP_WIN
-#include "nsLocalFileWin.h"
-#elif defined(XP_MACOSX) && !defined(VBOX_MACOSX_FOLLOWS_UNIX_IO)
-#include "nsLocalFileOSX.h"
-#elif defined(XP_MAC)
-#include "nsLocalFileMac.h"
-#elif defined(XP_UNIX) || defined(XP_BEOS)
+#if defined(XP_UNIX) || defined(XP_BEOS)
 #include "nsLocalFileUnix.h"
-#elif defined(XP_OS2)
-#include "nsLocalFileOS2.h"
 #else
 #error NOT_IMPLEMENTED
 #endif
 
-#define NSRESULT_FOR_RETURN(ret) (((ret) < 0) ? NSRESULT_FOR_ERRNO() : NS_OK)
+
+#define NSRESULT_FOR_IPRT(ret) (RT_FAILURE((ret)) ? nsresultForIprt(ret) : NS_OK)
 
 inline nsresult
-nsresultForErrno(int err)
+nsresultForIprt(int err)
 {
     switch (err) {
-      case 0:
+      case VINF_SUCCESS:
         return NS_OK;
-      case ENOENT:
+      case VERR_NOT_FOUND:
+      case VERR_FILE_NOT_FOUND:
+      case VERR_PATH_NOT_FOUND:
         return NS_ERROR_FILE_TARGET_DOES_NOT_EXIST;
-      case ENOTDIR:
+      case VERR_NOT_A_DIRECTORY:
         return NS_ERROR_FILE_DESTINATION_NOT_DIR;
-#ifdef ENOLINK
-      case ENOLINK:
+      case VERR_NOT_SYMLINK:
         return NS_ERROR_FILE_UNRESOLVABLE_SYMLINK;
-#endif /* ENOLINK */
-      case EEXIST:
+      case VERR_ALREADY_EXISTS:
         return NS_ERROR_FILE_ALREADY_EXISTS;
-#ifdef EPERM
-      case EPERM:
-#endif /* EPERM */
-      case EACCES:
+      case VERR_ACCESS_DENIED:
         return NS_ERROR_FILE_ACCESS_DENIED;
       default:
         return NS_ERROR_FAILURE;
     }
 }
 
-#define NSRESULT_FOR_ERRNO() nsresultForErrno(errno)
+#define NSRESULT_FOR_ERRNO() nsresultForIprt(RTErrConvertFromErrno(errno))
 
 void NS_StartupLocalFile();
 void NS_ShutdownLocalFile();

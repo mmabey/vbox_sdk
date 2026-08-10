@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/7.0-sdk/src/libs/xpcom18a4/xpcom/components/nsIClassInfo.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/sdk/src/libs/xpcom18a4/xpcom/components/nsIClassInfo.idl
  */
 
 #ifndef __gen_nsIClassInfo_h__
@@ -127,14 +127,14 @@ class NS_NO_VTABLE nsIClassInfo : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSICLASSINFO \
-  NS_IMETHOD GetInterfaces(PRUint32 *count, nsIID * **array); \
-  NS_IMETHOD GetHelperForLanguage(PRUint32 language, nsISupports **_retval); \
-  NS_IMETHOD GetContractID(char * *aContractID); \
-  NS_IMETHOD GetClassDescription(char * *aClassDescription); \
-  NS_IMETHOD GetClassID(nsCID * *aClassID); \
-  NS_IMETHOD GetImplementationLanguage(PRUint32 *aImplementationLanguage); \
-  NS_IMETHOD GetFlags(PRUint32 *aFlags); \
-  NS_IMETHOD GetClassIDNoAlloc(nsCID *aClassIDNoAlloc); 
+  NS_IMETHOD GetInterfaces(PRUint32 *count, nsIID * **array) NS_OVERRIDE; \
+  NS_IMETHOD GetHelperForLanguage(PRUint32 language, nsISupports **_retval) NS_OVERRIDE; \
+  NS_IMETHOD GetContractID(char * *aContractID) NS_OVERRIDE; \
+  NS_IMETHOD GetClassDescription(char * *aClassDescription) NS_OVERRIDE; \
+  NS_IMETHOD GetClassID(nsCID * *aClassID) NS_OVERRIDE; \
+  NS_IMETHOD GetImplementationLanguage(PRUint32 *aImplementationLanguage) NS_OVERRIDE; \
+  NS_IMETHOD GetFlags(PRUint32 *aFlags) NS_OVERRIDE; \
+  NS_IMETHOD GetClassIDNoAlloc(nsCID *aClassIDNoAlloc) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSICLASSINFO(_to) \
