@@ -21,7 +21,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from check_new_versions import SdkRelease, download, find_new_releases, get_release
+from check_new_versions import SdkRelease, download, find_latest_new_release, get_release
 from extract_vboxapi import extract_vboxapi
 from version import load_manifest, next_package_version, record_release, save_manifest
 
@@ -124,18 +124,20 @@ def main() -> None:
         release = get_release(args.version)
         if release is None:
             sys.exit(f"No SDK zip found for VirtualBox version {args.version}")
-        releases = [release]
     else:
-        releases = find_new_releases()
+        # Only ever the single newest version -- NOT every version missing
+        # from manifest.json. With just one historical entry seeded, that
+        # would mean backfilling the entire release history on every run.
+        # Backfill is workflows/backfill.yml's job, one version at a time.
+        release = find_latest_new_release()
 
-    if not releases:
-        print("No new releases found.")
+    if release is None:
+        print("No new release found.")
         return
 
-    for release in releases:
-        pkg_version = release_one(release, download_dir, dry_run=args.dry_run)
-        if pkg_version:
-            print(f"Released {pkg_version}")
+    pkg_version = release_one(release, download_dir, dry_run=args.dry_run)
+    if pkg_version:
+        print(f"Released {pkg_version}")
 
 
 if __name__ == "__main__":

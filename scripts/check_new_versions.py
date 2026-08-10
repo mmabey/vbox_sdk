@@ -85,8 +85,41 @@ def get_release(version: str) -> SdkRelease | None:
     return SdkRelease(version=version, build=build, filename=filename, md5=md5, sha256=sha256)
 
 
+def _version_key(version: str) -> tuple[int, ...]:
+    return tuple(int(part) for part in version.split("."))
+
+
+def latest_online_version() -> str:
+    return max(list_online_versions(), key=_version_key)
+
+
+def find_latest_new_release(manifest: dict | None = None) -> SdkRelease | None:
+    """The newest SDK release online, if it isn't already in manifest.json.
+
+    Deliberately checks only the single newest version rather than every
+    version missing from the manifest -- this is what the weekly cron uses,
+    and manifest.json is seeded with only one historical entry (5.1.18), so
+    a "give me everything missing" query would try to backfill the entire
+    ~20-year release history on the first run. Backfilling old versions is
+    workflows/backfill.yml's job, one explicit --version at a time, not this
+    function's.
+    """
+    manifest = load_manifest() if manifest is None else manifest
+    release = get_release(latest_online_version())
+    if release is None:
+        return None
+    if next_package_version(release.version, release.build, manifest) is None:
+        return None
+    return release
+
+
 def find_new_releases(manifest: dict | None = None) -> list[SdkRelease]:
-    """SDK releases online that would produce a package version not yet in manifest.json."""
+    """Every SDK release online that would produce a package version not yet in manifest.json.
+
+    This can return a lot of results against a freshly-seeded manifest.json
+    (see find_latest_new_release) -- it's a diagnostic/backfill-planning tool,
+    not something release.py's cron path should call directly.
+    """
     manifest = load_manifest() if manifest is None else manifest
     new_releases = []
     for version in list_online_versions():
