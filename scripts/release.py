@@ -19,6 +19,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 from check_new_versions import SdkRelease, download, find_latest_new_release, get_release
@@ -137,6 +138,60 @@ def release_one(release: SdkRelease, download_dir: Path, dry_run: bool = False) 
     return pkg_version
 
 
+# GitHub auto-disables `schedule`-triggered workflows in public repos after 60
+# days with no commits (tags/releases/workflow runs don't count). Threshold to
+# actually commit a heartbeat, not just check for one -- well under 60 so a
+# slow week or a delayed cron run (GitHub can lag `schedule` under load)
+# doesn't push things past the real limit.
+HEARTBEAT_THRESHOLD_DAYS = 45
+
+
+def days_since_last_commit() -> float:
+    """Days since the most recent commit across main, pylibsonly, and this branch.
+
+    Queried from git directly rather than tracking our own timestamp in
+    manifest.json, so it can't drift from what GitHub itself is actually
+    keying its 60-day auto-disable off of.
+    """
+    timestamps = []
+    for ref in ("main", "pylibsonly", "HEAD"):
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cI", ref],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        timestamps.append(datetime.fromisoformat(result.stdout.strip()))
+    return (datetime.now(timezone.utc) - max(timestamps)).total_seconds() / 86400
+
+
+def record_heartbeat(dry_run: bool = False) -> None:
+    """Commit something, but only when actually approaching the 60-day limit.
+
+    VirtualBox doesn't ship a new SDK on any guaranteed cadence, so left
+    alone, a slow stretch could eventually get this repo's scheduled workflow
+    auto-disabled with nothing to turn it back on -- silently defeating the
+    point of this automation. Kept to a minimum: most weekly runs when
+    nothing's new do nothing at all here.
+    """
+    days_idle = days_since_last_commit()
+    if days_idle < HEARTBEAT_THRESHOLD_DAYS:
+        print(f"{days_idle:.1f} days since the last commit (threshold {HEARTBEAT_THRESHOLD_DAYS}) -- no heartbeat needed")
+        return
+
+    print(f"{days_idle:.1f} days since the last commit -- committing a heartbeat to avoid the 60-day auto-disable")
+    manifest = load_manifest()
+    manifest["_meta"] = {"last_heartbeat_utc": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    save_manifest(manifest)
+    if dry_run:
+        print("(dry-run) would commit a heartbeat to manifest.json")
+        return
+    run(["git", "add", "manifest.json"], REPO_ROOT)
+    run(["git", "commit", "-m", "Heartbeat: keep the scheduled workflow from being auto-disabled"], REPO_ROOT)
+    run(["git", "push", "origin", "automation"], REPO_ROOT)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--version", help="Specific VirtualBox SDK version to release (for backfill)")
@@ -157,11 +212,14 @@ def main() -> None:
 
     if release is None:
         print("No new release found.")
+        record_heartbeat(dry_run=args.dry_run)
         return
 
     pkg_version = release_one(release, download_dir, dry_run=args.dry_run)
     if pkg_version:
         print(f"Released {pkg_version}")
+    else:
+        record_heartbeat(dry_run=args.dry_run)
 
 
 if __name__ == "__main__":
