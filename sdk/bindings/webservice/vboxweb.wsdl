@@ -1324,6 +1324,7 @@
             DetachAllReturnNone: 2 -
             DetachAllReturnHardDisksOnly: 3 -
             Full: 4 -
+            DetachAllReturnHardDisksAndVMRemovable: 5 -
             -->
       <xsd:simpleType name="CleanupMode">
         <xsd:restriction base="xsd:string">
@@ -1331,6 +1332,7 @@
           <xsd:enumeration value="DetachAllReturnNone"/>
           <xsd:enumeration value="DetachAllReturnHardDisksOnly"/>
           <xsd:enumeration value="Full"/>
+          <xsd:enumeration value="DetachAllReturnHardDisksAndVMRemovable"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: CloneMode -
@@ -19733,6 +19735,25 @@
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="IMedium_openForIOResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method IMedium::resizeAndCloneTo-->
+      <xsd:element name="IMedium_resizeAndCloneTo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="target" type="xsd:string"/>
+            <xsd:element name="logicalSize" type="xsd:long"/>
+            <xsd:element name="variant" minOccurs="0" maxOccurs="unbounded" type="vbox:MediumVariant"/>
+            <xsd:element name="parent" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IMedium_resizeAndCloneToResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="returnval" type="xsd:string"/>
@@ -38619,6 +38640,13 @@
   <wsdl:message name="IMedium_openForIOResultMsg">
     <wsdl:part name="parameters" element="vbox:IMedium_openForIOResponse"/>
   </wsdl:message>
+  <!-- method IMedium::resizeAndCloneTo-->
+  <wsdl:message name="IMedium_resizeAndCloneToRequestMsg">
+    <wsdl:part name="parameters" element="vbox:IMedium_resizeAndCloneTo"/>
+  </wsdl:message>
+  <wsdl:message name="IMedium_resizeAndCloneToResultMsg">
+    <wsdl:part name="parameters" element="vbox:IMedium_resizeAndCloneToResponse"/>
+  </wsdl:message>
   <!--
         *************************************
         messages for interface IMediumFormat
@@ -51329,6 +51357,12 @@
     <wsdl:operation name="IMedium_openForIO">
       <wsdl:input message="vbox:IMedium_openForIORequestMsg"/>
       <wsdl:output message="vbox:IMedium_openForIOResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="IMedium_resizeAndCloneTo">
+      <wsdl:input message="vbox:IMedium_resizeAndCloneToRequestMsg"/>
+      <wsdl:output message="vbox:IMedium_resizeAndCloneToResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -73287,6 +73321,21 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="IMedium_openForIO">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IMedium_resizeAndCloneTo">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

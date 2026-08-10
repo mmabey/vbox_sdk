@@ -165,6 +165,7 @@
 #define VBOX_E_MAXIMUM_REACHED ((nsresult)0x80BB000E)
 #define VBOX_E_GSTCTL_GUEST_ERROR ((nsresult)0x80BB000F)
 #define VBOX_E_TIMEOUT ((nsresult)0x80BB0010)
+#define VBOX_E_DND_ERROR ((nsresult)0x80BB0011)
 class IVirtualBoxErrorInfo; /* forward declaration */
 
 class INATNetwork; /* forward declaration */
@@ -5840,6 +5841,8 @@ class NS_NO_VTABLE CleanupMode {
 
   enum { Full = 4U };
 
+  enum { DetachAllReturnHardDisksAndVMRemovable = 5U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -5893,12 +5896,14 @@ typedef PRUint32 CleanupMode_T;
 # define CleanupMode_DetachAllReturnNone CleanupMode::DetachAllReturnNone
 # define CleanupMode_DetachAllReturnHardDisksOnly CleanupMode::DetachAllReturnHardDisksOnly
 # define CleanupMode_Full CleanupMode::Full
+# define CleanupMode_DetachAllReturnHardDisksAndVMRemovable CleanupMode::DetachAllReturnHardDisksAndVMRemovable
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum CleanupMode_T {
     CleanupMode_UnregisterOnly = CleanupMode::UnregisterOnly,
     CleanupMode_DetachAllReturnNone = CleanupMode::DetachAllReturnNone,
     CleanupMode_DetachAllReturnHardDisksOnly = CleanupMode::DetachAllReturnHardDisksOnly,
     CleanupMode_Full = CleanupMode::Full,
+    CleanupMode_DetachAllReturnHardDisksAndVMRemovable = CleanupMode::DetachAllReturnHardDisksAndVMRemovable,
     CleanupMode_32BitHack = 0x7fffffff
 } CleanupMode_T;
 # ifdef AssertCompileSize
@@ -42171,6 +42176,9 @@ class NS_NO_VTABLE IMedium : public nsISupports {
   /* void openForIO (in boolean writable, in wstring password, [retval] out IMediumIO mediumIO); */
   NS_IMETHOD OpenForIO(PRBool writable, const PRUnichar *password, IMediumIO **mediumIO) = 0;
 
+  /* void resizeAndCloneTo (in IMedium target, in long long logicalSize, in unsigned long variantSize, [array, size_is (variantSize)] in MediumVariant_T variant, in IMedium parent, [retval] out IProgress progress); */
+  NS_IMETHOD ResizeAndCloneTo(IMedium *target, PRInt64 logicalSize, PRUint32 variantSize, MediumVariant_T *variant, IMedium *parent, IProgress **progress) = 0;
+
   /* void InternalAndReservedMethod1IMedium (); */
   NS_IMETHOD InternalAndReservedMethod1IMedium(void) = 0;
 
@@ -42191,9 +42199,6 @@ class NS_NO_VTABLE IMedium : public nsISupports {
 
   /* void InternalAndReservedMethod7IMedium (); */
   NS_IMETHOD InternalAndReservedMethod7IMedium(void) = 0;
-
-  /* void InternalAndReservedMethod8IMedium (); */
-  NS_IMETHOD InternalAndReservedMethod8IMedium(void) = 0;
 
 };
 
@@ -42260,14 +42265,14 @@ class NS_NO_VTABLE IMedium : public nsISupports {
   NS_IMETHOD GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId); \
   NS_IMETHOD CheckEncryptionPassword(const PRUnichar *password); \
   NS_IMETHOD OpenForIO(PRBool writable, const PRUnichar *password, IMediumIO **mediumIO); \
+  NS_IMETHOD ResizeAndCloneTo(IMedium *target, PRInt64 logicalSize, PRUint32 variantSize, MediumVariant_T *variant, IMedium *parent, IProgress **progress); \
   NS_IMETHOD InternalAndReservedMethod1IMedium(void); \
   NS_IMETHOD InternalAndReservedMethod2IMedium(void); \
   NS_IMETHOD InternalAndReservedMethod3IMedium(void); \
   NS_IMETHOD InternalAndReservedMethod4IMedium(void); \
   NS_IMETHOD InternalAndReservedMethod5IMedium(void); \
   NS_IMETHOD InternalAndReservedMethod6IMedium(void); \
-  NS_IMETHOD InternalAndReservedMethod7IMedium(void); \
-  NS_IMETHOD InternalAndReservedMethod8IMedium(void); 
+  NS_IMETHOD InternalAndReservedMethod7IMedium(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IMEDIUM(_to) \
@@ -42332,14 +42337,14 @@ class NS_NO_VTABLE IMedium : public nsISupports {
   NS_IMETHOD GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId) { return _to GetEncryptionSettings(cipher, passwordId); } \
   NS_IMETHOD CheckEncryptionPassword(const PRUnichar *password) { return _to CheckEncryptionPassword(password); } \
   NS_IMETHOD OpenForIO(PRBool writable, const PRUnichar *password, IMediumIO **mediumIO) { return _to OpenForIO(writable, password, mediumIO); } \
+  NS_IMETHOD ResizeAndCloneTo(IMedium *target, PRInt64 logicalSize, PRUint32 variantSize, MediumVariant_T *variant, IMedium *parent, IProgress **progress) { return _to ResizeAndCloneTo(target, logicalSize, variantSize, variant, parent, progress); } \
   NS_IMETHOD InternalAndReservedMethod1IMedium(void) { return _to InternalAndReservedMethod1IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod2IMedium(void) { return _to InternalAndReservedMethod2IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod3IMedium(void) { return _to InternalAndReservedMethod3IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod4IMedium(void) { return _to InternalAndReservedMethod4IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod5IMedium(void) { return _to InternalAndReservedMethod5IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod6IMedium(void) { return _to InternalAndReservedMethod6IMedium(); } \
-  NS_IMETHOD InternalAndReservedMethod7IMedium(void) { return _to InternalAndReservedMethod7IMedium(); } \
-  NS_IMETHOD InternalAndReservedMethod8IMedium(void) { return _to InternalAndReservedMethod8IMedium(); } 
+  NS_IMETHOD InternalAndReservedMethod7IMedium(void) { return _to InternalAndReservedMethod7IMedium(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IMEDIUM(_to) \
@@ -42404,14 +42409,14 @@ class NS_NO_VTABLE IMedium : public nsISupports {
   NS_IMETHOD GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEncryptionSettings(cipher, passwordId); } \
   NS_IMETHOD CheckEncryptionPassword(const PRUnichar *password) { return !_to ? NS_ERROR_NULL_POINTER : _to->CheckEncryptionPassword(password); } \
   NS_IMETHOD OpenForIO(PRBool writable, const PRUnichar *password, IMediumIO **mediumIO) { return !_to ? NS_ERROR_NULL_POINTER : _to->OpenForIO(writable, password, mediumIO); } \
+  NS_IMETHOD ResizeAndCloneTo(IMedium *target, PRInt64 logicalSize, PRUint32 variantSize, MediumVariant_T *variant, IMedium *parent, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ResizeAndCloneTo(target, logicalSize, variantSize, variant, parent, progress); } \
   NS_IMETHOD InternalAndReservedMethod1IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod2IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod3IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod4IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod5IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod5IMedium(); } \
   NS_IMETHOD InternalAndReservedMethod6IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod6IMedium(); } \
-  NS_IMETHOD InternalAndReservedMethod7IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod7IMedium(); } \
-  NS_IMETHOD InternalAndReservedMethod8IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod8IMedium(); } 
+  NS_IMETHOD InternalAndReservedMethod7IMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod7IMedium(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -42803,6 +42808,12 @@ NS_IMETHODIMP _MYCLASS_::OpenForIO(PRBool writable, const PRUnichar *password, I
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void resizeAndCloneTo (in IMedium target, in long long logicalSize, in unsigned long variantSize, [array, size_is (variantSize)] in MediumVariant_T variant, in IMedium parent, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ResizeAndCloneTo(IMedium *target, PRInt64 logicalSize, PRUint32 variantSize, MediumVariant_T *variant, IMedium *parent, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void InternalAndReservedMethod1IMedium (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IMedium()
 {
@@ -42841,12 +42852,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6IMedium()
 
 /* void InternalAndReservedMethod7IMedium (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod7IMedium()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod8IMedium (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IMedium()
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -43001,6 +43006,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IMedium()
 #define COM_FORWARD_IMedium_OpenForIO_TO(smth) NS_IMETHOD OpenForIO (PRBool aWritable, PRUnichar * aPassword, IMediumIO * * aMediumIO) { return smth OpenForIO (aWritable, aPassword, aMediumIO); }
 #define COM_FORWARD_IMedium_OpenForIO_TO_OBJ(obj) COM_FORWARD_IMedium_OpenForIO_TO ((obj)->)
 #define COM_FORWARD_IMedium_OpenForIO_TO_BASE(base) COM_FORWARD_IMedium_OpenForIO_TO (base::)
+#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO(smth) NS_IMETHOD ResizeAndCloneTo (IMedium * aTarget, PRInt64 aLogicalSize, PRUint32 aVariantSize, PRUint32 * aVariant, IMedium * aParent, IProgress * * aProgress) { return smth ResizeAndCloneTo (aTarget, aLogicalSize, aVariantSize+++, aVariant, aParent, aProgress); }
+#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO_OBJ(obj) COM_FORWARD_IMedium_ResizeAndCloneTo_TO ((obj)->)
+#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO_BASE(base) COM_FORWARD_IMedium_ResizeAndCloneTo_TO (base::)
 #define COM_FORWARD_IMedium_TO(smth) NS_FORWARD_IMEDIUM (smth)
 #define COM_FORWARD_IMedium_TO_OBJ(obj) COM_FORWARD_IMedium_TO ((obj)->)
 #define COM_FORWARD_IMedium_TO_BASE(base) COM_FORWARD_IMedium_TO (base::)

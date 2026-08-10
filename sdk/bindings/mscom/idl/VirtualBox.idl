@@ -1359,7 +1359,8 @@ typedef enum
     CleanupMode_UnregisterOnly = 1,
     CleanupMode_DetachAllReturnNone = 2,
     CleanupMode_DetachAllReturnHardDisksOnly = 3,
-    CleanupMode_Full = 4
+    CleanupMode_Full = 4,
+    CleanupMode_DetachAllReturnHardDisksAndVMRemovable = 5
 } CleanupMode;
 
 /* cross-platform type name for CleanupMode */
@@ -12277,6 +12278,14 @@ interface IMedium : IDispatch
         [out, retval] IMediumIO * * aMediumIO
     );
 
+    HRESULT ResizeAndCloneTo (
+        [in] IMedium * aTarget,
+        [in] LONG64 aLogicalSize,
+        [in] SAFEARRAY(MediumVariant) aVariant,
+        [in] IMedium * aParent,
+        [out, retval] IProgress * * aProgress
+    );
+
     HRESULT InternalAndReservedMethod1IMedium();
 
     HRESULT InternalAndReservedMethod2IMedium();
@@ -12290,8 +12299,6 @@ interface IMedium : IDispatch
     HRESULT InternalAndReservedMethod6IMedium();
 
     HRESULT InternalAndReservedMethod7IMedium();
-
-    HRESULT InternalAndReservedMethod8IMedium();
 
 }; /* interface IMedium */
 
@@ -12443,7 +12450,10 @@ cpp_quote("#define COM_FORWARD_IMedium_CheckEncryptionPassword_TO_BASE(base) COM
 cpp_quote("#define COM_FORWARD_IMedium_OpenForIO_TO(smth) HRESULT STDMETHODCALLTYPE OpenForIO (BOOL aWritable, BSTR aPassword, IMediumIO * * aMediumIO) { return smth OpenForIO (aWritable, aPassword, aMediumIO); }")
 cpp_quote("#define COM_FORWARD_IMedium_OpenForIO_TO_OBJ(obj) COM_FORWARD_IMedium_OpenForIO_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IMedium_OpenForIO_TO_BASE(base) COM_FORWARD_IMedium_OpenForIO_TO (base::)")
-cpp_quote("#define COM_FORWARD_IMedium_TO(smth) COM_FORWARD_IMedium_GETTER_Id_TO (smth) COM_FORWARD_IMedium_GETTER_Description_TO (smth) COM_FORWARD_IMedium_SETTER_Description_TO (smth) COM_FORWARD_IMedium_GETTER_State_TO (smth) COM_FORWARD_IMedium_GETTER_Variant_TO (smth) COM_FORWARD_IMedium_GETTER_Location_TO (smth) COM_FORWARD_IMedium_SETTER_Location_TO (smth) COM_FORWARD_IMedium_GETTER_Name_TO (smth) COM_FORWARD_IMedium_GETTER_DeviceType_TO (smth) COM_FORWARD_IMedium_GETTER_HostDrive_TO (smth) COM_FORWARD_IMedium_GETTER_Size_TO (smth) COM_FORWARD_IMedium_GETTER_Format_TO (smth) COM_FORWARD_IMedium_GETTER_MediumFormat_TO (smth) COM_FORWARD_IMedium_GETTER_Type_TO (smth) COM_FORWARD_IMedium_SETTER_Type_TO (smth) COM_FORWARD_IMedium_GETTER_AllowedTypes_TO (smth) COM_FORWARD_IMedium_GETTER_Parent_TO (smth) COM_FORWARD_IMedium_GETTER_Children_TO (smth) COM_FORWARD_IMedium_GETTER_Base_TO (smth) COM_FORWARD_IMedium_GETTER_ReadOnly_TO (smth) COM_FORWARD_IMedium_GETTER_LogicalSize_TO (smth) COM_FORWARD_IMedium_GETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_SETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_GETTER_LastAccessError_TO (smth) COM_FORWARD_IMedium_GETTER_MachineIds_TO (smth) COM_FORWARD_IMedium_SetIds_TO (smth) COM_FORWARD_IMedium_RefreshState_TO (smth) COM_FORWARD_IMedium_GetSnapshotIds_TO (smth) COM_FORWARD_IMedium_LockRead_TO (smth) COM_FORWARD_IMedium_LockWrite_TO (smth) COM_FORWARD_IMedium_Close_TO (smth) COM_FORWARD_IMedium_GetProperty_TO (smth) COM_FORWARD_IMedium_SetProperty_TO (smth) COM_FORWARD_IMedium_GetProperties_TO (smth) COM_FORWARD_IMedium_SetProperties_TO (smth) COM_FORWARD_IMedium_CreateBaseStorage_TO (smth) COM_FORWARD_IMedium_DeleteStorage_TO (smth) COM_FORWARD_IMedium_CreateDiffStorage_TO (smth) COM_FORWARD_IMedium_MergeTo_TO (smth) COM_FORWARD_IMedium_CloneTo_TO (smth) COM_FORWARD_IMedium_CloneToBase_TO (smth) COM_FORWARD_IMedium_MoveTo_TO (smth) COM_FORWARD_IMedium_Compact_TO (smth) COM_FORWARD_IMedium_Resize_TO (smth) COM_FORWARD_IMedium_Reset_TO (smth) COM_FORWARD_IMedium_ChangeEncryption_TO (smth) COM_FORWARD_IMedium_GetEncryptionSettings_TO (smth) COM_FORWARD_IMedium_CheckEncryptionPassword_TO (smth) COM_FORWARD_IMedium_OpenForIO_TO (smth) ")
+cpp_quote("#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO(smth) HRESULT STDMETHODCALLTYPE ResizeAndCloneTo (IMedium * aTarget, LONG64 aLogicalSize, SAFEARRAY * * aVariant, IMedium * aParent, IProgress * * aProgress) { return smth ResizeAndCloneTo (aTarget, aLogicalSize, aVariant, aParent, aProgress); }")
+cpp_quote("#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO_OBJ(obj) COM_FORWARD_IMedium_ResizeAndCloneTo_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO_BASE(base) COM_FORWARD_IMedium_ResizeAndCloneTo_TO (base::)")
+cpp_quote("#define COM_FORWARD_IMedium_TO(smth) COM_FORWARD_IMedium_GETTER_Id_TO (smth) COM_FORWARD_IMedium_GETTER_Description_TO (smth) COM_FORWARD_IMedium_SETTER_Description_TO (smth) COM_FORWARD_IMedium_GETTER_State_TO (smth) COM_FORWARD_IMedium_GETTER_Variant_TO (smth) COM_FORWARD_IMedium_GETTER_Location_TO (smth) COM_FORWARD_IMedium_SETTER_Location_TO (smth) COM_FORWARD_IMedium_GETTER_Name_TO (smth) COM_FORWARD_IMedium_GETTER_DeviceType_TO (smth) COM_FORWARD_IMedium_GETTER_HostDrive_TO (smth) COM_FORWARD_IMedium_GETTER_Size_TO (smth) COM_FORWARD_IMedium_GETTER_Format_TO (smth) COM_FORWARD_IMedium_GETTER_MediumFormat_TO (smth) COM_FORWARD_IMedium_GETTER_Type_TO (smth) COM_FORWARD_IMedium_SETTER_Type_TO (smth) COM_FORWARD_IMedium_GETTER_AllowedTypes_TO (smth) COM_FORWARD_IMedium_GETTER_Parent_TO (smth) COM_FORWARD_IMedium_GETTER_Children_TO (smth) COM_FORWARD_IMedium_GETTER_Base_TO (smth) COM_FORWARD_IMedium_GETTER_ReadOnly_TO (smth) COM_FORWARD_IMedium_GETTER_LogicalSize_TO (smth) COM_FORWARD_IMedium_GETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_SETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_GETTER_LastAccessError_TO (smth) COM_FORWARD_IMedium_GETTER_MachineIds_TO (smth) COM_FORWARD_IMedium_SetIds_TO (smth) COM_FORWARD_IMedium_RefreshState_TO (smth) COM_FORWARD_IMedium_GetSnapshotIds_TO (smth) COM_FORWARD_IMedium_LockRead_TO (smth) COM_FORWARD_IMedium_LockWrite_TO (smth) COM_FORWARD_IMedium_Close_TO (smth) COM_FORWARD_IMedium_GetProperty_TO (smth) COM_FORWARD_IMedium_SetProperty_TO (smth) COM_FORWARD_IMedium_GetProperties_TO (smth) COM_FORWARD_IMedium_SetProperties_TO (smth) COM_FORWARD_IMedium_CreateBaseStorage_TO (smth) COM_FORWARD_IMedium_DeleteStorage_TO (smth) COM_FORWARD_IMedium_CreateDiffStorage_TO (smth) COM_FORWARD_IMedium_MergeTo_TO (smth) COM_FORWARD_IMedium_CloneTo_TO (smth) COM_FORWARD_IMedium_CloneToBase_TO (smth) COM_FORWARD_IMedium_MoveTo_TO (smth) COM_FORWARD_IMedium_Compact_TO (smth) COM_FORWARD_IMedium_Resize_TO (smth) COM_FORWARD_IMedium_Reset_TO (smth) COM_FORWARD_IMedium_ChangeEncryption_TO (smth) COM_FORWARD_IMedium_GetEncryptionSettings_TO (smth) COM_FORWARD_IMedium_CheckEncryptionPassword_TO (smth) COM_FORWARD_IMedium_OpenForIO_TO (smth) COM_FORWARD_IMedium_ResizeAndCloneTo_TO (smth) ")
 cpp_quote("#define COM_FORWARD_IMedium_TO_OBJ(obj) COM_FORWARD_IMedium_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IMedium_TO_BASE(base) COM_FORWARD_IMedium_TO (base::)")
 
@@ -20700,6 +20710,7 @@ cpp_quote("#define VBOX_E_PASSWORD_INCORRECT ((HRESULT)0x80BB000D)")
 cpp_quote("#define VBOX_E_MAXIMUM_REACHED ((HRESULT)0x80BB000E)")
 cpp_quote("#define VBOX_E_GSTCTL_GUEST_ERROR ((HRESULT)0x80BB000F)")
 cpp_quote("#define VBOX_E_TIMEOUT ((HRESULT)0x80BB0010)")
+cpp_quote("#define VBOX_E_DND_ERROR ((HRESULT)0x80BB0011)")
 
 
 interface IVirtualBoxErrorInfo;

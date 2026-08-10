@@ -45950,6 +45950,50 @@ class ns0:
             Holder.__name__ = "IMedium_openForIOResponse_Holder"
             self.pyclass = Holder
 
+    class IMedium_resizeAndCloneTo_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IMedium_resizeAndCloneTo"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IMedium_resizeAndCloneTo_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="target", aname="_target", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TCnumbers.Ilong(pname="logicalSize", aname="_logicalSize", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), GTD("http://www.virtualbox.org/","MediumVariant",lazy=False)(pname="variant", aname="_variant", minOccurs=0, maxOccurs="unbounded", nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="parent", aname="_parent", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IMedium_resizeAndCloneTo")
+            kw["aname"] = "_IMedium_resizeAndCloneTo"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    self._target = None
+                    self._logicalSize = None
+                    self._variant = []
+                    self._parent = None
+                    return
+            Holder.__name__ = "IMedium_resizeAndCloneTo_Holder"
+            self.pyclass = Holder
+
+    class IMedium_resizeAndCloneToResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "IMedium_resizeAndCloneToResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.IMedium_resizeAndCloneToResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","IMedium_resizeAndCloneToResponse")
+            kw["aname"] = "_IMedium_resizeAndCloneToResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "IMedium_resizeAndCloneToResponse_Holder"
+            self.pyclass = Holder
+
     class IMediumFormat_getId_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
         literal = "IMediumFormat_getId"
         schema = "http://www.virtualbox.org/"

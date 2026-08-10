@@ -11021,6 +11021,16 @@ class vboxBindingSOAP:
         response = self.binding.Receive(IMedium_openForIOResultMsg.typecode)
         return response
 
+    # op: IMedium_resizeAndCloneTo
+    def IMedium_resizeAndCloneTo(self, request, **kw):
+        if isinstance(request, IMedium_resizeAndCloneToRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(IMedium_resizeAndCloneToResultMsg.typecode)
+        return response
+
     # op: IMediumFormat_getId
     def IMediumFormat_getId(self, request, **kw):
         if isinstance(request, IMediumFormat_getIdRequestMsg) is False:
@@ -22656,6 +22666,10 @@ IMedium_checkEncryptionPasswordResultMsg = GED("http://www.virtualbox.org/", "IM
 IMedium_openForIORequestMsg = GED("http://www.virtualbox.org/", "IMedium_openForIO").pyclass
 
 IMedium_openForIOResultMsg = GED("http://www.virtualbox.org/", "IMedium_openForIOResponse").pyclass
+
+IMedium_resizeAndCloneToRequestMsg = GED("http://www.virtualbox.org/", "IMedium_resizeAndCloneTo").pyclass
+
+IMedium_resizeAndCloneToResultMsg = GED("http://www.virtualbox.org/", "IMedium_resizeAndCloneToResponse").pyclass
 
 IMediumFormat_getIdRequestMsg = GED("http://www.virtualbox.org/", "IMediumFormat_getId").pyclass
 

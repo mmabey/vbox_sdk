@@ -282,6 +282,8 @@ class VirtualBox_COM_result_codes
 
     const VBOX_E_TIMEOUT = 0x80BB0010;
 
+    const VBOX_E_DND_ERROR = 0x80BB0011;
+
 }
 
 /**
@@ -11488,6 +11490,18 @@ class IMedium extends VBox_ManagedObject
         return new IMediumIO ($this->connection, $response->returnval);
     }
 
+    public function resizeAndCloneTo($arg_target, $arg_logicalSize, $arg_variant, $arg_parent)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->target = $arg_target;
+        $request->logicalSize = $arg_logicalSize;
+        $request->variant = $arg_variant;
+        $request->parent = $arg_parent;
+        $response = $this->connection->__soapCall('IMedium_resizeAndCloneTo', array((array)$request));
+        return new IProgress ($this->connection, $response->returnval);
+    }
+
     public function getId()
     {
         $request = new stdClass();
@@ -22186,8 +22200,8 @@ class GraphicsControllerTypeCollection extends VBox_EnumCollection
  */
 class CleanupMode extends VBox_Enum
 {
-    public $NameMap = array(1 => 'UnregisterOnly', 2 => 'DetachAllReturnNone', 3 => 'DetachAllReturnHardDisksOnly', 4 => 'Full');
-    public $ValueMap = array('UnregisterOnly' => 1, 'DetachAllReturnNone' => 2, 'DetachAllReturnHardDisksOnly' => 3, 'Full' => 4);
+    public $NameMap = array(1 => 'UnregisterOnly', 2 => 'DetachAllReturnNone', 3 => 'DetachAllReturnHardDisksOnly', 4 => 'Full', 5 => 'DetachAllReturnHardDisksAndVMRemovable');
+    public $ValueMap = array('UnregisterOnly' => 1, 'DetachAllReturnNone' => 2, 'DetachAllReturnHardDisksOnly' => 3, 'Full' => 4, 'DetachAllReturnHardDisksAndVMRemovable' => 5);
 }
 
 /**

@@ -16,7 +16,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Nov 16 15:14:45 2022
+/* at Wed Jan 11 14:33:37 2023
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -3742,7 +3742,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0046
     {	CleanupMode_UnregisterOnly	= 1,
 	CleanupMode_DetachAllReturnNone	= 2,
 	CleanupMode_DetachAllReturnHardDisksOnly	= 3,
-	CleanupMode_Full	= 4
+	CleanupMode_Full	= 4,
+	CleanupMode_DetachAllReturnHardDisksAndVMRemovable	= 5
     } 	CleanupMode;
 
 #define CleanupMode_T CleanupMode
@@ -4254,7 +4255,7 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0096
     } 	MediumType;
 
 #define MediumType_T MediumType
-typedef /* [public][public][public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("0282e97f-4ef3-4411-a8e0-47c384803cb6") 
+typedef /* [public][public][public][public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("0282e97f-4ef3-4411-a8e0-47c384803cb6") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0097
     {	MediumVariant_Standard	= 0,
 	MediumVariant_VmdkSplit2G	= 0x1,
@@ -36091,6 +36092,13 @@ EXTERN_C const IID IID_IMedium;
             /* [in] */ BSTR aPassword,
             /* [retval][out] */ IMediumIO **aMediumIO) = 0;
         
+        virtual HRESULT STDMETHODCALLTYPE ResizeAndCloneTo( 
+            /* [in] */ IMedium *aTarget,
+            /* [in] */ LONG64 aLogicalSize,
+            /* [in] */ SAFEARRAY * aVariant,
+            /* [in] */ IMedium *aParent,
+            /* [retval][out] */ IProgress **aProgress) = 0;
+        
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod1IMedium( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod2IMedium( void) = 0;
@@ -36104,8 +36112,6 @@ EXTERN_C const IID IID_IMedium;
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod6IMedium( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod7IMedium( void) = 0;
-        
-        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod8IMedium( void) = 0;
         
     };
     
@@ -36427,6 +36433,14 @@ EXTERN_C const IID IID_IMedium;
             /* [in] */ BSTR aPassword,
             /* [retval][out] */ IMediumIO **aMediumIO);
         
+        HRESULT ( STDMETHODCALLTYPE *ResizeAndCloneTo )( 
+            IMedium * This,
+            /* [in] */ IMedium *aTarget,
+            /* [in] */ LONG64 aLogicalSize,
+            /* [in] */ SAFEARRAY * aVariant,
+            /* [in] */ IMedium *aParent,
+            /* [retval][out] */ IProgress **aProgress);
+        
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod1IMedium )( 
             IMedium * This);
         
@@ -36446,9 +36460,6 @@ EXTERN_C const IID IID_IMedium;
             IMedium * This);
         
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod7IMedium )( 
-            IMedium * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod8IMedium )( 
             IMedium * This);
         
         END_INTERFACE
@@ -36670,6 +36681,9 @@ EXTERN_C const IID IID_IMedium;
 #define IMedium_OpenForIO(This,aWritable,aPassword,aMediumIO)	\
     ( (This)->lpVtbl -> OpenForIO(This,aWritable,aPassword,aMediumIO) ) 
 
+#define IMedium_ResizeAndCloneTo(This,aTarget,aLogicalSize,aVariant,aParent,aProgress)	\
+    ( (This)->lpVtbl -> ResizeAndCloneTo(This,aTarget,aLogicalSize,aVariant,aParent,aProgress) ) 
+
 #define IMedium_InternalAndReservedMethod1IMedium(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod1IMedium(This) ) 
 
@@ -36690,9 +36704,6 @@ EXTERN_C const IID IID_IMedium;
 
 #define IMedium_InternalAndReservedMethod7IMedium(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod7IMedium(This) ) 
-
-#define IMedium_InternalAndReservedMethod8IMedium(This)	\
-    ( (This)->lpVtbl -> InternalAndReservedMethod8IMedium(This) ) 
 
 #endif /* COBJMACROS */
 
@@ -36855,7 +36866,10 @@ EXTERN_C const IID IID_IMedium;
 #define COM_FORWARD_IMedium_OpenForIO_TO(smth) HRESULT STDMETHODCALLTYPE OpenForIO (BOOL aWritable, BSTR aPassword, IMediumIO * * aMediumIO) { return smth OpenForIO (aWritable, aPassword, aMediumIO); }
 #define COM_FORWARD_IMedium_OpenForIO_TO_OBJ(obj) COM_FORWARD_IMedium_OpenForIO_TO ((obj)->)
 #define COM_FORWARD_IMedium_OpenForIO_TO_BASE(base) COM_FORWARD_IMedium_OpenForIO_TO (base::)
-#define COM_FORWARD_IMedium_TO(smth) COM_FORWARD_IMedium_GETTER_Id_TO (smth) COM_FORWARD_IMedium_GETTER_Description_TO (smth) COM_FORWARD_IMedium_SETTER_Description_TO (smth) COM_FORWARD_IMedium_GETTER_State_TO (smth) COM_FORWARD_IMedium_GETTER_Variant_TO (smth) COM_FORWARD_IMedium_GETTER_Location_TO (smth) COM_FORWARD_IMedium_SETTER_Location_TO (smth) COM_FORWARD_IMedium_GETTER_Name_TO (smth) COM_FORWARD_IMedium_GETTER_DeviceType_TO (smth) COM_FORWARD_IMedium_GETTER_HostDrive_TO (smth) COM_FORWARD_IMedium_GETTER_Size_TO (smth) COM_FORWARD_IMedium_GETTER_Format_TO (smth) COM_FORWARD_IMedium_GETTER_MediumFormat_TO (smth) COM_FORWARD_IMedium_GETTER_Type_TO (smth) COM_FORWARD_IMedium_SETTER_Type_TO (smth) COM_FORWARD_IMedium_GETTER_AllowedTypes_TO (smth) COM_FORWARD_IMedium_GETTER_Parent_TO (smth) COM_FORWARD_IMedium_GETTER_Children_TO (smth) COM_FORWARD_IMedium_GETTER_Base_TO (smth) COM_FORWARD_IMedium_GETTER_ReadOnly_TO (smth) COM_FORWARD_IMedium_GETTER_LogicalSize_TO (smth) COM_FORWARD_IMedium_GETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_SETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_GETTER_LastAccessError_TO (smth) COM_FORWARD_IMedium_GETTER_MachineIds_TO (smth) COM_FORWARD_IMedium_SetIds_TO (smth) COM_FORWARD_IMedium_RefreshState_TO (smth) COM_FORWARD_IMedium_GetSnapshotIds_TO (smth) COM_FORWARD_IMedium_LockRead_TO (smth) COM_FORWARD_IMedium_LockWrite_TO (smth) COM_FORWARD_IMedium_Close_TO (smth) COM_FORWARD_IMedium_GetProperty_TO (smth) COM_FORWARD_IMedium_SetProperty_TO (smth) COM_FORWARD_IMedium_GetProperties_TO (smth) COM_FORWARD_IMedium_SetProperties_TO (smth) COM_FORWARD_IMedium_CreateBaseStorage_TO (smth) COM_FORWARD_IMedium_DeleteStorage_TO (smth) COM_FORWARD_IMedium_CreateDiffStorage_TO (smth) COM_FORWARD_IMedium_MergeTo_TO (smth) COM_FORWARD_IMedium_CloneTo_TO (smth) COM_FORWARD_IMedium_CloneToBase_TO (smth) COM_FORWARD_IMedium_MoveTo_TO (smth) COM_FORWARD_IMedium_Compact_TO (smth) COM_FORWARD_IMedium_Resize_TO (smth) COM_FORWARD_IMedium_Reset_TO (smth) COM_FORWARD_IMedium_ChangeEncryption_TO (smth) COM_FORWARD_IMedium_GetEncryptionSettings_TO (smth) COM_FORWARD_IMedium_CheckEncryptionPassword_TO (smth) COM_FORWARD_IMedium_OpenForIO_TO (smth) 
+#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO(smth) HRESULT STDMETHODCALLTYPE ResizeAndCloneTo (IMedium * aTarget, LONG64 aLogicalSize, SAFEARRAY * * aVariant, IMedium * aParent, IProgress * * aProgress) { return smth ResizeAndCloneTo (aTarget, aLogicalSize, aVariant, aParent, aProgress); }
+#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO_OBJ(obj) COM_FORWARD_IMedium_ResizeAndCloneTo_TO ((obj)->)
+#define COM_FORWARD_IMedium_ResizeAndCloneTo_TO_BASE(base) COM_FORWARD_IMedium_ResizeAndCloneTo_TO (base::)
+#define COM_FORWARD_IMedium_TO(smth) COM_FORWARD_IMedium_GETTER_Id_TO (smth) COM_FORWARD_IMedium_GETTER_Description_TO (smth) COM_FORWARD_IMedium_SETTER_Description_TO (smth) COM_FORWARD_IMedium_GETTER_State_TO (smth) COM_FORWARD_IMedium_GETTER_Variant_TO (smth) COM_FORWARD_IMedium_GETTER_Location_TO (smth) COM_FORWARD_IMedium_SETTER_Location_TO (smth) COM_FORWARD_IMedium_GETTER_Name_TO (smth) COM_FORWARD_IMedium_GETTER_DeviceType_TO (smth) COM_FORWARD_IMedium_GETTER_HostDrive_TO (smth) COM_FORWARD_IMedium_GETTER_Size_TO (smth) COM_FORWARD_IMedium_GETTER_Format_TO (smth) COM_FORWARD_IMedium_GETTER_MediumFormat_TO (smth) COM_FORWARD_IMedium_GETTER_Type_TO (smth) COM_FORWARD_IMedium_SETTER_Type_TO (smth) COM_FORWARD_IMedium_GETTER_AllowedTypes_TO (smth) COM_FORWARD_IMedium_GETTER_Parent_TO (smth) COM_FORWARD_IMedium_GETTER_Children_TO (smth) COM_FORWARD_IMedium_GETTER_Base_TO (smth) COM_FORWARD_IMedium_GETTER_ReadOnly_TO (smth) COM_FORWARD_IMedium_GETTER_LogicalSize_TO (smth) COM_FORWARD_IMedium_GETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_SETTER_AutoReset_TO (smth) COM_FORWARD_IMedium_GETTER_LastAccessError_TO (smth) COM_FORWARD_IMedium_GETTER_MachineIds_TO (smth) COM_FORWARD_IMedium_SetIds_TO (smth) COM_FORWARD_IMedium_RefreshState_TO (smth) COM_FORWARD_IMedium_GetSnapshotIds_TO (smth) COM_FORWARD_IMedium_LockRead_TO (smth) COM_FORWARD_IMedium_LockWrite_TO (smth) COM_FORWARD_IMedium_Close_TO (smth) COM_FORWARD_IMedium_GetProperty_TO (smth) COM_FORWARD_IMedium_SetProperty_TO (smth) COM_FORWARD_IMedium_GetProperties_TO (smth) COM_FORWARD_IMedium_SetProperties_TO (smth) COM_FORWARD_IMedium_CreateBaseStorage_TO (smth) COM_FORWARD_IMedium_DeleteStorage_TO (smth) COM_FORWARD_IMedium_CreateDiffStorage_TO (smth) COM_FORWARD_IMedium_MergeTo_TO (smth) COM_FORWARD_IMedium_CloneTo_TO (smth) COM_FORWARD_IMedium_CloneToBase_TO (smth) COM_FORWARD_IMedium_MoveTo_TO (smth) COM_FORWARD_IMedium_Compact_TO (smth) COM_FORWARD_IMedium_Resize_TO (smth) COM_FORWARD_IMedium_Reset_TO (smth) COM_FORWARD_IMedium_ChangeEncryption_TO (smth) COM_FORWARD_IMedium_GetEncryptionSettings_TO (smth) COM_FORWARD_IMedium_CheckEncryptionPassword_TO (smth) COM_FORWARD_IMedium_OpenForIO_TO (smth) COM_FORWARD_IMedium_ResizeAndCloneTo_TO (smth) 
 #define COM_FORWARD_IMedium_TO_OBJ(obj) COM_FORWARD_IMedium_TO ((obj)->)
 #define COM_FORWARD_IMedium_TO_BASE(base) COM_FORWARD_IMedium_TO (base::)
 
@@ -77646,6 +77660,7 @@ extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0222_v0_0_s_ifspec;
 #define VBOX_E_MAXIMUM_REACHED ((HRESULT)0x80BB000E)
 #define VBOX_E_GSTCTL_GUEST_ERROR ((HRESULT)0x80BB000F)
 #define VBOX_E_TIMEOUT ((HRESULT)0x80BB0010)
+#define VBOX_E_DND_ERROR ((HRESULT)0x80BB0011)
 
 
 

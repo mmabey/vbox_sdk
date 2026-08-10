@@ -1187,6 +1187,7 @@ interface nsIEventQueue
 #define VBOX_E_MAXIMUM_REACHED ((HRESULT)0x80BB000E)
 #define VBOX_E_GSTCTL_GUEST_ERROR ((HRESULT)0x80BB000F)
 #define VBOX_E_TIMEOUT ((HRESULT)0x80BB0010)
+#define VBOX_E_DND_ERROR ((HRESULT)0x80BB0011)
 
 
 interface IVirtualBoxErrorInfo;
@@ -2740,7 +2741,8 @@ typedef enum CleanupMode
     CleanupMode_UnregisterOnly = 1,
     CleanupMode_DetachAllReturnNone = 2,
     CleanupMode_DetachAllReturnHardDisksOnly = 3,
-    CleanupMode_Full = 4
+    CleanupMode_Full = 4,
+    CleanupMode_DetachAllReturnHardDisksAndVMRemovable = 5
 } CleanupMode;
 /* End of enum CleanupMode declaration */
 #define CleanupMode_T PRUint32
@@ -19576,6 +19578,16 @@ struct IMedium_vtbl
         IMediumIO * * mediumIO
     );
 
+    nsresult (*ResizeAndCloneTo)(
+        IMedium *pThis,
+        IMedium * target,
+        PRInt64 logicalSize,
+        PRUint32 variantSize,
+        PRUint32* variant,
+        IMedium * parent,
+        IProgress * * progress
+    );
+
     nsresult (*InternalAndReservedMethod1IMedium)(IMedium *pThis);
 
     nsresult (*InternalAndReservedMethod2IMedium)(IMedium *pThis);
@@ -19589,8 +19601,6 @@ struct IMedium_vtbl
     nsresult (*InternalAndReservedMethod6IMedium)(IMedium *pThis);
 
     nsresult (*InternalAndReservedMethod7IMedium)(IMedium *pThis);
-
-    nsresult (*InternalAndReservedMethod8IMedium)(IMedium *pThis);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -19823,6 +19833,16 @@ struct IMediumVtbl
         IMediumIO * * mediumIO
     );
 
+    nsresult (*ResizeAndCloneTo)(
+        IMedium *pThis,
+        IMedium * target,
+        PRInt64 logicalSize,
+        PRUint32 variantSize,
+        PRUint32* variant,
+        IMedium * parent,
+        IProgress * * progress
+    );
+
     nsresult (*InternalAndReservedMethod1IMedium)(IMedium *pThis);
 
     nsresult (*InternalAndReservedMethod2IMedium)(IMedium *pThis);
@@ -19836,8 +19856,6 @@ struct IMediumVtbl
     nsresult (*InternalAndReservedMethod6IMedium)(IMedium *pThis);
 
     nsresult (*InternalAndReservedMethod7IMedium)(IMedium *pThis);
-
-    nsresult (*InternalAndReservedMethod8IMedium)(IMedium *pThis);
 
 };
 #define IMedium_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
@@ -19917,6 +19935,7 @@ struct IMediumVtbl
 #define IMedium_GetEncryptionSettings(p, aCipher, aPasswordId) ((p)->lpVtbl->GetEncryptionSettings(p, aCipher, aPasswordId))
 #define IMedium_CheckEncryptionPassword(p, aPassword) ((p)->lpVtbl->CheckEncryptionPassword(p, aPassword))
 #define IMedium_OpenForIO(p, aWritable, aPassword, aMediumIO) ((p)->lpVtbl->OpenForIO(p, aWritable, aPassword, aMediumIO))
+#define IMedium_ResizeAndCloneTo(p, aTarget, aLogicalSize, aVariant, aParent, aProgress) ((p)->lpVtbl->ResizeAndCloneTo(p, aTarget, aLogicalSize, aVariant, aParent, aProgress))
 #endif /* VBOX_WITH_GLUE */
 
 interface IMedium

@@ -13487,6 +13487,19 @@ class IMedium(IUnknown):
        return IMediumIO(self.mgr,val._returnval)
 
 
+   def resizeAndCloneTo(self, _arg_target, _arg_logicalSize, _arg_variant, _arg_parent):
+       req=IMedium_resizeAndCloneToRequestMsg()
+       req._this=self.handle
+       
+       req._target=_arg_target
+       req._logicalSize=_arg_logicalSize
+       req._variant=_arg_variant
+       req._parent=_arg_parent
+       val=self.mgr.getPort().IMedium_resizeAndCloneTo(req)
+       
+       return IProgress(self.mgr,val._returnval)
+
+
    def getId(self):
        req=IMedium_getIdRequestMsg()
        req._this=self.handle
@@ -34832,17 +34845,19 @@ class CleanupMode:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'UnregisterOnly',2:'DetachAllReturnNone',3:'DetachAllReturnHardDisksOnly',4:'Full'}
+   _NameMap={1:'UnregisterOnly',2:'DetachAllReturnNone',3:'DetachAllReturnHardDisksOnly',4:'Full',5:'DetachAllReturnHardDisksAndVMRemovable'}
    _ValueMap={
               'UnregisterOnly':1,
               'DetachAllReturnNone':2,
               'DetachAllReturnHardDisksOnly':3,
-              'Full':4}
+              'Full':4,
+              'DetachAllReturnHardDisksAndVMRemovable':5}
 
    UnregisterOnly=1
    DetachAllReturnNone=2
    DetachAllReturnHardDisksOnly=3
    Full=4
+   DetachAllReturnHardDisksAndVMRemovable=5
 
 class CloneMode:
    def __init__(self,mgr,handle):
