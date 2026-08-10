@@ -1,10 +1,10 @@
-# $Id: makefile.tstCAPIGlue 135976 2020-02-04 10:35:17Z bird $
+# $Id: makefile.tstCAPIGlue 153224 2022-08-22 17:43:14Z klaus $
 ## @file makefile.tstCAPIGlue
 # Makefile for sample program illustrating use of C binding for COM/XPCOM.
 #
 
 #
-# Copyright (C) 2009-2020 Oracle Corporation
+# Copyright (C) 2009-2022 Oracle and/or its affiliates.
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -30,7 +30,7 @@
 
 PATH_SDK      = ../../..
 CAPI_INC      = -I$(PATH_SDK)/bindings/c/include
-ifeq ($(BUILD_PLATFORM),win)
+ifdef ProgramFiles
 PLATFORM_INC  = -I$(PATH_SDK)/bindings/mscom/include
 PLATFORM_LIB  = $(PATH_SDK)/bindings/mscom/lib
 else

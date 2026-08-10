@@ -2,7 +2,7 @@
 
 
 1) RDP Web Control contains SWFObject library <http://code.google.com/p/swfobject/>
-which is released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
+which is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
 
 
 2) RDP Web Control contains code from as3crypto library which is
@@ -30,20 +30,20 @@ covered under the following copyright:
  *
  * Base64 is copyright (c) 2006 Steve Webster (http://dynamicflash.com/goodies/base64)
  *
- * Redistribution and use in source and binary forms, with or without modification, 
+ * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * Redistributions of source code must retain the above copyright notice, this list 
- * of conditions and the following disclaimer. Redistributions in binary form must 
- * reproduce the above copyright notice, this list of conditions and the following 
+ * Redistributions of source code must retain the above copyright notice, this list
+ * of conditions and the following disclaimer. Redistributions in binary form must
+ * reproduce the above copyright notice, this list of conditions and the following
  * disclaimer in the documentation and/or other materials provided with the distribution.
  *
  * Neither the name of the author nor the names of its contributors may be used to endorse
  * or promote products derived from this software without specific prior written permission.
  *
- * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND, 
- * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY 
- * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  
+ * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
+ * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
  *
  * IN NO EVENT SHALL TOM WU BE LIABLE FOR ANY SPECIAL, INCIDENTAL,
  * INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER
@@ -52,32 +52,32 @@ covered under the following copyright:
  * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  */
- 
+
 Address all questions regarding this license to:
 
  Henri Torgemane
  henri_torgemane@yahoo.com
- 
+
 
 Additionally, the MD5 algorithm is covered by the following notice:
 
 /* Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All rights reserved.
- * 
+ *
  * License to copy and use this software is granted provided that it
  * is identified as the "RSA Data Security, Inc. MD5 Message-Digest
  * Algorithm" in all material mentioning or referencing this software
  * or this function.
- * 
+ *
  * License is also granted to make and use derivative works provided
  * that such works are identified as "derived from the RSA Data
  * Security, Inc. MD5 Message-Digest Algorithm" in all material
  * mentioning or referencing the derived work.
- * 
+ *
  * RSA Data Security, Inc. makes no representations concerning either
  * the merchantability of this software or the suitability of this
  * software for any particular purpose. It is provided "as is"
  * without express or implied warranty of any kind.
- * 
+ *
  * These notices must be retained in any copies of any part of this
  * documentation and/or software.
  */

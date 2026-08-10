@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2009-2022 Oracle and/or its affiliates.
+ *
+ * Oracle Corporation confidential
+ */
+
 /* JS helpers for the Flash RDP Web Control.
  *
  * Methods started with '_' are for internal use and must not be called.

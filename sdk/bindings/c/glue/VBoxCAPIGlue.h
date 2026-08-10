@@ -1,10 +1,10 @@
-/* $Id: VBoxCAPIGlue.h.in 135976 2020-02-04 10:35:17Z bird $ */
+/* $Id: VBoxCAPIGlue.h.in 153224 2022-08-22 17:43:14Z klaus $ */
 /** @file VBoxCAPIGlue.h
  * Glue for dynamically linking with VBoxCAPI.
  */
 
 /*
- * Copyright (C) 2008-2020 Oracle Corporation
+ * Copyright (C) 2008-2022 Oracle and/or its affiliates.
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -36,7 +36,7 @@
 
 #undef VBOX_WITH_GLUE
 #define VBOX_WITH_GLUE
-#include "VBoxCAPI_v6_1.h"
+#include "VBoxCAPI_v7_0.h"
 
 #ifdef __cplusplus
 extern "C" {

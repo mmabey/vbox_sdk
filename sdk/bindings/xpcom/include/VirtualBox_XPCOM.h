@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/6.1-sdk/out/linux.amd64/release/bin/sdk/bindings/xpcom/idl/VirtualBox_XPCOM.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/out/linux.amd64/release/bin/sdk/bindings/xpcom/idl/VirtualBox_XPCOM.idl
  */
 
 #ifndef __gen_VirtualBox_XPCOM_h__
@@ -171,6 +171,8 @@ class INATNetwork; /* forward declaration */
 
 class ICloudNetwork; /* forward declaration */
 
+class IHostOnlyNetwork; /* forward declaration */
+
 class IDHCPServer; /* forward declaration */
 
 class IDHCPConfig; /* forward declaration */
@@ -201,6 +203,8 @@ class IGraphicsAdapter; /* forward declaration */
 
 class IBIOSSettings; /* forward declaration */
 
+class ITrustedPlatformModule; /* forward declaration */
+
 class IRecordingScreenSettings; /* forward declaration */
 
 class IRecordingSettings; /* forward declaration */
@@ -208,6 +212,10 @@ class IRecordingSettings; /* forward declaration */
 class IPCIAddress; /* forward declaration */
 
 class IPCIDeviceAttachment; /* forward declaration */
+
+class IUefiVariableStore; /* forward declaration */
+
+class INvramStore; /* forward declaration */
 
 class IMachine; /* forward declaration */
 
@@ -221,9 +229,17 @@ class IHostNetworkInterface; /* forward declaration */
 
 class IHostVideoInputDevice; /* forward declaration */
 
-class IHostUpdate; /* forward declaration */
+class IUpdateAgent; /* forward declaration */
+
+class IHostUpdateAgent; /* forward declaration */
+
+class IHostDrivePartition; /* forward declaration */
+
+class IHostDrive; /* forward declaration */
 
 class IHost; /* forward declaration */
+
+class ICPUProfile; /* forward declaration */
 
 class ISystemProperties; /* forward declaration */
 
@@ -255,7 +271,11 @@ class IFile; /* forward declaration */
 
 class IGuestFile; /* forward declaration */
 
+class IFsInfo; /* forward declaration */
+
 class IFsObjInfo; /* forward declaration */
+
+class IGuestFsInfo; /* forward declaration */
 
 class IGuestFsObjInfo; /* forward declaration */
 
@@ -319,6 +339,10 @@ class IUSBProxyBackend; /* forward declaration */
 
 class IAudioAdapter; /* forward declaration */
 
+class IHostAudioDevice; /* forward declaration */
+
+class IAudioSettings; /* forward declaration */
+
 class IVRDEServer; /* forward declaration */
 
 class ISharedFolder; /* forward declaration */
@@ -348,6 +372,8 @@ class IExtPackManager; /* forward declaration */
 class IBandwidthGroup; /* forward declaration */
 
 class IBandwidthControl; /* forward declaration */
+
+class IGuestDebugControl; /* forward declaration */
 
 class IVirtualBoxClient; /* forward declaration */
 
@@ -485,6 +511,8 @@ class IShowWindowEvent; /* forward declaration */
 
 class INATRedirectEvent; /* forward declaration */
 
+class IHostAudioDeviceChangedEvent; /* forward declaration */
+
 class IHostPCIDevicePlugEvent; /* forward declaration */
 
 class IVBoxSVCAvailabilityChangedEvent; /* forward declaration */
@@ -513,6 +541,8 @@ class IHostNameResolutionConfigurationChangeEvent; /* forward declaration */
 
 class IProgressEvent; /* forward declaration */
 
+class IProgressCreatedEvent; /* forward declaration */
+
 class IProgressPercentageChangedEvent; /* forward declaration */
 
 class IProgressTaskCompletedEvent; /* forward declaration */
@@ -522,6 +552,18 @@ class ICursorPositionChangedEvent; /* forward declaration */
 class IGuestAdditionsStatusChangedEvent; /* forward declaration */
 
 class IGuestMonitorInfoChangedEvent; /* forward declaration */
+
+class IUpdateAgentEvent; /* forward declaration */
+
+class IUpdateAgentSettingsChangedEvent; /* forward declaration */
+
+class IUpdateAgentErrorEvent; /* forward declaration */
+
+class IUpdateAgentAvailableEvent; /* forward declaration */
+
+class IUpdateAgentStateChangedEvent; /* forward declaration */
+
+class IGuestDebugControlChangedEvent; /* forward declaration */
 
 class IStringArray; /* forward declaration */
 
@@ -543,6 +585,8 @@ class ICloudNetworkGatewayInfo; /* forward declaration */
 
 class ICloudNetworkEnvironmentInfo; /* forward declaration */
 
+class ICloudMachine; /* forward declaration */
+
 class ICloudClient; /* forward declaration */
 
 class ICloudProfile; /* forward declaration */
@@ -550,6 +594,18 @@ class ICloudProfile; /* forward declaration */
 class ICloudProvider; /* forward declaration */
 
 class ICloudProviderManager; /* forward declaration */
+
+class ICloudProviderListChangedEvent; /* forward declaration */
+
+class ICloudProviderRegisteredEvent; /* forward declaration */
+
+class ICloudProviderUninstallEvent; /* forward declaration */
+
+class ICloudProfileRegisteredEvent; /* forward declaration */
+
+class ICloudProfileChangedEvent; /* forward declaration */
+
+class ILanguageChangedEvent; /* forward declaration */
 
 
 /* starting interface:    SettingsVersion */
@@ -605,6 +661,8 @@ class NS_NO_VTABLE SettingsVersion {
   enum { v1_17 = 19U };
 
   enum { v1_18 = 20U };
+
+  enum { v1_19 = 21U };
 
   enum { Future = 99999U };
 
@@ -678,6 +736,7 @@ typedef PRUint32 SettingsVersion_T;
 # define SettingsVersion_v1_16 SettingsVersion::v1_16
 # define SettingsVersion_v1_17 SettingsVersion::v1_17
 # define SettingsVersion_v1_18 SettingsVersion::v1_18
+# define SettingsVersion_v1_19 SettingsVersion::v1_19
 # define SettingsVersion_Future SettingsVersion::Future
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum SettingsVersion_T {
@@ -702,6 +761,7 @@ typedef enum SettingsVersion_T {
     SettingsVersion_v1_16 = SettingsVersion::v1_16,
     SettingsVersion_v1_17 = SettingsVersion::v1_17,
     SettingsVersion_v1_18 = SettingsVersion::v1_18,
+    SettingsVersion_v1_19 = SettingsVersion::v1_19,
     SettingsVersion_Future = SettingsVersion::Future,
     SettingsVersion_32BitHack = 0x7fffffff
 } SettingsVersion_T;
@@ -810,49 +870,51 @@ class NS_NO_VTABLE MachineState {
 
   enum { Aborted = 4U };
 
-  enum { Running = 5U };
+  enum { AbortedSaved = 5U };
 
-  enum { Paused = 6U };
+  enum { Running = 6U };
 
-  enum { Stuck = 7U };
+  enum { Paused = 7U };
 
-  enum { Teleporting = 8U };
+  enum { Stuck = 8U };
 
-  enum { LiveSnapshotting = 9U };
+  enum { Teleporting = 9U };
 
-  enum { Starting = 10U };
+  enum { LiveSnapshotting = 10U };
 
-  enum { Stopping = 11U };
+  enum { Starting = 11U };
 
-  enum { Saving = 12U };
+  enum { Stopping = 12U };
 
-  enum { Restoring = 13U };
+  enum { Saving = 13U };
 
-  enum { TeleportingPausedVM = 14U };
+  enum { Restoring = 14U };
 
-  enum { TeleportingIn = 15U };
+  enum { TeleportingPausedVM = 15U };
 
-  enum { DeletingSnapshotOnline = 16U };
+  enum { TeleportingIn = 16U };
 
-  enum { DeletingSnapshotPaused = 17U };
+  enum { DeletingSnapshotOnline = 17U };
 
-  enum { OnlineSnapshotting = 18U };
+  enum { DeletingSnapshotPaused = 18U };
 
-  enum { RestoringSnapshot = 19U };
+  enum { OnlineSnapshotting = 19U };
 
-  enum { DeletingSnapshot = 20U };
+  enum { RestoringSnapshot = 20U };
 
-  enum { SettingUp = 21U };
+  enum { DeletingSnapshot = 21U };
 
-  enum { Snapshotting = 22U };
+  enum { SettingUp = 22U };
 
-  enum { FirstOnline = 5U };
+  enum { Snapshotting = 23U };
 
-  enum { LastOnline = 18U };
+  enum { FirstOnline = 6U };
 
-  enum { FirstTransient = 8U };
+  enum { LastOnline = 19U };
 
-  enum { LastTransient = 22U };
+  enum { FirstTransient = 9U };
+
+  enum { LastTransient = 23U };
 
 };
 
@@ -908,6 +970,7 @@ typedef PRUint32 MachineState_T;
 # define MachineState_Saved MachineState::Saved
 # define MachineState_Teleported MachineState::Teleported
 # define MachineState_Aborted MachineState::Aborted
+# define MachineState_AbortedSaved MachineState::AbortedSaved
 # define MachineState_Running MachineState::Running
 # define MachineState_Paused MachineState::Paused
 # define MachineState_Stuck MachineState::Stuck
@@ -937,6 +1000,7 @@ typedef enum MachineState_T {
     MachineState_Saved = MachineState::Saved,
     MachineState_Teleported = MachineState::Teleported,
     MachineState_Aborted = MachineState::Aborted,
+    MachineState_AbortedSaved = MachineState::AbortedSaved,
     MachineState_Running = MachineState::Running,
     MachineState_Paused = MachineState::Paused,
     MachineState_Stuck = MachineState::Stuck,
@@ -1053,6 +1117,88 @@ typedef enum SessionState_T {
 } SessionState_T;
 # ifdef AssertCompileSize
 AssertCompileSize(SessionState_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    CPUArchitecture */
+#define CPUARCHITECTURE_IID_STR "4a2c9915-12f1-43b2-bb84-e4bd4d5ca227"
+
+#define CPUARCHITECTURE_IID \
+  {0x4a2c9915, 0x12f1, 0x43b2, \
+    { 0xbb, 0x84, 0xe4, 0xbd, 0x4d, 0x5c, 0xa2, 0x27 }}
+
+class NS_NO_VTABLE CPUArchitecture {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(CPUARCHITECTURE_IID)
+
+  enum { Any = 0U };
+
+  enum { x86 = 1U };
+
+  enum { AMD64 = 2U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_CPUARCHITECTURE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_CPUARCHITECTURE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_CPUARCHITECTURE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public CPUArchitecture
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_CPUARCHITECTURE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, CPUArchitecture)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 CPUArchitecture_T;
+
+# define CPUArchitecture_Any CPUArchitecture::Any
+# define CPUArchitecture_x86 CPUArchitecture::x86
+# define CPUArchitecture_AMD64 CPUArchitecture::AMD64
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum CPUArchitecture_T {
+    CPUArchitecture_Any = CPUArchitecture::Any,
+    CPUArchitecture_x86 = CPUArchitecture::x86,
+    CPUArchitecture_AMD64 = CPUArchitecture::AMD64,
+    CPUArchitecture_32BitHack = 0x7fffffff
+} CPUArchitecture_T;
+# ifdef AssertCompileSize
+AssertCompileSize(CPUArchitecture_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
@@ -1187,11 +1333,11 @@ AssertCompileSize(CPUPropertyType_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    HWVirtExPropertyType */
-#define HWVIRTEXPROPERTYTYPE_IID_STR "bc05551e-e288-467e-1ea3-233de08e4480"
+#define HWVIRTEXPROPERTYTYPE_IID_STR "00069d9c-00b5-460c-00dd-64250024f7aa"
 
 #define HWVIRTEXPROPERTYTYPE_IID \
-  {0xbc05551e, 0xe288, 0x467e, \
-    { 0x1e, 0xa3, 0x23, 0x3d, 0xe0, 0x8e, 0x44, 0x80 }}
+  {0x00069d9c, 0x00b5, 0x460c, \
+    { 0x00, 0xdd, 0x64, 0x25, 0x00, 0x24, 0xf7, 0xaa }}
 
 class NS_NO_VTABLE HWVirtExPropertyType {
  public: 
@@ -1213,6 +1359,8 @@ class NS_NO_VTABLE HWVirtExPropertyType {
   enum { Force = 6U };
 
   enum { UseNativeApi = 7U };
+
+  enum { VirtVmsaveVmload = 8U };
 
 };
 
@@ -1271,6 +1419,7 @@ typedef PRUint32 HWVirtExPropertyType_T;
 # define HWVirtExPropertyType_LargePages HWVirtExPropertyType::LargePages
 # define HWVirtExPropertyType_Force HWVirtExPropertyType::Force
 # define HWVirtExPropertyType_UseNativeApi HWVirtExPropertyType::UseNativeApi
+# define HWVirtExPropertyType_VirtVmsaveVmload HWVirtExPropertyType::VirtVmsaveVmload
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum HWVirtExPropertyType_T {
     HWVirtExPropertyType_Null = HWVirtExPropertyType::Null,
@@ -1281,6 +1430,7 @@ typedef enum HWVirtExPropertyType_T {
     HWVirtExPropertyType_LargePages = HWVirtExPropertyType::LargePages,
     HWVirtExPropertyType_Force = HWVirtExPropertyType::Force,
     HWVirtExPropertyType_UseNativeApi = HWVirtExPropertyType::UseNativeApi,
+    HWVirtExPropertyType_VirtVmsaveVmload = HWVirtExPropertyType::VirtVmsaveVmload,
     HWVirtExPropertyType_32BitHack = 0x7fffffff
 } HWVirtExPropertyType_T;
 # ifdef AssertCompileSize
@@ -2161,11 +2311,11 @@ AssertCompileSize(APICMode_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    ProcessorFeature */
-#define PROCESSORFEATURE_IID_STR "fed0e385-dc5a-4cef-b9e2-66bafb6af6aa"
+#define PROCESSORFEATURE_IID_STR "0064dece-000e-4963-00f8-eb9b00674c8a"
 
 #define PROCESSORFEATURE_IID \
-  {0xfed0e385, 0xdc5a, 0x4cef, \
-    { 0xb9, 0xe2, 0x66, 0xba, 0xfb, 0x6a, 0xf6, 0xaa }}
+  {0x0064dece, 0x000e, 0x4963, \
+    { 0x00, 0xf8, 0xeb, 0x9b, 0x00, 0x67, 0x4c, 0x8a }}
 
 class NS_NO_VTABLE ProcessorFeature {
  public: 
@@ -2183,6 +2333,8 @@ class NS_NO_VTABLE ProcessorFeature {
   enum { UnrestrictedGuest = 4U };
 
   enum { NestedHWVirt = 5U };
+
+  enum { VirtVmsaveVmload = 6U };
 
 };
 
@@ -2239,6 +2391,7 @@ typedef PRUint32 ProcessorFeature_T;
 # define ProcessorFeature_NestedPaging ProcessorFeature::NestedPaging
 # define ProcessorFeature_UnrestrictedGuest ProcessorFeature::UnrestrictedGuest
 # define ProcessorFeature_NestedHWVirt ProcessorFeature::NestedHWVirt
+# define ProcessorFeature_VirtVmsaveVmload ProcessorFeature::VirtVmsaveVmload
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum ProcessorFeature_T {
     ProcessorFeature_HWVirtEx = ProcessorFeature::HWVirtEx,
@@ -2247,6 +2400,7 @@ typedef enum ProcessorFeature_T {
     ProcessorFeature_NestedPaging = ProcessorFeature::NestedPaging,
     ProcessorFeature_UnrestrictedGuest = ProcessorFeature::UnrestrictedGuest,
     ProcessorFeature_NestedHWVirt = ProcessorFeature::NestedHWVirt,
+    ProcessorFeature_VirtVmsaveVmload = ProcessorFeature::VirtVmsaveVmload,
     ProcessorFeature_32BitHack = 0x7fffffff
 } ProcessorFeature_T;
 # ifdef AssertCompileSize
@@ -2345,11 +2499,11 @@ AssertCompileSize(FirmwareType_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    PointingHIDType */
-#define POINTINGHIDTYPE_IID_STR "19964e93-0050-45c4-9382-a7bccc53e666"
+#define POINTINGHIDTYPE_IID_STR "b3fd8215-6870-4e61-b6d9-2998fa625de0"
 
 #define POINTINGHIDTYPE_IID \
-  {0x19964e93, 0x0050, 0x45c4, \
-    { 0x93, 0x82, 0xa7, 0xbc, 0xcc, 0x53, 0xe6, 0x66 }}
+  {0xb3fd8215, 0x6870, 0x4e61, \
+    { 0xb6, 0xd9, 0x29, 0x98, 0xfa, 0x62, 0x5d, 0xe0 }}
 
 class NS_NO_VTABLE PointingHIDType {
  public: 
@@ -2367,6 +2521,8 @@ class NS_NO_VTABLE PointingHIDType {
   enum { ComboMouse = 5U };
 
   enum { USBMultiTouch = 6U };
+
+  enum { USBMultiTouchScreenPlusPad = 7U };
 
 };
 
@@ -2423,6 +2579,7 @@ typedef PRUint32 PointingHIDType_T;
 # define PointingHIDType_USBTablet PointingHIDType::USBTablet
 # define PointingHIDType_ComboMouse PointingHIDType::ComboMouse
 # define PointingHIDType_USBMultiTouch PointingHIDType::USBMultiTouch
+# define PointingHIDType_USBMultiTouchScreenPlusPad PointingHIDType::USBMultiTouchScreenPlusPad
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum PointingHIDType_T {
     PointingHIDType_None = PointingHIDType::None,
@@ -2431,6 +2588,7 @@ typedef enum PointingHIDType_T {
     PointingHIDType_USBTablet = PointingHIDType::USBTablet,
     PointingHIDType_ComboMouse = PointingHIDType::ComboMouse,
     PointingHIDType_USBMultiTouch = PointingHIDType::USBMultiTouch,
+    PointingHIDType_USBMultiTouchScreenPlusPad = PointingHIDType::USBMultiTouchScreenPlusPad,
     PointingHIDType_32BitHack = 0x7fffffff
 } PointingHIDType_T;
 # ifdef AssertCompileSize
@@ -2621,6 +2779,762 @@ typedef enum BitmapFormat_T {
 AssertCompileSize(BitmapFormat_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    PartitioningType */
+#define PARTITIONINGTYPE_IID_STR "64c4c806-8908-4c0b-9a51-2d7a0151321f"
+
+#define PARTITIONINGTYPE_IID \
+  {0x64c4c806, 0x8908, 0x4c0b, \
+    { 0x9a, 0x51, 0x2d, 0x7a, 0x01, 0x51, 0x32, 0x1f }}
+
+class NS_NO_VTABLE PartitioningType {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(PARTITIONINGTYPE_IID)
+
+  enum { MBR = 0U };
+
+  enum { GPT = 1U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_PARTITIONINGTYPE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_PARTITIONINGTYPE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_PARTITIONINGTYPE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public PartitioningType
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_PARTITIONINGTYPE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, PartitioningType)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 PartitioningType_T;
+
+# define PartitioningType_MBR PartitioningType::MBR
+# define PartitioningType_GPT PartitioningType::GPT
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum PartitioningType_T {
+    PartitioningType_MBR = PartitioningType::MBR,
+    PartitioningType_GPT = PartitioningType::GPT,
+    PartitioningType_32BitHack = 0x7fffffff
+} PartitioningType_T;
+# ifdef AssertCompileSize
+AssertCompileSize(PartitioningType_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    PartitionType */
+#define PARTITIONTYPE_IID_STR "84a6629c-8e9c-474c-adbb-21995671597f"
+
+#define PARTITIONTYPE_IID \
+  {0x84a6629c, 0x8e9c, 0x474c, \
+    { 0xad, 0xbb, 0x21, 0x99, 0x56, 0x71, 0x59, 0x7f }}
+
+class NS_NO_VTABLE PartitionType {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(PARTITIONTYPE_IID)
+
+  enum { Empty = 0U };
+
+  enum { FAT12 = 1U };
+
+  enum { FAT16 = 4U };
+
+  enum { FAT = 6U };
+
+  enum { IFS = 7U };
+
+  enum { FAT32CHS = 11U };
+
+  enum { FAT32LBA = 12U };
+
+  enum { FAT16B = 14U };
+
+  enum { Extended = 15U };
+
+  enum { WindowsRE = 39U };
+
+  enum { LinuxSwapOld = 66U };
+
+  enum { LinuxOld = 67U };
+
+  enum { DragonFlyBSDSlice = 108U };
+
+  enum { LinuxSwap = 130U };
+
+  enum { Linux = 131U };
+
+  enum { LinuxExtended = 133U };
+
+  enum { LinuxLVM = 142U };
+
+  enum { BSDSlice = 165U };
+
+  enum { AppleUFS = 168U };
+
+  enum { AppleHFS = 175U };
+
+  enum { Solaris = 191U };
+
+  enum { GPT = 238U };
+
+  enum { EFI = 239U };
+
+  enum { Unknown = 256U };
+
+  enum { MBR = 257U };
+
+  enum { iFFS = 258U };
+
+  enum { SonyBoot = 259U };
+
+  enum { LenovoBoot = 260U };
+
+  enum { WindowsMSR = 270U };
+
+  enum { WindowsBasicData = 271U };
+
+  enum { WindowsLDMMeta = 272U };
+
+  enum { WindowsLDMData = 273U };
+
+  enum { WindowsRecovery = 274U };
+
+  enum { WindowsStorageSpaces = 276U };
+
+  enum { WindowsStorageReplica = 277U };
+
+  enum { IBMGPFS = 275U };
+
+  enum { LinuxData = 300U };
+
+  enum { LinuxRAID = 301U };
+
+  enum { LinuxRootX86 = 302U };
+
+  enum { LinuxRootAMD64 = 303U };
+
+  enum { LinuxRootARM32 = 304U };
+
+  enum { LinuxRootARM64 = 305U };
+
+  enum { LinuxHome = 306U };
+
+  enum { LinuxSrv = 307U };
+
+  enum { LinuxPlainDmCrypt = 308U };
+
+  enum { LinuxLUKS = 309U };
+
+  enum { LinuxReserved = 310U };
+
+  enum { FreeBSDBoot = 330U };
+
+  enum { FreeBSDData = 331U };
+
+  enum { FreeBSDSwap = 332U };
+
+  enum { FreeBSDUFS = 333U };
+
+  enum { FreeBSDVinum = 334U };
+
+  enum { FreeBSDZFS = 335U };
+
+  enum { FreeBSDUnknown = 359U };
+
+  enum { AppleHFSPlus = 360U };
+
+  enum { AppleAPFS = 361U };
+
+  enum { AppleRAID = 362U };
+
+  enum { AppleRAIDOffline = 363U };
+
+  enum { AppleBoot = 364U };
+
+  enum { AppleLabel = 365U };
+
+  enum { AppleTvRecovery = 366U };
+
+  enum { AppleCoreStorage = 367U };
+
+  enum { SoftRAIDStatus = 370U };
+
+  enum { SoftRAIDScratch = 371U };
+
+  enum { SoftRAIDVolume = 372U };
+
+  enum { SoftRAIDCache = 373U };
+
+  enum { AppleUnknown = 389U };
+
+  enum { SolarisBoot = 390U };
+
+  enum { SolarisRoot = 391U };
+
+  enum { SolarisSwap = 392U };
+
+  enum { SolarisBackup = 393U };
+
+  enum { SolarisUsr = 394U };
+
+  enum { SolarisVar = 395U };
+
+  enum { SolarisHome = 396U };
+
+  enum { SolarisAltSector = 397U };
+
+  enum { SolarisReserved = 398U };
+
+  enum { SolarisUnknown = 419U };
+
+  enum { NetBSDSwap = 420U };
+
+  enum { NetBSDFFS = 421U };
+
+  enum { NetBSDLFS = 422U };
+
+  enum { NetBSDRAID = 423U };
+
+  enum { NetBSDConcatenated = 424U };
+
+  enum { NetBSDEncrypted = 425U };
+
+  enum { NetBSDUnknown = 449U };
+
+  enum { ChromeOSKernel = 450U };
+
+  enum { ChromeOSRootFS = 451U };
+
+  enum { ChromeOSFuture = 452U };
+
+  enum { ContLnxUsr = 480U };
+
+  enum { ContLnxRoot = 481U };
+
+  enum { ContLnxReserved = 482U };
+
+  enum { ContLnxRootRAID = 483U };
+
+  enum { HaikuBFS = 510U };
+
+  enum { MidntBSDBoot = 540U };
+
+  enum { MidntBSDData = 541U };
+
+  enum { MidntBSDSwap = 542U };
+
+  enum { MidntBSDUFS = 543U };
+
+  enum { MidntBSDVium = 544U };
+
+  enum { MidntBSDZFS = 545U };
+
+  enum { MidntBSDUnknown = 569U };
+
+  enum { OpenBSDData = 570U };
+
+  enum { QNXPowerSafeFS = 600U };
+
+  enum { Plan9 = 630U };
+
+  enum { VMWareVMKCore = 660U };
+
+  enum { VMWareVMFS = 661U };
+
+  enum { VMWareReserved = 662U };
+
+  enum { VMWareUnknown = 689U };
+
+  enum { AndroidX86Bootloader = 690U };
+
+  enum { AndroidX86Bootloader2 = 691U };
+
+  enum { AndroidX86Boot = 692U };
+
+  enum { AndroidX86Recovery = 693U };
+
+  enum { AndroidX86Misc = 694U };
+
+  enum { AndroidX86Metadata = 695U };
+
+  enum { AndroidX86System = 696U };
+
+  enum { AndroidX86Cache = 697U };
+
+  enum { AndroidX86Data = 698U };
+
+  enum { AndroidX86Persistent = 699U };
+
+  enum { AndroidX86Vendor = 700U };
+
+  enum { AndroidX86Config = 701U };
+
+  enum { AndroidX86Factory = 702U };
+
+  enum { AndroidX86FactoryAlt = 703U };
+
+  enum { AndroidX86Fastboot = 704U };
+
+  enum { AndroidX86OEM = 705U };
+
+  enum { AndroidARMMeta = 720U };
+
+  enum { AndroidARMExt = 721U };
+
+  enum { ONIEBoot = 750U };
+
+  enum { ONIEConfig = 751U };
+
+  enum { PowerPCPrep = 780U };
+
+  enum { XDGShrBootConfig = 810U };
+
+  enum { CephBlock = 830U };
+
+  enum { CephBlockDB = 831U };
+
+  enum { CephBlockDBDmc = 832U };
+
+  enum { CephBlockDBDmcLUKS = 833U };
+
+  enum { CephBlockDmc = 834U };
+
+  enum { CephBlockDmcLUKS = 835U };
+
+  enum { CephBlockWALog = 836U };
+
+  enum { CephBlockWALogDmc = 837U };
+
+  enum { CephBlockWALogDmcLUKS = 838U };
+
+  enum { CephDisk = 839U };
+
+  enum { CephDiskDmc = 840U };
+
+  enum { CephJournal = 841U };
+
+  enum { CephJournalDmc = 842U };
+
+  enum { CephJournalDmcLUKS = 843U };
+
+  enum { CephLockbox = 844U };
+
+  enum { CephMultipathBlock1 = 845U };
+
+  enum { CephMultipathBlock2 = 846U };
+
+  enum { CephMultipathBlockDB = 847U };
+
+  enum { CephMultipathBLockWALog = 848U };
+
+  enum { CephMultipathJournal = 849U };
+
+  enum { CephMultipathOSD = 851U };
+
+  enum { CephOSD = 852U };
+
+  enum { CephOSDDmc = 853U };
+
+  enum { CephOSDDmcLUKS = 854U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_PARTITIONTYPE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_PARTITIONTYPE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_PARTITIONTYPE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public PartitionType
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_PARTITIONTYPE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, PartitionType)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 PartitionType_T;
+
+# define PartitionType_Empty PartitionType::Empty
+# define PartitionType_FAT12 PartitionType::FAT12
+# define PartitionType_FAT16 PartitionType::FAT16
+# define PartitionType_FAT PartitionType::FAT
+# define PartitionType_IFS PartitionType::IFS
+# define PartitionType_FAT32CHS PartitionType::FAT32CHS
+# define PartitionType_FAT32LBA PartitionType::FAT32LBA
+# define PartitionType_FAT16B PartitionType::FAT16B
+# define PartitionType_Extended PartitionType::Extended
+# define PartitionType_WindowsRE PartitionType::WindowsRE
+# define PartitionType_LinuxSwapOld PartitionType::LinuxSwapOld
+# define PartitionType_LinuxOld PartitionType::LinuxOld
+# define PartitionType_DragonFlyBSDSlice PartitionType::DragonFlyBSDSlice
+# define PartitionType_LinuxSwap PartitionType::LinuxSwap
+# define PartitionType_Linux PartitionType::Linux
+# define PartitionType_LinuxExtended PartitionType::LinuxExtended
+# define PartitionType_LinuxLVM PartitionType::LinuxLVM
+# define PartitionType_BSDSlice PartitionType::BSDSlice
+# define PartitionType_AppleUFS PartitionType::AppleUFS
+# define PartitionType_AppleHFS PartitionType::AppleHFS
+# define PartitionType_Solaris PartitionType::Solaris
+# define PartitionType_GPT PartitionType::GPT
+# define PartitionType_EFI PartitionType::EFI
+# define PartitionType_Unknown PartitionType::Unknown
+# define PartitionType_MBR PartitionType::MBR
+# define PartitionType_iFFS PartitionType::iFFS
+# define PartitionType_SonyBoot PartitionType::SonyBoot
+# define PartitionType_LenovoBoot PartitionType::LenovoBoot
+# define PartitionType_WindowsMSR PartitionType::WindowsMSR
+# define PartitionType_WindowsBasicData PartitionType::WindowsBasicData
+# define PartitionType_WindowsLDMMeta PartitionType::WindowsLDMMeta
+# define PartitionType_WindowsLDMData PartitionType::WindowsLDMData
+# define PartitionType_WindowsRecovery PartitionType::WindowsRecovery
+# define PartitionType_WindowsStorageSpaces PartitionType::WindowsStorageSpaces
+# define PartitionType_WindowsStorageReplica PartitionType::WindowsStorageReplica
+# define PartitionType_IBMGPFS PartitionType::IBMGPFS
+# define PartitionType_LinuxData PartitionType::LinuxData
+# define PartitionType_LinuxRAID PartitionType::LinuxRAID
+# define PartitionType_LinuxRootX86 PartitionType::LinuxRootX86
+# define PartitionType_LinuxRootAMD64 PartitionType::LinuxRootAMD64
+# define PartitionType_LinuxRootARM32 PartitionType::LinuxRootARM32
+# define PartitionType_LinuxRootARM64 PartitionType::LinuxRootARM64
+# define PartitionType_LinuxHome PartitionType::LinuxHome
+# define PartitionType_LinuxSrv PartitionType::LinuxSrv
+# define PartitionType_LinuxPlainDmCrypt PartitionType::LinuxPlainDmCrypt
+# define PartitionType_LinuxLUKS PartitionType::LinuxLUKS
+# define PartitionType_LinuxReserved PartitionType::LinuxReserved
+# define PartitionType_FreeBSDBoot PartitionType::FreeBSDBoot
+# define PartitionType_FreeBSDData PartitionType::FreeBSDData
+# define PartitionType_FreeBSDSwap PartitionType::FreeBSDSwap
+# define PartitionType_FreeBSDUFS PartitionType::FreeBSDUFS
+# define PartitionType_FreeBSDVinum PartitionType::FreeBSDVinum
+# define PartitionType_FreeBSDZFS PartitionType::FreeBSDZFS
+# define PartitionType_FreeBSDUnknown PartitionType::FreeBSDUnknown
+# define PartitionType_AppleHFSPlus PartitionType::AppleHFSPlus
+# define PartitionType_AppleAPFS PartitionType::AppleAPFS
+# define PartitionType_AppleRAID PartitionType::AppleRAID
+# define PartitionType_AppleRAIDOffline PartitionType::AppleRAIDOffline
+# define PartitionType_AppleBoot PartitionType::AppleBoot
+# define PartitionType_AppleLabel PartitionType::AppleLabel
+# define PartitionType_AppleTvRecovery PartitionType::AppleTvRecovery
+# define PartitionType_AppleCoreStorage PartitionType::AppleCoreStorage
+# define PartitionType_SoftRAIDStatus PartitionType::SoftRAIDStatus
+# define PartitionType_SoftRAIDScratch PartitionType::SoftRAIDScratch
+# define PartitionType_SoftRAIDVolume PartitionType::SoftRAIDVolume
+# define PartitionType_SoftRAIDCache PartitionType::SoftRAIDCache
+# define PartitionType_AppleUnknown PartitionType::AppleUnknown
+# define PartitionType_SolarisBoot PartitionType::SolarisBoot
+# define PartitionType_SolarisRoot PartitionType::SolarisRoot
+# define PartitionType_SolarisSwap PartitionType::SolarisSwap
+# define PartitionType_SolarisBackup PartitionType::SolarisBackup
+# define PartitionType_SolarisUsr PartitionType::SolarisUsr
+# define PartitionType_SolarisVar PartitionType::SolarisVar
+# define PartitionType_SolarisHome PartitionType::SolarisHome
+# define PartitionType_SolarisAltSector PartitionType::SolarisAltSector
+# define PartitionType_SolarisReserved PartitionType::SolarisReserved
+# define PartitionType_SolarisUnknown PartitionType::SolarisUnknown
+# define PartitionType_NetBSDSwap PartitionType::NetBSDSwap
+# define PartitionType_NetBSDFFS PartitionType::NetBSDFFS
+# define PartitionType_NetBSDLFS PartitionType::NetBSDLFS
+# define PartitionType_NetBSDRAID PartitionType::NetBSDRAID
+# define PartitionType_NetBSDConcatenated PartitionType::NetBSDConcatenated
+# define PartitionType_NetBSDEncrypted PartitionType::NetBSDEncrypted
+# define PartitionType_NetBSDUnknown PartitionType::NetBSDUnknown
+# define PartitionType_ChromeOSKernel PartitionType::ChromeOSKernel
+# define PartitionType_ChromeOSRootFS PartitionType::ChromeOSRootFS
+# define PartitionType_ChromeOSFuture PartitionType::ChromeOSFuture
+# define PartitionType_ContLnxUsr PartitionType::ContLnxUsr
+# define PartitionType_ContLnxRoot PartitionType::ContLnxRoot
+# define PartitionType_ContLnxReserved PartitionType::ContLnxReserved
+# define PartitionType_ContLnxRootRAID PartitionType::ContLnxRootRAID
+# define PartitionType_HaikuBFS PartitionType::HaikuBFS
+# define PartitionType_MidntBSDBoot PartitionType::MidntBSDBoot
+# define PartitionType_MidntBSDData PartitionType::MidntBSDData
+# define PartitionType_MidntBSDSwap PartitionType::MidntBSDSwap
+# define PartitionType_MidntBSDUFS PartitionType::MidntBSDUFS
+# define PartitionType_MidntBSDVium PartitionType::MidntBSDVium
+# define PartitionType_MidntBSDZFS PartitionType::MidntBSDZFS
+# define PartitionType_MidntBSDUnknown PartitionType::MidntBSDUnknown
+# define PartitionType_OpenBSDData PartitionType::OpenBSDData
+# define PartitionType_QNXPowerSafeFS PartitionType::QNXPowerSafeFS
+# define PartitionType_Plan9 PartitionType::Plan9
+# define PartitionType_VMWareVMKCore PartitionType::VMWareVMKCore
+# define PartitionType_VMWareVMFS PartitionType::VMWareVMFS
+# define PartitionType_VMWareReserved PartitionType::VMWareReserved
+# define PartitionType_VMWareUnknown PartitionType::VMWareUnknown
+# define PartitionType_AndroidX86Bootloader PartitionType::AndroidX86Bootloader
+# define PartitionType_AndroidX86Bootloader2 PartitionType::AndroidX86Bootloader2
+# define PartitionType_AndroidX86Boot PartitionType::AndroidX86Boot
+# define PartitionType_AndroidX86Recovery PartitionType::AndroidX86Recovery
+# define PartitionType_AndroidX86Misc PartitionType::AndroidX86Misc
+# define PartitionType_AndroidX86Metadata PartitionType::AndroidX86Metadata
+# define PartitionType_AndroidX86System PartitionType::AndroidX86System
+# define PartitionType_AndroidX86Cache PartitionType::AndroidX86Cache
+# define PartitionType_AndroidX86Data PartitionType::AndroidX86Data
+# define PartitionType_AndroidX86Persistent PartitionType::AndroidX86Persistent
+# define PartitionType_AndroidX86Vendor PartitionType::AndroidX86Vendor
+# define PartitionType_AndroidX86Config PartitionType::AndroidX86Config
+# define PartitionType_AndroidX86Factory PartitionType::AndroidX86Factory
+# define PartitionType_AndroidX86FactoryAlt PartitionType::AndroidX86FactoryAlt
+# define PartitionType_AndroidX86Fastboot PartitionType::AndroidX86Fastboot
+# define PartitionType_AndroidX86OEM PartitionType::AndroidX86OEM
+# define PartitionType_AndroidARMMeta PartitionType::AndroidARMMeta
+# define PartitionType_AndroidARMExt PartitionType::AndroidARMExt
+# define PartitionType_ONIEBoot PartitionType::ONIEBoot
+# define PartitionType_ONIEConfig PartitionType::ONIEConfig
+# define PartitionType_PowerPCPrep PartitionType::PowerPCPrep
+# define PartitionType_XDGShrBootConfig PartitionType::XDGShrBootConfig
+# define PartitionType_CephBlock PartitionType::CephBlock
+# define PartitionType_CephBlockDB PartitionType::CephBlockDB
+# define PartitionType_CephBlockDBDmc PartitionType::CephBlockDBDmc
+# define PartitionType_CephBlockDBDmcLUKS PartitionType::CephBlockDBDmcLUKS
+# define PartitionType_CephBlockDmc PartitionType::CephBlockDmc
+# define PartitionType_CephBlockDmcLUKS PartitionType::CephBlockDmcLUKS
+# define PartitionType_CephBlockWALog PartitionType::CephBlockWALog
+# define PartitionType_CephBlockWALogDmc PartitionType::CephBlockWALogDmc
+# define PartitionType_CephBlockWALogDmcLUKS PartitionType::CephBlockWALogDmcLUKS
+# define PartitionType_CephDisk PartitionType::CephDisk
+# define PartitionType_CephDiskDmc PartitionType::CephDiskDmc
+# define PartitionType_CephJournal PartitionType::CephJournal
+# define PartitionType_CephJournalDmc PartitionType::CephJournalDmc
+# define PartitionType_CephJournalDmcLUKS PartitionType::CephJournalDmcLUKS
+# define PartitionType_CephLockbox PartitionType::CephLockbox
+# define PartitionType_CephMultipathBlock1 PartitionType::CephMultipathBlock1
+# define PartitionType_CephMultipathBlock2 PartitionType::CephMultipathBlock2
+# define PartitionType_CephMultipathBlockDB PartitionType::CephMultipathBlockDB
+# define PartitionType_CephMultipathBLockWALog PartitionType::CephMultipathBLockWALog
+# define PartitionType_CephMultipathJournal PartitionType::CephMultipathJournal
+# define PartitionType_CephMultipathOSD PartitionType::CephMultipathOSD
+# define PartitionType_CephOSD PartitionType::CephOSD
+# define PartitionType_CephOSDDmc PartitionType::CephOSDDmc
+# define PartitionType_CephOSDDmcLUKS PartitionType::CephOSDDmcLUKS
+#else 
+typedef enum PartitionType_T {
+    PartitionType_Empty = PartitionType::Empty,
+    PartitionType_FAT12 = PartitionType::FAT12,
+    PartitionType_FAT16 = PartitionType::FAT16,
+    PartitionType_FAT = PartitionType::FAT,
+    PartitionType_IFS = PartitionType::IFS,
+    PartitionType_FAT32CHS = PartitionType::FAT32CHS,
+    PartitionType_FAT32LBA = PartitionType::FAT32LBA,
+    PartitionType_FAT16B = PartitionType::FAT16B,
+    PartitionType_Extended = PartitionType::Extended,
+    PartitionType_WindowsRE = PartitionType::WindowsRE,
+    PartitionType_LinuxSwapOld = PartitionType::LinuxSwapOld,
+    PartitionType_LinuxOld = PartitionType::LinuxOld,
+    PartitionType_DragonFlyBSDSlice = PartitionType::DragonFlyBSDSlice,
+    PartitionType_LinuxSwap = PartitionType::LinuxSwap,
+    PartitionType_Linux = PartitionType::Linux,
+    PartitionType_LinuxExtended = PartitionType::LinuxExtended,
+    PartitionType_LinuxLVM = PartitionType::LinuxLVM,
+    PartitionType_BSDSlice = PartitionType::BSDSlice,
+    PartitionType_AppleUFS = PartitionType::AppleUFS,
+    PartitionType_AppleHFS = PartitionType::AppleHFS,
+    PartitionType_Solaris = PartitionType::Solaris,
+    PartitionType_GPT = PartitionType::GPT,
+    PartitionType_EFI = PartitionType::EFI,
+    PartitionType_Unknown = PartitionType::Unknown,
+    PartitionType_MBR = PartitionType::MBR,
+    PartitionType_iFFS = PartitionType::iFFS,
+    PartitionType_SonyBoot = PartitionType::SonyBoot,
+    PartitionType_LenovoBoot = PartitionType::LenovoBoot,
+    PartitionType_WindowsMSR = PartitionType::WindowsMSR,
+    PartitionType_WindowsBasicData = PartitionType::WindowsBasicData,
+    PartitionType_WindowsLDMMeta = PartitionType::WindowsLDMMeta,
+    PartitionType_WindowsLDMData = PartitionType::WindowsLDMData,
+    PartitionType_WindowsRecovery = PartitionType::WindowsRecovery,
+    PartitionType_WindowsStorageSpaces = PartitionType::WindowsStorageSpaces,
+    PartitionType_WindowsStorageReplica = PartitionType::WindowsStorageReplica,
+    PartitionType_IBMGPFS = PartitionType::IBMGPFS,
+    PartitionType_LinuxData = PartitionType::LinuxData,
+    PartitionType_LinuxRAID = PartitionType::LinuxRAID,
+    PartitionType_LinuxRootX86 = PartitionType::LinuxRootX86,
+    PartitionType_LinuxRootAMD64 = PartitionType::LinuxRootAMD64,
+    PartitionType_LinuxRootARM32 = PartitionType::LinuxRootARM32,
+    PartitionType_LinuxRootARM64 = PartitionType::LinuxRootARM64,
+    PartitionType_LinuxHome = PartitionType::LinuxHome,
+    PartitionType_LinuxSrv = PartitionType::LinuxSrv,
+    PartitionType_LinuxPlainDmCrypt = PartitionType::LinuxPlainDmCrypt,
+    PartitionType_LinuxLUKS = PartitionType::LinuxLUKS,
+    PartitionType_LinuxReserved = PartitionType::LinuxReserved,
+    PartitionType_FreeBSDBoot = PartitionType::FreeBSDBoot,
+    PartitionType_FreeBSDData = PartitionType::FreeBSDData,
+    PartitionType_FreeBSDSwap = PartitionType::FreeBSDSwap,
+    PartitionType_FreeBSDUFS = PartitionType::FreeBSDUFS,
+    PartitionType_FreeBSDVinum = PartitionType::FreeBSDVinum,
+    PartitionType_FreeBSDZFS = PartitionType::FreeBSDZFS,
+    PartitionType_FreeBSDUnknown = PartitionType::FreeBSDUnknown,
+    PartitionType_AppleHFSPlus = PartitionType::AppleHFSPlus,
+    PartitionType_AppleAPFS = PartitionType::AppleAPFS,
+    PartitionType_AppleRAID = PartitionType::AppleRAID,
+    PartitionType_AppleRAIDOffline = PartitionType::AppleRAIDOffline,
+    PartitionType_AppleBoot = PartitionType::AppleBoot,
+    PartitionType_AppleLabel = PartitionType::AppleLabel,
+    PartitionType_AppleTvRecovery = PartitionType::AppleTvRecovery,
+    PartitionType_AppleCoreStorage = PartitionType::AppleCoreStorage,
+    PartitionType_SoftRAIDStatus = PartitionType::SoftRAIDStatus,
+    PartitionType_SoftRAIDScratch = PartitionType::SoftRAIDScratch,
+    PartitionType_SoftRAIDVolume = PartitionType::SoftRAIDVolume,
+    PartitionType_SoftRAIDCache = PartitionType::SoftRAIDCache,
+    PartitionType_AppleUnknown = PartitionType::AppleUnknown,
+    PartitionType_SolarisBoot = PartitionType::SolarisBoot,
+    PartitionType_SolarisRoot = PartitionType::SolarisRoot,
+    PartitionType_SolarisSwap = PartitionType::SolarisSwap,
+    PartitionType_SolarisBackup = PartitionType::SolarisBackup,
+    PartitionType_SolarisUsr = PartitionType::SolarisUsr,
+    PartitionType_SolarisVar = PartitionType::SolarisVar,
+    PartitionType_SolarisHome = PartitionType::SolarisHome,
+    PartitionType_SolarisAltSector = PartitionType::SolarisAltSector,
+    PartitionType_SolarisReserved = PartitionType::SolarisReserved,
+    PartitionType_SolarisUnknown = PartitionType::SolarisUnknown,
+    PartitionType_NetBSDSwap = PartitionType::NetBSDSwap,
+    PartitionType_NetBSDFFS = PartitionType::NetBSDFFS,
+    PartitionType_NetBSDLFS = PartitionType::NetBSDLFS,
+    PartitionType_NetBSDRAID = PartitionType::NetBSDRAID,
+    PartitionType_NetBSDConcatenated = PartitionType::NetBSDConcatenated,
+    PartitionType_NetBSDEncrypted = PartitionType::NetBSDEncrypted,
+    PartitionType_NetBSDUnknown = PartitionType::NetBSDUnknown,
+    PartitionType_ChromeOSKernel = PartitionType::ChromeOSKernel,
+    PartitionType_ChromeOSRootFS = PartitionType::ChromeOSRootFS,
+    PartitionType_ChromeOSFuture = PartitionType::ChromeOSFuture,
+    PartitionType_ContLnxUsr = PartitionType::ContLnxUsr,
+    PartitionType_ContLnxRoot = PartitionType::ContLnxRoot,
+    PartitionType_ContLnxReserved = PartitionType::ContLnxReserved,
+    PartitionType_ContLnxRootRAID = PartitionType::ContLnxRootRAID,
+    PartitionType_HaikuBFS = PartitionType::HaikuBFS,
+    PartitionType_MidntBSDBoot = PartitionType::MidntBSDBoot,
+    PartitionType_MidntBSDData = PartitionType::MidntBSDData,
+    PartitionType_MidntBSDSwap = PartitionType::MidntBSDSwap,
+    PartitionType_MidntBSDUFS = PartitionType::MidntBSDUFS,
+    PartitionType_MidntBSDVium = PartitionType::MidntBSDVium,
+    PartitionType_MidntBSDZFS = PartitionType::MidntBSDZFS,
+    PartitionType_MidntBSDUnknown = PartitionType::MidntBSDUnknown,
+    PartitionType_OpenBSDData = PartitionType::OpenBSDData,
+    PartitionType_QNXPowerSafeFS = PartitionType::QNXPowerSafeFS,
+    PartitionType_Plan9 = PartitionType::Plan9,
+    PartitionType_VMWareVMKCore = PartitionType::VMWareVMKCore,
+    PartitionType_VMWareVMFS = PartitionType::VMWareVMFS,
+    PartitionType_VMWareReserved = PartitionType::VMWareReserved,
+    PartitionType_VMWareUnknown = PartitionType::VMWareUnknown,
+    PartitionType_AndroidX86Bootloader = PartitionType::AndroidX86Bootloader,
+    PartitionType_AndroidX86Bootloader2 = PartitionType::AndroidX86Bootloader2,
+    PartitionType_AndroidX86Boot = PartitionType::AndroidX86Boot,
+    PartitionType_AndroidX86Recovery = PartitionType::AndroidX86Recovery,
+    PartitionType_AndroidX86Misc = PartitionType::AndroidX86Misc,
+    PartitionType_AndroidX86Metadata = PartitionType::AndroidX86Metadata,
+    PartitionType_AndroidX86System = PartitionType::AndroidX86System,
+    PartitionType_AndroidX86Cache = PartitionType::AndroidX86Cache,
+    PartitionType_AndroidX86Data = PartitionType::AndroidX86Data,
+    PartitionType_AndroidX86Persistent = PartitionType::AndroidX86Persistent,
+    PartitionType_AndroidX86Vendor = PartitionType::AndroidX86Vendor,
+    PartitionType_AndroidX86Config = PartitionType::AndroidX86Config,
+    PartitionType_AndroidX86Factory = PartitionType::AndroidX86Factory,
+    PartitionType_AndroidX86FactoryAlt = PartitionType::AndroidX86FactoryAlt,
+    PartitionType_AndroidX86Fastboot = PartitionType::AndroidX86Fastboot,
+    PartitionType_AndroidX86OEM = PartitionType::AndroidX86OEM,
+    PartitionType_AndroidARMMeta = PartitionType::AndroidARMMeta,
+    PartitionType_AndroidARMExt = PartitionType::AndroidARMExt,
+    PartitionType_ONIEBoot = PartitionType::ONIEBoot,
+    PartitionType_ONIEConfig = PartitionType::ONIEConfig,
+    PartitionType_PowerPCPrep = PartitionType::PowerPCPrep,
+    PartitionType_XDGShrBootConfig = PartitionType::XDGShrBootConfig,
+    PartitionType_CephBlock = PartitionType::CephBlock,
+    PartitionType_CephBlockDB = PartitionType::CephBlockDB,
+    PartitionType_CephBlockDBDmc = PartitionType::CephBlockDBDmc,
+    PartitionType_CephBlockDBDmcLUKS = PartitionType::CephBlockDBDmcLUKS,
+    PartitionType_CephBlockDmc = PartitionType::CephBlockDmc,
+    PartitionType_CephBlockDmcLUKS = PartitionType::CephBlockDmcLUKS,
+    PartitionType_CephBlockWALog = PartitionType::CephBlockWALog,
+    PartitionType_CephBlockWALogDmc = PartitionType::CephBlockWALogDmc,
+    PartitionType_CephBlockWALogDmcLUKS = PartitionType::CephBlockWALogDmcLUKS,
+    PartitionType_CephDisk = PartitionType::CephDisk,
+    PartitionType_CephDiskDmc = PartitionType::CephDiskDmc,
+    PartitionType_CephJournal = PartitionType::CephJournal,
+    PartitionType_CephJournalDmc = PartitionType::CephJournalDmc,
+    PartitionType_CephJournalDmcLUKS = PartitionType::CephJournalDmcLUKS,
+    PartitionType_CephLockbox = PartitionType::CephLockbox,
+    PartitionType_CephMultipathBlock1 = PartitionType::CephMultipathBlock1,
+    PartitionType_CephMultipathBlock2 = PartitionType::CephMultipathBlock2,
+    PartitionType_CephMultipathBlockDB = PartitionType::CephMultipathBlockDB,
+    PartitionType_CephMultipathBLockWALog = PartitionType::CephMultipathBLockWALog,
+    PartitionType_CephMultipathJournal = PartitionType::CephMultipathJournal,
+    PartitionType_CephMultipathOSD = PartitionType::CephMultipathOSD,
+    PartitionType_CephOSD = PartitionType::CephOSD,
+    PartitionType_CephOSDDmc = PartitionType::CephOSDDmc,
+    PartitionType_CephOSDDmcLUKS = PartitionType::CephOSDDmcLUKS,
+    PartitionType_32BitHack = 0x7fffffff
+} PartitionType_T;
+# ifdef AssertCompileSize
+AssertCompileSize(PartitionType_T, sizeof(PRUint32));
+# endif
+#endif 
 
 /* starting interface:    DHCPOption */
 #define DHCPOPTION_IID_STR "00f5b10f-0021-4513-00f7-5bf4000982bf"
@@ -3559,11 +4473,11 @@ AssertCompileSize(CertificateVersion_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    VirtualSystemDescriptionType */
-#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "6e18c6d7-e1b7-4cb0-9706-1f31d18248f8"
+#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "247f8b6f-1042-4c15-8910-3e3c64395eb7"
 
 #define VIRTUALSYSTEMDESCRIPTIONTYPE_IID \
-  {0x6e18c6d7, 0xe1b7, 0x4cb0, \
-    { 0x97, 0x06, 0x1f, 0x31, 0xd1, 0x82, 0x48, 0xf8 }}
+  {0x247f8b6f, 0x1042, 0x4c15, \
+    { 0x89, 0x10, 0x3e, 0x3c, 0x64, 0x39, 0x5e, 0xb7 }}
 
 class NS_NO_VTABLE VirtualSystemDescriptionType {
  public: 
@@ -3670,9 +4584,13 @@ class NS_NO_VTABLE VirtualSystemDescriptionType {
 
   enum { CloudInitScriptPath = 50U };
 
-  enum { HardDiskControllerVirtioSCSI = 60U };
+  enum { CloudCompartmentId = 51U };
 
-  enum { HardDiskControllerNVMe = 61U };
+  enum { CloudShapeCpus = 52U };
+
+  enum { CloudShapeMemory = 53U };
+
+  enum { HardDiskControllerVirtioSCSI = 60U };
 
 };
 
@@ -3773,8 +4691,10 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudPublicSSHKey VirtualSystemDescriptionType::CloudPublicSSHKey
 # define VirtualSystemDescriptionType_BootingFirmware VirtualSystemDescriptionType::BootingFirmware
 # define VirtualSystemDescriptionType_CloudInitScriptPath VirtualSystemDescriptionType::CloudInitScriptPath
+# define VirtualSystemDescriptionType_CloudCompartmentId VirtualSystemDescriptionType::CloudCompartmentId
+# define VirtualSystemDescriptionType_CloudShapeCpus VirtualSystemDescriptionType::CloudShapeCpus
+# define VirtualSystemDescriptionType_CloudShapeMemory VirtualSystemDescriptionType::CloudShapeMemory
 # define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
-# define VirtualSystemDescriptionType_HardDiskControllerNVMe VirtualSystemDescriptionType::HardDiskControllerNVMe
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -3827,8 +4747,10 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudPublicSSHKey = VirtualSystemDescriptionType::CloudPublicSSHKey,
     VirtualSystemDescriptionType_BootingFirmware = VirtualSystemDescriptionType::BootingFirmware,
     VirtualSystemDescriptionType_CloudInitScriptPath = VirtualSystemDescriptionType::CloudInitScriptPath,
+    VirtualSystemDescriptionType_CloudCompartmentId = VirtualSystemDescriptionType::CloudCompartmentId,
+    VirtualSystemDescriptionType_CloudShapeCpus = VirtualSystemDescriptionType::CloudShapeCpus,
+    VirtualSystemDescriptionType_CloudShapeMemory = VirtualSystemDescriptionType::CloudShapeMemory,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
-    VirtualSystemDescriptionType_HardDiskControllerNVMe = VirtualSystemDescriptionType::HardDiskControllerNVMe,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize
@@ -3919,6 +4841,96 @@ typedef enum VirtualSystemDescriptionValueType_T {
 } VirtualSystemDescriptionValueType_T;
 # ifdef AssertCompileSize
 AssertCompileSize(VirtualSystemDescriptionValueType_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    TpmType */
+#define TPMTYPE_IID_STR "c669b9f7-a547-42b6-8464-636aa53401eb"
+
+#define TPMTYPE_IID \
+  {0xc669b9f7, 0xa547, 0x42b6, \
+    { 0x84, 0x64, 0x63, 0x6a, 0xa5, 0x34, 0x01, 0xeb }}
+
+class NS_NO_VTABLE TpmType {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(TPMTYPE_IID)
+
+  enum { None = 0U };
+
+  enum { v1_2 = 1U };
+
+  enum { v2_0 = 2U };
+
+  enum { Host = 3U };
+
+  enum { Swtpm = 4U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_TPMTYPE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_TPMTYPE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_TPMTYPE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public TpmType
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_TPMTYPE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, TpmType)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 TpmType_T;
+
+# define TpmType_None TpmType::None
+# define TpmType_v1_2 TpmType::v1_2
+# define TpmType_v2_0 TpmType::v2_0
+# define TpmType_Host TpmType::Host
+# define TpmType_Swtpm TpmType::Swtpm
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum TpmType_T {
+    TpmType_None = TpmType::None,
+    TpmType_v1_2 = TpmType::v1_2,
+    TpmType_v2_0 = TpmType::v2_0,
+    TpmType_Host = TpmType::Host,
+    TpmType_Swtpm = TpmType::Swtpm,
+    TpmType_32BitHack = 0x7fffffff
+} TpmType_T;
+# ifdef AssertCompileSize
+AssertCompileSize(TpmType_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
@@ -4083,11 +5095,11 @@ AssertCompileSize(RecordingFeature_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    RecordingAudioCodec */
-#define RECORDINGAUDIOCODEC_IID_STR "0aeff775-053a-42f8-9c00-e445107dbed8"
+#define RECORDINGAUDIOCODEC_IID_STR "16c42be8-1713-4717-a8b9-c65a6549fbcd"
 
 #define RECORDINGAUDIOCODEC_IID \
-  {0x0aeff775, 0x053a, 0x42f8, \
-    { 0x9c, 0x00, 0xe4, 0x45, 0x10, 0x7d, 0xbe, 0xd8 }}
+  {0x16c42be8, 0x1713, 0x4717, \
+    { 0xa8, 0xb9, 0xc6, 0x5a, 0x65, 0x49, 0xfb, 0xcd }}
 
 class NS_NO_VTABLE RecordingAudioCodec {
  public: 
@@ -4098,7 +5110,13 @@ class NS_NO_VTABLE RecordingAudioCodec {
 
   enum { WavPCM = 1U };
 
-  enum { Opus = 2U };
+  enum { MP3 = 2U };
+
+  enum { OggVorbis = 3U };
+
+  enum { Opus = 4U };
+
+  enum { Other = 5U };
 
 };
 
@@ -4151,12 +5169,18 @@ typedef PRUint32 RecordingAudioCodec_T;
 
 # define RecordingAudioCodec_None RecordingAudioCodec::None
 # define RecordingAudioCodec_WavPCM RecordingAudioCodec::WavPCM
+# define RecordingAudioCodec_MP3 RecordingAudioCodec::MP3
+# define RecordingAudioCodec_OggVorbis RecordingAudioCodec::OggVorbis
 # define RecordingAudioCodec_Opus RecordingAudioCodec::Opus
+# define RecordingAudioCodec_Other RecordingAudioCodec::Other
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum RecordingAudioCodec_T {
     RecordingAudioCodec_None = RecordingAudioCodec::None,
     RecordingAudioCodec_WavPCM = RecordingAudioCodec::WavPCM,
+    RecordingAudioCodec_MP3 = RecordingAudioCodec::MP3,
+    RecordingAudioCodec_OggVorbis = RecordingAudioCodec::OggVorbis,
     RecordingAudioCodec_Opus = RecordingAudioCodec::Opus,
+    RecordingAudioCodec_Other = RecordingAudioCodec::Other,
     RecordingAudioCodec_32BitHack = 0x7fffffff
 } RecordingAudioCodec_T;
 # ifdef AssertCompileSize
@@ -4164,12 +5188,98 @@ AssertCompileSize(RecordingAudioCodec_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
+/* starting interface:    RecordingCodecDeadline */
+#define RECORDINGCODECDEADLINE_IID_STR "53627ae1-31cf-4303-9cd5-0c22fd2637cf"
+
+#define RECORDINGCODECDEADLINE_IID \
+  {0x53627ae1, 0x31cf, 0x4303, \
+    { 0x9c, 0xd5, 0x0c, 0x22, 0xfd, 0x26, 0x37, 0xcf }}
+
+class NS_NO_VTABLE RecordingCodecDeadline {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(RECORDINGCODECDEADLINE_IID)
+
+  enum { Default = 0U };
+
+  enum { Realtime = 1U };
+
+  enum { Good = 2U };
+
+  enum { Best = 3U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_RECORDINGCODECDEADLINE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_RECORDINGCODECDEADLINE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_RECORDINGCODECDEADLINE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public RecordingCodecDeadline
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_RECORDINGCODECDEADLINE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, RecordingCodecDeadline)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 RecordingCodecDeadline_T;
+
+# define RecordingCodecDeadline_Default RecordingCodecDeadline::Default
+# define RecordingCodecDeadline_Realtime RecordingCodecDeadline::Realtime
+# define RecordingCodecDeadline_Good RecordingCodecDeadline::Good
+# define RecordingCodecDeadline_Best RecordingCodecDeadline::Best
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum RecordingCodecDeadline_T {
+    RecordingCodecDeadline_Default = RecordingCodecDeadline::Default,
+    RecordingCodecDeadline_Realtime = RecordingCodecDeadline::Realtime,
+    RecordingCodecDeadline_Good = RecordingCodecDeadline::Good,
+    RecordingCodecDeadline_Best = RecordingCodecDeadline::Best,
+    RecordingCodecDeadline_32BitHack = 0x7fffffff
+} RecordingCodecDeadline_T;
+# ifdef AssertCompileSize
+AssertCompileSize(RecordingCodecDeadline_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
 /* starting interface:    RecordingVideoCodec */
-#define RECORDINGVIDEOCODEC_IID_STR "663bfc39-afff-49fa-98dd-322a857e877b"
+#define RECORDINGVIDEOCODEC_IID_STR "93791063-3e8c-4310-987c-ddb43ff03ffe"
 
 #define RECORDINGVIDEOCODEC_IID \
-  {0x663bfc39, 0xafff, 0x49fa, \
-    { 0x98, 0xdd, 0x32, 0x2a, 0x85, 0x7e, 0x87, 0x7b }}
+  {0x93791063, 0x3e8c, 0x4310, \
+    { 0x98, 0x7c, 0xdd, 0xb4, 0x3f, 0xf0, 0x3f, 0xfe }}
 
 class NS_NO_VTABLE RecordingVideoCodec {
  public: 
@@ -4178,11 +5288,23 @@ class NS_NO_VTABLE RecordingVideoCodec {
 
   enum { None = 0U };
 
-  enum { VP8 = 1U };
+  enum { MJPEG = 1U };
 
-  enum { VP9 = 2U };
+  enum { H262 = 2U };
 
-  enum { AV1 = 3U };
+  enum { H264 = 3U };
+
+  enum { H265 = 4U };
+
+  enum { H266 = 5U };
+
+  enum { VP8 = 6U };
+
+  enum { VP9 = 7U };
+
+  enum { AV1 = 8U };
+
+  enum { Other = 9U };
 
 };
 
@@ -4234,15 +5356,27 @@ _MYCLASS_::~_MYCLASS_()
 typedef PRUint32 RecordingVideoCodec_T;
 
 # define RecordingVideoCodec_None RecordingVideoCodec::None
+# define RecordingVideoCodec_MJPEG RecordingVideoCodec::MJPEG
+# define RecordingVideoCodec_H262 RecordingVideoCodec::H262
+# define RecordingVideoCodec_H264 RecordingVideoCodec::H264
+# define RecordingVideoCodec_H265 RecordingVideoCodec::H265
+# define RecordingVideoCodec_H266 RecordingVideoCodec::H266
 # define RecordingVideoCodec_VP8 RecordingVideoCodec::VP8
 # define RecordingVideoCodec_VP9 RecordingVideoCodec::VP9
 # define RecordingVideoCodec_AV1 RecordingVideoCodec::AV1
+# define RecordingVideoCodec_Other RecordingVideoCodec::Other
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum RecordingVideoCodec_T {
     RecordingVideoCodec_None = RecordingVideoCodec::None,
+    RecordingVideoCodec_MJPEG = RecordingVideoCodec::MJPEG,
+    RecordingVideoCodec_H262 = RecordingVideoCodec::H262,
+    RecordingVideoCodec_H264 = RecordingVideoCodec::H264,
+    RecordingVideoCodec_H265 = RecordingVideoCodec::H265,
+    RecordingVideoCodec_H266 = RecordingVideoCodec::H266,
     RecordingVideoCodec_VP8 = RecordingVideoCodec::VP8,
     RecordingVideoCodec_VP9 = RecordingVideoCodec::VP9,
     RecordingVideoCodec_AV1 = RecordingVideoCodec::AV1,
+    RecordingVideoCodec_Other = RecordingVideoCodec::Other,
     RecordingVideoCodec_32BitHack = 0x7fffffff
 } RecordingVideoCodec_T;
 # ifdef AssertCompileSize
@@ -4250,17 +5384,17 @@ AssertCompileSize(RecordingVideoCodec_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
-/* starting interface:    RecordingVideoScalingMethod */
-#define RECORDINGVIDEOSCALINGMETHOD_IID_STR "5576d890-48ee-449a-a81b-b776233598b7"
+/* starting interface:    RecordingVideoScalingMode */
+#define RECORDINGVIDEOSCALINGMODE_IID_STR "0dd1127d-4f62-4b82-beee-91086a9f1d24"
 
-#define RECORDINGVIDEOSCALINGMETHOD_IID \
-  {0x5576d890, 0x48ee, 0x449a, \
-    { 0xa8, 0x1b, 0xb7, 0x76, 0x23, 0x35, 0x98, 0xb7 }}
+#define RECORDINGVIDEOSCALINGMODE_IID \
+  {0x0dd1127d, 0x4f62, 0x4b82, \
+    { 0xbe, 0xee, 0x91, 0x08, 0x6a, 0x9f, 0x1d, 0x24 }}
 
-class NS_NO_VTABLE RecordingVideoScalingMethod {
+class NS_NO_VTABLE RecordingVideoScalingMode {
  public: 
 
-  NS_DEFINE_STATIC_IID_ACCESSOR(RECORDINGVIDEOSCALINGMETHOD_IID)
+  NS_DEFINE_STATIC_IID_ACCESSOR(RECORDINGVIDEOSCALINGMODE_IID)
 
   enum { None = 0U };
 
@@ -4273,23 +5407,23 @@ class NS_NO_VTABLE RecordingVideoScalingMethod {
 };
 
 /* Use this macro when declaring classes that implement this interface. */
-#define NS_DECL_RECORDINGVIDEOSCALINGMETHOD \
+#define NS_DECL_RECORDINGVIDEOSCALINGMODE \
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
-#define NS_FORWARD_RECORDINGVIDEOSCALINGMETHOD(_to) \
+#define NS_FORWARD_RECORDINGVIDEOSCALINGMODE(_to) \
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
-#define NS_FORWARD_SAFE_RECORDINGVIDEOSCALINGMETHOD(_to) \
+#define NS_FORWARD_SAFE_RECORDINGVIDEOSCALINGMODE(_to) \
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
 
 /* Header file */
-class _MYCLASS_ : public RecordingVideoScalingMethod
+class _MYCLASS_ : public RecordingVideoScalingMode
 {
 public:
   NS_DECL_ISUPPORTS
-  NS_DECL_RECORDINGVIDEOSCALINGMETHOD
+  NS_DECL_RECORDINGVIDEOSCALINGMODE
 
   _MYCLASS_();
 
@@ -4301,7 +5435,7 @@ protected:
 };
 
 /* Implementation file */
-NS_IMPL_ISUPPORTS1(_MYCLASS_, RecordingVideoScalingMethod)
+NS_IMPL_ISUPPORTS1(_MYCLASS_, RecordingVideoScalingMode)
 
 _MYCLASS_::_MYCLASS_()
 {
@@ -4317,61 +5451,63 @@ _MYCLASS_::~_MYCLASS_()
 #endif
 
 #ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
-typedef PRUint32 RecordingVideoScalingMethod_T;
+typedef PRUint32 RecordingVideoScalingMode_T;
 
-# define RecordingVideoScalingMethod_None RecordingVideoScalingMethod::None
-# define RecordingVideoScalingMethod_NearestNeighbor RecordingVideoScalingMethod::NearestNeighbor
-# define RecordingVideoScalingMethod_Bilinear RecordingVideoScalingMethod::Bilinear
-# define RecordingVideoScalingMethod_Bicubic RecordingVideoScalingMethod::Bicubic
+# define RecordingVideoScalingMode_None RecordingVideoScalingMode::None
+# define RecordingVideoScalingMode_NearestNeighbor RecordingVideoScalingMode::NearestNeighbor
+# define RecordingVideoScalingMode_Bilinear RecordingVideoScalingMode::Bilinear
+# define RecordingVideoScalingMode_Bicubic RecordingVideoScalingMode::Bicubic
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
-typedef enum RecordingVideoScalingMethod_T {
-    RecordingVideoScalingMethod_None = RecordingVideoScalingMethod::None,
-    RecordingVideoScalingMethod_NearestNeighbor = RecordingVideoScalingMethod::NearestNeighbor,
-    RecordingVideoScalingMethod_Bilinear = RecordingVideoScalingMethod::Bilinear,
-    RecordingVideoScalingMethod_Bicubic = RecordingVideoScalingMethod::Bicubic,
-    RecordingVideoScalingMethod_32BitHack = 0x7fffffff
-} RecordingVideoScalingMethod_T;
+typedef enum RecordingVideoScalingMode_T {
+    RecordingVideoScalingMode_None = RecordingVideoScalingMode::None,
+    RecordingVideoScalingMode_NearestNeighbor = RecordingVideoScalingMode::NearestNeighbor,
+    RecordingVideoScalingMode_Bilinear = RecordingVideoScalingMode::Bilinear,
+    RecordingVideoScalingMode_Bicubic = RecordingVideoScalingMode::Bicubic,
+    RecordingVideoScalingMode_32BitHack = 0x7fffffff
+} RecordingVideoScalingMode_T;
 # ifdef AssertCompileSize
-AssertCompileSize(RecordingVideoScalingMethod_T, sizeof(PRUint32));
+AssertCompileSize(RecordingVideoScalingMode_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
-/* starting interface:    RecordingVideoRateControlMode */
-#define RECORDINGVIDEORATECONTROLMODE_IID_STR "d4efb692-9f98-4112-88d3-a16fbe2bf6a8"
+/* starting interface:    RecordingRateControlMode */
+#define RECORDINGRATECONTROLMODE_IID_STR "d07a33ac-b4ea-4917-942d-c03be14fbe2f"
 
-#define RECORDINGVIDEORATECONTROLMODE_IID \
-  {0xd4efb692, 0x9f98, 0x4112, \
-    { 0x88, 0xd3, 0xa1, 0x6f, 0xbe, 0x2b, 0xf6, 0xa8 }}
+#define RECORDINGRATECONTROLMODE_IID \
+  {0xd07a33ac, 0xb4ea, 0x4917, \
+    { 0x94, 0x2d, 0xc0, 0x3b, 0xe1, 0x4f, 0xbe, 0x2f }}
 
-class NS_NO_VTABLE RecordingVideoRateControlMode {
+class NS_NO_VTABLE RecordingRateControlMode {
  public: 
 
-  NS_DEFINE_STATIC_IID_ACCESSOR(RECORDINGVIDEORATECONTROLMODE_IID)
+  NS_DEFINE_STATIC_IID_ACCESSOR(RECORDINGRATECONTROLMODE_IID)
 
-  enum { CBR = 0U };
+  enum { ABR = 0U };
 
-  enum { VBR = 1U };
+  enum { CBR = 1U };
+
+  enum { VBR = 2U };
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
-#define NS_DECL_RECORDINGVIDEORATECONTROLMODE \
+#define NS_DECL_RECORDINGRATECONTROLMODE \
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
-#define NS_FORWARD_RECORDINGVIDEORATECONTROLMODE(_to) \
+#define NS_FORWARD_RECORDINGRATECONTROLMODE(_to) \
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
-#define NS_FORWARD_SAFE_RECORDINGVIDEORATECONTROLMODE(_to) \
+#define NS_FORWARD_SAFE_RECORDINGRATECONTROLMODE(_to) \
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
 
 /* Header file */
-class _MYCLASS_ : public RecordingVideoRateControlMode
+class _MYCLASS_ : public RecordingRateControlMode
 {
 public:
   NS_DECL_ISUPPORTS
-  NS_DECL_RECORDINGVIDEORATECONTROLMODE
+  NS_DECL_RECORDINGRATECONTROLMODE
 
   _MYCLASS_();
 
@@ -4383,7 +5519,7 @@ protected:
 };
 
 /* Implementation file */
-NS_IMPL_ISUPPORTS1(_MYCLASS_, RecordingVideoRateControlMode)
+NS_IMPL_ISUPPORTS1(_MYCLASS_, RecordingRateControlMode)
 
 _MYCLASS_::_MYCLASS_()
 {
@@ -4399,18 +5535,200 @@ _MYCLASS_::~_MYCLASS_()
 #endif
 
 #ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
-typedef PRUint32 RecordingVideoRateControlMode_T;
+typedef PRUint32 RecordingRateControlMode_T;
 
-# define RecordingVideoRateControlMode_CBR RecordingVideoRateControlMode::CBR
-# define RecordingVideoRateControlMode_VBR RecordingVideoRateControlMode::VBR
+# define RecordingRateControlMode_ABR RecordingRateControlMode::ABR
+# define RecordingRateControlMode_CBR RecordingRateControlMode::CBR
+# define RecordingRateControlMode_VBR RecordingRateControlMode::VBR
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
-typedef enum RecordingVideoRateControlMode_T {
-    RecordingVideoRateControlMode_CBR = RecordingVideoRateControlMode::CBR,
-    RecordingVideoRateControlMode_VBR = RecordingVideoRateControlMode::VBR,
-    RecordingVideoRateControlMode_32BitHack = 0x7fffffff
-} RecordingVideoRateControlMode_T;
+typedef enum RecordingRateControlMode_T {
+    RecordingRateControlMode_ABR = RecordingRateControlMode::ABR,
+    RecordingRateControlMode_CBR = RecordingRateControlMode::CBR,
+    RecordingRateControlMode_VBR = RecordingRateControlMode::VBR,
+    RecordingRateControlMode_32BitHack = 0x7fffffff
+} RecordingRateControlMode_T;
 # ifdef AssertCompileSize
-AssertCompileSize(RecordingVideoRateControlMode_T, sizeof(PRUint32));
+AssertCompileSize(RecordingRateControlMode_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    SignatureType */
+#define SIGNATURETYPE_IID_STR "6f6e67ef-9a32-4084-af84-5702679f882a"
+
+#define SIGNATURETYPE_IID \
+  {0x6f6e67ef, 0x9a32, 0x4084, \
+    { 0xaf, 0x84, 0x57, 0x02, 0x67, 0x9f, 0x88, 0x2a }}
+
+class NS_NO_VTABLE SignatureType {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(SIGNATURETYPE_IID)
+
+  enum { X509 = 0U };
+
+  enum { Sha256 = 1U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_SIGNATURETYPE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_SIGNATURETYPE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_SIGNATURETYPE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public SignatureType
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_SIGNATURETYPE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, SignatureType)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 SignatureType_T;
+
+# define SignatureType_X509 SignatureType::X509
+# define SignatureType_Sha256 SignatureType::Sha256
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum SignatureType_T {
+    SignatureType_X509 = SignatureType::X509,
+    SignatureType_Sha256 = SignatureType::Sha256,
+    SignatureType_32BitHack = 0x7fffffff
+} SignatureType_T;
+# ifdef AssertCompileSize
+AssertCompileSize(SignatureType_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    UefiVariableAttributes */
+#define UEFIVARIABLEATTRIBUTES_IID_STR "cda505ec-b444-4aef-b55c-b687717bdac5"
+
+#define UEFIVARIABLEATTRIBUTES_IID \
+  {0xcda505ec, 0xb444, 0x4aef, \
+    { 0xb5, 0x5c, 0xb6, 0x87, 0x71, 0x7b, 0xda, 0xc5 }}
+
+class NS_NO_VTABLE UefiVariableAttributes {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(UEFIVARIABLEATTRIBUTES_IID)
+
+  enum { None = 0U };
+
+  enum { NonVolatile = 1U };
+
+  enum { BootServiceAccess = 2U };
+
+  enum { RuntimeAccess = 4U };
+
+  enum { HwErrorRecord = 8U };
+
+  enum { AuthWriteAccess = 256U };
+
+  enum { AuthTimeBasedWriteAccess = 512U };
+
+  enum { AuthAppendWrite = 1024U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_UEFIVARIABLEATTRIBUTES \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_UEFIVARIABLEATTRIBUTES(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_UEFIVARIABLEATTRIBUTES(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public UefiVariableAttributes
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_UEFIVARIABLEATTRIBUTES
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, UefiVariableAttributes)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 UefiVariableAttributes_T;
+
+# define UefiVariableAttributes_None UefiVariableAttributes::None
+# define UefiVariableAttributes_NonVolatile UefiVariableAttributes::NonVolatile
+# define UefiVariableAttributes_BootServiceAccess UefiVariableAttributes::BootServiceAccess
+# define UefiVariableAttributes_RuntimeAccess UefiVariableAttributes::RuntimeAccess
+# define UefiVariableAttributes_HwErrorRecord UefiVariableAttributes::HwErrorRecord
+# define UefiVariableAttributes_AuthWriteAccess UefiVariableAttributes::AuthWriteAccess
+# define UefiVariableAttributes_AuthTimeBasedWriteAccess UefiVariableAttributes::AuthTimeBasedWriteAccess
+# define UefiVariableAttributes_AuthAppendWrite UefiVariableAttributes::AuthAppendWrite
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum UefiVariableAttributes_T {
+    UefiVariableAttributes_None = UefiVariableAttributes::None,
+    UefiVariableAttributes_NonVolatile = UefiVariableAttributes::NonVolatile,
+    UefiVariableAttributes_BootServiceAccess = UefiVariableAttributes::BootServiceAccess,
+    UefiVariableAttributes_RuntimeAccess = UefiVariableAttributes::RuntimeAccess,
+    UefiVariableAttributes_HwErrorRecord = UefiVariableAttributes::HwErrorRecord,
+    UefiVariableAttributes_AuthWriteAccess = UefiVariableAttributes::AuthWriteAccess,
+    UefiVariableAttributes_AuthTimeBasedWriteAccess = UefiVariableAttributes::AuthTimeBasedWriteAccess,
+    UefiVariableAttributes_AuthAppendWrite = UefiVariableAttributes::AuthAppendWrite,
+    UefiVariableAttributes_32BitHack = 0x7fffffff
+} UefiVariableAttributes_T;
+# ifdef AssertCompileSize
+AssertCompileSize(UefiVariableAttributes_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
@@ -4938,6 +6256,92 @@ AssertCompileSize(VMProcPriority_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
+/* starting interface:    IommuType */
+#define IOMMUTYPE_IID_STR "f47339cb-b94e-48fe-b507-2900103d7b9f"
+
+#define IOMMUTYPE_IID \
+  {0xf47339cb, 0xb94e, 0x48fe, \
+    { 0xb5, 0x07, 0x29, 0x00, 0x10, 0x3d, 0x7b, 0x9f }}
+
+class NS_NO_VTABLE IommuType {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IOMMUTYPE_IID)
+
+  enum { None = 0U };
+
+  enum { Automatic = 1U };
+
+  enum { AMD = 2U };
+
+  enum { Intel = 3U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IOMMUTYPE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IOMMUTYPE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IOMMUTYPE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IommuType
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IOMMUTYPE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IommuType)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 IommuType_T;
+
+# define IommuType_None IommuType::None
+# define IommuType_Automatic IommuType::Automatic
+# define IommuType_AMD IommuType::AMD
+# define IommuType_Intel IommuType::Intel
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum IommuType_T {
+    IommuType_None = IommuType::None,
+    IommuType_Automatic = IommuType::Automatic,
+    IommuType_AMD = IommuType::AMD,
+    IommuType_Intel = IommuType::Intel,
+    IommuType_32BitHack = 0x7fffffff
+} IommuType_T;
+# ifdef AssertCompileSize
+AssertCompileSize(IommuType_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
 /* starting interface:    HostNetworkInterfaceMediumType */
 #define HOSTNETWORKINTERFACEMEDIUMTYPE_IID_STR "1aa54aaf-2497-45a2-bfb1-8eb225e93d5b"
 
@@ -5181,6 +6585,300 @@ typedef enum HostNetworkInterfaceType_T {
 } HostNetworkInterfaceType_T;
 # ifdef AssertCompileSize
 AssertCompileSize(HostNetworkInterfaceType_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    UpdateChannel */
+#define UPDATECHANNEL_IID_STR "9f1562a5-e47a-496b-a818-66776f06ce40"
+
+#define UPDATECHANNEL_IID \
+  {0x9f1562a5, 0xe47a, 0x496b, \
+    { 0xa8, 0x18, 0x66, 0x77, 0x6f, 0x06, 0xce, 0x40 }}
+
+class NS_NO_VTABLE UpdateChannel {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(UPDATECHANNEL_IID)
+
+  enum { Invalid = 0U };
+
+  enum { Stable = 1U };
+
+  enum { All = 2U };
+
+  enum { WithBetas = 3U };
+
+  enum { WithTesting = 4U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_UPDATECHANNEL \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_UPDATECHANNEL(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_UPDATECHANNEL(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public UpdateChannel
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_UPDATECHANNEL
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, UpdateChannel)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 UpdateChannel_T;
+
+# define UpdateChannel_Invalid UpdateChannel::Invalid
+# define UpdateChannel_Stable UpdateChannel::Stable
+# define UpdateChannel_All UpdateChannel::All
+# define UpdateChannel_WithBetas UpdateChannel::WithBetas
+# define UpdateChannel_WithTesting UpdateChannel::WithTesting
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum UpdateChannel_T {
+    UpdateChannel_Invalid = UpdateChannel::Invalid,
+    UpdateChannel_Stable = UpdateChannel::Stable,
+    UpdateChannel_All = UpdateChannel::All,
+    UpdateChannel_WithBetas = UpdateChannel::WithBetas,
+    UpdateChannel_WithTesting = UpdateChannel::WithTesting,
+    UpdateChannel_32BitHack = 0x7fffffff
+} UpdateChannel_T;
+# ifdef AssertCompileSize
+AssertCompileSize(UpdateChannel_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    UpdateSeverity */
+#define UPDATESEVERITY_IID_STR "359a5fee-8a06-4306-8068-2f2dd5cde06f"
+
+#define UPDATESEVERITY_IID \
+  {0x359a5fee, 0x8a06, 0x4306, \
+    { 0x80, 0x68, 0x2f, 0x2d, 0xd5, 0xcd, 0xe0, 0x6f }}
+
+class NS_NO_VTABLE UpdateSeverity {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(UPDATESEVERITY_IID)
+
+  enum { Invalid = 0U };
+
+  enum { Critical = 1U };
+
+  enum { Major = 2U };
+
+  enum { Minor = 3U };
+
+  enum { Testing = 4U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_UPDATESEVERITY \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_UPDATESEVERITY(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_UPDATESEVERITY(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public UpdateSeverity
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_UPDATESEVERITY
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, UpdateSeverity)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 UpdateSeverity_T;
+
+# define UpdateSeverity_Invalid UpdateSeverity::Invalid
+# define UpdateSeverity_Critical UpdateSeverity::Critical
+# define UpdateSeverity_Major UpdateSeverity::Major
+# define UpdateSeverity_Minor UpdateSeverity::Minor
+# define UpdateSeverity_Testing UpdateSeverity::Testing
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum UpdateSeverity_T {
+    UpdateSeverity_Invalid = UpdateSeverity::Invalid,
+    UpdateSeverity_Critical = UpdateSeverity::Critical,
+    UpdateSeverity_Major = UpdateSeverity::Major,
+    UpdateSeverity_Minor = UpdateSeverity::Minor,
+    UpdateSeverity_Testing = UpdateSeverity::Testing,
+    UpdateSeverity_32BitHack = 0x7fffffff
+} UpdateSeverity_T;
+# ifdef AssertCompileSize
+AssertCompileSize(UpdateSeverity_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    UpdateState */
+#define UPDATESTATE_IID_STR "6623e363-c892-45f8-80cb-4e8ffd9b4e60"
+
+#define UPDATESTATE_IID \
+  {0x6623e363, 0xc892, 0x45f8, \
+    { 0x80, 0xcb, 0x4e, 0x8f, 0xfd, 0x9b, 0x4e, 0x60 }}
+
+class NS_NO_VTABLE UpdateState {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(UPDATESTATE_IID)
+
+  enum { Invalid = 0U };
+
+  enum { Available = 1U };
+
+  enum { NotAvailable = 2U };
+
+  enum { Downloading = 3U };
+
+  enum { Downloaded = 4U };
+
+  enum { Installing = 5U };
+
+  enum { Installed = 6U };
+
+  enum { UserInteraction = 7U };
+
+  enum { Canceled = 8U };
+
+  enum { Maintenance = 9U };
+
+  enum { Error = 10U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_UPDATESTATE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_UPDATESTATE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_UPDATESTATE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public UpdateState
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_UPDATESTATE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, UpdateState)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 UpdateState_T;
+
+# define UpdateState_Invalid UpdateState::Invalid
+# define UpdateState_Available UpdateState::Available
+# define UpdateState_NotAvailable UpdateState::NotAvailable
+# define UpdateState_Downloading UpdateState::Downloading
+# define UpdateState_Downloaded UpdateState::Downloaded
+# define UpdateState_Installing UpdateState::Installing
+# define UpdateState_Installed UpdateState::Installed
+# define UpdateState_UserInteraction UpdateState::UserInteraction
+# define UpdateState_Canceled UpdateState::Canceled
+# define UpdateState_Maintenance UpdateState::Maintenance
+# define UpdateState_Error UpdateState::Error
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum UpdateState_T {
+    UpdateState_Invalid = UpdateState::Invalid,
+    UpdateState_Available = UpdateState::Available,
+    UpdateState_NotAvailable = UpdateState::NotAvailable,
+    UpdateState_Downloading = UpdateState::Downloading,
+    UpdateState_Downloaded = UpdateState::Downloaded,
+    UpdateState_Installing = UpdateState::Installing,
+    UpdateState_Installed = UpdateState::Installed,
+    UpdateState_UserInteraction = UpdateState::UserInteraction,
+    UpdateState_Canceled = UpdateState::Canceled,
+    UpdateState_Maintenance = UpdateState::Maintenance,
+    UpdateState_Error = UpdateState::Error,
+    UpdateState_32BitHack = 0x7fffffff
+} UpdateState_T;
+# ifdef AssertCompileSize
+AssertCompileSize(UpdateState_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
@@ -5737,6 +7435,92 @@ typedef enum AdditionsUpdateFlag_T {
 } AdditionsUpdateFlag_T;
 # ifdef AssertCompileSize
 AssertCompileSize(AdditionsUpdateFlag_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    GuestShutdownFlag */
+#define GUESTSHUTDOWNFLAG_IID_STR "28d19c9c-5862-4930-b29a-f117712b4864"
+
+#define GUESTSHUTDOWNFLAG_IID \
+  {0x28d19c9c, 0x5862, 0x4930, \
+    { 0xb2, 0x9a, 0xf1, 0x17, 0x71, 0x2b, 0x48, 0x64 }}
+
+class NS_NO_VTABLE GuestShutdownFlag {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(GUESTSHUTDOWNFLAG_IID)
+
+  enum { None = 0U };
+
+  enum { PowerOff = 1U };
+
+  enum { Reboot = 2U };
+
+  enum { Force = 4U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_GUESTSHUTDOWNFLAG \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_GUESTSHUTDOWNFLAG(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_GUESTSHUTDOWNFLAG(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public GuestShutdownFlag
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_GUESTSHUTDOWNFLAG
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, GuestShutdownFlag)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 GuestShutdownFlag_T;
+
+# define GuestShutdownFlag_None GuestShutdownFlag::None
+# define GuestShutdownFlag_PowerOff GuestShutdownFlag::PowerOff
+# define GuestShutdownFlag_Reboot GuestShutdownFlag::Reboot
+# define GuestShutdownFlag_Force GuestShutdownFlag::Force
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum GuestShutdownFlag_T {
+    GuestShutdownFlag_None = GuestShutdownFlag::None,
+    GuestShutdownFlag_PowerOff = GuestShutdownFlag::PowerOff,
+    GuestShutdownFlag_Reboot = GuestShutdownFlag::Reboot,
+    GuestShutdownFlag_Force = GuestShutdownFlag::Force,
+    GuestShutdownFlag_32BitHack = 0x7fffffff
+} GuestShutdownFlag_T;
+# ifdef AssertCompileSize
+AssertCompileSize(GuestShutdownFlag_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
@@ -6857,11 +8641,11 @@ AssertCompileSize(DirectoryCreateFlag_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    DirectoryCopyFlag */
-#define DIRECTORYCOPYFLAG_IID_STR "b5901856-d064-4fbc-ab06-2909ba106154"
+#define DIRECTORYCOPYFLAG_IID_STR "20108c67-b1eb-4ef6-869b-25539a47a18e"
 
 #define DIRECTORYCOPYFLAG_IID \
-  {0xb5901856, 0xd064, 0x4fbc, \
-    { 0xab, 0x06, 0x29, 0x09, 0xba, 0x10, 0x61, 0x54 }}
+  {0x20108c67, 0xb1eb, 0x4ef6, \
+    { 0x86, 0x9b, 0x25, 0x53, 0x9a, 0x47, 0xa1, 0x8e }}
 
 class NS_NO_VTABLE DirectoryCopyFlag {
  public: 
@@ -6871,6 +8655,10 @@ class NS_NO_VTABLE DirectoryCopyFlag {
   enum { None = 0U };
 
   enum { CopyIntoExisting = 1U };
+
+  enum { Recursive = 2U };
+
+  enum { FollowLinks = 4U };
 
 };
 
@@ -6923,10 +8711,14 @@ typedef PRUint32 DirectoryCopyFlag_T;
 
 # define DirectoryCopyFlag_None DirectoryCopyFlag::None
 # define DirectoryCopyFlag_CopyIntoExisting DirectoryCopyFlag::CopyIntoExisting
+# define DirectoryCopyFlag_Recursive DirectoryCopyFlag::Recursive
+# define DirectoryCopyFlag_FollowLinks DirectoryCopyFlag::FollowLinks
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum DirectoryCopyFlag_T {
     DirectoryCopyFlag_None = DirectoryCopyFlag::None,
     DirectoryCopyFlag_CopyIntoExisting = DirectoryCopyFlag::CopyIntoExisting,
+    DirectoryCopyFlag_Recursive = DirectoryCopyFlag::Recursive,
+    DirectoryCopyFlag_FollowLinks = DirectoryCopyFlag::FollowLinks,
     DirectoryCopyFlag_32BitHack = 0x7fffffff
 } DirectoryCopyFlag_T;
 # ifdef AssertCompileSize
@@ -9655,11 +11447,11 @@ AssertCompileSize(ScreenLayoutMode_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    NetworkAttachmentType */
-#define NETWORKATTACHMENTTYPE_IID_STR "524a8f9d-4b86-4b51-877d-1aa27c4ebeac"
+#define NETWORKATTACHMENTTYPE_IID_STR "cbfd17fa-fdc3-4d1c-97ec-4674da8d2a5d"
 
 #define NETWORKATTACHMENTTYPE_IID \
-  {0x524a8f9d, 0x4b86, 0x4b51, \
-    { 0x87, 0x7d, 0x1a, 0xa2, 0x7c, 0x4e, 0xbe, 0xac }}
+  {0xcbfd17fa, 0xfdc3, 0x4d1c, \
+    { 0x97, 0xec, 0x46, 0x74, 0xda, 0x8d, 0x2a, 0x5d }}
 
 class NS_NO_VTABLE NetworkAttachmentType {
  public: 
@@ -9681,6 +11473,8 @@ class NS_NO_VTABLE NetworkAttachmentType {
   enum { NATNetwork = 6U };
 
   enum { Cloud = 7U };
+
+  enum { HostOnlyNetwork = 8U };
 
 };
 
@@ -9739,6 +11533,7 @@ typedef PRUint32 NetworkAttachmentType_T;
 # define NetworkAttachmentType_Generic NetworkAttachmentType::Generic
 # define NetworkAttachmentType_NATNetwork NetworkAttachmentType::NATNetwork
 # define NetworkAttachmentType_Cloud NetworkAttachmentType::Cloud
+# define NetworkAttachmentType_HostOnlyNetwork NetworkAttachmentType::HostOnlyNetwork
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum NetworkAttachmentType_T {
     NetworkAttachmentType_Null = NetworkAttachmentType::Null,
@@ -9749,6 +11544,7 @@ typedef enum NetworkAttachmentType_T {
     NetworkAttachmentType_Generic = NetworkAttachmentType::Generic,
     NetworkAttachmentType_NATNetwork = NetworkAttachmentType::NATNetwork,
     NetworkAttachmentType_Cloud = NetworkAttachmentType::Cloud,
+    NetworkAttachmentType_HostOnlyNetwork = NetworkAttachmentType::HostOnlyNetwork,
     NetworkAttachmentType_32BitHack = 0x7fffffff
 } NetworkAttachmentType_T;
 # ifdef AssertCompileSize
@@ -9784,7 +11580,17 @@ class NS_NO_VTABLE NetworkAdapterType {
 
   enum { Am79C960 = 7U };
 
-  enum { Virtio_1_0 = 8U };
+  enum { NE2000 = 8U };
+
+  enum { NE1000 = 9U };
+
+  enum { WD8013 = 10U };
+
+  enum { WD8003 = 11U };
+
+  enum { ELNK2 = 12U };
+
+  enum { ELNK1 = 13U };
 
 };
 
@@ -9843,7 +11649,12 @@ typedef PRUint32 NetworkAdapterType_T;
 # define NetworkAdapterType_I82545EM NetworkAdapterType::I82545EM
 # define NetworkAdapterType_Virtio NetworkAdapterType::Virtio
 # define NetworkAdapterType_Am79C960 NetworkAdapterType::Am79C960
-# define NetworkAdapterType_Virtio_1_0 NetworkAdapterType::Virtio_1_0
+# define NetworkAdapterType_NE2000 NetworkAdapterType::NE2000
+# define NetworkAdapterType_NE1000 NetworkAdapterType::NE1000
+# define NetworkAdapterType_WD8013 NetworkAdapterType::WD8013
+# define NetworkAdapterType_WD8003 NetworkAdapterType::WD8003
+# define NetworkAdapterType_ELNK2 NetworkAdapterType::ELNK2
+# define NetworkAdapterType_ELNK1 NetworkAdapterType::ELNK1
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum NetworkAdapterType_T {
     NetworkAdapterType_Null = NetworkAdapterType::Null,
@@ -9854,7 +11665,12 @@ typedef enum NetworkAdapterType_T {
     NetworkAdapterType_I82545EM = NetworkAdapterType::I82545EM,
     NetworkAdapterType_Virtio = NetworkAdapterType::Virtio,
     NetworkAdapterType_Am79C960 = NetworkAdapterType::Am79C960,
-    NetworkAdapterType_Virtio_1_0 = NetworkAdapterType::Virtio_1_0,
+    NetworkAdapterType_NE2000 = NetworkAdapterType::NE2000,
+    NetworkAdapterType_NE1000 = NetworkAdapterType::NE1000,
+    NetworkAdapterType_WD8013 = NetworkAdapterType::WD8013,
+    NetworkAdapterType_WD8003 = NetworkAdapterType::WD8003,
+    NetworkAdapterType_ELNK2 = NetworkAdapterType::ELNK2,
+    NetworkAdapterType_ELNK1 = NetworkAdapterType::ELNK1,
     NetworkAdapterType_32BitHack = 0x7fffffff
 } NetworkAdapterType_T;
 # ifdef AssertCompileSize
@@ -10117,11 +11933,11 @@ AssertCompileSize(UartType_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    VMExecutionEngine */
-#define VMEXECUTIONENGINE_IID_STR "56029577-31f7-44d2-3334-7ecbf95294b6"
+#define VMEXECUTIONENGINE_IID_STR "6e3f78f9-2dfe-4ed7-863d-67cad351e9d8"
 
 #define VMEXECUTIONENGINE_IID \
-  {0x56029577, 0x31f7, 0x44d2, \
-    { 0x33, 0x34, 0x7e, 0xcb, 0xf9, 0x52, 0x94, 0xb6 }}
+  {0x6e3f78f9, 0x2dfe, 0x4ed7, \
+    { 0x86, 0x3d, 0x67, 0xca, 0xd3, 0x51, 0xe9, 0xd8 }}
 
 class NS_NO_VTABLE VMExecutionEngine {
  public: 
@@ -10130,7 +11946,7 @@ class NS_NO_VTABLE VMExecutionEngine {
 
   enum { NotSet = 0U };
 
-  enum { RawMode = 1U };
+  enum { Emulated = 1U };
 
   enum { HwVirt = 2U };
 
@@ -10186,13 +12002,13 @@ _MYCLASS_::~_MYCLASS_()
 typedef PRUint32 VMExecutionEngine_T;
 
 # define VMExecutionEngine_NotSet VMExecutionEngine::NotSet
-# define VMExecutionEngine_RawMode VMExecutionEngine::RawMode
+# define VMExecutionEngine_Emulated VMExecutionEngine::Emulated
 # define VMExecutionEngine_HwVirt VMExecutionEngine::HwVirt
 # define VMExecutionEngine_NativeApi VMExecutionEngine::NativeApi
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VMExecutionEngine_T {
     VMExecutionEngine_NotSet = VMExecutionEngine::NotSet,
-    VMExecutionEngine_RawMode = VMExecutionEngine::RawMode,
+    VMExecutionEngine_Emulated = VMExecutionEngine::Emulated,
     VMExecutionEngine_HwVirt = VMExecutionEngine::HwVirt,
     VMExecutionEngine_NativeApi = VMExecutionEngine::NativeApi,
     VMExecutionEngine_32BitHack = 0x7fffffff
@@ -10563,34 +12379,38 @@ AssertCompileSize(USBDeviceFilterAction_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    AudioDriverType */
-#define AUDIODRIVERTYPE_IID_STR "4bcc3d73-c2fe-40db-b72f-0c2ca9d68496"
+#define AUDIODRIVERTYPE_IID_STR "32b4acfd-79ab-4b7e-9a1c-92e99f4e000b"
 
 #define AUDIODRIVERTYPE_IID \
-  {0x4bcc3d73, 0xc2fe, 0x40db, \
-    { 0xb7, 0x2f, 0x0c, 0x2c, 0xa9, 0xd6, 0x84, 0x96 }}
+  {0x32b4acfd, 0x79ab, 0x4b7e, \
+    { 0x9a, 0x1c, 0x92, 0xe9, 0x9f, 0x4e, 0x00, 0x0b }}
 
 class NS_NO_VTABLE AudioDriverType {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(AUDIODRIVERTYPE_IID)
 
-  enum { Null = 0U };
+  enum { Default = 0U };
 
-  enum { WinMM = 1U };
+  enum { Null = 1U };
 
   enum { OSS = 2U };
 
   enum { ALSA = 3U };
 
-  enum { DirectSound = 4U };
+  enum { Pulse = 4U };
 
-  enum { CoreAudio = 5U };
+  enum { WinMM = 5U };
 
-  enum { MMPM = 6U };
+  enum { DirectSound = 6U };
 
-  enum { Pulse = 7U };
+  enum { WAS = 7U };
 
-  enum { SolAudio = 8U };
+  enum { CoreAudio = 8U };
+
+  enum { MMPM = 9U };
+
+  enum { SolAudio = 10U };
 
 };
 
@@ -10641,25 +12461,29 @@ _MYCLASS_::~_MYCLASS_()
 #ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
 typedef PRUint32 AudioDriverType_T;
 
+# define AudioDriverType_Default AudioDriverType::Default
 # define AudioDriverType_Null AudioDriverType::Null
-# define AudioDriverType_WinMM AudioDriverType::WinMM
 # define AudioDriverType_OSS AudioDriverType::OSS
 # define AudioDriverType_ALSA AudioDriverType::ALSA
+# define AudioDriverType_Pulse AudioDriverType::Pulse
+# define AudioDriverType_WinMM AudioDriverType::WinMM
 # define AudioDriverType_DirectSound AudioDriverType::DirectSound
+# define AudioDriverType_WAS AudioDriverType::WAS
 # define AudioDriverType_CoreAudio AudioDriverType::CoreAudio
 # define AudioDriverType_MMPM AudioDriverType::MMPM
-# define AudioDriverType_Pulse AudioDriverType::Pulse
 # define AudioDriverType_SolAudio AudioDriverType::SolAudio
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum AudioDriverType_T {
+    AudioDriverType_Default = AudioDriverType::Default,
     AudioDriverType_Null = AudioDriverType::Null,
-    AudioDriverType_WinMM = AudioDriverType::WinMM,
     AudioDriverType_OSS = AudioDriverType::OSS,
     AudioDriverType_ALSA = AudioDriverType::ALSA,
+    AudioDriverType_Pulse = AudioDriverType::Pulse,
+    AudioDriverType_WinMM = AudioDriverType::WinMM,
     AudioDriverType_DirectSound = AudioDriverType::DirectSound,
+    AudioDriverType_WAS = AudioDriverType::WAS,
     AudioDriverType_CoreAudio = AudioDriverType::CoreAudio,
     AudioDriverType_MMPM = AudioDriverType::MMPM,
-    AudioDriverType_Pulse = AudioDriverType::Pulse,
     AudioDriverType_SolAudio = AudioDriverType::SolAudio,
     AudioDriverType_32BitHack = 0x7fffffff
 } AudioDriverType_T;
@@ -10837,6 +12661,268 @@ typedef enum AudioCodecType_T {
 } AudioCodecType_T;
 # ifdef AssertCompileSize
 AssertCompileSize(AudioCodecType_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    AudioDirection */
+#define AUDIODIRECTION_IID_STR "f27d209b-040c-4ae9-beae-85f9693ca07a"
+
+#define AUDIODIRECTION_IID \
+  {0xf27d209b, 0x040c, 0x4ae9, \
+    { 0xbe, 0xae, 0x85, 0xf9, 0x69, 0x3c, 0xa0, 0x7a }}
+
+class NS_NO_VTABLE AudioDirection {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(AUDIODIRECTION_IID)
+
+  enum { Unknown = 0U };
+
+  enum { In = 1U };
+
+  enum { Out = 2U };
+
+  enum { Duplex = 3U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_AUDIODIRECTION \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_AUDIODIRECTION(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_AUDIODIRECTION(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public AudioDirection
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_AUDIODIRECTION
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, AudioDirection)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 AudioDirection_T;
+
+# define AudioDirection_Unknown AudioDirection::Unknown
+# define AudioDirection_In AudioDirection::In
+# define AudioDirection_Out AudioDirection::Out
+# define AudioDirection_Duplex AudioDirection::Duplex
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum AudioDirection_T {
+    AudioDirection_Unknown = AudioDirection::Unknown,
+    AudioDirection_In = AudioDirection::In,
+    AudioDirection_Out = AudioDirection::Out,
+    AudioDirection_Duplex = AudioDirection::Duplex,
+    AudioDirection_32BitHack = 0x7fffffff
+} AudioDirection_T;
+# ifdef AssertCompileSize
+AssertCompileSize(AudioDirection_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    AudioDeviceType */
+#define AUDIODEVICETYPE_IID_STR "95457071-ef88-45a9-8416-fc05b08731d2"
+
+#define AUDIODEVICETYPE_IID \
+  {0x95457071, 0xef88, 0x45a9, \
+    { 0x84, 0x16, 0xfc, 0x05, 0xb0, 0x87, 0x31, 0xd2 }}
+
+class NS_NO_VTABLE AudioDeviceType {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(AUDIODEVICETYPE_IID)
+
+  enum { Unknown = 0U };
+
+  enum { BuiltLin = 1U };
+
+  enum { ExternalUSB = 2U };
+
+  enum { ExternalOther = 3U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_AUDIODEVICETYPE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_AUDIODEVICETYPE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_AUDIODEVICETYPE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public AudioDeviceType
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_AUDIODEVICETYPE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, AudioDeviceType)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 AudioDeviceType_T;
+
+# define AudioDeviceType_Unknown AudioDeviceType::Unknown
+# define AudioDeviceType_BuiltLin AudioDeviceType::BuiltLin
+# define AudioDeviceType_ExternalUSB AudioDeviceType::ExternalUSB
+# define AudioDeviceType_ExternalOther AudioDeviceType::ExternalOther
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum AudioDeviceType_T {
+    AudioDeviceType_Unknown = AudioDeviceType::Unknown,
+    AudioDeviceType_BuiltLin = AudioDeviceType::BuiltLin,
+    AudioDeviceType_ExternalUSB = AudioDeviceType::ExternalUSB,
+    AudioDeviceType_ExternalOther = AudioDeviceType::ExternalOther,
+    AudioDeviceType_32BitHack = 0x7fffffff
+} AudioDeviceType_T;
+# ifdef AssertCompileSize
+AssertCompileSize(AudioDeviceType_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    AudioDeviceState */
+#define AUDIODEVICESTATE_IID_STR "45c1b969-556a-4277-8570-b438d2ef5ebe"
+
+#define AUDIODEVICESTATE_IID \
+  {0x45c1b969, 0x556a, 0x4277, \
+    { 0x85, 0x70, 0xb4, 0x38, 0xd2, 0xef, 0x5e, 0xbe }}
+
+class NS_NO_VTABLE AudioDeviceState {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(AUDIODEVICESTATE_IID)
+
+  enum { Unknown = 0U };
+
+  enum { Active = 1U };
+
+  enum { Disabled = 2U };
+
+  enum { NotPresent = 3U };
+
+  enum { Unplugged = 4U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_AUDIODEVICESTATE \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_AUDIODEVICESTATE(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_AUDIODEVICESTATE(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public AudioDeviceState
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_AUDIODEVICESTATE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, AudioDeviceState)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 AudioDeviceState_T;
+
+# define AudioDeviceState_Unknown AudioDeviceState::Unknown
+# define AudioDeviceState_Active AudioDeviceState::Active
+# define AudioDeviceState_Disabled AudioDeviceState::Disabled
+# define AudioDeviceState_NotPresent AudioDeviceState::NotPresent
+# define AudioDeviceState_Unplugged AudioDeviceState::Unplugged
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum AudioDeviceState_T {
+    AudioDeviceState_Unknown = AudioDeviceState::Unknown,
+    AudioDeviceState_Active = AudioDeviceState::Active,
+    AudioDeviceState_Disabled = AudioDeviceState::Disabled,
+    AudioDeviceState_NotPresent = AudioDeviceState::NotPresent,
+    AudioDeviceState_Unplugged = AudioDeviceState::Unplugged,
+    AudioDeviceState_32BitHack = 0x7fffffff
+} AudioDeviceState_T;
+# ifdef AssertCompileSize
+AssertCompileSize(AudioDeviceState_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
@@ -11560,12 +13646,184 @@ AssertCompileSize(BandwidthGroupType_T, sizeof(PRUint32));
 # endif
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
+/* starting interface:    GuestDebugProvider */
+#define GUESTDEBUGPROVIDER_IID_STR "acdaddc5-aa0f-4f2e-be1f-a9be2828d24a"
+
+#define GUESTDEBUGPROVIDER_IID \
+  {0xacdaddc5, 0xaa0f, 0x4f2e, \
+    { 0xbe, 0x1f, 0xa9, 0xbe, 0x28, 0x28, 0xd2, 0x4a }}
+
+class NS_NO_VTABLE GuestDebugProvider {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(GUESTDEBUGPROVIDER_IID)
+
+  enum { None = 0U };
+
+  enum { Native = 1U };
+
+  enum { GDB = 2U };
+
+  enum { KD = 3U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_GUESTDEBUGPROVIDER \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_GUESTDEBUGPROVIDER(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_GUESTDEBUGPROVIDER(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public GuestDebugProvider
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_GUESTDEBUGPROVIDER
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, GuestDebugProvider)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 GuestDebugProvider_T;
+
+# define GuestDebugProvider_None GuestDebugProvider::None
+# define GuestDebugProvider_Native GuestDebugProvider::Native
+# define GuestDebugProvider_GDB GuestDebugProvider::GDB
+# define GuestDebugProvider_KD GuestDebugProvider::KD
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum GuestDebugProvider_T {
+    GuestDebugProvider_None = GuestDebugProvider::None,
+    GuestDebugProvider_Native = GuestDebugProvider::Native,
+    GuestDebugProvider_GDB = GuestDebugProvider::GDB,
+    GuestDebugProvider_KD = GuestDebugProvider::KD,
+    GuestDebugProvider_32BitHack = 0x7fffffff
+} GuestDebugProvider_T;
+# ifdef AssertCompileSize
+AssertCompileSize(GuestDebugProvider_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
+/* starting interface:    GuestDebugIoProvider */
+#define GUESTDEBUGIOPROVIDER_IID_STR "0cf00b1b-2ff7-414c-81c6-6cf410eaec4a"
+
+#define GUESTDEBUGIOPROVIDER_IID \
+  {0x0cf00b1b, 0x2ff7, 0x414c, \
+    { 0x81, 0xc6, 0x6c, 0xf4, 0x10, 0xea, 0xec, 0x4a }}
+
+class NS_NO_VTABLE GuestDebugIoProvider {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(GUESTDEBUGIOPROVIDER_IID)
+
+  enum { None = 0U };
+
+  enum { TCP = 1U };
+
+  enum { UDP = 2U };
+
+  enum { IPC = 3U };
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_GUESTDEBUGIOPROVIDER \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_GUESTDEBUGIOPROVIDER(_to) \
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_GUESTDEBUGIOPROVIDER(_to) \
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public GuestDebugIoProvider
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_GUESTDEBUGIOPROVIDER
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, GuestDebugIoProvider)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
+#ifndef VBOX_WITH_XPCOM_CPP_ENUM_HACK
+typedef PRUint32 GuestDebugIoProvider_T;
+
+# define GuestDebugIoProvider_None GuestDebugIoProvider::None
+# define GuestDebugIoProvider_TCP GuestDebugIoProvider::TCP
+# define GuestDebugIoProvider_UDP GuestDebugIoProvider::UDP
+# define GuestDebugIoProvider_IPC GuestDebugIoProvider::IPC
+#else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+typedef enum GuestDebugIoProvider_T {
+    GuestDebugIoProvider_None = GuestDebugIoProvider::None,
+    GuestDebugIoProvider_TCP = GuestDebugIoProvider::TCP,
+    GuestDebugIoProvider_UDP = GuestDebugIoProvider::UDP,
+    GuestDebugIoProvider_IPC = GuestDebugIoProvider::IPC,
+    GuestDebugIoProvider_32BitHack = 0x7fffffff
+} GuestDebugIoProvider_T;
+# ifdef AssertCompileSize
+AssertCompileSize(GuestDebugIoProvider_T, sizeof(PRUint32));
+# endif
+#endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
+
 /* starting interface:    VBoxEventType */
-#define VBOXEVENTTYPE_IID_STR "d5d15e38-808d-11e9-aaac-4bc5d973ca37"
+#define VBOXEVENTTYPE_IID_STR "e4c5252d-7d1a-4051-8cfb-5b2d7a73d992"
 
 #define VBOXEVENTTYPE_IID \
-  {0xd5d15e38, 0x808d, 0x11e9, \
-    { 0xaa, 0xac, 0x4b, 0xc5, 0xd9, 0x73, 0xca, 0x37 }}
+  {0xe4c5252d, 0x7d1a, 0x4051, \
+    { 0x8c, 0xfb, 0x5b, 0x2d, 0x7a, 0x73, 0xd9, 0x92 }}
 
 class NS_NO_VTABLE VBoxEventType {
  public: 
@@ -11732,7 +13990,33 @@ class NS_NO_VTABLE VBoxEventType {
 
   enum { OnClipboardFileTransferModeChanged = 104U };
 
-  enum { Last = 105U };
+  enum { OnCloudProviderListChanged = 105U };
+
+  enum { OnCloudProviderRegistered = 106U };
+
+  enum { OnCloudProviderUninstall = 107U };
+
+  enum { OnCloudProfileRegistered = 108U };
+
+  enum { OnCloudProfileChanged = 109U };
+
+  enum { OnProgressCreated = 110U };
+
+  enum { OnLanguageChanged = 111U };
+
+  enum { OnUpdateAgentAvailable = 112U };
+
+  enum { OnUpdateAgentError = 113U };
+
+  enum { OnUpdateAgentSettingsChanged = 114U };
+
+  enum { OnUpdateAgentStateChanged = 115U };
+
+  enum { OnHostAudioDeviceChanged = 116U };
+
+  enum { OnGuestDebugControlChanged = 117U };
+
+  enum { End = 118U };
 
 };
 
@@ -11863,7 +14147,20 @@ typedef PRUint32 VBoxEventType_T;
 # define VBoxEventType_OnGuestMonitorInfoChanged VBoxEventType::OnGuestMonitorInfoChanged
 # define VBoxEventType_OnGuestFileSizeChanged VBoxEventType::OnGuestFileSizeChanged
 # define VBoxEventType_OnClipboardFileTransferModeChanged VBoxEventType::OnClipboardFileTransferModeChanged
-# define VBoxEventType_Last VBoxEventType::Last
+# define VBoxEventType_OnCloudProviderListChanged VBoxEventType::OnCloudProviderListChanged
+# define VBoxEventType_OnCloudProviderRegistered VBoxEventType::OnCloudProviderRegistered
+# define VBoxEventType_OnCloudProviderUninstall VBoxEventType::OnCloudProviderUninstall
+# define VBoxEventType_OnCloudProfileRegistered VBoxEventType::OnCloudProfileRegistered
+# define VBoxEventType_OnCloudProfileChanged VBoxEventType::OnCloudProfileChanged
+# define VBoxEventType_OnProgressCreated VBoxEventType::OnProgressCreated
+# define VBoxEventType_OnLanguageChanged VBoxEventType::OnLanguageChanged
+# define VBoxEventType_OnUpdateAgentAvailable VBoxEventType::OnUpdateAgentAvailable
+# define VBoxEventType_OnUpdateAgentError VBoxEventType::OnUpdateAgentError
+# define VBoxEventType_OnUpdateAgentSettingsChanged VBoxEventType::OnUpdateAgentSettingsChanged
+# define VBoxEventType_OnUpdateAgentStateChanged VBoxEventType::OnUpdateAgentStateChanged
+# define VBoxEventType_OnHostAudioDeviceChanged VBoxEventType::OnHostAudioDeviceChanged
+# define VBoxEventType_OnGuestDebugControlChanged VBoxEventType::OnGuestDebugControlChanged
+# define VBoxEventType_End VBoxEventType::End
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VBoxEventType_T {
     VBoxEventType_Invalid = VBoxEventType::Invalid,
@@ -11946,7 +14243,20 @@ typedef enum VBoxEventType_T {
     VBoxEventType_OnGuestMonitorInfoChanged = VBoxEventType::OnGuestMonitorInfoChanged,
     VBoxEventType_OnGuestFileSizeChanged = VBoxEventType::OnGuestFileSizeChanged,
     VBoxEventType_OnClipboardFileTransferModeChanged = VBoxEventType::OnClipboardFileTransferModeChanged,
-    VBoxEventType_Last = VBoxEventType::Last,
+    VBoxEventType_OnCloudProviderListChanged = VBoxEventType::OnCloudProviderListChanged,
+    VBoxEventType_OnCloudProviderRegistered = VBoxEventType::OnCloudProviderRegistered,
+    VBoxEventType_OnCloudProviderUninstall = VBoxEventType::OnCloudProviderUninstall,
+    VBoxEventType_OnCloudProfileRegistered = VBoxEventType::OnCloudProfileRegistered,
+    VBoxEventType_OnCloudProfileChanged = VBoxEventType::OnCloudProfileChanged,
+    VBoxEventType_OnProgressCreated = VBoxEventType::OnProgressCreated,
+    VBoxEventType_OnLanguageChanged = VBoxEventType::OnLanguageChanged,
+    VBoxEventType_OnUpdateAgentAvailable = VBoxEventType::OnUpdateAgentAvailable,
+    VBoxEventType_OnUpdateAgentError = VBoxEventType::OnUpdateAgentError,
+    VBoxEventType_OnUpdateAgentSettingsChanged = VBoxEventType::OnUpdateAgentSettingsChanged,
+    VBoxEventType_OnUpdateAgentStateChanged = VBoxEventType::OnUpdateAgentStateChanged,
+    VBoxEventType_OnHostAudioDeviceChanged = VBoxEventType::OnHostAudioDeviceChanged,
+    VBoxEventType_OnGuestDebugControlChanged = VBoxEventType::OnGuestDebugControlChanged,
+    VBoxEventType_End = VBoxEventType::End,
     VBoxEventType_32BitHack = 0x7fffffff
 } VBoxEventType_T;
 # ifdef AssertCompileSize
@@ -12647,8 +14957,8 @@ class NS_NO_VTABLE INATNetwork : public nsISupports {
   /* void addPortForwardRule (in boolean isIpv6, in wstring ruleName, in NATProtocol_T proto, in wstring hostIP, in unsigned short hostPort, in wstring guestIP, in unsigned short guestPort); */
   NS_IMETHOD AddPortForwardRule(PRBool isIpv6, const PRUnichar *ruleName, NATProtocol_T proto, const PRUnichar *hostIP, PRUint16 hostPort, const PRUnichar *guestIP, PRUint16 guestPort) = 0;
 
-  /* void removePortForwardRule (in boolean iSipv6, in wstring ruleName); */
-  NS_IMETHOD RemovePortForwardRule(PRBool iSipv6, const PRUnichar *ruleName) = 0;
+  /* void removePortForwardRule (in boolean isIpv6, in wstring ruleName); */
+  NS_IMETHOD RemovePortForwardRule(PRBool isIpv6, const PRUnichar *ruleName) = 0;
 
   /* void start (); */
   NS_IMETHOD Start(void) = 0;
@@ -12697,7 +15007,7 @@ class NS_NO_VTABLE INATNetwork : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute8INATNetwork(PRUint32 *aInternalAndReservedAttribute8INATNetwork); \
   NS_IMETHOD AddLocalMapping(const PRUnichar *hostid, PRInt32 offset); \
   NS_IMETHOD AddPortForwardRule(PRBool isIpv6, const PRUnichar *ruleName, NATProtocol_T proto, const PRUnichar *hostIP, PRUint16 hostPort, const PRUnichar *guestIP, PRUint16 guestPort); \
-  NS_IMETHOD RemovePortForwardRule(PRBool iSipv6, const PRUnichar *ruleName); \
+  NS_IMETHOD RemovePortForwardRule(PRBool isIpv6, const PRUnichar *ruleName); \
   NS_IMETHOD Start(void); \
   NS_IMETHOD Stop(void); \
   NS_IMETHOD InternalAndReservedMethod1INATNetwork(void); \
@@ -12736,7 +15046,7 @@ class NS_NO_VTABLE INATNetwork : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute8INATNetwork(PRUint32 *aInternalAndReservedAttribute8INATNetwork) { return _to GetInternalAndReservedAttribute8INATNetwork(aInternalAndReservedAttribute8INATNetwork); } \
   NS_IMETHOD AddLocalMapping(const PRUnichar *hostid, PRInt32 offset) { return _to AddLocalMapping(hostid, offset); } \
   NS_IMETHOD AddPortForwardRule(PRBool isIpv6, const PRUnichar *ruleName, NATProtocol_T proto, const PRUnichar *hostIP, PRUint16 hostPort, const PRUnichar *guestIP, PRUint16 guestPort) { return _to AddPortForwardRule(isIpv6, ruleName, proto, hostIP, hostPort, guestIP, guestPort); } \
-  NS_IMETHOD RemovePortForwardRule(PRBool iSipv6, const PRUnichar *ruleName) { return _to RemovePortForwardRule(iSipv6, ruleName); } \
+  NS_IMETHOD RemovePortForwardRule(PRBool isIpv6, const PRUnichar *ruleName) { return _to RemovePortForwardRule(isIpv6, ruleName); } \
   NS_IMETHOD Start(void) { return _to Start(); } \
   NS_IMETHOD Stop(void) { return _to Stop(); } \
   NS_IMETHOD InternalAndReservedMethod1INATNetwork(void) { return _to InternalAndReservedMethod1INATNetwork(); } \
@@ -12775,7 +15085,7 @@ class NS_NO_VTABLE INATNetwork : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute8INATNetwork(PRUint32 *aInternalAndReservedAttribute8INATNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8INATNetwork(aInternalAndReservedAttribute8INATNetwork); } \
   NS_IMETHOD AddLocalMapping(const PRUnichar *hostid, PRInt32 offset) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddLocalMapping(hostid, offset); } \
   NS_IMETHOD AddPortForwardRule(PRBool isIpv6, const PRUnichar *ruleName, NATProtocol_T proto, const PRUnichar *hostIP, PRUint16 hostPort, const PRUnichar *guestIP, PRUint16 guestPort) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddPortForwardRule(isIpv6, ruleName, proto, hostIP, hostPort, guestIP, guestPort); } \
-  NS_IMETHOD RemovePortForwardRule(PRBool iSipv6, const PRUnichar *ruleName) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemovePortForwardRule(iSipv6, ruleName); } \
+  NS_IMETHOD RemovePortForwardRule(PRBool isIpv6, const PRUnichar *ruleName) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemovePortForwardRule(isIpv6, ruleName); } \
   NS_IMETHOD Start(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Start(); } \
   NS_IMETHOD Stop(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Stop(); } \
   NS_IMETHOD InternalAndReservedMethod1INATNetwork(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1INATNetwork(); } \
@@ -12983,8 +15293,8 @@ NS_IMETHODIMP _MYCLASS_::AddPortForwardRule(PRBool isIpv6, const PRUnichar *rule
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void removePortForwardRule (in boolean iSipv6, in wstring ruleName); */
-NS_IMETHODIMP _MYCLASS_::RemovePortForwardRule(PRBool iSipv6, const PRUnichar *ruleName)
+/* void removePortForwardRule (in boolean isIpv6, in wstring ruleName); */
+NS_IMETHODIMP _MYCLASS_::RemovePortForwardRule(PRBool isIpv6, const PRUnichar *ruleName)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -13085,7 +15395,7 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2INATNetwork()
 #define COM_FORWARD_INATNetwork_AddPortForwardRule_TO(smth) NS_IMETHOD AddPortForwardRule (PRBool aIsIpv6, PRUnichar * aRuleName, PRUint32 aProto, PRUnichar * aHostIP, PRUint16 aHostPort, PRUnichar * aGuestIP, PRUint16 aGuestPort) { return smth AddPortForwardRule (aIsIpv6, aRuleName, aProto, aHostIP, aHostPort, aGuestIP, aGuestPort); }
 #define COM_FORWARD_INATNetwork_AddPortForwardRule_TO_OBJ(obj) COM_FORWARD_INATNetwork_AddPortForwardRule_TO ((obj)->)
 #define COM_FORWARD_INATNetwork_AddPortForwardRule_TO_BASE(base) COM_FORWARD_INATNetwork_AddPortForwardRule_TO (base::)
-#define COM_FORWARD_INATNetwork_RemovePortForwardRule_TO(smth) NS_IMETHOD RemovePortForwardRule (PRBool aISipv6, PRUnichar * aRuleName) { return smth RemovePortForwardRule (aISipv6, aRuleName); }
+#define COM_FORWARD_INATNetwork_RemovePortForwardRule_TO(smth) NS_IMETHOD RemovePortForwardRule (PRBool aIsIpv6, PRUnichar * aRuleName) { return smth RemovePortForwardRule (aIsIpv6, aRuleName); }
 #define COM_FORWARD_INATNetwork_RemovePortForwardRule_TO_OBJ(obj) COM_FORWARD_INATNetwork_RemovePortForwardRule_TO ((obj)->)
 #define COM_FORWARD_INATNetwork_RemovePortForwardRule_TO_BASE(base) COM_FORWARD_INATNetwork_RemovePortForwardRule_TO (base::)
 #define COM_FORWARD_INATNetwork_Start_TO(smth) NS_IMETHOD Start() { return smth Start(); }
@@ -13485,6 +15795,385 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ICloudNetwork()
 #define COM_FORWARD_ICloudNetwork_TO_BASE(base) COM_FORWARD_ICloudNetwork_TO (base::)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_ICloudNetwork;
+
+/* starting interface:    IHostOnlyNetwork */
+#define IHOSTONLYNETWORK_IID_STR "6eb5de7d-9a67-4fde-83be-f768084d03b5"
+
+#define IHOSTONLYNETWORK_IID \
+  {0x6eb5de7d, 0x9a67, 0x4fde, \
+    { 0x83, 0xbe, 0xf7, 0x68, 0x08, 0x4d, 0x03, 0xb5 }}
+
+class NS_NO_VTABLE IHostOnlyNetwork : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IHOSTONLYNETWORK_IID)
+
+  /* attribute wstring networkName; */
+  NS_IMETHOD GetNetworkName(PRUnichar * *aNetworkName) = 0;
+  NS_IMETHOD SetNetworkName(const PRUnichar * aNetworkName) = 0;
+
+  /* attribute boolean enabled; */
+  NS_IMETHOD GetEnabled(PRBool *aEnabled) = 0;
+  NS_IMETHOD SetEnabled(PRBool aEnabled) = 0;
+
+  /* attribute wstring networkMask; */
+  NS_IMETHOD GetNetworkMask(PRUnichar * *aNetworkMask) = 0;
+  NS_IMETHOD SetNetworkMask(const PRUnichar * aNetworkMask) = 0;
+
+  /* readonly attribute wstring hostIP; */
+  NS_IMETHOD GetHostIP(PRUnichar * *aHostIP) = 0;
+
+  /* attribute wstring lowerIP; */
+  NS_IMETHOD GetLowerIP(PRUnichar * *aLowerIP) = 0;
+  NS_IMETHOD SetLowerIP(const PRUnichar * aLowerIP) = 0;
+
+  /* attribute wstring upperIP; */
+  NS_IMETHOD GetUpperIP(PRUnichar * *aUpperIP) = 0;
+  NS_IMETHOD SetUpperIP(const PRUnichar * aUpperIP) = 0;
+
+  /* attribute wstring id; */
+  NS_IMETHOD GetId(PRUnichar * *aId) = 0;
+  NS_IMETHOD SetId(const PRUnichar * aId) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute1IHostOnlyNetwork) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute2IHostOnlyNetwork) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute3IHostOnlyNetwork) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute4IHostOnlyNetwork) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute5IHostOnlyNetwork) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute6IHostOnlyNetwork) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute7IHostOnlyNetwork) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute8IHostOnlyNetwork; */
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute8IHostOnlyNetwork) = 0;
+
+  /* void InternalAndReservedMethod1IHostOnlyNetwork (); */
+  NS_IMETHOD InternalAndReservedMethod1IHostOnlyNetwork(void) = 0;
+
+  /* void InternalAndReservedMethod2IHostOnlyNetwork (); */
+  NS_IMETHOD InternalAndReservedMethod2IHostOnlyNetwork(void) = 0;
+
+  /* void InternalAndReservedMethod3IHostOnlyNetwork (); */
+  NS_IMETHOD InternalAndReservedMethod3IHostOnlyNetwork(void) = 0;
+
+  /* void InternalAndReservedMethod4IHostOnlyNetwork (); */
+  NS_IMETHOD InternalAndReservedMethod4IHostOnlyNetwork(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IHOSTONLYNETWORK \
+  NS_IMETHOD GetNetworkName(PRUnichar * *aNetworkName); \
+  NS_IMETHOD SetNetworkName(const PRUnichar * aNetworkName); \
+  NS_IMETHOD GetEnabled(PRBool *aEnabled); \
+  NS_IMETHOD SetEnabled(PRBool aEnabled); \
+  NS_IMETHOD GetNetworkMask(PRUnichar * *aNetworkMask); \
+  NS_IMETHOD SetNetworkMask(const PRUnichar * aNetworkMask); \
+  NS_IMETHOD GetHostIP(PRUnichar * *aHostIP); \
+  NS_IMETHOD GetLowerIP(PRUnichar * *aLowerIP); \
+  NS_IMETHOD SetLowerIP(const PRUnichar * aLowerIP); \
+  NS_IMETHOD GetUpperIP(PRUnichar * *aUpperIP); \
+  NS_IMETHOD SetUpperIP(const PRUnichar * aUpperIP); \
+  NS_IMETHOD GetId(PRUnichar * *aId); \
+  NS_IMETHOD SetId(const PRUnichar * aId); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute1IHostOnlyNetwork); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute2IHostOnlyNetwork); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute3IHostOnlyNetwork); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute4IHostOnlyNetwork); \
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute5IHostOnlyNetwork); \
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute6IHostOnlyNetwork); \
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute7IHostOnlyNetwork); \
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute8IHostOnlyNetwork); \
+  NS_IMETHOD InternalAndReservedMethod1IHostOnlyNetwork(void); \
+  NS_IMETHOD InternalAndReservedMethod2IHostOnlyNetwork(void); \
+  NS_IMETHOD InternalAndReservedMethod3IHostOnlyNetwork(void); \
+  NS_IMETHOD InternalAndReservedMethod4IHostOnlyNetwork(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IHOSTONLYNETWORK(_to) \
+  NS_IMETHOD GetNetworkName(PRUnichar * *aNetworkName) { return _to GetNetworkName(aNetworkName); } \
+  NS_IMETHOD SetNetworkName(const PRUnichar * aNetworkName) { return _to SetNetworkName(aNetworkName); } \
+  NS_IMETHOD GetEnabled(PRBool *aEnabled) { return _to GetEnabled(aEnabled); } \
+  NS_IMETHOD SetEnabled(PRBool aEnabled) { return _to SetEnabled(aEnabled); } \
+  NS_IMETHOD GetNetworkMask(PRUnichar * *aNetworkMask) { return _to GetNetworkMask(aNetworkMask); } \
+  NS_IMETHOD SetNetworkMask(const PRUnichar * aNetworkMask) { return _to SetNetworkMask(aNetworkMask); } \
+  NS_IMETHOD GetHostIP(PRUnichar * *aHostIP) { return _to GetHostIP(aHostIP); } \
+  NS_IMETHOD GetLowerIP(PRUnichar * *aLowerIP) { return _to GetLowerIP(aLowerIP); } \
+  NS_IMETHOD SetLowerIP(const PRUnichar * aLowerIP) { return _to SetLowerIP(aLowerIP); } \
+  NS_IMETHOD GetUpperIP(PRUnichar * *aUpperIP) { return _to GetUpperIP(aUpperIP); } \
+  NS_IMETHOD SetUpperIP(const PRUnichar * aUpperIP) { return _to SetUpperIP(aUpperIP); } \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return _to GetId(aId); } \
+  NS_IMETHOD SetId(const PRUnichar * aId) { return _to SetId(aId); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute1IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute1IHostOnlyNetwork(aInternalAndReservedAttribute1IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute2IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute2IHostOnlyNetwork(aInternalAndReservedAttribute2IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute3IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute3IHostOnlyNetwork(aInternalAndReservedAttribute3IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute4IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute4IHostOnlyNetwork(aInternalAndReservedAttribute4IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute5IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute5IHostOnlyNetwork(aInternalAndReservedAttribute5IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute6IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute6IHostOnlyNetwork(aInternalAndReservedAttribute6IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute7IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute7IHostOnlyNetwork(aInternalAndReservedAttribute7IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute8IHostOnlyNetwork) { return _to GetInternalAndReservedAttribute8IHostOnlyNetwork(aInternalAndReservedAttribute8IHostOnlyNetwork); } \
+  NS_IMETHOD InternalAndReservedMethod1IHostOnlyNetwork(void) { return _to InternalAndReservedMethod1IHostOnlyNetwork(); } \
+  NS_IMETHOD InternalAndReservedMethod2IHostOnlyNetwork(void) { return _to InternalAndReservedMethod2IHostOnlyNetwork(); } \
+  NS_IMETHOD InternalAndReservedMethod3IHostOnlyNetwork(void) { return _to InternalAndReservedMethod3IHostOnlyNetwork(); } \
+  NS_IMETHOD InternalAndReservedMethod4IHostOnlyNetwork(void) { return _to InternalAndReservedMethod4IHostOnlyNetwork(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IHOSTONLYNETWORK(_to) \
+  NS_IMETHOD GetNetworkName(PRUnichar * *aNetworkName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNetworkName(aNetworkName); } \
+  NS_IMETHOD SetNetworkName(const PRUnichar * aNetworkName) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetNetworkName(aNetworkName); } \
+  NS_IMETHOD GetEnabled(PRBool *aEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEnabled(aEnabled); } \
+  NS_IMETHOD SetEnabled(PRBool aEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetEnabled(aEnabled); } \
+  NS_IMETHOD GetNetworkMask(PRUnichar * *aNetworkMask) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNetworkMask(aNetworkMask); } \
+  NS_IMETHOD SetNetworkMask(const PRUnichar * aNetworkMask) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetNetworkMask(aNetworkMask); } \
+  NS_IMETHOD GetHostIP(PRUnichar * *aHostIP) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHostIP(aHostIP); } \
+  NS_IMETHOD GetLowerIP(PRUnichar * *aLowerIP) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLowerIP(aLowerIP); } \
+  NS_IMETHOD SetLowerIP(const PRUnichar * aLowerIP) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetLowerIP(aLowerIP); } \
+  NS_IMETHOD GetUpperIP(PRUnichar * *aUpperIP) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUpperIP(aUpperIP); } \
+  NS_IMETHOD SetUpperIP(const PRUnichar * aUpperIP) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetUpperIP(aUpperIP); } \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetId(aId); } \
+  NS_IMETHOD SetId(const PRUnichar * aId) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetId(aId); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute1IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IHostOnlyNetwork(aInternalAndReservedAttribute1IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute2IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IHostOnlyNetwork(aInternalAndReservedAttribute2IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute3IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IHostOnlyNetwork(aInternalAndReservedAttribute3IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute4IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IHostOnlyNetwork(aInternalAndReservedAttribute4IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute5IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5IHostOnlyNetwork(aInternalAndReservedAttribute5IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute6IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6IHostOnlyNetwork(aInternalAndReservedAttribute6IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute7IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7IHostOnlyNetwork(aInternalAndReservedAttribute7IHostOnlyNetwork); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute8IHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8IHostOnlyNetwork(aInternalAndReservedAttribute8IHostOnlyNetwork); } \
+  NS_IMETHOD InternalAndReservedMethod1IHostOnlyNetwork(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IHostOnlyNetwork(); } \
+  NS_IMETHOD InternalAndReservedMethod2IHostOnlyNetwork(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IHostOnlyNetwork(); } \
+  NS_IMETHOD InternalAndReservedMethod3IHostOnlyNetwork(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IHostOnlyNetwork(); } \
+  NS_IMETHOD InternalAndReservedMethod4IHostOnlyNetwork(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IHostOnlyNetwork(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IHostOnlyNetwork
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IHOSTONLYNETWORK
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IHostOnlyNetwork)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* attribute wstring networkName; */
+NS_IMETHODIMP _MYCLASS_::GetNetworkName(PRUnichar * *aNetworkName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetNetworkName(const PRUnichar * aNetworkName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute boolean enabled; */
+NS_IMETHODIMP _MYCLASS_::GetEnabled(PRBool *aEnabled)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetEnabled(PRBool aEnabled)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring networkMask; */
+NS_IMETHODIMP _MYCLASS_::GetNetworkMask(PRUnichar * *aNetworkMask)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetNetworkMask(const PRUnichar * aNetworkMask)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring hostIP; */
+NS_IMETHODIMP _MYCLASS_::GetHostIP(PRUnichar * *aHostIP)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring lowerIP; */
+NS_IMETHODIMP _MYCLASS_::GetLowerIP(PRUnichar * *aLowerIP)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetLowerIP(const PRUnichar * aLowerIP)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring upperIP; */
+NS_IMETHODIMP _MYCLASS_::GetUpperIP(PRUnichar * *aUpperIP)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetUpperIP(const PRUnichar * aUpperIP)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring id; */
+NS_IMETHODIMP _MYCLASS_::GetId(PRUnichar * *aId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetId(const PRUnichar * aId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute1IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute2IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute3IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute4IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute5IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute6IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute7IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute8IHostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8IHostOnlyNetwork(PRUint32 *aInternalAndReservedAttribute8IHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1IHostOnlyNetwork (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IHostOnlyNetwork()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2IHostOnlyNetwork (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IHostOnlyNetwork()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod3IHostOnlyNetwork (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3IHostOnlyNetwork()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod4IHostOnlyNetwork (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IHostOnlyNetwork()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkName_TO(smth) NS_IMETHOD GetNetworkName (PRUnichar * * aNetworkName) { return smth GetNetworkName (aNetworkName); }
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkName_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkName_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkName_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkName_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkName_TO(smth) NS_IMETHOD SetNetworkName (const PRUnichar * aNetworkName) { return smth SetNetworkName (aNetworkName); }
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkName_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkName_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkName_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkName_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_Enabled_TO(smth) NS_IMETHOD GetEnabled (PRBool * aEnabled) { return smth GetEnabled (aEnabled); }
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_GETTER_Enabled_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_Enabled_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_GETTER_Enabled_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_Enabled_TO(smth) NS_IMETHOD SetEnabled (PRBool aEnabled) { return smth SetEnabled (aEnabled); }
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_SETTER_Enabled_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_Enabled_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_SETTER_Enabled_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkMask_TO(smth) NS_IMETHOD GetNetworkMask (PRUnichar * * aNetworkMask) { return smth GetNetworkMask (aNetworkMask); }
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkMask_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkMask_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkMask_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_GETTER_NetworkMask_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkMask_TO(smth) NS_IMETHOD SetNetworkMask (const PRUnichar * aNetworkMask) { return smth SetNetworkMask (aNetworkMask); }
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkMask_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkMask_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkMask_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_SETTER_NetworkMask_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_HostIP_TO(smth) NS_IMETHOD GetHostIP (PRUnichar * * aHostIP) { return smth GetHostIP (aHostIP); }
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_HostIP_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_GETTER_HostIP_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_HostIP_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_GETTER_HostIP_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_LowerIP_TO(smth) NS_IMETHOD GetLowerIP (PRUnichar * * aLowerIP) { return smth GetLowerIP (aLowerIP); }
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_LowerIP_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_GETTER_LowerIP_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_LowerIP_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_GETTER_LowerIP_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_LowerIP_TO(smth) NS_IMETHOD SetLowerIP (const PRUnichar * aLowerIP) { return smth SetLowerIP (aLowerIP); }
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_LowerIP_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_SETTER_LowerIP_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_LowerIP_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_SETTER_LowerIP_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_UpperIP_TO(smth) NS_IMETHOD GetUpperIP (PRUnichar * * aUpperIP) { return smth GetUpperIP (aUpperIP); }
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_UpperIP_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_GETTER_UpperIP_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_UpperIP_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_GETTER_UpperIP_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_UpperIP_TO(smth) NS_IMETHOD SetUpperIP (const PRUnichar * aUpperIP) { return smth SetUpperIP (aUpperIP); }
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_UpperIP_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_SETTER_UpperIP_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_UpperIP_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_SETTER_UpperIP_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_Id_TO(smth) NS_IMETHOD GetId (PRUnichar * * aId) { return smth GetId (aId); }
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_Id_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_GETTER_Id_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_GETTER_Id_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_GETTER_Id_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_Id_TO(smth) NS_IMETHOD SetId (PRUnichar * aId) { return smth SetId (aId); }
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_Id_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_SETTER_Id_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_SETTER_Id_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_SETTER_Id_TO (base::)
+#define COM_FORWARD_IHostOnlyNetwork_TO(smth) NS_FORWARD_IHOSTONLYNETWORK (smth)
+#define COM_FORWARD_IHostOnlyNetwork_TO_OBJ(obj) COM_FORWARD_IHostOnlyNetwork_TO ((obj)->)
+#define COM_FORWARD_IHostOnlyNetwork_TO_BASE(base) COM_FORWARD_IHostOnlyNetwork_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IHostOnlyNetwork;
 
 /* starting interface:    IDHCPServer */
 #define IDHCPSERVER_IID_STR "cadef0a2-a1a9-4ac2-8e80-c049af69dac8"
@@ -15476,11 +18165,11 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IDHCPIndividualConfig()
 VBOX_EXTERN_C const nsID IID_IDHCPIndividualConfig;
 
 /* starting interface:    IVirtualBox */
-#define IVIRTUALBOX_IID_STR "d0a0163f-e254-4e5b-a1f2-011cf991c38d"
+#define IVIRTUALBOX_IID_STR "7682d5eb-f00e-44f1-8ca2-99d08b1cd607"
 
 #define IVIRTUALBOX_IID \
-  {0xd0a0163f, 0xe254, 0x4e5b, \
-    { 0xa1, 0xf2, 0x01, 0x1c, 0xf9, 0x91, 0xc3, 0x8d }}
+  {0x7682d5eb, 0xf00e, 0x44f1, \
+    { 0x8c, 0xa2, 0x99, 0xd0, 0x8b, 0x1c, 0xd6, 0x07 }}
 
 class NS_NO_VTABLE IVirtualBox : public nsISupports {
  public: 
@@ -15559,6 +18248,9 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   /* void getInternalNetworks (out unsigned long internalNetworksSize, [array, size_is (internalNetworksSize), retval] out wstring internalNetworks); */
   NS_IMETHOD GetInternalNetworks(PRUint32 *internalNetworksSize, PRUnichar ***internalNetworks) = 0;
 
+  /* void getHostOnlyNetworks (out unsigned long hostOnlyNetworksSize, [array, size_is (hostOnlyNetworksSize), retval] out IHostOnlyNetwork hostOnlyNetworks); */
+  NS_IMETHOD GetHostOnlyNetworks(PRUint32 *hostOnlyNetworksSize, IHostOnlyNetwork ***hostOnlyNetworks) = 0;
+
   /* void getGenericNetworkDrivers (out unsigned long genericNetworkDriversSize, [array, size_is (genericNetworkDriversSize), retval] out wstring genericNetworkDrivers); */
   NS_IMETHOD GetGenericNetworkDrivers(PRUint32 *genericNetworkDriversSize, PRUnichar ***genericNetworkDrivers) = 0;
 
@@ -15607,11 +18299,11 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   /* void composeMachineFilename (in wstring name, in wstring group, in wstring createFlags, in wstring baseFolder, [retval] out wstring file); */
   NS_IMETHOD ComposeMachineFilename(const PRUnichar *name, const PRUnichar *group, const PRUnichar *createFlags, const PRUnichar *baseFolder, PRUnichar **file) = 0;
 
-  /* void createMachine (in wstring settingsFile, in wstring name, in unsigned long groupsSize, [array, size_is (groupsSize)] in wstring groups, in wstring osTypeId, in wstring flags, [retval] out IMachine machine); */
-  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, IMachine **machine) = 0;
+  /* void createMachine (in wstring settingsFile, in wstring name, in unsigned long groupsSize, [array, size_is (groupsSize)] in wstring groups, in wstring osTypeId, in wstring flags, in wstring cipher, in wstring passwordId, in wstring password, [retval] out IMachine machine); */
+  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, const PRUnichar *cipher, const PRUnichar *passwordId, const PRUnichar *password, IMachine **machine) = 0;
 
-  /* void openMachine (in wstring settingsFile, [retval] out IMachine machine); */
-  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, IMachine **machine) = 0;
+  /* void openMachine (in wstring settingsFile, in wstring password, [retval] out IMachine machine); */
+  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, const PRUnichar *password, IMachine **machine) = 0;
 
   /* void registerMachine (in IMachine machine); */
   NS_IMETHOD RegisterMachine(IMachine *machine) = 0;
@@ -15676,6 +18368,18 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   /* void removeNATNetwork (in INATNetwork network); */
   NS_IMETHOD RemoveNATNetwork(INATNetwork *network) = 0;
 
+  /* void createHostOnlyNetwork (in wstring networkName, [retval] out IHostOnlyNetwork network); */
+  NS_IMETHOD CreateHostOnlyNetwork(const PRUnichar *networkName, IHostOnlyNetwork **network) = 0;
+
+  /* void findHostOnlyNetworkByName (in wstring networkName, [retval] out IHostOnlyNetwork network); */
+  NS_IMETHOD FindHostOnlyNetworkByName(const PRUnichar *networkName, IHostOnlyNetwork **network) = 0;
+
+  /* void findHostOnlyNetworkById (in wstring id, [retval] out IHostOnlyNetwork network); */
+  NS_IMETHOD FindHostOnlyNetworkById(const PRUnichar *id, IHostOnlyNetwork **network) = 0;
+
+  /* void removeHostOnlyNetwork (in IHostOnlyNetwork network); */
+  NS_IMETHOD RemoveHostOnlyNetwork(IHostOnlyNetwork *network) = 0;
+
   /* void createCloudNetwork (in wstring networkName, [retval] out ICloudNetwork network); */
   NS_IMETHOD CreateCloudNetwork(const PRUnichar *networkName, ICloudNetwork **network) = 0;
 
@@ -15687,6 +18391,9 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
 
   /* void checkFirmwarePresent (in FirmwareType_T firmwareType, in wstring version, out wstring url, out wstring file, [retval] out boolean result); */
   NS_IMETHOD CheckFirmwarePresent(FirmwareType_T firmwareType, const PRUnichar *version, PRUnichar **url, PRUnichar **file, PRBool *result) = 0;
+
+  /* void findProgressById (in wstring id, [retval] out IProgress progressObject); */
+  NS_IMETHOD FindProgressById(const PRUnichar *id, IProgress **progressObject) = 0;
 
   /* void InternalAndReservedMethod1IVirtualBox (); */
   NS_IMETHOD InternalAndReservedMethod1IVirtualBox(void) = 0;
@@ -15740,6 +18447,7 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD GetEventSource(IEventSource * *aEventSource); \
   NS_IMETHOD GetExtensionPackManager(IExtPackManager * *aExtensionPackManager); \
   NS_IMETHOD GetInternalNetworks(PRUint32 *internalNetworksSize, PRUnichar ***internalNetworks); \
+  NS_IMETHOD GetHostOnlyNetworks(PRUint32 *hostOnlyNetworksSize, IHostOnlyNetwork ***hostOnlyNetworks); \
   NS_IMETHOD GetGenericNetworkDrivers(PRUint32 *genericNetworkDriversSize, PRUnichar ***genericNetworkDrivers); \
   NS_IMETHOD GetCloudNetworks(PRUint32 *cloudNetworksSize, ICloudNetwork ***cloudNetworks); \
   NS_IMETHOD GetCloudProviderManager(ICloudProviderManager * *aCloudProviderManager); \
@@ -15756,8 +18464,8 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute11IVirtualBox(PRUint32 *aInternalAndReservedAttribute11IVirtualBox); \
   NS_IMETHOD GetInternalAndReservedAttribute12IVirtualBox(PRUint32 *aInternalAndReservedAttribute12IVirtualBox); \
   NS_IMETHOD ComposeMachineFilename(const PRUnichar *name, const PRUnichar *group, const PRUnichar *createFlags, const PRUnichar *baseFolder, PRUnichar **file); \
-  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, IMachine **machine); \
-  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, IMachine **machine); \
+  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, const PRUnichar *cipher, const PRUnichar *passwordId, const PRUnichar *password, IMachine **machine); \
+  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, const PRUnichar *password, IMachine **machine); \
   NS_IMETHOD RegisterMachine(IMachine *machine); \
   NS_IMETHOD FindMachine(const PRUnichar *nameOrId, IMachine **machine); \
   NS_IMETHOD GetMachinesByGroups(PRUint32 groupsSize, const PRUnichar **groups, PRUint32 *machinesSize, IMachine ***machines); \
@@ -15779,10 +18487,15 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD CreateNATNetwork(const PRUnichar *networkName, INATNetwork **network); \
   NS_IMETHOD FindNATNetworkByName(const PRUnichar *networkName, INATNetwork **network); \
   NS_IMETHOD RemoveNATNetwork(INATNetwork *network); \
+  NS_IMETHOD CreateHostOnlyNetwork(const PRUnichar *networkName, IHostOnlyNetwork **network); \
+  NS_IMETHOD FindHostOnlyNetworkByName(const PRUnichar *networkName, IHostOnlyNetwork **network); \
+  NS_IMETHOD FindHostOnlyNetworkById(const PRUnichar *id, IHostOnlyNetwork **network); \
+  NS_IMETHOD RemoveHostOnlyNetwork(IHostOnlyNetwork *network); \
   NS_IMETHOD CreateCloudNetwork(const PRUnichar *networkName, ICloudNetwork **network); \
   NS_IMETHOD FindCloudNetworkByName(const PRUnichar *networkName, ICloudNetwork **network); \
   NS_IMETHOD RemoveCloudNetwork(ICloudNetwork *network); \
   NS_IMETHOD CheckFirmwarePresent(FirmwareType_T firmwareType, const PRUnichar *version, PRUnichar **url, PRUnichar **file, PRBool *result); \
+  NS_IMETHOD FindProgressById(const PRUnichar *id, IProgress **progressObject); \
   NS_IMETHOD InternalAndReservedMethod1IVirtualBox(void); \
   NS_IMETHOD InternalAndReservedMethod2IVirtualBox(void); \
   NS_IMETHOD InternalAndReservedMethod3IVirtualBox(void); \
@@ -15818,6 +18531,7 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD GetEventSource(IEventSource * *aEventSource) { return _to GetEventSource(aEventSource); } \
   NS_IMETHOD GetExtensionPackManager(IExtPackManager * *aExtensionPackManager) { return _to GetExtensionPackManager(aExtensionPackManager); } \
   NS_IMETHOD GetInternalNetworks(PRUint32 *internalNetworksSize, PRUnichar ***internalNetworks) { return _to GetInternalNetworks(internalNetworksSize, internalNetworks); } \
+  NS_IMETHOD GetHostOnlyNetworks(PRUint32 *hostOnlyNetworksSize, IHostOnlyNetwork ***hostOnlyNetworks) { return _to GetHostOnlyNetworks(hostOnlyNetworksSize, hostOnlyNetworks); } \
   NS_IMETHOD GetGenericNetworkDrivers(PRUint32 *genericNetworkDriversSize, PRUnichar ***genericNetworkDrivers) { return _to GetGenericNetworkDrivers(genericNetworkDriversSize, genericNetworkDrivers); } \
   NS_IMETHOD GetCloudNetworks(PRUint32 *cloudNetworksSize, ICloudNetwork ***cloudNetworks) { return _to GetCloudNetworks(cloudNetworksSize, cloudNetworks); } \
   NS_IMETHOD GetCloudProviderManager(ICloudProviderManager * *aCloudProviderManager) { return _to GetCloudProviderManager(aCloudProviderManager); } \
@@ -15834,8 +18548,8 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute11IVirtualBox(PRUint32 *aInternalAndReservedAttribute11IVirtualBox) { return _to GetInternalAndReservedAttribute11IVirtualBox(aInternalAndReservedAttribute11IVirtualBox); } \
   NS_IMETHOD GetInternalAndReservedAttribute12IVirtualBox(PRUint32 *aInternalAndReservedAttribute12IVirtualBox) { return _to GetInternalAndReservedAttribute12IVirtualBox(aInternalAndReservedAttribute12IVirtualBox); } \
   NS_IMETHOD ComposeMachineFilename(const PRUnichar *name, const PRUnichar *group, const PRUnichar *createFlags, const PRUnichar *baseFolder, PRUnichar **file) { return _to ComposeMachineFilename(name, group, createFlags, baseFolder, file); } \
-  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, IMachine **machine) { return _to CreateMachine(settingsFile, name, groupsSize, groups, osTypeId, flags, machine); } \
-  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, IMachine **machine) { return _to OpenMachine(settingsFile, machine); } \
+  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, const PRUnichar *cipher, const PRUnichar *passwordId, const PRUnichar *password, IMachine **machine) { return _to CreateMachine(settingsFile, name, groupsSize, groups, osTypeId, flags, cipher, passwordId, password, machine); } \
+  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, const PRUnichar *password, IMachine **machine) { return _to OpenMachine(settingsFile, password, machine); } \
   NS_IMETHOD RegisterMachine(IMachine *machine) { return _to RegisterMachine(machine); } \
   NS_IMETHOD FindMachine(const PRUnichar *nameOrId, IMachine **machine) { return _to FindMachine(nameOrId, machine); } \
   NS_IMETHOD GetMachinesByGroups(PRUint32 groupsSize, const PRUnichar **groups, PRUint32 *machinesSize, IMachine ***machines) { return _to GetMachinesByGroups(groupsSize, groups, machinesSize, machines); } \
@@ -15857,10 +18571,15 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD CreateNATNetwork(const PRUnichar *networkName, INATNetwork **network) { return _to CreateNATNetwork(networkName, network); } \
   NS_IMETHOD FindNATNetworkByName(const PRUnichar *networkName, INATNetwork **network) { return _to FindNATNetworkByName(networkName, network); } \
   NS_IMETHOD RemoveNATNetwork(INATNetwork *network) { return _to RemoveNATNetwork(network); } \
+  NS_IMETHOD CreateHostOnlyNetwork(const PRUnichar *networkName, IHostOnlyNetwork **network) { return _to CreateHostOnlyNetwork(networkName, network); } \
+  NS_IMETHOD FindHostOnlyNetworkByName(const PRUnichar *networkName, IHostOnlyNetwork **network) { return _to FindHostOnlyNetworkByName(networkName, network); } \
+  NS_IMETHOD FindHostOnlyNetworkById(const PRUnichar *id, IHostOnlyNetwork **network) { return _to FindHostOnlyNetworkById(id, network); } \
+  NS_IMETHOD RemoveHostOnlyNetwork(IHostOnlyNetwork *network) { return _to RemoveHostOnlyNetwork(network); } \
   NS_IMETHOD CreateCloudNetwork(const PRUnichar *networkName, ICloudNetwork **network) { return _to CreateCloudNetwork(networkName, network); } \
   NS_IMETHOD FindCloudNetworkByName(const PRUnichar *networkName, ICloudNetwork **network) { return _to FindCloudNetworkByName(networkName, network); } \
   NS_IMETHOD RemoveCloudNetwork(ICloudNetwork *network) { return _to RemoveCloudNetwork(network); } \
   NS_IMETHOD CheckFirmwarePresent(FirmwareType_T firmwareType, const PRUnichar *version, PRUnichar **url, PRUnichar **file, PRBool *result) { return _to CheckFirmwarePresent(firmwareType, version, url, file, result); } \
+  NS_IMETHOD FindProgressById(const PRUnichar *id, IProgress **progressObject) { return _to FindProgressById(id, progressObject); } \
   NS_IMETHOD InternalAndReservedMethod1IVirtualBox(void) { return _to InternalAndReservedMethod1IVirtualBox(); } \
   NS_IMETHOD InternalAndReservedMethod2IVirtualBox(void) { return _to InternalAndReservedMethod2IVirtualBox(); } \
   NS_IMETHOD InternalAndReservedMethod3IVirtualBox(void) { return _to InternalAndReservedMethod3IVirtualBox(); } \
@@ -15896,6 +18615,7 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD GetEventSource(IEventSource * *aEventSource) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEventSource(aEventSource); } \
   NS_IMETHOD GetExtensionPackManager(IExtPackManager * *aExtensionPackManager) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetExtensionPackManager(aExtensionPackManager); } \
   NS_IMETHOD GetInternalNetworks(PRUint32 *internalNetworksSize, PRUnichar ***internalNetworks) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalNetworks(internalNetworksSize, internalNetworks); } \
+  NS_IMETHOD GetHostOnlyNetworks(PRUint32 *hostOnlyNetworksSize, IHostOnlyNetwork ***hostOnlyNetworks) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHostOnlyNetworks(hostOnlyNetworksSize, hostOnlyNetworks); } \
   NS_IMETHOD GetGenericNetworkDrivers(PRUint32 *genericNetworkDriversSize, PRUnichar ***genericNetworkDrivers) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetGenericNetworkDrivers(genericNetworkDriversSize, genericNetworkDrivers); } \
   NS_IMETHOD GetCloudNetworks(PRUint32 *cloudNetworksSize, ICloudNetwork ***cloudNetworks) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCloudNetworks(cloudNetworksSize, cloudNetworks); } \
   NS_IMETHOD GetCloudProviderManager(ICloudProviderManager * *aCloudProviderManager) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCloudProviderManager(aCloudProviderManager); } \
@@ -15912,8 +18632,8 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute11IVirtualBox(PRUint32 *aInternalAndReservedAttribute11IVirtualBox) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute11IVirtualBox(aInternalAndReservedAttribute11IVirtualBox); } \
   NS_IMETHOD GetInternalAndReservedAttribute12IVirtualBox(PRUint32 *aInternalAndReservedAttribute12IVirtualBox) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute12IVirtualBox(aInternalAndReservedAttribute12IVirtualBox); } \
   NS_IMETHOD ComposeMachineFilename(const PRUnichar *name, const PRUnichar *group, const PRUnichar *createFlags, const PRUnichar *baseFolder, PRUnichar **file) { return !_to ? NS_ERROR_NULL_POINTER : _to->ComposeMachineFilename(name, group, createFlags, baseFolder, file); } \
-  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, IMachine **machine) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateMachine(settingsFile, name, groupsSize, groups, osTypeId, flags, machine); } \
-  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, IMachine **machine) { return !_to ? NS_ERROR_NULL_POINTER : _to->OpenMachine(settingsFile, machine); } \
+  NS_IMETHOD CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, const PRUnichar *cipher, const PRUnichar *passwordId, const PRUnichar *password, IMachine **machine) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateMachine(settingsFile, name, groupsSize, groups, osTypeId, flags, cipher, passwordId, password, machine); } \
+  NS_IMETHOD OpenMachine(const PRUnichar *settingsFile, const PRUnichar *password, IMachine **machine) { return !_to ? NS_ERROR_NULL_POINTER : _to->OpenMachine(settingsFile, password, machine); } \
   NS_IMETHOD RegisterMachine(IMachine *machine) { return !_to ? NS_ERROR_NULL_POINTER : _to->RegisterMachine(machine); } \
   NS_IMETHOD FindMachine(const PRUnichar *nameOrId, IMachine **machine) { return !_to ? NS_ERROR_NULL_POINTER : _to->FindMachine(nameOrId, machine); } \
   NS_IMETHOD GetMachinesByGroups(PRUint32 groupsSize, const PRUnichar **groups, PRUint32 *machinesSize, IMachine ***machines) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMachinesByGroups(groupsSize, groups, machinesSize, machines); } \
@@ -15935,10 +18655,15 @@ class NS_NO_VTABLE IVirtualBox : public nsISupports {
   NS_IMETHOD CreateNATNetwork(const PRUnichar *networkName, INATNetwork **network) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateNATNetwork(networkName, network); } \
   NS_IMETHOD FindNATNetworkByName(const PRUnichar *networkName, INATNetwork **network) { return !_to ? NS_ERROR_NULL_POINTER : _to->FindNATNetworkByName(networkName, network); } \
   NS_IMETHOD RemoveNATNetwork(INATNetwork *network) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveNATNetwork(network); } \
+  NS_IMETHOD CreateHostOnlyNetwork(const PRUnichar *networkName, IHostOnlyNetwork **network) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateHostOnlyNetwork(networkName, network); } \
+  NS_IMETHOD FindHostOnlyNetworkByName(const PRUnichar *networkName, IHostOnlyNetwork **network) { return !_to ? NS_ERROR_NULL_POINTER : _to->FindHostOnlyNetworkByName(networkName, network); } \
+  NS_IMETHOD FindHostOnlyNetworkById(const PRUnichar *id, IHostOnlyNetwork **network) { return !_to ? NS_ERROR_NULL_POINTER : _to->FindHostOnlyNetworkById(id, network); } \
+  NS_IMETHOD RemoveHostOnlyNetwork(IHostOnlyNetwork *network) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveHostOnlyNetwork(network); } \
   NS_IMETHOD CreateCloudNetwork(const PRUnichar *networkName, ICloudNetwork **network) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateCloudNetwork(networkName, network); } \
   NS_IMETHOD FindCloudNetworkByName(const PRUnichar *networkName, ICloudNetwork **network) { return !_to ? NS_ERROR_NULL_POINTER : _to->FindCloudNetworkByName(networkName, network); } \
   NS_IMETHOD RemoveCloudNetwork(ICloudNetwork *network) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveCloudNetwork(network); } \
   NS_IMETHOD CheckFirmwarePresent(FirmwareType_T firmwareType, const PRUnichar *version, PRUnichar **url, PRUnichar **file, PRBool *result) { return !_to ? NS_ERROR_NULL_POINTER : _to->CheckFirmwarePresent(firmwareType, version, url, file, result); } \
+  NS_IMETHOD FindProgressById(const PRUnichar *id, IProgress **progressObject) { return !_to ? NS_ERROR_NULL_POINTER : _to->FindProgressById(id, progressObject); } \
   NS_IMETHOD InternalAndReservedMethod1IVirtualBox(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IVirtualBox(); } \
   NS_IMETHOD InternalAndReservedMethod2IVirtualBox(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IVirtualBox(); } \
   NS_IMETHOD InternalAndReservedMethod3IVirtualBox(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IVirtualBox(); } \
@@ -16124,6 +18849,12 @@ NS_IMETHODIMP _MYCLASS_::GetInternalNetworks(PRUint32 *internalNetworksSize, PRU
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getHostOnlyNetworks (out unsigned long hostOnlyNetworksSize, [array, size_is (hostOnlyNetworksSize), retval] out IHostOnlyNetwork hostOnlyNetworks); */
+NS_IMETHODIMP _MYCLASS_::GetHostOnlyNetworks(PRUint32 *hostOnlyNetworksSize, IHostOnlyNetwork ***hostOnlyNetworks)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void getGenericNetworkDrivers (out unsigned long genericNetworkDriversSize, [array, size_is (genericNetworkDriversSize), retval] out wstring genericNetworkDrivers); */
 NS_IMETHODIMP _MYCLASS_::GetGenericNetworkDrivers(PRUint32 *genericNetworkDriversSize, PRUnichar ***genericNetworkDrivers)
 {
@@ -16220,14 +18951,14 @@ NS_IMETHODIMP _MYCLASS_::ComposeMachineFilename(const PRUnichar *name, const PRU
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void createMachine (in wstring settingsFile, in wstring name, in unsigned long groupsSize, [array, size_is (groupsSize)] in wstring groups, in wstring osTypeId, in wstring flags, [retval] out IMachine machine); */
-NS_IMETHODIMP _MYCLASS_::CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, IMachine **machine)
+/* void createMachine (in wstring settingsFile, in wstring name, in unsigned long groupsSize, [array, size_is (groupsSize)] in wstring groups, in wstring osTypeId, in wstring flags, in wstring cipher, in wstring passwordId, in wstring password, [retval] out IMachine machine); */
+NS_IMETHODIMP _MYCLASS_::CreateMachine(const PRUnichar *settingsFile, const PRUnichar *name, PRUint32 groupsSize, const PRUnichar **groups, const PRUnichar *osTypeId, const PRUnichar *flags, const PRUnichar *cipher, const PRUnichar *passwordId, const PRUnichar *password, IMachine **machine)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void openMachine (in wstring settingsFile, [retval] out IMachine machine); */
-NS_IMETHODIMP _MYCLASS_::OpenMachine(const PRUnichar *settingsFile, IMachine **machine)
+/* void openMachine (in wstring settingsFile, in wstring password, [retval] out IMachine machine); */
+NS_IMETHODIMP _MYCLASS_::OpenMachine(const PRUnichar *settingsFile, const PRUnichar *password, IMachine **machine)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -16358,6 +19089,30 @@ NS_IMETHODIMP _MYCLASS_::RemoveNATNetwork(INATNetwork *network)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void createHostOnlyNetwork (in wstring networkName, [retval] out IHostOnlyNetwork network); */
+NS_IMETHODIMP _MYCLASS_::CreateHostOnlyNetwork(const PRUnichar *networkName, IHostOnlyNetwork **network)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void findHostOnlyNetworkByName (in wstring networkName, [retval] out IHostOnlyNetwork network); */
+NS_IMETHODIMP _MYCLASS_::FindHostOnlyNetworkByName(const PRUnichar *networkName, IHostOnlyNetwork **network)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void findHostOnlyNetworkById (in wstring id, [retval] out IHostOnlyNetwork network); */
+NS_IMETHODIMP _MYCLASS_::FindHostOnlyNetworkById(const PRUnichar *id, IHostOnlyNetwork **network)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void removeHostOnlyNetwork (in IHostOnlyNetwork network); */
+NS_IMETHODIMP _MYCLASS_::RemoveHostOnlyNetwork(IHostOnlyNetwork *network)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void createCloudNetwork (in wstring networkName, [retval] out ICloudNetwork network); */
 NS_IMETHODIMP _MYCLASS_::CreateCloudNetwork(const PRUnichar *networkName, ICloudNetwork **network)
 {
@@ -16378,6 +19133,12 @@ NS_IMETHODIMP _MYCLASS_::RemoveCloudNetwork(ICloudNetwork *network)
 
 /* void checkFirmwarePresent (in FirmwareType_T firmwareType, in wstring version, out wstring url, out wstring file, [retval] out boolean result); */
 NS_IMETHODIMP _MYCLASS_::CheckFirmwarePresent(FirmwareType_T firmwareType, const PRUnichar *version, PRUnichar **url, PRUnichar **file, PRBool *result)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void findProgressById (in wstring id, [retval] out IProgress progressObject); */
+NS_IMETHODIMP _MYCLASS_::FindProgressById(const PRUnichar *id, IProgress **progressObject)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -16505,6 +19266,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IVirtualBox()
 #define COM_FORWARD_IVirtualBox_GETTER_InternalNetworks_TO(smth) NS_IMETHOD GetInternalNetworks (PRUint32 * aInternalNetworksSize, PRUnichar * * * aInternalNetworks) { return smth GetInternalNetworks (aInternalNetworksSize, aInternalNetworks); }
 #define COM_FORWARD_IVirtualBox_GETTER_InternalNetworks_TO_OBJ(obj) COM_FORWARD_IVirtualBox_GETTER_InternalNetworks_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_GETTER_InternalNetworks_TO_BASE(base) COM_FORWARD_IVirtualBox_GETTER_InternalNetworks_TO (base::)
+#define COM_FORWARD_IVirtualBox_GETTER_HostOnlyNetworks_TO(smth) NS_IMETHOD GetHostOnlyNetworks (PRUint32 * aHostOnlyNetworksSize, IHostOnlyNetwork * * * aHostOnlyNetworks) { return smth GetHostOnlyNetworks (aHostOnlyNetworksSize, aHostOnlyNetworks); }
+#define COM_FORWARD_IVirtualBox_GETTER_HostOnlyNetworks_TO_OBJ(obj) COM_FORWARD_IVirtualBox_GETTER_HostOnlyNetworks_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_GETTER_HostOnlyNetworks_TO_BASE(base) COM_FORWARD_IVirtualBox_GETTER_HostOnlyNetworks_TO (base::)
 #define COM_FORWARD_IVirtualBox_GETTER_GenericNetworkDrivers_TO(smth) NS_IMETHOD GetGenericNetworkDrivers (PRUint32 * aGenericNetworkDriversSize, PRUnichar * * * aGenericNetworkDrivers) { return smth GetGenericNetworkDrivers (aGenericNetworkDriversSize, aGenericNetworkDrivers); }
 #define COM_FORWARD_IVirtualBox_GETTER_GenericNetworkDrivers_TO_OBJ(obj) COM_FORWARD_IVirtualBox_GETTER_GenericNetworkDrivers_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_GETTER_GenericNetworkDrivers_TO_BASE(base) COM_FORWARD_IVirtualBox_GETTER_GenericNetworkDrivers_TO (base::)
@@ -16517,10 +19281,10 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IVirtualBox()
 #define COM_FORWARD_IVirtualBox_ComposeMachineFilename_TO(smth) NS_IMETHOD ComposeMachineFilename (PRUnichar * aName, PRUnichar * aGroup, PRUnichar * aCreateFlags, PRUnichar * aBaseFolder, PRUnichar * * aFile) { return smth ComposeMachineFilename (aName, aGroup, aCreateFlags, aBaseFolder, aFile); }
 #define COM_FORWARD_IVirtualBox_ComposeMachineFilename_TO_OBJ(obj) COM_FORWARD_IVirtualBox_ComposeMachineFilename_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_ComposeMachineFilename_TO_BASE(base) COM_FORWARD_IVirtualBox_ComposeMachineFilename_TO (base::)
-#define COM_FORWARD_IVirtualBox_CreateMachine_TO(smth) NS_IMETHOD CreateMachine (PRUnichar * aSettingsFile, PRUnichar * aName, PRUint32 aGroupsSize, PRUnichar * * aGroups, PRUnichar * aOsTypeId, PRUnichar * aFlags, IMachine * * aMachine) { return smth CreateMachine (aSettingsFile, aName, aGroupsSize+++, aGroups, aOsTypeId, aFlags, aMachine); }
+#define COM_FORWARD_IVirtualBox_CreateMachine_TO(smth) NS_IMETHOD CreateMachine (PRUnichar * aSettingsFile, PRUnichar * aName, PRUint32 aGroupsSize, PRUnichar * * aGroups, PRUnichar * aOsTypeId, PRUnichar * aFlags, PRUnichar * aCipher, PRUnichar * aPasswordId, PRUnichar * aPassword, IMachine * * aMachine) { return smth CreateMachine (aSettingsFile, aName, aGroupsSize+++, aGroups, aOsTypeId, aFlags, aCipher, aPasswordId, aPassword, aMachine); }
 #define COM_FORWARD_IVirtualBox_CreateMachine_TO_OBJ(obj) COM_FORWARD_IVirtualBox_CreateMachine_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_CreateMachine_TO_BASE(base) COM_FORWARD_IVirtualBox_CreateMachine_TO (base::)
-#define COM_FORWARD_IVirtualBox_OpenMachine_TO(smth) NS_IMETHOD OpenMachine (PRUnichar * aSettingsFile, IMachine * * aMachine) { return smth OpenMachine (aSettingsFile, aMachine); }
+#define COM_FORWARD_IVirtualBox_OpenMachine_TO(smth) NS_IMETHOD OpenMachine (PRUnichar * aSettingsFile, PRUnichar * aPassword, IMachine * * aMachine) { return smth OpenMachine (aSettingsFile, aPassword, aMachine); }
 #define COM_FORWARD_IVirtualBox_OpenMachine_TO_OBJ(obj) COM_FORWARD_IVirtualBox_OpenMachine_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_OpenMachine_TO_BASE(base) COM_FORWARD_IVirtualBox_OpenMachine_TO (base::)
 #define COM_FORWARD_IVirtualBox_RegisterMachine_TO(smth) NS_IMETHOD RegisterMachine (IMachine * aMachine) { return smth RegisterMachine (aMachine); }
@@ -16586,6 +19350,18 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IVirtualBox()
 #define COM_FORWARD_IVirtualBox_RemoveNATNetwork_TO(smth) NS_IMETHOD RemoveNATNetwork (INATNetwork * aNetwork) { return smth RemoveNATNetwork (aNetwork); }
 #define COM_FORWARD_IVirtualBox_RemoveNATNetwork_TO_OBJ(obj) COM_FORWARD_IVirtualBox_RemoveNATNetwork_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_RemoveNATNetwork_TO_BASE(base) COM_FORWARD_IVirtualBox_RemoveNATNetwork_TO (base::)
+#define COM_FORWARD_IVirtualBox_CreateHostOnlyNetwork_TO(smth) NS_IMETHOD CreateHostOnlyNetwork (PRUnichar * aNetworkName, IHostOnlyNetwork * * aNetwork) { return smth CreateHostOnlyNetwork (aNetworkName, aNetwork); }
+#define COM_FORWARD_IVirtualBox_CreateHostOnlyNetwork_TO_OBJ(obj) COM_FORWARD_IVirtualBox_CreateHostOnlyNetwork_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_CreateHostOnlyNetwork_TO_BASE(base) COM_FORWARD_IVirtualBox_CreateHostOnlyNetwork_TO (base::)
+#define COM_FORWARD_IVirtualBox_FindHostOnlyNetworkByName_TO(smth) NS_IMETHOD FindHostOnlyNetworkByName (PRUnichar * aNetworkName, IHostOnlyNetwork * * aNetwork) { return smth FindHostOnlyNetworkByName (aNetworkName, aNetwork); }
+#define COM_FORWARD_IVirtualBox_FindHostOnlyNetworkByName_TO_OBJ(obj) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkByName_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_FindHostOnlyNetworkByName_TO_BASE(base) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkByName_TO (base::)
+#define COM_FORWARD_IVirtualBox_FindHostOnlyNetworkById_TO(smth) NS_IMETHOD FindHostOnlyNetworkById (PRUnichar * aId, IHostOnlyNetwork * * aNetwork) { return smth FindHostOnlyNetworkById (aId, aNetwork); }
+#define COM_FORWARD_IVirtualBox_FindHostOnlyNetworkById_TO_OBJ(obj) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkById_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_FindHostOnlyNetworkById_TO_BASE(base) COM_FORWARD_IVirtualBox_FindHostOnlyNetworkById_TO (base::)
+#define COM_FORWARD_IVirtualBox_RemoveHostOnlyNetwork_TO(smth) NS_IMETHOD RemoveHostOnlyNetwork (IHostOnlyNetwork * aNetwork) { return smth RemoveHostOnlyNetwork (aNetwork); }
+#define COM_FORWARD_IVirtualBox_RemoveHostOnlyNetwork_TO_OBJ(obj) COM_FORWARD_IVirtualBox_RemoveHostOnlyNetwork_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_RemoveHostOnlyNetwork_TO_BASE(base) COM_FORWARD_IVirtualBox_RemoveHostOnlyNetwork_TO (base::)
 #define COM_FORWARD_IVirtualBox_CreateCloudNetwork_TO(smth) NS_IMETHOD CreateCloudNetwork (PRUnichar * aNetworkName, ICloudNetwork * * aNetwork) { return smth CreateCloudNetwork (aNetworkName, aNetwork); }
 #define COM_FORWARD_IVirtualBox_CreateCloudNetwork_TO_OBJ(obj) COM_FORWARD_IVirtualBox_CreateCloudNetwork_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_CreateCloudNetwork_TO_BASE(base) COM_FORWARD_IVirtualBox_CreateCloudNetwork_TO (base::)
@@ -16598,6 +19374,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IVirtualBox()
 #define COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO(smth) NS_IMETHOD CheckFirmwarePresent (PRUint32 aFirmwareType, PRUnichar * aVersion, PRUnichar * * aUrl, PRUnichar * * aFile, PRBool * aResult) { return smth CheckFirmwarePresent (aFirmwareType, aVersion, aUrl, aFile, aResult); }
 #define COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO_OBJ(obj) COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO_BASE(base) COM_FORWARD_IVirtualBox_CheckFirmwarePresent_TO (base::)
+#define COM_FORWARD_IVirtualBox_FindProgressById_TO(smth) NS_IMETHOD FindProgressById (PRUnichar * aId, IProgress * * aProgressObject) { return smth FindProgressById (aId, aProgressObject); }
+#define COM_FORWARD_IVirtualBox_FindProgressById_TO_OBJ(obj) COM_FORWARD_IVirtualBox_FindProgressById_TO ((obj)->)
+#define COM_FORWARD_IVirtualBox_FindProgressById_TO_BASE(base) COM_FORWARD_IVirtualBox_FindProgressById_TO (base::)
 #define COM_FORWARD_IVirtualBox_TO(smth) NS_FORWARD_IVIRTUALBOX (smth)
 #define COM_FORWARD_IVirtualBox_TO_OBJ(obj) COM_FORWARD_IVirtualBox_TO ((obj)->)
 #define COM_FORWARD_IVirtualBox_TO_BASE(base) COM_FORWARD_IVirtualBox_TO (base::)
@@ -18100,11 +20879,11 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IVirtualSystemDescription()
 VBOX_EXTERN_C const nsID IID_IVirtualSystemDescription;
 
 /* starting interface:    IUnattended */
-#define IUNATTENDED_IID_STR "6f89464f-7193-426c-a41f-522e8f537fa0"
+#define IUNATTENDED_IID_STR "6f89464f-7773-436a-a4df-592e4e537fa0"
 
 #define IUNATTENDED_IID \
-  {0x6f89464f, 0x7193, 0x426c, \
-    { 0xa4, 0x1f, 0x52, 0x2e, 0x8f, 0x53, 0x7f, 0xa0 }}
+  {0x6f89464f, 0x7773, 0x436a, \
+    { 0xa4, 0xdf, 0x59, 0x2e, 0x4e, 0x53, 0x7f, 0xa0 }}
 
 class NS_NO_VTABLE IUnattended : public nsISupports {
  public: 
@@ -18217,6 +20996,19 @@ class NS_NO_VTABLE IUnattended : public nsISupports {
 
   /* readonly attribute wstring detectedOSHints; */
   NS_IMETHOD GetDetectedOSHints(PRUnichar * *aDetectedOSHints) = 0;
+
+  /* void getDetectedImageNames (out unsigned long detectedImageNamesSize, [array, size_is (detectedImageNamesSize), retval] out wstring detectedImageNames); */
+  NS_IMETHOD GetDetectedImageNames(PRUint32 *detectedImageNamesSize, PRUnichar ***detectedImageNames) = 0;
+
+  /* void getDetectedImageIndices (out unsigned long detectedImageIndicesSize, [array, size_is (detectedImageIndicesSize), retval] out unsigned long detectedImageIndices); */
+  NS_IMETHOD GetDetectedImageIndices(PRUint32 *detectedImageIndicesSize, PRUint32 **detectedImageIndices) = 0;
+
+  /* readonly attribute boolean isUnattendedInstallSupported; */
+  NS_IMETHOD GetIsUnattendedInstallSupported(PRBool *aIsUnattendedInstallSupported) = 0;
+
+  /* attribute boolean avoidUpdatesOverNetwork; */
+  NS_IMETHOD GetAvoidUpdatesOverNetwork(PRBool *aAvoidUpdatesOverNetwork) = 0;
+  NS_IMETHOD SetAvoidUpdatesOverNetwork(PRBool aAvoidUpdatesOverNetwork) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1IUnattended; */
   NS_IMETHOD GetInternalAndReservedAttribute1IUnattended(PRUint32 *aInternalAndReservedAttribute1IUnattended) = 0;
@@ -18348,6 +21140,11 @@ class NS_NO_VTABLE IUnattended : public nsISupports {
   NS_IMETHOD GetDetectedOSFlavor(PRUnichar * *aDetectedOSFlavor); \
   NS_IMETHOD GetDetectedOSLanguages(PRUnichar * *aDetectedOSLanguages); \
   NS_IMETHOD GetDetectedOSHints(PRUnichar * *aDetectedOSHints); \
+  NS_IMETHOD GetDetectedImageNames(PRUint32 *detectedImageNamesSize, PRUnichar ***detectedImageNames); \
+  NS_IMETHOD GetDetectedImageIndices(PRUint32 *detectedImageIndicesSize, PRUint32 **detectedImageIndices); \
+  NS_IMETHOD GetIsUnattendedInstallSupported(PRBool *aIsUnattendedInstallSupported); \
+  NS_IMETHOD GetAvoidUpdatesOverNetwork(PRBool *aAvoidUpdatesOverNetwork); \
+  NS_IMETHOD SetAvoidUpdatesOverNetwork(PRBool aAvoidUpdatesOverNetwork); \
   NS_IMETHOD GetInternalAndReservedAttribute1IUnattended(PRUint32 *aInternalAndReservedAttribute1IUnattended); \
   NS_IMETHOD GetInternalAndReservedAttribute2IUnattended(PRUint32 *aInternalAndReservedAttribute2IUnattended); \
   NS_IMETHOD GetInternalAndReservedAttribute3IUnattended(PRUint32 *aInternalAndReservedAttribute3IUnattended); \
@@ -18427,6 +21224,11 @@ class NS_NO_VTABLE IUnattended : public nsISupports {
   NS_IMETHOD GetDetectedOSFlavor(PRUnichar * *aDetectedOSFlavor) { return _to GetDetectedOSFlavor(aDetectedOSFlavor); } \
   NS_IMETHOD GetDetectedOSLanguages(PRUnichar * *aDetectedOSLanguages) { return _to GetDetectedOSLanguages(aDetectedOSLanguages); } \
   NS_IMETHOD GetDetectedOSHints(PRUnichar * *aDetectedOSHints) { return _to GetDetectedOSHints(aDetectedOSHints); } \
+  NS_IMETHOD GetDetectedImageNames(PRUint32 *detectedImageNamesSize, PRUnichar ***detectedImageNames) { return _to GetDetectedImageNames(detectedImageNamesSize, detectedImageNames); } \
+  NS_IMETHOD GetDetectedImageIndices(PRUint32 *detectedImageIndicesSize, PRUint32 **detectedImageIndices) { return _to GetDetectedImageIndices(detectedImageIndicesSize, detectedImageIndices); } \
+  NS_IMETHOD GetIsUnattendedInstallSupported(PRBool *aIsUnattendedInstallSupported) { return _to GetIsUnattendedInstallSupported(aIsUnattendedInstallSupported); } \
+  NS_IMETHOD GetAvoidUpdatesOverNetwork(PRBool *aAvoidUpdatesOverNetwork) { return _to GetAvoidUpdatesOverNetwork(aAvoidUpdatesOverNetwork); } \
+  NS_IMETHOD SetAvoidUpdatesOverNetwork(PRBool aAvoidUpdatesOverNetwork) { return _to SetAvoidUpdatesOverNetwork(aAvoidUpdatesOverNetwork); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IUnattended(PRUint32 *aInternalAndReservedAttribute1IUnattended) { return _to GetInternalAndReservedAttribute1IUnattended(aInternalAndReservedAttribute1IUnattended); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IUnattended(PRUint32 *aInternalAndReservedAttribute2IUnattended) { return _to GetInternalAndReservedAttribute2IUnattended(aInternalAndReservedAttribute2IUnattended); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IUnattended(PRUint32 *aInternalAndReservedAttribute3IUnattended) { return _to GetInternalAndReservedAttribute3IUnattended(aInternalAndReservedAttribute3IUnattended); } \
@@ -18506,6 +21308,11 @@ class NS_NO_VTABLE IUnattended : public nsISupports {
   NS_IMETHOD GetDetectedOSFlavor(PRUnichar * *aDetectedOSFlavor) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDetectedOSFlavor(aDetectedOSFlavor); } \
   NS_IMETHOD GetDetectedOSLanguages(PRUnichar * *aDetectedOSLanguages) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDetectedOSLanguages(aDetectedOSLanguages); } \
   NS_IMETHOD GetDetectedOSHints(PRUnichar * *aDetectedOSHints) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDetectedOSHints(aDetectedOSHints); } \
+  NS_IMETHOD GetDetectedImageNames(PRUint32 *detectedImageNamesSize, PRUnichar ***detectedImageNames) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDetectedImageNames(detectedImageNamesSize, detectedImageNames); } \
+  NS_IMETHOD GetDetectedImageIndices(PRUint32 *detectedImageIndicesSize, PRUint32 **detectedImageIndices) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDetectedImageIndices(detectedImageIndicesSize, detectedImageIndices); } \
+  NS_IMETHOD GetIsUnattendedInstallSupported(PRBool *aIsUnattendedInstallSupported) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsUnattendedInstallSupported(aIsUnattendedInstallSupported); } \
+  NS_IMETHOD GetAvoidUpdatesOverNetwork(PRBool *aAvoidUpdatesOverNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAvoidUpdatesOverNetwork(aAvoidUpdatesOverNetwork); } \
+  NS_IMETHOD SetAvoidUpdatesOverNetwork(PRBool aAvoidUpdatesOverNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAvoidUpdatesOverNetwork(aAvoidUpdatesOverNetwork); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IUnattended(PRUint32 *aInternalAndReservedAttribute1IUnattended) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IUnattended(aInternalAndReservedAttribute1IUnattended); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IUnattended(PRUint32 *aInternalAndReservedAttribute2IUnattended) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IUnattended(aInternalAndReservedAttribute2IUnattended); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IUnattended(PRUint32 *aInternalAndReservedAttribute3IUnattended) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IUnattended(aInternalAndReservedAttribute3IUnattended); } \
@@ -18824,6 +21631,34 @@ NS_IMETHODIMP _MYCLASS_::GetDetectedOSHints(PRUnichar * *aDetectedOSHints)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getDetectedImageNames (out unsigned long detectedImageNamesSize, [array, size_is (detectedImageNamesSize), retval] out wstring detectedImageNames); */
+NS_IMETHODIMP _MYCLASS_::GetDetectedImageNames(PRUint32 *detectedImageNamesSize, PRUnichar ***detectedImageNames)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getDetectedImageIndices (out unsigned long detectedImageIndicesSize, [array, size_is (detectedImageIndicesSize), retval] out unsigned long detectedImageIndices); */
+NS_IMETHODIMP _MYCLASS_::GetDetectedImageIndices(PRUint32 *detectedImageIndicesSize, PRUint32 **detectedImageIndices)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean isUnattendedInstallSupported; */
+NS_IMETHODIMP _MYCLASS_::GetIsUnattendedInstallSupported(PRBool *aIsUnattendedInstallSupported)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute boolean avoidUpdatesOverNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetAvoidUpdatesOverNetwork(PRBool *aAvoidUpdatesOverNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetAvoidUpdatesOverNetwork(PRBool aAvoidUpdatesOverNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* readonly attribute unsigned long InternalAndReservedAttribute1IUnattended; */
 NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IUnattended(PRUint32 *aInternalAndReservedAttribute1IUnattended)
 {
@@ -19130,6 +21965,21 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IUnattended()
 #define COM_FORWARD_IUnattended_GETTER_DetectedOSHints_TO(smth) NS_IMETHOD GetDetectedOSHints (PRUnichar * * aDetectedOSHints) { return smth GetDetectedOSHints (aDetectedOSHints); }
 #define COM_FORWARD_IUnattended_GETTER_DetectedOSHints_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_DetectedOSHints_TO ((obj)->)
 #define COM_FORWARD_IUnattended_GETTER_DetectedOSHints_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_DetectedOSHints_TO (base::)
+#define COM_FORWARD_IUnattended_GETTER_DetectedImageNames_TO(smth) NS_IMETHOD GetDetectedImageNames (PRUint32 * aDetectedImageNamesSize, PRUnichar * * * aDetectedImageNames) { return smth GetDetectedImageNames (aDetectedImageNamesSize, aDetectedImageNames); }
+#define COM_FORWARD_IUnattended_GETTER_DetectedImageNames_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_DetectedImageNames_TO ((obj)->)
+#define COM_FORWARD_IUnattended_GETTER_DetectedImageNames_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_DetectedImageNames_TO (base::)
+#define COM_FORWARD_IUnattended_GETTER_DetectedImageIndices_TO(smth) NS_IMETHOD GetDetectedImageIndices (PRUint32 * aDetectedImageIndicesSize, PRUint32 * * aDetectedImageIndices) { return smth GetDetectedImageIndices (aDetectedImageIndicesSize, aDetectedImageIndices); }
+#define COM_FORWARD_IUnattended_GETTER_DetectedImageIndices_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_DetectedImageIndices_TO ((obj)->)
+#define COM_FORWARD_IUnattended_GETTER_DetectedImageIndices_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_DetectedImageIndices_TO (base::)
+#define COM_FORWARD_IUnattended_GETTER_IsUnattendedInstallSupported_TO(smth) NS_IMETHOD GetIsUnattendedInstallSupported (PRBool * aIsUnattendedInstallSupported) { return smth GetIsUnattendedInstallSupported (aIsUnattendedInstallSupported); }
+#define COM_FORWARD_IUnattended_GETTER_IsUnattendedInstallSupported_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_IsUnattendedInstallSupported_TO ((obj)->)
+#define COM_FORWARD_IUnattended_GETTER_IsUnattendedInstallSupported_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_IsUnattendedInstallSupported_TO (base::)
+#define COM_FORWARD_IUnattended_GETTER_AvoidUpdatesOverNetwork_TO(smth) NS_IMETHOD GetAvoidUpdatesOverNetwork (PRBool * aAvoidUpdatesOverNetwork) { return smth GetAvoidUpdatesOverNetwork (aAvoidUpdatesOverNetwork); }
+#define COM_FORWARD_IUnattended_GETTER_AvoidUpdatesOverNetwork_TO_OBJ(obj) COM_FORWARD_IUnattended_GETTER_AvoidUpdatesOverNetwork_TO ((obj)->)
+#define COM_FORWARD_IUnattended_GETTER_AvoidUpdatesOverNetwork_TO_BASE(base) COM_FORWARD_IUnattended_GETTER_AvoidUpdatesOverNetwork_TO (base::)
+#define COM_FORWARD_IUnattended_SETTER_AvoidUpdatesOverNetwork_TO(smth) NS_IMETHOD SetAvoidUpdatesOverNetwork (PRBool aAvoidUpdatesOverNetwork) { return smth SetAvoidUpdatesOverNetwork (aAvoidUpdatesOverNetwork); }
+#define COM_FORWARD_IUnattended_SETTER_AvoidUpdatesOverNetwork_TO_OBJ(obj) COM_FORWARD_IUnattended_SETTER_AvoidUpdatesOverNetwork_TO ((obj)->)
+#define COM_FORWARD_IUnattended_SETTER_AvoidUpdatesOverNetwork_TO_BASE(base) COM_FORWARD_IUnattended_SETTER_AvoidUpdatesOverNetwork_TO (base::)
 #define COM_FORWARD_IUnattended_DetectIsoOS_TO(smth) NS_IMETHOD DetectIsoOS() { return smth DetectIsoOS(); }
 #define COM_FORWARD_IUnattended_DetectIsoOS_TO_OBJ(obj) COM_FORWARD_IUnattended_DetectIsoOS_TO ((obj)->)
 #define COM_FORWARD_IUnattended_DetectIsoOS_TO_BASE(base) COM_FORWARD_IUnattended_DetectIsoOS_TO (base::)
@@ -19152,11 +22002,11 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IUnattended()
 VBOX_EXTERN_C const nsID IID_IUnattended;
 
 /* starting interface:    IInternalMachineControl */
-#define IINTERNALMACHINECONTROL_IID_STR "0075fd6c-00c2-4484-0077-c057003d9c90"
+#define IINTERNALMACHINECONTROL_IID_STR "ea05e40c-cb31-423b-b3b7-a5b19300f40c"
 
 #define IINTERNALMACHINECONTROL_IID \
-  {0x0075fd6c, 0x00c2, 0x4484, \
-    { 0x00, 0x77, 0xc0, 0x57, 0x00, 0x3d, 0x9c, 0x90 }}
+  {0xea05e40c, 0xcb31, 0x423b, \
+    { 0xb3, 0xb7, 0xa5, 0xb1, 0x93, 0x00, 0xf4, 0x0c }}
 
 class NS_NO_VTABLE IInternalMachineControl : public nsISupports {
  public: 
@@ -19202,26 +22052,8 @@ class NS_NO_VTABLE IInternalMachineControl : public nsISupports {
   /* void pullGuestProperties (out unsigned long namesSize, [array, size_is (namesSize)] out wstring names, out unsigned long valuesSize, [array, size_is (valuesSize)] out wstring values, out unsigned long timestampsSize, [array, size_is (timestampsSize)] out long long timestamps, out unsigned long flagsSize, [array, size_is (flagsSize)] out wstring flags); */
   NS_IMETHOD PullGuestProperties(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *valuesSize, PRUnichar ***values, PRUint32 *timestampsSize, PRInt64 **timestamps, PRUint32 *flagsSize, PRUnichar ***flags) = 0;
 
-  /* void clipboardAreaRegister (in unsigned long parmsSize, [array, size_is (parmsSize)] in wstring parms, out unsigned long id); */
-  NS_IMETHOD ClipboardAreaRegister(PRUint32 parmsSize, const PRUnichar **parms, PRUint32 *id) = 0;
-
-  /* void clipboardAreaUnregister (in unsigned long id); */
-  NS_IMETHOD ClipboardAreaUnregister(PRUint32 id) = 0;
-
-  /* void clipboardAreaAttach (in unsigned long id); */
-  NS_IMETHOD ClipboardAreaAttach(PRUint32 id) = 0;
-
-  /* void clipboardAreaDetach (in unsigned long id); */
-  NS_IMETHOD ClipboardAreaDetach(PRUint32 id) = 0;
-
-  /* void clipboardAreaGetMostRecent (out unsigned long id); */
-  NS_IMETHOD ClipboardAreaGetMostRecent(PRUint32 *id) = 0;
-
-  /* void clipboardAreaGetRefCount (in unsigned long id, out unsigned long refcount); */
-  NS_IMETHOD ClipboardAreaGetRefCount(PRUint32 id, PRUint32 *refcount) = 0;
-
-  /* void pushGuestProperty (in wstring name, in wstring value, in long long timestamp, in wstring flags); */
-  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags) = 0;
+  /* void pushGuestProperty (in wstring name, in wstring value, in long long timestamp, in wstring flags, in boolean fWasDeleted); */
+  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags, PRBool fWasDeleted) = 0;
 
   /* void lockMedia (); */
   NS_IMETHOD LockMedia(void) = 0;
@@ -19255,13 +22087,7 @@ class NS_NO_VTABLE IInternalMachineControl : public nsISupports {
   NS_IMETHOD OnSessionEnd(ISession *session, IProgress **progress); \
   NS_IMETHOD FinishOnlineMergeMedium(void); \
   NS_IMETHOD PullGuestProperties(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *valuesSize, PRUnichar ***values, PRUint32 *timestampsSize, PRInt64 **timestamps, PRUint32 *flagsSize, PRUnichar ***flags); \
-  NS_IMETHOD ClipboardAreaRegister(PRUint32 parmsSize, const PRUnichar **parms, PRUint32 *id); \
-  NS_IMETHOD ClipboardAreaUnregister(PRUint32 id); \
-  NS_IMETHOD ClipboardAreaAttach(PRUint32 id); \
-  NS_IMETHOD ClipboardAreaDetach(PRUint32 id); \
-  NS_IMETHOD ClipboardAreaGetMostRecent(PRUint32 *id); \
-  NS_IMETHOD ClipboardAreaGetRefCount(PRUint32 id, PRUint32 *refcount); \
-  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags); \
+  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags, PRBool fWasDeleted); \
   NS_IMETHOD LockMedia(void); \
   NS_IMETHOD UnlockMedia(void); \
   NS_IMETHOD EjectMedium(IMediumAttachment *attachment, IMediumAttachment **newAttachment); \
@@ -19283,13 +22109,7 @@ class NS_NO_VTABLE IInternalMachineControl : public nsISupports {
   NS_IMETHOD OnSessionEnd(ISession *session, IProgress **progress) { return _to OnSessionEnd(session, progress); } \
   NS_IMETHOD FinishOnlineMergeMedium(void) { return _to FinishOnlineMergeMedium(); } \
   NS_IMETHOD PullGuestProperties(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *valuesSize, PRUnichar ***values, PRUint32 *timestampsSize, PRInt64 **timestamps, PRUint32 *flagsSize, PRUnichar ***flags) { return _to PullGuestProperties(namesSize, names, valuesSize, values, timestampsSize, timestamps, flagsSize, flags); } \
-  NS_IMETHOD ClipboardAreaRegister(PRUint32 parmsSize, const PRUnichar **parms, PRUint32 *id) { return _to ClipboardAreaRegister(parmsSize, parms, id); } \
-  NS_IMETHOD ClipboardAreaUnregister(PRUint32 id) { return _to ClipboardAreaUnregister(id); } \
-  NS_IMETHOD ClipboardAreaAttach(PRUint32 id) { return _to ClipboardAreaAttach(id); } \
-  NS_IMETHOD ClipboardAreaDetach(PRUint32 id) { return _to ClipboardAreaDetach(id); } \
-  NS_IMETHOD ClipboardAreaGetMostRecent(PRUint32 *id) { return _to ClipboardAreaGetMostRecent(id); } \
-  NS_IMETHOD ClipboardAreaGetRefCount(PRUint32 id, PRUint32 *refcount) { return _to ClipboardAreaGetRefCount(id, refcount); } \
-  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags) { return _to PushGuestProperty(name, value, timestamp, flags); } \
+  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags, PRBool fWasDeleted) { return _to PushGuestProperty(name, value, timestamp, flags, fWasDeleted); } \
   NS_IMETHOD LockMedia(void) { return _to LockMedia(); } \
   NS_IMETHOD UnlockMedia(void) { return _to UnlockMedia(); } \
   NS_IMETHOD EjectMedium(IMediumAttachment *attachment, IMediumAttachment **newAttachment) { return _to EjectMedium(attachment, newAttachment); } \
@@ -19311,13 +22131,7 @@ class NS_NO_VTABLE IInternalMachineControl : public nsISupports {
   NS_IMETHOD OnSessionEnd(ISession *session, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnSessionEnd(session, progress); } \
   NS_IMETHOD FinishOnlineMergeMedium(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->FinishOnlineMergeMedium(); } \
   NS_IMETHOD PullGuestProperties(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *valuesSize, PRUnichar ***values, PRUint32 *timestampsSize, PRInt64 **timestamps, PRUint32 *flagsSize, PRUnichar ***flags) { return !_to ? NS_ERROR_NULL_POINTER : _to->PullGuestProperties(namesSize, names, valuesSize, values, timestampsSize, timestamps, flagsSize, flags); } \
-  NS_IMETHOD ClipboardAreaRegister(PRUint32 parmsSize, const PRUnichar **parms, PRUint32 *id) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClipboardAreaRegister(parmsSize, parms, id); } \
-  NS_IMETHOD ClipboardAreaUnregister(PRUint32 id) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClipboardAreaUnregister(id); } \
-  NS_IMETHOD ClipboardAreaAttach(PRUint32 id) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClipboardAreaAttach(id); } \
-  NS_IMETHOD ClipboardAreaDetach(PRUint32 id) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClipboardAreaDetach(id); } \
-  NS_IMETHOD ClipboardAreaGetMostRecent(PRUint32 *id) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClipboardAreaGetMostRecent(id); } \
-  NS_IMETHOD ClipboardAreaGetRefCount(PRUint32 id, PRUint32 *refcount) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClipboardAreaGetRefCount(id, refcount); } \
-  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags) { return !_to ? NS_ERROR_NULL_POINTER : _to->PushGuestProperty(name, value, timestamp, flags); } \
+  NS_IMETHOD PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags, PRBool fWasDeleted) { return !_to ? NS_ERROR_NULL_POINTER : _to->PushGuestProperty(name, value, timestamp, flags, fWasDeleted); } \
   NS_IMETHOD LockMedia(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->LockMedia(); } \
   NS_IMETHOD UnlockMedia(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->UnlockMedia(); } \
   NS_IMETHOD EjectMedium(IMediumAttachment *attachment, IMediumAttachment **newAttachment) { return !_to ? NS_ERROR_NULL_POINTER : _to->EjectMedium(attachment, newAttachment); } \
@@ -19434,44 +22248,8 @@ NS_IMETHODIMP _MYCLASS_::PullGuestProperties(PRUint32 *namesSize, PRUnichar ***n
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void clipboardAreaRegister (in unsigned long parmsSize, [array, size_is (parmsSize)] in wstring parms, out unsigned long id); */
-NS_IMETHODIMP _MYCLASS_::ClipboardAreaRegister(PRUint32 parmsSize, const PRUnichar **parms, PRUint32 *id)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void clipboardAreaUnregister (in unsigned long id); */
-NS_IMETHODIMP _MYCLASS_::ClipboardAreaUnregister(PRUint32 id)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void clipboardAreaAttach (in unsigned long id); */
-NS_IMETHODIMP _MYCLASS_::ClipboardAreaAttach(PRUint32 id)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void clipboardAreaDetach (in unsigned long id); */
-NS_IMETHODIMP _MYCLASS_::ClipboardAreaDetach(PRUint32 id)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void clipboardAreaGetMostRecent (out unsigned long id); */
-NS_IMETHODIMP _MYCLASS_::ClipboardAreaGetMostRecent(PRUint32 *id)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void clipboardAreaGetRefCount (in unsigned long id, out unsigned long refcount); */
-NS_IMETHODIMP _MYCLASS_::ClipboardAreaGetRefCount(PRUint32 id, PRUint32 *refcount)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void pushGuestProperty (in wstring name, in wstring value, in long long timestamp, in wstring flags); */
-NS_IMETHODIMP _MYCLASS_::PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags)
+/* void pushGuestProperty (in wstring name, in wstring value, in long long timestamp, in wstring flags, in boolean fWasDeleted); */
+NS_IMETHODIMP _MYCLASS_::PushGuestProperty(const PRUnichar *name, const PRUnichar *value, PRInt64 timestamp, const PRUnichar *flags, PRBool fWasDeleted)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -19548,25 +22326,7 @@ NS_IMETHODIMP _MYCLASS_::AuthenticateExternal(PRUint32 authParamsSize, const PRU
 #define COM_FORWARD_IInternalMachineControl_PullGuestProperties_TO(smth) NS_IMETHOD PullGuestProperties (PRUint32 * aNamesSize, PRUnichar * * * aNames, PRUint32 * aValuesSize, PRUnichar * * * aValues, PRUint32 * aTimestampsSize, PRInt64 * * aTimestamps, PRUint32 * aFlagsSize, PRUnichar * * * aFlags) { return smth PullGuestProperties (aNamesSize+++, aNames, aValuesSize+++, aValues, aTimestampsSize+++, aTimestamps, aFlagsSize, aFlags); }
 #define COM_FORWARD_IInternalMachineControl_PullGuestProperties_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_PullGuestProperties_TO ((obj)->)
 #define COM_FORWARD_IInternalMachineControl_PullGuestProperties_TO_BASE(base) COM_FORWARD_IInternalMachineControl_PullGuestProperties_TO (base::)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaRegister_TO(smth) NS_IMETHOD ClipboardAreaRegister (PRUint32 aParmsSize, PRUnichar * * aParms, PRUint32 * aId) { return smth ClipboardAreaRegister (aParmsSize+++, aParms, aId); }
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaRegister_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_ClipboardAreaRegister_TO ((obj)->)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaRegister_TO_BASE(base) COM_FORWARD_IInternalMachineControl_ClipboardAreaRegister_TO (base::)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaUnregister_TO(smth) NS_IMETHOD ClipboardAreaUnregister (PRUint32 aId) { return smth ClipboardAreaUnregister (aId); }
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaUnregister_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_ClipboardAreaUnregister_TO ((obj)->)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaUnregister_TO_BASE(base) COM_FORWARD_IInternalMachineControl_ClipboardAreaUnregister_TO (base::)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaAttach_TO(smth) NS_IMETHOD ClipboardAreaAttach (PRUint32 aId) { return smth ClipboardAreaAttach (aId); }
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaAttach_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_ClipboardAreaAttach_TO ((obj)->)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaAttach_TO_BASE(base) COM_FORWARD_IInternalMachineControl_ClipboardAreaAttach_TO (base::)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaDetach_TO(smth) NS_IMETHOD ClipboardAreaDetach (PRUint32 aId) { return smth ClipboardAreaDetach (aId); }
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaDetach_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_ClipboardAreaDetach_TO ((obj)->)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaDetach_TO_BASE(base) COM_FORWARD_IInternalMachineControl_ClipboardAreaDetach_TO (base::)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaGetMostRecent_TO(smth) NS_IMETHOD ClipboardAreaGetMostRecent (PRUint32 * aId) { return smth ClipboardAreaGetMostRecent (aId); }
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaGetMostRecent_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_ClipboardAreaGetMostRecent_TO ((obj)->)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaGetMostRecent_TO_BASE(base) COM_FORWARD_IInternalMachineControl_ClipboardAreaGetMostRecent_TO (base::)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaGetRefCount_TO(smth) NS_IMETHOD ClipboardAreaGetRefCount (PRUint32 aId, PRUint32 * aRefcount) { return smth ClipboardAreaGetRefCount (aId, aRefcount); }
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaGetRefCount_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_ClipboardAreaGetRefCount_TO ((obj)->)
-#define COM_FORWARD_IInternalMachineControl_ClipboardAreaGetRefCount_TO_BASE(base) COM_FORWARD_IInternalMachineControl_ClipboardAreaGetRefCount_TO (base::)
-#define COM_FORWARD_IInternalMachineControl_PushGuestProperty_TO(smth) NS_IMETHOD PushGuestProperty (PRUnichar * aName, PRUnichar * aValue, PRInt64 aTimestamp, PRUnichar * aFlags) { return smth PushGuestProperty (aName, aValue, aTimestamp, aFlags); }
+#define COM_FORWARD_IInternalMachineControl_PushGuestProperty_TO(smth) NS_IMETHOD PushGuestProperty (PRUnichar * aName, PRUnichar * aValue, PRInt64 aTimestamp, PRUnichar * aFlags, PRBool aFWasDeleted) { return smth PushGuestProperty (aName, aValue, aTimestamp, aFlags, aFWasDeleted); }
 #define COM_FORWARD_IInternalMachineControl_PushGuestProperty_TO_OBJ(obj) COM_FORWARD_IInternalMachineControl_PushGuestProperty_TO ((obj)->)
 #define COM_FORWARD_IInternalMachineControl_PushGuestProperty_TO_BASE(base) COM_FORWARD_IInternalMachineControl_PushGuestProperty_TO (base::)
 #define COM_FORWARD_IInternalMachineControl_LockMedia_TO(smth) NS_IMETHOD LockMedia() { return smth LockMedia(); }
@@ -19929,11 +22689,11 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IGraphicsAdapter()
 VBOX_EXTERN_C const nsID IID_IGraphicsAdapter;
 
 /* starting interface:    IBIOSSettings */
-#define IBIOSSETTINGS_IID_STR "73af4152-7e67-4144-bf34-41c38e8b4cc7"
+#define IBIOSSETTINGS_IID_STR "a0a7f210-b857-4468-be26-c29f36a84345"
 
 #define IBIOSSETTINGS_IID \
-  {0x73af4152, 0x7e67, 0x4144, \
-    { 0xbf, 0x34, 0x41, 0xc3, 0x8e, 0x8b, 0x4c, 0xc7 }}
+  {0xa0a7f210, 0xb857, 0x4468, \
+    { 0xbe, 0x26, 0xc2, 0x9f, 0x36, 0xa8, 0x43, 0x45 }}
 
 class NS_NO_VTABLE IBIOSSettings : public nsISupports {
  public: 
@@ -19979,9 +22739,6 @@ class NS_NO_VTABLE IBIOSSettings : public nsISupports {
   /* attribute boolean PXEDebugEnabled; */
   NS_IMETHOD GetPXEDebugEnabled(PRBool *aPXEDebugEnabled) = 0;
   NS_IMETHOD SetPXEDebugEnabled(PRBool aPXEDebugEnabled) = 0;
-
-  /* readonly attribute wstring nonVolatileStorageFile; */
-  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile) = 0;
 
   /* attribute boolean SMBIOSUuidLittleEndian; */
   NS_IMETHOD GetSMBIOSUuidLittleEndian(PRBool *aSMBIOSUuidLittleEndian) = 0;
@@ -20041,7 +22798,6 @@ class NS_NO_VTABLE IBIOSSettings : public nsISupports {
   NS_IMETHOD SetTimeOffset(PRInt64 aTimeOffset); \
   NS_IMETHOD GetPXEDebugEnabled(PRBool *aPXEDebugEnabled); \
   NS_IMETHOD SetPXEDebugEnabled(PRBool aPXEDebugEnabled); \
-  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile); \
   NS_IMETHOD GetSMBIOSUuidLittleEndian(PRBool *aSMBIOSUuidLittleEndian); \
   NS_IMETHOD SetSMBIOSUuidLittleEndian(PRBool aSMBIOSUuidLittleEndian); \
   NS_IMETHOD GetInternalAndReservedAttribute1IBIOSSettings(PRUint32 *aInternalAndReservedAttribute1IBIOSSettings); \
@@ -20077,7 +22833,6 @@ class NS_NO_VTABLE IBIOSSettings : public nsISupports {
   NS_IMETHOD SetTimeOffset(PRInt64 aTimeOffset) { return _to SetTimeOffset(aTimeOffset); } \
   NS_IMETHOD GetPXEDebugEnabled(PRBool *aPXEDebugEnabled) { return _to GetPXEDebugEnabled(aPXEDebugEnabled); } \
   NS_IMETHOD SetPXEDebugEnabled(PRBool aPXEDebugEnabled) { return _to SetPXEDebugEnabled(aPXEDebugEnabled); } \
-  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile) { return _to GetNonVolatileStorageFile(aNonVolatileStorageFile); } \
   NS_IMETHOD GetSMBIOSUuidLittleEndian(PRBool *aSMBIOSUuidLittleEndian) { return _to GetSMBIOSUuidLittleEndian(aSMBIOSUuidLittleEndian); } \
   NS_IMETHOD SetSMBIOSUuidLittleEndian(PRBool aSMBIOSUuidLittleEndian) { return _to SetSMBIOSUuidLittleEndian(aSMBIOSUuidLittleEndian); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IBIOSSettings(PRUint32 *aInternalAndReservedAttribute1IBIOSSettings) { return _to GetInternalAndReservedAttribute1IBIOSSettings(aInternalAndReservedAttribute1IBIOSSettings); } \
@@ -20113,7 +22868,6 @@ class NS_NO_VTABLE IBIOSSettings : public nsISupports {
   NS_IMETHOD SetTimeOffset(PRInt64 aTimeOffset) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetTimeOffset(aTimeOffset); } \
   NS_IMETHOD GetPXEDebugEnabled(PRBool *aPXEDebugEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPXEDebugEnabled(aPXEDebugEnabled); } \
   NS_IMETHOD SetPXEDebugEnabled(PRBool aPXEDebugEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetPXEDebugEnabled(aPXEDebugEnabled); } \
-  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNonVolatileStorageFile(aNonVolatileStorageFile); } \
   NS_IMETHOD GetSMBIOSUuidLittleEndian(PRBool *aSMBIOSUuidLittleEndian) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSMBIOSUuidLittleEndian(aSMBIOSUuidLittleEndian); } \
   NS_IMETHOD SetSMBIOSUuidLittleEndian(PRBool aSMBIOSUuidLittleEndian) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetSMBIOSUuidLittleEndian(aSMBIOSUuidLittleEndian); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IBIOSSettings(PRUint32 *aInternalAndReservedAttribute1IBIOSSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IBIOSSettings(aInternalAndReservedAttribute1IBIOSSettings); } \
@@ -20259,12 +23013,6 @@ NS_IMETHODIMP IBOSSettings::SetPXEDebugEnabled(PRBool aPXEDebugEnabled)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute wstring nonVolatileStorageFile; */
-NS_IMETHODIMP IBOSSettings::GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
 /* attribute boolean SMBIOSUuidLittleEndian; */
 NS_IMETHODIMP IBOSSettings::GetSMBIOSUuidLittleEndian(PRBool *aSMBIOSUuidLittleEndian)
 {
@@ -20398,9 +23146,6 @@ NS_IMETHODIMP IBOSSettings::InternalAndReservedMethod2IBIOSSettings()
 #define COM_FORWARD_IBIOSSettings_SETTER_PXEDebugEnabled_TO(smth) NS_IMETHOD SetPXEDebugEnabled (PRBool aPXEDebugEnabled) { return smth SetPXEDebugEnabled (aPXEDebugEnabled); }
 #define COM_FORWARD_IBIOSSettings_SETTER_PXEDebugEnabled_TO_OBJ(obj) COM_FORWARD_IBIOSSettings_SETTER_PXEDebugEnabled_TO ((obj)->)
 #define COM_FORWARD_IBIOSSettings_SETTER_PXEDebugEnabled_TO_BASE(base) COM_FORWARD_IBIOSSettings_SETTER_PXEDebugEnabled_TO (base::)
-#define COM_FORWARD_IBIOSSettings_GETTER_NonVolatileStorageFile_TO(smth) NS_IMETHOD GetNonVolatileStorageFile (PRUnichar * * aNonVolatileStorageFile) { return smth GetNonVolatileStorageFile (aNonVolatileStorageFile); }
-#define COM_FORWARD_IBIOSSettings_GETTER_NonVolatileStorageFile_TO_OBJ(obj) COM_FORWARD_IBIOSSettings_GETTER_NonVolatileStorageFile_TO ((obj)->)
-#define COM_FORWARD_IBIOSSettings_GETTER_NonVolatileStorageFile_TO_BASE(base) COM_FORWARD_IBIOSSettings_GETTER_NonVolatileStorageFile_TO (base::)
 #define COM_FORWARD_IBIOSSettings_GETTER_SMBIOSUuidLittleEndian_TO(smth) NS_IMETHOD GetSMBIOSUuidLittleEndian (PRBool * aSMBIOSUuidLittleEndian) { return smth GetSMBIOSUuidLittleEndian (aSMBIOSUuidLittleEndian); }
 #define COM_FORWARD_IBIOSSettings_GETTER_SMBIOSUuidLittleEndian_TO_OBJ(obj) COM_FORWARD_IBIOSSettings_GETTER_SMBIOSUuidLittleEndian_TO ((obj)->)
 #define COM_FORWARD_IBIOSSettings_GETTER_SMBIOSUuidLittleEndian_TO_BASE(base) COM_FORWARD_IBIOSSettings_GETTER_SMBIOSUuidLittleEndian_TO (base::)
@@ -20413,12 +23158,248 @@ NS_IMETHODIMP IBOSSettings::InternalAndReservedMethod2IBIOSSettings()
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IBIOSSettings;
 
+/* starting interface:    ITrustedPlatformModule */
+#define ITRUSTEDPLATFORMMODULE_IID_STR "cf11d345-0241-4ea9-ac4c-c69ed3d674e3"
+
+#define ITRUSTEDPLATFORMMODULE_IID \
+  {0xcf11d345, 0x0241, 0x4ea9, \
+    { 0xac, 0x4c, 0xc6, 0x9e, 0xd3, 0xd6, 0x74, 0xe3 }}
+
+class NS_NO_VTABLE ITrustedPlatformModule : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ITRUSTEDPLATFORMMODULE_IID)
+
+  /* attribute TpmType_T type; */
+  NS_IMETHOD GetType(TpmType_T *aType) = 0;
+  NS_IMETHOD SetType(TpmType_T aType) = 0;
+
+  /* attribute wstring location; */
+  NS_IMETHOD GetLocation(PRUnichar * *aLocation) = 0;
+  NS_IMETHOD SetLocation(const PRUnichar * aLocation) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute1ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute1ITrustedPlatformModule) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute2ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute2ITrustedPlatformModule) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute3ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute3ITrustedPlatformModule) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute4ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute4ITrustedPlatformModule) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute5ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute5ITrustedPlatformModule) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute6ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute6ITrustedPlatformModule) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute7ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute7ITrustedPlatformModule) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute8ITrustedPlatformModule; */
+  NS_IMETHOD GetInternalAndReservedAttribute8ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute8ITrustedPlatformModule) = 0;
+
+  /* void InternalAndReservedMethod1ITrustedPlatformModule (); */
+  NS_IMETHOD InternalAndReservedMethod1ITrustedPlatformModule(void) = 0;
+
+  /* void InternalAndReservedMethod2ITrustedPlatformModule (); */
+  NS_IMETHOD InternalAndReservedMethod2ITrustedPlatformModule(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ITRUSTEDPLATFORMMODULE \
+  NS_IMETHOD GetType(TpmType_T *aType); \
+  NS_IMETHOD SetType(TpmType_T aType); \
+  NS_IMETHOD GetLocation(PRUnichar * *aLocation); \
+  NS_IMETHOD SetLocation(const PRUnichar * aLocation); \
+  NS_IMETHOD GetInternalAndReservedAttribute1ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute1ITrustedPlatformModule); \
+  NS_IMETHOD GetInternalAndReservedAttribute2ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute2ITrustedPlatformModule); \
+  NS_IMETHOD GetInternalAndReservedAttribute3ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute3ITrustedPlatformModule); \
+  NS_IMETHOD GetInternalAndReservedAttribute4ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute4ITrustedPlatformModule); \
+  NS_IMETHOD GetInternalAndReservedAttribute5ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute5ITrustedPlatformModule); \
+  NS_IMETHOD GetInternalAndReservedAttribute6ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute6ITrustedPlatformModule); \
+  NS_IMETHOD GetInternalAndReservedAttribute7ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute7ITrustedPlatformModule); \
+  NS_IMETHOD GetInternalAndReservedAttribute8ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute8ITrustedPlatformModule); \
+  NS_IMETHOD InternalAndReservedMethod1ITrustedPlatformModule(void); \
+  NS_IMETHOD InternalAndReservedMethod2ITrustedPlatformModule(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ITRUSTEDPLATFORMMODULE(_to) \
+  NS_IMETHOD GetType(TpmType_T *aType) { return _to GetType(aType); } \
+  NS_IMETHOD SetType(TpmType_T aType) { return _to SetType(aType); } \
+  NS_IMETHOD GetLocation(PRUnichar * *aLocation) { return _to GetLocation(aLocation); } \
+  NS_IMETHOD SetLocation(const PRUnichar * aLocation) { return _to SetLocation(aLocation); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute1ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute1ITrustedPlatformModule(aInternalAndReservedAttribute1ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute2ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute2ITrustedPlatformModule(aInternalAndReservedAttribute2ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute3ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute3ITrustedPlatformModule(aInternalAndReservedAttribute3ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute4ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute4ITrustedPlatformModule(aInternalAndReservedAttribute4ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute5ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute5ITrustedPlatformModule(aInternalAndReservedAttribute5ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute6ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute6ITrustedPlatformModule(aInternalAndReservedAttribute6ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute7ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute7ITrustedPlatformModule(aInternalAndReservedAttribute7ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute8ITrustedPlatformModule) { return _to GetInternalAndReservedAttribute8ITrustedPlatformModule(aInternalAndReservedAttribute8ITrustedPlatformModule); } \
+  NS_IMETHOD InternalAndReservedMethod1ITrustedPlatformModule(void) { return _to InternalAndReservedMethod1ITrustedPlatformModule(); } \
+  NS_IMETHOD InternalAndReservedMethod2ITrustedPlatformModule(void) { return _to InternalAndReservedMethod2ITrustedPlatformModule(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ITRUSTEDPLATFORMMODULE(_to) \
+  NS_IMETHOD GetType(TpmType_T *aType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetType(aType); } \
+  NS_IMETHOD SetType(TpmType_T aType) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetType(aType); } \
+  NS_IMETHOD GetLocation(PRUnichar * *aLocation) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLocation(aLocation); } \
+  NS_IMETHOD SetLocation(const PRUnichar * aLocation) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetLocation(aLocation); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute1ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1ITrustedPlatformModule(aInternalAndReservedAttribute1ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute2ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2ITrustedPlatformModule(aInternalAndReservedAttribute2ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute3ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3ITrustedPlatformModule(aInternalAndReservedAttribute3ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute4ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4ITrustedPlatformModule(aInternalAndReservedAttribute4ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute5ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5ITrustedPlatformModule(aInternalAndReservedAttribute5ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute6ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6ITrustedPlatformModule(aInternalAndReservedAttribute6ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute7ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7ITrustedPlatformModule(aInternalAndReservedAttribute7ITrustedPlatformModule); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute8ITrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8ITrustedPlatformModule(aInternalAndReservedAttribute8ITrustedPlatformModule); } \
+  NS_IMETHOD InternalAndReservedMethod1ITrustedPlatformModule(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1ITrustedPlatformModule(); } \
+  NS_IMETHOD InternalAndReservedMethod2ITrustedPlatformModule(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2ITrustedPlatformModule(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ITrustedPlatformModule
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ITRUSTEDPLATFORMMODULE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ITrustedPlatformModule)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* attribute TpmType_T type; */
+NS_IMETHODIMP _MYCLASS_::GetType(TpmType_T *aType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetType(TpmType_T aType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring location; */
+NS_IMETHODIMP _MYCLASS_::GetLocation(PRUnichar * *aLocation)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetLocation(const PRUnichar * aLocation)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute1ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute2ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute3ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute4ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute5ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute6ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute7ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute8ITrustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8ITrustedPlatformModule(PRUint32 *aInternalAndReservedAttribute8ITrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1ITrustedPlatformModule (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1ITrustedPlatformModule()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2ITrustedPlatformModule (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2ITrustedPlatformModule()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ITrustedPlatformModule_GETTER_Type_TO(smth) NS_IMETHOD GetType (PRUint32 * aType) { return smth GetType (aType); }
+#define COM_FORWARD_ITrustedPlatformModule_GETTER_Type_TO_OBJ(obj) COM_FORWARD_ITrustedPlatformModule_GETTER_Type_TO ((obj)->)
+#define COM_FORWARD_ITrustedPlatformModule_GETTER_Type_TO_BASE(base) COM_FORWARD_ITrustedPlatformModule_GETTER_Type_TO (base::)
+#define COM_FORWARD_ITrustedPlatformModule_SETTER_Type_TO(smth) NS_IMETHOD SetType (PRUint32 aType) { return smth SetType (aType); }
+#define COM_FORWARD_ITrustedPlatformModule_SETTER_Type_TO_OBJ(obj) COM_FORWARD_ITrustedPlatformModule_SETTER_Type_TO ((obj)->)
+#define COM_FORWARD_ITrustedPlatformModule_SETTER_Type_TO_BASE(base) COM_FORWARD_ITrustedPlatformModule_SETTER_Type_TO (base::)
+#define COM_FORWARD_ITrustedPlatformModule_GETTER_Location_TO(smth) NS_IMETHOD GetLocation (PRUnichar * * aLocation) { return smth GetLocation (aLocation); }
+#define COM_FORWARD_ITrustedPlatformModule_GETTER_Location_TO_OBJ(obj) COM_FORWARD_ITrustedPlatformModule_GETTER_Location_TO ((obj)->)
+#define COM_FORWARD_ITrustedPlatformModule_GETTER_Location_TO_BASE(base) COM_FORWARD_ITrustedPlatformModule_GETTER_Location_TO (base::)
+#define COM_FORWARD_ITrustedPlatformModule_SETTER_Location_TO(smth) NS_IMETHOD SetLocation (const PRUnichar * aLocation) { return smth SetLocation (aLocation); }
+#define COM_FORWARD_ITrustedPlatformModule_SETTER_Location_TO_OBJ(obj) COM_FORWARD_ITrustedPlatformModule_SETTER_Location_TO ((obj)->)
+#define COM_FORWARD_ITrustedPlatformModule_SETTER_Location_TO_BASE(base) COM_FORWARD_ITrustedPlatformModule_SETTER_Location_TO (base::)
+#define COM_FORWARD_ITrustedPlatformModule_TO(smth) NS_FORWARD_ITRUSTEDPLATFORMMODULE (smth)
+#define COM_FORWARD_ITrustedPlatformModule_TO_OBJ(obj) COM_FORWARD_ITrustedPlatformModule_TO ((obj)->)
+#define COM_FORWARD_ITrustedPlatformModule_TO_BASE(base) COM_FORWARD_ITrustedPlatformModule_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ITrustedPlatformModule;
+
 /* starting interface:    IRecordingScreenSettings */
-#define IRECORDINGSCREENSETTINGS_IID_STR "678fbd9a-93af-42a7-7f13-79ad6ef1a18d"
+#define IRECORDINGSCREENSETTINGS_IID_STR "c1844087-ec6b-488d-afbb-c90f6452a04b"
 
 #define IRECORDINGSCREENSETTINGS_IID \
-  {0x678fbd9a, 0x93af, 0x42a7, \
-    { 0x7f, 0x13, 0x79, 0xad, 0x6e, 0xf1, 0xa1, 0x8d }}
+  {0xc1844087, 0xec6b, 0x488d, \
+    { 0xaf, 0xbb, 0xc9, 0x0f, 0x64, 0x52, 0xa0, 0x4b }}
 
 class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
  public: 
@@ -20432,9 +23413,11 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD GetEnabled(PRBool *aEnabled) = 0;
   NS_IMETHOD SetEnabled(PRBool aEnabled) = 0;
 
-  /* attribute unsigned long features; */
-  NS_IMETHOD GetFeatures(PRUint32 *aFeatures) = 0;
-  NS_IMETHOD SetFeatures(PRUint32 aFeatures) = 0;
+  /* void getFeatures (out unsigned long featuresSize, [array, size_is (featuresSize), retval] out RecordingFeature_T features); */
+  NS_IMETHOD GetFeatures(PRUint32 *featuresSize, RecordingFeature_T **features) = 0;
+
+  /* void setFeatures (in unsigned long featuresSize, [array, size_is (featuresSize)] in RecordingFeature_T features); */
+  NS_IMETHOD SetFeatures(PRUint32 featuresSize, RecordingFeature_T *features) = 0;
 
   /* attribute RecordingDestination_T destination; */
   NS_IMETHOD GetDestination(RecordingDestination_T *aDestination) = 0;
@@ -20460,6 +23443,14 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD GetAudioCodec(RecordingAudioCodec_T *aAudioCodec) = 0;
   NS_IMETHOD SetAudioCodec(RecordingAudioCodec_T aAudioCodec) = 0;
 
+  /* attribute RecordingRateControlMode_T audioRateControlMode; */
+  NS_IMETHOD GetAudioRateControlMode(RecordingRateControlMode_T *aAudioRateControlMode) = 0;
+  NS_IMETHOD SetAudioRateControlMode(RecordingRateControlMode_T aAudioRateControlMode) = 0;
+
+  /* attribute RecordingCodecDeadline_T audioDeadline; */
+  NS_IMETHOD GetAudioDeadline(RecordingCodecDeadline_T *aAudioDeadline) = 0;
+  NS_IMETHOD SetAudioDeadline(RecordingCodecDeadline_T aAudioDeadline) = 0;
+
   /* attribute unsigned long audioHz; */
   NS_IMETHOD GetAudioHz(PRUint32 *aAudioHz) = 0;
   NS_IMETHOD SetAudioHz(PRUint32 aAudioHz) = 0;
@@ -20476,6 +23467,10 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD GetVideoCodec(RecordingVideoCodec_T *aVideoCodec) = 0;
   NS_IMETHOD SetVideoCodec(RecordingVideoCodec_T aVideoCodec) = 0;
 
+  /* attribute RecordingCodecDeadline_T videoDeadline; */
+  NS_IMETHOD GetVideoDeadline(RecordingCodecDeadline_T *aVideoDeadline) = 0;
+  NS_IMETHOD SetVideoDeadline(RecordingCodecDeadline_T aVideoDeadline) = 0;
+
   /* attribute unsigned long videoWidth; */
   NS_IMETHOD GetVideoWidth(PRUint32 *aVideoWidth) = 0;
   NS_IMETHOD SetVideoWidth(PRUint32 aVideoWidth) = 0;
@@ -20488,17 +23483,17 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD GetVideoRate(PRUint32 *aVideoRate) = 0;
   NS_IMETHOD SetVideoRate(PRUint32 aVideoRate) = 0;
 
-  /* attribute RecordingVideoRateControlMode_T videoRateControlMode; */
-  NS_IMETHOD GetVideoRateControlMode(RecordingVideoRateControlMode_T *aVideoRateControlMode) = 0;
-  NS_IMETHOD SetVideoRateControlMode(RecordingVideoRateControlMode_T aVideoRateControlMode) = 0;
+  /* attribute RecordingRateControlMode_T videoRateControlMode; */
+  NS_IMETHOD GetVideoRateControlMode(RecordingRateControlMode_T *aVideoRateControlMode) = 0;
+  NS_IMETHOD SetVideoRateControlMode(RecordingRateControlMode_T aVideoRateControlMode) = 0;
 
   /* attribute unsigned long videoFPS; */
   NS_IMETHOD GetVideoFPS(PRUint32 *aVideoFPS) = 0;
   NS_IMETHOD SetVideoFPS(PRUint32 aVideoFPS) = 0;
 
-  /* attribute RecordingVideoScalingMethod_T videoScalingMethod; */
-  NS_IMETHOD GetVideoScalingMethod(RecordingVideoScalingMethod_T *aVideoScalingMethod) = 0;
-  NS_IMETHOD SetVideoScalingMethod(RecordingVideoScalingMethod_T aVideoScalingMethod) = 0;
+  /* attribute RecordingVideoScalingMode_T videoScalingMode; */
+  NS_IMETHOD GetVideoScalingMode(RecordingVideoScalingMode_T *aVideoScalingMode) = 0;
+  NS_IMETHOD SetVideoScalingMode(RecordingVideoScalingMode_T aVideoScalingMode) = 0;
 
   /* void isFeatureEnabled (in RecordingFeature_T feature, [retval] out boolean enabled); */
   NS_IMETHOD IsFeatureEnabled(RecordingFeature_T feature, PRBool *enabled) = 0;
@@ -20510,8 +23505,8 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD GetId(PRUint32 *aId); \
   NS_IMETHOD GetEnabled(PRBool *aEnabled); \
   NS_IMETHOD SetEnabled(PRBool aEnabled); \
-  NS_IMETHOD GetFeatures(PRUint32 *aFeatures); \
-  NS_IMETHOD SetFeatures(PRUint32 aFeatures); \
+  NS_IMETHOD GetFeatures(PRUint32 *featuresSize, RecordingFeature_T **features); \
+  NS_IMETHOD SetFeatures(PRUint32 featuresSize, RecordingFeature_T *features); \
   NS_IMETHOD GetDestination(RecordingDestination_T *aDestination); \
   NS_IMETHOD SetDestination(RecordingDestination_T aDestination); \
   NS_IMETHOD GetFilename(PRUnichar * *aFilename); \
@@ -20524,6 +23519,10 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD SetOptions(const PRUnichar * aOptions); \
   NS_IMETHOD GetAudioCodec(RecordingAudioCodec_T *aAudioCodec); \
   NS_IMETHOD SetAudioCodec(RecordingAudioCodec_T aAudioCodec); \
+  NS_IMETHOD GetAudioRateControlMode(RecordingRateControlMode_T *aAudioRateControlMode); \
+  NS_IMETHOD SetAudioRateControlMode(RecordingRateControlMode_T aAudioRateControlMode); \
+  NS_IMETHOD GetAudioDeadline(RecordingCodecDeadline_T *aAudioDeadline); \
+  NS_IMETHOD SetAudioDeadline(RecordingCodecDeadline_T aAudioDeadline); \
   NS_IMETHOD GetAudioHz(PRUint32 *aAudioHz); \
   NS_IMETHOD SetAudioHz(PRUint32 aAudioHz); \
   NS_IMETHOD GetAudioBits(PRUint32 *aAudioBits); \
@@ -20532,18 +23531,20 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD SetAudioChannels(PRUint32 aAudioChannels); \
   NS_IMETHOD GetVideoCodec(RecordingVideoCodec_T *aVideoCodec); \
   NS_IMETHOD SetVideoCodec(RecordingVideoCodec_T aVideoCodec); \
+  NS_IMETHOD GetVideoDeadline(RecordingCodecDeadline_T *aVideoDeadline); \
+  NS_IMETHOD SetVideoDeadline(RecordingCodecDeadline_T aVideoDeadline); \
   NS_IMETHOD GetVideoWidth(PRUint32 *aVideoWidth); \
   NS_IMETHOD SetVideoWidth(PRUint32 aVideoWidth); \
   NS_IMETHOD GetVideoHeight(PRUint32 *aVideoHeight); \
   NS_IMETHOD SetVideoHeight(PRUint32 aVideoHeight); \
   NS_IMETHOD GetVideoRate(PRUint32 *aVideoRate); \
   NS_IMETHOD SetVideoRate(PRUint32 aVideoRate); \
-  NS_IMETHOD GetVideoRateControlMode(RecordingVideoRateControlMode_T *aVideoRateControlMode); \
-  NS_IMETHOD SetVideoRateControlMode(RecordingVideoRateControlMode_T aVideoRateControlMode); \
+  NS_IMETHOD GetVideoRateControlMode(RecordingRateControlMode_T *aVideoRateControlMode); \
+  NS_IMETHOD SetVideoRateControlMode(RecordingRateControlMode_T aVideoRateControlMode); \
   NS_IMETHOD GetVideoFPS(PRUint32 *aVideoFPS); \
   NS_IMETHOD SetVideoFPS(PRUint32 aVideoFPS); \
-  NS_IMETHOD GetVideoScalingMethod(RecordingVideoScalingMethod_T *aVideoScalingMethod); \
-  NS_IMETHOD SetVideoScalingMethod(RecordingVideoScalingMethod_T aVideoScalingMethod); \
+  NS_IMETHOD GetVideoScalingMode(RecordingVideoScalingMode_T *aVideoScalingMode); \
+  NS_IMETHOD SetVideoScalingMode(RecordingVideoScalingMode_T aVideoScalingMode); \
   NS_IMETHOD IsFeatureEnabled(RecordingFeature_T feature, PRBool *enabled); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
@@ -20551,8 +23552,8 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD GetId(PRUint32 *aId) { return _to GetId(aId); } \
   NS_IMETHOD GetEnabled(PRBool *aEnabled) { return _to GetEnabled(aEnabled); } \
   NS_IMETHOD SetEnabled(PRBool aEnabled) { return _to SetEnabled(aEnabled); } \
-  NS_IMETHOD GetFeatures(PRUint32 *aFeatures) { return _to GetFeatures(aFeatures); } \
-  NS_IMETHOD SetFeatures(PRUint32 aFeatures) { return _to SetFeatures(aFeatures); } \
+  NS_IMETHOD GetFeatures(PRUint32 *featuresSize, RecordingFeature_T **features) { return _to GetFeatures(featuresSize, features); } \
+  NS_IMETHOD SetFeatures(PRUint32 featuresSize, RecordingFeature_T *features) { return _to SetFeatures(featuresSize, features); } \
   NS_IMETHOD GetDestination(RecordingDestination_T *aDestination) { return _to GetDestination(aDestination); } \
   NS_IMETHOD SetDestination(RecordingDestination_T aDestination) { return _to SetDestination(aDestination); } \
   NS_IMETHOD GetFilename(PRUnichar * *aFilename) { return _to GetFilename(aFilename); } \
@@ -20565,6 +23566,10 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD SetOptions(const PRUnichar * aOptions) { return _to SetOptions(aOptions); } \
   NS_IMETHOD GetAudioCodec(RecordingAudioCodec_T *aAudioCodec) { return _to GetAudioCodec(aAudioCodec); } \
   NS_IMETHOD SetAudioCodec(RecordingAudioCodec_T aAudioCodec) { return _to SetAudioCodec(aAudioCodec); } \
+  NS_IMETHOD GetAudioRateControlMode(RecordingRateControlMode_T *aAudioRateControlMode) { return _to GetAudioRateControlMode(aAudioRateControlMode); } \
+  NS_IMETHOD SetAudioRateControlMode(RecordingRateControlMode_T aAudioRateControlMode) { return _to SetAudioRateControlMode(aAudioRateControlMode); } \
+  NS_IMETHOD GetAudioDeadline(RecordingCodecDeadline_T *aAudioDeadline) { return _to GetAudioDeadline(aAudioDeadline); } \
+  NS_IMETHOD SetAudioDeadline(RecordingCodecDeadline_T aAudioDeadline) { return _to SetAudioDeadline(aAudioDeadline); } \
   NS_IMETHOD GetAudioHz(PRUint32 *aAudioHz) { return _to GetAudioHz(aAudioHz); } \
   NS_IMETHOD SetAudioHz(PRUint32 aAudioHz) { return _to SetAudioHz(aAudioHz); } \
   NS_IMETHOD GetAudioBits(PRUint32 *aAudioBits) { return _to GetAudioBits(aAudioBits); } \
@@ -20573,18 +23578,20 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD SetAudioChannels(PRUint32 aAudioChannels) { return _to SetAudioChannels(aAudioChannels); } \
   NS_IMETHOD GetVideoCodec(RecordingVideoCodec_T *aVideoCodec) { return _to GetVideoCodec(aVideoCodec); } \
   NS_IMETHOD SetVideoCodec(RecordingVideoCodec_T aVideoCodec) { return _to SetVideoCodec(aVideoCodec); } \
+  NS_IMETHOD GetVideoDeadline(RecordingCodecDeadline_T *aVideoDeadline) { return _to GetVideoDeadline(aVideoDeadline); } \
+  NS_IMETHOD SetVideoDeadline(RecordingCodecDeadline_T aVideoDeadline) { return _to SetVideoDeadline(aVideoDeadline); } \
   NS_IMETHOD GetVideoWidth(PRUint32 *aVideoWidth) { return _to GetVideoWidth(aVideoWidth); } \
   NS_IMETHOD SetVideoWidth(PRUint32 aVideoWidth) { return _to SetVideoWidth(aVideoWidth); } \
   NS_IMETHOD GetVideoHeight(PRUint32 *aVideoHeight) { return _to GetVideoHeight(aVideoHeight); } \
   NS_IMETHOD SetVideoHeight(PRUint32 aVideoHeight) { return _to SetVideoHeight(aVideoHeight); } \
   NS_IMETHOD GetVideoRate(PRUint32 *aVideoRate) { return _to GetVideoRate(aVideoRate); } \
   NS_IMETHOD SetVideoRate(PRUint32 aVideoRate) { return _to SetVideoRate(aVideoRate); } \
-  NS_IMETHOD GetVideoRateControlMode(RecordingVideoRateControlMode_T *aVideoRateControlMode) { return _to GetVideoRateControlMode(aVideoRateControlMode); } \
-  NS_IMETHOD SetVideoRateControlMode(RecordingVideoRateControlMode_T aVideoRateControlMode) { return _to SetVideoRateControlMode(aVideoRateControlMode); } \
+  NS_IMETHOD GetVideoRateControlMode(RecordingRateControlMode_T *aVideoRateControlMode) { return _to GetVideoRateControlMode(aVideoRateControlMode); } \
+  NS_IMETHOD SetVideoRateControlMode(RecordingRateControlMode_T aVideoRateControlMode) { return _to SetVideoRateControlMode(aVideoRateControlMode); } \
   NS_IMETHOD GetVideoFPS(PRUint32 *aVideoFPS) { return _to GetVideoFPS(aVideoFPS); } \
   NS_IMETHOD SetVideoFPS(PRUint32 aVideoFPS) { return _to SetVideoFPS(aVideoFPS); } \
-  NS_IMETHOD GetVideoScalingMethod(RecordingVideoScalingMethod_T *aVideoScalingMethod) { return _to GetVideoScalingMethod(aVideoScalingMethod); } \
-  NS_IMETHOD SetVideoScalingMethod(RecordingVideoScalingMethod_T aVideoScalingMethod) { return _to SetVideoScalingMethod(aVideoScalingMethod); } \
+  NS_IMETHOD GetVideoScalingMode(RecordingVideoScalingMode_T *aVideoScalingMode) { return _to GetVideoScalingMode(aVideoScalingMode); } \
+  NS_IMETHOD SetVideoScalingMode(RecordingVideoScalingMode_T aVideoScalingMode) { return _to SetVideoScalingMode(aVideoScalingMode); } \
   NS_IMETHOD IsFeatureEnabled(RecordingFeature_T feature, PRBool *enabled) { return _to IsFeatureEnabled(feature, enabled); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
@@ -20592,8 +23599,8 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD GetId(PRUint32 *aId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetId(aId); } \
   NS_IMETHOD GetEnabled(PRBool *aEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEnabled(aEnabled); } \
   NS_IMETHOD SetEnabled(PRBool aEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetEnabled(aEnabled); } \
-  NS_IMETHOD GetFeatures(PRUint32 *aFeatures) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFeatures(aFeatures); } \
-  NS_IMETHOD SetFeatures(PRUint32 aFeatures) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetFeatures(aFeatures); } \
+  NS_IMETHOD GetFeatures(PRUint32 *featuresSize, RecordingFeature_T **features) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFeatures(featuresSize, features); } \
+  NS_IMETHOD SetFeatures(PRUint32 featuresSize, RecordingFeature_T *features) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetFeatures(featuresSize, features); } \
   NS_IMETHOD GetDestination(RecordingDestination_T *aDestination) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDestination(aDestination); } \
   NS_IMETHOD SetDestination(RecordingDestination_T aDestination) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDestination(aDestination); } \
   NS_IMETHOD GetFilename(PRUnichar * *aFilename) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFilename(aFilename); } \
@@ -20606,6 +23613,10 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD SetOptions(const PRUnichar * aOptions) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetOptions(aOptions); } \
   NS_IMETHOD GetAudioCodec(RecordingAudioCodec_T *aAudioCodec) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioCodec(aAudioCodec); } \
   NS_IMETHOD SetAudioCodec(RecordingAudioCodec_T aAudioCodec) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAudioCodec(aAudioCodec); } \
+  NS_IMETHOD GetAudioRateControlMode(RecordingRateControlMode_T *aAudioRateControlMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioRateControlMode(aAudioRateControlMode); } \
+  NS_IMETHOD SetAudioRateControlMode(RecordingRateControlMode_T aAudioRateControlMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAudioRateControlMode(aAudioRateControlMode); } \
+  NS_IMETHOD GetAudioDeadline(RecordingCodecDeadline_T *aAudioDeadline) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioDeadline(aAudioDeadline); } \
+  NS_IMETHOD SetAudioDeadline(RecordingCodecDeadline_T aAudioDeadline) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAudioDeadline(aAudioDeadline); } \
   NS_IMETHOD GetAudioHz(PRUint32 *aAudioHz) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioHz(aAudioHz); } \
   NS_IMETHOD SetAudioHz(PRUint32 aAudioHz) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAudioHz(aAudioHz); } \
   NS_IMETHOD GetAudioBits(PRUint32 *aAudioBits) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioBits(aAudioBits); } \
@@ -20614,18 +23625,20 @@ class NS_NO_VTABLE IRecordingScreenSettings : public nsISupports {
   NS_IMETHOD SetAudioChannels(PRUint32 aAudioChannels) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAudioChannels(aAudioChannels); } \
   NS_IMETHOD GetVideoCodec(RecordingVideoCodec_T *aVideoCodec) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoCodec(aVideoCodec); } \
   NS_IMETHOD SetVideoCodec(RecordingVideoCodec_T aVideoCodec) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoCodec(aVideoCodec); } \
+  NS_IMETHOD GetVideoDeadline(RecordingCodecDeadline_T *aVideoDeadline) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoDeadline(aVideoDeadline); } \
+  NS_IMETHOD SetVideoDeadline(RecordingCodecDeadline_T aVideoDeadline) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoDeadline(aVideoDeadline); } \
   NS_IMETHOD GetVideoWidth(PRUint32 *aVideoWidth) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoWidth(aVideoWidth); } \
   NS_IMETHOD SetVideoWidth(PRUint32 aVideoWidth) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoWidth(aVideoWidth); } \
   NS_IMETHOD GetVideoHeight(PRUint32 *aVideoHeight) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoHeight(aVideoHeight); } \
   NS_IMETHOD SetVideoHeight(PRUint32 aVideoHeight) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoHeight(aVideoHeight); } \
   NS_IMETHOD GetVideoRate(PRUint32 *aVideoRate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoRate(aVideoRate); } \
   NS_IMETHOD SetVideoRate(PRUint32 aVideoRate) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoRate(aVideoRate); } \
-  NS_IMETHOD GetVideoRateControlMode(RecordingVideoRateControlMode_T *aVideoRateControlMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoRateControlMode(aVideoRateControlMode); } \
-  NS_IMETHOD SetVideoRateControlMode(RecordingVideoRateControlMode_T aVideoRateControlMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoRateControlMode(aVideoRateControlMode); } \
+  NS_IMETHOD GetVideoRateControlMode(RecordingRateControlMode_T *aVideoRateControlMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoRateControlMode(aVideoRateControlMode); } \
+  NS_IMETHOD SetVideoRateControlMode(RecordingRateControlMode_T aVideoRateControlMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoRateControlMode(aVideoRateControlMode); } \
   NS_IMETHOD GetVideoFPS(PRUint32 *aVideoFPS) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoFPS(aVideoFPS); } \
   NS_IMETHOD SetVideoFPS(PRUint32 aVideoFPS) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoFPS(aVideoFPS); } \
-  NS_IMETHOD GetVideoScalingMethod(RecordingVideoScalingMethod_T *aVideoScalingMethod) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoScalingMethod(aVideoScalingMethod); } \
-  NS_IMETHOD SetVideoScalingMethod(RecordingVideoScalingMethod_T aVideoScalingMethod) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoScalingMethod(aVideoScalingMethod); } \
+  NS_IMETHOD GetVideoScalingMode(RecordingVideoScalingMode_T *aVideoScalingMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoScalingMode(aVideoScalingMode); } \
+  NS_IMETHOD SetVideoScalingMode(RecordingVideoScalingMode_T aVideoScalingMode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVideoScalingMode(aVideoScalingMode); } \
   NS_IMETHOD IsFeatureEnabled(RecordingFeature_T feature, PRBool *enabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->IsFeatureEnabled(feature, enabled); } 
 
 #if 0
@@ -20676,12 +23689,14 @@ NS_IMETHODIMP _MYCLASS_::SetEnabled(PRBool aEnabled)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* attribute unsigned long features; */
-NS_IMETHODIMP _MYCLASS_::GetFeatures(PRUint32 *aFeatures)
+/* void getFeatures (out unsigned long featuresSize, [array, size_is (featuresSize), retval] out RecordingFeature_T features); */
+NS_IMETHODIMP _MYCLASS_::GetFeatures(PRUint32 *featuresSize, RecordingFeature_T **features)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
-NS_IMETHODIMP _MYCLASS_::SetFeatures(PRUint32 aFeatures)
+
+/* void setFeatures (in unsigned long featuresSize, [array, size_is (featuresSize)] in RecordingFeature_T features); */
+NS_IMETHODIMP _MYCLASS_::SetFeatures(PRUint32 featuresSize, RecordingFeature_T *features)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -20746,6 +23761,26 @@ NS_IMETHODIMP _MYCLASS_::SetAudioCodec(RecordingAudioCodec_T aAudioCodec)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* attribute RecordingRateControlMode_T audioRateControlMode; */
+NS_IMETHODIMP _MYCLASS_::GetAudioRateControlMode(RecordingRateControlMode_T *aAudioRateControlMode)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetAudioRateControlMode(RecordingRateControlMode_T aAudioRateControlMode)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute RecordingCodecDeadline_T audioDeadline; */
+NS_IMETHODIMP _MYCLASS_::GetAudioDeadline(RecordingCodecDeadline_T *aAudioDeadline)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetAudioDeadline(RecordingCodecDeadline_T aAudioDeadline)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* attribute unsigned long audioHz; */
 NS_IMETHODIMP _MYCLASS_::GetAudioHz(PRUint32 *aAudioHz)
 {
@@ -20786,6 +23821,16 @@ NS_IMETHODIMP _MYCLASS_::SetVideoCodec(RecordingVideoCodec_T aVideoCodec)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* attribute RecordingCodecDeadline_T videoDeadline; */
+NS_IMETHODIMP _MYCLASS_::GetVideoDeadline(RecordingCodecDeadline_T *aVideoDeadline)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetVideoDeadline(RecordingCodecDeadline_T aVideoDeadline)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* attribute unsigned long videoWidth; */
 NS_IMETHODIMP _MYCLASS_::GetVideoWidth(PRUint32 *aVideoWidth)
 {
@@ -20816,12 +23861,12 @@ NS_IMETHODIMP _MYCLASS_::SetVideoRate(PRUint32 aVideoRate)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* attribute RecordingVideoRateControlMode_T videoRateControlMode; */
-NS_IMETHODIMP _MYCLASS_::GetVideoRateControlMode(RecordingVideoRateControlMode_T *aVideoRateControlMode)
+/* attribute RecordingRateControlMode_T videoRateControlMode; */
+NS_IMETHODIMP _MYCLASS_::GetVideoRateControlMode(RecordingRateControlMode_T *aVideoRateControlMode)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
-NS_IMETHODIMP _MYCLASS_::SetVideoRateControlMode(RecordingVideoRateControlMode_T aVideoRateControlMode)
+NS_IMETHODIMP _MYCLASS_::SetVideoRateControlMode(RecordingRateControlMode_T aVideoRateControlMode)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -20836,12 +23881,12 @@ NS_IMETHODIMP _MYCLASS_::SetVideoFPS(PRUint32 aVideoFPS)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* attribute RecordingVideoScalingMethod_T videoScalingMethod; */
-NS_IMETHODIMP _MYCLASS_::GetVideoScalingMethod(RecordingVideoScalingMethod_T *aVideoScalingMethod)
+/* attribute RecordingVideoScalingMode_T videoScalingMode; */
+NS_IMETHODIMP _MYCLASS_::GetVideoScalingMode(RecordingVideoScalingMode_T *aVideoScalingMode)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
-NS_IMETHODIMP _MYCLASS_::SetVideoScalingMethod(RecordingVideoScalingMethod_T aVideoScalingMethod)
+NS_IMETHODIMP _MYCLASS_::SetVideoScalingMode(RecordingVideoScalingMode_T aVideoScalingMode)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -20864,10 +23909,10 @@ NS_IMETHODIMP _MYCLASS_::IsFeatureEnabled(RecordingFeature_T feature, PRBool *en
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_Enabled_TO(smth) NS_IMETHOD SetEnabled (PRBool aEnabled) { return smth SetEnabled (aEnabled); }
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_Enabled_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_Enabled_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_Enabled_TO (base::)
-#define COM_FORWARD_IRecordingScreenSettings_GETTER_Features_TO(smth) NS_IMETHOD GetFeatures (PRUint32 * aFeatures) { return smth GetFeatures (aFeatures); }
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_Features_TO(smth) NS_IMETHOD GetFeatures (PRUint32 * aFeaturesSize, PRUint32 * * aFeatures) { return smth GetFeatures (aFeaturesSize, aFeatures); }
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_Features_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_Features_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_Features_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_Features_TO (base::)
-#define COM_FORWARD_IRecordingScreenSettings_SETTER_Features_TO(smth) NS_IMETHOD SetFeatures (PRUint32 aFeatures) { return smth SetFeatures (aFeatures); }
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_Features_TO(smth) NS_IMETHOD SetFeatures (PRUint32 aFeaturesSize, PRUint32 * aFeatures) { return smth SetFeatures (aFeatures); }
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_Features_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_Features_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_Features_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_Features_TO (base::)
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_Destination_TO(smth) NS_IMETHOD GetDestination (PRUint32 * aDestination) { return smth GetDestination (aDestination); }
@@ -20906,6 +23951,18 @@ NS_IMETHODIMP _MYCLASS_::IsFeatureEnabled(RecordingFeature_T feature, PRBool *en
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioCodec_TO(smth) NS_IMETHOD SetAudioCodec (PRUint32 aAudioCodec) { return smth SetAudioCodec (aAudioCodec); }
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioCodec_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_AudioCodec_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioCodec_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_AudioCodec_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioRateControlMode_TO(smth) NS_IMETHOD GetAudioRateControlMode (PRUint32 * aAudioRateControlMode) { return smth GetAudioRateControlMode (aAudioRateControlMode); }
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioRateControlMode_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_AudioRateControlMode_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioRateControlMode_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_AudioRateControlMode_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioRateControlMode_TO(smth) NS_IMETHOD SetAudioRateControlMode (PRUint32 aAudioRateControlMode) { return smth SetAudioRateControlMode (aAudioRateControlMode); }
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioRateControlMode_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_AudioRateControlMode_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioRateControlMode_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_AudioRateControlMode_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioDeadline_TO(smth) NS_IMETHOD GetAudioDeadline (PRUint32 * aAudioDeadline) { return smth GetAudioDeadline (aAudioDeadline); }
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioDeadline_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_AudioDeadline_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioDeadline_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_AudioDeadline_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioDeadline_TO(smth) NS_IMETHOD SetAudioDeadline (PRUint32 aAudioDeadline) { return smth SetAudioDeadline (aAudioDeadline); }
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioDeadline_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_AudioDeadline_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_AudioDeadline_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_AudioDeadline_TO (base::)
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioHz_TO(smth) NS_IMETHOD GetAudioHz (PRUint32 * aAudioHz) { return smth GetAudioHz (aAudioHz); }
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioHz_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_AudioHz_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_AudioHz_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_AudioHz_TO (base::)
@@ -20930,6 +23987,12 @@ NS_IMETHODIMP _MYCLASS_::IsFeatureEnabled(RecordingFeature_T feature, PRBool *en
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoCodec_TO(smth) NS_IMETHOD SetVideoCodec (PRUint32 aVideoCodec) { return smth SetVideoCodec (aVideoCodec); }
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoCodec_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoCodec_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoCodec_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoCodec_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoDeadline_TO(smth) NS_IMETHOD GetVideoDeadline (PRUint32 * aVideoDeadline) { return smth GetVideoDeadline (aVideoDeadline); }
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoDeadline_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoDeadline_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoDeadline_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoDeadline_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoDeadline_TO(smth) NS_IMETHOD SetVideoDeadline (PRUint32 aVideoDeadline) { return smth SetVideoDeadline (aVideoDeadline); }
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoDeadline_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoDeadline_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoDeadline_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoDeadline_TO (base::)
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoWidth_TO(smth) NS_IMETHOD GetVideoWidth (PRUint32 * aVideoWidth) { return smth GetVideoWidth (aVideoWidth); }
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoWidth_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoWidth_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoWidth_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoWidth_TO (base::)
@@ -20960,12 +24023,12 @@ NS_IMETHODIMP _MYCLASS_::IsFeatureEnabled(RecordingFeature_T feature, PRBool *en
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoFPS_TO(smth) NS_IMETHOD SetVideoFPS (PRUint32 aVideoFPS) { return smth SetVideoFPS (aVideoFPS); }
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoFPS_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoFPS_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoFPS_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoFPS_TO (base::)
-#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMethod_TO(smth) NS_IMETHOD GetVideoScalingMethod (PRUint32 * aVideoScalingMethod) { return smth GetVideoScalingMethod (aVideoScalingMethod); }
-#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMethod_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMethod_TO ((obj)->)
-#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMethod_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMethod_TO (base::)
-#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMethod_TO(smth) NS_IMETHOD SetVideoScalingMethod (PRUint32 aVideoScalingMethod) { return smth SetVideoScalingMethod (aVideoScalingMethod); }
-#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMethod_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMethod_TO ((obj)->)
-#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMethod_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMethod_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMode_TO(smth) NS_IMETHOD GetVideoScalingMode (PRUint32 * aVideoScalingMode) { return smth GetVideoScalingMode (aVideoScalingMode); }
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMode_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMode_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMode_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_GETTER_VideoScalingMode_TO (base::)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMode_TO(smth) NS_IMETHOD SetVideoScalingMode (PRUint32 aVideoScalingMode) { return smth SetVideoScalingMode (aVideoScalingMode); }
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMode_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMode_TO ((obj)->)
+#define COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMode_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_SETTER_VideoScalingMode_TO (base::)
 #define COM_FORWARD_IRecordingScreenSettings_IsFeatureEnabled_TO(smth) NS_IMETHOD IsFeatureEnabled (PRUint32 aFeature, PRBool * aEnabled) { return smth IsFeatureEnabled (aFeature, aEnabled); }
 #define COM_FORWARD_IRecordingScreenSettings_IsFeatureEnabled_TO_OBJ(obj) COM_FORWARD_IRecordingScreenSettings_IsFeatureEnabled_TO ((obj)->)
 #define COM_FORWARD_IRecordingScreenSettings_IsFeatureEnabled_TO_BASE(base) COM_FORWARD_IRecordingScreenSettings_IsFeatureEnabled_TO (base::)
@@ -21391,12 +24454,586 @@ NS_IMETHODIMP _MYCLASS_::GetGuestAddress(PRInt32 *aGuestAddress)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IPCIDeviceAttachment;
 
+/* starting interface:    IUefiVariableStore */
+#define IUEFIVARIABLESTORE_IID_STR "d134c6b6-4479-430d-bb73-68a452ba3e67"
+
+#define IUEFIVARIABLESTORE_IID \
+  {0xd134c6b6, 0x4479, 0x430d, \
+    { 0xbb, 0x73, 0x68, 0xa4, 0x52, 0xba, 0x3e, 0x67 }}
+
+class NS_NO_VTABLE IUefiVariableStore : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IUEFIVARIABLESTORE_IID)
+
+  /* attribute boolean secureBootEnabled; */
+  NS_IMETHOD GetSecureBootEnabled(PRBool *aSecureBootEnabled) = 0;
+  NS_IMETHOD SetSecureBootEnabled(PRBool aSecureBootEnabled) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IUefiVariableStore; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute1IUefiVariableStore) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IUefiVariableStore; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute2IUefiVariableStore) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IUefiVariableStore; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute3IUefiVariableStore) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IUefiVariableStore; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute4IUefiVariableStore) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5IUefiVariableStore; */
+  NS_IMETHOD GetInternalAndReservedAttribute5IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute5IUefiVariableStore) = 0;
+
+  /* void addVariable (in wstring name, in wstring owner, in unsigned long attributesSize, [array, size_is (attributesSize)] in UefiVariableAttributes_T attributes, in unsigned long dataSize, [array, size_is (dataSize)] in octet data); */
+  NS_IMETHOD AddVariable(const PRUnichar *name, const PRUnichar *owner, PRUint32 attributesSize, UefiVariableAttributes_T *attributes, PRUint32 dataSize, PRUint8 *data) = 0;
+
+  /* void deleteVariable (in wstring name, in wstring owner); */
+  NS_IMETHOD DeleteVariable(const PRUnichar *name, const PRUnichar *owner) = 0;
+
+  /* void changeVariable (in wstring name, in unsigned long dataSize, [array, size_is (dataSize)] in octet data); */
+  NS_IMETHOD ChangeVariable(const PRUnichar *name, PRUint32 dataSize, PRUint8 *data) = 0;
+
+  /* void queryVariableByName (in wstring name, out wstring owner, out unsigned long attributesSize, [array, size_is (attributesSize)] out UefiVariableAttributes_T attributes, out unsigned long dataSize, [array, size_is (dataSize)] out octet data); */
+  NS_IMETHOD QueryVariableByName(const PRUnichar *name, PRUnichar **owner, PRUint32 *attributesSize, UefiVariableAttributes_T **attributes, PRUint32 *dataSize, PRUint8 **data) = 0;
+
+  /* void queryVariables (out unsigned long namesSize, [array, size_is (namesSize)] out wstring names, out unsigned long ownersSize, [array, size_is (ownersSize)] out wstring owners); */
+  NS_IMETHOD QueryVariables(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *ownersSize, PRUnichar ***owners) = 0;
+
+  /* void enrollOraclePlatformKey (); */
+  NS_IMETHOD EnrollOraclePlatformKey(void) = 0;
+
+  /* void enrollPlatformKey (in unsigned long platformKeySize, [array, size_is (platformKeySize)] in octet platformKey, in wstring owner); */
+  NS_IMETHOD EnrollPlatformKey(PRUint32 platformKeySize, PRUint8 *platformKey, const PRUnichar *owner) = 0;
+
+  /* void addKek (in unsigned long keyEncryptionKeySize, [array, size_is (keyEncryptionKeySize)] in octet keyEncryptionKey, in wstring owner, in SignatureType_T signatureType); */
+  NS_IMETHOD AddKek(PRUint32 keyEncryptionKeySize, PRUint8 *keyEncryptionKey, const PRUnichar *owner, SignatureType_T signatureType) = 0;
+
+  /* void addSignatureToDb (in unsigned long signatureSize, [array, size_is (signatureSize)] in octet signature, in wstring owner, in SignatureType_T signatureType); */
+  NS_IMETHOD AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) = 0;
+
+  /* void addSignatureToDbx (in unsigned long signatureSize, [array, size_is (signatureSize)] in octet signature, in wstring owner, in SignatureType_T signatureType); */
+  NS_IMETHOD AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) = 0;
+
+  /* void enrollDefaultMsSignatures (); */
+  NS_IMETHOD EnrollDefaultMsSignatures(void) = 0;
+
+  /* void InternalAndReservedMethod1IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod2IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod2IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod3IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod3IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod4IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod4IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod5IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod5IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod6IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod6IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod7IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod7IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod8IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod8IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod9IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) = 0;
+
+  /* void InternalAndReservedMethod10IUefiVariableStore (); */
+  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IUEFIVARIABLESTORE \
+  NS_IMETHOD GetSecureBootEnabled(PRBool *aSecureBootEnabled); \
+  NS_IMETHOD SetSecureBootEnabled(PRBool aSecureBootEnabled); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute1IUefiVariableStore); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute2IUefiVariableStore); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute3IUefiVariableStore); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute4IUefiVariableStore); \
+  NS_IMETHOD GetInternalAndReservedAttribute5IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute5IUefiVariableStore); \
+  NS_IMETHOD AddVariable(const PRUnichar *name, const PRUnichar *owner, PRUint32 attributesSize, UefiVariableAttributes_T *attributes, PRUint32 dataSize, PRUint8 *data); \
+  NS_IMETHOD DeleteVariable(const PRUnichar *name, const PRUnichar *owner); \
+  NS_IMETHOD ChangeVariable(const PRUnichar *name, PRUint32 dataSize, PRUint8 *data); \
+  NS_IMETHOD QueryVariableByName(const PRUnichar *name, PRUnichar **owner, PRUint32 *attributesSize, UefiVariableAttributes_T **attributes, PRUint32 *dataSize, PRUint8 **data); \
+  NS_IMETHOD QueryVariables(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *ownersSize, PRUnichar ***owners); \
+  NS_IMETHOD EnrollOraclePlatformKey(void); \
+  NS_IMETHOD EnrollPlatformKey(PRUint32 platformKeySize, PRUint8 *platformKey, const PRUnichar *owner); \
+  NS_IMETHOD AddKek(PRUint32 keyEncryptionKeySize, PRUint8 *keyEncryptionKey, const PRUnichar *owner, SignatureType_T signatureType); \
+  NS_IMETHOD AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType); \
+  NS_IMETHOD AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType); \
+  NS_IMETHOD EnrollDefaultMsSignatures(void); \
+  NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod2IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod3IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod4IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod5IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod6IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod7IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod8IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void); \
+  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IUEFIVARIABLESTORE(_to) \
+  NS_IMETHOD GetSecureBootEnabled(PRBool *aSecureBootEnabled) { return _to GetSecureBootEnabled(aSecureBootEnabled); } \
+  NS_IMETHOD SetSecureBootEnabled(PRBool aSecureBootEnabled) { return _to SetSecureBootEnabled(aSecureBootEnabled); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute1IUefiVariableStore) { return _to GetInternalAndReservedAttribute1IUefiVariableStore(aInternalAndReservedAttribute1IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute2IUefiVariableStore) { return _to GetInternalAndReservedAttribute2IUefiVariableStore(aInternalAndReservedAttribute2IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute3IUefiVariableStore) { return _to GetInternalAndReservedAttribute3IUefiVariableStore(aInternalAndReservedAttribute3IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute4IUefiVariableStore) { return _to GetInternalAndReservedAttribute4IUefiVariableStore(aInternalAndReservedAttribute4IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute5IUefiVariableStore) { return _to GetInternalAndReservedAttribute5IUefiVariableStore(aInternalAndReservedAttribute5IUefiVariableStore); } \
+  NS_IMETHOD AddVariable(const PRUnichar *name, const PRUnichar *owner, PRUint32 attributesSize, UefiVariableAttributes_T *attributes, PRUint32 dataSize, PRUint8 *data) { return _to AddVariable(name, owner, attributesSize, attributes, dataSize, data); } \
+  NS_IMETHOD DeleteVariable(const PRUnichar *name, const PRUnichar *owner) { return _to DeleteVariable(name, owner); } \
+  NS_IMETHOD ChangeVariable(const PRUnichar *name, PRUint32 dataSize, PRUint8 *data) { return _to ChangeVariable(name, dataSize, data); } \
+  NS_IMETHOD QueryVariableByName(const PRUnichar *name, PRUnichar **owner, PRUint32 *attributesSize, UefiVariableAttributes_T **attributes, PRUint32 *dataSize, PRUint8 **data) { return _to QueryVariableByName(name, owner, attributesSize, attributes, dataSize, data); } \
+  NS_IMETHOD QueryVariables(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *ownersSize, PRUnichar ***owners) { return _to QueryVariables(namesSize, names, ownersSize, owners); } \
+  NS_IMETHOD EnrollOraclePlatformKey(void) { return _to EnrollOraclePlatformKey(); } \
+  NS_IMETHOD EnrollPlatformKey(PRUint32 platformKeySize, PRUint8 *platformKey, const PRUnichar *owner) { return _to EnrollPlatformKey(platformKeySize, platformKey, owner); } \
+  NS_IMETHOD AddKek(PRUint32 keyEncryptionKeySize, PRUint8 *keyEncryptionKey, const PRUnichar *owner, SignatureType_T signatureType) { return _to AddKek(keyEncryptionKeySize, keyEncryptionKey, owner, signatureType); } \
+  NS_IMETHOD AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return _to AddSignatureToDb(signatureSize, signature, owner, signatureType); } \
+  NS_IMETHOD AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return _to AddSignatureToDbx(signatureSize, signature, owner, signatureType); } \
+  NS_IMETHOD EnrollDefaultMsSignatures(void) { return _to EnrollDefaultMsSignatures(); } \
+  NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void) { return _to InternalAndReservedMethod1IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod2IUefiVariableStore(void) { return _to InternalAndReservedMethod2IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod3IUefiVariableStore(void) { return _to InternalAndReservedMethod3IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod4IUefiVariableStore(void) { return _to InternalAndReservedMethod4IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod5IUefiVariableStore(void) { return _to InternalAndReservedMethod5IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod6IUefiVariableStore(void) { return _to InternalAndReservedMethod6IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod7IUefiVariableStore(void) { return _to InternalAndReservedMethod7IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod8IUefiVariableStore(void) { return _to InternalAndReservedMethod8IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) { return _to InternalAndReservedMethod9IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void) { return _to InternalAndReservedMethod10IUefiVariableStore(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IUEFIVARIABLESTORE(_to) \
+  NS_IMETHOD GetSecureBootEnabled(PRBool *aSecureBootEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSecureBootEnabled(aSecureBootEnabled); } \
+  NS_IMETHOD SetSecureBootEnabled(PRBool aSecureBootEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetSecureBootEnabled(aSecureBootEnabled); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute1IUefiVariableStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IUefiVariableStore(aInternalAndReservedAttribute1IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute2IUefiVariableStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IUefiVariableStore(aInternalAndReservedAttribute2IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute3IUefiVariableStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IUefiVariableStore(aInternalAndReservedAttribute3IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute4IUefiVariableStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IUefiVariableStore(aInternalAndReservedAttribute4IUefiVariableStore); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute5IUefiVariableStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5IUefiVariableStore(aInternalAndReservedAttribute5IUefiVariableStore); } \
+  NS_IMETHOD AddVariable(const PRUnichar *name, const PRUnichar *owner, PRUint32 attributesSize, UefiVariableAttributes_T *attributes, PRUint32 dataSize, PRUint8 *data) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddVariable(name, owner, attributesSize, attributes, dataSize, data); } \
+  NS_IMETHOD DeleteVariable(const PRUnichar *name, const PRUnichar *owner) { return !_to ? NS_ERROR_NULL_POINTER : _to->DeleteVariable(name, owner); } \
+  NS_IMETHOD ChangeVariable(const PRUnichar *name, PRUint32 dataSize, PRUint8 *data) { return !_to ? NS_ERROR_NULL_POINTER : _to->ChangeVariable(name, dataSize, data); } \
+  NS_IMETHOD QueryVariableByName(const PRUnichar *name, PRUnichar **owner, PRUint32 *attributesSize, UefiVariableAttributes_T **attributes, PRUint32 *dataSize, PRUint8 **data) { return !_to ? NS_ERROR_NULL_POINTER : _to->QueryVariableByName(name, owner, attributesSize, attributes, dataSize, data); } \
+  NS_IMETHOD QueryVariables(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *ownersSize, PRUnichar ***owners) { return !_to ? NS_ERROR_NULL_POINTER : _to->QueryVariables(namesSize, names, ownersSize, owners); } \
+  NS_IMETHOD EnrollOraclePlatformKey(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->EnrollOraclePlatformKey(); } \
+  NS_IMETHOD EnrollPlatformKey(PRUint32 platformKeySize, PRUint8 *platformKey, const PRUnichar *owner) { return !_to ? NS_ERROR_NULL_POINTER : _to->EnrollPlatformKey(platformKeySize, platformKey, owner); } \
+  NS_IMETHOD AddKek(PRUint32 keyEncryptionKeySize, PRUint8 *keyEncryptionKey, const PRUnichar *owner, SignatureType_T signatureType) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddKek(keyEncryptionKeySize, keyEncryptionKey, owner, signatureType); } \
+  NS_IMETHOD AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddSignatureToDb(signatureSize, signature, owner, signatureType); } \
+  NS_IMETHOD AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddSignatureToDbx(signatureSize, signature, owner, signatureType); } \
+  NS_IMETHOD EnrollDefaultMsSignatures(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->EnrollDefaultMsSignatures(); } \
+  NS_IMETHOD InternalAndReservedMethod1IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod2IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod3IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod4IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod5IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod5IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod6IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod6IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod7IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod7IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod8IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod8IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod9IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod9IUefiVariableStore(); } \
+  NS_IMETHOD InternalAndReservedMethod10IUefiVariableStore(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod10IUefiVariableStore(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IUefiVariableStore
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IUEFIVARIABLESTORE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IUefiVariableStore)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* attribute boolean secureBootEnabled; */
+NS_IMETHODIMP _MYCLASS_::GetSecureBootEnabled(PRBool *aSecureBootEnabled)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetSecureBootEnabled(PRBool aSecureBootEnabled)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IUefiVariableStore; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute1IUefiVariableStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IUefiVariableStore; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute2IUefiVariableStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3IUefiVariableStore; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute3IUefiVariableStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4IUefiVariableStore; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute4IUefiVariableStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5IUefiVariableStore; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5IUefiVariableStore(PRUint32 *aInternalAndReservedAttribute5IUefiVariableStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void addVariable (in wstring name, in wstring owner, in unsigned long attributesSize, [array, size_is (attributesSize)] in UefiVariableAttributes_T attributes, in unsigned long dataSize, [array, size_is (dataSize)] in octet data); */
+NS_IMETHODIMP _MYCLASS_::AddVariable(const PRUnichar *name, const PRUnichar *owner, PRUint32 attributesSize, UefiVariableAttributes_T *attributes, PRUint32 dataSize, PRUint8 *data)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void deleteVariable (in wstring name, in wstring owner); */
+NS_IMETHODIMP _MYCLASS_::DeleteVariable(const PRUnichar *name, const PRUnichar *owner)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void changeVariable (in wstring name, in unsigned long dataSize, [array, size_is (dataSize)] in octet data); */
+NS_IMETHODIMP _MYCLASS_::ChangeVariable(const PRUnichar *name, PRUint32 dataSize, PRUint8 *data)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void queryVariableByName (in wstring name, out wstring owner, out unsigned long attributesSize, [array, size_is (attributesSize)] out UefiVariableAttributes_T attributes, out unsigned long dataSize, [array, size_is (dataSize)] out octet data); */
+NS_IMETHODIMP _MYCLASS_::QueryVariableByName(const PRUnichar *name, PRUnichar **owner, PRUint32 *attributesSize, UefiVariableAttributes_T **attributes, PRUint32 *dataSize, PRUint8 **data)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void queryVariables (out unsigned long namesSize, [array, size_is (namesSize)] out wstring names, out unsigned long ownersSize, [array, size_is (ownersSize)] out wstring owners); */
+NS_IMETHODIMP _MYCLASS_::QueryVariables(PRUint32 *namesSize, PRUnichar ***names, PRUint32 *ownersSize, PRUnichar ***owners)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void enrollOraclePlatformKey (); */
+NS_IMETHODIMP _MYCLASS_::EnrollOraclePlatformKey()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void enrollPlatformKey (in unsigned long platformKeySize, [array, size_is (platformKeySize)] in octet platformKey, in wstring owner); */
+NS_IMETHODIMP _MYCLASS_::EnrollPlatformKey(PRUint32 platformKeySize, PRUint8 *platformKey, const PRUnichar *owner)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void addKek (in unsigned long keyEncryptionKeySize, [array, size_is (keyEncryptionKeySize)] in octet keyEncryptionKey, in wstring owner, in SignatureType_T signatureType); */
+NS_IMETHODIMP _MYCLASS_::AddKek(PRUint32 keyEncryptionKeySize, PRUint8 *keyEncryptionKey, const PRUnichar *owner, SignatureType_T signatureType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void addSignatureToDb (in unsigned long signatureSize, [array, size_is (signatureSize)] in octet signature, in wstring owner, in SignatureType_T signatureType); */
+NS_IMETHODIMP _MYCLASS_::AddSignatureToDb(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void addSignatureToDbx (in unsigned long signatureSize, [array, size_is (signatureSize)] in octet signature, in wstring owner, in SignatureType_T signatureType); */
+NS_IMETHODIMP _MYCLASS_::AddSignatureToDbx(PRUint32 signatureSize, PRUint8 *signature, const PRUnichar *owner, SignatureType_T signatureType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void enrollDefaultMsSignatures (); */
+NS_IMETHODIMP _MYCLASS_::EnrollDefaultMsSignatures()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod3IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod4IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod5IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod5IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod6IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod7IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod7IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod8IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod9IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod9IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod10IUefiVariableStore (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod10IUefiVariableStore()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO(smth) NS_IMETHOD GetSecureBootEnabled (PRBool * aSecureBootEnabled) { return smth GetSecureBootEnabled (aSecureBootEnabled); }
+#define COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO_BASE(base) COM_FORWARD_IUefiVariableStore_GETTER_SecureBootEnabled_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO(smth) NS_IMETHOD SetSecureBootEnabled (PRBool aSecureBootEnabled) { return smth SetSecureBootEnabled (aSecureBootEnabled); }
+#define COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO_BASE(base) COM_FORWARD_IUefiVariableStore_SETTER_SecureBootEnabled_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_AddVariable_TO(smth) NS_IMETHOD AddVariable (PRUnichar * aName, PRUnichar * aOwner, PRUint32 aAttributesSize, PRUint32 * aAttributes, PRUint32 aDataSize, PRUint8 * aData) { return smth AddVariable (aName, aOwner, aAttributesSize+++, aAttributes, aDataSize, aData); }
+#define COM_FORWARD_IUefiVariableStore_AddVariable_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddVariable_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_AddVariable_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddVariable_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_DeleteVariable_TO(smth) NS_IMETHOD DeleteVariable (PRUnichar * aName, PRUnichar * aOwner) { return smth DeleteVariable (aName, aOwner); }
+#define COM_FORWARD_IUefiVariableStore_DeleteVariable_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_DeleteVariable_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_DeleteVariable_TO_BASE(base) COM_FORWARD_IUefiVariableStore_DeleteVariable_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_ChangeVariable_TO(smth) NS_IMETHOD ChangeVariable (PRUnichar * aName, PRUint32 aDataSize, PRUint8 * aData) { return smth ChangeVariable (aName, aDataSize, aData); }
+#define COM_FORWARD_IUefiVariableStore_ChangeVariable_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_ChangeVariable_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_ChangeVariable_TO_BASE(base) COM_FORWARD_IUefiVariableStore_ChangeVariable_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO(smth) NS_IMETHOD QueryVariableByName (PRUnichar * aName, PRUnichar * * aOwner, PRUint32 * aAttributesSize, PRUint32 * * aAttributes, PRUint32 * aDataSize, PRUint8 * * aData) { return smth QueryVariableByName (aName, aOwner, aAttributesSize+++, aAttributes, aDataSize, aData); }
+#define COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO_BASE(base) COM_FORWARD_IUefiVariableStore_QueryVariableByName_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_QueryVariables_TO(smth) NS_IMETHOD QueryVariables (PRUint32 * aNamesSize, PRUnichar * * * aNames, PRUint32 * aOwnersSize, PRUnichar * * * aOwners) { return smth QueryVariables (aNamesSize+++, aNames, aOwnersSize, aOwners); }
+#define COM_FORWARD_IUefiVariableStore_QueryVariables_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_QueryVariables_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_QueryVariables_TO_BASE(base) COM_FORWARD_IUefiVariableStore_QueryVariables_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO(smth) NS_IMETHOD EnrollOraclePlatformKey() { return smth EnrollOraclePlatformKey(); }
+#define COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO_BASE(base) COM_FORWARD_IUefiVariableStore_EnrollOraclePlatformKey_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO(smth) NS_IMETHOD EnrollPlatformKey (PRUint32 aPlatformKeySize, PRUint8 * aPlatformKey, PRUnichar * aOwner) { return smth EnrollPlatformKey (aPlatformKeySize+++, aPlatformKey, aOwner); }
+#define COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO_BASE(base) COM_FORWARD_IUefiVariableStore_EnrollPlatformKey_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_AddKek_TO(smth) NS_IMETHOD AddKek (PRUint32 aKeyEncryptionKeySize, PRUint8 * aKeyEncryptionKey, PRUnichar * aOwner, PRUint32 aSignatureType) { return smth AddKek (aKeyEncryptionKeySize+++, aKeyEncryptionKey, aOwner, aSignatureType); }
+#define COM_FORWARD_IUefiVariableStore_AddKek_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddKek_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_AddKek_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddKek_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO(smth) NS_IMETHOD AddSignatureToDb (PRUint32 aSignatureSize, PRUint8 * aSignature, PRUnichar * aOwner, PRUint32 aSignatureType) { return smth AddSignatureToDb (aSignatureSize+++, aSignature, aOwner, aSignatureType); }
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddSignatureToDb_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO(smth) NS_IMETHOD AddSignatureToDbx (PRUint32 aSignatureSize, PRUint8 * aSignature, PRUnichar * aOwner, PRUint32 aSignatureType) { return smth AddSignatureToDbx (aSignatureSize+++, aSignature, aOwner, aSignatureType); }
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO_BASE(base) COM_FORWARD_IUefiVariableStore_AddSignatureToDbx_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO(smth) NS_IMETHOD EnrollDefaultMsSignatures() { return smth EnrollDefaultMsSignatures(); }
+#define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO_BASE(base) COM_FORWARD_IUefiVariableStore_EnrollDefaultMsSignatures_TO (base::)
+#define COM_FORWARD_IUefiVariableStore_TO(smth) NS_FORWARD_IUEFIVARIABLESTORE (smth)
+#define COM_FORWARD_IUefiVariableStore_TO_OBJ(obj) COM_FORWARD_IUefiVariableStore_TO ((obj)->)
+#define COM_FORWARD_IUefiVariableStore_TO_BASE(base) COM_FORWARD_IUefiVariableStore_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IUefiVariableStore;
+
+/* starting interface:    INvramStore */
+#define INVRAMSTORE_IID_STR "5bfd8965-b81b-469f-8649-f717ce97a5d5"
+
+#define INVRAMSTORE_IID \
+  {0x5bfd8965, 0xb81b, 0x469f, \
+    { 0x86, 0x49, 0xf7, 0x17, 0xce, 0x97, 0xa5, 0xd5 }}
+
+class NS_NO_VTABLE INvramStore : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(INVRAMSTORE_IID)
+
+  /* readonly attribute wstring nonVolatileStorageFile; */
+  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile) = 0;
+
+  /* readonly attribute IUefiVariableStore uefiVariableStore; */
+  NS_IMETHOD GetUefiVariableStore(IUefiVariableStore * *aUefiVariableStore) = 0;
+
+  /* readonly attribute wstring keyId; */
+  NS_IMETHOD GetKeyId(PRUnichar * *aKeyId) = 0;
+
+  /* readonly attribute wstring keyStore; */
+  NS_IMETHOD GetKeyStore(PRUnichar * *aKeyStore) = 0;
+
+  /* void initUefiVariableStore (in unsigned long size); */
+  NS_IMETHOD InitUefiVariableStore(PRUint32 size) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_INVRAMSTORE \
+  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile); \
+  NS_IMETHOD GetUefiVariableStore(IUefiVariableStore * *aUefiVariableStore); \
+  NS_IMETHOD GetKeyId(PRUnichar * *aKeyId); \
+  NS_IMETHOD GetKeyStore(PRUnichar * *aKeyStore); \
+  NS_IMETHOD InitUefiVariableStore(PRUint32 size); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_INVRAMSTORE(_to) \
+  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile) { return _to GetNonVolatileStorageFile(aNonVolatileStorageFile); } \
+  NS_IMETHOD GetUefiVariableStore(IUefiVariableStore * *aUefiVariableStore) { return _to GetUefiVariableStore(aUefiVariableStore); } \
+  NS_IMETHOD GetKeyId(PRUnichar * *aKeyId) { return _to GetKeyId(aKeyId); } \
+  NS_IMETHOD GetKeyStore(PRUnichar * *aKeyStore) { return _to GetKeyStore(aKeyStore); } \
+  NS_IMETHOD InitUefiVariableStore(PRUint32 size) { return _to InitUefiVariableStore(size); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_INVRAMSTORE(_to) \
+  NS_IMETHOD GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNonVolatileStorageFile(aNonVolatileStorageFile); } \
+  NS_IMETHOD GetUefiVariableStore(IUefiVariableStore * *aUefiVariableStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUefiVariableStore(aUefiVariableStore); } \
+  NS_IMETHOD GetKeyId(PRUnichar * *aKeyId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetKeyId(aKeyId); } \
+  NS_IMETHOD GetKeyStore(PRUnichar * *aKeyStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetKeyStore(aKeyStore); } \
+  NS_IMETHOD InitUefiVariableStore(PRUint32 size) { return !_to ? NS_ERROR_NULL_POINTER : _to->InitUefiVariableStore(size); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public INvramStore
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_INVRAMSTORE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, INvramStore)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring nonVolatileStorageFile; */
+NS_IMETHODIMP _MYCLASS_::GetNonVolatileStorageFile(PRUnichar * *aNonVolatileStorageFile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute IUefiVariableStore uefiVariableStore; */
+NS_IMETHODIMP _MYCLASS_::GetUefiVariableStore(IUefiVariableStore * *aUefiVariableStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring keyId; */
+NS_IMETHODIMP _MYCLASS_::GetKeyId(PRUnichar * *aKeyId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring keyStore; */
+NS_IMETHODIMP _MYCLASS_::GetKeyStore(PRUnichar * *aKeyStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void initUefiVariableStore (in unsigned long size); */
+NS_IMETHODIMP _MYCLASS_::InitUefiVariableStore(PRUint32 size)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_INvramStore_GETTER_NonVolatileStorageFile_TO(smth) NS_IMETHOD GetNonVolatileStorageFile (PRUnichar * * aNonVolatileStorageFile) { return smth GetNonVolatileStorageFile (aNonVolatileStorageFile); }
+#define COM_FORWARD_INvramStore_GETTER_NonVolatileStorageFile_TO_OBJ(obj) COM_FORWARD_INvramStore_GETTER_NonVolatileStorageFile_TO ((obj)->)
+#define COM_FORWARD_INvramStore_GETTER_NonVolatileStorageFile_TO_BASE(base) COM_FORWARD_INvramStore_GETTER_NonVolatileStorageFile_TO (base::)
+#define COM_FORWARD_INvramStore_GETTER_UefiVariableStore_TO(smth) NS_IMETHOD GetUefiVariableStore (IUefiVariableStore * * aUefiVariableStore) { return smth GetUefiVariableStore (aUefiVariableStore); }
+#define COM_FORWARD_INvramStore_GETTER_UefiVariableStore_TO_OBJ(obj) COM_FORWARD_INvramStore_GETTER_UefiVariableStore_TO ((obj)->)
+#define COM_FORWARD_INvramStore_GETTER_UefiVariableStore_TO_BASE(base) COM_FORWARD_INvramStore_GETTER_UefiVariableStore_TO (base::)
+#define COM_FORWARD_INvramStore_GETTER_KeyId_TO(smth) NS_IMETHOD GetKeyId (PRUnichar * * aKeyId) { return smth GetKeyId (aKeyId); }
+#define COM_FORWARD_INvramStore_GETTER_KeyId_TO_OBJ(obj) COM_FORWARD_INvramStore_GETTER_KeyId_TO ((obj)->)
+#define COM_FORWARD_INvramStore_GETTER_KeyId_TO_BASE(base) COM_FORWARD_INvramStore_GETTER_KeyId_TO (base::)
+#define COM_FORWARD_INvramStore_GETTER_KeyStore_TO(smth) NS_IMETHOD GetKeyStore (PRUnichar * * aKeyStore) { return smth GetKeyStore (aKeyStore); }
+#define COM_FORWARD_INvramStore_GETTER_KeyStore_TO_OBJ(obj) COM_FORWARD_INvramStore_GETTER_KeyStore_TO ((obj)->)
+#define COM_FORWARD_INvramStore_GETTER_KeyStore_TO_BASE(base) COM_FORWARD_INvramStore_GETTER_KeyStore_TO (base::)
+#define COM_FORWARD_INvramStore_InitUefiVariableStore_TO(smth) NS_IMETHOD InitUefiVariableStore (PRUint32 aSize) { return smth InitUefiVariableStore (aSize); }
+#define COM_FORWARD_INvramStore_InitUefiVariableStore_TO_OBJ(obj) COM_FORWARD_INvramStore_InitUefiVariableStore_TO ((obj)->)
+#define COM_FORWARD_INvramStore_InitUefiVariableStore_TO_BASE(base) COM_FORWARD_INvramStore_InitUefiVariableStore_TO (base::)
+#define COM_FORWARD_INvramStore_TO(smth) NS_FORWARD_INVRAMSTORE (smth)
+#define COM_FORWARD_INvramStore_TO_OBJ(obj) COM_FORWARD_INvramStore_TO ((obj)->)
+#define COM_FORWARD_INvramStore_TO_BASE(base) COM_FORWARD_INvramStore_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_INvramStore;
+
 /* starting interface:    IMachine */
-#define IMACHINE_IID_STR "85632c68-b5bb-4316-a900-5eb28d3413df"
+#define IMACHINE_IID_STR "300763af-5d6b-46e6-aa96-273eac15538a"
 
 #define IMACHINE_IID \
-  {0x85632c68, 0xb5bb, 0x4316, \
-    { 0xa9, 0x00, 0x5e, 0xb2, 0x8d, 0x34, 0x13, 0xdf }}
+  {0x300763af, 0x5d6b, 0x46e6, \
+    { 0xaa, 0x96, 0x27, 0x3e, 0xac, 0x15, 0x53, 0x8a }}
 
 class NS_NO_VTABLE IMachine : public nsISupports {
  public: 
@@ -21481,6 +25118,12 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   /* readonly attribute IBIOSSettings BIOSSettings; */
   NS_IMETHOD GetBIOSSettings(IBIOSSettings * *aBIOSSettings) = 0;
 
+  /* readonly attribute ITrustedPlatformModule trustedPlatformModule; */
+  NS_IMETHOD GetTrustedPlatformModule(ITrustedPlatformModule * *aTrustedPlatformModule) = 0;
+
+  /* readonly attribute INvramStore nonVolatileStore; */
+  NS_IMETHOD GetNonVolatileStore(INvramStore * *aNonVolatileStore) = 0;
+
   /* readonly attribute IRecordingSettings recordingSettings; */
   NS_IMETHOD GetRecordingSettings(IRecordingSettings * *aRecordingSettings) = 0;
 
@@ -21504,6 +25147,10 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD GetChipsetType(ChipsetType_T *aChipsetType) = 0;
   NS_IMETHOD SetChipsetType(ChipsetType_T aChipsetType) = 0;
 
+  /* attribute IommuType_T iommuType; */
+  NS_IMETHOD GetIommuType(IommuType_T *aIommuType) = 0;
+  NS_IMETHOD SetIommuType(IommuType_T aIommuType) = 0;
+
   /* attribute wstring snapshotFolder; */
   NS_IMETHOD GetSnapshotFolder(PRUnichar * *aSnapshotFolder) = 0;
   NS_IMETHOD SetSnapshotFolder(const PRUnichar * aSnapshotFolder) = 0;
@@ -21524,8 +25171,8 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   /* readonly attribute IUSBDeviceFilters USBDeviceFilters; */
   NS_IMETHOD GetUSBDeviceFilters(IUSBDeviceFilters * *aUSBDeviceFilters) = 0;
 
-  /* readonly attribute IAudioAdapter audioAdapter; */
-  NS_IMETHOD GetAudioAdapter(IAudioAdapter * *aAudioAdapter) = 0;
+  /* readonly attribute IAudioSettings audioSettings; */
+  NS_IMETHOD GetAudioSettings(IAudioSettings * *aAudioSettings) = 0;
 
   /* void getStorageControllers (out unsigned long storageControllersSize, [array, size_is (storageControllersSize), retval] out IStorageController storageControllers); */
   NS_IMETHOD GetStorageControllers(PRUint32 *storageControllersSize, IStorageController ***storageControllers) = 0;
@@ -21664,6 +25311,21 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   /* attribute wstring CPUProfile; */
   NS_IMETHOD GetCPUProfile(PRUnichar * *aCPUProfile) = 0;
   NS_IMETHOD SetCPUProfile(const PRUnichar * aCPUProfile) = 0;
+
+  /* readonly attribute wstring stateKeyId; */
+  NS_IMETHOD GetStateKeyId(PRUnichar * *aStateKeyId) = 0;
+
+  /* readonly attribute wstring stateKeyStore; */
+  NS_IMETHOD GetStateKeyStore(PRUnichar * *aStateKeyStore) = 0;
+
+  /* readonly attribute wstring logKeyId; */
+  NS_IMETHOD GetLogKeyId(PRUnichar * *aLogKeyId) = 0;
+
+  /* readonly attribute wstring logKeyStore; */
+  NS_IMETHOD GetLogKeyStore(PRUnichar * *aLogKeyStore) = 0;
+
+  /* readonly attribute IGuestDebugControl guestDebugControl; */
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1IMachine; */
   NS_IMETHOD GetInternalAndReservedAttribute1IMachine(PRUint32 *aInternalAndReservedAttribute1IMachine) = 0;
@@ -21965,6 +25627,27 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   /* void applyDefaults (in wstring flags); */
   NS_IMETHOD ApplyDefaults(const PRUnichar *flags) = 0;
 
+  /* void changeEncryption (in wstring currentPassword, in wstring cipher, in wstring newPassword, in wstring newPasswordId, in boolean force, [retval] out IProgress progress); */
+  NS_IMETHOD ChangeEncryption(const PRUnichar *currentPassword, const PRUnichar *cipher, const PRUnichar *newPassword, const PRUnichar *newPasswordId, PRBool force, IProgress **progress) = 0;
+
+  /* void getEncryptionSettings (out wstring cipher, out wstring passwordId); */
+  NS_IMETHOD GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId) = 0;
+
+  /* void checkEncryptionPassword (in wstring password); */
+  NS_IMETHOD CheckEncryptionPassword(const PRUnichar *password) = 0;
+
+  /* void addEncryptionPassword (in wstring id, in wstring password); */
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password) = 0;
+
+  /* void addEncryptionPasswords (in unsigned long idsSize, [array, size_is (idsSize)] in wstring ids, in unsigned long passwordsSize, [array, size_is (passwordsSize)] in wstring passwords); */
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords) = 0;
+
+  /* void removeEncryptionPassword (in wstring id); */
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id) = 0;
+
+  /* void clearAllEncryptionPasswords (); */
+  NS_IMETHOD ClearAllEncryptionPasswords(void) = 0;
+
   /* void InternalAndReservedMethod1IMachine (); */
   NS_IMETHOD InternalAndReservedMethod1IMachine(void) = 0;
 
@@ -22027,6 +25710,8 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetPageFusionEnabled(PRBool aPageFusionEnabled); \
   NS_IMETHOD GetGraphicsAdapter(IGraphicsAdapter * *aGraphicsAdapter); \
   NS_IMETHOD GetBIOSSettings(IBIOSSettings * *aBIOSSettings); \
+  NS_IMETHOD GetTrustedPlatformModule(ITrustedPlatformModule * *aTrustedPlatformModule); \
+  NS_IMETHOD GetNonVolatileStore(INvramStore * *aNonVolatileStore); \
   NS_IMETHOD GetRecordingSettings(IRecordingSettings * *aRecordingSettings); \
   NS_IMETHOD GetFirmwareType(FirmwareType_T *aFirmwareType); \
   NS_IMETHOD SetFirmwareType(FirmwareType_T aFirmwareType); \
@@ -22038,6 +25723,8 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetHPETEnabled(PRBool aHPETEnabled); \
   NS_IMETHOD GetChipsetType(ChipsetType_T *aChipsetType); \
   NS_IMETHOD SetChipsetType(ChipsetType_T aChipsetType); \
+  NS_IMETHOD GetIommuType(IommuType_T *aIommuType); \
+  NS_IMETHOD SetIommuType(IommuType_T aIommuType); \
   NS_IMETHOD GetSnapshotFolder(PRUnichar * *aSnapshotFolder); \
   NS_IMETHOD SetSnapshotFolder(const PRUnichar * aSnapshotFolder); \
   NS_IMETHOD GetVRDEServer(IVRDEServer * *aVRDEServer); \
@@ -22046,7 +25733,7 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD GetMediumAttachments(PRUint32 *mediumAttachmentsSize, IMediumAttachment ***mediumAttachments); \
   NS_IMETHOD GetUSBControllers(PRUint32 *USBControllersSize, IUSBController ***USBControllers); \
   NS_IMETHOD GetUSBDeviceFilters(IUSBDeviceFilters * *aUSBDeviceFilters); \
-  NS_IMETHOD GetAudioAdapter(IAudioAdapter * *aAudioAdapter); \
+  NS_IMETHOD GetAudioSettings(IAudioSettings * *aAudioSettings); \
   NS_IMETHOD GetStorageControllers(PRUint32 *storageControllersSize, IStorageController ***storageControllers); \
   NS_IMETHOD GetSettingsFilePath(PRUnichar * *aSettingsFilePath); \
   NS_IMETHOD GetSettingsAuxFilePath(PRUnichar * *aSettingsAuxFilePath); \
@@ -22107,6 +25794,11 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetParavirtDebug(const PRUnichar * aParavirtDebug); \
   NS_IMETHOD GetCPUProfile(PRUnichar * *aCPUProfile); \
   NS_IMETHOD SetCPUProfile(const PRUnichar * aCPUProfile); \
+  NS_IMETHOD GetStateKeyId(PRUnichar * *aStateKeyId); \
+  NS_IMETHOD GetStateKeyStore(PRUnichar * *aStateKeyStore); \
+  NS_IMETHOD GetLogKeyId(PRUnichar * *aLogKeyId); \
+  NS_IMETHOD GetLogKeyStore(PRUnichar * *aLogKeyStore); \
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl); \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachine(PRUint32 *aInternalAndReservedAttribute1IMachine); \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachine(PRUint32 *aInternalAndReservedAttribute2IMachine); \
   NS_IMETHOD GetInternalAndReservedAttribute3IMachine(PRUint32 *aInternalAndReservedAttribute3IMachine); \
@@ -22207,6 +25899,13 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD DeleteSnapshotRange(const PRUnichar *startId, const PRUnichar *endId, IProgress **progress); \
   NS_IMETHOD RestoreSnapshot(ISnapshot *snapshot, IProgress **progress); \
   NS_IMETHOD ApplyDefaults(const PRUnichar *flags); \
+  NS_IMETHOD ChangeEncryption(const PRUnichar *currentPassword, const PRUnichar *cipher, const PRUnichar *newPassword, const PRUnichar *newPasswordId, PRBool force, IProgress **progress); \
+  NS_IMETHOD GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId); \
+  NS_IMETHOD CheckEncryptionPassword(const PRUnichar *password); \
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password); \
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords); \
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id); \
+  NS_IMETHOD ClearAllEncryptionPasswords(void); \
   NS_IMETHOD InternalAndReservedMethod1IMachine(void); \
   NS_IMETHOD InternalAndReservedMethod2IMachine(void); \
   NS_IMETHOD InternalAndReservedMethod3IMachine(void); \
@@ -22252,6 +25951,8 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetPageFusionEnabled(PRBool aPageFusionEnabled) { return _to SetPageFusionEnabled(aPageFusionEnabled); } \
   NS_IMETHOD GetGraphicsAdapter(IGraphicsAdapter * *aGraphicsAdapter) { return _to GetGraphicsAdapter(aGraphicsAdapter); } \
   NS_IMETHOD GetBIOSSettings(IBIOSSettings * *aBIOSSettings) { return _to GetBIOSSettings(aBIOSSettings); } \
+  NS_IMETHOD GetTrustedPlatformModule(ITrustedPlatformModule * *aTrustedPlatformModule) { return _to GetTrustedPlatformModule(aTrustedPlatformModule); } \
+  NS_IMETHOD GetNonVolatileStore(INvramStore * *aNonVolatileStore) { return _to GetNonVolatileStore(aNonVolatileStore); } \
   NS_IMETHOD GetRecordingSettings(IRecordingSettings * *aRecordingSettings) { return _to GetRecordingSettings(aRecordingSettings); } \
   NS_IMETHOD GetFirmwareType(FirmwareType_T *aFirmwareType) { return _to GetFirmwareType(aFirmwareType); } \
   NS_IMETHOD SetFirmwareType(FirmwareType_T aFirmwareType) { return _to SetFirmwareType(aFirmwareType); } \
@@ -22263,6 +25964,8 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetHPETEnabled(PRBool aHPETEnabled) { return _to SetHPETEnabled(aHPETEnabled); } \
   NS_IMETHOD GetChipsetType(ChipsetType_T *aChipsetType) { return _to GetChipsetType(aChipsetType); } \
   NS_IMETHOD SetChipsetType(ChipsetType_T aChipsetType) { return _to SetChipsetType(aChipsetType); } \
+  NS_IMETHOD GetIommuType(IommuType_T *aIommuType) { return _to GetIommuType(aIommuType); } \
+  NS_IMETHOD SetIommuType(IommuType_T aIommuType) { return _to SetIommuType(aIommuType); } \
   NS_IMETHOD GetSnapshotFolder(PRUnichar * *aSnapshotFolder) { return _to GetSnapshotFolder(aSnapshotFolder); } \
   NS_IMETHOD SetSnapshotFolder(const PRUnichar * aSnapshotFolder) { return _to SetSnapshotFolder(aSnapshotFolder); } \
   NS_IMETHOD GetVRDEServer(IVRDEServer * *aVRDEServer) { return _to GetVRDEServer(aVRDEServer); } \
@@ -22271,7 +25974,7 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD GetMediumAttachments(PRUint32 *mediumAttachmentsSize, IMediumAttachment ***mediumAttachments) { return _to GetMediumAttachments(mediumAttachmentsSize, mediumAttachments); } \
   NS_IMETHOD GetUSBControllers(PRUint32 *USBControllersSize, IUSBController ***USBControllers) { return _to GetUSBControllers(USBControllersSize, USBControllers); } \
   NS_IMETHOD GetUSBDeviceFilters(IUSBDeviceFilters * *aUSBDeviceFilters) { return _to GetUSBDeviceFilters(aUSBDeviceFilters); } \
-  NS_IMETHOD GetAudioAdapter(IAudioAdapter * *aAudioAdapter) { return _to GetAudioAdapter(aAudioAdapter); } \
+  NS_IMETHOD GetAudioSettings(IAudioSettings * *aAudioSettings) { return _to GetAudioSettings(aAudioSettings); } \
   NS_IMETHOD GetStorageControllers(PRUint32 *storageControllersSize, IStorageController ***storageControllers) { return _to GetStorageControllers(storageControllersSize, storageControllers); } \
   NS_IMETHOD GetSettingsFilePath(PRUnichar * *aSettingsFilePath) { return _to GetSettingsFilePath(aSettingsFilePath); } \
   NS_IMETHOD GetSettingsAuxFilePath(PRUnichar * *aSettingsAuxFilePath) { return _to GetSettingsAuxFilePath(aSettingsAuxFilePath); } \
@@ -22332,6 +26035,11 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetParavirtDebug(const PRUnichar * aParavirtDebug) { return _to SetParavirtDebug(aParavirtDebug); } \
   NS_IMETHOD GetCPUProfile(PRUnichar * *aCPUProfile) { return _to GetCPUProfile(aCPUProfile); } \
   NS_IMETHOD SetCPUProfile(const PRUnichar * aCPUProfile) { return _to SetCPUProfile(aCPUProfile); } \
+  NS_IMETHOD GetStateKeyId(PRUnichar * *aStateKeyId) { return _to GetStateKeyId(aStateKeyId); } \
+  NS_IMETHOD GetStateKeyStore(PRUnichar * *aStateKeyStore) { return _to GetStateKeyStore(aStateKeyStore); } \
+  NS_IMETHOD GetLogKeyId(PRUnichar * *aLogKeyId) { return _to GetLogKeyId(aLogKeyId); } \
+  NS_IMETHOD GetLogKeyStore(PRUnichar * *aLogKeyStore) { return _to GetLogKeyStore(aLogKeyStore); } \
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl) { return _to GetGuestDebugControl(aGuestDebugControl); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachine(PRUint32 *aInternalAndReservedAttribute1IMachine) { return _to GetInternalAndReservedAttribute1IMachine(aInternalAndReservedAttribute1IMachine); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachine(PRUint32 *aInternalAndReservedAttribute2IMachine) { return _to GetInternalAndReservedAttribute2IMachine(aInternalAndReservedAttribute2IMachine); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IMachine(PRUint32 *aInternalAndReservedAttribute3IMachine) { return _to GetInternalAndReservedAttribute3IMachine(aInternalAndReservedAttribute3IMachine); } \
@@ -22432,6 +26140,13 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD DeleteSnapshotRange(const PRUnichar *startId, const PRUnichar *endId, IProgress **progress) { return _to DeleteSnapshotRange(startId, endId, progress); } \
   NS_IMETHOD RestoreSnapshot(ISnapshot *snapshot, IProgress **progress) { return _to RestoreSnapshot(snapshot, progress); } \
   NS_IMETHOD ApplyDefaults(const PRUnichar *flags) { return _to ApplyDefaults(flags); } \
+  NS_IMETHOD ChangeEncryption(const PRUnichar *currentPassword, const PRUnichar *cipher, const PRUnichar *newPassword, const PRUnichar *newPasswordId, PRBool force, IProgress **progress) { return _to ChangeEncryption(currentPassword, cipher, newPassword, newPasswordId, force, progress); } \
+  NS_IMETHOD GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId) { return _to GetEncryptionSettings(cipher, passwordId); } \
+  NS_IMETHOD CheckEncryptionPassword(const PRUnichar *password) { return _to CheckEncryptionPassword(password); } \
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password) { return _to AddEncryptionPassword(id, password); } \
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords) { return _to AddEncryptionPasswords(idsSize, ids, passwordsSize, passwords); } \
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id) { return _to RemoveEncryptionPassword(id); } \
+  NS_IMETHOD ClearAllEncryptionPasswords(void) { return _to ClearAllEncryptionPasswords(); } \
   NS_IMETHOD InternalAndReservedMethod1IMachine(void) { return _to InternalAndReservedMethod1IMachine(); } \
   NS_IMETHOD InternalAndReservedMethod2IMachine(void) { return _to InternalAndReservedMethod2IMachine(); } \
   NS_IMETHOD InternalAndReservedMethod3IMachine(void) { return _to InternalAndReservedMethod3IMachine(); } \
@@ -22477,6 +26192,8 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetPageFusionEnabled(PRBool aPageFusionEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetPageFusionEnabled(aPageFusionEnabled); } \
   NS_IMETHOD GetGraphicsAdapter(IGraphicsAdapter * *aGraphicsAdapter) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetGraphicsAdapter(aGraphicsAdapter); } \
   NS_IMETHOD GetBIOSSettings(IBIOSSettings * *aBIOSSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetBIOSSettings(aBIOSSettings); } \
+  NS_IMETHOD GetTrustedPlatformModule(ITrustedPlatformModule * *aTrustedPlatformModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTrustedPlatformModule(aTrustedPlatformModule); } \
+  NS_IMETHOD GetNonVolatileStore(INvramStore * *aNonVolatileStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNonVolatileStore(aNonVolatileStore); } \
   NS_IMETHOD GetRecordingSettings(IRecordingSettings * *aRecordingSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecordingSettings(aRecordingSettings); } \
   NS_IMETHOD GetFirmwareType(FirmwareType_T *aFirmwareType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFirmwareType(aFirmwareType); } \
   NS_IMETHOD SetFirmwareType(FirmwareType_T aFirmwareType) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetFirmwareType(aFirmwareType); } \
@@ -22488,6 +26205,8 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetHPETEnabled(PRBool aHPETEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetHPETEnabled(aHPETEnabled); } \
   NS_IMETHOD GetChipsetType(ChipsetType_T *aChipsetType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetChipsetType(aChipsetType); } \
   NS_IMETHOD SetChipsetType(ChipsetType_T aChipsetType) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetChipsetType(aChipsetType); } \
+  NS_IMETHOD GetIommuType(IommuType_T *aIommuType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIommuType(aIommuType); } \
+  NS_IMETHOD SetIommuType(IommuType_T aIommuType) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetIommuType(aIommuType); } \
   NS_IMETHOD GetSnapshotFolder(PRUnichar * *aSnapshotFolder) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSnapshotFolder(aSnapshotFolder); } \
   NS_IMETHOD SetSnapshotFolder(const PRUnichar * aSnapshotFolder) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetSnapshotFolder(aSnapshotFolder); } \
   NS_IMETHOD GetVRDEServer(IVRDEServer * *aVRDEServer) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVRDEServer(aVRDEServer); } \
@@ -22496,7 +26215,7 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD GetMediumAttachments(PRUint32 *mediumAttachmentsSize, IMediumAttachment ***mediumAttachments) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMediumAttachments(mediumAttachmentsSize, mediumAttachments); } \
   NS_IMETHOD GetUSBControllers(PRUint32 *USBControllersSize, IUSBController ***USBControllers) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUSBControllers(USBControllersSize, USBControllers); } \
   NS_IMETHOD GetUSBDeviceFilters(IUSBDeviceFilters * *aUSBDeviceFilters) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUSBDeviceFilters(aUSBDeviceFilters); } \
-  NS_IMETHOD GetAudioAdapter(IAudioAdapter * *aAudioAdapter) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioAdapter(aAudioAdapter); } \
+  NS_IMETHOD GetAudioSettings(IAudioSettings * *aAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioSettings(aAudioSettings); } \
   NS_IMETHOD GetStorageControllers(PRUint32 *storageControllersSize, IStorageController ***storageControllers) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStorageControllers(storageControllersSize, storageControllers); } \
   NS_IMETHOD GetSettingsFilePath(PRUnichar * *aSettingsFilePath) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSettingsFilePath(aSettingsFilePath); } \
   NS_IMETHOD GetSettingsAuxFilePath(PRUnichar * *aSettingsAuxFilePath) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSettingsAuxFilePath(aSettingsAuxFilePath); } \
@@ -22557,6 +26276,11 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD SetParavirtDebug(const PRUnichar * aParavirtDebug) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetParavirtDebug(aParavirtDebug); } \
   NS_IMETHOD GetCPUProfile(PRUnichar * *aCPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCPUProfile(aCPUProfile); } \
   NS_IMETHOD SetCPUProfile(const PRUnichar * aCPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetCPUProfile(aCPUProfile); } \
+  NS_IMETHOD GetStateKeyId(PRUnichar * *aStateKeyId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStateKeyId(aStateKeyId); } \
+  NS_IMETHOD GetStateKeyStore(PRUnichar * *aStateKeyStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStateKeyStore(aStateKeyStore); } \
+  NS_IMETHOD GetLogKeyId(PRUnichar * *aLogKeyId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLogKeyId(aLogKeyId); } \
+  NS_IMETHOD GetLogKeyStore(PRUnichar * *aLogKeyStore) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLogKeyStore(aLogKeyStore); } \
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetGuestDebugControl(aGuestDebugControl); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachine(PRUint32 *aInternalAndReservedAttribute1IMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IMachine(aInternalAndReservedAttribute1IMachine); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachine(PRUint32 *aInternalAndReservedAttribute2IMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IMachine(aInternalAndReservedAttribute2IMachine); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IMachine(PRUint32 *aInternalAndReservedAttribute3IMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IMachine(aInternalAndReservedAttribute3IMachine); } \
@@ -22657,6 +26381,13 @@ class NS_NO_VTABLE IMachine : public nsISupports {
   NS_IMETHOD DeleteSnapshotRange(const PRUnichar *startId, const PRUnichar *endId, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->DeleteSnapshotRange(startId, endId, progress); } \
   NS_IMETHOD RestoreSnapshot(ISnapshot *snapshot, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->RestoreSnapshot(snapshot, progress); } \
   NS_IMETHOD ApplyDefaults(const PRUnichar *flags) { return !_to ? NS_ERROR_NULL_POINTER : _to->ApplyDefaults(flags); } \
+  NS_IMETHOD ChangeEncryption(const PRUnichar *currentPassword, const PRUnichar *cipher, const PRUnichar *newPassword, const PRUnichar *newPasswordId, PRBool force, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ChangeEncryption(currentPassword, cipher, newPassword, newPasswordId, force, progress); } \
+  NS_IMETHOD GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEncryptionSettings(cipher, passwordId); } \
+  NS_IMETHOD CheckEncryptionPassword(const PRUnichar *password) { return !_to ? NS_ERROR_NULL_POINTER : _to->CheckEncryptionPassword(password); } \
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddEncryptionPassword(id, password); } \
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddEncryptionPasswords(idsSize, ids, passwordsSize, passwords); } \
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveEncryptionPassword(id); } \
+  NS_IMETHOD ClearAllEncryptionPasswords(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClearAllEncryptionPasswords(); } \
   NS_IMETHOD InternalAndReservedMethod1IMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IMachine(); } \
   NS_IMETHOD InternalAndReservedMethod2IMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IMachine(); } \
   NS_IMETHOD InternalAndReservedMethod3IMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IMachine(); } \
@@ -22878,6 +26609,18 @@ NS_IMETHODIMP _MYCLASS_::GetBIOSSettings(IBIOSSettings * *aBIOSSettings)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* readonly attribute ITrustedPlatformModule trustedPlatformModule; */
+NS_IMETHODIMP _MYCLASS_::GetTrustedPlatformModule(ITrustedPlatformModule * *aTrustedPlatformModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute INvramStore nonVolatileStore; */
+NS_IMETHODIMP _MYCLASS_::GetNonVolatileStore(INvramStore * *aNonVolatileStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* readonly attribute IRecordingSettings recordingSettings; */
 NS_IMETHODIMP _MYCLASS_::GetRecordingSettings(IRecordingSettings * *aRecordingSettings)
 {
@@ -22934,6 +26677,16 @@ NS_IMETHODIMP _MYCLASS_::SetChipsetType(ChipsetType_T aChipsetType)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* attribute IommuType_T iommuType; */
+NS_IMETHODIMP _MYCLASS_::GetIommuType(IommuType_T *aIommuType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetIommuType(IommuType_T aIommuType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* attribute wstring snapshotFolder; */
 NS_IMETHODIMP _MYCLASS_::GetSnapshotFolder(PRUnichar * *aSnapshotFolder)
 {
@@ -22978,8 +26731,8 @@ NS_IMETHODIMP _MYCLASS_::GetUSBDeviceFilters(IUSBDeviceFilters * *aUSBDeviceFilt
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute IAudioAdapter audioAdapter; */
-NS_IMETHODIMP _MYCLASS_::GetAudioAdapter(IAudioAdapter * *aAudioAdapter)
+/* readonly attribute IAudioSettings audioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetAudioSettings(IAudioSettings * *aAudioSettings)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -23298,6 +27051,36 @@ NS_IMETHODIMP _MYCLASS_::GetCPUProfile(PRUnichar * *aCPUProfile)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 NS_IMETHODIMP _MYCLASS_::SetCPUProfile(const PRUnichar * aCPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring stateKeyId; */
+NS_IMETHODIMP _MYCLASS_::GetStateKeyId(PRUnichar * *aStateKeyId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring stateKeyStore; */
+NS_IMETHODIMP _MYCLASS_::GetStateKeyStore(PRUnichar * *aStateKeyStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring logKeyId; */
+NS_IMETHODIMP _MYCLASS_::GetLogKeyId(PRUnichar * *aLogKeyId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring logKeyStore; */
+NS_IMETHODIMP _MYCLASS_::GetLogKeyStore(PRUnichar * *aLogKeyStore)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute IGuestDebugControl guestDebugControl; */
+NS_IMETHODIMP _MYCLASS_::GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -23902,6 +27685,48 @@ NS_IMETHODIMP _MYCLASS_::ApplyDefaults(const PRUnichar *flags)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void changeEncryption (in wstring currentPassword, in wstring cipher, in wstring newPassword, in wstring newPasswordId, in boolean force, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ChangeEncryption(const PRUnichar *currentPassword, const PRUnichar *cipher, const PRUnichar *newPassword, const PRUnichar *newPasswordId, PRBool force, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getEncryptionSettings (out wstring cipher, out wstring passwordId); */
+NS_IMETHODIMP _MYCLASS_::GetEncryptionSettings(PRUnichar **cipher, PRUnichar **passwordId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void checkEncryptionPassword (in wstring password); */
+NS_IMETHODIMP _MYCLASS_::CheckEncryptionPassword(const PRUnichar *password)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void addEncryptionPassword (in wstring id, in wstring password); */
+NS_IMETHODIMP _MYCLASS_::AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void addEncryptionPasswords (in unsigned long idsSize, [array, size_is (idsSize)] in wstring ids, in unsigned long passwordsSize, [array, size_is (passwordsSize)] in wstring passwords); */
+NS_IMETHODIMP _MYCLASS_::AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void removeEncryptionPassword (in wstring id); */
+NS_IMETHODIMP _MYCLASS_::RemoveEncryptionPassword(const PRUnichar *id)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void clearAllEncryptionPasswords (); */
+NS_IMETHODIMP _MYCLASS_::ClearAllEncryptionPasswords()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void InternalAndReservedMethod1IMachine (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IMachine()
 {
@@ -24055,6 +27880,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IMachine()
 #define COM_FORWARD_IMachine_GETTER_BIOSSettings_TO(smth) NS_IMETHOD GetBIOSSettings (IBIOSSettings * * aBIOSSettings) { return smth GetBIOSSettings (aBIOSSettings); }
 #define COM_FORWARD_IMachine_GETTER_BIOSSettings_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_BIOSSettings_TO ((obj)->)
 #define COM_FORWARD_IMachine_GETTER_BIOSSettings_TO_BASE(base) COM_FORWARD_IMachine_GETTER_BIOSSettings_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_TrustedPlatformModule_TO(smth) NS_IMETHOD GetTrustedPlatformModule (ITrustedPlatformModule * * aTrustedPlatformModule) { return smth GetTrustedPlatformModule (aTrustedPlatformModule); }
+#define COM_FORWARD_IMachine_GETTER_TrustedPlatformModule_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_TrustedPlatformModule_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_TrustedPlatformModule_TO_BASE(base) COM_FORWARD_IMachine_GETTER_TrustedPlatformModule_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_NonVolatileStore_TO(smth) NS_IMETHOD GetNonVolatileStore (INvramStore * * aNonVolatileStore) { return smth GetNonVolatileStore (aNonVolatileStore); }
+#define COM_FORWARD_IMachine_GETTER_NonVolatileStore_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_NonVolatileStore_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_NonVolatileStore_TO_BASE(base) COM_FORWARD_IMachine_GETTER_NonVolatileStore_TO (base::)
 #define COM_FORWARD_IMachine_GETTER_RecordingSettings_TO(smth) NS_IMETHOD GetRecordingSettings (IRecordingSettings * * aRecordingSettings) { return smth GetRecordingSettings (aRecordingSettings); }
 #define COM_FORWARD_IMachine_GETTER_RecordingSettings_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_RecordingSettings_TO ((obj)->)
 #define COM_FORWARD_IMachine_GETTER_RecordingSettings_TO_BASE(base) COM_FORWARD_IMachine_GETTER_RecordingSettings_TO (base::)
@@ -24088,6 +27919,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IMachine()
 #define COM_FORWARD_IMachine_SETTER_ChipsetType_TO(smth) NS_IMETHOD SetChipsetType (PRUint32 aChipsetType) { return smth SetChipsetType (aChipsetType); }
 #define COM_FORWARD_IMachine_SETTER_ChipsetType_TO_OBJ(obj) COM_FORWARD_IMachine_SETTER_ChipsetType_TO ((obj)->)
 #define COM_FORWARD_IMachine_SETTER_ChipsetType_TO_BASE(base) COM_FORWARD_IMachine_SETTER_ChipsetType_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_IommuType_TO(smth) NS_IMETHOD GetIommuType (PRUint32 * aIommuType) { return smth GetIommuType (aIommuType); }
+#define COM_FORWARD_IMachine_GETTER_IommuType_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_IommuType_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_IommuType_TO_BASE(base) COM_FORWARD_IMachine_GETTER_IommuType_TO (base::)
+#define COM_FORWARD_IMachine_SETTER_IommuType_TO(smth) NS_IMETHOD SetIommuType (PRUint32 aIommuType) { return smth SetIommuType (aIommuType); }
+#define COM_FORWARD_IMachine_SETTER_IommuType_TO_OBJ(obj) COM_FORWARD_IMachine_SETTER_IommuType_TO ((obj)->)
+#define COM_FORWARD_IMachine_SETTER_IommuType_TO_BASE(base) COM_FORWARD_IMachine_SETTER_IommuType_TO (base::)
 #define COM_FORWARD_IMachine_GETTER_SnapshotFolder_TO(smth) NS_IMETHOD GetSnapshotFolder (PRUnichar * * aSnapshotFolder) { return smth GetSnapshotFolder (aSnapshotFolder); }
 #define COM_FORWARD_IMachine_GETTER_SnapshotFolder_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_SnapshotFolder_TO ((obj)->)
 #define COM_FORWARD_IMachine_GETTER_SnapshotFolder_TO_BASE(base) COM_FORWARD_IMachine_GETTER_SnapshotFolder_TO (base::)
@@ -24112,9 +27949,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IMachine()
 #define COM_FORWARD_IMachine_GETTER_USBDeviceFilters_TO(smth) NS_IMETHOD GetUSBDeviceFilters (IUSBDeviceFilters * * aUSBDeviceFilters) { return smth GetUSBDeviceFilters (aUSBDeviceFilters); }
 #define COM_FORWARD_IMachine_GETTER_USBDeviceFilters_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_USBDeviceFilters_TO ((obj)->)
 #define COM_FORWARD_IMachine_GETTER_USBDeviceFilters_TO_BASE(base) COM_FORWARD_IMachine_GETTER_USBDeviceFilters_TO (base::)
-#define COM_FORWARD_IMachine_GETTER_AudioAdapter_TO(smth) NS_IMETHOD GetAudioAdapter (IAudioAdapter * * aAudioAdapter) { return smth GetAudioAdapter (aAudioAdapter); }
-#define COM_FORWARD_IMachine_GETTER_AudioAdapter_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_AudioAdapter_TO ((obj)->)
-#define COM_FORWARD_IMachine_GETTER_AudioAdapter_TO_BASE(base) COM_FORWARD_IMachine_GETTER_AudioAdapter_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_AudioSettings_TO(smth) NS_IMETHOD GetAudioSettings (IAudioSettings * * aAudioSettings) { return smth GetAudioSettings (aAudioSettings); }
+#define COM_FORWARD_IMachine_GETTER_AudioSettings_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_AudioSettings_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_AudioSettings_TO_BASE(base) COM_FORWARD_IMachine_GETTER_AudioSettings_TO (base::)
 #define COM_FORWARD_IMachine_GETTER_StorageControllers_TO(smth) NS_IMETHOD GetStorageControllers (PRUint32 * aStorageControllersSize, IStorageController * * * aStorageControllers) { return smth GetStorageControllers (aStorageControllersSize, aStorageControllers); }
 #define COM_FORWARD_IMachine_GETTER_StorageControllers_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_StorageControllers_TO ((obj)->)
 #define COM_FORWARD_IMachine_GETTER_StorageControllers_TO_BASE(base) COM_FORWARD_IMachine_GETTER_StorageControllers_TO (base::)
@@ -24295,6 +28132,21 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IMachine()
 #define COM_FORWARD_IMachine_SETTER_CPUProfile_TO(smth) NS_IMETHOD SetCPUProfile (const PRUnichar * aCPUProfile) { return smth SetCPUProfile (aCPUProfile); }
 #define COM_FORWARD_IMachine_SETTER_CPUProfile_TO_OBJ(obj) COM_FORWARD_IMachine_SETTER_CPUProfile_TO ((obj)->)
 #define COM_FORWARD_IMachine_SETTER_CPUProfile_TO_BASE(base) COM_FORWARD_IMachine_SETTER_CPUProfile_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_StateKeyId_TO(smth) NS_IMETHOD GetStateKeyId (PRUnichar * * aStateKeyId) { return smth GetStateKeyId (aStateKeyId); }
+#define COM_FORWARD_IMachine_GETTER_StateKeyId_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_StateKeyId_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_StateKeyId_TO_BASE(base) COM_FORWARD_IMachine_GETTER_StateKeyId_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_StateKeyStore_TO(smth) NS_IMETHOD GetStateKeyStore (PRUnichar * * aStateKeyStore) { return smth GetStateKeyStore (aStateKeyStore); }
+#define COM_FORWARD_IMachine_GETTER_StateKeyStore_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_StateKeyStore_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_StateKeyStore_TO_BASE(base) COM_FORWARD_IMachine_GETTER_StateKeyStore_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_LogKeyId_TO(smth) NS_IMETHOD GetLogKeyId (PRUnichar * * aLogKeyId) { return smth GetLogKeyId (aLogKeyId); }
+#define COM_FORWARD_IMachine_GETTER_LogKeyId_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_LogKeyId_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_LogKeyId_TO_BASE(base) COM_FORWARD_IMachine_GETTER_LogKeyId_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_LogKeyStore_TO(smth) NS_IMETHOD GetLogKeyStore (PRUnichar * * aLogKeyStore) { return smth GetLogKeyStore (aLogKeyStore); }
+#define COM_FORWARD_IMachine_GETTER_LogKeyStore_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_LogKeyStore_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_LogKeyStore_TO_BASE(base) COM_FORWARD_IMachine_GETTER_LogKeyStore_TO (base::)
+#define COM_FORWARD_IMachine_GETTER_GuestDebugControl_TO(smth) NS_IMETHOD GetGuestDebugControl (IGuestDebugControl * * aGuestDebugControl) { return smth GetGuestDebugControl (aGuestDebugControl); }
+#define COM_FORWARD_IMachine_GETTER_GuestDebugControl_TO_OBJ(obj) COM_FORWARD_IMachine_GETTER_GuestDebugControl_TO ((obj)->)
+#define COM_FORWARD_IMachine_GETTER_GuestDebugControl_TO_BASE(base) COM_FORWARD_IMachine_GETTER_GuestDebugControl_TO (base::)
 #define COM_FORWARD_IMachine_LockMachine_TO(smth) NS_IMETHOD LockMachine (ISession * aSession, PRUint32 aLockType) { return smth LockMachine (aSession, aLockType); }
 #define COM_FORWARD_IMachine_LockMachine_TO_OBJ(obj) COM_FORWARD_IMachine_LockMachine_TO ((obj)->)
 #define COM_FORWARD_IMachine_LockMachine_TO_BASE(base) COM_FORWARD_IMachine_LockMachine_TO (base::)
@@ -24547,6 +28399,27 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IMachine()
 #define COM_FORWARD_IMachine_ApplyDefaults_TO(smth) NS_IMETHOD ApplyDefaults (PRUnichar * aFlags) { return smth ApplyDefaults (aFlags); }
 #define COM_FORWARD_IMachine_ApplyDefaults_TO_OBJ(obj) COM_FORWARD_IMachine_ApplyDefaults_TO ((obj)->)
 #define COM_FORWARD_IMachine_ApplyDefaults_TO_BASE(base) COM_FORWARD_IMachine_ApplyDefaults_TO (base::)
+#define COM_FORWARD_IMachine_ChangeEncryption_TO(smth) NS_IMETHOD ChangeEncryption (PRUnichar * aCurrentPassword, PRUnichar * aCipher, PRUnichar * aNewPassword, PRUnichar * aNewPasswordId, PRBool aForce, IProgress * * aProgress) { return smth ChangeEncryption (aCurrentPassword, aCipher, aNewPassword, aNewPasswordId, aForce, aProgress); }
+#define COM_FORWARD_IMachine_ChangeEncryption_TO_OBJ(obj) COM_FORWARD_IMachine_ChangeEncryption_TO ((obj)->)
+#define COM_FORWARD_IMachine_ChangeEncryption_TO_BASE(base) COM_FORWARD_IMachine_ChangeEncryption_TO (base::)
+#define COM_FORWARD_IMachine_GetEncryptionSettings_TO(smth) NS_IMETHOD GetEncryptionSettings (PRUnichar * * aCipher, PRUnichar * * aPasswordId) { return smth GetEncryptionSettings (aCipher, aPasswordId); }
+#define COM_FORWARD_IMachine_GetEncryptionSettings_TO_OBJ(obj) COM_FORWARD_IMachine_GetEncryptionSettings_TO ((obj)->)
+#define COM_FORWARD_IMachine_GetEncryptionSettings_TO_BASE(base) COM_FORWARD_IMachine_GetEncryptionSettings_TO (base::)
+#define COM_FORWARD_IMachine_CheckEncryptionPassword_TO(smth) NS_IMETHOD CheckEncryptionPassword (PRUnichar * aPassword) { return smth CheckEncryptionPassword (aPassword); }
+#define COM_FORWARD_IMachine_CheckEncryptionPassword_TO_OBJ(obj) COM_FORWARD_IMachine_CheckEncryptionPassword_TO ((obj)->)
+#define COM_FORWARD_IMachine_CheckEncryptionPassword_TO_BASE(base) COM_FORWARD_IMachine_CheckEncryptionPassword_TO (base::)
+#define COM_FORWARD_IMachine_AddEncryptionPassword_TO(smth) NS_IMETHOD AddEncryptionPassword (PRUnichar * aId, PRUnichar * aPassword) { return smth AddEncryptionPassword (aId, aPassword); }
+#define COM_FORWARD_IMachine_AddEncryptionPassword_TO_OBJ(obj) COM_FORWARD_IMachine_AddEncryptionPassword_TO ((obj)->)
+#define COM_FORWARD_IMachine_AddEncryptionPassword_TO_BASE(base) COM_FORWARD_IMachine_AddEncryptionPassword_TO (base::)
+#define COM_FORWARD_IMachine_AddEncryptionPasswords_TO(smth) NS_IMETHOD AddEncryptionPasswords (PRUint32 aIdsSize, PRUnichar * * aIds, PRUint32 aPasswordsSize, PRUnichar * * aPasswords) { return smth AddEncryptionPasswords (aIdsSize+++, aIds, aPasswordsSize, aPasswords); }
+#define COM_FORWARD_IMachine_AddEncryptionPasswords_TO_OBJ(obj) COM_FORWARD_IMachine_AddEncryptionPasswords_TO ((obj)->)
+#define COM_FORWARD_IMachine_AddEncryptionPasswords_TO_BASE(base) COM_FORWARD_IMachine_AddEncryptionPasswords_TO (base::)
+#define COM_FORWARD_IMachine_RemoveEncryptionPassword_TO(smth) NS_IMETHOD RemoveEncryptionPassword (PRUnichar * aId) { return smth RemoveEncryptionPassword (aId); }
+#define COM_FORWARD_IMachine_RemoveEncryptionPassword_TO_OBJ(obj) COM_FORWARD_IMachine_RemoveEncryptionPassword_TO ((obj)->)
+#define COM_FORWARD_IMachine_RemoveEncryptionPassword_TO_BASE(base) COM_FORWARD_IMachine_RemoveEncryptionPassword_TO (base::)
+#define COM_FORWARD_IMachine_ClearAllEncryptionPasswords_TO(smth) NS_IMETHOD ClearAllEncryptionPasswords() { return smth ClearAllEncryptionPasswords(); }
+#define COM_FORWARD_IMachine_ClearAllEncryptionPasswords_TO_OBJ(obj) COM_FORWARD_IMachine_ClearAllEncryptionPasswords_TO ((obj)->)
+#define COM_FORWARD_IMachine_ClearAllEncryptionPasswords_TO_BASE(base) COM_FORWARD_IMachine_ClearAllEncryptionPasswords_TO (base::)
 #define COM_FORWARD_IMachine_TO(smth) NS_FORWARD_IMACHINE (smth)
 #define COM_FORWARD_IMachine_TO_OBJ(obj) COM_FORWARD_IMachine_TO ((obj)->)
 #define COM_FORWARD_IMachine_TO_BASE(base) COM_FORWARD_IMachine_TO (base::)
@@ -25144,11 +29017,11 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8IVRDEServerInfo(PRUint3
 VBOX_EXTERN_C const nsID IID_IVRDEServerInfo;
 
 /* starting interface:    IConsole */
-#define ICONSOLE_IID_STR "872da645-4a9b-1727-bee2-5585105b9eed"
+#define ICONSOLE_IID_STR "6ac83d89-6ee7-4e33-8ae6-b257b2e81be8"
 
 #define ICONSOLE_IID \
-  {0x872da645, 0x4a9b, 0x1727, \
-    { 0xbe, 0xe2, 0x55, 0x85, 0x10, 0x5b, 0x9e, 0xed }}
+  {0x6ac83d89, 0x6ee7, 0x4e33, \
+    { 0x8a, 0xe6, 0xb2, 0x57, 0xb2, 0xe8, 0x1b, 0xe8 }}
 
 class NS_NO_VTABLE IConsole : public nsISupports {
  public: 
@@ -25279,17 +29152,17 @@ class NS_NO_VTABLE IConsole : public nsISupports {
   /* void teleport (in wstring hostname, in unsigned long tcpport, in wstring password, in unsigned long maxDowntime, [retval] out IProgress progress); */
   NS_IMETHOD Teleport(const PRUnichar *hostname, PRUint32 tcpport, const PRUnichar *password, PRUint32 maxDowntime, IProgress **progress) = 0;
 
-  /* void addDiskEncryptionPassword (in wstring id, in wstring password, in boolean clearOnSuspend); */
-  NS_IMETHOD AddDiskEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend) = 0;
+  /* void addEncryptionPassword (in wstring id, in wstring password, in boolean clearOnSuspend); */
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend) = 0;
 
-  /* void addDiskEncryptionPasswords (in unsigned long idsSize, [array, size_is (idsSize)] in wstring ids, in unsigned long passwordsSize, [array, size_is (passwordsSize)] in wstring passwords, in boolean clearOnSuspend); */
-  NS_IMETHOD AddDiskEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend) = 0;
+  /* void addEncryptionPasswords (in unsigned long idsSize, [array, size_is (idsSize)] in wstring ids, in unsigned long passwordsSize, [array, size_is (passwordsSize)] in wstring passwords, in boolean clearOnSuspend); */
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend) = 0;
 
-  /* void removeDiskEncryptionPassword (in wstring id); */
-  NS_IMETHOD RemoveDiskEncryptionPassword(const PRUnichar *id) = 0;
+  /* void removeEncryptionPassword (in wstring id); */
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id) = 0;
 
-  /* void clearAllDiskEncryptionPasswords (); */
-  NS_IMETHOD ClearAllDiskEncryptionPasswords(void) = 0;
+  /* void clearAllEncryptionPasswords (); */
+  NS_IMETHOD ClearAllEncryptionPasswords(void) = 0;
 
   /* void InternalAndReservedMethod1IConsole (); */
   NS_IMETHOD InternalAndReservedMethod1IConsole(void) = 0;
@@ -25361,10 +29234,10 @@ class NS_NO_VTABLE IConsole : public nsISupports {
   NS_IMETHOD CreateSharedFolder(const PRUnichar *name, const PRUnichar *hostPath, PRBool writable, PRBool automount, const PRUnichar *autoMountPoint); \
   NS_IMETHOD RemoveSharedFolder(const PRUnichar *name); \
   NS_IMETHOD Teleport(const PRUnichar *hostname, PRUint32 tcpport, const PRUnichar *password, PRUint32 maxDowntime, IProgress **progress); \
-  NS_IMETHOD AddDiskEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend); \
-  NS_IMETHOD AddDiskEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend); \
-  NS_IMETHOD RemoveDiskEncryptionPassword(const PRUnichar *id); \
-  NS_IMETHOD ClearAllDiskEncryptionPasswords(void); \
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend); \
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend); \
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id); \
+  NS_IMETHOD ClearAllEncryptionPasswords(void); \
   NS_IMETHOD InternalAndReservedMethod1IConsole(void); \
   NS_IMETHOD InternalAndReservedMethod2IConsole(void); \
   NS_IMETHOD InternalAndReservedMethod3IConsole(void); \
@@ -25418,10 +29291,10 @@ class NS_NO_VTABLE IConsole : public nsISupports {
   NS_IMETHOD CreateSharedFolder(const PRUnichar *name, const PRUnichar *hostPath, PRBool writable, PRBool automount, const PRUnichar *autoMountPoint) { return _to CreateSharedFolder(name, hostPath, writable, automount, autoMountPoint); } \
   NS_IMETHOD RemoveSharedFolder(const PRUnichar *name) { return _to RemoveSharedFolder(name); } \
   NS_IMETHOD Teleport(const PRUnichar *hostname, PRUint32 tcpport, const PRUnichar *password, PRUint32 maxDowntime, IProgress **progress) { return _to Teleport(hostname, tcpport, password, maxDowntime, progress); } \
-  NS_IMETHOD AddDiskEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend) { return _to AddDiskEncryptionPassword(id, password, clearOnSuspend); } \
-  NS_IMETHOD AddDiskEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend) { return _to AddDiskEncryptionPasswords(idsSize, ids, passwordsSize, passwords, clearOnSuspend); } \
-  NS_IMETHOD RemoveDiskEncryptionPassword(const PRUnichar *id) { return _to RemoveDiskEncryptionPassword(id); } \
-  NS_IMETHOD ClearAllDiskEncryptionPasswords(void) { return _to ClearAllDiskEncryptionPasswords(); } \
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend) { return _to AddEncryptionPassword(id, password, clearOnSuspend); } \
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend) { return _to AddEncryptionPasswords(idsSize, ids, passwordsSize, passwords, clearOnSuspend); } \
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id) { return _to RemoveEncryptionPassword(id); } \
+  NS_IMETHOD ClearAllEncryptionPasswords(void) { return _to ClearAllEncryptionPasswords(); } \
   NS_IMETHOD InternalAndReservedMethod1IConsole(void) { return _to InternalAndReservedMethod1IConsole(); } \
   NS_IMETHOD InternalAndReservedMethod2IConsole(void) { return _to InternalAndReservedMethod2IConsole(); } \
   NS_IMETHOD InternalAndReservedMethod3IConsole(void) { return _to InternalAndReservedMethod3IConsole(); } \
@@ -25475,10 +29348,10 @@ class NS_NO_VTABLE IConsole : public nsISupports {
   NS_IMETHOD CreateSharedFolder(const PRUnichar *name, const PRUnichar *hostPath, PRBool writable, PRBool automount, const PRUnichar *autoMountPoint) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateSharedFolder(name, hostPath, writable, automount, autoMountPoint); } \
   NS_IMETHOD RemoveSharedFolder(const PRUnichar *name) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveSharedFolder(name); } \
   NS_IMETHOD Teleport(const PRUnichar *hostname, PRUint32 tcpport, const PRUnichar *password, PRUint32 maxDowntime, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Teleport(hostname, tcpport, password, maxDowntime, progress); } \
-  NS_IMETHOD AddDiskEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddDiskEncryptionPassword(id, password, clearOnSuspend); } \
-  NS_IMETHOD AddDiskEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddDiskEncryptionPasswords(idsSize, ids, passwordsSize, passwords, clearOnSuspend); } \
-  NS_IMETHOD RemoveDiskEncryptionPassword(const PRUnichar *id) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveDiskEncryptionPassword(id); } \
-  NS_IMETHOD ClearAllDiskEncryptionPasswords(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClearAllDiskEncryptionPasswords(); } \
+  NS_IMETHOD AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddEncryptionPassword(id, password, clearOnSuspend); } \
+  NS_IMETHOD AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddEncryptionPasswords(idsSize, ids, passwordsSize, passwords, clearOnSuspend); } \
+  NS_IMETHOD RemoveEncryptionPassword(const PRUnichar *id) { return !_to ? NS_ERROR_NULL_POINTER : _to->RemoveEncryptionPassword(id); } \
+  NS_IMETHOD ClearAllEncryptionPasswords(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->ClearAllEncryptionPasswords(); } \
   NS_IMETHOD InternalAndReservedMethod1IConsole(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IConsole(); } \
   NS_IMETHOD InternalAndReservedMethod2IConsole(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IConsole(); } \
   NS_IMETHOD InternalAndReservedMethod3IConsole(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IConsole(); } \
@@ -25770,26 +29643,26 @@ NS_IMETHODIMP _MYCLASS_::Teleport(const PRUnichar *hostname, PRUint32 tcpport, c
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void addDiskEncryptionPassword (in wstring id, in wstring password, in boolean clearOnSuspend); */
-NS_IMETHODIMP _MYCLASS_::AddDiskEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend)
+/* void addEncryptionPassword (in wstring id, in wstring password, in boolean clearOnSuspend); */
+NS_IMETHODIMP _MYCLASS_::AddEncryptionPassword(const PRUnichar *id, const PRUnichar *password, PRBool clearOnSuspend)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void addDiskEncryptionPasswords (in unsigned long idsSize, [array, size_is (idsSize)] in wstring ids, in unsigned long passwordsSize, [array, size_is (passwordsSize)] in wstring passwords, in boolean clearOnSuspend); */
-NS_IMETHODIMP _MYCLASS_::AddDiskEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend)
+/* void addEncryptionPasswords (in unsigned long idsSize, [array, size_is (idsSize)] in wstring ids, in unsigned long passwordsSize, [array, size_is (passwordsSize)] in wstring passwords, in boolean clearOnSuspend); */
+NS_IMETHODIMP _MYCLASS_::AddEncryptionPasswords(PRUint32 idsSize, const PRUnichar **ids, PRUint32 passwordsSize, const PRUnichar **passwords, PRBool clearOnSuspend)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void removeDiskEncryptionPassword (in wstring id); */
-NS_IMETHODIMP _MYCLASS_::RemoveDiskEncryptionPassword(const PRUnichar *id)
+/* void removeEncryptionPassword (in wstring id); */
+NS_IMETHODIMP _MYCLASS_::RemoveEncryptionPassword(const PRUnichar *id)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void clearAllDiskEncryptionPasswords (); */
-NS_IMETHODIMP _MYCLASS_::ClearAllDiskEncryptionPasswords()
+/* void clearAllEncryptionPasswords (); */
+NS_IMETHODIMP _MYCLASS_::ClearAllEncryptionPasswords()
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -25947,18 +29820,18 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IConsole()
 #define COM_FORWARD_IConsole_Teleport_TO(smth) NS_IMETHOD Teleport (PRUnichar * aHostname, PRUint32 aTcpport, PRUnichar * aPassword, PRUint32 aMaxDowntime, IProgress * * aProgress) { return smth Teleport (aHostname, aTcpport, aPassword, aMaxDowntime, aProgress); }
 #define COM_FORWARD_IConsole_Teleport_TO_OBJ(obj) COM_FORWARD_IConsole_Teleport_TO ((obj)->)
 #define COM_FORWARD_IConsole_Teleport_TO_BASE(base) COM_FORWARD_IConsole_Teleport_TO (base::)
-#define COM_FORWARD_IConsole_AddDiskEncryptionPassword_TO(smth) NS_IMETHOD AddDiskEncryptionPassword (PRUnichar * aId, PRUnichar * aPassword, PRBool aClearOnSuspend) { return smth AddDiskEncryptionPassword (aId, aPassword, aClearOnSuspend); }
-#define COM_FORWARD_IConsole_AddDiskEncryptionPassword_TO_OBJ(obj) COM_FORWARD_IConsole_AddDiskEncryptionPassword_TO ((obj)->)
-#define COM_FORWARD_IConsole_AddDiskEncryptionPassword_TO_BASE(base) COM_FORWARD_IConsole_AddDiskEncryptionPassword_TO (base::)
-#define COM_FORWARD_IConsole_AddDiskEncryptionPasswords_TO(smth) NS_IMETHOD AddDiskEncryptionPasswords (PRUint32 aIdsSize, PRUnichar * * aIds, PRUint32 aPasswordsSize, PRUnichar * * aPasswords, PRBool aClearOnSuspend) { return smth AddDiskEncryptionPasswords (aIdsSize+++, aIds, aPasswordsSize+++, aPasswords, aClearOnSuspend); }
-#define COM_FORWARD_IConsole_AddDiskEncryptionPasswords_TO_OBJ(obj) COM_FORWARD_IConsole_AddDiskEncryptionPasswords_TO ((obj)->)
-#define COM_FORWARD_IConsole_AddDiskEncryptionPasswords_TO_BASE(base) COM_FORWARD_IConsole_AddDiskEncryptionPasswords_TO (base::)
-#define COM_FORWARD_IConsole_RemoveDiskEncryptionPassword_TO(smth) NS_IMETHOD RemoveDiskEncryptionPassword (PRUnichar * aId) { return smth RemoveDiskEncryptionPassword (aId); }
-#define COM_FORWARD_IConsole_RemoveDiskEncryptionPassword_TO_OBJ(obj) COM_FORWARD_IConsole_RemoveDiskEncryptionPassword_TO ((obj)->)
-#define COM_FORWARD_IConsole_RemoveDiskEncryptionPassword_TO_BASE(base) COM_FORWARD_IConsole_RemoveDiskEncryptionPassword_TO (base::)
-#define COM_FORWARD_IConsole_ClearAllDiskEncryptionPasswords_TO(smth) NS_IMETHOD ClearAllDiskEncryptionPasswords() { return smth ClearAllDiskEncryptionPasswords(); }
-#define COM_FORWARD_IConsole_ClearAllDiskEncryptionPasswords_TO_OBJ(obj) COM_FORWARD_IConsole_ClearAllDiskEncryptionPasswords_TO ((obj)->)
-#define COM_FORWARD_IConsole_ClearAllDiskEncryptionPasswords_TO_BASE(base) COM_FORWARD_IConsole_ClearAllDiskEncryptionPasswords_TO (base::)
+#define COM_FORWARD_IConsole_AddEncryptionPassword_TO(smth) NS_IMETHOD AddEncryptionPassword (PRUnichar * aId, PRUnichar * aPassword, PRBool aClearOnSuspend) { return smth AddEncryptionPassword (aId, aPassword, aClearOnSuspend); }
+#define COM_FORWARD_IConsole_AddEncryptionPassword_TO_OBJ(obj) COM_FORWARD_IConsole_AddEncryptionPassword_TO ((obj)->)
+#define COM_FORWARD_IConsole_AddEncryptionPassword_TO_BASE(base) COM_FORWARD_IConsole_AddEncryptionPassword_TO (base::)
+#define COM_FORWARD_IConsole_AddEncryptionPasswords_TO(smth) NS_IMETHOD AddEncryptionPasswords (PRUint32 aIdsSize, PRUnichar * * aIds, PRUint32 aPasswordsSize, PRUnichar * * aPasswords, PRBool aClearOnSuspend) { return smth AddEncryptionPasswords (aIdsSize+++, aIds, aPasswordsSize+++, aPasswords, aClearOnSuspend); }
+#define COM_FORWARD_IConsole_AddEncryptionPasswords_TO_OBJ(obj) COM_FORWARD_IConsole_AddEncryptionPasswords_TO ((obj)->)
+#define COM_FORWARD_IConsole_AddEncryptionPasswords_TO_BASE(base) COM_FORWARD_IConsole_AddEncryptionPasswords_TO (base::)
+#define COM_FORWARD_IConsole_RemoveEncryptionPassword_TO(smth) NS_IMETHOD RemoveEncryptionPassword (PRUnichar * aId) { return smth RemoveEncryptionPassword (aId); }
+#define COM_FORWARD_IConsole_RemoveEncryptionPassword_TO_OBJ(obj) COM_FORWARD_IConsole_RemoveEncryptionPassword_TO ((obj)->)
+#define COM_FORWARD_IConsole_RemoveEncryptionPassword_TO_BASE(base) COM_FORWARD_IConsole_RemoveEncryptionPassword_TO (base::)
+#define COM_FORWARD_IConsole_ClearAllEncryptionPasswords_TO(smth) NS_IMETHOD ClearAllEncryptionPasswords() { return smth ClearAllEncryptionPasswords(); }
+#define COM_FORWARD_IConsole_ClearAllEncryptionPasswords_TO_OBJ(obj) COM_FORWARD_IConsole_ClearAllEncryptionPasswords_TO ((obj)->)
+#define COM_FORWARD_IConsole_ClearAllEncryptionPasswords_TO_BASE(base) COM_FORWARD_IConsole_ClearAllEncryptionPasswords_TO (base::)
 #define COM_FORWARD_IConsole_TO(smth) NS_FORWARD_ICONSOLE (smth)
 #define COM_FORWARD_IConsole_TO_OBJ(obj) COM_FORWARD_IConsole_TO ((obj)->)
 #define COM_FORWARD_IConsole_TO_BASE(base) COM_FORWARD_IConsole_TO (base::)
@@ -26543,254 +30416,222 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IHostVideoInputDevice(P
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IHostVideoInputDevice;
 
-/* starting interface:    IHostUpdate */
-#define IHOSTUPDATE_IID_STR "6fa2671b-0547-448e-bc7c-94e9e173bf57"
+/* starting interface:    IUpdateAgent */
+#define IUPDATEAGENT_IID_STR "c4b1b5f4-8cdf-4923-9ef6-b92476a84109"
 
-#define IHOSTUPDATE_IID \
-  {0x6fa2671b, 0x0547, 0x448e, \
-    { 0xbc, 0x7c, 0x94, 0xe9, 0xe1, 0x73, 0xbf, 0x57 }}
+#define IUPDATEAGENT_IID \
+  {0xc4b1b5f4, 0x8cdf, 0x4923, \
+    { 0x9e, 0xf6, 0xb9, 0x24, 0x76, 0xa8, 0x41, 0x09 }}
 
-class NS_NO_VTABLE IHostUpdate : public nsISupports {
+class NS_NO_VTABLE IUpdateAgent : public nsISupports {
  public: 
 
-  NS_DEFINE_STATIC_IID_ACCESSOR(IHOSTUPDATE_IID)
+  NS_DEFINE_STATIC_IID_ACCESSOR(IUPDATEAGENT_IID)
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute1IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdate(PRUint32 *aInternalAndReservedAttribute1IHostUpdate) = 0;
+  /* readonly attribute wstring name; */
+  NS_IMETHOD GetName(PRUnichar * *aName) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute2IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdate(PRUint32 *aInternalAndReservedAttribute2IHostUpdate) = 0;
+  /* readonly attribute IEventSource eventSource; */
+  NS_IMETHOD GetEventSource(IEventSource * *aEventSource) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute3IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdate(PRUint32 *aInternalAndReservedAttribute3IHostUpdate) = 0;
+  /* readonly attribute unsigned long order; */
+  NS_IMETHOD GetOrder(PRUint32 *aOrder) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute4IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdate(PRUint32 *aInternalAndReservedAttribute4IHostUpdate) = 0;
+  /* void getDependsOn (out unsigned long dependsOnSize, [array, size_is (dependsOnSize), retval] out wstring dependsOn); */
+  NS_IMETHOD GetDependsOn(PRUint32 *dependsOnSize, PRUnichar ***dependsOn) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute5IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute5IHostUpdate(PRUint32 *aInternalAndReservedAttribute5IHostUpdate) = 0;
+  /* readonly attribute wstring version; */
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute6IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute6IHostUpdate(PRUint32 *aInternalAndReservedAttribute6IHostUpdate) = 0;
+  /* readonly attribute wstring downloadUrl; */
+  NS_IMETHOD GetDownloadUrl(PRUnichar * *aDownloadUrl) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute7IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute7IHostUpdate(PRUint32 *aInternalAndReservedAttribute7IHostUpdate) = 0;
+  /* readonly attribute wstring webUrl; */
+  NS_IMETHOD GetWebUrl(PRUnichar * *aWebUrl) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute8IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute8IHostUpdate(PRUint32 *aInternalAndReservedAttribute8IHostUpdate) = 0;
+  /* readonly attribute wstring releaseNotes; */
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute9IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute9IHostUpdate(PRUint32 *aInternalAndReservedAttribute9IHostUpdate) = 0;
+  /* attribute boolean enabled; */
+  NS_IMETHOD GetEnabled(PRBool *aEnabled) = 0;
+  NS_IMETHOD SetEnabled(PRBool aEnabled) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute10IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute10IHostUpdate(PRUint32 *aInternalAndReservedAttribute10IHostUpdate) = 0;
+  /* readonly attribute boolean hidden; */
+  NS_IMETHOD GetHidden(PRBool *aHidden) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute11IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute11IHostUpdate(PRUint32 *aInternalAndReservedAttribute11IHostUpdate) = 0;
+  /* readonly attribute UpdateState_T state; */
+  NS_IMETHOD GetState(UpdateState_T *aState) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute12IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute12IHostUpdate(PRUint32 *aInternalAndReservedAttribute12IHostUpdate) = 0;
+  /* attribute unsigned long checkFrequency; */
+  NS_IMETHOD GetCheckFrequency(PRUint32 *aCheckFrequency) = 0;
+  NS_IMETHOD SetCheckFrequency(PRUint32 aCheckFrequency) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute13IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute13IHostUpdate(PRUint32 *aInternalAndReservedAttribute13IHostUpdate) = 0;
+  /* attribute UpdateChannel_T channel; */
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel) = 0;
+  NS_IMETHOD SetChannel(UpdateChannel_T aChannel) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute14IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute14IHostUpdate(PRUint32 *aInternalAndReservedAttribute14IHostUpdate) = 0;
+  /* attribute wstring repositoryURL; */
+  NS_IMETHOD GetRepositoryURL(PRUnichar * *aRepositoryURL) = 0;
+  NS_IMETHOD SetRepositoryURL(const PRUnichar * aRepositoryURL) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute15IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute15IHostUpdate(PRUint32 *aInternalAndReservedAttribute15IHostUpdate) = 0;
+  /* readonly attribute wstring lastCheckDate; */
+  NS_IMETHOD GetLastCheckDate(PRUnichar * *aLastCheckDate) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute16IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute16IHostUpdate(PRUint32 *aInternalAndReservedAttribute16IHostUpdate) = 0;
+  /* readonly attribute unsigned long checkCount; */
+  NS_IMETHOD GetCheckCount(PRUint32 *aCheckCount) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute17IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute17IHostUpdate(PRUint32 *aInternalAndReservedAttribute17IHostUpdate) = 0;
+  /* readonly attribute boolean isCheckNeeded; */
+  NS_IMETHOD GetIsCheckNeeded(PRBool *aIsCheckNeeded) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute18IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute18IHostUpdate(PRUint32 *aInternalAndReservedAttribute18IHostUpdate) = 0;
+  /* void getSupportedChannels (out unsigned long supportedChannelsSize, [array, size_is (supportedChannelsSize), retval] out UpdateChannel_T supportedChannels); */
+  NS_IMETHOD GetSupportedChannels(PRUint32 *supportedChannelsSize, UpdateChannel_T **supportedChannels) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute19IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute19IHostUpdate(PRUint32 *aInternalAndReservedAttribute19IHostUpdate) = 0;
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IUpdateAgent) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute20IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute20IHostUpdate(PRUint32 *aInternalAndReservedAttribute20IHostUpdate) = 0;
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IUpdateAgent) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute21IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute21IHostUpdate(PRUint32 *aInternalAndReservedAttribute21IHostUpdate) = 0;
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IUpdateAgent) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute22IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute22IHostUpdate(PRUint32 *aInternalAndReservedAttribute22IHostUpdate) = 0;
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IUpdateAgent) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute23IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute23IHostUpdate(PRUint32 *aInternalAndReservedAttribute23IHostUpdate) = 0;
+  /* void checkFor ([retval] out IProgress progress); */
+  NS_IMETHOD CheckFor(IProgress **progress) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute24IHostUpdate; */
-  NS_IMETHOD GetInternalAndReservedAttribute24IHostUpdate(PRUint32 *aInternalAndReservedAttribute24IHostUpdate) = 0;
+  /* void download ([retval] out IProgress progress); */
+  NS_IMETHOD Download(IProgress **progress) = 0;
 
-  /* void InternalAndReservedMethod1IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod1IHostUpdate(void) = 0;
+  /* void install ([retval] out IProgress progress); */
+  NS_IMETHOD Install(IProgress **progress) = 0;
 
-  /* void InternalAndReservedMethod2IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod2IHostUpdate(void) = 0;
+  /* void rollback (); */
+  NS_IMETHOD Rollback(void) = 0;
 
-  /* void InternalAndReservedMethod3IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod3IHostUpdate(void) = 0;
+  /* void InternalAndReservedMethod1IUpdateAgent (); */
+  NS_IMETHOD InternalAndReservedMethod1IUpdateAgent(void) = 0;
 
-  /* void InternalAndReservedMethod4IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod4IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod5IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod5IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod6IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod6IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod7IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod7IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod8IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod8IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod9IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod9IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod10IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod10IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod11IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod11IHostUpdate(void) = 0;
-
-  /* void InternalAndReservedMethod12IHostUpdate (); */
-  NS_IMETHOD InternalAndReservedMethod12IHostUpdate(void) = 0;
+  /* void InternalAndReservedMethod2IUpdateAgent (); */
+  NS_IMETHOD InternalAndReservedMethod2IUpdateAgent(void) = 0;
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
-#define NS_DECL_IHOSTUPDATE \
-  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdate(PRUint32 *aInternalAndReservedAttribute1IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdate(PRUint32 *aInternalAndReservedAttribute2IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdate(PRUint32 *aInternalAndReservedAttribute3IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdate(PRUint32 *aInternalAndReservedAttribute4IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute5IHostUpdate(PRUint32 *aInternalAndReservedAttribute5IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute6IHostUpdate(PRUint32 *aInternalAndReservedAttribute6IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute7IHostUpdate(PRUint32 *aInternalAndReservedAttribute7IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute8IHostUpdate(PRUint32 *aInternalAndReservedAttribute8IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute9IHostUpdate(PRUint32 *aInternalAndReservedAttribute9IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute10IHostUpdate(PRUint32 *aInternalAndReservedAttribute10IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute11IHostUpdate(PRUint32 *aInternalAndReservedAttribute11IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute12IHostUpdate(PRUint32 *aInternalAndReservedAttribute12IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute13IHostUpdate(PRUint32 *aInternalAndReservedAttribute13IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute14IHostUpdate(PRUint32 *aInternalAndReservedAttribute14IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute15IHostUpdate(PRUint32 *aInternalAndReservedAttribute15IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute16IHostUpdate(PRUint32 *aInternalAndReservedAttribute16IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute17IHostUpdate(PRUint32 *aInternalAndReservedAttribute17IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute18IHostUpdate(PRUint32 *aInternalAndReservedAttribute18IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute19IHostUpdate(PRUint32 *aInternalAndReservedAttribute19IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute20IHostUpdate(PRUint32 *aInternalAndReservedAttribute20IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute21IHostUpdate(PRUint32 *aInternalAndReservedAttribute21IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute22IHostUpdate(PRUint32 *aInternalAndReservedAttribute22IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute23IHostUpdate(PRUint32 *aInternalAndReservedAttribute23IHostUpdate); \
-  NS_IMETHOD GetInternalAndReservedAttribute24IHostUpdate(PRUint32 *aInternalAndReservedAttribute24IHostUpdate); \
-  NS_IMETHOD InternalAndReservedMethod1IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod2IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod3IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod4IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod5IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod6IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod7IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod8IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod9IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod10IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod11IHostUpdate(void); \
-  NS_IMETHOD InternalAndReservedMethod12IHostUpdate(void); 
+#define NS_DECL_IUPDATEAGENT \
+  NS_IMETHOD GetName(PRUnichar * *aName); \
+  NS_IMETHOD GetEventSource(IEventSource * *aEventSource); \
+  NS_IMETHOD GetOrder(PRUint32 *aOrder); \
+  NS_IMETHOD GetDependsOn(PRUint32 *dependsOnSize, PRUnichar ***dependsOn); \
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion); \
+  NS_IMETHOD GetDownloadUrl(PRUnichar * *aDownloadUrl); \
+  NS_IMETHOD GetWebUrl(PRUnichar * *aWebUrl); \
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes); \
+  NS_IMETHOD GetEnabled(PRBool *aEnabled); \
+  NS_IMETHOD SetEnabled(PRBool aEnabled); \
+  NS_IMETHOD GetHidden(PRBool *aHidden); \
+  NS_IMETHOD GetState(UpdateState_T *aState); \
+  NS_IMETHOD GetCheckFrequency(PRUint32 *aCheckFrequency); \
+  NS_IMETHOD SetCheckFrequency(PRUint32 aCheckFrequency); \
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel); \
+  NS_IMETHOD SetChannel(UpdateChannel_T aChannel); \
+  NS_IMETHOD GetRepositoryURL(PRUnichar * *aRepositoryURL); \
+  NS_IMETHOD SetRepositoryURL(const PRUnichar * aRepositoryURL); \
+  NS_IMETHOD GetLastCheckDate(PRUnichar * *aLastCheckDate); \
+  NS_IMETHOD GetCheckCount(PRUint32 *aCheckCount); \
+  NS_IMETHOD GetIsCheckNeeded(PRBool *aIsCheckNeeded); \
+  NS_IMETHOD GetSupportedChannels(PRUint32 *supportedChannelsSize, UpdateChannel_T **supportedChannels); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IUpdateAgent); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IUpdateAgent); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IUpdateAgent); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IUpdateAgent); \
+  NS_IMETHOD CheckFor(IProgress **progress); \
+  NS_IMETHOD Download(IProgress **progress); \
+  NS_IMETHOD Install(IProgress **progress); \
+  NS_IMETHOD Rollback(void); \
+  NS_IMETHOD InternalAndReservedMethod1IUpdateAgent(void); \
+  NS_IMETHOD InternalAndReservedMethod2IUpdateAgent(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
-#define NS_FORWARD_IHOSTUPDATE(_to) \
-  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdate(PRUint32 *aInternalAndReservedAttribute1IHostUpdate) { return _to GetInternalAndReservedAttribute1IHostUpdate(aInternalAndReservedAttribute1IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdate(PRUint32 *aInternalAndReservedAttribute2IHostUpdate) { return _to GetInternalAndReservedAttribute2IHostUpdate(aInternalAndReservedAttribute2IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdate(PRUint32 *aInternalAndReservedAttribute3IHostUpdate) { return _to GetInternalAndReservedAttribute3IHostUpdate(aInternalAndReservedAttribute3IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdate(PRUint32 *aInternalAndReservedAttribute4IHostUpdate) { return _to GetInternalAndReservedAttribute4IHostUpdate(aInternalAndReservedAttribute4IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute5IHostUpdate(PRUint32 *aInternalAndReservedAttribute5IHostUpdate) { return _to GetInternalAndReservedAttribute5IHostUpdate(aInternalAndReservedAttribute5IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute6IHostUpdate(PRUint32 *aInternalAndReservedAttribute6IHostUpdate) { return _to GetInternalAndReservedAttribute6IHostUpdate(aInternalAndReservedAttribute6IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute7IHostUpdate(PRUint32 *aInternalAndReservedAttribute7IHostUpdate) { return _to GetInternalAndReservedAttribute7IHostUpdate(aInternalAndReservedAttribute7IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute8IHostUpdate(PRUint32 *aInternalAndReservedAttribute8IHostUpdate) { return _to GetInternalAndReservedAttribute8IHostUpdate(aInternalAndReservedAttribute8IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute9IHostUpdate(PRUint32 *aInternalAndReservedAttribute9IHostUpdate) { return _to GetInternalAndReservedAttribute9IHostUpdate(aInternalAndReservedAttribute9IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute10IHostUpdate(PRUint32 *aInternalAndReservedAttribute10IHostUpdate) { return _to GetInternalAndReservedAttribute10IHostUpdate(aInternalAndReservedAttribute10IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute11IHostUpdate(PRUint32 *aInternalAndReservedAttribute11IHostUpdate) { return _to GetInternalAndReservedAttribute11IHostUpdate(aInternalAndReservedAttribute11IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute12IHostUpdate(PRUint32 *aInternalAndReservedAttribute12IHostUpdate) { return _to GetInternalAndReservedAttribute12IHostUpdate(aInternalAndReservedAttribute12IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute13IHostUpdate(PRUint32 *aInternalAndReservedAttribute13IHostUpdate) { return _to GetInternalAndReservedAttribute13IHostUpdate(aInternalAndReservedAttribute13IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute14IHostUpdate(PRUint32 *aInternalAndReservedAttribute14IHostUpdate) { return _to GetInternalAndReservedAttribute14IHostUpdate(aInternalAndReservedAttribute14IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IHostUpdate(PRUint32 *aInternalAndReservedAttribute15IHostUpdate) { return _to GetInternalAndReservedAttribute15IHostUpdate(aInternalAndReservedAttribute15IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute16IHostUpdate(PRUint32 *aInternalAndReservedAttribute16IHostUpdate) { return _to GetInternalAndReservedAttribute16IHostUpdate(aInternalAndReservedAttribute16IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute17IHostUpdate(PRUint32 *aInternalAndReservedAttribute17IHostUpdate) { return _to GetInternalAndReservedAttribute17IHostUpdate(aInternalAndReservedAttribute17IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute18IHostUpdate(PRUint32 *aInternalAndReservedAttribute18IHostUpdate) { return _to GetInternalAndReservedAttribute18IHostUpdate(aInternalAndReservedAttribute18IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute19IHostUpdate(PRUint32 *aInternalAndReservedAttribute19IHostUpdate) { return _to GetInternalAndReservedAttribute19IHostUpdate(aInternalAndReservedAttribute19IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute20IHostUpdate(PRUint32 *aInternalAndReservedAttribute20IHostUpdate) { return _to GetInternalAndReservedAttribute20IHostUpdate(aInternalAndReservedAttribute20IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute21IHostUpdate(PRUint32 *aInternalAndReservedAttribute21IHostUpdate) { return _to GetInternalAndReservedAttribute21IHostUpdate(aInternalAndReservedAttribute21IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute22IHostUpdate(PRUint32 *aInternalAndReservedAttribute22IHostUpdate) { return _to GetInternalAndReservedAttribute22IHostUpdate(aInternalAndReservedAttribute22IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute23IHostUpdate(PRUint32 *aInternalAndReservedAttribute23IHostUpdate) { return _to GetInternalAndReservedAttribute23IHostUpdate(aInternalAndReservedAttribute23IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute24IHostUpdate(PRUint32 *aInternalAndReservedAttribute24IHostUpdate) { return _to GetInternalAndReservedAttribute24IHostUpdate(aInternalAndReservedAttribute24IHostUpdate); } \
-  NS_IMETHOD InternalAndReservedMethod1IHostUpdate(void) { return _to InternalAndReservedMethod1IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod2IHostUpdate(void) { return _to InternalAndReservedMethod2IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod3IHostUpdate(void) { return _to InternalAndReservedMethod3IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod4IHostUpdate(void) { return _to InternalAndReservedMethod4IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod5IHostUpdate(void) { return _to InternalAndReservedMethod5IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod6IHostUpdate(void) { return _to InternalAndReservedMethod6IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod7IHostUpdate(void) { return _to InternalAndReservedMethod7IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod8IHostUpdate(void) { return _to InternalAndReservedMethod8IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod9IHostUpdate(void) { return _to InternalAndReservedMethod9IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod10IHostUpdate(void) { return _to InternalAndReservedMethod10IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod11IHostUpdate(void) { return _to InternalAndReservedMethod11IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod12IHostUpdate(void) { return _to InternalAndReservedMethod12IHostUpdate(); } 
+#define NS_FORWARD_IUPDATEAGENT(_to) \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } \
+  NS_IMETHOD GetEventSource(IEventSource * *aEventSource) { return _to GetEventSource(aEventSource); } \
+  NS_IMETHOD GetOrder(PRUint32 *aOrder) { return _to GetOrder(aOrder); } \
+  NS_IMETHOD GetDependsOn(PRUint32 *dependsOnSize, PRUnichar ***dependsOn) { return _to GetDependsOn(dependsOnSize, dependsOn); } \
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion) { return _to GetVersion(aVersion); } \
+  NS_IMETHOD GetDownloadUrl(PRUnichar * *aDownloadUrl) { return _to GetDownloadUrl(aDownloadUrl); } \
+  NS_IMETHOD GetWebUrl(PRUnichar * *aWebUrl) { return _to GetWebUrl(aWebUrl); } \
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes) { return _to GetReleaseNotes(aReleaseNotes); } \
+  NS_IMETHOD GetEnabled(PRBool *aEnabled) { return _to GetEnabled(aEnabled); } \
+  NS_IMETHOD SetEnabled(PRBool aEnabled) { return _to SetEnabled(aEnabled); } \
+  NS_IMETHOD GetHidden(PRBool *aHidden) { return _to GetHidden(aHidden); } \
+  NS_IMETHOD GetState(UpdateState_T *aState) { return _to GetState(aState); } \
+  NS_IMETHOD GetCheckFrequency(PRUint32 *aCheckFrequency) { return _to GetCheckFrequency(aCheckFrequency); } \
+  NS_IMETHOD SetCheckFrequency(PRUint32 aCheckFrequency) { return _to SetCheckFrequency(aCheckFrequency); } \
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel) { return _to GetChannel(aChannel); } \
+  NS_IMETHOD SetChannel(UpdateChannel_T aChannel) { return _to SetChannel(aChannel); } \
+  NS_IMETHOD GetRepositoryURL(PRUnichar * *aRepositoryURL) { return _to GetRepositoryURL(aRepositoryURL); } \
+  NS_IMETHOD SetRepositoryURL(const PRUnichar * aRepositoryURL) { return _to SetRepositoryURL(aRepositoryURL); } \
+  NS_IMETHOD GetLastCheckDate(PRUnichar * *aLastCheckDate) { return _to GetLastCheckDate(aLastCheckDate); } \
+  NS_IMETHOD GetCheckCount(PRUint32 *aCheckCount) { return _to GetCheckCount(aCheckCount); } \
+  NS_IMETHOD GetIsCheckNeeded(PRBool *aIsCheckNeeded) { return _to GetIsCheckNeeded(aIsCheckNeeded); } \
+  NS_IMETHOD GetSupportedChannels(PRUint32 *supportedChannelsSize, UpdateChannel_T **supportedChannels) { return _to GetSupportedChannels(supportedChannelsSize, supportedChannels); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IUpdateAgent) { return _to GetInternalAndReservedAttribute1IUpdateAgent(aInternalAndReservedAttribute1IUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IUpdateAgent) { return _to GetInternalAndReservedAttribute2IUpdateAgent(aInternalAndReservedAttribute2IUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IUpdateAgent) { return _to GetInternalAndReservedAttribute3IUpdateAgent(aInternalAndReservedAttribute3IUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IUpdateAgent) { return _to GetInternalAndReservedAttribute4IUpdateAgent(aInternalAndReservedAttribute4IUpdateAgent); } \
+  NS_IMETHOD CheckFor(IProgress **progress) { return _to CheckFor(progress); } \
+  NS_IMETHOD Download(IProgress **progress) { return _to Download(progress); } \
+  NS_IMETHOD Install(IProgress **progress) { return _to Install(progress); } \
+  NS_IMETHOD Rollback(void) { return _to Rollback(); } \
+  NS_IMETHOD InternalAndReservedMethod1IUpdateAgent(void) { return _to InternalAndReservedMethod1IUpdateAgent(); } \
+  NS_IMETHOD InternalAndReservedMethod2IUpdateAgent(void) { return _to InternalAndReservedMethod2IUpdateAgent(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
-#define NS_FORWARD_SAFE_IHOSTUPDATE(_to) \
-  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdate(PRUint32 *aInternalAndReservedAttribute1IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IHostUpdate(aInternalAndReservedAttribute1IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdate(PRUint32 *aInternalAndReservedAttribute2IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IHostUpdate(aInternalAndReservedAttribute2IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdate(PRUint32 *aInternalAndReservedAttribute3IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IHostUpdate(aInternalAndReservedAttribute3IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdate(PRUint32 *aInternalAndReservedAttribute4IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IHostUpdate(aInternalAndReservedAttribute4IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute5IHostUpdate(PRUint32 *aInternalAndReservedAttribute5IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5IHostUpdate(aInternalAndReservedAttribute5IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute6IHostUpdate(PRUint32 *aInternalAndReservedAttribute6IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6IHostUpdate(aInternalAndReservedAttribute6IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute7IHostUpdate(PRUint32 *aInternalAndReservedAttribute7IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7IHostUpdate(aInternalAndReservedAttribute7IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute8IHostUpdate(PRUint32 *aInternalAndReservedAttribute8IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8IHostUpdate(aInternalAndReservedAttribute8IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute9IHostUpdate(PRUint32 *aInternalAndReservedAttribute9IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute9IHostUpdate(aInternalAndReservedAttribute9IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute10IHostUpdate(PRUint32 *aInternalAndReservedAttribute10IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute10IHostUpdate(aInternalAndReservedAttribute10IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute11IHostUpdate(PRUint32 *aInternalAndReservedAttribute11IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute11IHostUpdate(aInternalAndReservedAttribute11IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute12IHostUpdate(PRUint32 *aInternalAndReservedAttribute12IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute12IHostUpdate(aInternalAndReservedAttribute12IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute13IHostUpdate(PRUint32 *aInternalAndReservedAttribute13IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute13IHostUpdate(aInternalAndReservedAttribute13IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute14IHostUpdate(PRUint32 *aInternalAndReservedAttribute14IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute14IHostUpdate(aInternalAndReservedAttribute14IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IHostUpdate(PRUint32 *aInternalAndReservedAttribute15IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute15IHostUpdate(aInternalAndReservedAttribute15IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute16IHostUpdate(PRUint32 *aInternalAndReservedAttribute16IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute16IHostUpdate(aInternalAndReservedAttribute16IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute17IHostUpdate(PRUint32 *aInternalAndReservedAttribute17IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute17IHostUpdate(aInternalAndReservedAttribute17IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute18IHostUpdate(PRUint32 *aInternalAndReservedAttribute18IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute18IHostUpdate(aInternalAndReservedAttribute18IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute19IHostUpdate(PRUint32 *aInternalAndReservedAttribute19IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute19IHostUpdate(aInternalAndReservedAttribute19IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute20IHostUpdate(PRUint32 *aInternalAndReservedAttribute20IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute20IHostUpdate(aInternalAndReservedAttribute20IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute21IHostUpdate(PRUint32 *aInternalAndReservedAttribute21IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute21IHostUpdate(aInternalAndReservedAttribute21IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute22IHostUpdate(PRUint32 *aInternalAndReservedAttribute22IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute22IHostUpdate(aInternalAndReservedAttribute22IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute23IHostUpdate(PRUint32 *aInternalAndReservedAttribute23IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute23IHostUpdate(aInternalAndReservedAttribute23IHostUpdate); } \
-  NS_IMETHOD GetInternalAndReservedAttribute24IHostUpdate(PRUint32 *aInternalAndReservedAttribute24IHostUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute24IHostUpdate(aInternalAndReservedAttribute24IHostUpdate); } \
-  NS_IMETHOD InternalAndReservedMethod1IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod2IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod3IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod4IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod5IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod5IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod6IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod6IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod7IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod7IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod8IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod8IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod9IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod9IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod10IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod10IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod11IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod11IHostUpdate(); } \
-  NS_IMETHOD InternalAndReservedMethod12IHostUpdate(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod12IHostUpdate(); } 
+#define NS_FORWARD_SAFE_IUPDATEAGENT(_to) \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
+  NS_IMETHOD GetEventSource(IEventSource * *aEventSource) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEventSource(aEventSource); } \
+  NS_IMETHOD GetOrder(PRUint32 *aOrder) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetOrder(aOrder); } \
+  NS_IMETHOD GetDependsOn(PRUint32 *dependsOnSize, PRUnichar ***dependsOn) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDependsOn(dependsOnSize, dependsOn); } \
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVersion(aVersion); } \
+  NS_IMETHOD GetDownloadUrl(PRUnichar * *aDownloadUrl) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDownloadUrl(aDownloadUrl); } \
+  NS_IMETHOD GetWebUrl(PRUnichar * *aWebUrl) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetWebUrl(aWebUrl); } \
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetReleaseNotes(aReleaseNotes); } \
+  NS_IMETHOD GetEnabled(PRBool *aEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEnabled(aEnabled); } \
+  NS_IMETHOD SetEnabled(PRBool aEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetEnabled(aEnabled); } \
+  NS_IMETHOD GetHidden(PRBool *aHidden) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHidden(aHidden); } \
+  NS_IMETHOD GetState(UpdateState_T *aState) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetState(aState); } \
+  NS_IMETHOD GetCheckFrequency(PRUint32 *aCheckFrequency) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCheckFrequency(aCheckFrequency); } \
+  NS_IMETHOD SetCheckFrequency(PRUint32 aCheckFrequency) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetCheckFrequency(aCheckFrequency); } \
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetChannel(aChannel); } \
+  NS_IMETHOD SetChannel(UpdateChannel_T aChannel) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetChannel(aChannel); } \
+  NS_IMETHOD GetRepositoryURL(PRUnichar * *aRepositoryURL) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRepositoryURL(aRepositoryURL); } \
+  NS_IMETHOD SetRepositoryURL(const PRUnichar * aRepositoryURL) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetRepositoryURL(aRepositoryURL); } \
+  NS_IMETHOD GetLastCheckDate(PRUnichar * *aLastCheckDate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLastCheckDate(aLastCheckDate); } \
+  NS_IMETHOD GetCheckCount(PRUint32 *aCheckCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCheckCount(aCheckCount); } \
+  NS_IMETHOD GetIsCheckNeeded(PRBool *aIsCheckNeeded) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsCheckNeeded(aIsCheckNeeded); } \
+  NS_IMETHOD GetSupportedChannels(PRUint32 *supportedChannelsSize, UpdateChannel_T **supportedChannels) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedChannels(supportedChannelsSize, supportedChannels); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IUpdateAgent(aInternalAndReservedAttribute1IUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IUpdateAgent(aInternalAndReservedAttribute2IUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IUpdateAgent(aInternalAndReservedAttribute3IUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IUpdateAgent(aInternalAndReservedAttribute4IUpdateAgent); } \
+  NS_IMETHOD CheckFor(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->CheckFor(progress); } \
+  NS_IMETHOD Download(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Download(progress); } \
+  NS_IMETHOD Install(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Install(progress); } \
+  NS_IMETHOD Rollback(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Rollback(); } \
+  NS_IMETHOD InternalAndReservedMethod1IUpdateAgent(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IUpdateAgent(); } \
+  NS_IMETHOD InternalAndReservedMethod2IUpdateAgent(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IUpdateAgent(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
 
 /* Header file */
-class _MYCLASS_ : public IHostUpdate
+class _MYCLASS_ : public IUpdateAgent
 {
 public:
   NS_DECL_ISUPPORTS
-  NS_DECL_IHOSTUPDATE
+  NS_DECL_IUPDATEAGENT
 
   _MYCLASS_();
 
@@ -26802,7 +30643,7 @@ protected:
 };
 
 /* Implementation file */
-NS_IMPL_ISUPPORTS1(_MYCLASS_, IHostUpdate)
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IUpdateAgent)
 
 _MYCLASS_::_MYCLASS_()
 {
@@ -26814,218 +30655,186 @@ _MYCLASS_::~_MYCLASS_()
   /* destructor code */
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute1IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IHostUpdate(PRUint32 *aInternalAndReservedAttribute1IHostUpdate)
+/* readonly attribute wstring name; */
+NS_IMETHODIMP _MYCLASS_::GetName(PRUnichar * *aName)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute2IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IHostUpdate(PRUint32 *aInternalAndReservedAttribute2IHostUpdate)
+/* readonly attribute IEventSource eventSource; */
+NS_IMETHODIMP _MYCLASS_::GetEventSource(IEventSource * *aEventSource)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute3IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IHostUpdate(PRUint32 *aInternalAndReservedAttribute3IHostUpdate)
+/* readonly attribute unsigned long order; */
+NS_IMETHODIMP _MYCLASS_::GetOrder(PRUint32 *aOrder)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute4IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IHostUpdate(PRUint32 *aInternalAndReservedAttribute4IHostUpdate)
+/* void getDependsOn (out unsigned long dependsOnSize, [array, size_is (dependsOnSize), retval] out wstring dependsOn); */
+NS_IMETHODIMP _MYCLASS_::GetDependsOn(PRUint32 *dependsOnSize, PRUnichar ***dependsOn)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute5IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5IHostUpdate(PRUint32 *aInternalAndReservedAttribute5IHostUpdate)
+/* readonly attribute wstring version; */
+NS_IMETHODIMP _MYCLASS_::GetVersion(PRUnichar * *aVersion)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute6IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6IHostUpdate(PRUint32 *aInternalAndReservedAttribute6IHostUpdate)
+/* readonly attribute wstring downloadUrl; */
+NS_IMETHODIMP _MYCLASS_::GetDownloadUrl(PRUnichar * *aDownloadUrl)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute7IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7IHostUpdate(PRUint32 *aInternalAndReservedAttribute7IHostUpdate)
+/* readonly attribute wstring webUrl; */
+NS_IMETHODIMP _MYCLASS_::GetWebUrl(PRUnichar * *aWebUrl)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute8IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8IHostUpdate(PRUint32 *aInternalAndReservedAttribute8IHostUpdate)
+/* readonly attribute wstring releaseNotes; */
+NS_IMETHODIMP _MYCLASS_::GetReleaseNotes(PRUnichar * *aReleaseNotes)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute9IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute9IHostUpdate(PRUint32 *aInternalAndReservedAttribute9IHostUpdate)
+/* attribute boolean enabled; */
+NS_IMETHODIMP _MYCLASS_::GetEnabled(PRBool *aEnabled)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetEnabled(PRBool aEnabled)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute10IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute10IHostUpdate(PRUint32 *aInternalAndReservedAttribute10IHostUpdate)
+/* readonly attribute boolean hidden; */
+NS_IMETHODIMP _MYCLASS_::GetHidden(PRBool *aHidden)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute11IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute11IHostUpdate(PRUint32 *aInternalAndReservedAttribute11IHostUpdate)
+/* readonly attribute UpdateState_T state; */
+NS_IMETHODIMP _MYCLASS_::GetState(UpdateState_T *aState)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute12IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute12IHostUpdate(PRUint32 *aInternalAndReservedAttribute12IHostUpdate)
+/* attribute unsigned long checkFrequency; */
+NS_IMETHODIMP _MYCLASS_::GetCheckFrequency(PRUint32 *aCheckFrequency)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetCheckFrequency(PRUint32 aCheckFrequency)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute13IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute13IHostUpdate(PRUint32 *aInternalAndReservedAttribute13IHostUpdate)
+/* attribute UpdateChannel_T channel; */
+NS_IMETHODIMP _MYCLASS_::GetChannel(UpdateChannel_T *aChannel)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetChannel(UpdateChannel_T aChannel)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute14IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute14IHostUpdate(PRUint32 *aInternalAndReservedAttribute14IHostUpdate)
+/* attribute wstring repositoryURL; */
+NS_IMETHODIMP _MYCLASS_::GetRepositoryURL(PRUnichar * *aRepositoryURL)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetRepositoryURL(const PRUnichar * aRepositoryURL)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute15IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute15IHostUpdate(PRUint32 *aInternalAndReservedAttribute15IHostUpdate)
+/* readonly attribute wstring lastCheckDate; */
+NS_IMETHODIMP _MYCLASS_::GetLastCheckDate(PRUnichar * *aLastCheckDate)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute16IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute16IHostUpdate(PRUint32 *aInternalAndReservedAttribute16IHostUpdate)
+/* readonly attribute unsigned long checkCount; */
+NS_IMETHODIMP _MYCLASS_::GetCheckCount(PRUint32 *aCheckCount)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute17IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute17IHostUpdate(PRUint32 *aInternalAndReservedAttribute17IHostUpdate)
+/* readonly attribute boolean isCheckNeeded; */
+NS_IMETHODIMP _MYCLASS_::GetIsCheckNeeded(PRBool *aIsCheckNeeded)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute18IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute18IHostUpdate(PRUint32 *aInternalAndReservedAttribute18IHostUpdate)
+/* void getSupportedChannels (out unsigned long supportedChannelsSize, [array, size_is (supportedChannelsSize), retval] out UpdateChannel_T supportedChannels); */
+NS_IMETHODIMP _MYCLASS_::GetSupportedChannels(PRUint32 *supportedChannelsSize, UpdateChannel_T **supportedChannels)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute19IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute19IHostUpdate(PRUint32 *aInternalAndReservedAttribute19IHostUpdate)
+/* readonly attribute unsigned long InternalAndReservedAttribute1IUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IUpdateAgent)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute20IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute20IHostUpdate(PRUint32 *aInternalAndReservedAttribute20IHostUpdate)
+/* readonly attribute unsigned long InternalAndReservedAttribute2IUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IUpdateAgent)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute21IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute21IHostUpdate(PRUint32 *aInternalAndReservedAttribute21IHostUpdate)
+/* readonly attribute unsigned long InternalAndReservedAttribute3IUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IUpdateAgent)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute22IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute22IHostUpdate(PRUint32 *aInternalAndReservedAttribute22IHostUpdate)
+/* readonly attribute unsigned long InternalAndReservedAttribute4IUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IUpdateAgent)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute23IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute23IHostUpdate(PRUint32 *aInternalAndReservedAttribute23IHostUpdate)
+/* void checkFor ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::CheckFor(IProgress **progress)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute24IHostUpdate; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute24IHostUpdate(PRUint32 *aInternalAndReservedAttribute24IHostUpdate)
+/* void download ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Download(IProgress **progress)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod1IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IHostUpdate()
+/* void install ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Install(IProgress **progress)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod2IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IHostUpdate()
+/* void rollback (); */
+NS_IMETHODIMP _MYCLASS_::Rollback()
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod3IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3IHostUpdate()
+/* void InternalAndReservedMethod1IUpdateAgent (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IUpdateAgent()
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod4IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod5IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod5IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod6IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod7IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod7IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod8IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod9IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod9IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod10IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod10IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod11IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod11IHostUpdate()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void InternalAndReservedMethod12IHostUpdate (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod12IHostUpdate()
+/* void InternalAndReservedMethod2IUpdateAgent (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IUpdateAgent()
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -27033,18 +30842,705 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod12IHostUpdate()
 /* End of implementation class template. */
 #endif
 
-#define COM_FORWARD_IHostUpdate_TO(smth) NS_FORWARD_IHOSTUPDATE (smth)
-#define COM_FORWARD_IHostUpdate_TO_OBJ(obj) COM_FORWARD_IHostUpdate_TO ((obj)->)
-#define COM_FORWARD_IHostUpdate_TO_BASE(base) COM_FORWARD_IHostUpdate_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_Name_TO(smth) NS_IMETHOD GetName (PRUnichar * * aName) { return smth GetName (aName); }
+#define COM_FORWARD_IUpdateAgent_GETTER_Name_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_Name_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_Name_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_Name_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_EventSource_TO(smth) NS_IMETHOD GetEventSource (IEventSource * * aEventSource) { return smth GetEventSource (aEventSource); }
+#define COM_FORWARD_IUpdateAgent_GETTER_EventSource_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_EventSource_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_EventSource_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_EventSource_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_Order_TO(smth) NS_IMETHOD GetOrder (PRUint32 * aOrder) { return smth GetOrder (aOrder); }
+#define COM_FORWARD_IUpdateAgent_GETTER_Order_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_Order_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_Order_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_Order_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_DependsOn_TO(smth) NS_IMETHOD GetDependsOn (PRUint32 * aDependsOnSize, PRUnichar * * * aDependsOn) { return smth GetDependsOn (aDependsOnSize, aDependsOn); }
+#define COM_FORWARD_IUpdateAgent_GETTER_DependsOn_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_DependsOn_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_DependsOn_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_DependsOn_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_Version_TO(smth) NS_IMETHOD GetVersion (PRUnichar * * aVersion) { return smth GetVersion (aVersion); }
+#define COM_FORWARD_IUpdateAgent_GETTER_Version_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_Version_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_Version_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_Version_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_DownloadUrl_TO(smth) NS_IMETHOD GetDownloadUrl (PRUnichar * * aDownloadUrl) { return smth GetDownloadUrl (aDownloadUrl); }
+#define COM_FORWARD_IUpdateAgent_GETTER_DownloadUrl_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_DownloadUrl_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_DownloadUrl_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_DownloadUrl_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_WebUrl_TO(smth) NS_IMETHOD GetWebUrl (PRUnichar * * aWebUrl) { return smth GetWebUrl (aWebUrl); }
+#define COM_FORWARD_IUpdateAgent_GETTER_WebUrl_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_WebUrl_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_WebUrl_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_WebUrl_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_ReleaseNotes_TO(smth) NS_IMETHOD GetReleaseNotes (PRUnichar * * aReleaseNotes) { return smth GetReleaseNotes (aReleaseNotes); }
+#define COM_FORWARD_IUpdateAgent_GETTER_ReleaseNotes_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_ReleaseNotes_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_ReleaseNotes_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_ReleaseNotes_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_Enabled_TO(smth) NS_IMETHOD GetEnabled (PRBool * aEnabled) { return smth GetEnabled (aEnabled); }
+#define COM_FORWARD_IUpdateAgent_GETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_Enabled_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_Enabled_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_Enabled_TO (base::)
+#define COM_FORWARD_IUpdateAgent_SETTER_Enabled_TO(smth) NS_IMETHOD SetEnabled (PRBool aEnabled) { return smth SetEnabled (aEnabled); }
+#define COM_FORWARD_IUpdateAgent_SETTER_Enabled_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_SETTER_Enabled_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_SETTER_Enabled_TO_BASE(base) COM_FORWARD_IUpdateAgent_SETTER_Enabled_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_Hidden_TO(smth) NS_IMETHOD GetHidden (PRBool * aHidden) { return smth GetHidden (aHidden); }
+#define COM_FORWARD_IUpdateAgent_GETTER_Hidden_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_Hidden_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_Hidden_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_Hidden_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_State_TO(smth) NS_IMETHOD GetState (PRUint32 * aState) { return smth GetState (aState); }
+#define COM_FORWARD_IUpdateAgent_GETTER_State_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_State_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_State_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_State_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_CheckFrequency_TO(smth) NS_IMETHOD GetCheckFrequency (PRUint32 * aCheckFrequency) { return smth GetCheckFrequency (aCheckFrequency); }
+#define COM_FORWARD_IUpdateAgent_GETTER_CheckFrequency_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_CheckFrequency_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_CheckFrequency_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_CheckFrequency_TO (base::)
+#define COM_FORWARD_IUpdateAgent_SETTER_CheckFrequency_TO(smth) NS_IMETHOD SetCheckFrequency (PRUint32 aCheckFrequency) { return smth SetCheckFrequency (aCheckFrequency); }
+#define COM_FORWARD_IUpdateAgent_SETTER_CheckFrequency_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_SETTER_CheckFrequency_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_SETTER_CheckFrequency_TO_BASE(base) COM_FORWARD_IUpdateAgent_SETTER_CheckFrequency_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_Channel_TO(smth) NS_IMETHOD GetChannel (PRUint32 * aChannel) { return smth GetChannel (aChannel); }
+#define COM_FORWARD_IUpdateAgent_GETTER_Channel_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_Channel_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_Channel_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_Channel_TO (base::)
+#define COM_FORWARD_IUpdateAgent_SETTER_Channel_TO(smth) NS_IMETHOD SetChannel (PRUint32 aChannel) { return smth SetChannel (aChannel); }
+#define COM_FORWARD_IUpdateAgent_SETTER_Channel_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_SETTER_Channel_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_SETTER_Channel_TO_BASE(base) COM_FORWARD_IUpdateAgent_SETTER_Channel_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_RepositoryURL_TO(smth) NS_IMETHOD GetRepositoryURL (PRUnichar * * aRepositoryURL) { return smth GetRepositoryURL (aRepositoryURL); }
+#define COM_FORWARD_IUpdateAgent_GETTER_RepositoryURL_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_RepositoryURL_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_RepositoryURL_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_RepositoryURL_TO (base::)
+#define COM_FORWARD_IUpdateAgent_SETTER_RepositoryURL_TO(smth) NS_IMETHOD SetRepositoryURL (const PRUnichar * aRepositoryURL) { return smth SetRepositoryURL (aRepositoryURL); }
+#define COM_FORWARD_IUpdateAgent_SETTER_RepositoryURL_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_SETTER_RepositoryURL_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_SETTER_RepositoryURL_TO_BASE(base) COM_FORWARD_IUpdateAgent_SETTER_RepositoryURL_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_LastCheckDate_TO(smth) NS_IMETHOD GetLastCheckDate (PRUnichar * * aLastCheckDate) { return smth GetLastCheckDate (aLastCheckDate); }
+#define COM_FORWARD_IUpdateAgent_GETTER_LastCheckDate_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_LastCheckDate_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_LastCheckDate_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_LastCheckDate_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_CheckCount_TO(smth) NS_IMETHOD GetCheckCount (PRUint32 * aCheckCount) { return smth GetCheckCount (aCheckCount); }
+#define COM_FORWARD_IUpdateAgent_GETTER_CheckCount_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_CheckCount_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_CheckCount_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_CheckCount_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_IsCheckNeeded_TO(smth) NS_IMETHOD GetIsCheckNeeded (PRBool * aIsCheckNeeded) { return smth GetIsCheckNeeded (aIsCheckNeeded); }
+#define COM_FORWARD_IUpdateAgent_GETTER_IsCheckNeeded_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_IsCheckNeeded_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_IsCheckNeeded_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_IsCheckNeeded_TO (base::)
+#define COM_FORWARD_IUpdateAgent_GETTER_SupportedChannels_TO(smth) NS_IMETHOD GetSupportedChannels (PRUint32 * aSupportedChannelsSize, PRUint32 * * aSupportedChannels) { return smth GetSupportedChannels (aSupportedChannelsSize, aSupportedChannels); }
+#define COM_FORWARD_IUpdateAgent_GETTER_SupportedChannels_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_GETTER_SupportedChannels_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_GETTER_SupportedChannels_TO_BASE(base) COM_FORWARD_IUpdateAgent_GETTER_SupportedChannels_TO (base::)
+#define COM_FORWARD_IUpdateAgent_CheckFor_TO(smth) NS_IMETHOD CheckFor (IProgress * * aProgress) { return smth CheckFor (aProgress); }
+#define COM_FORWARD_IUpdateAgent_CheckFor_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_CheckFor_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_CheckFor_TO_BASE(base) COM_FORWARD_IUpdateAgent_CheckFor_TO (base::)
+#define COM_FORWARD_IUpdateAgent_Download_TO(smth) NS_IMETHOD Download (IProgress * * aProgress) { return smth Download (aProgress); }
+#define COM_FORWARD_IUpdateAgent_Download_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_Download_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_Download_TO_BASE(base) COM_FORWARD_IUpdateAgent_Download_TO (base::)
+#define COM_FORWARD_IUpdateAgent_Install_TO(smth) NS_IMETHOD Install (IProgress * * aProgress) { return smth Install (aProgress); }
+#define COM_FORWARD_IUpdateAgent_Install_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_Install_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_Install_TO_BASE(base) COM_FORWARD_IUpdateAgent_Install_TO (base::)
+#define COM_FORWARD_IUpdateAgent_Rollback_TO(smth) NS_IMETHOD Rollback() { return smth Rollback(); }
+#define COM_FORWARD_IUpdateAgent_Rollback_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_Rollback_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_Rollback_TO_BASE(base) COM_FORWARD_IUpdateAgent_Rollback_TO (base::)
+#define COM_FORWARD_IUpdateAgent_TO(smth) NS_FORWARD_IUPDATEAGENT (smth)
+#define COM_FORWARD_IUpdateAgent_TO_OBJ(obj) COM_FORWARD_IUpdateAgent_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgent_TO_BASE(base) COM_FORWARD_IUpdateAgent_TO (base::)
 // for compatibility with Win32
-VBOX_EXTERN_C const nsID IID_IHostUpdate;
+VBOX_EXTERN_C const nsID IID_IUpdateAgent;
+
+/* starting interface:    IHostUpdateAgent */
+#define IHOSTUPDATEAGENT_IID_STR "d782dba7-cd4f-4ace-951a-58321c23e258"
+
+#define IHOSTUPDATEAGENT_IID \
+  {0xd782dba7, 0xcd4f, 0x4ace, \
+    { 0x95, 0x1a, 0x58, 0x32, 0x1c, 0x23, 0xe2, 0x58 }}
+
+class NS_NO_VTABLE IHostUpdateAgent : public IUpdateAgent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IHOSTUPDATEAGENT_IID)
+
+  /* readonly attribute boolean midlDoesNotLikeEmptyInterfaces; */
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IHostUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IHostUpdateAgent) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IHostUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IHostUpdateAgent) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IHostUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IHostUpdateAgent) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IHostUpdateAgent; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IHostUpdateAgent) = 0;
+
+  /* void InternalAndReservedMethod1IHostUpdateAgent (); */
+  NS_IMETHOD InternalAndReservedMethod1IHostUpdateAgent(void) = 0;
+
+  /* void InternalAndReservedMethod2IHostUpdateAgent (); */
+  NS_IMETHOD InternalAndReservedMethod2IHostUpdateAgent(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IHOSTUPDATEAGENT \
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IHostUpdateAgent); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IHostUpdateAgent); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IHostUpdateAgent); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IHostUpdateAgent); \
+  NS_IMETHOD InternalAndReservedMethod1IHostUpdateAgent(void); \
+  NS_IMETHOD InternalAndReservedMethod2IHostUpdateAgent(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IHOSTUPDATEAGENT(_to) \
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces) { return _to GetMidlDoesNotLikeEmptyInterfaces(aMidlDoesNotLikeEmptyInterfaces); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IHostUpdateAgent) { return _to GetInternalAndReservedAttribute1IHostUpdateAgent(aInternalAndReservedAttribute1IHostUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IHostUpdateAgent) { return _to GetInternalAndReservedAttribute2IHostUpdateAgent(aInternalAndReservedAttribute2IHostUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IHostUpdateAgent) { return _to GetInternalAndReservedAttribute3IHostUpdateAgent(aInternalAndReservedAttribute3IHostUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IHostUpdateAgent) { return _to GetInternalAndReservedAttribute4IHostUpdateAgent(aInternalAndReservedAttribute4IHostUpdateAgent); } \
+  NS_IMETHOD InternalAndReservedMethod1IHostUpdateAgent(void) { return _to InternalAndReservedMethod1IHostUpdateAgent(); } \
+  NS_IMETHOD InternalAndReservedMethod2IHostUpdateAgent(void) { return _to InternalAndReservedMethod2IHostUpdateAgent(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IHOSTUPDATEAGENT(_to) \
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMidlDoesNotLikeEmptyInterfaces(aMidlDoesNotLikeEmptyInterfaces); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IHostUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IHostUpdateAgent(aInternalAndReservedAttribute1IHostUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IHostUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IHostUpdateAgent(aInternalAndReservedAttribute2IHostUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IHostUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IHostUpdateAgent(aInternalAndReservedAttribute3IHostUpdateAgent); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IHostUpdateAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IHostUpdateAgent(aInternalAndReservedAttribute4IHostUpdateAgent); } \
+  NS_IMETHOD InternalAndReservedMethod1IHostUpdateAgent(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IHostUpdateAgent(); } \
+  NS_IMETHOD InternalAndReservedMethod2IHostUpdateAgent(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IHostUpdateAgent(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IHostUpdateAgent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IHOSTUPDATEAGENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IHostUpdateAgent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute boolean midlDoesNotLikeEmptyInterfaces; */
+NS_IMETHODIMP _MYCLASS_::GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IHostUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute1IHostUpdateAgent)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IHostUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute2IHostUpdateAgent)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3IHostUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute3IHostUpdateAgent)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4IHostUpdateAgent; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IHostUpdateAgent(PRUint32 *aInternalAndReservedAttribute4IHostUpdateAgent)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1IHostUpdateAgent (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IHostUpdateAgent()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2IHostUpdateAgent (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IHostUpdateAgent()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IHostUpdateAgent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces (PRBool * aMidlDoesNotLikeEmptyInterfaces) { return smth GetMidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
+#define COM_FORWARD_IHostUpdateAgent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_OBJ(obj) COM_FORWARD_IHostUpdateAgent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO ((obj)->)
+#define COM_FORWARD_IHostUpdateAgent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_BASE(base) COM_FORWARD_IHostUpdateAgent_GETTER_MidlDoesNotLikeEmptyInterfaces_TO (base::)
+#define COM_FORWARD_IHostUpdateAgent_TO(smth) NS_FORWARD_IHOSTUPDATEAGENT (smth)
+#define COM_FORWARD_IHostUpdateAgent_TO_OBJ(obj) COM_FORWARD_IHostUpdateAgent_TO ((obj)->)
+#define COM_FORWARD_IHostUpdateAgent_TO_BASE(base) COM_FORWARD_IHostUpdateAgent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IHostUpdateAgent;
+
+/* starting interface:    IHostDrivePartition */
+#define IHOSTDRIVEPARTITION_IID_STR "4f529a14-ace3-407c-9c49-066e8e8027f0"
+
+#define IHOSTDRIVEPARTITION_IID \
+  {0x4f529a14, 0xace3, 0x407c, \
+    { 0x9c, 0x49, 0x06, 0x6e, 0x8e, 0x80, 0x27, 0xf0 }}
+
+class NS_NO_VTABLE IHostDrivePartition : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IHOSTDRIVEPARTITION_IID)
+
+  /* readonly attribute unsigned long number; */
+  NS_IMETHOD GetNumber(PRUint32 *aNumber) = 0;
+
+  /* readonly attribute long long size; */
+  NS_IMETHOD GetSize(PRInt64 *aSize) = 0;
+
+  /* readonly attribute long long start; */
+  NS_IMETHOD GetStart(PRInt64 *aStart) = 0;
+
+  /* readonly attribute PartitionType_T type; */
+  NS_IMETHOD GetType(PartitionType_T *aType) = 0;
+
+  /* readonly attribute boolean active; */
+  NS_IMETHOD GetActive(PRBool *aActive) = 0;
+
+  /* readonly attribute unsigned long typeMBR; */
+  NS_IMETHOD GetTypeMBR(PRUint32 *aTypeMBR) = 0;
+
+  /* readonly attribute unsigned long startCylinder; */
+  NS_IMETHOD GetStartCylinder(PRUint32 *aStartCylinder) = 0;
+
+  /* readonly attribute unsigned long startHead; */
+  NS_IMETHOD GetStartHead(PRUint32 *aStartHead) = 0;
+
+  /* readonly attribute unsigned long startSector; */
+  NS_IMETHOD GetStartSector(PRUint32 *aStartSector) = 0;
+
+  /* readonly attribute unsigned long endCylinder; */
+  NS_IMETHOD GetEndCylinder(PRUint32 *aEndCylinder) = 0;
+
+  /* readonly attribute unsigned long endHead; */
+  NS_IMETHOD GetEndHead(PRUint32 *aEndHead) = 0;
+
+  /* readonly attribute unsigned long endSector; */
+  NS_IMETHOD GetEndSector(PRUint32 *aEndSector) = 0;
+
+  /* readonly attribute wstring typeUuid; */
+  NS_IMETHOD GetTypeUuid(PRUnichar * *aTypeUuid) = 0;
+
+  /* readonly attribute wstring uuid; */
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid) = 0;
+
+  /* readonly attribute wstring name; */
+  NS_IMETHOD GetName(PRUnichar * *aName) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IHOSTDRIVEPARTITION \
+  NS_IMETHOD GetNumber(PRUint32 *aNumber); \
+  NS_IMETHOD GetSize(PRInt64 *aSize); \
+  NS_IMETHOD GetStart(PRInt64 *aStart); \
+  NS_IMETHOD GetType(PartitionType_T *aType); \
+  NS_IMETHOD GetActive(PRBool *aActive); \
+  NS_IMETHOD GetTypeMBR(PRUint32 *aTypeMBR); \
+  NS_IMETHOD GetStartCylinder(PRUint32 *aStartCylinder); \
+  NS_IMETHOD GetStartHead(PRUint32 *aStartHead); \
+  NS_IMETHOD GetStartSector(PRUint32 *aStartSector); \
+  NS_IMETHOD GetEndCylinder(PRUint32 *aEndCylinder); \
+  NS_IMETHOD GetEndHead(PRUint32 *aEndHead); \
+  NS_IMETHOD GetEndSector(PRUint32 *aEndSector); \
+  NS_IMETHOD GetTypeUuid(PRUnichar * *aTypeUuid); \
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid); \
+  NS_IMETHOD GetName(PRUnichar * *aName); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IHOSTDRIVEPARTITION(_to) \
+  NS_IMETHOD GetNumber(PRUint32 *aNumber) { return _to GetNumber(aNumber); } \
+  NS_IMETHOD GetSize(PRInt64 *aSize) { return _to GetSize(aSize); } \
+  NS_IMETHOD GetStart(PRInt64 *aStart) { return _to GetStart(aStart); } \
+  NS_IMETHOD GetType(PartitionType_T *aType) { return _to GetType(aType); } \
+  NS_IMETHOD GetActive(PRBool *aActive) { return _to GetActive(aActive); } \
+  NS_IMETHOD GetTypeMBR(PRUint32 *aTypeMBR) { return _to GetTypeMBR(aTypeMBR); } \
+  NS_IMETHOD GetStartCylinder(PRUint32 *aStartCylinder) { return _to GetStartCylinder(aStartCylinder); } \
+  NS_IMETHOD GetStartHead(PRUint32 *aStartHead) { return _to GetStartHead(aStartHead); } \
+  NS_IMETHOD GetStartSector(PRUint32 *aStartSector) { return _to GetStartSector(aStartSector); } \
+  NS_IMETHOD GetEndCylinder(PRUint32 *aEndCylinder) { return _to GetEndCylinder(aEndCylinder); } \
+  NS_IMETHOD GetEndHead(PRUint32 *aEndHead) { return _to GetEndHead(aEndHead); } \
+  NS_IMETHOD GetEndSector(PRUint32 *aEndSector) { return _to GetEndSector(aEndSector); } \
+  NS_IMETHOD GetTypeUuid(PRUnichar * *aTypeUuid) { return _to GetTypeUuid(aTypeUuid); } \
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid) { return _to GetUuid(aUuid); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IHOSTDRIVEPARTITION(_to) \
+  NS_IMETHOD GetNumber(PRUint32 *aNumber) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNumber(aNumber); } \
+  NS_IMETHOD GetSize(PRInt64 *aSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSize(aSize); } \
+  NS_IMETHOD GetStart(PRInt64 *aStart) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStart(aStart); } \
+  NS_IMETHOD GetType(PartitionType_T *aType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetType(aType); } \
+  NS_IMETHOD GetActive(PRBool *aActive) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetActive(aActive); } \
+  NS_IMETHOD GetTypeMBR(PRUint32 *aTypeMBR) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTypeMBR(aTypeMBR); } \
+  NS_IMETHOD GetStartCylinder(PRUint32 *aStartCylinder) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStartCylinder(aStartCylinder); } \
+  NS_IMETHOD GetStartHead(PRUint32 *aStartHead) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStartHead(aStartHead); } \
+  NS_IMETHOD GetStartSector(PRUint32 *aStartSector) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStartSector(aStartSector); } \
+  NS_IMETHOD GetEndCylinder(PRUint32 *aEndCylinder) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEndCylinder(aEndCylinder); } \
+  NS_IMETHOD GetEndHead(PRUint32 *aEndHead) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEndHead(aEndHead); } \
+  NS_IMETHOD GetEndSector(PRUint32 *aEndSector) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEndSector(aEndSector); } \
+  NS_IMETHOD GetTypeUuid(PRUnichar * *aTypeUuid) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTypeUuid(aTypeUuid); } \
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUuid(aUuid); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IHostDrivePartition
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IHOSTDRIVEPARTITION
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IHostDrivePartition)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute unsigned long number; */
+NS_IMETHODIMP _MYCLASS_::GetNumber(PRUint32 *aNumber)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long long size; */
+NS_IMETHODIMP _MYCLASS_::GetSize(PRInt64 *aSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long long start; */
+NS_IMETHODIMP _MYCLASS_::GetStart(PRInt64 *aStart)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute PartitionType_T type; */
+NS_IMETHODIMP _MYCLASS_::GetType(PartitionType_T *aType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean active; */
+NS_IMETHODIMP _MYCLASS_::GetActive(PRBool *aActive)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long typeMBR; */
+NS_IMETHODIMP _MYCLASS_::GetTypeMBR(PRUint32 *aTypeMBR)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long startCylinder; */
+NS_IMETHODIMP _MYCLASS_::GetStartCylinder(PRUint32 *aStartCylinder)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long startHead; */
+NS_IMETHODIMP _MYCLASS_::GetStartHead(PRUint32 *aStartHead)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long startSector; */
+NS_IMETHODIMP _MYCLASS_::GetStartSector(PRUint32 *aStartSector)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long endCylinder; */
+NS_IMETHODIMP _MYCLASS_::GetEndCylinder(PRUint32 *aEndCylinder)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long endHead; */
+NS_IMETHODIMP _MYCLASS_::GetEndHead(PRUint32 *aEndHead)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long endSector; */
+NS_IMETHODIMP _MYCLASS_::GetEndSector(PRUint32 *aEndSector)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring typeUuid; */
+NS_IMETHODIMP _MYCLASS_::GetTypeUuid(PRUnichar * *aTypeUuid)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring uuid; */
+NS_IMETHODIMP _MYCLASS_::GetUuid(PRUnichar * *aUuid)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring name; */
+NS_IMETHODIMP _MYCLASS_::GetName(PRUnichar * *aName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IHostDrivePartition_GETTER_Number_TO(smth) NS_IMETHOD GetNumber (PRUint32 * aNumber) { return smth GetNumber (aNumber); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_Number_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_Number_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Number_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_Number_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Size_TO(smth) NS_IMETHOD GetSize (PRInt64 * aSize) { return smth GetSize (aSize); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_Size_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_Size_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Size_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_Size_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Start_TO(smth) NS_IMETHOD GetStart (PRInt64 * aStart) { return smth GetStart (aStart); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_Start_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_Start_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Start_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_Start_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Type_TO(smth) NS_IMETHOD GetType (PRUint32 * aType) { return smth GetType (aType); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_Type_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_Type_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Type_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_Type_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Active_TO(smth) NS_IMETHOD GetActive (PRBool * aActive) { return smth GetActive (aActive); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_Active_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_Active_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Active_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_Active_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_TypeMBR_TO(smth) NS_IMETHOD GetTypeMBR (PRUint32 * aTypeMBR) { return smth GetTypeMBR (aTypeMBR); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_TypeMBR_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_TypeMBR_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_TypeMBR_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_TypeMBR_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartCylinder_TO(smth) NS_IMETHOD GetStartCylinder (PRUint32 * aStartCylinder) { return smth GetStartCylinder (aStartCylinder); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartCylinder_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_StartCylinder_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartCylinder_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_StartCylinder_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartHead_TO(smth) NS_IMETHOD GetStartHead (PRUint32 * aStartHead) { return smth GetStartHead (aStartHead); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartHead_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_StartHead_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartHead_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_StartHead_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartSector_TO(smth) NS_IMETHOD GetStartSector (PRUint32 * aStartSector) { return smth GetStartSector (aStartSector); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartSector_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_StartSector_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_StartSector_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_StartSector_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndCylinder_TO(smth) NS_IMETHOD GetEndCylinder (PRUint32 * aEndCylinder) { return smth GetEndCylinder (aEndCylinder); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndCylinder_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_EndCylinder_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndCylinder_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_EndCylinder_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndHead_TO(smth) NS_IMETHOD GetEndHead (PRUint32 * aEndHead) { return smth GetEndHead (aEndHead); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndHead_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_EndHead_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndHead_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_EndHead_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndSector_TO(smth) NS_IMETHOD GetEndSector (PRUint32 * aEndSector) { return smth GetEndSector (aEndSector); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndSector_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_EndSector_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_EndSector_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_EndSector_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_TypeUuid_TO(smth) NS_IMETHOD GetTypeUuid (PRUnichar * * aTypeUuid) { return smth GetTypeUuid (aTypeUuid); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_TypeUuid_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_TypeUuid_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_TypeUuid_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_TypeUuid_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Uuid_TO(smth) NS_IMETHOD GetUuid (PRUnichar * * aUuid) { return smth GetUuid (aUuid); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_Uuid_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_Uuid_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Uuid_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_Uuid_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Name_TO(smth) NS_IMETHOD GetName (PRUnichar * * aName) { return smth GetName (aName); }
+#define COM_FORWARD_IHostDrivePartition_GETTER_Name_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_GETTER_Name_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_GETTER_Name_TO_BASE(base) COM_FORWARD_IHostDrivePartition_GETTER_Name_TO (base::)
+#define COM_FORWARD_IHostDrivePartition_TO(smth) NS_FORWARD_IHOSTDRIVEPARTITION (smth)
+#define COM_FORWARD_IHostDrivePartition_TO_OBJ(obj) COM_FORWARD_IHostDrivePartition_TO ((obj)->)
+#define COM_FORWARD_IHostDrivePartition_TO_BASE(base) COM_FORWARD_IHostDrivePartition_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IHostDrivePartition;
+
+/* starting interface:    IHostDrive */
+#define IHOSTDRIVE_IID_STR "70e2e0c3-332c-4d72-b822-2db16e2cb31b"
+
+#define IHOSTDRIVE_IID \
+  {0x70e2e0c3, 0x332c, 0x4d72, \
+    { 0xb8, 0x22, 0x2d, 0xb1, 0x6e, 0x2c, 0xb3, 0x1b }}
+
+class NS_NO_VTABLE IHostDrive : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IHOSTDRIVE_IID)
+
+  /* readonly attribute wstring drivePath; */
+  NS_IMETHOD GetDrivePath(PRUnichar * *aDrivePath) = 0;
+
+  /* readonly attribute PartitioningType_T partitioningType; */
+  NS_IMETHOD GetPartitioningType(PartitioningType_T *aPartitioningType) = 0;
+
+  /* readonly attribute wstring uuid; */
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid) = 0;
+
+  /* readonly attribute unsigned long sectorSize; */
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize) = 0;
+
+  /* readonly attribute long long size; */
+  NS_IMETHOD GetSize(PRInt64 *aSize) = 0;
+
+  /* readonly attribute wstring model; */
+  NS_IMETHOD GetModel(PRUnichar * *aModel) = 0;
+
+  /* void getPartitions (out unsigned long partitionsSize, [array, size_is (partitionsSize), retval] out IHostDrivePartition partitions); */
+  NS_IMETHOD GetPartitions(PRUint32 *partitionsSize, IHostDrivePartition ***partitions) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IHOSTDRIVE \
+  NS_IMETHOD GetDrivePath(PRUnichar * *aDrivePath); \
+  NS_IMETHOD GetPartitioningType(PartitioningType_T *aPartitioningType); \
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid); \
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize); \
+  NS_IMETHOD GetSize(PRInt64 *aSize); \
+  NS_IMETHOD GetModel(PRUnichar * *aModel); \
+  NS_IMETHOD GetPartitions(PRUint32 *partitionsSize, IHostDrivePartition ***partitions); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IHOSTDRIVE(_to) \
+  NS_IMETHOD GetDrivePath(PRUnichar * *aDrivePath) { return _to GetDrivePath(aDrivePath); } \
+  NS_IMETHOD GetPartitioningType(PartitioningType_T *aPartitioningType) { return _to GetPartitioningType(aPartitioningType); } \
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid) { return _to GetUuid(aUuid); } \
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize) { return _to GetSectorSize(aSectorSize); } \
+  NS_IMETHOD GetSize(PRInt64 *aSize) { return _to GetSize(aSize); } \
+  NS_IMETHOD GetModel(PRUnichar * *aModel) { return _to GetModel(aModel); } \
+  NS_IMETHOD GetPartitions(PRUint32 *partitionsSize, IHostDrivePartition ***partitions) { return _to GetPartitions(partitionsSize, partitions); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IHOSTDRIVE(_to) \
+  NS_IMETHOD GetDrivePath(PRUnichar * *aDrivePath) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDrivePath(aDrivePath); } \
+  NS_IMETHOD GetPartitioningType(PartitioningType_T *aPartitioningType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPartitioningType(aPartitioningType); } \
+  NS_IMETHOD GetUuid(PRUnichar * *aUuid) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUuid(aUuid); } \
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSectorSize(aSectorSize); } \
+  NS_IMETHOD GetSize(PRInt64 *aSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSize(aSize); } \
+  NS_IMETHOD GetModel(PRUnichar * *aModel) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetModel(aModel); } \
+  NS_IMETHOD GetPartitions(PRUint32 *partitionsSize, IHostDrivePartition ***partitions) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPartitions(partitionsSize, partitions); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IHostDrive
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IHOSTDRIVE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IHostDrive)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring drivePath; */
+NS_IMETHODIMP _MYCLASS_::GetDrivePath(PRUnichar * *aDrivePath)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute PartitioningType_T partitioningType; */
+NS_IMETHODIMP _MYCLASS_::GetPartitioningType(PartitioningType_T *aPartitioningType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring uuid; */
+NS_IMETHODIMP _MYCLASS_::GetUuid(PRUnichar * *aUuid)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long sectorSize; */
+NS_IMETHODIMP _MYCLASS_::GetSectorSize(PRUint32 *aSectorSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long long size; */
+NS_IMETHODIMP _MYCLASS_::GetSize(PRInt64 *aSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring model; */
+NS_IMETHODIMP _MYCLASS_::GetModel(PRUnichar * *aModel)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getPartitions (out unsigned long partitionsSize, [array, size_is (partitionsSize), retval] out IHostDrivePartition partitions); */
+NS_IMETHODIMP _MYCLASS_::GetPartitions(PRUint32 *partitionsSize, IHostDrivePartition ***partitions)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IHostDrive_GETTER_DrivePath_TO(smth) NS_IMETHOD GetDrivePath (PRUnichar * * aDrivePath) { return smth GetDrivePath (aDrivePath); }
+#define COM_FORWARD_IHostDrive_GETTER_DrivePath_TO_OBJ(obj) COM_FORWARD_IHostDrive_GETTER_DrivePath_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_GETTER_DrivePath_TO_BASE(base) COM_FORWARD_IHostDrive_GETTER_DrivePath_TO (base::)
+#define COM_FORWARD_IHostDrive_GETTER_PartitioningType_TO(smth) NS_IMETHOD GetPartitioningType (PRUint32 * aPartitioningType) { return smth GetPartitioningType (aPartitioningType); }
+#define COM_FORWARD_IHostDrive_GETTER_PartitioningType_TO_OBJ(obj) COM_FORWARD_IHostDrive_GETTER_PartitioningType_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_GETTER_PartitioningType_TO_BASE(base) COM_FORWARD_IHostDrive_GETTER_PartitioningType_TO (base::)
+#define COM_FORWARD_IHostDrive_GETTER_Uuid_TO(smth) NS_IMETHOD GetUuid (PRUnichar * * aUuid) { return smth GetUuid (aUuid); }
+#define COM_FORWARD_IHostDrive_GETTER_Uuid_TO_OBJ(obj) COM_FORWARD_IHostDrive_GETTER_Uuid_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_GETTER_Uuid_TO_BASE(base) COM_FORWARD_IHostDrive_GETTER_Uuid_TO (base::)
+#define COM_FORWARD_IHostDrive_GETTER_SectorSize_TO(smth) NS_IMETHOD GetSectorSize (PRUint32 * aSectorSize) { return smth GetSectorSize (aSectorSize); }
+#define COM_FORWARD_IHostDrive_GETTER_SectorSize_TO_OBJ(obj) COM_FORWARD_IHostDrive_GETTER_SectorSize_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_GETTER_SectorSize_TO_BASE(base) COM_FORWARD_IHostDrive_GETTER_SectorSize_TO (base::)
+#define COM_FORWARD_IHostDrive_GETTER_Size_TO(smth) NS_IMETHOD GetSize (PRInt64 * aSize) { return smth GetSize (aSize); }
+#define COM_FORWARD_IHostDrive_GETTER_Size_TO_OBJ(obj) COM_FORWARD_IHostDrive_GETTER_Size_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_GETTER_Size_TO_BASE(base) COM_FORWARD_IHostDrive_GETTER_Size_TO (base::)
+#define COM_FORWARD_IHostDrive_GETTER_Model_TO(smth) NS_IMETHOD GetModel (PRUnichar * * aModel) { return smth GetModel (aModel); }
+#define COM_FORWARD_IHostDrive_GETTER_Model_TO_OBJ(obj) COM_FORWARD_IHostDrive_GETTER_Model_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_GETTER_Model_TO_BASE(base) COM_FORWARD_IHostDrive_GETTER_Model_TO (base::)
+#define COM_FORWARD_IHostDrive_GETTER_Partitions_TO(smth) NS_IMETHOD GetPartitions (PRUint32 * aPartitionsSize, IHostDrivePartition * * * aPartitions) { return smth GetPartitions (aPartitionsSize, aPartitions); }
+#define COM_FORWARD_IHostDrive_GETTER_Partitions_TO_OBJ(obj) COM_FORWARD_IHostDrive_GETTER_Partitions_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_GETTER_Partitions_TO_BASE(base) COM_FORWARD_IHostDrive_GETTER_Partitions_TO (base::)
+#define COM_FORWARD_IHostDrive_TO(smth) NS_FORWARD_IHOSTDRIVE (smth)
+#define COM_FORWARD_IHostDrive_TO_OBJ(obj) COM_FORWARD_IHostDrive_TO ((obj)->)
+#define COM_FORWARD_IHostDrive_TO_BASE(base) COM_FORWARD_IHostDrive_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IHostDrive;
 
 /* starting interface:    IHost */
-#define IHOST_IID_STR "16ced992-5fdc-4aba-aff5-6a39bbd7c38b"
+#define IHOST_IID_STR "e54f6256-97a7-4947-8a78-10c013ddf4b8"
 
 #define IHOST_IID \
-  {0x16ced992, 0x5fdc, 0x4aba, \
-    { 0xaf, 0xf5, 0x6a, 0x39, 0xbb, 0xd7, 0xc3, 0x8b }}
+  {0xe54f6256, 0x97a7, 0x4947, \
+    { 0x8a, 0x78, 0x10, 0xc0, 0x13, 0xdd, 0xf4, 0xb8 }}
 
 class NS_NO_VTABLE IHost : public nsISupports {
  public: 
@@ -27056,6 +31552,9 @@ class NS_NO_VTABLE IHost : public nsISupports {
 
   /* void getFloppyDrives (out unsigned long floppyDrivesSize, [array, size_is (floppyDrivesSize), retval] out IMedium floppyDrives); */
   NS_IMETHOD GetFloppyDrives(PRUint32 *floppyDrivesSize, IMedium ***floppyDrives) = 0;
+
+  /* void getAudioDevices (out unsigned long audioDevicesSize, [array, size_is (audioDevicesSize), retval] out IHostAudioDevice audioDevices); */
+  NS_IMETHOD GetAudioDevices(PRUint32 *audioDevicesSize, IHostAudioDevice ***audioDevices) = 0;
 
   /* void getUSBDevices (out unsigned long USBDevicesSize, [array, size_is (USBDevicesSize), retval] out IHostUSBDevice USBDevices); */
   NS_IMETHOD GetUSBDevices(PRUint32 *USBDevicesSize, IHostUSBDevice ***USBDevices) = 0;
@@ -27087,6 +31586,9 @@ class NS_NO_VTABLE IHost : public nsISupports {
   /* readonly attribute unsigned long processorOnlineCoreCount; */
   NS_IMETHOD GetProcessorOnlineCoreCount(PRUint32 *aProcessorOnlineCoreCount) = 0;
 
+  /* void getHostDrives (out unsigned long hostDrivesSize, [array, size_is (hostDrivesSize), retval] out IHostDrive hostDrives); */
+  NS_IMETHOD GetHostDrives(PRUint32 *hostDrivesSize, IHostDrive ***hostDrives) = 0;
+
   /* readonly attribute unsigned long memorySize; */
   NS_IMETHOD GetMemorySize(PRUint32 *aMemorySize) = 0;
 
@@ -27108,8 +31610,14 @@ class NS_NO_VTABLE IHost : public nsISupports {
   /* void getVideoInputDevices (out unsigned long videoInputDevicesSize, [array, size_is (videoInputDevicesSize), retval] out IHostVideoInputDevice videoInputDevices); */
   NS_IMETHOD GetVideoInputDevices(PRUint32 *videoInputDevicesSize, IHostVideoInputDevice ***videoInputDevices) = 0;
 
-  /* readonly attribute IHostUpdate update; */
-  NS_IMETHOD GetUpdate(IHostUpdate * *aUpdate) = 0;
+  /* readonly attribute IUpdateAgent updateHost; */
+  NS_IMETHOD GetUpdateHost(IUpdateAgent * *aUpdateHost) = 0;
+
+  /* readonly attribute IUpdateAgent updateExtPack; */
+  NS_IMETHOD GetUpdateExtPack(IUpdateAgent * *aUpdateExtPack) = 0;
+
+  /* readonly attribute IUpdateAgent updateGuestAdditions; */
+  NS_IMETHOD GetUpdateGuestAdditions(IUpdateAgent * *aUpdateGuestAdditions) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1IHost; */
   NS_IMETHOD GetInternalAndReservedAttribute1IHost(PRUint32 *aInternalAndReservedAttribute1IHost) = 0;
@@ -27228,6 +31736,7 @@ class NS_NO_VTABLE IHost : public nsISupports {
 #define NS_DECL_IHOST \
   NS_IMETHOD GetDVDDrives(PRUint32 *DVDDrivesSize, IMedium ***DVDDrives); \
   NS_IMETHOD GetFloppyDrives(PRUint32 *floppyDrivesSize, IMedium ***floppyDrives); \
+  NS_IMETHOD GetAudioDevices(PRUint32 *audioDevicesSize, IHostAudioDevice ***audioDevices); \
   NS_IMETHOD GetUSBDevices(PRUint32 *USBDevicesSize, IHostUSBDevice ***USBDevices); \
   NS_IMETHOD GetUSBDeviceFilters(PRUint32 *USBDeviceFiltersSize, IHostUSBDeviceFilter ***USBDeviceFilters); \
   NS_IMETHOD GetNetworkInterfaces(PRUint32 *networkInterfacesSize, IHostNetworkInterface ***networkInterfaces); \
@@ -27238,6 +31747,7 @@ class NS_NO_VTABLE IHost : public nsISupports {
   NS_IMETHOD GetProcessorOnlineCount(PRUint32 *aProcessorOnlineCount); \
   NS_IMETHOD GetProcessorCoreCount(PRUint32 *aProcessorCoreCount); \
   NS_IMETHOD GetProcessorOnlineCoreCount(PRUint32 *aProcessorOnlineCoreCount); \
+  NS_IMETHOD GetHostDrives(PRUint32 *hostDrivesSize, IHostDrive ***hostDrives); \
   NS_IMETHOD GetMemorySize(PRUint32 *aMemorySize); \
   NS_IMETHOD GetMemoryAvailable(PRUint32 *aMemoryAvailable); \
   NS_IMETHOD GetOperatingSystem(PRUnichar * *aOperatingSystem); \
@@ -27245,7 +31755,9 @@ class NS_NO_VTABLE IHost : public nsISupports {
   NS_IMETHOD GetUTCTime(PRInt64 *aUTCTime); \
   NS_IMETHOD GetAcceleration3DAvailable(PRBool *aAcceleration3DAvailable); \
   NS_IMETHOD GetVideoInputDevices(PRUint32 *videoInputDevicesSize, IHostVideoInputDevice ***videoInputDevices); \
-  NS_IMETHOD GetUpdate(IHostUpdate * *aUpdate); \
+  NS_IMETHOD GetUpdateHost(IUpdateAgent * *aUpdateHost); \
+  NS_IMETHOD GetUpdateExtPack(IUpdateAgent * *aUpdateExtPack); \
+  NS_IMETHOD GetUpdateGuestAdditions(IUpdateAgent * *aUpdateGuestAdditions); \
   NS_IMETHOD GetInternalAndReservedAttribute1IHost(PRUint32 *aInternalAndReservedAttribute1IHost); \
   NS_IMETHOD GetInternalAndReservedAttribute2IHost(PRUint32 *aInternalAndReservedAttribute2IHost); \
   NS_IMETHOD GetInternalAndReservedAttribute3IHost(PRUint32 *aInternalAndReservedAttribute3IHost); \
@@ -27288,6 +31800,7 @@ class NS_NO_VTABLE IHost : public nsISupports {
 #define NS_FORWARD_IHOST(_to) \
   NS_IMETHOD GetDVDDrives(PRUint32 *DVDDrivesSize, IMedium ***DVDDrives) { return _to GetDVDDrives(DVDDrivesSize, DVDDrives); } \
   NS_IMETHOD GetFloppyDrives(PRUint32 *floppyDrivesSize, IMedium ***floppyDrives) { return _to GetFloppyDrives(floppyDrivesSize, floppyDrives); } \
+  NS_IMETHOD GetAudioDevices(PRUint32 *audioDevicesSize, IHostAudioDevice ***audioDevices) { return _to GetAudioDevices(audioDevicesSize, audioDevices); } \
   NS_IMETHOD GetUSBDevices(PRUint32 *USBDevicesSize, IHostUSBDevice ***USBDevices) { return _to GetUSBDevices(USBDevicesSize, USBDevices); } \
   NS_IMETHOD GetUSBDeviceFilters(PRUint32 *USBDeviceFiltersSize, IHostUSBDeviceFilter ***USBDeviceFilters) { return _to GetUSBDeviceFilters(USBDeviceFiltersSize, USBDeviceFilters); } \
   NS_IMETHOD GetNetworkInterfaces(PRUint32 *networkInterfacesSize, IHostNetworkInterface ***networkInterfaces) { return _to GetNetworkInterfaces(networkInterfacesSize, networkInterfaces); } \
@@ -27298,6 +31811,7 @@ class NS_NO_VTABLE IHost : public nsISupports {
   NS_IMETHOD GetProcessorOnlineCount(PRUint32 *aProcessorOnlineCount) { return _to GetProcessorOnlineCount(aProcessorOnlineCount); } \
   NS_IMETHOD GetProcessorCoreCount(PRUint32 *aProcessorCoreCount) { return _to GetProcessorCoreCount(aProcessorCoreCount); } \
   NS_IMETHOD GetProcessorOnlineCoreCount(PRUint32 *aProcessorOnlineCoreCount) { return _to GetProcessorOnlineCoreCount(aProcessorOnlineCoreCount); } \
+  NS_IMETHOD GetHostDrives(PRUint32 *hostDrivesSize, IHostDrive ***hostDrives) { return _to GetHostDrives(hostDrivesSize, hostDrives); } \
   NS_IMETHOD GetMemorySize(PRUint32 *aMemorySize) { return _to GetMemorySize(aMemorySize); } \
   NS_IMETHOD GetMemoryAvailable(PRUint32 *aMemoryAvailable) { return _to GetMemoryAvailable(aMemoryAvailable); } \
   NS_IMETHOD GetOperatingSystem(PRUnichar * *aOperatingSystem) { return _to GetOperatingSystem(aOperatingSystem); } \
@@ -27305,7 +31819,9 @@ class NS_NO_VTABLE IHost : public nsISupports {
   NS_IMETHOD GetUTCTime(PRInt64 *aUTCTime) { return _to GetUTCTime(aUTCTime); } \
   NS_IMETHOD GetAcceleration3DAvailable(PRBool *aAcceleration3DAvailable) { return _to GetAcceleration3DAvailable(aAcceleration3DAvailable); } \
   NS_IMETHOD GetVideoInputDevices(PRUint32 *videoInputDevicesSize, IHostVideoInputDevice ***videoInputDevices) { return _to GetVideoInputDevices(videoInputDevicesSize, videoInputDevices); } \
-  NS_IMETHOD GetUpdate(IHostUpdate * *aUpdate) { return _to GetUpdate(aUpdate); } \
+  NS_IMETHOD GetUpdateHost(IUpdateAgent * *aUpdateHost) { return _to GetUpdateHost(aUpdateHost); } \
+  NS_IMETHOD GetUpdateExtPack(IUpdateAgent * *aUpdateExtPack) { return _to GetUpdateExtPack(aUpdateExtPack); } \
+  NS_IMETHOD GetUpdateGuestAdditions(IUpdateAgent * *aUpdateGuestAdditions) { return _to GetUpdateGuestAdditions(aUpdateGuestAdditions); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IHost(PRUint32 *aInternalAndReservedAttribute1IHost) { return _to GetInternalAndReservedAttribute1IHost(aInternalAndReservedAttribute1IHost); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IHost(PRUint32 *aInternalAndReservedAttribute2IHost) { return _to GetInternalAndReservedAttribute2IHost(aInternalAndReservedAttribute2IHost); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IHost(PRUint32 *aInternalAndReservedAttribute3IHost) { return _to GetInternalAndReservedAttribute3IHost(aInternalAndReservedAttribute3IHost); } \
@@ -27348,6 +31864,7 @@ class NS_NO_VTABLE IHost : public nsISupports {
 #define NS_FORWARD_SAFE_IHOST(_to) \
   NS_IMETHOD GetDVDDrives(PRUint32 *DVDDrivesSize, IMedium ***DVDDrives) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDVDDrives(DVDDrivesSize, DVDDrives); } \
   NS_IMETHOD GetFloppyDrives(PRUint32 *floppyDrivesSize, IMedium ***floppyDrives) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFloppyDrives(floppyDrivesSize, floppyDrives); } \
+  NS_IMETHOD GetAudioDevices(PRUint32 *audioDevicesSize, IHostAudioDevice ***audioDevices) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAudioDevices(audioDevicesSize, audioDevices); } \
   NS_IMETHOD GetUSBDevices(PRUint32 *USBDevicesSize, IHostUSBDevice ***USBDevices) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUSBDevices(USBDevicesSize, USBDevices); } \
   NS_IMETHOD GetUSBDeviceFilters(PRUint32 *USBDeviceFiltersSize, IHostUSBDeviceFilter ***USBDeviceFilters) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUSBDeviceFilters(USBDeviceFiltersSize, USBDeviceFilters); } \
   NS_IMETHOD GetNetworkInterfaces(PRUint32 *networkInterfacesSize, IHostNetworkInterface ***networkInterfaces) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNetworkInterfaces(networkInterfacesSize, networkInterfaces); } \
@@ -27358,6 +31875,7 @@ class NS_NO_VTABLE IHost : public nsISupports {
   NS_IMETHOD GetProcessorOnlineCount(PRUint32 *aProcessorOnlineCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProcessorOnlineCount(aProcessorOnlineCount); } \
   NS_IMETHOD GetProcessorCoreCount(PRUint32 *aProcessorCoreCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProcessorCoreCount(aProcessorCoreCount); } \
   NS_IMETHOD GetProcessorOnlineCoreCount(PRUint32 *aProcessorOnlineCoreCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProcessorOnlineCoreCount(aProcessorOnlineCoreCount); } \
+  NS_IMETHOD GetHostDrives(PRUint32 *hostDrivesSize, IHostDrive ***hostDrives) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHostDrives(hostDrivesSize, hostDrives); } \
   NS_IMETHOD GetMemorySize(PRUint32 *aMemorySize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMemorySize(aMemorySize); } \
   NS_IMETHOD GetMemoryAvailable(PRUint32 *aMemoryAvailable) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMemoryAvailable(aMemoryAvailable); } \
   NS_IMETHOD GetOperatingSystem(PRUnichar * *aOperatingSystem) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetOperatingSystem(aOperatingSystem); } \
@@ -27365,7 +31883,9 @@ class NS_NO_VTABLE IHost : public nsISupports {
   NS_IMETHOD GetUTCTime(PRInt64 *aUTCTime) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUTCTime(aUTCTime); } \
   NS_IMETHOD GetAcceleration3DAvailable(PRBool *aAcceleration3DAvailable) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAcceleration3DAvailable(aAcceleration3DAvailable); } \
   NS_IMETHOD GetVideoInputDevices(PRUint32 *videoInputDevicesSize, IHostVideoInputDevice ***videoInputDevices) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVideoInputDevices(videoInputDevicesSize, videoInputDevices); } \
-  NS_IMETHOD GetUpdate(IHostUpdate * *aUpdate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUpdate(aUpdate); } \
+  NS_IMETHOD GetUpdateHost(IUpdateAgent * *aUpdateHost) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUpdateHost(aUpdateHost); } \
+  NS_IMETHOD GetUpdateExtPack(IUpdateAgent * *aUpdateExtPack) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUpdateExtPack(aUpdateExtPack); } \
+  NS_IMETHOD GetUpdateGuestAdditions(IUpdateAgent * *aUpdateGuestAdditions) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUpdateGuestAdditions(aUpdateGuestAdditions); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IHost(PRUint32 *aInternalAndReservedAttribute1IHost) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IHost(aInternalAndReservedAttribute1IHost); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IHost(PRUint32 *aInternalAndReservedAttribute2IHost) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IHost(aInternalAndReservedAttribute2IHost); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IHost(PRUint32 *aInternalAndReservedAttribute3IHost) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IHost(aInternalAndReservedAttribute3IHost); } \
@@ -27448,6 +31968,12 @@ NS_IMETHODIMP _MYCLASS_::GetFloppyDrives(PRUint32 *floppyDrivesSize, IMedium ***
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getAudioDevices (out unsigned long audioDevicesSize, [array, size_is (audioDevicesSize), retval] out IHostAudioDevice audioDevices); */
+NS_IMETHODIMP _MYCLASS_::GetAudioDevices(PRUint32 *audioDevicesSize, IHostAudioDevice ***audioDevices)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void getUSBDevices (out unsigned long USBDevicesSize, [array, size_is (USBDevicesSize), retval] out IHostUSBDevice USBDevices); */
 NS_IMETHODIMP _MYCLASS_::GetUSBDevices(PRUint32 *USBDevicesSize, IHostUSBDevice ***USBDevices)
 {
@@ -27508,6 +32034,12 @@ NS_IMETHODIMP _MYCLASS_::GetProcessorOnlineCoreCount(PRUint32 *aProcessorOnlineC
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getHostDrives (out unsigned long hostDrivesSize, [array, size_is (hostDrivesSize), retval] out IHostDrive hostDrives); */
+NS_IMETHODIMP _MYCLASS_::GetHostDrives(PRUint32 *hostDrivesSize, IHostDrive ***hostDrives)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* readonly attribute unsigned long memorySize; */
 NS_IMETHODIMP _MYCLASS_::GetMemorySize(PRUint32 *aMemorySize)
 {
@@ -27550,8 +32082,20 @@ NS_IMETHODIMP _MYCLASS_::GetVideoInputDevices(PRUint32 *videoInputDevicesSize, I
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute IHostUpdate update; */
-NS_IMETHODIMP _MYCLASS_::GetUpdate(IHostUpdate * *aUpdate)
+/* readonly attribute IUpdateAgent updateHost; */
+NS_IMETHODIMP _MYCLASS_::GetUpdateHost(IUpdateAgent * *aUpdateHost)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute IUpdateAgent updateExtPack; */
+NS_IMETHODIMP _MYCLASS_::GetUpdateExtPack(IUpdateAgent * *aUpdateExtPack)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute IUpdateAgent updateGuestAdditions; */
+NS_IMETHODIMP _MYCLASS_::GetUpdateGuestAdditions(IUpdateAgent * *aUpdateGuestAdditions)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -27787,6 +32331,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6IHost()
 #define COM_FORWARD_IHost_GETTER_FloppyDrives_TO(smth) NS_IMETHOD GetFloppyDrives (PRUint32 * aFloppyDrivesSize, IMedium * * * aFloppyDrives) { return smth GetFloppyDrives (aFloppyDrivesSize, aFloppyDrives); }
 #define COM_FORWARD_IHost_GETTER_FloppyDrives_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_FloppyDrives_TO ((obj)->)
 #define COM_FORWARD_IHost_GETTER_FloppyDrives_TO_BASE(base) COM_FORWARD_IHost_GETTER_FloppyDrives_TO (base::)
+#define COM_FORWARD_IHost_GETTER_AudioDevices_TO(smth) NS_IMETHOD GetAudioDevices (PRUint32 * aAudioDevicesSize, IHostAudioDevice * * * aAudioDevices) { return smth GetAudioDevices (aAudioDevicesSize, aAudioDevices); }
+#define COM_FORWARD_IHost_GETTER_AudioDevices_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_AudioDevices_TO ((obj)->)
+#define COM_FORWARD_IHost_GETTER_AudioDevices_TO_BASE(base) COM_FORWARD_IHost_GETTER_AudioDevices_TO (base::)
 #define COM_FORWARD_IHost_GETTER_USBDevices_TO(smth) NS_IMETHOD GetUSBDevices (PRUint32 * aUSBDevicesSize, IHostUSBDevice * * * aUSBDevices) { return smth GetUSBDevices (aUSBDevicesSize, aUSBDevices); }
 #define COM_FORWARD_IHost_GETTER_USBDevices_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_USBDevices_TO ((obj)->)
 #define COM_FORWARD_IHost_GETTER_USBDevices_TO_BASE(base) COM_FORWARD_IHost_GETTER_USBDevices_TO (base::)
@@ -27817,6 +32364,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6IHost()
 #define COM_FORWARD_IHost_GETTER_ProcessorOnlineCoreCount_TO(smth) NS_IMETHOD GetProcessorOnlineCoreCount (PRUint32 * aProcessorOnlineCoreCount) { return smth GetProcessorOnlineCoreCount (aProcessorOnlineCoreCount); }
 #define COM_FORWARD_IHost_GETTER_ProcessorOnlineCoreCount_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_ProcessorOnlineCoreCount_TO ((obj)->)
 #define COM_FORWARD_IHost_GETTER_ProcessorOnlineCoreCount_TO_BASE(base) COM_FORWARD_IHost_GETTER_ProcessorOnlineCoreCount_TO (base::)
+#define COM_FORWARD_IHost_GETTER_HostDrives_TO(smth) NS_IMETHOD GetHostDrives (PRUint32 * aHostDrivesSize, IHostDrive * * * aHostDrives) { return smth GetHostDrives (aHostDrivesSize, aHostDrives); }
+#define COM_FORWARD_IHost_GETTER_HostDrives_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_HostDrives_TO ((obj)->)
+#define COM_FORWARD_IHost_GETTER_HostDrives_TO_BASE(base) COM_FORWARD_IHost_GETTER_HostDrives_TO (base::)
 #define COM_FORWARD_IHost_GETTER_MemorySize_TO(smth) NS_IMETHOD GetMemorySize (PRUint32 * aMemorySize) { return smth GetMemorySize (aMemorySize); }
 #define COM_FORWARD_IHost_GETTER_MemorySize_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_MemorySize_TO ((obj)->)
 #define COM_FORWARD_IHost_GETTER_MemorySize_TO_BASE(base) COM_FORWARD_IHost_GETTER_MemorySize_TO (base::)
@@ -27838,9 +32388,15 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6IHost()
 #define COM_FORWARD_IHost_GETTER_VideoInputDevices_TO(smth) NS_IMETHOD GetVideoInputDevices (PRUint32 * aVideoInputDevicesSize, IHostVideoInputDevice * * * aVideoInputDevices) { return smth GetVideoInputDevices (aVideoInputDevicesSize, aVideoInputDevices); }
 #define COM_FORWARD_IHost_GETTER_VideoInputDevices_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_VideoInputDevices_TO ((obj)->)
 #define COM_FORWARD_IHost_GETTER_VideoInputDevices_TO_BASE(base) COM_FORWARD_IHost_GETTER_VideoInputDevices_TO (base::)
-#define COM_FORWARD_IHost_GETTER_Update_TO(smth) NS_IMETHOD GetUpdate (IHostUpdate * * aUpdate) { return smth GetUpdate (aUpdate); }
-#define COM_FORWARD_IHost_GETTER_Update_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_Update_TO ((obj)->)
-#define COM_FORWARD_IHost_GETTER_Update_TO_BASE(base) COM_FORWARD_IHost_GETTER_Update_TO (base::)
+#define COM_FORWARD_IHost_GETTER_UpdateHost_TO(smth) NS_IMETHOD GetUpdateHost (IUpdateAgent * * aUpdateHost) { return smth GetUpdateHost (aUpdateHost); }
+#define COM_FORWARD_IHost_GETTER_UpdateHost_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_UpdateHost_TO ((obj)->)
+#define COM_FORWARD_IHost_GETTER_UpdateHost_TO_BASE(base) COM_FORWARD_IHost_GETTER_UpdateHost_TO (base::)
+#define COM_FORWARD_IHost_GETTER_UpdateExtPack_TO(smth) NS_IMETHOD GetUpdateExtPack (IUpdateAgent * * aUpdateExtPack) { return smth GetUpdateExtPack (aUpdateExtPack); }
+#define COM_FORWARD_IHost_GETTER_UpdateExtPack_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_UpdateExtPack_TO ((obj)->)
+#define COM_FORWARD_IHost_GETTER_UpdateExtPack_TO_BASE(base) COM_FORWARD_IHost_GETTER_UpdateExtPack_TO (base::)
+#define COM_FORWARD_IHost_GETTER_UpdateGuestAdditions_TO(smth) NS_IMETHOD GetUpdateGuestAdditions (IUpdateAgent * * aUpdateGuestAdditions) { return smth GetUpdateGuestAdditions (aUpdateGuestAdditions); }
+#define COM_FORWARD_IHost_GETTER_UpdateGuestAdditions_TO_OBJ(obj) COM_FORWARD_IHost_GETTER_UpdateGuestAdditions_TO ((obj)->)
+#define COM_FORWARD_IHost_GETTER_UpdateGuestAdditions_TO_BASE(base) COM_FORWARD_IHost_GETTER_UpdateGuestAdditions_TO (base::)
 #define COM_FORWARD_IHost_GetProcessorSpeed_TO(smth) NS_IMETHOD GetProcessorSpeed (PRUint32 aCpuId, PRUint32 * aSpeed) { return smth GetProcessorSpeed (aCpuId, aSpeed); }
 #define COM_FORWARD_IHost_GetProcessorSpeed_TO_OBJ(obj) COM_FORWARD_IHost_GetProcessorSpeed_TO ((obj)->)
 #define COM_FORWARD_IHost_GetProcessorSpeed_TO_BASE(base) COM_FORWARD_IHost_GetProcessorSpeed_TO (base::)
@@ -27904,12 +32460,265 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6IHost()
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IHost;
 
+/* starting interface:    ICPUProfile */
+#define ICPUPROFILE_IID_STR "b7fda727-7a08-46ee-8dd8-f8d7308b519c"
+
+#define ICPUPROFILE_IID \
+  {0xb7fda727, 0x7a08, 0x46ee, \
+    { 0x8d, 0xd8, 0xf8, 0xd7, 0x30, 0x8b, 0x51, 0x9c }}
+
+class NS_NO_VTABLE ICPUProfile : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICPUPROFILE_IID)
+
+  /* readonly attribute wstring name; */
+  NS_IMETHOD GetName(PRUnichar * *aName) = 0;
+
+  /* readonly attribute wstring fullName; */
+  NS_IMETHOD GetFullName(PRUnichar * *aFullName) = 0;
+
+  /* readonly attribute CPUArchitecture_T architecture; */
+  NS_IMETHOD GetArchitecture(CPUArchitecture_T *aArchitecture) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute1ICPUProfile(PRUint32 *aInternalAndReservedAttribute1ICPUProfile) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute2ICPUProfile(PRUint32 *aInternalAndReservedAttribute2ICPUProfile) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute3ICPUProfile(PRUint32 *aInternalAndReservedAttribute3ICPUProfile) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute4ICPUProfile(PRUint32 *aInternalAndReservedAttribute4ICPUProfile) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute5ICPUProfile(PRUint32 *aInternalAndReservedAttribute5ICPUProfile) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute6ICPUProfile(PRUint32 *aInternalAndReservedAttribute6ICPUProfile) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute7ICPUProfile(PRUint32 *aInternalAndReservedAttribute7ICPUProfile) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute8ICPUProfile; */
+  NS_IMETHOD GetInternalAndReservedAttribute8ICPUProfile(PRUint32 *aInternalAndReservedAttribute8ICPUProfile) = 0;
+
+  /* void InternalAndReservedMethod1ICPUProfile (); */
+  NS_IMETHOD InternalAndReservedMethod1ICPUProfile(void) = 0;
+
+  /* void InternalAndReservedMethod2ICPUProfile (); */
+  NS_IMETHOD InternalAndReservedMethod2ICPUProfile(void) = 0;
+
+  /* void InternalAndReservedMethod3ICPUProfile (); */
+  NS_IMETHOD InternalAndReservedMethod3ICPUProfile(void) = 0;
+
+  /* void InternalAndReservedMethod4ICPUProfile (); */
+  NS_IMETHOD InternalAndReservedMethod4ICPUProfile(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICPUPROFILE \
+  NS_IMETHOD GetName(PRUnichar * *aName); \
+  NS_IMETHOD GetFullName(PRUnichar * *aFullName); \
+  NS_IMETHOD GetArchitecture(CPUArchitecture_T *aArchitecture); \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICPUProfile(PRUint32 *aInternalAndReservedAttribute1ICPUProfile); \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICPUProfile(PRUint32 *aInternalAndReservedAttribute2ICPUProfile); \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICPUProfile(PRUint32 *aInternalAndReservedAttribute3ICPUProfile); \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICPUProfile(PRUint32 *aInternalAndReservedAttribute4ICPUProfile); \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICPUProfile(PRUint32 *aInternalAndReservedAttribute5ICPUProfile); \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICPUProfile(PRUint32 *aInternalAndReservedAttribute6ICPUProfile); \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICPUProfile(PRUint32 *aInternalAndReservedAttribute7ICPUProfile); \
+  NS_IMETHOD GetInternalAndReservedAttribute8ICPUProfile(PRUint32 *aInternalAndReservedAttribute8ICPUProfile); \
+  NS_IMETHOD InternalAndReservedMethod1ICPUProfile(void); \
+  NS_IMETHOD InternalAndReservedMethod2ICPUProfile(void); \
+  NS_IMETHOD InternalAndReservedMethod3ICPUProfile(void); \
+  NS_IMETHOD InternalAndReservedMethod4ICPUProfile(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICPUPROFILE(_to) \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } \
+  NS_IMETHOD GetFullName(PRUnichar * *aFullName) { return _to GetFullName(aFullName); } \
+  NS_IMETHOD GetArchitecture(CPUArchitecture_T *aArchitecture) { return _to GetArchitecture(aArchitecture); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICPUProfile(PRUint32 *aInternalAndReservedAttribute1ICPUProfile) { return _to GetInternalAndReservedAttribute1ICPUProfile(aInternalAndReservedAttribute1ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICPUProfile(PRUint32 *aInternalAndReservedAttribute2ICPUProfile) { return _to GetInternalAndReservedAttribute2ICPUProfile(aInternalAndReservedAttribute2ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICPUProfile(PRUint32 *aInternalAndReservedAttribute3ICPUProfile) { return _to GetInternalAndReservedAttribute3ICPUProfile(aInternalAndReservedAttribute3ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICPUProfile(PRUint32 *aInternalAndReservedAttribute4ICPUProfile) { return _to GetInternalAndReservedAttribute4ICPUProfile(aInternalAndReservedAttribute4ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICPUProfile(PRUint32 *aInternalAndReservedAttribute5ICPUProfile) { return _to GetInternalAndReservedAttribute5ICPUProfile(aInternalAndReservedAttribute5ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICPUProfile(PRUint32 *aInternalAndReservedAttribute6ICPUProfile) { return _to GetInternalAndReservedAttribute6ICPUProfile(aInternalAndReservedAttribute6ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICPUProfile(PRUint32 *aInternalAndReservedAttribute7ICPUProfile) { return _to GetInternalAndReservedAttribute7ICPUProfile(aInternalAndReservedAttribute7ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8ICPUProfile(PRUint32 *aInternalAndReservedAttribute8ICPUProfile) { return _to GetInternalAndReservedAttribute8ICPUProfile(aInternalAndReservedAttribute8ICPUProfile); } \
+  NS_IMETHOD InternalAndReservedMethod1ICPUProfile(void) { return _to InternalAndReservedMethod1ICPUProfile(); } \
+  NS_IMETHOD InternalAndReservedMethod2ICPUProfile(void) { return _to InternalAndReservedMethod2ICPUProfile(); } \
+  NS_IMETHOD InternalAndReservedMethod3ICPUProfile(void) { return _to InternalAndReservedMethod3ICPUProfile(); } \
+  NS_IMETHOD InternalAndReservedMethod4ICPUProfile(void) { return _to InternalAndReservedMethod4ICPUProfile(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICPUPROFILE(_to) \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
+  NS_IMETHOD GetFullName(PRUnichar * *aFullName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFullName(aFullName); } \
+  NS_IMETHOD GetArchitecture(CPUArchitecture_T *aArchitecture) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetArchitecture(aArchitecture); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICPUProfile(PRUint32 *aInternalAndReservedAttribute1ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1ICPUProfile(aInternalAndReservedAttribute1ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICPUProfile(PRUint32 *aInternalAndReservedAttribute2ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2ICPUProfile(aInternalAndReservedAttribute2ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICPUProfile(PRUint32 *aInternalAndReservedAttribute3ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3ICPUProfile(aInternalAndReservedAttribute3ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICPUProfile(PRUint32 *aInternalAndReservedAttribute4ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4ICPUProfile(aInternalAndReservedAttribute4ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICPUProfile(PRUint32 *aInternalAndReservedAttribute5ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5ICPUProfile(aInternalAndReservedAttribute5ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICPUProfile(PRUint32 *aInternalAndReservedAttribute6ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6ICPUProfile(aInternalAndReservedAttribute6ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICPUProfile(PRUint32 *aInternalAndReservedAttribute7ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7ICPUProfile(aInternalAndReservedAttribute7ICPUProfile); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8ICPUProfile(PRUint32 *aInternalAndReservedAttribute8ICPUProfile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8ICPUProfile(aInternalAndReservedAttribute8ICPUProfile); } \
+  NS_IMETHOD InternalAndReservedMethod1ICPUProfile(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1ICPUProfile(); } \
+  NS_IMETHOD InternalAndReservedMethod2ICPUProfile(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2ICPUProfile(); } \
+  NS_IMETHOD InternalAndReservedMethod3ICPUProfile(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3ICPUProfile(); } \
+  NS_IMETHOD InternalAndReservedMethod4ICPUProfile(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4ICPUProfile(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICPUProfile
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICPUPROFILE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICPUProfile)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring name; */
+NS_IMETHODIMP _MYCLASS_::GetName(PRUnichar * *aName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring fullName; */
+NS_IMETHODIMP _MYCLASS_::GetFullName(PRUnichar * *aFullName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute CPUArchitecture_T architecture; */
+NS_IMETHODIMP _MYCLASS_::GetArchitecture(CPUArchitecture_T *aArchitecture)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1ICPUProfile(PRUint32 *aInternalAndReservedAttribute1ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2ICPUProfile(PRUint32 *aInternalAndReservedAttribute2ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3ICPUProfile(PRUint32 *aInternalAndReservedAttribute3ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4ICPUProfile(PRUint32 *aInternalAndReservedAttribute4ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5ICPUProfile(PRUint32 *aInternalAndReservedAttribute5ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6ICPUProfile(PRUint32 *aInternalAndReservedAttribute6ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7ICPUProfile(PRUint32 *aInternalAndReservedAttribute7ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute8ICPUProfile; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8ICPUProfile(PRUint32 *aInternalAndReservedAttribute8ICPUProfile)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1ICPUProfile (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1ICPUProfile()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2ICPUProfile (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2ICPUProfile()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod3ICPUProfile (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3ICPUProfile()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod4ICPUProfile (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ICPUProfile()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICPUProfile_GETTER_Name_TO(smth) NS_IMETHOD GetName (PRUnichar * * aName) { return smth GetName (aName); }
+#define COM_FORWARD_ICPUProfile_GETTER_Name_TO_OBJ(obj) COM_FORWARD_ICPUProfile_GETTER_Name_TO ((obj)->)
+#define COM_FORWARD_ICPUProfile_GETTER_Name_TO_BASE(base) COM_FORWARD_ICPUProfile_GETTER_Name_TO (base::)
+#define COM_FORWARD_ICPUProfile_GETTER_FullName_TO(smth) NS_IMETHOD GetFullName (PRUnichar * * aFullName) { return smth GetFullName (aFullName); }
+#define COM_FORWARD_ICPUProfile_GETTER_FullName_TO_OBJ(obj) COM_FORWARD_ICPUProfile_GETTER_FullName_TO ((obj)->)
+#define COM_FORWARD_ICPUProfile_GETTER_FullName_TO_BASE(base) COM_FORWARD_ICPUProfile_GETTER_FullName_TO (base::)
+#define COM_FORWARD_ICPUProfile_GETTER_Architecture_TO(smth) NS_IMETHOD GetArchitecture (PRUint32 * aArchitecture) { return smth GetArchitecture (aArchitecture); }
+#define COM_FORWARD_ICPUProfile_GETTER_Architecture_TO_OBJ(obj) COM_FORWARD_ICPUProfile_GETTER_Architecture_TO ((obj)->)
+#define COM_FORWARD_ICPUProfile_GETTER_Architecture_TO_BASE(base) COM_FORWARD_ICPUProfile_GETTER_Architecture_TO (base::)
+#define COM_FORWARD_ICPUProfile_TO(smth) NS_FORWARD_ICPUPROFILE (smth)
+#define COM_FORWARD_ICPUProfile_TO_OBJ(obj) COM_FORWARD_ICPUProfile_TO ((obj)->)
+#define COM_FORWARD_ICPUProfile_TO_BASE(base) COM_FORWARD_ICPUProfile_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICPUProfile;
+
 /* starting interface:    ISystemProperties */
-#define ISYSTEMPROPERTIES_IID_STR "027bc463-929c-40e8-bf16-fea557cd8e7e"
+#define ISYSTEMPROPERTIES_IID_STR "aac6c7cb-a371-4c58-ab51-0616896b2f2c"
 
 #define ISYSTEMPROPERTIES_IID \
-  {0x027bc463, 0x929c, 0x40e8, \
-    { 0xbf, 0x16, 0xfe, 0xa5, 0x57, 0xcd, 0x8e, 0x7e }}
+  {0xaac6c7cb, 0xa371, 0x4c58, \
+    { 0xab, 0x51, 0x06, 0x16, 0x89, 0x6b, 0x2f, 0x2c }}
 
 class NS_NO_VTABLE ISystemProperties : public nsISupports {
  public: 
@@ -27999,6 +32808,10 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetDefaultVRDEExtPack(PRUnichar * *aDefaultVRDEExtPack) = 0;
   NS_IMETHOD SetDefaultVRDEExtPack(const PRUnichar * aDefaultVRDEExtPack) = 0;
 
+  /* attribute wstring defaultCryptoExtPack; */
+  NS_IMETHOD GetDefaultCryptoExtPack(PRUnichar * *aDefaultCryptoExtPack) = 0;
+  NS_IMETHOD SetDefaultCryptoExtPack(const PRUnichar * aDefaultCryptoExtPack) = 0;
+
   /* attribute unsigned long logHistoryCount; */
   NS_IMETHOD GetLogHistoryCount(PRUint32 *aLogHistoryCount) = 0;
   NS_IMETHOD SetLogHistoryCount(PRUint32 aLogHistoryCount) = 0;
@@ -28056,17 +32869,23 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   /* void getSupportedExportOptions (out unsigned long supportedExportOptionsSize, [array, size_is (supportedExportOptionsSize), retval] out ExportOptions_T supportedExportOptions); */
   NS_IMETHOD GetSupportedExportOptions(PRUint32 *supportedExportOptionsSize, ExportOptions_T **supportedExportOptions) = 0;
 
+  /* void getSupportedRecordingFeatures (out unsigned long supportedRecordingFeaturesSize, [array, size_is (supportedRecordingFeaturesSize), retval] out RecordingFeature_T supportedRecordingFeatures); */
+  NS_IMETHOD GetSupportedRecordingFeatures(PRUint32 *supportedRecordingFeaturesSize, RecordingFeature_T **supportedRecordingFeatures) = 0;
+
   /* void getSupportedRecordingAudioCodecs (out unsigned long supportedRecordingAudioCodecsSize, [array, size_is (supportedRecordingAudioCodecsSize), retval] out RecordingAudioCodec_T supportedRecordingAudioCodecs); */
   NS_IMETHOD GetSupportedRecordingAudioCodecs(PRUint32 *supportedRecordingAudioCodecsSize, RecordingAudioCodec_T **supportedRecordingAudioCodecs) = 0;
 
   /* void getSupportedRecordingVideoCodecs (out unsigned long supportedRecordingVideoCodecsSize, [array, size_is (supportedRecordingVideoCodecsSize), retval] out RecordingVideoCodec_T supportedRecordingVideoCodecs); */
   NS_IMETHOD GetSupportedRecordingVideoCodecs(PRUint32 *supportedRecordingVideoCodecsSize, RecordingVideoCodec_T **supportedRecordingVideoCodecs) = 0;
 
-  /* void getSupportedRecordingVSMethods (out unsigned long supportedRecordingVSMethodsSize, [array, size_is (supportedRecordingVSMethodsSize), retval] out RecordingVideoScalingMethod_T supportedRecordingVSMethods); */
-  NS_IMETHOD GetSupportedRecordingVSMethods(PRUint32 *supportedRecordingVSMethodsSize, RecordingVideoScalingMethod_T **supportedRecordingVSMethods) = 0;
+  /* void getSupportedRecordingVSModes (out unsigned long supportedRecordingVSModesSize, [array, size_is (supportedRecordingVSModesSize), retval] out RecordingVideoScalingMode_T supportedRecordingVSModes); */
+  NS_IMETHOD GetSupportedRecordingVSModes(PRUint32 *supportedRecordingVSModesSize, RecordingVideoScalingMode_T **supportedRecordingVSModes) = 0;
 
-  /* void getSupportedRecordingVRCModes (out unsigned long supportedRecordingVRCModesSize, [array, size_is (supportedRecordingVRCModesSize), retval] out RecordingVideoRateControlMode_T supportedRecordingVRCModes); */
-  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingVideoRateControlMode_T **supportedRecordingVRCModes) = 0;
+  /* void getSupportedRecordingARCModes (out unsigned long supportedRecordingARCModesSize, [array, size_is (supportedRecordingARCModesSize), retval] out RecordingRateControlMode_T supportedRecordingARCModes); */
+  NS_IMETHOD GetSupportedRecordingARCModes(PRUint32 *supportedRecordingARCModesSize, RecordingRateControlMode_T **supportedRecordingARCModes) = 0;
+
+  /* void getSupportedRecordingVRCModes (out unsigned long supportedRecordingVRCModesSize, [array, size_is (supportedRecordingVRCModesSize), retval] out RecordingRateControlMode_T supportedRecordingVRCModes); */
+  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingRateControlMode_T **supportedRecordingVRCModes) = 0;
 
   /* void getSupportedGraphicsControllerTypes (out unsigned long supportedGraphicsControllerTypesSize, [array, size_is (supportedGraphicsControllerTypesSize), retval] out GraphicsControllerType_T supportedGraphicsControllerTypes); */
   NS_IMETHOD GetSupportedGraphicsControllerTypes(PRUint32 *supportedGraphicsControllerTypesSize, GraphicsControllerType_T **supportedGraphicsControllerTypes) = 0;
@@ -28109,6 +32928,16 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
 
   /* void getSupportedChipsetTypes (out unsigned long supportedChipsetTypesSize, [array, size_is (supportedChipsetTypesSize), retval] out ChipsetType_T supportedChipsetTypes); */
   NS_IMETHOD GetSupportedChipsetTypes(PRUint32 *supportedChipsetTypesSize, ChipsetType_T **supportedChipsetTypes) = 0;
+
+  /* void getSupportedIommuTypes (out unsigned long supportedIommuTypesSize, [array, size_is (supportedIommuTypesSize), retval] out IommuType_T supportedIommuTypes); */
+  NS_IMETHOD GetSupportedIommuTypes(PRUint32 *supportedIommuTypesSize, IommuType_T **supportedIommuTypes) = 0;
+
+  /* void getSupportedTpmTypes (out unsigned long supportedTpmTypesSize, [array, size_is (supportedTpmTypesSize), retval] out TpmType_T supportedTpmTypes); */
+  NS_IMETHOD GetSupportedTpmTypes(PRUint32 *supportedTpmTypesSize, TpmType_T **supportedTpmTypes) = 0;
+
+  /* attribute wstring languageId; */
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId) = 0;
+  NS_IMETHOD SetLanguageId(const PRUnichar * aLanguageId) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1ISystemProperties; */
   NS_IMETHOD GetInternalAndReservedAttribute1ISystemProperties(PRUint32 *aInternalAndReservedAttribute1ISystemProperties) = 0;
@@ -28194,6 +33023,9 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   /* void getMaxInstancesOfUSBControllerType (in ChipsetType_T chipset, in USBControllerType_T type, [retval] out unsigned long maxInstances); */
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances) = 0;
 
+  /* void getCPUProfiles (in CPUArchitecture_T architecture, in wstring namePattern, out unsigned long profilesSize, [array, size_is (profilesSize), retval] out ICPUProfile profiles); */
+  NS_IMETHOD GetCPUProfiles(CPUArchitecture_T architecture, const PRUnichar *namePattern, PRUint32 *profilesSize, ICPUProfile ***profiles) = 0;
+
   /* void InternalAndReservedMethod1ISystemProperties (); */
   NS_IMETHOD InternalAndReservedMethod1ISystemProperties(void) = 0;
 
@@ -28245,6 +33077,8 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD SetWebServiceAuthLibrary(const PRUnichar * aWebServiceAuthLibrary); \
   NS_IMETHOD GetDefaultVRDEExtPack(PRUnichar * *aDefaultVRDEExtPack); \
   NS_IMETHOD SetDefaultVRDEExtPack(const PRUnichar * aDefaultVRDEExtPack); \
+  NS_IMETHOD GetDefaultCryptoExtPack(PRUnichar * *aDefaultCryptoExtPack); \
+  NS_IMETHOD SetDefaultCryptoExtPack(const PRUnichar * aDefaultCryptoExtPack); \
   NS_IMETHOD GetLogHistoryCount(PRUint32 *aLogHistoryCount); \
   NS_IMETHOD SetLogHistoryCount(PRUint32 aLogHistoryCount); \
   NS_IMETHOD GetDefaultAudioDriver(AudioDriverType_T *aDefaultAudioDriver); \
@@ -28268,10 +33102,12 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetSupportedVFSTypes(PRUint32 *supportedVFSTypesSize, VFSType_T **supportedVFSTypes); \
   NS_IMETHOD GetSupportedImportOptions(PRUint32 *supportedImportOptionsSize, ImportOptions_T **supportedImportOptions); \
   NS_IMETHOD GetSupportedExportOptions(PRUint32 *supportedExportOptionsSize, ExportOptions_T **supportedExportOptions); \
+  NS_IMETHOD GetSupportedRecordingFeatures(PRUint32 *supportedRecordingFeaturesSize, RecordingFeature_T **supportedRecordingFeatures); \
   NS_IMETHOD GetSupportedRecordingAudioCodecs(PRUint32 *supportedRecordingAudioCodecsSize, RecordingAudioCodec_T **supportedRecordingAudioCodecs); \
   NS_IMETHOD GetSupportedRecordingVideoCodecs(PRUint32 *supportedRecordingVideoCodecsSize, RecordingVideoCodec_T **supportedRecordingVideoCodecs); \
-  NS_IMETHOD GetSupportedRecordingVSMethods(PRUint32 *supportedRecordingVSMethodsSize, RecordingVideoScalingMethod_T **supportedRecordingVSMethods); \
-  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingVideoRateControlMode_T **supportedRecordingVRCModes); \
+  NS_IMETHOD GetSupportedRecordingVSModes(PRUint32 *supportedRecordingVSModesSize, RecordingVideoScalingMode_T **supportedRecordingVSModes); \
+  NS_IMETHOD GetSupportedRecordingARCModes(PRUint32 *supportedRecordingARCModesSize, RecordingRateControlMode_T **supportedRecordingARCModes); \
+  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingRateControlMode_T **supportedRecordingVRCModes); \
   NS_IMETHOD GetSupportedGraphicsControllerTypes(PRUint32 *supportedGraphicsControllerTypesSize, GraphicsControllerType_T **supportedGraphicsControllerTypes); \
   NS_IMETHOD GetSupportedCloneOptions(PRUint32 *supportedCloneOptionsSize, CloneOptions_T **supportedCloneOptions); \
   NS_IMETHOD GetSupportedAutostopTypes(PRUint32 *supportedAutostopTypesSize, AutostopType_T **supportedAutostopTypes); \
@@ -28286,6 +33122,10 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetSupportedStorageBuses(PRUint32 *supportedStorageBusesSize, StorageBus_T **supportedStorageBuses); \
   NS_IMETHOD GetSupportedStorageControllerTypes(PRUint32 *supportedStorageControllerTypesSize, StorageControllerType_T **supportedStorageControllerTypes); \
   NS_IMETHOD GetSupportedChipsetTypes(PRUint32 *supportedChipsetTypesSize, ChipsetType_T **supportedChipsetTypes); \
+  NS_IMETHOD GetSupportedIommuTypes(PRUint32 *supportedIommuTypesSize, IommuType_T **supportedIommuTypes); \
+  NS_IMETHOD GetSupportedTpmTypes(PRUint32 *supportedTpmTypesSize, TpmType_T **supportedTpmTypes); \
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId); \
+  NS_IMETHOD SetLanguageId(const PRUnichar * aLanguageId); \
   NS_IMETHOD GetInternalAndReservedAttribute1ISystemProperties(PRUint32 *aInternalAndReservedAttribute1ISystemProperties); \
   NS_IMETHOD GetInternalAndReservedAttribute2ISystemProperties(PRUint32 *aInternalAndReservedAttribute2ISystemProperties); \
   NS_IMETHOD GetInternalAndReservedAttribute3ISystemProperties(PRUint32 *aInternalAndReservedAttribute3ISystemProperties); \
@@ -28314,6 +33154,7 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetDefaultIoCacheSettingForStorageController(StorageControllerType_T controllerType, PRBool *enabled); \
   NS_IMETHOD GetStorageControllerHotplugCapable(StorageControllerType_T controllerType, PRBool *hotplugCapable); \
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances); \
+  NS_IMETHOD GetCPUProfiles(CPUArchitecture_T architecture, const PRUnichar *namePattern, PRUint32 *profilesSize, ICPUProfile ***profiles); \
   NS_IMETHOD InternalAndReservedMethod1ISystemProperties(void); \
   NS_IMETHOD InternalAndReservedMethod2ISystemProperties(void); \
   NS_IMETHOD InternalAndReservedMethod3ISystemProperties(void); \
@@ -28356,6 +33197,8 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD SetWebServiceAuthLibrary(const PRUnichar * aWebServiceAuthLibrary) { return _to SetWebServiceAuthLibrary(aWebServiceAuthLibrary); } \
   NS_IMETHOD GetDefaultVRDEExtPack(PRUnichar * *aDefaultVRDEExtPack) { return _to GetDefaultVRDEExtPack(aDefaultVRDEExtPack); } \
   NS_IMETHOD SetDefaultVRDEExtPack(const PRUnichar * aDefaultVRDEExtPack) { return _to SetDefaultVRDEExtPack(aDefaultVRDEExtPack); } \
+  NS_IMETHOD GetDefaultCryptoExtPack(PRUnichar * *aDefaultCryptoExtPack) { return _to GetDefaultCryptoExtPack(aDefaultCryptoExtPack); } \
+  NS_IMETHOD SetDefaultCryptoExtPack(const PRUnichar * aDefaultCryptoExtPack) { return _to SetDefaultCryptoExtPack(aDefaultCryptoExtPack); } \
   NS_IMETHOD GetLogHistoryCount(PRUint32 *aLogHistoryCount) { return _to GetLogHistoryCount(aLogHistoryCount); } \
   NS_IMETHOD SetLogHistoryCount(PRUint32 aLogHistoryCount) { return _to SetLogHistoryCount(aLogHistoryCount); } \
   NS_IMETHOD GetDefaultAudioDriver(AudioDriverType_T *aDefaultAudioDriver) { return _to GetDefaultAudioDriver(aDefaultAudioDriver); } \
@@ -28379,10 +33222,12 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetSupportedVFSTypes(PRUint32 *supportedVFSTypesSize, VFSType_T **supportedVFSTypes) { return _to GetSupportedVFSTypes(supportedVFSTypesSize, supportedVFSTypes); } \
   NS_IMETHOD GetSupportedImportOptions(PRUint32 *supportedImportOptionsSize, ImportOptions_T **supportedImportOptions) { return _to GetSupportedImportOptions(supportedImportOptionsSize, supportedImportOptions); } \
   NS_IMETHOD GetSupportedExportOptions(PRUint32 *supportedExportOptionsSize, ExportOptions_T **supportedExportOptions) { return _to GetSupportedExportOptions(supportedExportOptionsSize, supportedExportOptions); } \
+  NS_IMETHOD GetSupportedRecordingFeatures(PRUint32 *supportedRecordingFeaturesSize, RecordingFeature_T **supportedRecordingFeatures) { return _to GetSupportedRecordingFeatures(supportedRecordingFeaturesSize, supportedRecordingFeatures); } \
   NS_IMETHOD GetSupportedRecordingAudioCodecs(PRUint32 *supportedRecordingAudioCodecsSize, RecordingAudioCodec_T **supportedRecordingAudioCodecs) { return _to GetSupportedRecordingAudioCodecs(supportedRecordingAudioCodecsSize, supportedRecordingAudioCodecs); } \
   NS_IMETHOD GetSupportedRecordingVideoCodecs(PRUint32 *supportedRecordingVideoCodecsSize, RecordingVideoCodec_T **supportedRecordingVideoCodecs) { return _to GetSupportedRecordingVideoCodecs(supportedRecordingVideoCodecsSize, supportedRecordingVideoCodecs); } \
-  NS_IMETHOD GetSupportedRecordingVSMethods(PRUint32 *supportedRecordingVSMethodsSize, RecordingVideoScalingMethod_T **supportedRecordingVSMethods) { return _to GetSupportedRecordingVSMethods(supportedRecordingVSMethodsSize, supportedRecordingVSMethods); } \
-  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingVideoRateControlMode_T **supportedRecordingVRCModes) { return _to GetSupportedRecordingVRCModes(supportedRecordingVRCModesSize, supportedRecordingVRCModes); } \
+  NS_IMETHOD GetSupportedRecordingVSModes(PRUint32 *supportedRecordingVSModesSize, RecordingVideoScalingMode_T **supportedRecordingVSModes) { return _to GetSupportedRecordingVSModes(supportedRecordingVSModesSize, supportedRecordingVSModes); } \
+  NS_IMETHOD GetSupportedRecordingARCModes(PRUint32 *supportedRecordingARCModesSize, RecordingRateControlMode_T **supportedRecordingARCModes) { return _to GetSupportedRecordingARCModes(supportedRecordingARCModesSize, supportedRecordingARCModes); } \
+  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingRateControlMode_T **supportedRecordingVRCModes) { return _to GetSupportedRecordingVRCModes(supportedRecordingVRCModesSize, supportedRecordingVRCModes); } \
   NS_IMETHOD GetSupportedGraphicsControllerTypes(PRUint32 *supportedGraphicsControllerTypesSize, GraphicsControllerType_T **supportedGraphicsControllerTypes) { return _to GetSupportedGraphicsControllerTypes(supportedGraphicsControllerTypesSize, supportedGraphicsControllerTypes); } \
   NS_IMETHOD GetSupportedCloneOptions(PRUint32 *supportedCloneOptionsSize, CloneOptions_T **supportedCloneOptions) { return _to GetSupportedCloneOptions(supportedCloneOptionsSize, supportedCloneOptions); } \
   NS_IMETHOD GetSupportedAutostopTypes(PRUint32 *supportedAutostopTypesSize, AutostopType_T **supportedAutostopTypes) { return _to GetSupportedAutostopTypes(supportedAutostopTypesSize, supportedAutostopTypes); } \
@@ -28397,6 +33242,10 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetSupportedStorageBuses(PRUint32 *supportedStorageBusesSize, StorageBus_T **supportedStorageBuses) { return _to GetSupportedStorageBuses(supportedStorageBusesSize, supportedStorageBuses); } \
   NS_IMETHOD GetSupportedStorageControllerTypes(PRUint32 *supportedStorageControllerTypesSize, StorageControllerType_T **supportedStorageControllerTypes) { return _to GetSupportedStorageControllerTypes(supportedStorageControllerTypesSize, supportedStorageControllerTypes); } \
   NS_IMETHOD GetSupportedChipsetTypes(PRUint32 *supportedChipsetTypesSize, ChipsetType_T **supportedChipsetTypes) { return _to GetSupportedChipsetTypes(supportedChipsetTypesSize, supportedChipsetTypes); } \
+  NS_IMETHOD GetSupportedIommuTypes(PRUint32 *supportedIommuTypesSize, IommuType_T **supportedIommuTypes) { return _to GetSupportedIommuTypes(supportedIommuTypesSize, supportedIommuTypes); } \
+  NS_IMETHOD GetSupportedTpmTypes(PRUint32 *supportedTpmTypesSize, TpmType_T **supportedTpmTypes) { return _to GetSupportedTpmTypes(supportedTpmTypesSize, supportedTpmTypes); } \
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId) { return _to GetLanguageId(aLanguageId); } \
+  NS_IMETHOD SetLanguageId(const PRUnichar * aLanguageId) { return _to SetLanguageId(aLanguageId); } \
   NS_IMETHOD GetInternalAndReservedAttribute1ISystemProperties(PRUint32 *aInternalAndReservedAttribute1ISystemProperties) { return _to GetInternalAndReservedAttribute1ISystemProperties(aInternalAndReservedAttribute1ISystemProperties); } \
   NS_IMETHOD GetInternalAndReservedAttribute2ISystemProperties(PRUint32 *aInternalAndReservedAttribute2ISystemProperties) { return _to GetInternalAndReservedAttribute2ISystemProperties(aInternalAndReservedAttribute2ISystemProperties); } \
   NS_IMETHOD GetInternalAndReservedAttribute3ISystemProperties(PRUint32 *aInternalAndReservedAttribute3ISystemProperties) { return _to GetInternalAndReservedAttribute3ISystemProperties(aInternalAndReservedAttribute3ISystemProperties); } \
@@ -28425,6 +33274,7 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetDefaultIoCacheSettingForStorageController(StorageControllerType_T controllerType, PRBool *enabled) { return _to GetDefaultIoCacheSettingForStorageController(controllerType, enabled); } \
   NS_IMETHOD GetStorageControllerHotplugCapable(StorageControllerType_T controllerType, PRBool *hotplugCapable) { return _to GetStorageControllerHotplugCapable(controllerType, hotplugCapable); } \
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances) { return _to GetMaxInstancesOfUSBControllerType(chipset, type, maxInstances); } \
+  NS_IMETHOD GetCPUProfiles(CPUArchitecture_T architecture, const PRUnichar *namePattern, PRUint32 *profilesSize, ICPUProfile ***profiles) { return _to GetCPUProfiles(architecture, namePattern, profilesSize, profiles); } \
   NS_IMETHOD InternalAndReservedMethod1ISystemProperties(void) { return _to InternalAndReservedMethod1ISystemProperties(); } \
   NS_IMETHOD InternalAndReservedMethod2ISystemProperties(void) { return _to InternalAndReservedMethod2ISystemProperties(); } \
   NS_IMETHOD InternalAndReservedMethod3ISystemProperties(void) { return _to InternalAndReservedMethod3ISystemProperties(); } \
@@ -28467,6 +33317,8 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD SetWebServiceAuthLibrary(const PRUnichar * aWebServiceAuthLibrary) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetWebServiceAuthLibrary(aWebServiceAuthLibrary); } \
   NS_IMETHOD GetDefaultVRDEExtPack(PRUnichar * *aDefaultVRDEExtPack) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDefaultVRDEExtPack(aDefaultVRDEExtPack); } \
   NS_IMETHOD SetDefaultVRDEExtPack(const PRUnichar * aDefaultVRDEExtPack) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDefaultVRDEExtPack(aDefaultVRDEExtPack); } \
+  NS_IMETHOD GetDefaultCryptoExtPack(PRUnichar * *aDefaultCryptoExtPack) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDefaultCryptoExtPack(aDefaultCryptoExtPack); } \
+  NS_IMETHOD SetDefaultCryptoExtPack(const PRUnichar * aDefaultCryptoExtPack) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDefaultCryptoExtPack(aDefaultCryptoExtPack); } \
   NS_IMETHOD GetLogHistoryCount(PRUint32 *aLogHistoryCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLogHistoryCount(aLogHistoryCount); } \
   NS_IMETHOD SetLogHistoryCount(PRUint32 aLogHistoryCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetLogHistoryCount(aLogHistoryCount); } \
   NS_IMETHOD GetDefaultAudioDriver(AudioDriverType_T *aDefaultAudioDriver) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDefaultAudioDriver(aDefaultAudioDriver); } \
@@ -28490,10 +33342,12 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetSupportedVFSTypes(PRUint32 *supportedVFSTypesSize, VFSType_T **supportedVFSTypes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedVFSTypes(supportedVFSTypesSize, supportedVFSTypes); } \
   NS_IMETHOD GetSupportedImportOptions(PRUint32 *supportedImportOptionsSize, ImportOptions_T **supportedImportOptions) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedImportOptions(supportedImportOptionsSize, supportedImportOptions); } \
   NS_IMETHOD GetSupportedExportOptions(PRUint32 *supportedExportOptionsSize, ExportOptions_T **supportedExportOptions) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedExportOptions(supportedExportOptionsSize, supportedExportOptions); } \
+  NS_IMETHOD GetSupportedRecordingFeatures(PRUint32 *supportedRecordingFeaturesSize, RecordingFeature_T **supportedRecordingFeatures) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingFeatures(supportedRecordingFeaturesSize, supportedRecordingFeatures); } \
   NS_IMETHOD GetSupportedRecordingAudioCodecs(PRUint32 *supportedRecordingAudioCodecsSize, RecordingAudioCodec_T **supportedRecordingAudioCodecs) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingAudioCodecs(supportedRecordingAudioCodecsSize, supportedRecordingAudioCodecs); } \
   NS_IMETHOD GetSupportedRecordingVideoCodecs(PRUint32 *supportedRecordingVideoCodecsSize, RecordingVideoCodec_T **supportedRecordingVideoCodecs) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingVideoCodecs(supportedRecordingVideoCodecsSize, supportedRecordingVideoCodecs); } \
-  NS_IMETHOD GetSupportedRecordingVSMethods(PRUint32 *supportedRecordingVSMethodsSize, RecordingVideoScalingMethod_T **supportedRecordingVSMethods) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingVSMethods(supportedRecordingVSMethodsSize, supportedRecordingVSMethods); } \
-  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingVideoRateControlMode_T **supportedRecordingVRCModes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingVRCModes(supportedRecordingVRCModesSize, supportedRecordingVRCModes); } \
+  NS_IMETHOD GetSupportedRecordingVSModes(PRUint32 *supportedRecordingVSModesSize, RecordingVideoScalingMode_T **supportedRecordingVSModes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingVSModes(supportedRecordingVSModesSize, supportedRecordingVSModes); } \
+  NS_IMETHOD GetSupportedRecordingARCModes(PRUint32 *supportedRecordingARCModesSize, RecordingRateControlMode_T **supportedRecordingARCModes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingARCModes(supportedRecordingARCModesSize, supportedRecordingARCModes); } \
+  NS_IMETHOD GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingRateControlMode_T **supportedRecordingVRCModes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedRecordingVRCModes(supportedRecordingVRCModesSize, supportedRecordingVRCModes); } \
   NS_IMETHOD GetSupportedGraphicsControllerTypes(PRUint32 *supportedGraphicsControllerTypesSize, GraphicsControllerType_T **supportedGraphicsControllerTypes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedGraphicsControllerTypes(supportedGraphicsControllerTypesSize, supportedGraphicsControllerTypes); } \
   NS_IMETHOD GetSupportedCloneOptions(PRUint32 *supportedCloneOptionsSize, CloneOptions_T **supportedCloneOptions) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedCloneOptions(supportedCloneOptionsSize, supportedCloneOptions); } \
   NS_IMETHOD GetSupportedAutostopTypes(PRUint32 *supportedAutostopTypesSize, AutostopType_T **supportedAutostopTypes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedAutostopTypes(supportedAutostopTypesSize, supportedAutostopTypes); } \
@@ -28508,6 +33362,10 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetSupportedStorageBuses(PRUint32 *supportedStorageBusesSize, StorageBus_T **supportedStorageBuses) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedStorageBuses(supportedStorageBusesSize, supportedStorageBuses); } \
   NS_IMETHOD GetSupportedStorageControllerTypes(PRUint32 *supportedStorageControllerTypesSize, StorageControllerType_T **supportedStorageControllerTypes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedStorageControllerTypes(supportedStorageControllerTypesSize, supportedStorageControllerTypes); } \
   NS_IMETHOD GetSupportedChipsetTypes(PRUint32 *supportedChipsetTypesSize, ChipsetType_T **supportedChipsetTypes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedChipsetTypes(supportedChipsetTypesSize, supportedChipsetTypes); } \
+  NS_IMETHOD GetSupportedIommuTypes(PRUint32 *supportedIommuTypesSize, IommuType_T **supportedIommuTypes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedIommuTypes(supportedIommuTypesSize, supportedIommuTypes); } \
+  NS_IMETHOD GetSupportedTpmTypes(PRUint32 *supportedTpmTypesSize, TpmType_T **supportedTpmTypes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportedTpmTypes(supportedTpmTypesSize, supportedTpmTypes); } \
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLanguageId(aLanguageId); } \
+  NS_IMETHOD SetLanguageId(const PRUnichar * aLanguageId) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetLanguageId(aLanguageId); } \
   NS_IMETHOD GetInternalAndReservedAttribute1ISystemProperties(PRUint32 *aInternalAndReservedAttribute1ISystemProperties) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1ISystemProperties(aInternalAndReservedAttribute1ISystemProperties); } \
   NS_IMETHOD GetInternalAndReservedAttribute2ISystemProperties(PRUint32 *aInternalAndReservedAttribute2ISystemProperties) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2ISystemProperties(aInternalAndReservedAttribute2ISystemProperties); } \
   NS_IMETHOD GetInternalAndReservedAttribute3ISystemProperties(PRUint32 *aInternalAndReservedAttribute3ISystemProperties) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3ISystemProperties(aInternalAndReservedAttribute3ISystemProperties); } \
@@ -28536,6 +33394,7 @@ class NS_NO_VTABLE ISystemProperties : public nsISupports {
   NS_IMETHOD GetDefaultIoCacheSettingForStorageController(StorageControllerType_T controllerType, PRBool *enabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDefaultIoCacheSettingForStorageController(controllerType, enabled); } \
   NS_IMETHOD GetStorageControllerHotplugCapable(StorageControllerType_T controllerType, PRBool *hotplugCapable) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStorageControllerHotplugCapable(controllerType, hotplugCapable); } \
   NS_IMETHOD GetMaxInstancesOfUSBControllerType(ChipsetType_T chipset, USBControllerType_T type, PRUint32 *maxInstances) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMaxInstancesOfUSBControllerType(chipset, type, maxInstances); } \
+  NS_IMETHOD GetCPUProfiles(CPUArchitecture_T architecture, const PRUnichar *namePattern, PRUint32 *profilesSize, ICPUProfile ***profiles) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCPUProfiles(architecture, namePattern, profilesSize, profiles); } \
   NS_IMETHOD InternalAndReservedMethod1ISystemProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1ISystemProperties(); } \
   NS_IMETHOD InternalAndReservedMethod2ISystemProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2ISystemProperties(); } \
   NS_IMETHOD InternalAndReservedMethod3ISystemProperties(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3ISystemProperties(); } \
@@ -28761,6 +33620,16 @@ NS_IMETHODIMP _MYCLASS_::SetDefaultVRDEExtPack(const PRUnichar * aDefaultVRDEExt
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* attribute wstring defaultCryptoExtPack; */
+NS_IMETHODIMP _MYCLASS_::GetDefaultCryptoExtPack(PRUnichar * *aDefaultCryptoExtPack)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetDefaultCryptoExtPack(const PRUnichar * aDefaultCryptoExtPack)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* attribute unsigned long logHistoryCount; */
 NS_IMETHODIMP _MYCLASS_::GetLogHistoryCount(PRUint32 *aLogHistoryCount)
 {
@@ -28887,6 +33756,12 @@ NS_IMETHODIMP _MYCLASS_::GetSupportedExportOptions(PRUint32 *supportedExportOpti
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getSupportedRecordingFeatures (out unsigned long supportedRecordingFeaturesSize, [array, size_is (supportedRecordingFeaturesSize), retval] out RecordingFeature_T supportedRecordingFeatures); */
+NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingFeatures(PRUint32 *supportedRecordingFeaturesSize, RecordingFeature_T **supportedRecordingFeatures)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void getSupportedRecordingAudioCodecs (out unsigned long supportedRecordingAudioCodecsSize, [array, size_is (supportedRecordingAudioCodecsSize), retval] out RecordingAudioCodec_T supportedRecordingAudioCodecs); */
 NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingAudioCodecs(PRUint32 *supportedRecordingAudioCodecsSize, RecordingAudioCodec_T **supportedRecordingAudioCodecs)
 {
@@ -28899,14 +33774,20 @@ NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingVideoCodecs(PRUint32 *supportedRec
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void getSupportedRecordingVSMethods (out unsigned long supportedRecordingVSMethodsSize, [array, size_is (supportedRecordingVSMethodsSize), retval] out RecordingVideoScalingMethod_T supportedRecordingVSMethods); */
-NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingVSMethods(PRUint32 *supportedRecordingVSMethodsSize, RecordingVideoScalingMethod_T **supportedRecordingVSMethods)
+/* void getSupportedRecordingVSModes (out unsigned long supportedRecordingVSModesSize, [array, size_is (supportedRecordingVSModesSize), retval] out RecordingVideoScalingMode_T supportedRecordingVSModes); */
+NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingVSModes(PRUint32 *supportedRecordingVSModesSize, RecordingVideoScalingMode_T **supportedRecordingVSModes)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void getSupportedRecordingVRCModes (out unsigned long supportedRecordingVRCModesSize, [array, size_is (supportedRecordingVRCModesSize), retval] out RecordingVideoRateControlMode_T supportedRecordingVRCModes); */
-NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingVideoRateControlMode_T **supportedRecordingVRCModes)
+/* void getSupportedRecordingARCModes (out unsigned long supportedRecordingARCModesSize, [array, size_is (supportedRecordingARCModesSize), retval] out RecordingRateControlMode_T supportedRecordingARCModes); */
+NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingARCModes(PRUint32 *supportedRecordingARCModesSize, RecordingRateControlMode_T **supportedRecordingARCModes)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getSupportedRecordingVRCModes (out unsigned long supportedRecordingVRCModesSize, [array, size_is (supportedRecordingVRCModesSize), retval] out RecordingRateControlMode_T supportedRecordingVRCModes); */
+NS_IMETHODIMP _MYCLASS_::GetSupportedRecordingVRCModes(PRUint32 *supportedRecordingVRCModesSize, RecordingRateControlMode_T **supportedRecordingVRCModes)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -28991,6 +33872,28 @@ NS_IMETHODIMP _MYCLASS_::GetSupportedStorageControllerTypes(PRUint32 *supportedS
 
 /* void getSupportedChipsetTypes (out unsigned long supportedChipsetTypesSize, [array, size_is (supportedChipsetTypesSize), retval] out ChipsetType_T supportedChipsetTypes); */
 NS_IMETHODIMP _MYCLASS_::GetSupportedChipsetTypes(PRUint32 *supportedChipsetTypesSize, ChipsetType_T **supportedChipsetTypes)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getSupportedIommuTypes (out unsigned long supportedIommuTypesSize, [array, size_is (supportedIommuTypesSize), retval] out IommuType_T supportedIommuTypes); */
+NS_IMETHODIMP _MYCLASS_::GetSupportedIommuTypes(PRUint32 *supportedIommuTypesSize, IommuType_T **supportedIommuTypes)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getSupportedTpmTypes (out unsigned long supportedTpmTypesSize, [array, size_is (supportedTpmTypesSize), retval] out TpmType_T supportedTpmTypes); */
+NS_IMETHODIMP _MYCLASS_::GetSupportedTpmTypes(PRUint32 *supportedTpmTypesSize, TpmType_T **supportedTpmTypes)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring languageId; */
+NS_IMETHODIMP _MYCLASS_::GetLanguageId(PRUnichar * *aLanguageId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetLanguageId(const PRUnichar * aLanguageId)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -29163,6 +34066,12 @@ NS_IMETHODIMP _MYCLASS_::GetMaxInstancesOfUSBControllerType(ChipsetType_T chipse
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getCPUProfiles (in CPUArchitecture_T architecture, in wstring namePattern, out unsigned long profilesSize, [array, size_is (profilesSize), retval] out ICPUProfile profiles); */
+NS_IMETHODIMP _MYCLASS_::GetCPUProfiles(CPUArchitecture_T architecture, const PRUnichar *namePattern, PRUint32 *profilesSize, ICPUProfile ***profiles)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void InternalAndReservedMethod1ISystemProperties (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1ISystemProperties()
 {
@@ -29295,6 +34204,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ISystemProperties()
 #define COM_FORWARD_ISystemProperties_SETTER_DefaultVRDEExtPack_TO(smth) NS_IMETHOD SetDefaultVRDEExtPack (const PRUnichar * aDefaultVRDEExtPack) { return smth SetDefaultVRDEExtPack (aDefaultVRDEExtPack); }
 #define COM_FORWARD_ISystemProperties_SETTER_DefaultVRDEExtPack_TO_OBJ(obj) COM_FORWARD_ISystemProperties_SETTER_DefaultVRDEExtPack_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_SETTER_DefaultVRDEExtPack_TO_BASE(base) COM_FORWARD_ISystemProperties_SETTER_DefaultVRDEExtPack_TO (base::)
+#define COM_FORWARD_ISystemProperties_GETTER_DefaultCryptoExtPack_TO(smth) NS_IMETHOD GetDefaultCryptoExtPack (PRUnichar * * aDefaultCryptoExtPack) { return smth GetDefaultCryptoExtPack (aDefaultCryptoExtPack); }
+#define COM_FORWARD_ISystemProperties_GETTER_DefaultCryptoExtPack_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_DefaultCryptoExtPack_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GETTER_DefaultCryptoExtPack_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_DefaultCryptoExtPack_TO (base::)
+#define COM_FORWARD_ISystemProperties_SETTER_DefaultCryptoExtPack_TO(smth) NS_IMETHOD SetDefaultCryptoExtPack (const PRUnichar * aDefaultCryptoExtPack) { return smth SetDefaultCryptoExtPack (aDefaultCryptoExtPack); }
+#define COM_FORWARD_ISystemProperties_SETTER_DefaultCryptoExtPack_TO_OBJ(obj) COM_FORWARD_ISystemProperties_SETTER_DefaultCryptoExtPack_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_SETTER_DefaultCryptoExtPack_TO_BASE(base) COM_FORWARD_ISystemProperties_SETTER_DefaultCryptoExtPack_TO (base::)
 #define COM_FORWARD_ISystemProperties_GETTER_LogHistoryCount_TO(smth) NS_IMETHOD GetLogHistoryCount (PRUint32 * aLogHistoryCount) { return smth GetLogHistoryCount (aLogHistoryCount); }
 #define COM_FORWARD_ISystemProperties_GETTER_LogHistoryCount_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_LogHistoryCount_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GETTER_LogHistoryCount_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_LogHistoryCount_TO (base::)
@@ -29364,15 +34279,21 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ISystemProperties()
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedExportOptions_TO(smth) NS_IMETHOD GetSupportedExportOptions (PRUint32 * aSupportedExportOptionsSize, PRUint32 * * aSupportedExportOptions) { return smth GetSupportedExportOptions (aSupportedExportOptionsSize, aSupportedExportOptions); }
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedExportOptions_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedExportOptions_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedExportOptions_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedExportOptions_TO (base::)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingFeatures_TO(smth) NS_IMETHOD GetSupportedRecordingFeatures (PRUint32 * aSupportedRecordingFeaturesSize, PRUint32 * * aSupportedRecordingFeatures) { return smth GetSupportedRecordingFeatures (aSupportedRecordingFeaturesSize, aSupportedRecordingFeatures); }
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingFeatures_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingFeatures_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingFeatures_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingFeatures_TO (base::)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingAudioCodecs_TO(smth) NS_IMETHOD GetSupportedRecordingAudioCodecs (PRUint32 * aSupportedRecordingAudioCodecsSize, PRUint32 * * aSupportedRecordingAudioCodecs) { return smth GetSupportedRecordingAudioCodecs (aSupportedRecordingAudioCodecsSize, aSupportedRecordingAudioCodecs); }
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingAudioCodecs_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingAudioCodecs_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingAudioCodecs_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingAudioCodecs_TO (base::)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVideoCodecs_TO(smth) NS_IMETHOD GetSupportedRecordingVideoCodecs (PRUint32 * aSupportedRecordingVideoCodecsSize, PRUint32 * * aSupportedRecordingVideoCodecs) { return smth GetSupportedRecordingVideoCodecs (aSupportedRecordingVideoCodecsSize, aSupportedRecordingVideoCodecs); }
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVideoCodecs_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVideoCodecs_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVideoCodecs_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVideoCodecs_TO (base::)
-#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSMethods_TO(smth) NS_IMETHOD GetSupportedRecordingVSMethods (PRUint32 * aSupportedRecordingVSMethodsSize, PRUint32 * * aSupportedRecordingVSMethods) { return smth GetSupportedRecordingVSMethods (aSupportedRecordingVSMethodsSize, aSupportedRecordingVSMethods); }
-#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSMethods_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSMethods_TO ((obj)->)
-#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSMethods_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSMethods_TO (base::)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSModes_TO(smth) NS_IMETHOD GetSupportedRecordingVSModes (PRUint32 * aSupportedRecordingVSModesSize, PRUint32 * * aSupportedRecordingVSModes) { return smth GetSupportedRecordingVSModes (aSupportedRecordingVSModesSize, aSupportedRecordingVSModes); }
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSModes_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSModes_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSModes_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVSModes_TO (base::)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingARCModes_TO(smth) NS_IMETHOD GetSupportedRecordingARCModes (PRUint32 * aSupportedRecordingARCModesSize, PRUint32 * * aSupportedRecordingARCModes) { return smth GetSupportedRecordingARCModes (aSupportedRecordingARCModesSize, aSupportedRecordingARCModes); }
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingARCModes_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingARCModes_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingARCModes_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingARCModes_TO (base::)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVRCModes_TO(smth) NS_IMETHOD GetSupportedRecordingVRCModes (PRUint32 * aSupportedRecordingVRCModesSize, PRUint32 * * aSupportedRecordingVRCModes) { return smth GetSupportedRecordingVRCModes (aSupportedRecordingVRCModesSize, aSupportedRecordingVRCModes); }
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVRCModes_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVRCModes_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVRCModes_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedRecordingVRCModes_TO (base::)
@@ -29418,6 +34339,18 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ISystemProperties()
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedChipsetTypes_TO(smth) NS_IMETHOD GetSupportedChipsetTypes (PRUint32 * aSupportedChipsetTypesSize, PRUint32 * * aSupportedChipsetTypes) { return smth GetSupportedChipsetTypes (aSupportedChipsetTypesSize, aSupportedChipsetTypes); }
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedChipsetTypes_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedChipsetTypes_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GETTER_SupportedChipsetTypes_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedChipsetTypes_TO (base::)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedIommuTypes_TO(smth) NS_IMETHOD GetSupportedIommuTypes (PRUint32 * aSupportedIommuTypesSize, PRUint32 * * aSupportedIommuTypes) { return smth GetSupportedIommuTypes (aSupportedIommuTypesSize, aSupportedIommuTypes); }
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedIommuTypes_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedIommuTypes_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedIommuTypes_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedIommuTypes_TO (base::)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedTpmTypes_TO(smth) NS_IMETHOD GetSupportedTpmTypes (PRUint32 * aSupportedTpmTypesSize, PRUint32 * * aSupportedTpmTypes) { return smth GetSupportedTpmTypes (aSupportedTpmTypesSize, aSupportedTpmTypes); }
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedTpmTypes_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_SupportedTpmTypes_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GETTER_SupportedTpmTypes_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_SupportedTpmTypes_TO (base::)
+#define COM_FORWARD_ISystemProperties_GETTER_LanguageId_TO(smth) NS_IMETHOD GetLanguageId (PRUnichar * * aLanguageId) { return smth GetLanguageId (aLanguageId); }
+#define COM_FORWARD_ISystemProperties_GETTER_LanguageId_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GETTER_LanguageId_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GETTER_LanguageId_TO_BASE(base) COM_FORWARD_ISystemProperties_GETTER_LanguageId_TO (base::)
+#define COM_FORWARD_ISystemProperties_SETTER_LanguageId_TO(smth) NS_IMETHOD SetLanguageId (const PRUnichar * aLanguageId) { return smth SetLanguageId (aLanguageId); }
+#define COM_FORWARD_ISystemProperties_SETTER_LanguageId_TO_OBJ(obj) COM_FORWARD_ISystemProperties_SETTER_LanguageId_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_SETTER_LanguageId_TO_BASE(base) COM_FORWARD_ISystemProperties_SETTER_LanguageId_TO (base::)
 #define COM_FORWARD_ISystemProperties_GetMaxNetworkAdapters_TO(smth) NS_IMETHOD GetMaxNetworkAdapters (PRUint32 aChipset, PRUint32 * aMaxNetworkAdapters) { return smth GetMaxNetworkAdapters (aChipset, aMaxNetworkAdapters); }
 #define COM_FORWARD_ISystemProperties_GetMaxNetworkAdapters_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GetMaxNetworkAdapters_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GetMaxNetworkAdapters_TO_BASE(base) COM_FORWARD_ISystemProperties_GetMaxNetworkAdapters_TO (base::)
@@ -29454,6 +34387,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ISystemProperties()
 #define COM_FORWARD_ISystemProperties_GetMaxInstancesOfUSBControllerType_TO(smth) NS_IMETHOD GetMaxInstancesOfUSBControllerType (PRUint32 aChipset, PRUint32 aType, PRUint32 * aMaxInstances) { return smth GetMaxInstancesOfUSBControllerType (aChipset, aType, aMaxInstances); }
 #define COM_FORWARD_ISystemProperties_GetMaxInstancesOfUSBControllerType_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GetMaxInstancesOfUSBControllerType_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_GetMaxInstancesOfUSBControllerType_TO_BASE(base) COM_FORWARD_ISystemProperties_GetMaxInstancesOfUSBControllerType_TO (base::)
+#define COM_FORWARD_ISystemProperties_GetCPUProfiles_TO(smth) NS_IMETHOD GetCPUProfiles (PRUint32 aArchitecture, PRUnichar * aNamePattern, PRUint32 * aProfilesSize, ICPUProfile * * * aProfiles) { return smth GetCPUProfiles (aArchitecture, aNamePattern, aProfilesSize, aProfiles); }
+#define COM_FORWARD_ISystemProperties_GetCPUProfiles_TO_OBJ(obj) COM_FORWARD_ISystemProperties_GetCPUProfiles_TO ((obj)->)
+#define COM_FORWARD_ISystemProperties_GetCPUProfiles_TO_BASE(base) COM_FORWARD_ISystemProperties_GetCPUProfiles_TO (base::)
 #define COM_FORWARD_ISystemProperties_TO(smth) NS_FORWARD_ISYSTEMPROPERTIES (smth)
 #define COM_FORWARD_ISystemProperties_TO_OBJ(obj) COM_FORWARD_ISystemProperties_TO ((obj)->)
 #define COM_FORWARD_ISystemProperties_TO_BASE(base) COM_FORWARD_ISystemProperties_TO (base::)
@@ -29461,11 +34397,11 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ISystemProperties()
 VBOX_EXTERN_C const nsID IID_ISystemProperties;
 
 /* starting interface:    IGuestOSType */
-#define IGUESTOSTYPE_IID_STR "d0d6c6d8-e5db-4d2c-baaa-c71053a6236d"
+#define IGUESTOSTYPE_IID_STR "966303d0-36a8-4180-8971-18650b0d1055"
 
 #define IGUESTOSTYPE_IID \
-  {0xd0d6c6d8, 0xe5db, 0x4d2c, \
-    { 0xba, 0xaa, 0xc7, 0x10, 0x53, 0xa6, 0x23, 0x6d }}
+  {0x966303d0, 0x36a8, 0x4180, \
+    { 0x89, 0x71, 0x18, 0x65, 0x0b, 0x0d, 0x10, 0x55 }}
 
 class NS_NO_VTABLE IGuestOSType : public nsISupports {
  public: 
@@ -29547,6 +34483,9 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   /* readonly attribute ChipsetType_T recommendedChipset; */
   NS_IMETHOD GetRecommendedChipset(ChipsetType_T *aRecommendedChipset) = 0;
 
+  /* readonly attribute IommuType_T recommendedIommuType; */
+  NS_IMETHOD GetRecommendedIommuType(IommuType_T *aRecommendedIommuType) = 0;
+
   /* readonly attribute AudioControllerType_T recommendedAudioController; */
   NS_IMETHOD GetRecommendedAudioController(AudioControllerType_T *aRecommendedAudioController) = 0;
 
@@ -29570,6 +34509,15 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
 
   /* readonly attribute unsigned long recommendedCPUCount; */
   NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount) = 0;
+
+  /* readonly attribute TpmType_T recommendedTpmType; */
+  NS_IMETHOD GetRecommendedTpmType(TpmType_T *aRecommendedTpmType) = 0;
+
+  /* readonly attribute boolean recommendedSecureBoot; */
+  NS_IMETHOD GetRecommendedSecureBoot(PRBool *aRecommendedSecureBoot) = 0;
+
+  /* readonly attribute boolean recommendedWDDMGraphics; */
+  NS_IMETHOD GetRecommendedWDDMGraphics(PRBool *aRecommendedWDDMGraphics) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1IGuestOSType; */
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType) = 0;
@@ -29616,6 +34564,9 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   /* readonly attribute unsigned long InternalAndReservedAttribute15IGuestOSType; */
   NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) = 0;
 
+  /* readonly attribute unsigned long InternalAndReservedAttribute16IGuestOSType; */
+  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType) = 0;
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -29645,6 +34596,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedUSBTablet(PRBool *aRecommendedUSBTablet); \
   NS_IMETHOD GetRecommendedRTCUseUTC(PRBool *aRecommendedRTCUseUTC); \
   NS_IMETHOD GetRecommendedChipset(ChipsetType_T *aRecommendedChipset); \
+  NS_IMETHOD GetRecommendedIommuType(IommuType_T *aRecommendedIommuType); \
   NS_IMETHOD GetRecommendedAudioController(AudioControllerType_T *aRecommendedAudioController); \
   NS_IMETHOD GetRecommendedAudioCodec(AudioCodecType_T *aRecommendedAudioCodec); \
   NS_IMETHOD GetRecommendedFloppy(PRBool *aRecommendedFloppy); \
@@ -29653,6 +34605,9 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedTFReset(PRBool *aRecommendedTFReset); \
   NS_IMETHOD GetRecommendedX2APIC(PRBool *aRecommendedX2APIC); \
   NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount); \
+  NS_IMETHOD GetRecommendedTpmType(TpmType_T *aRecommendedTpmType); \
+  NS_IMETHOD GetRecommendedSecureBoot(PRBool *aRecommendedSecureBoot); \
+  NS_IMETHOD GetRecommendedWDDMGraphics(PRBool *aRecommendedWDDMGraphics); \
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute2IGuestOSType(PRUint32 *aInternalAndReservedAttribute2IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute3IGuestOSType(PRUint32 *aInternalAndReservedAttribute3IGuestOSType); \
@@ -29667,7 +34622,8 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IGuestOSType(PRUint32 *aInternalAndReservedAttribute12IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute13IGuestOSType(PRUint32 *aInternalAndReservedAttribute13IGuestOSType); \
   NS_IMETHOD GetInternalAndReservedAttribute14IGuestOSType(PRUint32 *aInternalAndReservedAttribute14IGuestOSType); \
-  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType); 
+  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType); \
+  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IGUESTOSTYPE(_to) \
@@ -29696,6 +34652,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedUSBTablet(PRBool *aRecommendedUSBTablet) { return _to GetRecommendedUSBTablet(aRecommendedUSBTablet); } \
   NS_IMETHOD GetRecommendedRTCUseUTC(PRBool *aRecommendedRTCUseUTC) { return _to GetRecommendedRTCUseUTC(aRecommendedRTCUseUTC); } \
   NS_IMETHOD GetRecommendedChipset(ChipsetType_T *aRecommendedChipset) { return _to GetRecommendedChipset(aRecommendedChipset); } \
+  NS_IMETHOD GetRecommendedIommuType(IommuType_T *aRecommendedIommuType) { return _to GetRecommendedIommuType(aRecommendedIommuType); } \
   NS_IMETHOD GetRecommendedAudioController(AudioControllerType_T *aRecommendedAudioController) { return _to GetRecommendedAudioController(aRecommendedAudioController); } \
   NS_IMETHOD GetRecommendedAudioCodec(AudioCodecType_T *aRecommendedAudioCodec) { return _to GetRecommendedAudioCodec(aRecommendedAudioCodec); } \
   NS_IMETHOD GetRecommendedFloppy(PRBool *aRecommendedFloppy) { return _to GetRecommendedFloppy(aRecommendedFloppy); } \
@@ -29704,6 +34661,9 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedTFReset(PRBool *aRecommendedTFReset) { return _to GetRecommendedTFReset(aRecommendedTFReset); } \
   NS_IMETHOD GetRecommendedX2APIC(PRBool *aRecommendedX2APIC) { return _to GetRecommendedX2APIC(aRecommendedX2APIC); } \
   NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount) { return _to GetRecommendedCPUCount(aRecommendedCPUCount); } \
+  NS_IMETHOD GetRecommendedTpmType(TpmType_T *aRecommendedTpmType) { return _to GetRecommendedTpmType(aRecommendedTpmType); } \
+  NS_IMETHOD GetRecommendedSecureBoot(PRBool *aRecommendedSecureBoot) { return _to GetRecommendedSecureBoot(aRecommendedSecureBoot); } \
+  NS_IMETHOD GetRecommendedWDDMGraphics(PRBool *aRecommendedWDDMGraphics) { return _to GetRecommendedWDDMGraphics(aRecommendedWDDMGraphics); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType) { return _to GetInternalAndReservedAttribute1IGuestOSType(aInternalAndReservedAttribute1IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IGuestOSType(PRUint32 *aInternalAndReservedAttribute2IGuestOSType) { return _to GetInternalAndReservedAttribute2IGuestOSType(aInternalAndReservedAttribute2IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IGuestOSType(PRUint32 *aInternalAndReservedAttribute3IGuestOSType) { return _to GetInternalAndReservedAttribute3IGuestOSType(aInternalAndReservedAttribute3IGuestOSType); } \
@@ -29718,7 +34678,8 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IGuestOSType(PRUint32 *aInternalAndReservedAttribute12IGuestOSType) { return _to GetInternalAndReservedAttribute12IGuestOSType(aInternalAndReservedAttribute12IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute13IGuestOSType(PRUint32 *aInternalAndReservedAttribute13IGuestOSType) { return _to GetInternalAndReservedAttribute13IGuestOSType(aInternalAndReservedAttribute13IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute14IGuestOSType(PRUint32 *aInternalAndReservedAttribute14IGuestOSType) { return _to GetInternalAndReservedAttribute14IGuestOSType(aInternalAndReservedAttribute14IGuestOSType); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return _to GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } 
+  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return _to GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } \
+  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType) { return _to GetInternalAndReservedAttribute16IGuestOSType(aInternalAndReservedAttribute16IGuestOSType); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IGUESTOSTYPE(_to) \
@@ -29747,6 +34708,7 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedUSBTablet(PRBool *aRecommendedUSBTablet) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedUSBTablet(aRecommendedUSBTablet); } \
   NS_IMETHOD GetRecommendedRTCUseUTC(PRBool *aRecommendedRTCUseUTC) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedRTCUseUTC(aRecommendedRTCUseUTC); } \
   NS_IMETHOD GetRecommendedChipset(ChipsetType_T *aRecommendedChipset) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedChipset(aRecommendedChipset); } \
+  NS_IMETHOD GetRecommendedIommuType(IommuType_T *aRecommendedIommuType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedIommuType(aRecommendedIommuType); } \
   NS_IMETHOD GetRecommendedAudioController(AudioControllerType_T *aRecommendedAudioController) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedAudioController(aRecommendedAudioController); } \
   NS_IMETHOD GetRecommendedAudioCodec(AudioCodecType_T *aRecommendedAudioCodec) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedAudioCodec(aRecommendedAudioCodec); } \
   NS_IMETHOD GetRecommendedFloppy(PRBool *aRecommendedFloppy) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedFloppy(aRecommendedFloppy); } \
@@ -29755,6 +34717,9 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetRecommendedTFReset(PRBool *aRecommendedTFReset) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedTFReset(aRecommendedTFReset); } \
   NS_IMETHOD GetRecommendedX2APIC(PRBool *aRecommendedX2APIC) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedX2APIC(aRecommendedX2APIC); } \
   NS_IMETHOD GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedCPUCount(aRecommendedCPUCount); } \
+  NS_IMETHOD GetRecommendedTpmType(TpmType_T *aRecommendedTpmType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedTpmType(aRecommendedTpmType); } \
+  NS_IMETHOD GetRecommendedSecureBoot(PRBool *aRecommendedSecureBoot) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedSecureBoot(aRecommendedSecureBoot); } \
+  NS_IMETHOD GetRecommendedWDDMGraphics(PRBool *aRecommendedWDDMGraphics) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecommendedWDDMGraphics(aRecommendedWDDMGraphics); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IGuestOSType(PRUint32 *aInternalAndReservedAttribute1IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IGuestOSType(aInternalAndReservedAttribute1IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IGuestOSType(PRUint32 *aInternalAndReservedAttribute2IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IGuestOSType(aInternalAndReservedAttribute2IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IGuestOSType(PRUint32 *aInternalAndReservedAttribute3IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IGuestOSType(aInternalAndReservedAttribute3IGuestOSType); } \
@@ -29769,7 +34734,8 @@ class NS_NO_VTABLE IGuestOSType : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute12IGuestOSType(PRUint32 *aInternalAndReservedAttribute12IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute12IGuestOSType(aInternalAndReservedAttribute12IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute13IGuestOSType(PRUint32 *aInternalAndReservedAttribute13IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute13IGuestOSType(aInternalAndReservedAttribute13IGuestOSType); } \
   NS_IMETHOD GetInternalAndReservedAttribute14IGuestOSType(PRUint32 *aInternalAndReservedAttribute14IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute14IGuestOSType(aInternalAndReservedAttribute14IGuestOSType); } \
-  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } 
+  NS_IMETHOD GetInternalAndReservedAttribute15IGuestOSType(PRUint32 *aInternalAndReservedAttribute15IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute15IGuestOSType(aInternalAndReservedAttribute15IGuestOSType); } \
+  NS_IMETHOD GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute16IGuestOSType(aInternalAndReservedAttribute16IGuestOSType); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -29953,6 +34919,12 @@ NS_IMETHODIMP _MYCLASS_::GetRecommendedChipset(ChipsetType_T *aRecommendedChipse
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* readonly attribute IommuType_T recommendedIommuType; */
+NS_IMETHODIMP _MYCLASS_::GetRecommendedIommuType(IommuType_T *aRecommendedIommuType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* readonly attribute AudioControllerType_T recommendedAudioController; */
 NS_IMETHODIMP _MYCLASS_::GetRecommendedAudioController(AudioControllerType_T *aRecommendedAudioController)
 {
@@ -29997,6 +34969,24 @@ NS_IMETHODIMP _MYCLASS_::GetRecommendedX2APIC(PRBool *aRecommendedX2APIC)
 
 /* readonly attribute unsigned long recommendedCPUCount; */
 NS_IMETHODIMP _MYCLASS_::GetRecommendedCPUCount(PRUint32 *aRecommendedCPUCount)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute TpmType_T recommendedTpmType; */
+NS_IMETHODIMP _MYCLASS_::GetRecommendedTpmType(TpmType_T *aRecommendedTpmType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean recommendedSecureBoot; */
+NS_IMETHODIMP _MYCLASS_::GetRecommendedSecureBoot(PRBool *aRecommendedSecureBoot)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean recommendedWDDMGraphics; */
+NS_IMETHODIMP _MYCLASS_::GetRecommendedWDDMGraphics(PRBool *aRecommendedWDDMGraphics)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -30091,6 +35081,12 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute15IGuestOSType(PRUint32 
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* readonly attribute unsigned long InternalAndReservedAttribute16IGuestOSType; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute16IGuestOSType(PRUint32 *aInternalAndReservedAttribute16IGuestOSType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* End of implementation class template. */
 #endif
 
@@ -30169,6 +35165,9 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute15IGuestOSType(PRUint32 
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO(smth) NS_IMETHOD GetRecommendedChipset (PRUint32 * aRecommendedChipset) { return smth GetRecommendedChipset (aRecommendedChipset); }
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedChipset_TO (base::)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedIommuType_TO(smth) NS_IMETHOD GetRecommendedIommuType (PRUint32 * aRecommendedIommuType) { return smth GetRecommendedIommuType (aRecommendedIommuType); }
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedIommuType_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedIommuType_TO ((obj)->)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedIommuType_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedIommuType_TO (base::)
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO(smth) NS_IMETHOD GetRecommendedAudioController (PRUint32 * aRecommendedAudioController) { return smth GetRecommendedAudioController (aRecommendedAudioController); }
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedAudioController_TO (base::)
@@ -30193,6 +35192,15 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute15IGuestOSType(PRUint32 
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO(smth) NS_IMETHOD GetRecommendedCPUCount (PRUint32 * aRecommendedCPUCount) { return smth GetRecommendedCPUCount (aRecommendedCPUCount); }
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedCPUCount_TO (base::)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedTpmType_TO(smth) NS_IMETHOD GetRecommendedTpmType (PRUint32 * aRecommendedTpmType) { return smth GetRecommendedTpmType (aRecommendedTpmType); }
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedTpmType_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedTpmType_TO ((obj)->)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedTpmType_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedTpmType_TO (base::)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedSecureBoot_TO(smth) NS_IMETHOD GetRecommendedSecureBoot (PRBool * aRecommendedSecureBoot) { return smth GetRecommendedSecureBoot (aRecommendedSecureBoot); }
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedSecureBoot_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedSecureBoot_TO ((obj)->)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedSecureBoot_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedSecureBoot_TO (base::)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO(smth) NS_IMETHOD GetRecommendedWDDMGraphics (PRBool * aRecommendedWDDMGraphics) { return smth GetRecommendedWDDMGraphics (aRecommendedWDDMGraphics); }
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO_OBJ(obj) COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO ((obj)->)
+#define COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO_BASE(base) COM_FORWARD_IGuestOSType_GETTER_RecommendedWDDMGraphics_TO (base::)
 #define COM_FORWARD_IGuestOSType_TO(smth) NS_FORWARD_IGUESTOSTYPE (smth)
 #define COM_FORWARD_IGuestOSType_TO_OBJ(obj) COM_FORWARD_IGuestOSType_TO ((obj)->)
 #define COM_FORWARD_IGuestOSType_TO_BASE(base) COM_FORWARD_IGuestOSType_TO (base::)
@@ -30363,11 +35371,11 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IAdditionsFacility(PRUi
 VBOX_EXTERN_C const nsID IID_IAdditionsFacility;
 
 /* starting interface:    IDnDBase */
-#define IDNDBASE_IID_STR "4132147b-42f8-cd96-7570-6a8800e3342c"
+#define IDNDBASE_IID_STR "00727a73-000a-4c4a-006d-e7d300351186"
 
 #define IDNDBASE_IID \
-  {0x4132147b, 0x42f8, 0xcd96, \
-    { 0x75, 0x70, 0x6a, 0x88, 0x00, 0xe3, 0x34, 0x2c }}
+  {0x00727a73, 0x000a, 0x4c4a, \
+    { 0x00, 0x6d, 0xe7, 0xd3, 0x00, 0x35, 0x11, 0x86 }}
 
 class NS_NO_VTABLE IDnDBase : public nsISupports {
  public: 
@@ -30376,9 +35384,6 @@ class NS_NO_VTABLE IDnDBase : public nsISupports {
 
   /* void getFormats (out unsigned long formatsSize, [array, size_is (formatsSize), retval] out wstring formats); */
   NS_IMETHOD GetFormats(PRUint32 *formatsSize, PRUnichar ***formats) = 0;
-
-  /* readonly attribute unsigned long protocolVersion; */
-  NS_IMETHOD GetProtocolVersion(PRUint32 *aProtocolVersion) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1IDnDBase; */
   NS_IMETHOD GetInternalAndReservedAttribute1IDnDBase(PRUint32 *aInternalAndReservedAttribute1IDnDBase) = 0;
@@ -30403,7 +35408,6 @@ class NS_NO_VTABLE IDnDBase : public nsISupports {
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_IDNDBASE \
   NS_IMETHOD GetFormats(PRUint32 *formatsSize, PRUnichar ***formats); \
-  NS_IMETHOD GetProtocolVersion(PRUint32 *aProtocolVersion); \
   NS_IMETHOD GetInternalAndReservedAttribute1IDnDBase(PRUint32 *aInternalAndReservedAttribute1IDnDBase); \
   NS_IMETHOD GetInternalAndReservedAttribute2IDnDBase(PRUint32 *aInternalAndReservedAttribute2IDnDBase); \
   NS_IMETHOD IsFormatSupported(const PRUnichar *format, PRBool *supported); \
@@ -30414,7 +35418,6 @@ class NS_NO_VTABLE IDnDBase : public nsISupports {
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IDNDBASE(_to) \
   NS_IMETHOD GetFormats(PRUint32 *formatsSize, PRUnichar ***formats) { return _to GetFormats(formatsSize, formats); } \
-  NS_IMETHOD GetProtocolVersion(PRUint32 *aProtocolVersion) { return _to GetProtocolVersion(aProtocolVersion); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IDnDBase(PRUint32 *aInternalAndReservedAttribute1IDnDBase) { return _to GetInternalAndReservedAttribute1IDnDBase(aInternalAndReservedAttribute1IDnDBase); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IDnDBase(PRUint32 *aInternalAndReservedAttribute2IDnDBase) { return _to GetInternalAndReservedAttribute2IDnDBase(aInternalAndReservedAttribute2IDnDBase); } \
   NS_IMETHOD IsFormatSupported(const PRUnichar *format, PRBool *supported) { return _to IsFormatSupported(format, supported); } \
@@ -30425,7 +35428,6 @@ class NS_NO_VTABLE IDnDBase : public nsISupports {
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IDNDBASE(_to) \
   NS_IMETHOD GetFormats(PRUint32 *formatsSize, PRUnichar ***formats) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFormats(formatsSize, formats); } \
-  NS_IMETHOD GetProtocolVersion(PRUint32 *aProtocolVersion) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProtocolVersion(aProtocolVersion); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IDnDBase(PRUint32 *aInternalAndReservedAttribute1IDnDBase) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IDnDBase(aInternalAndReservedAttribute1IDnDBase); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IDnDBase(PRUint32 *aInternalAndReservedAttribute2IDnDBase) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IDnDBase(aInternalAndReservedAttribute2IDnDBase); } \
   NS_IMETHOD IsFormatSupported(const PRUnichar *format, PRBool *supported) { return !_to ? NS_ERROR_NULL_POINTER : _to->IsFormatSupported(format, supported); } \
@@ -30467,12 +35469,6 @@ _MYCLASS_::~_MYCLASS_()
 
 /* void getFormats (out unsigned long formatsSize, [array, size_is (formatsSize), retval] out wstring formats); */
 NS_IMETHODIMP _MYCLASS_::GetFormats(PRUint32 *formatsSize, PRUnichar ***formats)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* readonly attribute unsigned long protocolVersion; */
-NS_IMETHODIMP _MYCLASS_::GetProtocolVersion(PRUint32 *aProtocolVersion)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -30519,9 +35515,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IDnDBase()
 #define COM_FORWARD_IDnDBase_GETTER_Formats_TO(smth) NS_IMETHOD GetFormats (PRUint32 * aFormatsSize, PRUnichar * * * aFormats) { return smth GetFormats (aFormatsSize, aFormats); }
 #define COM_FORWARD_IDnDBase_GETTER_Formats_TO_OBJ(obj) COM_FORWARD_IDnDBase_GETTER_Formats_TO ((obj)->)
 #define COM_FORWARD_IDnDBase_GETTER_Formats_TO_BASE(base) COM_FORWARD_IDnDBase_GETTER_Formats_TO (base::)
-#define COM_FORWARD_IDnDBase_GETTER_ProtocolVersion_TO(smth) NS_IMETHOD GetProtocolVersion (PRUint32 * aProtocolVersion) { return smth GetProtocolVersion (aProtocolVersion); }
-#define COM_FORWARD_IDnDBase_GETTER_ProtocolVersion_TO_OBJ(obj) COM_FORWARD_IDnDBase_GETTER_ProtocolVersion_TO ((obj)->)
-#define COM_FORWARD_IDnDBase_GETTER_ProtocolVersion_TO_BASE(base) COM_FORWARD_IDnDBase_GETTER_ProtocolVersion_TO (base::)
 #define COM_FORWARD_IDnDBase_IsFormatSupported_TO(smth) NS_IMETHOD IsFormatSupported (PRUnichar * aFormat, PRBool * aSupported) { return smth IsFormatSupported (aFormat, aSupported); }
 #define COM_FORWARD_IDnDBase_IsFormatSupported_TO_OBJ(obj) COM_FORWARD_IDnDBase_IsFormatSupported_TO ((obj)->)
 #define COM_FORWARD_IDnDBase_IsFormatSupported_TO_BASE(base) COM_FORWARD_IDnDBase_IsFormatSupported_TO (base::)
@@ -31031,11 +36024,11 @@ NS_IMETHODIMP _MYCLASS_::GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotL
 VBOX_EXTERN_C const nsID IID_IGuestDnDTarget;
 
 /* starting interface:    IGuestSession */
-#define IGUESTSESSION_IID_STR "3e14c189-4a75-437e-b0bb-7e7c90d0df2a"
+#define IGUESTSESSION_IID_STR "234f0627-866d-48c2-91a5-4c9d50f04928"
 
 #define IGUESTSESSION_IID \
-  {0x3e14c189, 0x4a75, 0x437e, \
-    { 0xb0, 0xbb, 0x7e, 0x7c, 0x90, 0xd0, 0xdf, 0x2a }}
+  {0x234f0627, 0x866d, 0x48c2, \
+    { 0x91, 0xa5, 0x4c, 0x9d, 0x50, 0xf0, 0x49, 0x28 }}
 
 class NS_NO_VTABLE IGuestSession : public nsISupports {
  public: 
@@ -31233,6 +36226,12 @@ class NS_NO_VTABLE IGuestSession : public nsISupports {
   /* void fsObjSetACL (in wstring path, in boolean followSymlinks, in wstring acl, in unsigned long mode); */
   NS_IMETHOD FsObjSetACL(const PRUnichar *path, PRBool followSymlinks, const PRUnichar *acl, PRUint32 mode) = 0;
 
+  /* void fsQueryFreeSpace (in wstring path, [retval] out long long freeSpace); */
+  NS_IMETHOD FsQueryFreeSpace(const PRUnichar *path, PRInt64 *freeSpace) = 0;
+
+  /* void fsQueryInfo (in wstring path, [retval] out IGuestFsInfo info); */
+  NS_IMETHOD FsQueryInfo(const PRUnichar *path, IGuestFsInfo **info) = 0;
+
   /* void processCreate (in wstring executable, in unsigned long argumentsSize, [array, size_is (argumentsSize)] in wstring arguments, in unsigned long environmentChangesSize, [array, size_is (environmentChangesSize)] in wstring environmentChanges, in unsigned long flagsSize, [array, size_is (flagsSize)] in ProcessCreateFlag_T flags, in unsigned long timeoutMS, [retval] out IGuestProcess guestProcess); */
   NS_IMETHOD ProcessCreate(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, IGuestProcess **guestProcess) = 0;
 
@@ -31350,6 +36349,8 @@ class NS_NO_VTABLE IGuestSession : public nsISupports {
   NS_IMETHOD FsObjMoveArray(PRUint32 sourceSize, const PRUnichar **source, const PRUnichar *destination, PRUint32 flagsSize, FsObjMoveFlag_T *flags, IProgress **progress); \
   NS_IMETHOD FsObjCopyArray(PRUint32 sourceSize, const PRUnichar **source, const PRUnichar *destination, PRUint32 flagsSize, FileCopyFlag_T *flags, IProgress **progress); \
   NS_IMETHOD FsObjSetACL(const PRUnichar *path, PRBool followSymlinks, const PRUnichar *acl, PRUint32 mode); \
+  NS_IMETHOD FsQueryFreeSpace(const PRUnichar *path, PRInt64 *freeSpace); \
+  NS_IMETHOD FsQueryInfo(const PRUnichar *path, IGuestFsInfo **info); \
   NS_IMETHOD ProcessCreate(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, IGuestProcess **guestProcess); \
   NS_IMETHOD ProcessCreateEx(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, ProcessPriority_T priority, PRUint32 affinitySize, PRInt32 *affinity, IGuestProcess **guestProcess); \
   NS_IMETHOD ProcessGet(PRUint32 pid, IGuestProcess **guestProcess); \
@@ -31434,6 +36435,8 @@ class NS_NO_VTABLE IGuestSession : public nsISupports {
   NS_IMETHOD FsObjMoveArray(PRUint32 sourceSize, const PRUnichar **source, const PRUnichar *destination, PRUint32 flagsSize, FsObjMoveFlag_T *flags, IProgress **progress) { return _to FsObjMoveArray(sourceSize, source, destination, flagsSize, flags, progress); } \
   NS_IMETHOD FsObjCopyArray(PRUint32 sourceSize, const PRUnichar **source, const PRUnichar *destination, PRUint32 flagsSize, FileCopyFlag_T *flags, IProgress **progress) { return _to FsObjCopyArray(sourceSize, source, destination, flagsSize, flags, progress); } \
   NS_IMETHOD FsObjSetACL(const PRUnichar *path, PRBool followSymlinks, const PRUnichar *acl, PRUint32 mode) { return _to FsObjSetACL(path, followSymlinks, acl, mode); } \
+  NS_IMETHOD FsQueryFreeSpace(const PRUnichar *path, PRInt64 *freeSpace) { return _to FsQueryFreeSpace(path, freeSpace); } \
+  NS_IMETHOD FsQueryInfo(const PRUnichar *path, IGuestFsInfo **info) { return _to FsQueryInfo(path, info); } \
   NS_IMETHOD ProcessCreate(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, IGuestProcess **guestProcess) { return _to ProcessCreate(executable, argumentsSize, arguments, environmentChangesSize, environmentChanges, flagsSize, flags, timeoutMS, guestProcess); } \
   NS_IMETHOD ProcessCreateEx(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, ProcessPriority_T priority, PRUint32 affinitySize, PRInt32 *affinity, IGuestProcess **guestProcess) { return _to ProcessCreateEx(executable, argumentsSize, arguments, environmentChangesSize, environmentChanges, flagsSize, flags, timeoutMS, priority, affinitySize, affinity, guestProcess); } \
   NS_IMETHOD ProcessGet(PRUint32 pid, IGuestProcess **guestProcess) { return _to ProcessGet(pid, guestProcess); } \
@@ -31518,6 +36521,8 @@ class NS_NO_VTABLE IGuestSession : public nsISupports {
   NS_IMETHOD FsObjMoveArray(PRUint32 sourceSize, const PRUnichar **source, const PRUnichar *destination, PRUint32 flagsSize, FsObjMoveFlag_T *flags, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->FsObjMoveArray(sourceSize, source, destination, flagsSize, flags, progress); } \
   NS_IMETHOD FsObjCopyArray(PRUint32 sourceSize, const PRUnichar **source, const PRUnichar *destination, PRUint32 flagsSize, FileCopyFlag_T *flags, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->FsObjCopyArray(sourceSize, source, destination, flagsSize, flags, progress); } \
   NS_IMETHOD FsObjSetACL(const PRUnichar *path, PRBool followSymlinks, const PRUnichar *acl, PRUint32 mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->FsObjSetACL(path, followSymlinks, acl, mode); } \
+  NS_IMETHOD FsQueryFreeSpace(const PRUnichar *path, PRInt64 *freeSpace) { return !_to ? NS_ERROR_NULL_POINTER : _to->FsQueryFreeSpace(path, freeSpace); } \
+  NS_IMETHOD FsQueryInfo(const PRUnichar *path, IGuestFsInfo **info) { return !_to ? NS_ERROR_NULL_POINTER : _to->FsQueryInfo(path, info); } \
   NS_IMETHOD ProcessCreate(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, IGuestProcess **guestProcess) { return !_to ? NS_ERROR_NULL_POINTER : _to->ProcessCreate(executable, argumentsSize, arguments, environmentChangesSize, environmentChanges, flagsSize, flags, timeoutMS, guestProcess); } \
   NS_IMETHOD ProcessCreateEx(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, ProcessPriority_T priority, PRUint32 affinitySize, PRInt32 *affinity, IGuestProcess **guestProcess) { return !_to ? NS_ERROR_NULL_POINTER : _to->ProcessCreateEx(executable, argumentsSize, arguments, environmentChangesSize, environmentChanges, flagsSize, flags, timeoutMS, priority, affinitySize, affinity, guestProcess); } \
   NS_IMETHOD ProcessGet(PRUint32 pid, IGuestProcess **guestProcess) { return !_to ? NS_ERROR_NULL_POINTER : _to->ProcessGet(pid, guestProcess); } \
@@ -31953,6 +36958,18 @@ NS_IMETHODIMP _MYCLASS_::FsObjSetACL(const PRUnichar *path, PRBool followSymlink
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void fsQueryFreeSpace (in wstring path, [retval] out long long freeSpace); */
+NS_IMETHODIMP _MYCLASS_::FsQueryFreeSpace(const PRUnichar *path, PRInt64 *freeSpace)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void fsQueryInfo (in wstring path, [retval] out IGuestFsInfo info); */
+NS_IMETHODIMP _MYCLASS_::FsQueryInfo(const PRUnichar *path, IGuestFsInfo **info)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void processCreate (in wstring executable, in unsigned long argumentsSize, [array, size_is (argumentsSize)] in wstring arguments, in unsigned long environmentChangesSize, [array, size_is (environmentChangesSize)] in wstring environmentChanges, in unsigned long flagsSize, [array, size_is (flagsSize)] in ProcessCreateFlag_T flags, in unsigned long timeoutMS, [retval] out IGuestProcess guestProcess); */
 NS_IMETHODIMP _MYCLASS_::ProcessCreate(const PRUnichar *executable, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 environmentChangesSize, const PRUnichar **environmentChanges, PRUint32 flagsSize, ProcessCreateFlag_T *flags, PRUint32 timeoutMS, IGuestProcess **guestProcess)
 {
@@ -32211,6 +37228,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IGuestSession()
 #define COM_FORWARD_IGuestSession_FsObjSetACL_TO(smth) NS_IMETHOD FsObjSetACL (PRUnichar * aPath, PRBool aFollowSymlinks, PRUnichar * aAcl, PRUint32 aMode) { return smth FsObjSetACL (aPath, aFollowSymlinks, aAcl, aMode); }
 #define COM_FORWARD_IGuestSession_FsObjSetACL_TO_OBJ(obj) COM_FORWARD_IGuestSession_FsObjSetACL_TO ((obj)->)
 #define COM_FORWARD_IGuestSession_FsObjSetACL_TO_BASE(base) COM_FORWARD_IGuestSession_FsObjSetACL_TO (base::)
+#define COM_FORWARD_IGuestSession_FsQueryFreeSpace_TO(smth) NS_IMETHOD FsQueryFreeSpace (PRUnichar * aPath, PRInt64 * aFreeSpace) { return smth FsQueryFreeSpace (aPath, aFreeSpace); }
+#define COM_FORWARD_IGuestSession_FsQueryFreeSpace_TO_OBJ(obj) COM_FORWARD_IGuestSession_FsQueryFreeSpace_TO ((obj)->)
+#define COM_FORWARD_IGuestSession_FsQueryFreeSpace_TO_BASE(base) COM_FORWARD_IGuestSession_FsQueryFreeSpace_TO (base::)
+#define COM_FORWARD_IGuestSession_FsQueryInfo_TO(smth) NS_IMETHOD FsQueryInfo (PRUnichar * aPath, IGuestFsInfo * * aInfo) { return smth FsQueryInfo (aPath, aInfo); }
+#define COM_FORWARD_IGuestSession_FsQueryInfo_TO_OBJ(obj) COM_FORWARD_IGuestSession_FsQueryInfo_TO ((obj)->)
+#define COM_FORWARD_IGuestSession_FsQueryInfo_TO_BASE(base) COM_FORWARD_IGuestSession_FsQueryInfo_TO (base::)
 #define COM_FORWARD_IGuestSession_ProcessCreate_TO(smth) NS_IMETHOD ProcessCreate (PRUnichar * aExecutable, PRUint32 aArgumentsSize, PRUnichar * * aArguments, PRUint32 aEnvironmentChangesSize, PRUnichar * * aEnvironmentChanges, PRUint32 aFlagsSize, PRUint32 * aFlags, PRUint32 aTimeoutMS, IGuestProcess * * aGuestProcess) { return smth ProcessCreate (aExecutable, aArgumentsSize+++, aArguments, aEnvironmentChangesSize+++, aEnvironmentChanges, aFlagsSize+++, aFlags, aTimeoutMS, aGuestProcess); }
 #define COM_FORWARD_IGuestSession_ProcessCreate_TO_OBJ(obj) COM_FORWARD_IGuestSession_ProcessCreate_TO ((obj)->)
 #define COM_FORWARD_IGuestSession_ProcessCreate_TO_BASE(base) COM_FORWARD_IGuestSession_ProcessCreate_TO (base::)
@@ -33657,6 +38680,376 @@ NS_IMETHODIMP _MYCLASS_::GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotL
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IGuestFile;
 
+/* starting interface:    IFsInfo */
+#define IFSINFO_IID_STR "3db2ab1a-6cf7-42f1-8bf5-e1c0553e0b30"
+
+#define IFSINFO_IID \
+  {0x3db2ab1a, 0x6cf7, 0x42f1, \
+    { 0x8b, 0xf5, 0xe1, 0xc0, 0x55, 0x3e, 0x0b, 0x30 }}
+
+class NS_NO_VTABLE IFsInfo : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IFSINFO_IID)
+
+  /* readonly attribute long long freeSize; */
+  NS_IMETHOD GetFreeSize(PRInt64 *aFreeSize) = 0;
+
+  /* readonly attribute long long totalSize; */
+  NS_IMETHOD GetTotalSize(PRInt64 *aTotalSize) = 0;
+
+  /* readonly attribute unsigned long blockSize; */
+  NS_IMETHOD GetBlockSize(PRUint32 *aBlockSize) = 0;
+
+  /* readonly attribute unsigned long sectorSize; */
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize) = 0;
+
+  /* readonly attribute unsigned long serialNumber; */
+  NS_IMETHOD GetSerialNumber(PRUint32 *aSerialNumber) = 0;
+
+  /* readonly attribute boolean isRemote; */
+  NS_IMETHOD GetIsRemote(PRBool *aIsRemote) = 0;
+
+  /* readonly attribute boolean isCaseSensitive; */
+  NS_IMETHOD GetIsCaseSensitive(PRBool *aIsCaseSensitive) = 0;
+
+  /* readonly attribute boolean isReadOnly; */
+  NS_IMETHOD GetIsReadOnly(PRBool *aIsReadOnly) = 0;
+
+  /* readonly attribute boolean isCompressed; */
+  NS_IMETHOD GetIsCompressed(PRBool *aIsCompressed) = 0;
+
+  /* readonly attribute boolean supportsFileCompression; */
+  NS_IMETHOD GetSupportsFileCompression(PRBool *aSupportsFileCompression) = 0;
+
+  /* readonly attribute unsigned long maxComponent; */
+  NS_IMETHOD GetMaxComponent(PRUint32 *aMaxComponent) = 0;
+
+  /* readonly attribute wstring type; */
+  NS_IMETHOD GetType(PRUnichar * *aType) = 0;
+
+  /* readonly attribute wstring label; */
+  NS_IMETHOD GetLabel(PRUnichar * *aLabel) = 0;
+
+  /* readonly attribute wstring mountPoint; */
+  NS_IMETHOD GetMountPoint(PRUnichar * *aMountPoint) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IFsInfo(PRUint32 *aInternalAndReservedAttribute1IFsInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IFsInfo(PRUint32 *aInternalAndReservedAttribute2IFsInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IFsInfo(PRUint32 *aInternalAndReservedAttribute3IFsInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IFsInfo(PRUint32 *aInternalAndReservedAttribute4IFsInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute5IFsInfo(PRUint32 *aInternalAndReservedAttribute5IFsInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute6IFsInfo(PRUint32 *aInternalAndReservedAttribute6IFsInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute7IFsInfo(PRUint32 *aInternalAndReservedAttribute7IFsInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute8IFsInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute8IFsInfo(PRUint32 *aInternalAndReservedAttribute8IFsInfo) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IFSINFO \
+  NS_IMETHOD GetFreeSize(PRInt64 *aFreeSize); \
+  NS_IMETHOD GetTotalSize(PRInt64 *aTotalSize); \
+  NS_IMETHOD GetBlockSize(PRUint32 *aBlockSize); \
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize); \
+  NS_IMETHOD GetSerialNumber(PRUint32 *aSerialNumber); \
+  NS_IMETHOD GetIsRemote(PRBool *aIsRemote); \
+  NS_IMETHOD GetIsCaseSensitive(PRBool *aIsCaseSensitive); \
+  NS_IMETHOD GetIsReadOnly(PRBool *aIsReadOnly); \
+  NS_IMETHOD GetIsCompressed(PRBool *aIsCompressed); \
+  NS_IMETHOD GetSupportsFileCompression(PRBool *aSupportsFileCompression); \
+  NS_IMETHOD GetMaxComponent(PRUint32 *aMaxComponent); \
+  NS_IMETHOD GetType(PRUnichar * *aType); \
+  NS_IMETHOD GetLabel(PRUnichar * *aLabel); \
+  NS_IMETHOD GetMountPoint(PRUnichar * *aMountPoint); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IFsInfo(PRUint32 *aInternalAndReservedAttribute1IFsInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IFsInfo(PRUint32 *aInternalAndReservedAttribute2IFsInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IFsInfo(PRUint32 *aInternalAndReservedAttribute3IFsInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IFsInfo(PRUint32 *aInternalAndReservedAttribute4IFsInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute5IFsInfo(PRUint32 *aInternalAndReservedAttribute5IFsInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute6IFsInfo(PRUint32 *aInternalAndReservedAttribute6IFsInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute7IFsInfo(PRUint32 *aInternalAndReservedAttribute7IFsInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute8IFsInfo(PRUint32 *aInternalAndReservedAttribute8IFsInfo); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IFSINFO(_to) \
+  NS_IMETHOD GetFreeSize(PRInt64 *aFreeSize) { return _to GetFreeSize(aFreeSize); } \
+  NS_IMETHOD GetTotalSize(PRInt64 *aTotalSize) { return _to GetTotalSize(aTotalSize); } \
+  NS_IMETHOD GetBlockSize(PRUint32 *aBlockSize) { return _to GetBlockSize(aBlockSize); } \
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize) { return _to GetSectorSize(aSectorSize); } \
+  NS_IMETHOD GetSerialNumber(PRUint32 *aSerialNumber) { return _to GetSerialNumber(aSerialNumber); } \
+  NS_IMETHOD GetIsRemote(PRBool *aIsRemote) { return _to GetIsRemote(aIsRemote); } \
+  NS_IMETHOD GetIsCaseSensitive(PRBool *aIsCaseSensitive) { return _to GetIsCaseSensitive(aIsCaseSensitive); } \
+  NS_IMETHOD GetIsReadOnly(PRBool *aIsReadOnly) { return _to GetIsReadOnly(aIsReadOnly); } \
+  NS_IMETHOD GetIsCompressed(PRBool *aIsCompressed) { return _to GetIsCompressed(aIsCompressed); } \
+  NS_IMETHOD GetSupportsFileCompression(PRBool *aSupportsFileCompression) { return _to GetSupportsFileCompression(aSupportsFileCompression); } \
+  NS_IMETHOD GetMaxComponent(PRUint32 *aMaxComponent) { return _to GetMaxComponent(aMaxComponent); } \
+  NS_IMETHOD GetType(PRUnichar * *aType) { return _to GetType(aType); } \
+  NS_IMETHOD GetLabel(PRUnichar * *aLabel) { return _to GetLabel(aLabel); } \
+  NS_IMETHOD GetMountPoint(PRUnichar * *aMountPoint) { return _to GetMountPoint(aMountPoint); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IFsInfo(PRUint32 *aInternalAndReservedAttribute1IFsInfo) { return _to GetInternalAndReservedAttribute1IFsInfo(aInternalAndReservedAttribute1IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IFsInfo(PRUint32 *aInternalAndReservedAttribute2IFsInfo) { return _to GetInternalAndReservedAttribute2IFsInfo(aInternalAndReservedAttribute2IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IFsInfo(PRUint32 *aInternalAndReservedAttribute3IFsInfo) { return _to GetInternalAndReservedAttribute3IFsInfo(aInternalAndReservedAttribute3IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IFsInfo(PRUint32 *aInternalAndReservedAttribute4IFsInfo) { return _to GetInternalAndReservedAttribute4IFsInfo(aInternalAndReservedAttribute4IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IFsInfo(PRUint32 *aInternalAndReservedAttribute5IFsInfo) { return _to GetInternalAndReservedAttribute5IFsInfo(aInternalAndReservedAttribute5IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IFsInfo(PRUint32 *aInternalAndReservedAttribute6IFsInfo) { return _to GetInternalAndReservedAttribute6IFsInfo(aInternalAndReservedAttribute6IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IFsInfo(PRUint32 *aInternalAndReservedAttribute7IFsInfo) { return _to GetInternalAndReservedAttribute7IFsInfo(aInternalAndReservedAttribute7IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IFsInfo(PRUint32 *aInternalAndReservedAttribute8IFsInfo) { return _to GetInternalAndReservedAttribute8IFsInfo(aInternalAndReservedAttribute8IFsInfo); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IFSINFO(_to) \
+  NS_IMETHOD GetFreeSize(PRInt64 *aFreeSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFreeSize(aFreeSize); } \
+  NS_IMETHOD GetTotalSize(PRInt64 *aTotalSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTotalSize(aTotalSize); } \
+  NS_IMETHOD GetBlockSize(PRUint32 *aBlockSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetBlockSize(aBlockSize); } \
+  NS_IMETHOD GetSectorSize(PRUint32 *aSectorSize) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSectorSize(aSectorSize); } \
+  NS_IMETHOD GetSerialNumber(PRUint32 *aSerialNumber) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSerialNumber(aSerialNumber); } \
+  NS_IMETHOD GetIsRemote(PRBool *aIsRemote) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsRemote(aIsRemote); } \
+  NS_IMETHOD GetIsCaseSensitive(PRBool *aIsCaseSensitive) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsCaseSensitive(aIsCaseSensitive); } \
+  NS_IMETHOD GetIsReadOnly(PRBool *aIsReadOnly) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsReadOnly(aIsReadOnly); } \
+  NS_IMETHOD GetIsCompressed(PRBool *aIsCompressed) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsCompressed(aIsCompressed); } \
+  NS_IMETHOD GetSupportsFileCompression(PRBool *aSupportsFileCompression) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportsFileCompression(aSupportsFileCompression); } \
+  NS_IMETHOD GetMaxComponent(PRUint32 *aMaxComponent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMaxComponent(aMaxComponent); } \
+  NS_IMETHOD GetType(PRUnichar * *aType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetType(aType); } \
+  NS_IMETHOD GetLabel(PRUnichar * *aLabel) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLabel(aLabel); } \
+  NS_IMETHOD GetMountPoint(PRUnichar * *aMountPoint) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMountPoint(aMountPoint); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IFsInfo(PRUint32 *aInternalAndReservedAttribute1IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IFsInfo(aInternalAndReservedAttribute1IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IFsInfo(PRUint32 *aInternalAndReservedAttribute2IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IFsInfo(aInternalAndReservedAttribute2IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IFsInfo(PRUint32 *aInternalAndReservedAttribute3IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IFsInfo(aInternalAndReservedAttribute3IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IFsInfo(PRUint32 *aInternalAndReservedAttribute4IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IFsInfo(aInternalAndReservedAttribute4IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IFsInfo(PRUint32 *aInternalAndReservedAttribute5IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5IFsInfo(aInternalAndReservedAttribute5IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IFsInfo(PRUint32 *aInternalAndReservedAttribute6IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6IFsInfo(aInternalAndReservedAttribute6IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IFsInfo(PRUint32 *aInternalAndReservedAttribute7IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7IFsInfo(aInternalAndReservedAttribute7IFsInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IFsInfo(PRUint32 *aInternalAndReservedAttribute8IFsInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8IFsInfo(aInternalAndReservedAttribute8IFsInfo); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IFsInfo
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IFSINFO
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IFsInfo)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute long long freeSize; */
+NS_IMETHODIMP _MYCLASS_::GetFreeSize(PRInt64 *aFreeSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long long totalSize; */
+NS_IMETHODIMP _MYCLASS_::GetTotalSize(PRInt64 *aTotalSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long blockSize; */
+NS_IMETHODIMP _MYCLASS_::GetBlockSize(PRUint32 *aBlockSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long sectorSize; */
+NS_IMETHODIMP _MYCLASS_::GetSectorSize(PRUint32 *aSectorSize)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long serialNumber; */
+NS_IMETHODIMP _MYCLASS_::GetSerialNumber(PRUint32 *aSerialNumber)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean isRemote; */
+NS_IMETHODIMP _MYCLASS_::GetIsRemote(PRBool *aIsRemote)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean isCaseSensitive; */
+NS_IMETHODIMP _MYCLASS_::GetIsCaseSensitive(PRBool *aIsCaseSensitive)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean isReadOnly; */
+NS_IMETHODIMP _MYCLASS_::GetIsReadOnly(PRBool *aIsReadOnly)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean isCompressed; */
+NS_IMETHODIMP _MYCLASS_::GetIsCompressed(PRBool *aIsCompressed)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean supportsFileCompression; */
+NS_IMETHODIMP _MYCLASS_::GetSupportsFileCompression(PRBool *aSupportsFileCompression)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long maxComponent; */
+NS_IMETHODIMP _MYCLASS_::GetMaxComponent(PRUint32 *aMaxComponent)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring type; */
+NS_IMETHODIMP _MYCLASS_::GetType(PRUnichar * *aType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring label; */
+NS_IMETHODIMP _MYCLASS_::GetLabel(PRUnichar * *aLabel)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring mountPoint; */
+NS_IMETHODIMP _MYCLASS_::GetMountPoint(PRUnichar * *aMountPoint)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IFsInfo(PRUint32 *aInternalAndReservedAttribute1IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IFsInfo(PRUint32 *aInternalAndReservedAttribute2IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IFsInfo(PRUint32 *aInternalAndReservedAttribute3IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IFsInfo(PRUint32 *aInternalAndReservedAttribute4IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5IFsInfo(PRUint32 *aInternalAndReservedAttribute5IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6IFsInfo(PRUint32 *aInternalAndReservedAttribute6IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7IFsInfo(PRUint32 *aInternalAndReservedAttribute7IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute8IFsInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8IFsInfo(PRUint32 *aInternalAndReservedAttribute8IFsInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IFsInfo_GETTER_FreeSize_TO(smth) NS_IMETHOD GetFreeSize (PRInt64 * aFreeSize) { return smth GetFreeSize (aFreeSize); }
+#define COM_FORWARD_IFsInfo_GETTER_FreeSize_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_FreeSize_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_FreeSize_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_FreeSize_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_TotalSize_TO(smth) NS_IMETHOD GetTotalSize (PRInt64 * aTotalSize) { return smth GetTotalSize (aTotalSize); }
+#define COM_FORWARD_IFsInfo_GETTER_TotalSize_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_TotalSize_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_TotalSize_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_TotalSize_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_BlockSize_TO(smth) NS_IMETHOD GetBlockSize (PRUint32 * aBlockSize) { return smth GetBlockSize (aBlockSize); }
+#define COM_FORWARD_IFsInfo_GETTER_BlockSize_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_BlockSize_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_BlockSize_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_BlockSize_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_SectorSize_TO(smth) NS_IMETHOD GetSectorSize (PRUint32 * aSectorSize) { return smth GetSectorSize (aSectorSize); }
+#define COM_FORWARD_IFsInfo_GETTER_SectorSize_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_SectorSize_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_SectorSize_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_SectorSize_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_SerialNumber_TO(smth) NS_IMETHOD GetSerialNumber (PRUint32 * aSerialNumber) { return smth GetSerialNumber (aSerialNumber); }
+#define COM_FORWARD_IFsInfo_GETTER_SerialNumber_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_SerialNumber_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_SerialNumber_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_SerialNumber_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_IsRemote_TO(smth) NS_IMETHOD GetIsRemote (PRBool * aIsRemote) { return smth GetIsRemote (aIsRemote); }
+#define COM_FORWARD_IFsInfo_GETTER_IsRemote_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_IsRemote_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_IsRemote_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_IsRemote_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_IsCaseSensitive_TO(smth) NS_IMETHOD GetIsCaseSensitive (PRBool * aIsCaseSensitive) { return smth GetIsCaseSensitive (aIsCaseSensitive); }
+#define COM_FORWARD_IFsInfo_GETTER_IsCaseSensitive_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_IsCaseSensitive_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_IsCaseSensitive_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_IsCaseSensitive_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_IsReadOnly_TO(smth) NS_IMETHOD GetIsReadOnly (PRBool * aIsReadOnly) { return smth GetIsReadOnly (aIsReadOnly); }
+#define COM_FORWARD_IFsInfo_GETTER_IsReadOnly_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_IsReadOnly_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_IsReadOnly_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_IsReadOnly_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_IsCompressed_TO(smth) NS_IMETHOD GetIsCompressed (PRBool * aIsCompressed) { return smth GetIsCompressed (aIsCompressed); }
+#define COM_FORWARD_IFsInfo_GETTER_IsCompressed_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_IsCompressed_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_IsCompressed_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_IsCompressed_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_SupportsFileCompression_TO(smth) NS_IMETHOD GetSupportsFileCompression (PRBool * aSupportsFileCompression) { return smth GetSupportsFileCompression (aSupportsFileCompression); }
+#define COM_FORWARD_IFsInfo_GETTER_SupportsFileCompression_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_SupportsFileCompression_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_SupportsFileCompression_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_SupportsFileCompression_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_MaxComponent_TO(smth) NS_IMETHOD GetMaxComponent (PRUint32 * aMaxComponent) { return smth GetMaxComponent (aMaxComponent); }
+#define COM_FORWARD_IFsInfo_GETTER_MaxComponent_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_MaxComponent_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_MaxComponent_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_MaxComponent_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_Type_TO(smth) NS_IMETHOD GetType (PRUnichar * * aType) { return smth GetType (aType); }
+#define COM_FORWARD_IFsInfo_GETTER_Type_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_Type_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_Type_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_Type_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_Label_TO(smth) NS_IMETHOD GetLabel (PRUnichar * * aLabel) { return smth GetLabel (aLabel); }
+#define COM_FORWARD_IFsInfo_GETTER_Label_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_Label_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_Label_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_Label_TO (base::)
+#define COM_FORWARD_IFsInfo_GETTER_MountPoint_TO(smth) NS_IMETHOD GetMountPoint (PRUnichar * * aMountPoint) { return smth GetMountPoint (aMountPoint); }
+#define COM_FORWARD_IFsInfo_GETTER_MountPoint_TO_OBJ(obj) COM_FORWARD_IFsInfo_GETTER_MountPoint_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_GETTER_MountPoint_TO_BASE(base) COM_FORWARD_IFsInfo_GETTER_MountPoint_TO (base::)
+#define COM_FORWARD_IFsInfo_TO(smth) NS_FORWARD_IFSINFO (smth)
+#define COM_FORWARD_IFsInfo_TO_OBJ(obj) COM_FORWARD_IFsInfo_TO ((obj)->)
+#define COM_FORWARD_IFsInfo_TO_BASE(base) COM_FORWARD_IFsInfo_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IFsInfo;
+
 /* starting interface:    IFsObjInfo */
 #define IFSOBJINFO_IID_STR "081fc833-c6fa-430e-6020-6a505d086387"
 
@@ -34102,6 +39495,85 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8IFsObjInfo(PRUint32 *aI
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IFsObjInfo;
 
+/* starting interface:    IGuestFsInfo */
+#define IGUESTFSINFO_IID_STR "726eaca9-091e-41b4-bca6-355efe864107"
+
+#define IGUESTFSINFO_IID \
+  {0x726eaca9, 0x091e, 0x41b4, \
+    { 0xbc, 0xa6, 0x35, 0x5e, 0xfe, 0x86, 0x41, 0x07 }}
+
+class NS_NO_VTABLE IGuestFsInfo : public IFsInfo {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IGUESTFSINFO_IID)
+
+  /* readonly attribute boolean midlDoesNotLikeEmptyInterfaces; */
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IGUESTFSINFO \
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IGUESTFSINFO(_to) \
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces) { return _to GetMidlDoesNotLikeEmptyInterfaces(aMidlDoesNotLikeEmptyInterfaces); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IGUESTFSINFO(_to) \
+  NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMidlDoesNotLikeEmptyInterfaces(aMidlDoesNotLikeEmptyInterfaces); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IGuestFsInfo
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IGUESTFSINFO
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IGuestFsInfo)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute boolean midlDoesNotLikeEmptyInterfaces; */
+NS_IMETHODIMP _MYCLASS_::GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotLikeEmptyInterfaces)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IGuestFsInfo_GETTER_MidlDoesNotLikeEmptyInterfaces_TO(smth) NS_IMETHOD GetMidlDoesNotLikeEmptyInterfaces (PRBool * aMidlDoesNotLikeEmptyInterfaces) { return smth GetMidlDoesNotLikeEmptyInterfaces (aMidlDoesNotLikeEmptyInterfaces); }
+#define COM_FORWARD_IGuestFsInfo_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_OBJ(obj) COM_FORWARD_IGuestFsInfo_GETTER_MidlDoesNotLikeEmptyInterfaces_TO ((obj)->)
+#define COM_FORWARD_IGuestFsInfo_GETTER_MidlDoesNotLikeEmptyInterfaces_TO_BASE(base) COM_FORWARD_IGuestFsInfo_GETTER_MidlDoesNotLikeEmptyInterfaces_TO (base::)
+#define COM_FORWARD_IGuestFsInfo_TO(smth) NS_FORWARD_IGUESTFSINFO (smth)
+#define COM_FORWARD_IGuestFsInfo_TO_OBJ(obj) COM_FORWARD_IGuestFsInfo_TO ((obj)->)
+#define COM_FORWARD_IGuestFsInfo_TO_BASE(base) COM_FORWARD_IGuestFsInfo_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IGuestFsInfo;
+
 /* starting interface:    IGuestFsObjInfo */
 #define IGUESTFSOBJINFO_IID_STR "6620db85-44e0-ca69-e9e0-d4907ceccbe5"
 
@@ -34182,11 +39654,11 @@ NS_IMETHODIMP _MYCLASS_::GetMidlDoesNotLikeEmptyInterfaces(PRBool *aMidlDoesNotL
 VBOX_EXTERN_C const nsID IID_IGuestFsObjInfo;
 
 /* starting interface:    IGuest */
-#define IGUEST_IID_STR "13a11514-402e-022e-6180-c3944de3f9c8"
+#define IGUEST_IID_STR "00892186-a4af-4627-b21f-fc561ce4473c"
 
 #define IGUEST_IID \
-  {0x13a11514, 0x402e, 0x022e, \
-    { 0x61, 0x80, 0xc3, 0x94, 0x4d, 0xe3, 0xf9, 0xc8 }}
+  {0x00892186, 0xa4af, 0x4627, \
+    { 0xb2, 0x1f, 0xfc, 0x56, 0x1c, 0xe4, 0x47, 0x3c }}
 
 class NS_NO_VTABLE IGuest : public nsISupports {
  public: 
@@ -34294,6 +39766,9 @@ class NS_NO_VTABLE IGuest : public nsISupports {
   /* void findSession (in wstring sessionName, out unsigned long sessionsSize, [array, size_is (sessionsSize), retval] out IGuestSession sessions); */
   NS_IMETHOD FindSession(const PRUnichar *sessionName, PRUint32 *sessionsSize, IGuestSession ***sessions) = 0;
 
+  /* void shutdown (in unsigned long flagsSize, [array, size_is (flagsSize)] in GuestShutdownFlag_T flags); */
+  NS_IMETHOD Shutdown(PRUint32 flagsSize, GuestShutdownFlag_T *flags) = 0;
+
   /* void updateGuestAdditions (in wstring source, in unsigned long argumentsSize, [array, size_is (argumentsSize)] in wstring arguments, in unsigned long flagsSize, [array, size_is (flagsSize)] in AdditionsUpdateFlag_T flags, [retval] out IProgress progress); */
   NS_IMETHOD UpdateGuestAdditions(const PRUnichar *source, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 flagsSize, AdditionsUpdateFlag_T *flags, IProgress **progress) = 0;
 
@@ -34360,6 +39835,7 @@ class NS_NO_VTABLE IGuest : public nsISupports {
   NS_IMETHOD SetCredentials(const PRUnichar *userName, const PRUnichar *password, const PRUnichar *domain, PRBool allowInteractiveLogon); \
   NS_IMETHOD CreateSession(const PRUnichar *user, const PRUnichar *password, const PRUnichar *domain, const PRUnichar *sessionName, IGuestSession **guestSession); \
   NS_IMETHOD FindSession(const PRUnichar *sessionName, PRUint32 *sessionsSize, IGuestSession ***sessions); \
+  NS_IMETHOD Shutdown(PRUint32 flagsSize, GuestShutdownFlag_T *flags); \
   NS_IMETHOD UpdateGuestAdditions(const PRUnichar *source, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 flagsSize, AdditionsUpdateFlag_T *flags, IProgress **progress); \
   NS_IMETHOD InternalAndReservedMethod1IGuest(void); \
   NS_IMETHOD InternalAndReservedMethod2IGuest(void); \
@@ -34407,6 +39883,7 @@ class NS_NO_VTABLE IGuest : public nsISupports {
   NS_IMETHOD SetCredentials(const PRUnichar *userName, const PRUnichar *password, const PRUnichar *domain, PRBool allowInteractiveLogon) { return _to SetCredentials(userName, password, domain, allowInteractiveLogon); } \
   NS_IMETHOD CreateSession(const PRUnichar *user, const PRUnichar *password, const PRUnichar *domain, const PRUnichar *sessionName, IGuestSession **guestSession) { return _to CreateSession(user, password, domain, sessionName, guestSession); } \
   NS_IMETHOD FindSession(const PRUnichar *sessionName, PRUint32 *sessionsSize, IGuestSession ***sessions) { return _to FindSession(sessionName, sessionsSize, sessions); } \
+  NS_IMETHOD Shutdown(PRUint32 flagsSize, GuestShutdownFlag_T *flags) { return _to Shutdown(flagsSize, flags); } \
   NS_IMETHOD UpdateGuestAdditions(const PRUnichar *source, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 flagsSize, AdditionsUpdateFlag_T *flags, IProgress **progress) { return _to UpdateGuestAdditions(source, argumentsSize, arguments, flagsSize, flags, progress); } \
   NS_IMETHOD InternalAndReservedMethod1IGuest(void) { return _to InternalAndReservedMethod1IGuest(); } \
   NS_IMETHOD InternalAndReservedMethod2IGuest(void) { return _to InternalAndReservedMethod2IGuest(); } \
@@ -34454,6 +39931,7 @@ class NS_NO_VTABLE IGuest : public nsISupports {
   NS_IMETHOD SetCredentials(const PRUnichar *userName, const PRUnichar *password, const PRUnichar *domain, PRBool allowInteractiveLogon) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetCredentials(userName, password, domain, allowInteractiveLogon); } \
   NS_IMETHOD CreateSession(const PRUnichar *user, const PRUnichar *password, const PRUnichar *domain, const PRUnichar *sessionName, IGuestSession **guestSession) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateSession(user, password, domain, sessionName, guestSession); } \
   NS_IMETHOD FindSession(const PRUnichar *sessionName, PRUint32 *sessionsSize, IGuestSession ***sessions) { return !_to ? NS_ERROR_NULL_POINTER : _to->FindSession(sessionName, sessionsSize, sessions); } \
+  NS_IMETHOD Shutdown(PRUint32 flagsSize, GuestShutdownFlag_T *flags) { return !_to ? NS_ERROR_NULL_POINTER : _to->Shutdown(flagsSize, flags); } \
   NS_IMETHOD UpdateGuestAdditions(const PRUnichar *source, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 flagsSize, AdditionsUpdateFlag_T *flags, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->UpdateGuestAdditions(source, argumentsSize, arguments, flagsSize, flags, progress); } \
   NS_IMETHOD InternalAndReservedMethod1IGuest(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IGuest(); } \
   NS_IMETHOD InternalAndReservedMethod2IGuest(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IGuest(); } \
@@ -34702,6 +40180,12 @@ NS_IMETHODIMP _MYCLASS_::FindSession(const PRUnichar *sessionName, PRUint32 *ses
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void shutdown (in unsigned long flagsSize, [array, size_is (flagsSize)] in GuestShutdownFlag_T flags); */
+NS_IMETHODIMP _MYCLASS_::Shutdown(PRUint32 flagsSize, GuestShutdownFlag_T *flags)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void updateGuestAdditions (in wstring source, in unsigned long argumentsSize, [array, size_is (argumentsSize)] in wstring arguments, in unsigned long flagsSize, [array, size_is (flagsSize)] in AdditionsUpdateFlag_T flags, [retval] out IProgress progress); */
 NS_IMETHODIMP _MYCLASS_::UpdateGuestAdditions(const PRUnichar *source, PRUint32 argumentsSize, const PRUnichar **arguments, PRUint32 flagsSize, AdditionsUpdateFlag_T *flags, IProgress **progress)
 {
@@ -34816,6 +40300,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IGuest()
 #define COM_FORWARD_IGuest_FindSession_TO(smth) NS_IMETHOD FindSession (PRUnichar * aSessionName, PRUint32 * aSessionsSize, IGuestSession * * * aSessions) { return smth FindSession (aSessionName, aSessionsSize, aSessions); }
 #define COM_FORWARD_IGuest_FindSession_TO_OBJ(obj) COM_FORWARD_IGuest_FindSession_TO ((obj)->)
 #define COM_FORWARD_IGuest_FindSession_TO_BASE(base) COM_FORWARD_IGuest_FindSession_TO (base::)
+#define COM_FORWARD_IGuest_Shutdown_TO(smth) NS_IMETHOD Shutdown (PRUint32 aFlagsSize, PRUint32 * aFlags) { return smth Shutdown (aFlagsSize, aFlags); }
+#define COM_FORWARD_IGuest_Shutdown_TO_OBJ(obj) COM_FORWARD_IGuest_Shutdown_TO ((obj)->)
+#define COM_FORWARD_IGuest_Shutdown_TO_BASE(base) COM_FORWARD_IGuest_Shutdown_TO (base::)
 #define COM_FORWARD_IGuest_UpdateGuestAdditions_TO(smth) NS_IMETHOD UpdateGuestAdditions (PRUnichar * aSource, PRUint32 aArgumentsSize, PRUnichar * * aArguments, PRUint32 aFlagsSize, PRUint32 * aFlags, IProgress * * aProgress) { return smth UpdateGuestAdditions (aSource, aArgumentsSize+++, aArguments, aFlagsSize+++, aFlags, aProgress); }
 #define COM_FORWARD_IGuest_UpdateGuestAdditions_TO_OBJ(obj) COM_FORWARD_IGuest_UpdateGuestAdditions_TO ((obj)->)
 #define COM_FORWARD_IGuest_UpdateGuestAdditions_TO_BASE(base) COM_FORWARD_IGuest_UpdateGuestAdditions_TO (base::)
@@ -38919,11 +44406,11 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IMousePointerShape(PRUi
 VBOX_EXTERN_C const nsID IID_IMousePointerShape;
 
 /* starting interface:    IMouse */
-#define IMOUSE_IID_STR "10cd08d0-e8b8-4838-b10c-45ba193734c1"
+#define IMOUSE_IID_STR "25360a74-55e5-4f14-ac2a-f5cf8e62e4af"
 
 #define IMOUSE_IID \
-  {0x10cd08d0, 0xe8b8, 0x4838, \
-    { 0xb1, 0x0c, 0x45, 0xba, 0x19, 0x37, 0x34, 0xc1 }}
+  {0x25360a74, 0x55e5, 0x4f14, \
+    { 0xac, 0x2a, 0xf5, 0xcf, 0x8e, 0x62, 0xe4, 0xaf }}
 
 class NS_NO_VTABLE IMouse : public nsISupports {
  public: 
@@ -38936,8 +44423,11 @@ class NS_NO_VTABLE IMouse : public nsISupports {
   /* readonly attribute boolean relativeSupported; */
   NS_IMETHOD GetRelativeSupported(PRBool *aRelativeSupported) = 0;
 
-  /* readonly attribute boolean multiTouchSupported; */
-  NS_IMETHOD GetMultiTouchSupported(PRBool *aMultiTouchSupported) = 0;
+  /* readonly attribute boolean touchScreenSupported; */
+  NS_IMETHOD GetTouchScreenSupported(PRBool *aTouchScreenSupported) = 0;
+
+  /* readonly attribute boolean touchPadSupported; */
+  NS_IMETHOD GetTouchPadSupported(PRBool *aTouchPadSupported) = 0;
 
   /* readonly attribute boolean needsHostCursor; */
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor) = 0;
@@ -38966,11 +44456,11 @@ class NS_NO_VTABLE IMouse : public nsISupports {
   /* void putMouseEventAbsolute (in long x, in long y, in long dz, in long dw, in long buttonState); */
   NS_IMETHOD PutMouseEventAbsolute(PRInt32 x, PRInt32 y, PRInt32 dz, PRInt32 dw, PRInt32 buttonState) = 0;
 
-  /* void putEventMultiTouch (in long count, in unsigned long contactsSize, [array, size_is (contactsSize)] in long long contacts, in unsigned long scanTime); */
-  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRUint32 scanTime) = 0;
+  /* void putEventMultiTouch (in long count, in unsigned long contactsSize, [array, size_is (contactsSize)] in long long contacts, in boolean isTouchScreen, in unsigned long scanTime); */
+  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRBool isTouchScreen, PRUint32 scanTime) = 0;
 
-  /* void putEventMultiTouchString (in long count, in wstring contacts, in unsigned long scanTime); */
-  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRUint32 scanTime) = 0;
+  /* void putEventMultiTouchString (in long count, in wstring contacts, in boolean isTouchScreen, in unsigned long scanTime); */
+  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRBool isTouchScreen, PRUint32 scanTime) = 0;
 
   /* void InternalAndReservedMethod1IMouse (); */
   NS_IMETHOD InternalAndReservedMethod1IMouse(void) = 0;
@@ -38990,7 +44480,8 @@ class NS_NO_VTABLE IMouse : public nsISupports {
 #define NS_DECL_IMOUSE \
   NS_IMETHOD GetAbsoluteSupported(PRBool *aAbsoluteSupported); \
   NS_IMETHOD GetRelativeSupported(PRBool *aRelativeSupported); \
-  NS_IMETHOD GetMultiTouchSupported(PRBool *aMultiTouchSupported); \
+  NS_IMETHOD GetTouchScreenSupported(PRBool *aTouchScreenSupported); \
+  NS_IMETHOD GetTouchPadSupported(PRBool *aTouchPadSupported); \
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor); \
   NS_IMETHOD GetPointerShape(IMousePointerShape * *aPointerShape); \
   NS_IMETHOD GetEventSource(IEventSource * *aEventSource); \
@@ -39000,8 +44491,8 @@ class NS_NO_VTABLE IMouse : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute4IMouse(PRUint32 *aInternalAndReservedAttribute4IMouse); \
   NS_IMETHOD PutMouseEvent(PRInt32 dx, PRInt32 dy, PRInt32 dz, PRInt32 dw, PRInt32 buttonState); \
   NS_IMETHOD PutMouseEventAbsolute(PRInt32 x, PRInt32 y, PRInt32 dz, PRInt32 dw, PRInt32 buttonState); \
-  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRUint32 scanTime); \
-  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRUint32 scanTime); \
+  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRBool isTouchScreen, PRUint32 scanTime); \
+  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRBool isTouchScreen, PRUint32 scanTime); \
   NS_IMETHOD InternalAndReservedMethod1IMouse(void); \
   NS_IMETHOD InternalAndReservedMethod2IMouse(void); \
   NS_IMETHOD InternalAndReservedMethod3IMouse(void); \
@@ -39011,7 +44502,8 @@ class NS_NO_VTABLE IMouse : public nsISupports {
 #define NS_FORWARD_IMOUSE(_to) \
   NS_IMETHOD GetAbsoluteSupported(PRBool *aAbsoluteSupported) { return _to GetAbsoluteSupported(aAbsoluteSupported); } \
   NS_IMETHOD GetRelativeSupported(PRBool *aRelativeSupported) { return _to GetRelativeSupported(aRelativeSupported); } \
-  NS_IMETHOD GetMultiTouchSupported(PRBool *aMultiTouchSupported) { return _to GetMultiTouchSupported(aMultiTouchSupported); } \
+  NS_IMETHOD GetTouchScreenSupported(PRBool *aTouchScreenSupported) { return _to GetTouchScreenSupported(aTouchScreenSupported); } \
+  NS_IMETHOD GetTouchPadSupported(PRBool *aTouchPadSupported) { return _to GetTouchPadSupported(aTouchPadSupported); } \
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor) { return _to GetNeedsHostCursor(aNeedsHostCursor); } \
   NS_IMETHOD GetPointerShape(IMousePointerShape * *aPointerShape) { return _to GetPointerShape(aPointerShape); } \
   NS_IMETHOD GetEventSource(IEventSource * *aEventSource) { return _to GetEventSource(aEventSource); } \
@@ -39021,8 +44513,8 @@ class NS_NO_VTABLE IMouse : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute4IMouse(PRUint32 *aInternalAndReservedAttribute4IMouse) { return _to GetInternalAndReservedAttribute4IMouse(aInternalAndReservedAttribute4IMouse); } \
   NS_IMETHOD PutMouseEvent(PRInt32 dx, PRInt32 dy, PRInt32 dz, PRInt32 dw, PRInt32 buttonState) { return _to PutMouseEvent(dx, dy, dz, dw, buttonState); } \
   NS_IMETHOD PutMouseEventAbsolute(PRInt32 x, PRInt32 y, PRInt32 dz, PRInt32 dw, PRInt32 buttonState) { return _to PutMouseEventAbsolute(x, y, dz, dw, buttonState); } \
-  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRUint32 scanTime) { return _to PutEventMultiTouch(count, contactsSize, contacts, scanTime); } \
-  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRUint32 scanTime) { return _to PutEventMultiTouchString(count, contacts, scanTime); } \
+  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRBool isTouchScreen, PRUint32 scanTime) { return _to PutEventMultiTouch(count, contactsSize, contacts, isTouchScreen, scanTime); } \
+  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRBool isTouchScreen, PRUint32 scanTime) { return _to PutEventMultiTouchString(count, contacts, isTouchScreen, scanTime); } \
   NS_IMETHOD InternalAndReservedMethod1IMouse(void) { return _to InternalAndReservedMethod1IMouse(); } \
   NS_IMETHOD InternalAndReservedMethod2IMouse(void) { return _to InternalAndReservedMethod2IMouse(); } \
   NS_IMETHOD InternalAndReservedMethod3IMouse(void) { return _to InternalAndReservedMethod3IMouse(); } \
@@ -39032,7 +44524,8 @@ class NS_NO_VTABLE IMouse : public nsISupports {
 #define NS_FORWARD_SAFE_IMOUSE(_to) \
   NS_IMETHOD GetAbsoluteSupported(PRBool *aAbsoluteSupported) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAbsoluteSupported(aAbsoluteSupported); } \
   NS_IMETHOD GetRelativeSupported(PRBool *aRelativeSupported) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRelativeSupported(aRelativeSupported); } \
-  NS_IMETHOD GetMultiTouchSupported(PRBool *aMultiTouchSupported) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMultiTouchSupported(aMultiTouchSupported); } \
+  NS_IMETHOD GetTouchScreenSupported(PRBool *aTouchScreenSupported) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTouchScreenSupported(aTouchScreenSupported); } \
+  NS_IMETHOD GetTouchPadSupported(PRBool *aTouchPadSupported) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTouchPadSupported(aTouchPadSupported); } \
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNeedsHostCursor(aNeedsHostCursor); } \
   NS_IMETHOD GetPointerShape(IMousePointerShape * *aPointerShape) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPointerShape(aPointerShape); } \
   NS_IMETHOD GetEventSource(IEventSource * *aEventSource) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEventSource(aEventSource); } \
@@ -39042,8 +44535,8 @@ class NS_NO_VTABLE IMouse : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute4IMouse(PRUint32 *aInternalAndReservedAttribute4IMouse) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IMouse(aInternalAndReservedAttribute4IMouse); } \
   NS_IMETHOD PutMouseEvent(PRInt32 dx, PRInt32 dy, PRInt32 dz, PRInt32 dw, PRInt32 buttonState) { return !_to ? NS_ERROR_NULL_POINTER : _to->PutMouseEvent(dx, dy, dz, dw, buttonState); } \
   NS_IMETHOD PutMouseEventAbsolute(PRInt32 x, PRInt32 y, PRInt32 dz, PRInt32 dw, PRInt32 buttonState) { return !_to ? NS_ERROR_NULL_POINTER : _to->PutMouseEventAbsolute(x, y, dz, dw, buttonState); } \
-  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRUint32 scanTime) { return !_to ? NS_ERROR_NULL_POINTER : _to->PutEventMultiTouch(count, contactsSize, contacts, scanTime); } \
-  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRUint32 scanTime) { return !_to ? NS_ERROR_NULL_POINTER : _to->PutEventMultiTouchString(count, contacts, scanTime); } \
+  NS_IMETHOD PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRBool isTouchScreen, PRUint32 scanTime) { return !_to ? NS_ERROR_NULL_POINTER : _to->PutEventMultiTouch(count, contactsSize, contacts, isTouchScreen, scanTime); } \
+  NS_IMETHOD PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRBool isTouchScreen, PRUint32 scanTime) { return !_to ? NS_ERROR_NULL_POINTER : _to->PutEventMultiTouchString(count, contacts, isTouchScreen, scanTime); } \
   NS_IMETHOD InternalAndReservedMethod1IMouse(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IMouse(); } \
   NS_IMETHOD InternalAndReservedMethod2IMouse(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IMouse(); } \
   NS_IMETHOD InternalAndReservedMethod3IMouse(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IMouse(); } \
@@ -39093,8 +44586,14 @@ NS_IMETHODIMP _MYCLASS_::GetRelativeSupported(PRBool *aRelativeSupported)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute boolean multiTouchSupported; */
-NS_IMETHODIMP _MYCLASS_::GetMultiTouchSupported(PRBool *aMultiTouchSupported)
+/* readonly attribute boolean touchScreenSupported; */
+NS_IMETHODIMP _MYCLASS_::GetTouchScreenSupported(PRBool *aTouchScreenSupported)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean touchPadSupported; */
+NS_IMETHODIMP _MYCLASS_::GetTouchPadSupported(PRBool *aTouchPadSupported)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -39153,14 +44652,14 @@ NS_IMETHODIMP _MYCLASS_::PutMouseEventAbsolute(PRInt32 x, PRInt32 y, PRInt32 dz,
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void putEventMultiTouch (in long count, in unsigned long contactsSize, [array, size_is (contactsSize)] in long long contacts, in unsigned long scanTime); */
-NS_IMETHODIMP _MYCLASS_::PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRUint32 scanTime)
+/* void putEventMultiTouch (in long count, in unsigned long contactsSize, [array, size_is (contactsSize)] in long long contacts, in boolean isTouchScreen, in unsigned long scanTime); */
+NS_IMETHODIMP _MYCLASS_::PutEventMultiTouch(PRInt32 count, PRUint32 contactsSize, PRInt64 *contacts, PRBool isTouchScreen, PRUint32 scanTime)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void putEventMultiTouchString (in long count, in wstring contacts, in unsigned long scanTime); */
-NS_IMETHODIMP _MYCLASS_::PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRUint32 scanTime)
+/* void putEventMultiTouchString (in long count, in wstring contacts, in boolean isTouchScreen, in unsigned long scanTime); */
+NS_IMETHODIMP _MYCLASS_::PutEventMultiTouchString(PRInt32 count, const PRUnichar *contacts, PRBool isTouchScreen, PRUint32 scanTime)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -39198,9 +44697,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IMouse()
 #define COM_FORWARD_IMouse_GETTER_RelativeSupported_TO(smth) NS_IMETHOD GetRelativeSupported (PRBool * aRelativeSupported) { return smth GetRelativeSupported (aRelativeSupported); }
 #define COM_FORWARD_IMouse_GETTER_RelativeSupported_TO_OBJ(obj) COM_FORWARD_IMouse_GETTER_RelativeSupported_TO ((obj)->)
 #define COM_FORWARD_IMouse_GETTER_RelativeSupported_TO_BASE(base) COM_FORWARD_IMouse_GETTER_RelativeSupported_TO (base::)
-#define COM_FORWARD_IMouse_GETTER_MultiTouchSupported_TO(smth) NS_IMETHOD GetMultiTouchSupported (PRBool * aMultiTouchSupported) { return smth GetMultiTouchSupported (aMultiTouchSupported); }
-#define COM_FORWARD_IMouse_GETTER_MultiTouchSupported_TO_OBJ(obj) COM_FORWARD_IMouse_GETTER_MultiTouchSupported_TO ((obj)->)
-#define COM_FORWARD_IMouse_GETTER_MultiTouchSupported_TO_BASE(base) COM_FORWARD_IMouse_GETTER_MultiTouchSupported_TO (base::)
+#define COM_FORWARD_IMouse_GETTER_TouchScreenSupported_TO(smth) NS_IMETHOD GetTouchScreenSupported (PRBool * aTouchScreenSupported) { return smth GetTouchScreenSupported (aTouchScreenSupported); }
+#define COM_FORWARD_IMouse_GETTER_TouchScreenSupported_TO_OBJ(obj) COM_FORWARD_IMouse_GETTER_TouchScreenSupported_TO ((obj)->)
+#define COM_FORWARD_IMouse_GETTER_TouchScreenSupported_TO_BASE(base) COM_FORWARD_IMouse_GETTER_TouchScreenSupported_TO (base::)
+#define COM_FORWARD_IMouse_GETTER_TouchPadSupported_TO(smth) NS_IMETHOD GetTouchPadSupported (PRBool * aTouchPadSupported) { return smth GetTouchPadSupported (aTouchPadSupported); }
+#define COM_FORWARD_IMouse_GETTER_TouchPadSupported_TO_OBJ(obj) COM_FORWARD_IMouse_GETTER_TouchPadSupported_TO ((obj)->)
+#define COM_FORWARD_IMouse_GETTER_TouchPadSupported_TO_BASE(base) COM_FORWARD_IMouse_GETTER_TouchPadSupported_TO (base::)
 #define COM_FORWARD_IMouse_GETTER_NeedsHostCursor_TO(smth) NS_IMETHOD GetNeedsHostCursor (PRBool * aNeedsHostCursor) { return smth GetNeedsHostCursor (aNeedsHostCursor); }
 #define COM_FORWARD_IMouse_GETTER_NeedsHostCursor_TO_OBJ(obj) COM_FORWARD_IMouse_GETTER_NeedsHostCursor_TO ((obj)->)
 #define COM_FORWARD_IMouse_GETTER_NeedsHostCursor_TO_BASE(base) COM_FORWARD_IMouse_GETTER_NeedsHostCursor_TO (base::)
@@ -39216,10 +44718,10 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IMouse()
 #define COM_FORWARD_IMouse_PutMouseEventAbsolute_TO(smth) NS_IMETHOD PutMouseEventAbsolute (PRInt32 aX, PRInt32 aY, PRInt32 aDz, PRInt32 aDw, PRInt32 aButtonState) { return smth PutMouseEventAbsolute (aX, aY, aDz, aDw, aButtonState); }
 #define COM_FORWARD_IMouse_PutMouseEventAbsolute_TO_OBJ(obj) COM_FORWARD_IMouse_PutMouseEventAbsolute_TO ((obj)->)
 #define COM_FORWARD_IMouse_PutMouseEventAbsolute_TO_BASE(base) COM_FORWARD_IMouse_PutMouseEventAbsolute_TO (base::)
-#define COM_FORWARD_IMouse_PutEventMultiTouch_TO(smth) NS_IMETHOD PutEventMultiTouch (PRInt32 aCount, PRUint32 aContactsSize, PRInt64 * aContacts, PRUint32 aScanTime) { return smth PutEventMultiTouch (aCount, aContactsSize+++, aContacts, aScanTime); }
+#define COM_FORWARD_IMouse_PutEventMultiTouch_TO(smth) NS_IMETHOD PutEventMultiTouch (PRInt32 aCount, PRUint32 aContactsSize, PRInt64 * aContacts, PRBool aIsTouchScreen, PRUint32 aScanTime) { return smth PutEventMultiTouch (aCount, aContactsSize+++, aContacts, aIsTouchScreen, aScanTime); }
 #define COM_FORWARD_IMouse_PutEventMultiTouch_TO_OBJ(obj) COM_FORWARD_IMouse_PutEventMultiTouch_TO ((obj)->)
 #define COM_FORWARD_IMouse_PutEventMultiTouch_TO_BASE(base) COM_FORWARD_IMouse_PutEventMultiTouch_TO (base::)
-#define COM_FORWARD_IMouse_PutEventMultiTouchString_TO(smth) NS_IMETHOD PutEventMultiTouchString (PRInt32 aCount, PRUnichar * aContacts, PRUint32 aScanTime) { return smth PutEventMultiTouchString (aCount, aContacts, aScanTime); }
+#define COM_FORWARD_IMouse_PutEventMultiTouchString_TO(smth) NS_IMETHOD PutEventMultiTouchString (PRInt32 aCount, PRUnichar * aContacts, PRBool aIsTouchScreen, PRUint32 aScanTime) { return smth PutEventMultiTouchString (aCount, aContacts, aIsTouchScreen, aScanTime); }
 #define COM_FORWARD_IMouse_PutEventMultiTouchString_TO_OBJ(obj) COM_FORWARD_IMouse_PutEventMultiTouchString_TO ((obj)->)
 #define COM_FORWARD_IMouse_PutEventMultiTouchString_TO_BASE(base) COM_FORWARD_IMouse_PutEventMultiTouchString_TO (base::)
 #define COM_FORWARD_IMouse_TO(smth) NS_FORWARD_IMOUSE (smth)
@@ -40684,11 +46186,11 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8IDisplay()
 VBOX_EXTERN_C const nsID IID_IDisplay;
 
 /* starting interface:    INetworkAdapter */
-#define INETWORKADAPTER_IID_STR "e9a0c183-7071-4894-93d6-dcbec010fa91"
+#define INETWORKADAPTER_IID_STR "dcf47a1d-ed70-4db8-9a4b-2646bd166905"
 
 #define INETWORKADAPTER_IID \
-  {0xe9a0c183, 0x7071, 0x4894, \
-    { 0x93, 0xd6, 0xdc, 0xbe, 0xc0, 0x10, 0xfa, 0x91 }}
+  {0xdcf47a1d, 0xed70, 0x4db8, \
+    { 0x9a, 0x4b, 0x26, 0x46, 0xbd, 0x16, 0x69, 0x05 }}
 
 class NS_NO_VTABLE INetworkAdapter : public nsISupports {
  public: 
@@ -40721,6 +46223,10 @@ class NS_NO_VTABLE INetworkAdapter : public nsISupports {
   /* attribute wstring hostOnlyInterface; */
   NS_IMETHOD GetHostOnlyInterface(PRUnichar * *aHostOnlyInterface) = 0;
   NS_IMETHOD SetHostOnlyInterface(const PRUnichar * aHostOnlyInterface) = 0;
+
+  /* attribute wstring hostOnlyNetwork; */
+  NS_IMETHOD GetHostOnlyNetwork(PRUnichar * *aHostOnlyNetwork) = 0;
+  NS_IMETHOD SetHostOnlyNetwork(const PRUnichar * aHostOnlyNetwork) = 0;
 
   /* attribute wstring internalNetwork; */
   NS_IMETHOD GetInternalNetwork(PRUnichar * *aInternalNetwork) = 0;
@@ -40831,6 +46337,8 @@ class NS_NO_VTABLE INetworkAdapter : public nsISupports {
   NS_IMETHOD SetBridgedInterface(const PRUnichar * aBridgedInterface); \
   NS_IMETHOD GetHostOnlyInterface(PRUnichar * *aHostOnlyInterface); \
   NS_IMETHOD SetHostOnlyInterface(const PRUnichar * aHostOnlyInterface); \
+  NS_IMETHOD GetHostOnlyNetwork(PRUnichar * *aHostOnlyNetwork); \
+  NS_IMETHOD SetHostOnlyNetwork(const PRUnichar * aHostOnlyNetwork); \
   NS_IMETHOD GetInternalNetwork(PRUnichar * *aInternalNetwork); \
   NS_IMETHOD SetInternalNetwork(const PRUnichar * aInternalNetwork); \
   NS_IMETHOD GetNATNetwork(PRUnichar * *aNATNetwork); \
@@ -40885,6 +46393,8 @@ class NS_NO_VTABLE INetworkAdapter : public nsISupports {
   NS_IMETHOD SetBridgedInterface(const PRUnichar * aBridgedInterface) { return _to SetBridgedInterface(aBridgedInterface); } \
   NS_IMETHOD GetHostOnlyInterface(PRUnichar * *aHostOnlyInterface) { return _to GetHostOnlyInterface(aHostOnlyInterface); } \
   NS_IMETHOD SetHostOnlyInterface(const PRUnichar * aHostOnlyInterface) { return _to SetHostOnlyInterface(aHostOnlyInterface); } \
+  NS_IMETHOD GetHostOnlyNetwork(PRUnichar * *aHostOnlyNetwork) { return _to GetHostOnlyNetwork(aHostOnlyNetwork); } \
+  NS_IMETHOD SetHostOnlyNetwork(const PRUnichar * aHostOnlyNetwork) { return _to SetHostOnlyNetwork(aHostOnlyNetwork); } \
   NS_IMETHOD GetInternalNetwork(PRUnichar * *aInternalNetwork) { return _to GetInternalNetwork(aInternalNetwork); } \
   NS_IMETHOD SetInternalNetwork(const PRUnichar * aInternalNetwork) { return _to SetInternalNetwork(aInternalNetwork); } \
   NS_IMETHOD GetNATNetwork(PRUnichar * *aNATNetwork) { return _to GetNATNetwork(aNATNetwork); } \
@@ -40939,6 +46449,8 @@ class NS_NO_VTABLE INetworkAdapter : public nsISupports {
   NS_IMETHOD SetBridgedInterface(const PRUnichar * aBridgedInterface) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetBridgedInterface(aBridgedInterface); } \
   NS_IMETHOD GetHostOnlyInterface(PRUnichar * *aHostOnlyInterface) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHostOnlyInterface(aHostOnlyInterface); } \
   NS_IMETHOD SetHostOnlyInterface(const PRUnichar * aHostOnlyInterface) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetHostOnlyInterface(aHostOnlyInterface); } \
+  NS_IMETHOD GetHostOnlyNetwork(PRUnichar * *aHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHostOnlyNetwork(aHostOnlyNetwork); } \
+  NS_IMETHOD SetHostOnlyNetwork(const PRUnichar * aHostOnlyNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetHostOnlyNetwork(aHostOnlyNetwork); } \
   NS_IMETHOD GetInternalNetwork(PRUnichar * *aInternalNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalNetwork(aInternalNetwork); } \
   NS_IMETHOD SetInternalNetwork(const PRUnichar * aInternalNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetInternalNetwork(aInternalNetwork); } \
   NS_IMETHOD GetNATNetwork(PRUnichar * *aNATNetwork) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNATNetwork(aNATNetwork); } \
@@ -41072,6 +46584,16 @@ NS_IMETHODIMP _MYCLASS_::GetHostOnlyInterface(PRUnichar * *aHostOnlyInterface)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 NS_IMETHODIMP _MYCLASS_::SetHostOnlyInterface(const PRUnichar * aHostOnlyInterface)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring hostOnlyNetwork; */
+NS_IMETHODIMP _MYCLASS_::GetHostOnlyNetwork(PRUnichar * *aHostOnlyNetwork)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetHostOnlyNetwork(const PRUnichar * aHostOnlyNetwork)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -41324,6 +46846,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4INetworkAdapter()
 #define COM_FORWARD_INetworkAdapter_SETTER_HostOnlyInterface_TO(smth) NS_IMETHOD SetHostOnlyInterface (const PRUnichar * aHostOnlyInterface) { return smth SetHostOnlyInterface (aHostOnlyInterface); }
 #define COM_FORWARD_INetworkAdapter_SETTER_HostOnlyInterface_TO_OBJ(obj) COM_FORWARD_INetworkAdapter_SETTER_HostOnlyInterface_TO ((obj)->)
 #define COM_FORWARD_INetworkAdapter_SETTER_HostOnlyInterface_TO_BASE(base) COM_FORWARD_INetworkAdapter_SETTER_HostOnlyInterface_TO (base::)
+#define COM_FORWARD_INetworkAdapter_GETTER_HostOnlyNetwork_TO(smth) NS_IMETHOD GetHostOnlyNetwork (PRUnichar * * aHostOnlyNetwork) { return smth GetHostOnlyNetwork (aHostOnlyNetwork); }
+#define COM_FORWARD_INetworkAdapter_GETTER_HostOnlyNetwork_TO_OBJ(obj) COM_FORWARD_INetworkAdapter_GETTER_HostOnlyNetwork_TO ((obj)->)
+#define COM_FORWARD_INetworkAdapter_GETTER_HostOnlyNetwork_TO_BASE(base) COM_FORWARD_INetworkAdapter_GETTER_HostOnlyNetwork_TO (base::)
+#define COM_FORWARD_INetworkAdapter_SETTER_HostOnlyNetwork_TO(smth) NS_IMETHOD SetHostOnlyNetwork (const PRUnichar * aHostOnlyNetwork) { return smth SetHostOnlyNetwork (aHostOnlyNetwork); }
+#define COM_FORWARD_INetworkAdapter_SETTER_HostOnlyNetwork_TO_OBJ(obj) COM_FORWARD_INetworkAdapter_SETTER_HostOnlyNetwork_TO ((obj)->)
+#define COM_FORWARD_INetworkAdapter_SETTER_HostOnlyNetwork_TO_BASE(base) COM_FORWARD_INetworkAdapter_SETTER_HostOnlyNetwork_TO (base::)
 #define COM_FORWARD_INetworkAdapter_GETTER_InternalNetwork_TO(smth) NS_IMETHOD GetInternalNetwork (PRUnichar * * aInternalNetwork) { return smth GetInternalNetwork (aInternalNetwork); }
 #define COM_FORWARD_INetworkAdapter_GETTER_InternalNetwork_TO_OBJ(obj) COM_FORWARD_INetworkAdapter_GETTER_InternalNetwork_TO ((obj)->)
 #define COM_FORWARD_INetworkAdapter_GETTER_InternalNetwork_TO_BASE(base) COM_FORWARD_INetworkAdapter_GETTER_InternalNetwork_TO (base::)
@@ -41949,11 +47477,11 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IParallelPort(PRUint32 
 VBOX_EXTERN_C const nsID IID_IParallelPort;
 
 /* starting interface:    IMachineDebugger */
-#define IMACHINEDEBUGGER_IID_STR "00ae6af4-00a7-4104-0009-49bc00b2da80"
+#define IMACHINEDEBUGGER_IID_STR "fa43579a-2272-47c4-a443-9713f19a902f"
 
 #define IMACHINEDEBUGGER_IID \
-  {0x00ae6af4, 0x00a7, 0x4104, \
-    { 0x00, 0x09, 0x49, 0xbc, 0x00, 0xb2, 0xda, 0x80 }}
+  {0xfa43579a, 0x2272, 0x47c4, \
+    { 0xa4, 0x43, 0x97, 0x13, 0xf1, 0x9a, 0x90, 0x2f }}
 
 class NS_NO_VTABLE IMachineDebugger : public nsISupports {
  public: 
@@ -41964,25 +47492,9 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetSingleStep(PRBool *aSingleStep) = 0;
   NS_IMETHOD SetSingleStep(PRBool aSingleStep) = 0;
 
-  /* attribute boolean recompileUser; */
-  NS_IMETHOD GetRecompileUser(PRBool *aRecompileUser) = 0;
-  NS_IMETHOD SetRecompileUser(PRBool aRecompileUser) = 0;
-
-  /* attribute boolean recompileSupervisor; */
-  NS_IMETHOD GetRecompileSupervisor(PRBool *aRecompileSupervisor) = 0;
-  NS_IMETHOD SetRecompileSupervisor(PRBool aRecompileSupervisor) = 0;
-
   /* attribute boolean executeAllInIEM; */
   NS_IMETHOD GetExecuteAllInIEM(PRBool *aExecuteAllInIEM) = 0;
   NS_IMETHOD SetExecuteAllInIEM(PRBool aExecuteAllInIEM) = 0;
-
-  /* attribute boolean PATMEnabled; */
-  NS_IMETHOD GetPATMEnabled(PRBool *aPATMEnabled) = 0;
-  NS_IMETHOD SetPATMEnabled(PRBool aPATMEnabled) = 0;
-
-  /* attribute boolean CSAMEnabled; */
-  NS_IMETHOD GetCSAMEnabled(PRBool *aCSAMEnabled) = 0;
-  NS_IMETHOD SetCSAMEnabled(PRBool aCSAMEnabled) = 0;
 
   /* attribute boolean logEnabled; */
   NS_IMETHOD GetLogEnabled(PRBool *aLogEnabled) = 0;
@@ -42009,9 +47521,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   /* readonly attribute VMExecutionEngine_T executionEngine; */
   NS_IMETHOD GetExecutionEngine(VMExecutionEngine_T *aExecutionEngine) = 0;
 
-  /* readonly attribute boolean HWVirtExEnabled; */
-  NS_IMETHOD GetHWVirtExEnabled(PRBool *aHWVirtExEnabled) = 0;
-
   /* readonly attribute boolean HWVirtExNestedPagingEnabled; */
   NS_IMETHOD GetHWVirtExNestedPagingEnabled(PRBool *aHWVirtExNestedPagingEnabled) = 0;
 
@@ -42033,9 +47542,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   /* attribute unsigned long virtualTimeRate; */
   NS_IMETHOD GetVirtualTimeRate(PRUint32 *aVirtualTimeRate) = 0;
   NS_IMETHOD SetVirtualTimeRate(PRUint32 aVirtualTimeRate) = 0;
-
-  /* readonly attribute long long VM; */
-  NS_IMETHOD GetVM(PRInt64 *aVM) = 0;
 
   /* readonly attribute long long uptime; */
   NS_IMETHOD GetUptime(PRInt64 *aUptime) = 0;
@@ -42160,6 +47666,12 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   /* void getCPULoad (in unsigned long cpuId, out unsigned long pctExecuting, out unsigned long pctHalted, out unsigned long pctOther, [retval] out long long msInterval); */
   NS_IMETHOD GetCPULoad(PRUint32 cpuId, PRUint32 *pctExecuting, PRUint32 *pctHalted, PRUint32 *pctOther, PRInt64 *msInterval) = 0;
 
+  /* void takeGuestSample (in wstring filename, in unsigned long usInterval, in long long usSampleTime, [retval] out IProgress progress); */
+  NS_IMETHOD TakeGuestSample(const PRUnichar *filename, PRUint32 usInterval, PRInt64 usSampleTime, IProgress **progress) = 0;
+
+  /* void getUVMAndVMMFunctionTable (in long long magicVersion, out long long VMMFunctionTable, [retval] out long long UVM); */
+  NS_IMETHOD GetUVMAndVMMFunctionTable(PRInt64 magicVersion, PRInt64 *VMMFunctionTable, PRInt64 *UVM) = 0;
+
   /* void InternalAndReservedMethod1IMachineDebugger (); */
   NS_IMETHOD InternalAndReservedMethod1IMachineDebugger(void) = 0;
 
@@ -42214,16 +47726,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
 #define NS_DECL_IMACHINEDEBUGGER \
   NS_IMETHOD GetSingleStep(PRBool *aSingleStep); \
   NS_IMETHOD SetSingleStep(PRBool aSingleStep); \
-  NS_IMETHOD GetRecompileUser(PRBool *aRecompileUser); \
-  NS_IMETHOD SetRecompileUser(PRBool aRecompileUser); \
-  NS_IMETHOD GetRecompileSupervisor(PRBool *aRecompileSupervisor); \
-  NS_IMETHOD SetRecompileSupervisor(PRBool aRecompileSupervisor); \
   NS_IMETHOD GetExecuteAllInIEM(PRBool *aExecuteAllInIEM); \
   NS_IMETHOD SetExecuteAllInIEM(PRBool aExecuteAllInIEM); \
-  NS_IMETHOD GetPATMEnabled(PRBool *aPATMEnabled); \
-  NS_IMETHOD SetPATMEnabled(PRBool aPATMEnabled); \
-  NS_IMETHOD GetCSAMEnabled(PRBool *aCSAMEnabled); \
-  NS_IMETHOD SetCSAMEnabled(PRBool aCSAMEnabled); \
   NS_IMETHOD GetLogEnabled(PRBool *aLogEnabled); \
   NS_IMETHOD SetLogEnabled(PRBool aLogEnabled); \
   NS_IMETHOD GetLogDbgFlags(PRUnichar * *aLogDbgFlags); \
@@ -42233,7 +47737,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetLogRelGroups(PRUnichar * *aLogRelGroups); \
   NS_IMETHOD GetLogRelDestinations(PRUnichar * *aLogRelDestinations); \
   NS_IMETHOD GetExecutionEngine(VMExecutionEngine_T *aExecutionEngine); \
-  NS_IMETHOD GetHWVirtExEnabled(PRBool *aHWVirtExEnabled); \
   NS_IMETHOD GetHWVirtExNestedPagingEnabled(PRBool *aHWVirtExNestedPagingEnabled); \
   NS_IMETHOD GetHWVirtExVPIDEnabled(PRBool *aHWVirtExVPIDEnabled); \
   NS_IMETHOD GetHWVirtExUXEnabled(PRBool *aHWVirtExUXEnabled); \
@@ -42242,7 +47745,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetPAEEnabled(PRBool *aPAEEnabled); \
   NS_IMETHOD GetVirtualTimeRate(PRUint32 *aVirtualTimeRate); \
   NS_IMETHOD SetVirtualTimeRate(PRUint32 aVirtualTimeRate); \
-  NS_IMETHOD GetVM(PRInt64 *aVM); \
   NS_IMETHOD GetUptime(PRInt64 *aUptime); \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachineDebugger(PRUint32 *aInternalAndReservedAttribute1IMachineDebugger); \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachineDebugger(PRUint32 *aInternalAndReservedAttribute2IMachineDebugger); \
@@ -42284,6 +47786,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD DumpStats(const PRUnichar *pattern); \
   NS_IMETHOD GetStats(const PRUnichar *pattern, PRBool withDescriptions, PRUnichar **stats); \
   NS_IMETHOD GetCPULoad(PRUint32 cpuId, PRUint32 *pctExecuting, PRUint32 *pctHalted, PRUint32 *pctOther, PRInt64 *msInterval); \
+  NS_IMETHOD TakeGuestSample(const PRUnichar *filename, PRUint32 usInterval, PRInt64 usSampleTime, IProgress **progress); \
+  NS_IMETHOD GetUVMAndVMMFunctionTable(PRInt64 magicVersion, PRInt64 *VMMFunctionTable, PRInt64 *UVM); \
   NS_IMETHOD InternalAndReservedMethod1IMachineDebugger(void); \
   NS_IMETHOD InternalAndReservedMethod2IMachineDebugger(void); \
   NS_IMETHOD InternalAndReservedMethod3IMachineDebugger(void); \
@@ -42305,16 +47809,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
 #define NS_FORWARD_IMACHINEDEBUGGER(_to) \
   NS_IMETHOD GetSingleStep(PRBool *aSingleStep) { return _to GetSingleStep(aSingleStep); } \
   NS_IMETHOD SetSingleStep(PRBool aSingleStep) { return _to SetSingleStep(aSingleStep); } \
-  NS_IMETHOD GetRecompileUser(PRBool *aRecompileUser) { return _to GetRecompileUser(aRecompileUser); } \
-  NS_IMETHOD SetRecompileUser(PRBool aRecompileUser) { return _to SetRecompileUser(aRecompileUser); } \
-  NS_IMETHOD GetRecompileSupervisor(PRBool *aRecompileSupervisor) { return _to GetRecompileSupervisor(aRecompileSupervisor); } \
-  NS_IMETHOD SetRecompileSupervisor(PRBool aRecompileSupervisor) { return _to SetRecompileSupervisor(aRecompileSupervisor); } \
   NS_IMETHOD GetExecuteAllInIEM(PRBool *aExecuteAllInIEM) { return _to GetExecuteAllInIEM(aExecuteAllInIEM); } \
   NS_IMETHOD SetExecuteAllInIEM(PRBool aExecuteAllInIEM) { return _to SetExecuteAllInIEM(aExecuteAllInIEM); } \
-  NS_IMETHOD GetPATMEnabled(PRBool *aPATMEnabled) { return _to GetPATMEnabled(aPATMEnabled); } \
-  NS_IMETHOD SetPATMEnabled(PRBool aPATMEnabled) { return _to SetPATMEnabled(aPATMEnabled); } \
-  NS_IMETHOD GetCSAMEnabled(PRBool *aCSAMEnabled) { return _to GetCSAMEnabled(aCSAMEnabled); } \
-  NS_IMETHOD SetCSAMEnabled(PRBool aCSAMEnabled) { return _to SetCSAMEnabled(aCSAMEnabled); } \
   NS_IMETHOD GetLogEnabled(PRBool *aLogEnabled) { return _to GetLogEnabled(aLogEnabled); } \
   NS_IMETHOD SetLogEnabled(PRBool aLogEnabled) { return _to SetLogEnabled(aLogEnabled); } \
   NS_IMETHOD GetLogDbgFlags(PRUnichar * *aLogDbgFlags) { return _to GetLogDbgFlags(aLogDbgFlags); } \
@@ -42324,7 +47820,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetLogRelGroups(PRUnichar * *aLogRelGroups) { return _to GetLogRelGroups(aLogRelGroups); } \
   NS_IMETHOD GetLogRelDestinations(PRUnichar * *aLogRelDestinations) { return _to GetLogRelDestinations(aLogRelDestinations); } \
   NS_IMETHOD GetExecutionEngine(VMExecutionEngine_T *aExecutionEngine) { return _to GetExecutionEngine(aExecutionEngine); } \
-  NS_IMETHOD GetHWVirtExEnabled(PRBool *aHWVirtExEnabled) { return _to GetHWVirtExEnabled(aHWVirtExEnabled); } \
   NS_IMETHOD GetHWVirtExNestedPagingEnabled(PRBool *aHWVirtExNestedPagingEnabled) { return _to GetHWVirtExNestedPagingEnabled(aHWVirtExNestedPagingEnabled); } \
   NS_IMETHOD GetHWVirtExVPIDEnabled(PRBool *aHWVirtExVPIDEnabled) { return _to GetHWVirtExVPIDEnabled(aHWVirtExVPIDEnabled); } \
   NS_IMETHOD GetHWVirtExUXEnabled(PRBool *aHWVirtExUXEnabled) { return _to GetHWVirtExUXEnabled(aHWVirtExUXEnabled); } \
@@ -42333,7 +47828,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetPAEEnabled(PRBool *aPAEEnabled) { return _to GetPAEEnabled(aPAEEnabled); } \
   NS_IMETHOD GetVirtualTimeRate(PRUint32 *aVirtualTimeRate) { return _to GetVirtualTimeRate(aVirtualTimeRate); } \
   NS_IMETHOD SetVirtualTimeRate(PRUint32 aVirtualTimeRate) { return _to SetVirtualTimeRate(aVirtualTimeRate); } \
-  NS_IMETHOD GetVM(PRInt64 *aVM) { return _to GetVM(aVM); } \
   NS_IMETHOD GetUptime(PRInt64 *aUptime) { return _to GetUptime(aUptime); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachineDebugger(PRUint32 *aInternalAndReservedAttribute1IMachineDebugger) { return _to GetInternalAndReservedAttribute1IMachineDebugger(aInternalAndReservedAttribute1IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachineDebugger(PRUint32 *aInternalAndReservedAttribute2IMachineDebugger) { return _to GetInternalAndReservedAttribute2IMachineDebugger(aInternalAndReservedAttribute2IMachineDebugger); } \
@@ -42375,6 +47869,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD DumpStats(const PRUnichar *pattern) { return _to DumpStats(pattern); } \
   NS_IMETHOD GetStats(const PRUnichar *pattern, PRBool withDescriptions, PRUnichar **stats) { return _to GetStats(pattern, withDescriptions, stats); } \
   NS_IMETHOD GetCPULoad(PRUint32 cpuId, PRUint32 *pctExecuting, PRUint32 *pctHalted, PRUint32 *pctOther, PRInt64 *msInterval) { return _to GetCPULoad(cpuId, pctExecuting, pctHalted, pctOther, msInterval); } \
+  NS_IMETHOD TakeGuestSample(const PRUnichar *filename, PRUint32 usInterval, PRInt64 usSampleTime, IProgress **progress) { return _to TakeGuestSample(filename, usInterval, usSampleTime, progress); } \
+  NS_IMETHOD GetUVMAndVMMFunctionTable(PRInt64 magicVersion, PRInt64 *VMMFunctionTable, PRInt64 *UVM) { return _to GetUVMAndVMMFunctionTable(magicVersion, VMMFunctionTable, UVM); } \
   NS_IMETHOD InternalAndReservedMethod1IMachineDebugger(void) { return _to InternalAndReservedMethod1IMachineDebugger(); } \
   NS_IMETHOD InternalAndReservedMethod2IMachineDebugger(void) { return _to InternalAndReservedMethod2IMachineDebugger(); } \
   NS_IMETHOD InternalAndReservedMethod3IMachineDebugger(void) { return _to InternalAndReservedMethod3IMachineDebugger(); } \
@@ -42396,16 +47892,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
 #define NS_FORWARD_SAFE_IMACHINEDEBUGGER(_to) \
   NS_IMETHOD GetSingleStep(PRBool *aSingleStep) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSingleStep(aSingleStep); } \
   NS_IMETHOD SetSingleStep(PRBool aSingleStep) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetSingleStep(aSingleStep); } \
-  NS_IMETHOD GetRecompileUser(PRBool *aRecompileUser) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecompileUser(aRecompileUser); } \
-  NS_IMETHOD SetRecompileUser(PRBool aRecompileUser) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetRecompileUser(aRecompileUser); } \
-  NS_IMETHOD GetRecompileSupervisor(PRBool *aRecompileSupervisor) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRecompileSupervisor(aRecompileSupervisor); } \
-  NS_IMETHOD SetRecompileSupervisor(PRBool aRecompileSupervisor) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetRecompileSupervisor(aRecompileSupervisor); } \
   NS_IMETHOD GetExecuteAllInIEM(PRBool *aExecuteAllInIEM) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetExecuteAllInIEM(aExecuteAllInIEM); } \
   NS_IMETHOD SetExecuteAllInIEM(PRBool aExecuteAllInIEM) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetExecuteAllInIEM(aExecuteAllInIEM); } \
-  NS_IMETHOD GetPATMEnabled(PRBool *aPATMEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPATMEnabled(aPATMEnabled); } \
-  NS_IMETHOD SetPATMEnabled(PRBool aPATMEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetPATMEnabled(aPATMEnabled); } \
-  NS_IMETHOD GetCSAMEnabled(PRBool *aCSAMEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCSAMEnabled(aCSAMEnabled); } \
-  NS_IMETHOD SetCSAMEnabled(PRBool aCSAMEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetCSAMEnabled(aCSAMEnabled); } \
   NS_IMETHOD GetLogEnabled(PRBool *aLogEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLogEnabled(aLogEnabled); } \
   NS_IMETHOD SetLogEnabled(PRBool aLogEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetLogEnabled(aLogEnabled); } \
   NS_IMETHOD GetLogDbgFlags(PRUnichar * *aLogDbgFlags) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLogDbgFlags(aLogDbgFlags); } \
@@ -42415,7 +47903,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetLogRelGroups(PRUnichar * *aLogRelGroups) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLogRelGroups(aLogRelGroups); } \
   NS_IMETHOD GetLogRelDestinations(PRUnichar * *aLogRelDestinations) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLogRelDestinations(aLogRelDestinations); } \
   NS_IMETHOD GetExecutionEngine(VMExecutionEngine_T *aExecutionEngine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetExecutionEngine(aExecutionEngine); } \
-  NS_IMETHOD GetHWVirtExEnabled(PRBool *aHWVirtExEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHWVirtExEnabled(aHWVirtExEnabled); } \
   NS_IMETHOD GetHWVirtExNestedPagingEnabled(PRBool *aHWVirtExNestedPagingEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHWVirtExNestedPagingEnabled(aHWVirtExNestedPagingEnabled); } \
   NS_IMETHOD GetHWVirtExVPIDEnabled(PRBool *aHWVirtExVPIDEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHWVirtExVPIDEnabled(aHWVirtExVPIDEnabled); } \
   NS_IMETHOD GetHWVirtExUXEnabled(PRBool *aHWVirtExUXEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHWVirtExUXEnabled(aHWVirtExUXEnabled); } \
@@ -42424,7 +47911,6 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD GetPAEEnabled(PRBool *aPAEEnabled) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPAEEnabled(aPAEEnabled); } \
   NS_IMETHOD GetVirtualTimeRate(PRUint32 *aVirtualTimeRate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVirtualTimeRate(aVirtualTimeRate); } \
   NS_IMETHOD SetVirtualTimeRate(PRUint32 aVirtualTimeRate) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetVirtualTimeRate(aVirtualTimeRate); } \
-  NS_IMETHOD GetVM(PRInt64 *aVM) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVM(aVM); } \
   NS_IMETHOD GetUptime(PRInt64 *aUptime) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUptime(aUptime); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IMachineDebugger(PRUint32 *aInternalAndReservedAttribute1IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IMachineDebugger(aInternalAndReservedAttribute1IMachineDebugger); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IMachineDebugger(PRUint32 *aInternalAndReservedAttribute2IMachineDebugger) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IMachineDebugger(aInternalAndReservedAttribute2IMachineDebugger); } \
@@ -42466,6 +47952,8 @@ class NS_NO_VTABLE IMachineDebugger : public nsISupports {
   NS_IMETHOD DumpStats(const PRUnichar *pattern) { return !_to ? NS_ERROR_NULL_POINTER : _to->DumpStats(pattern); } \
   NS_IMETHOD GetStats(const PRUnichar *pattern, PRBool withDescriptions, PRUnichar **stats) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStats(pattern, withDescriptions, stats); } \
   NS_IMETHOD GetCPULoad(PRUint32 cpuId, PRUint32 *pctExecuting, PRUint32 *pctHalted, PRUint32 *pctOther, PRInt64 *msInterval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCPULoad(cpuId, pctExecuting, pctHalted, pctOther, msInterval); } \
+  NS_IMETHOD TakeGuestSample(const PRUnichar *filename, PRUint32 usInterval, PRInt64 usSampleTime, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->TakeGuestSample(filename, usInterval, usSampleTime, progress); } \
+  NS_IMETHOD GetUVMAndVMMFunctionTable(PRInt64 magicVersion, PRInt64 *VMMFunctionTable, PRInt64 *UVM) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUVMAndVMMFunctionTable(magicVersion, VMMFunctionTable, UVM); } \
   NS_IMETHOD InternalAndReservedMethod1IMachineDebugger(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IMachineDebugger(); } \
   NS_IMETHOD InternalAndReservedMethod2IMachineDebugger(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IMachineDebugger(); } \
   NS_IMETHOD InternalAndReservedMethod3IMachineDebugger(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IMachineDebugger(); } \
@@ -42525,52 +48013,12 @@ NS_IMETHODIMP _MYCLASS_::SetSingleStep(PRBool aSingleStep)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* attribute boolean recompileUser; */
-NS_IMETHODIMP _MYCLASS_::GetRecompileUser(PRBool *aRecompileUser)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-NS_IMETHODIMP _MYCLASS_::SetRecompileUser(PRBool aRecompileUser)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* attribute boolean recompileSupervisor; */
-NS_IMETHODIMP _MYCLASS_::GetRecompileSupervisor(PRBool *aRecompileSupervisor)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-NS_IMETHODIMP _MYCLASS_::SetRecompileSupervisor(PRBool aRecompileSupervisor)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
 /* attribute boolean executeAllInIEM; */
 NS_IMETHODIMP _MYCLASS_::GetExecuteAllInIEM(PRBool *aExecuteAllInIEM)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 NS_IMETHODIMP _MYCLASS_::SetExecuteAllInIEM(PRBool aExecuteAllInIEM)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* attribute boolean PATMEnabled; */
-NS_IMETHODIMP _MYCLASS_::GetPATMEnabled(PRBool *aPATMEnabled)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-NS_IMETHODIMP _MYCLASS_::SetPATMEnabled(PRBool aPATMEnabled)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* attribute boolean CSAMEnabled; */
-NS_IMETHODIMP _MYCLASS_::GetCSAMEnabled(PRBool *aCSAMEnabled)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-NS_IMETHODIMP _MYCLASS_::SetCSAMEnabled(PRBool aCSAMEnabled)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -42627,12 +48075,6 @@ NS_IMETHODIMP _MYCLASS_::GetExecutionEngine(VMExecutionEngine_T *aExecutionEngin
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute boolean HWVirtExEnabled; */
-NS_IMETHODIMP _MYCLASS_::GetHWVirtExEnabled(PRBool *aHWVirtExEnabled)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
 /* readonly attribute boolean HWVirtExNestedPagingEnabled; */
 NS_IMETHODIMP _MYCLASS_::GetHWVirtExNestedPagingEnabled(PRBool *aHWVirtExNestedPagingEnabled)
 {
@@ -42675,12 +48117,6 @@ NS_IMETHODIMP _MYCLASS_::GetVirtualTimeRate(PRUint32 *aVirtualTimeRate)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 NS_IMETHODIMP _MYCLASS_::SetVirtualTimeRate(PRUint32 aVirtualTimeRate)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* readonly attribute long long VM; */
-NS_IMETHODIMP _MYCLASS_::GetVM(PRInt64 *aVM)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -42931,6 +48367,18 @@ NS_IMETHODIMP _MYCLASS_::GetCPULoad(PRUint32 cpuId, PRUint32 *pctExecuting, PRUi
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void takeGuestSample (in wstring filename, in unsigned long usInterval, in long long usSampleTime, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::TakeGuestSample(const PRUnichar *filename, PRUint32 usInterval, PRInt64 usSampleTime, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getUVMAndVMMFunctionTable (in long long magicVersion, out long long VMMFunctionTable, [retval] out long long UVM); */
+NS_IMETHODIMP _MYCLASS_::GetUVMAndVMMFunctionTable(PRInt64 magicVersion, PRInt64 *VMMFunctionTable, PRInt64 *UVM)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void InternalAndReservedMethod1IMachineDebugger (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IMachineDebugger()
 {
@@ -43036,36 +48484,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16IMachineDebugger()
 #define COM_FORWARD_IMachineDebugger_SETTER_SingleStep_TO(smth) NS_IMETHOD SetSingleStep (PRBool aSingleStep) { return smth SetSingleStep (aSingleStep); }
 #define COM_FORWARD_IMachineDebugger_SETTER_SingleStep_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_SingleStep_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_SETTER_SingleStep_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_SingleStep_TO (base::)
-#define COM_FORWARD_IMachineDebugger_GETTER_RecompileUser_TO(smth) NS_IMETHOD GetRecompileUser (PRBool * aRecompileUser) { return smth GetRecompileUser (aRecompileUser); }
-#define COM_FORWARD_IMachineDebugger_GETTER_RecompileUser_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_RecompileUser_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_GETTER_RecompileUser_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_RecompileUser_TO (base::)
-#define COM_FORWARD_IMachineDebugger_SETTER_RecompileUser_TO(smth) NS_IMETHOD SetRecompileUser (PRBool aRecompileUser) { return smth SetRecompileUser (aRecompileUser); }
-#define COM_FORWARD_IMachineDebugger_SETTER_RecompileUser_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_RecompileUser_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_SETTER_RecompileUser_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_RecompileUser_TO (base::)
-#define COM_FORWARD_IMachineDebugger_GETTER_RecompileSupervisor_TO(smth) NS_IMETHOD GetRecompileSupervisor (PRBool * aRecompileSupervisor) { return smth GetRecompileSupervisor (aRecompileSupervisor); }
-#define COM_FORWARD_IMachineDebugger_GETTER_RecompileSupervisor_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_RecompileSupervisor_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_GETTER_RecompileSupervisor_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_RecompileSupervisor_TO (base::)
-#define COM_FORWARD_IMachineDebugger_SETTER_RecompileSupervisor_TO(smth) NS_IMETHOD SetRecompileSupervisor (PRBool aRecompileSupervisor) { return smth SetRecompileSupervisor (aRecompileSupervisor); }
-#define COM_FORWARD_IMachineDebugger_SETTER_RecompileSupervisor_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_RecompileSupervisor_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_SETTER_RecompileSupervisor_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_RecompileSupervisor_TO (base::)
 #define COM_FORWARD_IMachineDebugger_GETTER_ExecuteAllInIEM_TO(smth) NS_IMETHOD GetExecuteAllInIEM (PRBool * aExecuteAllInIEM) { return smth GetExecuteAllInIEM (aExecuteAllInIEM); }
 #define COM_FORWARD_IMachineDebugger_GETTER_ExecuteAllInIEM_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_ExecuteAllInIEM_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_GETTER_ExecuteAllInIEM_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_ExecuteAllInIEM_TO (base::)
 #define COM_FORWARD_IMachineDebugger_SETTER_ExecuteAllInIEM_TO(smth) NS_IMETHOD SetExecuteAllInIEM (PRBool aExecuteAllInIEM) { return smth SetExecuteAllInIEM (aExecuteAllInIEM); }
 #define COM_FORWARD_IMachineDebugger_SETTER_ExecuteAllInIEM_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_ExecuteAllInIEM_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_SETTER_ExecuteAllInIEM_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_ExecuteAllInIEM_TO (base::)
-#define COM_FORWARD_IMachineDebugger_GETTER_PATMEnabled_TO(smth) NS_IMETHOD GetPATMEnabled (PRBool * aPATMEnabled) { return smth GetPATMEnabled (aPATMEnabled); }
-#define COM_FORWARD_IMachineDebugger_GETTER_PATMEnabled_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_PATMEnabled_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_GETTER_PATMEnabled_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_PATMEnabled_TO (base::)
-#define COM_FORWARD_IMachineDebugger_SETTER_PATMEnabled_TO(smth) NS_IMETHOD SetPATMEnabled (PRBool aPATMEnabled) { return smth SetPATMEnabled (aPATMEnabled); }
-#define COM_FORWARD_IMachineDebugger_SETTER_PATMEnabled_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_PATMEnabled_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_SETTER_PATMEnabled_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_PATMEnabled_TO (base::)
-#define COM_FORWARD_IMachineDebugger_GETTER_CSAMEnabled_TO(smth) NS_IMETHOD GetCSAMEnabled (PRBool * aCSAMEnabled) { return smth GetCSAMEnabled (aCSAMEnabled); }
-#define COM_FORWARD_IMachineDebugger_GETTER_CSAMEnabled_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_CSAMEnabled_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_GETTER_CSAMEnabled_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_CSAMEnabled_TO (base::)
-#define COM_FORWARD_IMachineDebugger_SETTER_CSAMEnabled_TO(smth) NS_IMETHOD SetCSAMEnabled (PRBool aCSAMEnabled) { return smth SetCSAMEnabled (aCSAMEnabled); }
-#define COM_FORWARD_IMachineDebugger_SETTER_CSAMEnabled_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_CSAMEnabled_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_SETTER_CSAMEnabled_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_CSAMEnabled_TO (base::)
 #define COM_FORWARD_IMachineDebugger_GETTER_LogEnabled_TO(smth) NS_IMETHOD GetLogEnabled (PRBool * aLogEnabled) { return smth GetLogEnabled (aLogEnabled); }
 #define COM_FORWARD_IMachineDebugger_GETTER_LogEnabled_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_LogEnabled_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_GETTER_LogEnabled_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_LogEnabled_TO (base::)
@@ -43093,9 +48517,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16IMachineDebugger()
 #define COM_FORWARD_IMachineDebugger_GETTER_ExecutionEngine_TO(smth) NS_IMETHOD GetExecutionEngine (PRUint32 * aExecutionEngine) { return smth GetExecutionEngine (aExecutionEngine); }
 #define COM_FORWARD_IMachineDebugger_GETTER_ExecutionEngine_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_ExecutionEngine_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_GETTER_ExecutionEngine_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_ExecutionEngine_TO (base::)
-#define COM_FORWARD_IMachineDebugger_GETTER_HWVirtExEnabled_TO(smth) NS_IMETHOD GetHWVirtExEnabled (PRBool * aHWVirtExEnabled) { return smth GetHWVirtExEnabled (aHWVirtExEnabled); }
-#define COM_FORWARD_IMachineDebugger_GETTER_HWVirtExEnabled_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_HWVirtExEnabled_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_GETTER_HWVirtExEnabled_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_HWVirtExEnabled_TO (base::)
 #define COM_FORWARD_IMachineDebugger_GETTER_HWVirtExNestedPagingEnabled_TO(smth) NS_IMETHOD GetHWVirtExNestedPagingEnabled (PRBool * aHWVirtExNestedPagingEnabled) { return smth GetHWVirtExNestedPagingEnabled (aHWVirtExNestedPagingEnabled); }
 #define COM_FORWARD_IMachineDebugger_GETTER_HWVirtExNestedPagingEnabled_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_HWVirtExNestedPagingEnabled_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_GETTER_HWVirtExNestedPagingEnabled_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_HWVirtExNestedPagingEnabled_TO (base::)
@@ -43120,9 +48541,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16IMachineDebugger()
 #define COM_FORWARD_IMachineDebugger_SETTER_VirtualTimeRate_TO(smth) NS_IMETHOD SetVirtualTimeRate (PRUint32 aVirtualTimeRate) { return smth SetVirtualTimeRate (aVirtualTimeRate); }
 #define COM_FORWARD_IMachineDebugger_SETTER_VirtualTimeRate_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_SETTER_VirtualTimeRate_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_SETTER_VirtualTimeRate_TO_BASE(base) COM_FORWARD_IMachineDebugger_SETTER_VirtualTimeRate_TO (base::)
-#define COM_FORWARD_IMachineDebugger_GETTER_VM_TO(smth) NS_IMETHOD GetVM (PRInt64 * aVM) { return smth GetVM (aVM); }
-#define COM_FORWARD_IMachineDebugger_GETTER_VM_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_VM_TO ((obj)->)
-#define COM_FORWARD_IMachineDebugger_GETTER_VM_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_VM_TO (base::)
 #define COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO(smth) NS_IMETHOD GetUptime (PRInt64 * aUptime) { return smth GetUptime (aUptime); }
 #define COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO_BASE(base) COM_FORWARD_IMachineDebugger_GETTER_Uptime_TO (base::)
@@ -43198,6 +48616,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16IMachineDebugger()
 #define COM_FORWARD_IMachineDebugger_GetCPULoad_TO(smth) NS_IMETHOD GetCPULoad (PRUint32 aCpuId, PRUint32 * aPctExecuting, PRUint32 * aPctHalted, PRUint32 * aPctOther, PRInt64 * aMsInterval) { return smth GetCPULoad (aCpuId, aPctExecuting, aPctHalted, aPctOther, aMsInterval); }
 #define COM_FORWARD_IMachineDebugger_GetCPULoad_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GetCPULoad_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_GetCPULoad_TO_BASE(base) COM_FORWARD_IMachineDebugger_GetCPULoad_TO (base::)
+#define COM_FORWARD_IMachineDebugger_TakeGuestSample_TO(smth) NS_IMETHOD TakeGuestSample (PRUnichar * aFilename, PRUint32 aUsInterval, PRInt64 aUsSampleTime, IProgress * * aProgress) { return smth TakeGuestSample (aFilename, aUsInterval, aUsSampleTime, aProgress); }
+#define COM_FORWARD_IMachineDebugger_TakeGuestSample_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_TakeGuestSample_TO ((obj)->)
+#define COM_FORWARD_IMachineDebugger_TakeGuestSample_TO_BASE(base) COM_FORWARD_IMachineDebugger_TakeGuestSample_TO (base::)
+#define COM_FORWARD_IMachineDebugger_GetUVMAndVMMFunctionTable_TO(smth) NS_IMETHOD GetUVMAndVMMFunctionTable (PRInt64 aMagicVersion, PRInt64 * aVMMFunctionTable, PRInt64 * aUVM) { return smth GetUVMAndVMMFunctionTable (aMagicVersion, aVMMFunctionTable, aUVM); }
+#define COM_FORWARD_IMachineDebugger_GetUVMAndVMMFunctionTable_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_GetUVMAndVMMFunctionTable_TO ((obj)->)
+#define COM_FORWARD_IMachineDebugger_GetUVMAndVMMFunctionTable_TO_BASE(base) COM_FORWARD_IMachineDebugger_GetUVMAndVMMFunctionTable_TO (base::)
 #define COM_FORWARD_IMachineDebugger_TO(smth) NS_FORWARD_IMACHINEDEBUGGER (smth)
 #define COM_FORWARD_IMachineDebugger_TO_OBJ(obj) COM_FORWARD_IMachineDebugger_TO ((obj)->)
 #define COM_FORWARD_IMachineDebugger_TO_BASE(base) COM_FORWARD_IMachineDebugger_TO (base::)
@@ -45298,6 +50722,679 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IAudioAdapter()
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IAudioAdapter;
 
+/* starting interface:    IHostAudioDevice */
+#define IHOSTAUDIODEVICE_IID_STR "cfde1265-3140-4048-a81f-a1e280dfbd75"
+
+#define IHOSTAUDIODEVICE_IID \
+  {0xcfde1265, 0x3140, 0x4048, \
+    { 0xa8, 0x1f, 0xa1, 0xe2, 0x80, 0xdf, 0xbd, 0x75 }}
+
+class NS_NO_VTABLE IHostAudioDevice : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IHOSTAUDIODEVICE_IID)
+
+  /* readonly attribute wstring id; */
+  NS_IMETHOD GetId(PRUnichar * *aId) = 0;
+
+  /* attribute wstring name; */
+  NS_IMETHOD GetName(PRUnichar * *aName) = 0;
+  NS_IMETHOD SetName(const PRUnichar * aName) = 0;
+
+  /* attribute AudioDeviceType_T type; */
+  NS_IMETHOD GetType(AudioDeviceType_T *aType) = 0;
+  NS_IMETHOD SetType(AudioDeviceType_T aType) = 0;
+
+  /* attribute AudioDirection_T usage; */
+  NS_IMETHOD GetUsage(AudioDirection_T *aUsage) = 0;
+  NS_IMETHOD SetUsage(AudioDirection_T aUsage) = 0;
+
+  /* attribute boolean defaultIn; */
+  NS_IMETHOD GetDefaultIn(PRBool *aDefaultIn) = 0;
+  NS_IMETHOD SetDefaultIn(PRBool aDefaultIn) = 0;
+
+  /* attribute boolean defaultOut; */
+  NS_IMETHOD GetDefaultOut(PRBool *aDefaultOut) = 0;
+  NS_IMETHOD SetDefaultOut(PRBool aDefaultOut) = 0;
+
+  /* attribute boolean isHotPlug; */
+  NS_IMETHOD GetIsHotPlug(PRBool *aIsHotPlug) = 0;
+  NS_IMETHOD SetIsHotPlug(PRBool aIsHotPlug) = 0;
+
+  /* attribute AudioDeviceState_T state; */
+  NS_IMETHOD GetState(AudioDeviceState_T *aState) = 0;
+  NS_IMETHOD SetState(AudioDeviceState_T aState) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute1IHostAudioDevice) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute2IHostAudioDevice) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute3IHostAudioDevice) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute4IHostAudioDevice) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute5IHostAudioDevice) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute6IHostAudioDevice) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute7IHostAudioDevice) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute8IHostAudioDevice; */
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute8IHostAudioDevice) = 0;
+
+  /* void getProperty (in wstring key, [retval] out wstring value); */
+  NS_IMETHOD GetProperty(const PRUnichar *key, PRUnichar **value) = 0;
+
+  /* void InternalAndReservedMethod1IHostAudioDevice (); */
+  NS_IMETHOD InternalAndReservedMethod1IHostAudioDevice(void) = 0;
+
+  /* void InternalAndReservedMethod2IHostAudioDevice (); */
+  NS_IMETHOD InternalAndReservedMethod2IHostAudioDevice(void) = 0;
+
+  /* void InternalAndReservedMethod3IHostAudioDevice (); */
+  NS_IMETHOD InternalAndReservedMethod3IHostAudioDevice(void) = 0;
+
+  /* void InternalAndReservedMethod4IHostAudioDevice (); */
+  NS_IMETHOD InternalAndReservedMethod4IHostAudioDevice(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IHOSTAUDIODEVICE \
+  NS_IMETHOD GetId(PRUnichar * *aId); \
+  NS_IMETHOD GetName(PRUnichar * *aName); \
+  NS_IMETHOD SetName(const PRUnichar * aName); \
+  NS_IMETHOD GetType(AudioDeviceType_T *aType); \
+  NS_IMETHOD SetType(AudioDeviceType_T aType); \
+  NS_IMETHOD GetUsage(AudioDirection_T *aUsage); \
+  NS_IMETHOD SetUsage(AudioDirection_T aUsage); \
+  NS_IMETHOD GetDefaultIn(PRBool *aDefaultIn); \
+  NS_IMETHOD SetDefaultIn(PRBool aDefaultIn); \
+  NS_IMETHOD GetDefaultOut(PRBool *aDefaultOut); \
+  NS_IMETHOD SetDefaultOut(PRBool aDefaultOut); \
+  NS_IMETHOD GetIsHotPlug(PRBool *aIsHotPlug); \
+  NS_IMETHOD SetIsHotPlug(PRBool aIsHotPlug); \
+  NS_IMETHOD GetState(AudioDeviceState_T *aState); \
+  NS_IMETHOD SetState(AudioDeviceState_T aState); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute1IHostAudioDevice); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute2IHostAudioDevice); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute3IHostAudioDevice); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute4IHostAudioDevice); \
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute5IHostAudioDevice); \
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute6IHostAudioDevice); \
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute7IHostAudioDevice); \
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute8IHostAudioDevice); \
+  NS_IMETHOD GetProperty(const PRUnichar *key, PRUnichar **value); \
+  NS_IMETHOD InternalAndReservedMethod1IHostAudioDevice(void); \
+  NS_IMETHOD InternalAndReservedMethod2IHostAudioDevice(void); \
+  NS_IMETHOD InternalAndReservedMethod3IHostAudioDevice(void); \
+  NS_IMETHOD InternalAndReservedMethod4IHostAudioDevice(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IHOSTAUDIODEVICE(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return _to GetId(aId); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } \
+  NS_IMETHOD SetName(const PRUnichar * aName) { return _to SetName(aName); } \
+  NS_IMETHOD GetType(AudioDeviceType_T *aType) { return _to GetType(aType); } \
+  NS_IMETHOD SetType(AudioDeviceType_T aType) { return _to SetType(aType); } \
+  NS_IMETHOD GetUsage(AudioDirection_T *aUsage) { return _to GetUsage(aUsage); } \
+  NS_IMETHOD SetUsage(AudioDirection_T aUsage) { return _to SetUsage(aUsage); } \
+  NS_IMETHOD GetDefaultIn(PRBool *aDefaultIn) { return _to GetDefaultIn(aDefaultIn); } \
+  NS_IMETHOD SetDefaultIn(PRBool aDefaultIn) { return _to SetDefaultIn(aDefaultIn); } \
+  NS_IMETHOD GetDefaultOut(PRBool *aDefaultOut) { return _to GetDefaultOut(aDefaultOut); } \
+  NS_IMETHOD SetDefaultOut(PRBool aDefaultOut) { return _to SetDefaultOut(aDefaultOut); } \
+  NS_IMETHOD GetIsHotPlug(PRBool *aIsHotPlug) { return _to GetIsHotPlug(aIsHotPlug); } \
+  NS_IMETHOD SetIsHotPlug(PRBool aIsHotPlug) { return _to SetIsHotPlug(aIsHotPlug); } \
+  NS_IMETHOD GetState(AudioDeviceState_T *aState) { return _to GetState(aState); } \
+  NS_IMETHOD SetState(AudioDeviceState_T aState) { return _to SetState(aState); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute1IHostAudioDevice) { return _to GetInternalAndReservedAttribute1IHostAudioDevice(aInternalAndReservedAttribute1IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute2IHostAudioDevice) { return _to GetInternalAndReservedAttribute2IHostAudioDevice(aInternalAndReservedAttribute2IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute3IHostAudioDevice) { return _to GetInternalAndReservedAttribute3IHostAudioDevice(aInternalAndReservedAttribute3IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute4IHostAudioDevice) { return _to GetInternalAndReservedAttribute4IHostAudioDevice(aInternalAndReservedAttribute4IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute5IHostAudioDevice) { return _to GetInternalAndReservedAttribute5IHostAudioDevice(aInternalAndReservedAttribute5IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute6IHostAudioDevice) { return _to GetInternalAndReservedAttribute6IHostAudioDevice(aInternalAndReservedAttribute6IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute7IHostAudioDevice) { return _to GetInternalAndReservedAttribute7IHostAudioDevice(aInternalAndReservedAttribute7IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute8IHostAudioDevice) { return _to GetInternalAndReservedAttribute8IHostAudioDevice(aInternalAndReservedAttribute8IHostAudioDevice); } \
+  NS_IMETHOD GetProperty(const PRUnichar *key, PRUnichar **value) { return _to GetProperty(key, value); } \
+  NS_IMETHOD InternalAndReservedMethod1IHostAudioDevice(void) { return _to InternalAndReservedMethod1IHostAudioDevice(); } \
+  NS_IMETHOD InternalAndReservedMethod2IHostAudioDevice(void) { return _to InternalAndReservedMethod2IHostAudioDevice(); } \
+  NS_IMETHOD InternalAndReservedMethod3IHostAudioDevice(void) { return _to InternalAndReservedMethod3IHostAudioDevice(); } \
+  NS_IMETHOD InternalAndReservedMethod4IHostAudioDevice(void) { return _to InternalAndReservedMethod4IHostAudioDevice(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IHOSTAUDIODEVICE(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetId(aId); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
+  NS_IMETHOD SetName(const PRUnichar * aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetName(aName); } \
+  NS_IMETHOD GetType(AudioDeviceType_T *aType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetType(aType); } \
+  NS_IMETHOD SetType(AudioDeviceType_T aType) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetType(aType); } \
+  NS_IMETHOD GetUsage(AudioDirection_T *aUsage) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUsage(aUsage); } \
+  NS_IMETHOD SetUsage(AudioDirection_T aUsage) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetUsage(aUsage); } \
+  NS_IMETHOD GetDefaultIn(PRBool *aDefaultIn) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDefaultIn(aDefaultIn); } \
+  NS_IMETHOD SetDefaultIn(PRBool aDefaultIn) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDefaultIn(aDefaultIn); } \
+  NS_IMETHOD GetDefaultOut(PRBool *aDefaultOut) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDefaultOut(aDefaultOut); } \
+  NS_IMETHOD SetDefaultOut(PRBool aDefaultOut) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDefaultOut(aDefaultOut); } \
+  NS_IMETHOD GetIsHotPlug(PRBool *aIsHotPlug) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsHotPlug(aIsHotPlug); } \
+  NS_IMETHOD SetIsHotPlug(PRBool aIsHotPlug) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetIsHotPlug(aIsHotPlug); } \
+  NS_IMETHOD GetState(AudioDeviceState_T *aState) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetState(aState); } \
+  NS_IMETHOD SetState(AudioDeviceState_T aState) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetState(aState); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute1IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IHostAudioDevice(aInternalAndReservedAttribute1IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute2IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IHostAudioDevice(aInternalAndReservedAttribute2IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute3IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IHostAudioDevice(aInternalAndReservedAttribute3IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute4IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IHostAudioDevice(aInternalAndReservedAttribute4IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute5IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5IHostAudioDevice(aInternalAndReservedAttribute5IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute6IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6IHostAudioDevice(aInternalAndReservedAttribute6IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute7IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7IHostAudioDevice(aInternalAndReservedAttribute7IHostAudioDevice); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute8IHostAudioDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8IHostAudioDevice(aInternalAndReservedAttribute8IHostAudioDevice); } \
+  NS_IMETHOD GetProperty(const PRUnichar *key, PRUnichar **value) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProperty(key, value); } \
+  NS_IMETHOD InternalAndReservedMethod1IHostAudioDevice(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IHostAudioDevice(); } \
+  NS_IMETHOD InternalAndReservedMethod2IHostAudioDevice(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IHostAudioDevice(); } \
+  NS_IMETHOD InternalAndReservedMethod3IHostAudioDevice(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IHostAudioDevice(); } \
+  NS_IMETHOD InternalAndReservedMethod4IHostAudioDevice(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IHostAudioDevice(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IHostAudioDevice
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IHOSTAUDIODEVICE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IHostAudioDevice)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring id; */
+NS_IMETHODIMP _MYCLASS_::GetId(PRUnichar * *aId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring name; */
+NS_IMETHODIMP _MYCLASS_::GetName(PRUnichar * *aName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetName(const PRUnichar * aName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute AudioDeviceType_T type; */
+NS_IMETHODIMP _MYCLASS_::GetType(AudioDeviceType_T *aType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetType(AudioDeviceType_T aType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute AudioDirection_T usage; */
+NS_IMETHODIMP _MYCLASS_::GetUsage(AudioDirection_T *aUsage)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetUsage(AudioDirection_T aUsage)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute boolean defaultIn; */
+NS_IMETHODIMP _MYCLASS_::GetDefaultIn(PRBool *aDefaultIn)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetDefaultIn(PRBool aDefaultIn)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute boolean defaultOut; */
+NS_IMETHODIMP _MYCLASS_::GetDefaultOut(PRBool *aDefaultOut)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetDefaultOut(PRBool aDefaultOut)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute boolean isHotPlug; */
+NS_IMETHODIMP _MYCLASS_::GetIsHotPlug(PRBool *aIsHotPlug)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetIsHotPlug(PRBool aIsHotPlug)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute AudioDeviceState_T state; */
+NS_IMETHODIMP _MYCLASS_::GetState(AudioDeviceState_T *aState)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetState(AudioDeviceState_T aState)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute1IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute2IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute3IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute4IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute5IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute6IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute7IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute8IHostAudioDevice; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8IHostAudioDevice(PRUint32 *aInternalAndReservedAttribute8IHostAudioDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getProperty (in wstring key, [retval] out wstring value); */
+NS_IMETHODIMP _MYCLASS_::GetProperty(const PRUnichar *key, PRUnichar **value)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1IHostAudioDevice (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IHostAudioDevice()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2IHostAudioDevice (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IHostAudioDevice()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod3IHostAudioDevice (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3IHostAudioDevice()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod4IHostAudioDevice (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IHostAudioDevice()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IHostAudioDevice_GETTER_Id_TO(smth) NS_IMETHOD GetId (PRUnichar * * aId) { return smth GetId (aId); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_Id_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_Id_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_Id_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_Id_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GETTER_Name_TO(smth) NS_IMETHOD GetName (PRUnichar * * aName) { return smth GetName (aName); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_Name_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_Name_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_Name_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_Name_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_SETTER_Name_TO(smth) NS_IMETHOD SetName (const PRUnichar * aName) { return smth SetName (aName); }
+#define COM_FORWARD_IHostAudioDevice_SETTER_Name_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_SETTER_Name_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_SETTER_Name_TO_BASE(base) COM_FORWARD_IHostAudioDevice_SETTER_Name_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GETTER_Type_TO(smth) NS_IMETHOD GetType (PRUint32 * aType) { return smth GetType (aType); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_Type_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_Type_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_Type_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_Type_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_SETTER_Type_TO(smth) NS_IMETHOD SetType (PRUint32 aType) { return smth SetType (aType); }
+#define COM_FORWARD_IHostAudioDevice_SETTER_Type_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_SETTER_Type_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_SETTER_Type_TO_BASE(base) COM_FORWARD_IHostAudioDevice_SETTER_Type_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GETTER_Usage_TO(smth) NS_IMETHOD GetUsage (PRUint32 * aUsage) { return smth GetUsage (aUsage); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_Usage_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_Usage_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_Usage_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_Usage_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_SETTER_Usage_TO(smth) NS_IMETHOD SetUsage (PRUint32 aUsage) { return smth SetUsage (aUsage); }
+#define COM_FORWARD_IHostAudioDevice_SETTER_Usage_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_SETTER_Usage_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_SETTER_Usage_TO_BASE(base) COM_FORWARD_IHostAudioDevice_SETTER_Usage_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GETTER_DefaultIn_TO(smth) NS_IMETHOD GetDefaultIn (PRBool * aDefaultIn) { return smth GetDefaultIn (aDefaultIn); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_DefaultIn_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_DefaultIn_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_DefaultIn_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_DefaultIn_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_SETTER_DefaultIn_TO(smth) NS_IMETHOD SetDefaultIn (PRBool aDefaultIn) { return smth SetDefaultIn (aDefaultIn); }
+#define COM_FORWARD_IHostAudioDevice_SETTER_DefaultIn_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_SETTER_DefaultIn_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_SETTER_DefaultIn_TO_BASE(base) COM_FORWARD_IHostAudioDevice_SETTER_DefaultIn_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GETTER_DefaultOut_TO(smth) NS_IMETHOD GetDefaultOut (PRBool * aDefaultOut) { return smth GetDefaultOut (aDefaultOut); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_DefaultOut_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_DefaultOut_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_DefaultOut_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_DefaultOut_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_SETTER_DefaultOut_TO(smth) NS_IMETHOD SetDefaultOut (PRBool aDefaultOut) { return smth SetDefaultOut (aDefaultOut); }
+#define COM_FORWARD_IHostAudioDevice_SETTER_DefaultOut_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_SETTER_DefaultOut_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_SETTER_DefaultOut_TO_BASE(base) COM_FORWARD_IHostAudioDevice_SETTER_DefaultOut_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GETTER_IsHotPlug_TO(smth) NS_IMETHOD GetIsHotPlug (PRBool * aIsHotPlug) { return smth GetIsHotPlug (aIsHotPlug); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_IsHotPlug_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_IsHotPlug_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_IsHotPlug_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_IsHotPlug_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_SETTER_IsHotPlug_TO(smth) NS_IMETHOD SetIsHotPlug (PRBool aIsHotPlug) { return smth SetIsHotPlug (aIsHotPlug); }
+#define COM_FORWARD_IHostAudioDevice_SETTER_IsHotPlug_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_SETTER_IsHotPlug_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_SETTER_IsHotPlug_TO_BASE(base) COM_FORWARD_IHostAudioDevice_SETTER_IsHotPlug_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GETTER_State_TO(smth) NS_IMETHOD GetState (PRUint32 * aState) { return smth GetState (aState); }
+#define COM_FORWARD_IHostAudioDevice_GETTER_State_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GETTER_State_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GETTER_State_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GETTER_State_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_SETTER_State_TO(smth) NS_IMETHOD SetState (PRUint32 aState) { return smth SetState (aState); }
+#define COM_FORWARD_IHostAudioDevice_SETTER_State_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_SETTER_State_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_SETTER_State_TO_BASE(base) COM_FORWARD_IHostAudioDevice_SETTER_State_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_GetProperty_TO(smth) NS_IMETHOD GetProperty (PRUnichar * aKey, PRUnichar * * aValue) { return smth GetProperty (aKey, aValue); }
+#define COM_FORWARD_IHostAudioDevice_GetProperty_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_GetProperty_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_GetProperty_TO_BASE(base) COM_FORWARD_IHostAudioDevice_GetProperty_TO (base::)
+#define COM_FORWARD_IHostAudioDevice_TO(smth) NS_FORWARD_IHOSTAUDIODEVICE (smth)
+#define COM_FORWARD_IHostAudioDevice_TO_OBJ(obj) COM_FORWARD_IHostAudioDevice_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDevice_TO_BASE(base) COM_FORWARD_IHostAudioDevice_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IHostAudioDevice;
+
+/* starting interface:    IAudioSettings */
+#define IAUDIOSETTINGS_IID_STR "52f40b16-520e-473f-9428-3e69b0d915c3"
+
+#define IAUDIOSETTINGS_IID \
+  {0x52f40b16, 0x520e, 0x473f, \
+    { 0x94, 0x28, 0x3e, 0x69, 0xb0, 0xd9, 0x15, 0xc3 }}
+
+class NS_NO_VTABLE IAudioSettings : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IAUDIOSETTINGS_IID)
+
+  /* readonly attribute IAudioAdapter adapter; */
+  NS_IMETHOD GetAdapter(IAudioAdapter * *aAdapter) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IAudioSettings(PRUint32 *aInternalAndReservedAttribute1IAudioSettings) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IAudioSettings(PRUint32 *aInternalAndReservedAttribute2IAudioSettings) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute3IAudioSettings(PRUint32 *aInternalAndReservedAttribute3IAudioSettings) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute4IAudioSettings(PRUint32 *aInternalAndReservedAttribute4IAudioSettings) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute5IAudioSettings(PRUint32 *aInternalAndReservedAttribute5IAudioSettings) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute6IAudioSettings(PRUint32 *aInternalAndReservedAttribute6IAudioSettings) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute7IAudioSettings(PRUint32 *aInternalAndReservedAttribute7IAudioSettings) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute8IAudioSettings; */
+  NS_IMETHOD GetInternalAndReservedAttribute8IAudioSettings(PRUint32 *aInternalAndReservedAttribute8IAudioSettings) = 0;
+
+  /* void getHostAudioDevice (in AudioDirection_T usage, [retval] out IHostAudioDevice device); */
+  NS_IMETHOD GetHostAudioDevice(AudioDirection_T usage, IHostAudioDevice **device) = 0;
+
+  /* void setHostAudioDevice (in IHostAudioDevice device, in AudioDirection_T usage); */
+  NS_IMETHOD SetHostAudioDevice(IHostAudioDevice *device, AudioDirection_T usage) = 0;
+
+  /* void InternalAndReservedMethod1IAudioSettings (); */
+  NS_IMETHOD InternalAndReservedMethod1IAudioSettings(void) = 0;
+
+  /* void InternalAndReservedMethod2IAudioSettings (); */
+  NS_IMETHOD InternalAndReservedMethod2IAudioSettings(void) = 0;
+
+  /* void InternalAndReservedMethod3IAudioSettings (); */
+  NS_IMETHOD InternalAndReservedMethod3IAudioSettings(void) = 0;
+
+  /* void InternalAndReservedMethod4IAudioSettings (); */
+  NS_IMETHOD InternalAndReservedMethod4IAudioSettings(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IAUDIOSETTINGS \
+  NS_IMETHOD GetAdapter(IAudioAdapter * *aAdapter); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IAudioSettings(PRUint32 *aInternalAndReservedAttribute1IAudioSettings); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IAudioSettings(PRUint32 *aInternalAndReservedAttribute2IAudioSettings); \
+  NS_IMETHOD GetInternalAndReservedAttribute3IAudioSettings(PRUint32 *aInternalAndReservedAttribute3IAudioSettings); \
+  NS_IMETHOD GetInternalAndReservedAttribute4IAudioSettings(PRUint32 *aInternalAndReservedAttribute4IAudioSettings); \
+  NS_IMETHOD GetInternalAndReservedAttribute5IAudioSettings(PRUint32 *aInternalAndReservedAttribute5IAudioSettings); \
+  NS_IMETHOD GetInternalAndReservedAttribute6IAudioSettings(PRUint32 *aInternalAndReservedAttribute6IAudioSettings); \
+  NS_IMETHOD GetInternalAndReservedAttribute7IAudioSettings(PRUint32 *aInternalAndReservedAttribute7IAudioSettings); \
+  NS_IMETHOD GetInternalAndReservedAttribute8IAudioSettings(PRUint32 *aInternalAndReservedAttribute8IAudioSettings); \
+  NS_IMETHOD GetHostAudioDevice(AudioDirection_T usage, IHostAudioDevice **device); \
+  NS_IMETHOD SetHostAudioDevice(IHostAudioDevice *device, AudioDirection_T usage); \
+  NS_IMETHOD InternalAndReservedMethod1IAudioSettings(void); \
+  NS_IMETHOD InternalAndReservedMethod2IAudioSettings(void); \
+  NS_IMETHOD InternalAndReservedMethod3IAudioSettings(void); \
+  NS_IMETHOD InternalAndReservedMethod4IAudioSettings(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IAUDIOSETTINGS(_to) \
+  NS_IMETHOD GetAdapter(IAudioAdapter * *aAdapter) { return _to GetAdapter(aAdapter); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IAudioSettings(PRUint32 *aInternalAndReservedAttribute1IAudioSettings) { return _to GetInternalAndReservedAttribute1IAudioSettings(aInternalAndReservedAttribute1IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IAudioSettings(PRUint32 *aInternalAndReservedAttribute2IAudioSettings) { return _to GetInternalAndReservedAttribute2IAudioSettings(aInternalAndReservedAttribute2IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IAudioSettings(PRUint32 *aInternalAndReservedAttribute3IAudioSettings) { return _to GetInternalAndReservedAttribute3IAudioSettings(aInternalAndReservedAttribute3IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IAudioSettings(PRUint32 *aInternalAndReservedAttribute4IAudioSettings) { return _to GetInternalAndReservedAttribute4IAudioSettings(aInternalAndReservedAttribute4IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IAudioSettings(PRUint32 *aInternalAndReservedAttribute5IAudioSettings) { return _to GetInternalAndReservedAttribute5IAudioSettings(aInternalAndReservedAttribute5IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IAudioSettings(PRUint32 *aInternalAndReservedAttribute6IAudioSettings) { return _to GetInternalAndReservedAttribute6IAudioSettings(aInternalAndReservedAttribute6IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IAudioSettings(PRUint32 *aInternalAndReservedAttribute7IAudioSettings) { return _to GetInternalAndReservedAttribute7IAudioSettings(aInternalAndReservedAttribute7IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IAudioSettings(PRUint32 *aInternalAndReservedAttribute8IAudioSettings) { return _to GetInternalAndReservedAttribute8IAudioSettings(aInternalAndReservedAttribute8IAudioSettings); } \
+  NS_IMETHOD GetHostAudioDevice(AudioDirection_T usage, IHostAudioDevice **device) { return _to GetHostAudioDevice(usage, device); } \
+  NS_IMETHOD SetHostAudioDevice(IHostAudioDevice *device, AudioDirection_T usage) { return _to SetHostAudioDevice(device, usage); } \
+  NS_IMETHOD InternalAndReservedMethod1IAudioSettings(void) { return _to InternalAndReservedMethod1IAudioSettings(); } \
+  NS_IMETHOD InternalAndReservedMethod2IAudioSettings(void) { return _to InternalAndReservedMethod2IAudioSettings(); } \
+  NS_IMETHOD InternalAndReservedMethod3IAudioSettings(void) { return _to InternalAndReservedMethod3IAudioSettings(); } \
+  NS_IMETHOD InternalAndReservedMethod4IAudioSettings(void) { return _to InternalAndReservedMethod4IAudioSettings(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IAUDIOSETTINGS(_to) \
+  NS_IMETHOD GetAdapter(IAudioAdapter * *aAdapter) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAdapter(aAdapter); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IAudioSettings(PRUint32 *aInternalAndReservedAttribute1IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IAudioSettings(aInternalAndReservedAttribute1IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IAudioSettings(PRUint32 *aInternalAndReservedAttribute2IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IAudioSettings(aInternalAndReservedAttribute2IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3IAudioSettings(PRUint32 *aInternalAndReservedAttribute3IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IAudioSettings(aInternalAndReservedAttribute3IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4IAudioSettings(PRUint32 *aInternalAndReservedAttribute4IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IAudioSettings(aInternalAndReservedAttribute4IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5IAudioSettings(PRUint32 *aInternalAndReservedAttribute5IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5IAudioSettings(aInternalAndReservedAttribute5IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6IAudioSettings(PRUint32 *aInternalAndReservedAttribute6IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6IAudioSettings(aInternalAndReservedAttribute6IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7IAudioSettings(PRUint32 *aInternalAndReservedAttribute7IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7IAudioSettings(aInternalAndReservedAttribute7IAudioSettings); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8IAudioSettings(PRUint32 *aInternalAndReservedAttribute8IAudioSettings) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8IAudioSettings(aInternalAndReservedAttribute8IAudioSettings); } \
+  NS_IMETHOD GetHostAudioDevice(AudioDirection_T usage, IHostAudioDevice **device) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetHostAudioDevice(usage, device); } \
+  NS_IMETHOD SetHostAudioDevice(IHostAudioDevice *device, AudioDirection_T usage) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetHostAudioDevice(device, usage); } \
+  NS_IMETHOD InternalAndReservedMethod1IAudioSettings(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IAudioSettings(); } \
+  NS_IMETHOD InternalAndReservedMethod2IAudioSettings(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IAudioSettings(); } \
+  NS_IMETHOD InternalAndReservedMethod3IAudioSettings(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IAudioSettings(); } \
+  NS_IMETHOD InternalAndReservedMethod4IAudioSettings(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4IAudioSettings(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IAudioSettings
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IAUDIOSETTINGS
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IAudioSettings)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute IAudioAdapter adapter; */
+NS_IMETHODIMP _MYCLASS_::GetAdapter(IAudioAdapter * *aAdapter)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IAudioSettings(PRUint32 *aInternalAndReservedAttribute1IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IAudioSettings(PRUint32 *aInternalAndReservedAttribute2IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3IAudioSettings(PRUint32 *aInternalAndReservedAttribute3IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IAudioSettings(PRUint32 *aInternalAndReservedAttribute4IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5IAudioSettings(PRUint32 *aInternalAndReservedAttribute5IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6IAudioSettings(PRUint32 *aInternalAndReservedAttribute6IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7IAudioSettings(PRUint32 *aInternalAndReservedAttribute7IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute8IAudioSettings; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8IAudioSettings(PRUint32 *aInternalAndReservedAttribute8IAudioSettings)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getHostAudioDevice (in AudioDirection_T usage, [retval] out IHostAudioDevice device); */
+NS_IMETHODIMP _MYCLASS_::GetHostAudioDevice(AudioDirection_T usage, IHostAudioDevice **device)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setHostAudioDevice (in IHostAudioDevice device, in AudioDirection_T usage); */
+NS_IMETHODIMP _MYCLASS_::SetHostAudioDevice(IHostAudioDevice *device, AudioDirection_T usage)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1IAudioSettings (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IAudioSettings()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2IAudioSettings (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IAudioSettings()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod3IAudioSettings (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3IAudioSettings()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod4IAudioSettings (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IAudioSettings()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IAudioSettings_GETTER_Adapter_TO(smth) NS_IMETHOD GetAdapter (IAudioAdapter * * aAdapter) { return smth GetAdapter (aAdapter); }
+#define COM_FORWARD_IAudioSettings_GETTER_Adapter_TO_OBJ(obj) COM_FORWARD_IAudioSettings_GETTER_Adapter_TO ((obj)->)
+#define COM_FORWARD_IAudioSettings_GETTER_Adapter_TO_BASE(base) COM_FORWARD_IAudioSettings_GETTER_Adapter_TO (base::)
+#define COM_FORWARD_IAudioSettings_GetHostAudioDevice_TO(smth) NS_IMETHOD GetHostAudioDevice (PRUint32 aUsage, IHostAudioDevice * * aDevice) { return smth GetHostAudioDevice (aUsage, aDevice); }
+#define COM_FORWARD_IAudioSettings_GetHostAudioDevice_TO_OBJ(obj) COM_FORWARD_IAudioSettings_GetHostAudioDevice_TO ((obj)->)
+#define COM_FORWARD_IAudioSettings_GetHostAudioDevice_TO_BASE(base) COM_FORWARD_IAudioSettings_GetHostAudioDevice_TO (base::)
+#define COM_FORWARD_IAudioSettings_SetHostAudioDevice_TO(smth) NS_IMETHOD SetHostAudioDevice (IHostAudioDevice * aDevice, PRUint32 aUsage) { return smth SetHostAudioDevice (aDevice, aUsage); }
+#define COM_FORWARD_IAudioSettings_SetHostAudioDevice_TO_OBJ(obj) COM_FORWARD_IAudioSettings_SetHostAudioDevice_TO ((obj)->)
+#define COM_FORWARD_IAudioSettings_SetHostAudioDevice_TO_BASE(base) COM_FORWARD_IAudioSettings_SetHostAudioDevice_TO (base::)
+#define COM_FORWARD_IAudioSettings_TO(smth) NS_FORWARD_IAUDIOSETTINGS (smth)
+#define COM_FORWARD_IAudioSettings_TO_OBJ(obj) COM_FORWARD_IAudioSettings_TO ((obj)->)
+#define COM_FORWARD_IAudioSettings_TO_BASE(base) COM_FORWARD_IAudioSettings_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IAudioSettings;
+
 /* starting interface:    IVRDEServer */
 #define IVRDESERVER_IID_STR "08e25756-08a2-41af-a05f-d7c661abaebe"
 
@@ -45960,11 +52057,11 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8ISharedFolder(PRUint32 
 VBOX_EXTERN_C const nsID IID_ISharedFolder;
 
 /* starting interface:    IInternalSessionControl */
-#define IINTERNALSESSIONCONTROL_IID_STR "f4638054-f1f8-4590-941a-cdb66075c5bf"
+#define IINTERNALSESSIONCONTROL_IID_STR "5045c372-2e8f-4d9e-ad9d-121ab1661146"
 
 #define IINTERNALSESSIONCONTROL_IID \
-  {0xf4638054, 0xf1f8, 0x4590, \
-    { 0x94, 0x1a, 0xcd, 0xb6, 0x60, 0x75, 0xc5, 0xbf }}
+  {0x5045c372, 0x2e8f, 0x4d9e, \
+    { 0xad, 0x9d, 0x12, 0x1a, 0xb1, 0x66, 0x11, 0x46 }}
 
 class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
  public: 
@@ -45994,6 +52091,9 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
 
   /* void onAudioAdapterChange (in IAudioAdapter audioAdapter); */
   NS_IMETHOD OnAudioAdapterChange(IAudioAdapter *audioAdapter) = 0;
+
+  /* void onHostAudioDeviceChange (in IHostAudioDevice device, in boolean isNew, in AudioDeviceState_T state, in IVirtualBoxErrorInfo errorInfo); */
+  NS_IMETHOD OnHostAudioDeviceChange(IHostAudioDevice *device, PRBool isNew, AudioDeviceState_T state, IVirtualBoxErrorInfo *errorInfo) = 0;
 
   /* void onSerialPortChange (in ISerialPort serialPort); */
   NS_IMETHOD OnSerialPortChange(ISerialPort *serialPort) = 0;
@@ -46039,6 +52139,9 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
 
   /* void onSharedFolderChange (in boolean global); */
   NS_IMETHOD OnSharedFolderChange(PRBool global) = 0;
+
+  /* void onGuestDebugControlChange (in IGuestDebugControl guestDebugControl); */
+  NS_IMETHOD OnGuestDebugControlChange(IGuestDebugControl *guestDebugControl) = 0;
 
   /* void onUSBDeviceAttach (in IUSBDevice device, in IVirtualBoxErrorInfo error, in unsigned long maskedInterfaces, in wstring captureFilename); */
   NS_IMETHOD OnUSBDeviceAttach(IUSBDevice *device, IVirtualBoxErrorInfo *error, PRUint32 maskedInterfaces, const PRUnichar *captureFilename) = 0;
@@ -46094,6 +52197,7 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
   NS_IMETHOD Uninitialize(void); \
   NS_IMETHOD OnNetworkAdapterChange(INetworkAdapter *networkAdapter, PRBool changeAdapter); \
   NS_IMETHOD OnAudioAdapterChange(IAudioAdapter *audioAdapter); \
+  NS_IMETHOD OnHostAudioDeviceChange(IHostAudioDevice *device, PRBool isNew, AudioDeviceState_T state, IVirtualBoxErrorInfo *errorInfo); \
   NS_IMETHOD OnSerialPortChange(ISerialPort *serialPort); \
   NS_IMETHOD OnParallelPortChange(IParallelPort *parallelPort); \
   NS_IMETHOD OnStorageControllerChange(const PRUnichar *machineId, const PRUnichar *controllerName); \
@@ -46109,6 +52213,7 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
   NS_IMETHOD OnRecordingChange(PRBool enable); \
   NS_IMETHOD OnUSBControllerChange(void); \
   NS_IMETHOD OnSharedFolderChange(PRBool global); \
+  NS_IMETHOD OnGuestDebugControlChange(IGuestDebugControl *guestDebugControl); \
   NS_IMETHOD OnUSBDeviceAttach(IUSBDevice *device, IVirtualBoxErrorInfo *error, PRUint32 maskedInterfaces, const PRUnichar *captureFilename); \
   NS_IMETHOD OnUSBDeviceDetach(const PRUnichar *id, IVirtualBoxErrorInfo *error); \
   NS_IMETHOD OnShowWindow(PRBool check, PRBool *canShow, PRInt64 *winId); \
@@ -46134,6 +52239,7 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
   NS_IMETHOD Uninitialize(void) { return _to Uninitialize(); } \
   NS_IMETHOD OnNetworkAdapterChange(INetworkAdapter *networkAdapter, PRBool changeAdapter) { return _to OnNetworkAdapterChange(networkAdapter, changeAdapter); } \
   NS_IMETHOD OnAudioAdapterChange(IAudioAdapter *audioAdapter) { return _to OnAudioAdapterChange(audioAdapter); } \
+  NS_IMETHOD OnHostAudioDeviceChange(IHostAudioDevice *device, PRBool isNew, AudioDeviceState_T state, IVirtualBoxErrorInfo *errorInfo) { return _to OnHostAudioDeviceChange(device, isNew, state, errorInfo); } \
   NS_IMETHOD OnSerialPortChange(ISerialPort *serialPort) { return _to OnSerialPortChange(serialPort); } \
   NS_IMETHOD OnParallelPortChange(IParallelPort *parallelPort) { return _to OnParallelPortChange(parallelPort); } \
   NS_IMETHOD OnStorageControllerChange(const PRUnichar *machineId, const PRUnichar *controllerName) { return _to OnStorageControllerChange(machineId, controllerName); } \
@@ -46149,6 +52255,7 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
   NS_IMETHOD OnRecordingChange(PRBool enable) { return _to OnRecordingChange(enable); } \
   NS_IMETHOD OnUSBControllerChange(void) { return _to OnUSBControllerChange(); } \
   NS_IMETHOD OnSharedFolderChange(PRBool global) { return _to OnSharedFolderChange(global); } \
+  NS_IMETHOD OnGuestDebugControlChange(IGuestDebugControl *guestDebugControl) { return _to OnGuestDebugControlChange(guestDebugControl); } \
   NS_IMETHOD OnUSBDeviceAttach(IUSBDevice *device, IVirtualBoxErrorInfo *error, PRUint32 maskedInterfaces, const PRUnichar *captureFilename) { return _to OnUSBDeviceAttach(device, error, maskedInterfaces, captureFilename); } \
   NS_IMETHOD OnUSBDeviceDetach(const PRUnichar *id, IVirtualBoxErrorInfo *error) { return _to OnUSBDeviceDetach(id, error); } \
   NS_IMETHOD OnShowWindow(PRBool check, PRBool *canShow, PRInt64 *winId) { return _to OnShowWindow(check, canShow, winId); } \
@@ -46174,6 +52281,7 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
   NS_IMETHOD Uninitialize(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Uninitialize(); } \
   NS_IMETHOD OnNetworkAdapterChange(INetworkAdapter *networkAdapter, PRBool changeAdapter) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnNetworkAdapterChange(networkAdapter, changeAdapter); } \
   NS_IMETHOD OnAudioAdapterChange(IAudioAdapter *audioAdapter) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnAudioAdapterChange(audioAdapter); } \
+  NS_IMETHOD OnHostAudioDeviceChange(IHostAudioDevice *device, PRBool isNew, AudioDeviceState_T state, IVirtualBoxErrorInfo *errorInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnHostAudioDeviceChange(device, isNew, state, errorInfo); } \
   NS_IMETHOD OnSerialPortChange(ISerialPort *serialPort) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnSerialPortChange(serialPort); } \
   NS_IMETHOD OnParallelPortChange(IParallelPort *parallelPort) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnParallelPortChange(parallelPort); } \
   NS_IMETHOD OnStorageControllerChange(const PRUnichar *machineId, const PRUnichar *controllerName) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnStorageControllerChange(machineId, controllerName); } \
@@ -46189,6 +52297,7 @@ class NS_NO_VTABLE IInternalSessionControl : public nsISupports {
   NS_IMETHOD OnRecordingChange(PRBool enable) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnRecordingChange(enable); } \
   NS_IMETHOD OnUSBControllerChange(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnUSBControllerChange(); } \
   NS_IMETHOD OnSharedFolderChange(PRBool global) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnSharedFolderChange(global); } \
+  NS_IMETHOD OnGuestDebugControlChange(IGuestDebugControl *guestDebugControl) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnGuestDebugControlChange(guestDebugControl); } \
   NS_IMETHOD OnUSBDeviceAttach(IUSBDevice *device, IVirtualBoxErrorInfo *error, PRUint32 maskedInterfaces, const PRUnichar *captureFilename) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnUSBDeviceAttach(device, error, maskedInterfaces, captureFilename); } \
   NS_IMETHOD OnUSBDeviceDetach(const PRUnichar *id, IVirtualBoxErrorInfo *error) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnUSBDeviceDetach(id, error); } \
   NS_IMETHOD OnShowWindow(PRBool check, PRBool *canShow, PRInt64 *winId) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnShowWindow(check, canShow, winId); } \
@@ -46284,6 +52393,12 @@ NS_IMETHODIMP _MYCLASS_::OnAudioAdapterChange(IAudioAdapter *audioAdapter)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void onHostAudioDeviceChange (in IHostAudioDevice device, in boolean isNew, in AudioDeviceState_T state, in IVirtualBoxErrorInfo errorInfo); */
+NS_IMETHODIMP _MYCLASS_::OnHostAudioDeviceChange(IHostAudioDevice *device, PRBool isNew, AudioDeviceState_T state, IVirtualBoxErrorInfo *errorInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void onSerialPortChange (in ISerialPort serialPort); */
 NS_IMETHODIMP _MYCLASS_::OnSerialPortChange(ISerialPort *serialPort)
 {
@@ -46370,6 +52485,12 @@ NS_IMETHODIMP _MYCLASS_::OnUSBControllerChange()
 
 /* void onSharedFolderChange (in boolean global); */
 NS_IMETHODIMP _MYCLASS_::OnSharedFolderChange(PRBool global)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void onGuestDebugControlChange (in IGuestDebugControl guestDebugControl); */
+NS_IMETHODIMP _MYCLASS_::OnGuestDebugControlChange(IGuestDebugControl *guestDebugControl)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -46485,6 +52606,9 @@ NS_IMETHODIMP _MYCLASS_::AssignMachine(IMachine *machine, LockType_T lockType, I
 #define COM_FORWARD_IInternalSessionControl_OnAudioAdapterChange_TO(smth) NS_IMETHOD OnAudioAdapterChange (IAudioAdapter * aAudioAdapter) { return smth OnAudioAdapterChange (aAudioAdapter); }
 #define COM_FORWARD_IInternalSessionControl_OnAudioAdapterChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnAudioAdapterChange_TO ((obj)->)
 #define COM_FORWARD_IInternalSessionControl_OnAudioAdapterChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnAudioAdapterChange_TO (base::)
+#define COM_FORWARD_IInternalSessionControl_OnHostAudioDeviceChange_TO(smth) NS_IMETHOD OnHostAudioDeviceChange (IHostAudioDevice * aDevice, PRBool aIsNew, PRUint32 aState, IVirtualBoxErrorInfo * aErrorInfo) { return smth OnHostAudioDeviceChange (aDevice, aIsNew, aState, aErrorInfo); }
+#define COM_FORWARD_IInternalSessionControl_OnHostAudioDeviceChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnHostAudioDeviceChange_TO ((obj)->)
+#define COM_FORWARD_IInternalSessionControl_OnHostAudioDeviceChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnHostAudioDeviceChange_TO (base::)
 #define COM_FORWARD_IInternalSessionControl_OnSerialPortChange_TO(smth) NS_IMETHOD OnSerialPortChange (ISerialPort * aSerialPort) { return smth OnSerialPortChange (aSerialPort); }
 #define COM_FORWARD_IInternalSessionControl_OnSerialPortChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnSerialPortChange_TO ((obj)->)
 #define COM_FORWARD_IInternalSessionControl_OnSerialPortChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnSerialPortChange_TO (base::)
@@ -46530,6 +52654,9 @@ NS_IMETHODIMP _MYCLASS_::AssignMachine(IMachine *machine, LockType_T lockType, I
 #define COM_FORWARD_IInternalSessionControl_OnSharedFolderChange_TO(smth) NS_IMETHOD OnSharedFolderChange (PRBool aGlobal) { return smth OnSharedFolderChange (aGlobal); }
 #define COM_FORWARD_IInternalSessionControl_OnSharedFolderChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnSharedFolderChange_TO ((obj)->)
 #define COM_FORWARD_IInternalSessionControl_OnSharedFolderChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnSharedFolderChange_TO (base::)
+#define COM_FORWARD_IInternalSessionControl_OnGuestDebugControlChange_TO(smth) NS_IMETHOD OnGuestDebugControlChange (IGuestDebugControl * aGuestDebugControl) { return smth OnGuestDebugControlChange (aGuestDebugControl); }
+#define COM_FORWARD_IInternalSessionControl_OnGuestDebugControlChange_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnGuestDebugControlChange_TO ((obj)->)
+#define COM_FORWARD_IInternalSessionControl_OnGuestDebugControlChange_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnGuestDebugControlChange_TO (base::)
 #define COM_FORWARD_IInternalSessionControl_OnUSBDeviceAttach_TO(smth) NS_IMETHOD OnUSBDeviceAttach (IUSBDevice * aDevice, IVirtualBoxErrorInfo * aError, PRUint32 aMaskedInterfaces, PRUnichar * aCaptureFilename) { return smth OnUSBDeviceAttach (aDevice, aError, aMaskedInterfaces, aCaptureFilename); }
 #define COM_FORWARD_IInternalSessionControl_OnUSBDeviceAttach_TO_OBJ(obj) COM_FORWARD_IInternalSessionControl_OnUSBDeviceAttach_TO ((obj)->)
 #define COM_FORWARD_IInternalSessionControl_OnUSBDeviceAttach_TO_BASE(base) COM_FORWARD_IInternalSessionControl_OnUSBDeviceAttach_TO (base::)
@@ -47879,11 +54006,11 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IPerformanceCollector()
 VBOX_EXTERN_C const nsID IID_IPerformanceCollector;
 
 /* starting interface:    INATEngine */
-#define INATENGINE_IID_STR "8faef61e-6e15-4f71-a6a5-94e707fafbcc"
+#define INATENGINE_IID_STR "a06253a7-dcd2-44e3-8689-9c9c4b6b6234"
 
 #define INATENGINE_IID \
-  {0x8faef61e, 0x6e15, 0x4f71, \
-    { 0xa6, 0xa5, 0x94, 0xe7, 0x07, 0xfa, 0xfb, 0xcc }}
+  {0xa06253a7, 0xdcd2, 0x44e3, \
+    { 0x86, 0x89, 0x9c, 0x9c, 0x4b, 0x6b, 0x62, 0x34 }}
 
 class NS_NO_VTABLE INATEngine : public nsISupports {
  public: 
@@ -47928,6 +54055,10 @@ class NS_NO_VTABLE INATEngine : public nsISupports {
 
   /* void getRedirects (out unsigned long redirectsSize, [array, size_is (redirectsSize), retval] out wstring redirects); */
   NS_IMETHOD GetRedirects(PRUint32 *redirectsSize, PRUnichar ***redirects) = 0;
+
+  /* attribute boolean localhostReachable; */
+  NS_IMETHOD GetLocalhostReachable(PRBool *aLocalhostReachable) = 0;
+  NS_IMETHOD SetLocalhostReachable(PRBool aLocalhostReachable) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1INATEngine; */
   NS_IMETHOD GetInternalAndReservedAttribute1INATEngine(PRUint32 *aInternalAndReservedAttribute1INATEngine) = 0;
@@ -48000,6 +54131,8 @@ class NS_NO_VTABLE INATEngine : public nsISupports {
   NS_IMETHOD GetDNSUseHostResolver(PRBool *aDNSUseHostResolver); \
   NS_IMETHOD SetDNSUseHostResolver(PRBool aDNSUseHostResolver); \
   NS_IMETHOD GetRedirects(PRUint32 *redirectsSize, PRUnichar ***redirects); \
+  NS_IMETHOD GetLocalhostReachable(PRBool *aLocalhostReachable); \
+  NS_IMETHOD SetLocalhostReachable(PRBool aLocalhostReachable); \
   NS_IMETHOD GetInternalAndReservedAttribute1INATEngine(PRUint32 *aInternalAndReservedAttribute1INATEngine); \
   NS_IMETHOD GetInternalAndReservedAttribute2INATEngine(PRUint32 *aInternalAndReservedAttribute2INATEngine); \
   NS_IMETHOD GetInternalAndReservedAttribute3INATEngine(PRUint32 *aInternalAndReservedAttribute3INATEngine); \
@@ -48038,6 +54171,8 @@ class NS_NO_VTABLE INATEngine : public nsISupports {
   NS_IMETHOD GetDNSUseHostResolver(PRBool *aDNSUseHostResolver) { return _to GetDNSUseHostResolver(aDNSUseHostResolver); } \
   NS_IMETHOD SetDNSUseHostResolver(PRBool aDNSUseHostResolver) { return _to SetDNSUseHostResolver(aDNSUseHostResolver); } \
   NS_IMETHOD GetRedirects(PRUint32 *redirectsSize, PRUnichar ***redirects) { return _to GetRedirects(redirectsSize, redirects); } \
+  NS_IMETHOD GetLocalhostReachable(PRBool *aLocalhostReachable) { return _to GetLocalhostReachable(aLocalhostReachable); } \
+  NS_IMETHOD SetLocalhostReachable(PRBool aLocalhostReachable) { return _to SetLocalhostReachable(aLocalhostReachable); } \
   NS_IMETHOD GetInternalAndReservedAttribute1INATEngine(PRUint32 *aInternalAndReservedAttribute1INATEngine) { return _to GetInternalAndReservedAttribute1INATEngine(aInternalAndReservedAttribute1INATEngine); } \
   NS_IMETHOD GetInternalAndReservedAttribute2INATEngine(PRUint32 *aInternalAndReservedAttribute2INATEngine) { return _to GetInternalAndReservedAttribute2INATEngine(aInternalAndReservedAttribute2INATEngine); } \
   NS_IMETHOD GetInternalAndReservedAttribute3INATEngine(PRUint32 *aInternalAndReservedAttribute3INATEngine) { return _to GetInternalAndReservedAttribute3INATEngine(aInternalAndReservedAttribute3INATEngine); } \
@@ -48076,6 +54211,8 @@ class NS_NO_VTABLE INATEngine : public nsISupports {
   NS_IMETHOD GetDNSUseHostResolver(PRBool *aDNSUseHostResolver) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDNSUseHostResolver(aDNSUseHostResolver); } \
   NS_IMETHOD SetDNSUseHostResolver(PRBool aDNSUseHostResolver) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDNSUseHostResolver(aDNSUseHostResolver); } \
   NS_IMETHOD GetRedirects(PRUint32 *redirectsSize, PRUnichar ***redirects) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRedirects(redirectsSize, redirects); } \
+  NS_IMETHOD GetLocalhostReachable(PRBool *aLocalhostReachable) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLocalhostReachable(aLocalhostReachable); } \
+  NS_IMETHOD SetLocalhostReachable(PRBool aLocalhostReachable) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetLocalhostReachable(aLocalhostReachable); } \
   NS_IMETHOD GetInternalAndReservedAttribute1INATEngine(PRUint32 *aInternalAndReservedAttribute1INATEngine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1INATEngine(aInternalAndReservedAttribute1INATEngine); } \
   NS_IMETHOD GetInternalAndReservedAttribute2INATEngine(PRUint32 *aInternalAndReservedAttribute2INATEngine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2INATEngine(aInternalAndReservedAttribute2INATEngine); } \
   NS_IMETHOD GetInternalAndReservedAttribute3INATEngine(PRUint32 *aInternalAndReservedAttribute3INATEngine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3INATEngine(aInternalAndReservedAttribute3INATEngine); } \
@@ -48217,6 +54354,16 @@ NS_IMETHODIMP _MYCLASS_::SetDNSUseHostResolver(PRBool aDNSUseHostResolver)
 
 /* void getRedirects (out unsigned long redirectsSize, [array, size_is (redirectsSize), retval] out wstring redirects); */
 NS_IMETHODIMP _MYCLASS_::GetRedirects(PRUint32 *redirectsSize, PRUnichar ***redirects)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute boolean localhostReachable; */
+NS_IMETHODIMP _MYCLASS_::GetLocalhostReachable(PRBool *aLocalhostReachable)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetLocalhostReachable(PRBool aLocalhostReachable)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -48377,6 +54524,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4INATEngine()
 #define COM_FORWARD_INATEngine_GETTER_Redirects_TO(smth) NS_IMETHOD GetRedirects (PRUint32 * aRedirectsSize, PRUnichar * * * aRedirects) { return smth GetRedirects (aRedirectsSize, aRedirects); }
 #define COM_FORWARD_INATEngine_GETTER_Redirects_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_Redirects_TO ((obj)->)
 #define COM_FORWARD_INATEngine_GETTER_Redirects_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_Redirects_TO (base::)
+#define COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO(smth) NS_IMETHOD GetLocalhostReachable (PRBool * aLocalhostReachable) { return smth GetLocalhostReachable (aLocalhostReachable); }
+#define COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO ((obj)->)
+#define COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO (base::)
+#define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO(smth) NS_IMETHOD SetLocalhostReachable (PRBool aLocalhostReachable) { return smth SetLocalhostReachable (aLocalhostReachable); }
+#define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO ((obj)->)
+#define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO (base::)
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO(smth) NS_IMETHOD SetNetworkSettings (PRUint32 aMtu, PRUint32 aSockSnd, PRUint32 aSockRcv, PRUint32 aTcpWndSnd, PRUint32 aTcpWndRcv) { return smth SetNetworkSettings (aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv); }
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO_OBJ(obj) COM_FORWARD_INATEngine_SetNetworkSettings_TO ((obj)->)
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO_BASE(base) COM_FORWARD_INATEngine_SetNetworkSettings_TO (base::)
@@ -48568,11 +54721,11 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IExtPackPlugIn(PRUint32
 VBOX_EXTERN_C const nsID IID_IExtPackPlugIn;
 
 /* starting interface:    IExtPackBase */
-#define IEXTPACKBASE_IID_STR "f25aca3d-0b79-4350-bdd9-a0376cd6e6e3"
+#define IEXTPACKBASE_IID_STR "aa204a12-5b29-45a5-b5d6-c2bafcdb9b0b"
 
 #define IEXTPACKBASE_IID \
-  {0xf25aca3d, 0x0b79, 0x4350, \
-    { 0xbd, 0xd9, 0xa0, 0x37, 0x6c, 0xd6, 0xe6, 0xe3 }}
+  {0xaa204a12, 0x5b29, 0x45a5, \
+    { 0xb5, 0xd6, 0xc2, 0xba, 0xfc, 0xdb, 0x9b, 0x0b }}
 
 class NS_NO_VTABLE IExtPackBase : public nsISupports {
  public: 
@@ -48596,6 +54749,9 @@ class NS_NO_VTABLE IExtPackBase : public nsISupports {
 
   /* readonly attribute wstring VRDEModule; */
   NS_IMETHOD GetVRDEModule(PRUnichar * *aVRDEModule) = 0;
+
+  /* readonly attribute wstring CryptoModule; */
+  NS_IMETHOD GetCryptoModule(PRUnichar * *aCryptoModule) = 0;
 
   /* void getPlugIns (out unsigned long plugInsSize, [array, size_is (plugInsSize), retval] out IExtPackPlugIn plugIns); */
   NS_IMETHOD GetPlugIns(PRUint32 *plugInsSize, IExtPackPlugIn ***plugIns) = 0;
@@ -48661,6 +54817,7 @@ class NS_NO_VTABLE IExtPackBase : public nsISupports {
   NS_IMETHOD GetRevision(PRUint32 *aRevision); \
   NS_IMETHOD GetEdition(PRUnichar * *aEdition); \
   NS_IMETHOD GetVRDEModule(PRUnichar * *aVRDEModule); \
+  NS_IMETHOD GetCryptoModule(PRUnichar * *aCryptoModule); \
   NS_IMETHOD GetPlugIns(PRUint32 *plugInsSize, IExtPackPlugIn ***plugIns); \
   NS_IMETHOD GetUsable(PRBool *aUsable); \
   NS_IMETHOD GetWhyUnusable(PRUnichar * *aWhyUnusable); \
@@ -48688,6 +54845,7 @@ class NS_NO_VTABLE IExtPackBase : public nsISupports {
   NS_IMETHOD GetRevision(PRUint32 *aRevision) { return _to GetRevision(aRevision); } \
   NS_IMETHOD GetEdition(PRUnichar * *aEdition) { return _to GetEdition(aEdition); } \
   NS_IMETHOD GetVRDEModule(PRUnichar * *aVRDEModule) { return _to GetVRDEModule(aVRDEModule); } \
+  NS_IMETHOD GetCryptoModule(PRUnichar * *aCryptoModule) { return _to GetCryptoModule(aCryptoModule); } \
   NS_IMETHOD GetPlugIns(PRUint32 *plugInsSize, IExtPackPlugIn ***plugIns) { return _to GetPlugIns(plugInsSize, plugIns); } \
   NS_IMETHOD GetUsable(PRBool *aUsable) { return _to GetUsable(aUsable); } \
   NS_IMETHOD GetWhyUnusable(PRUnichar * *aWhyUnusable) { return _to GetWhyUnusable(aWhyUnusable); } \
@@ -48715,6 +54873,7 @@ class NS_NO_VTABLE IExtPackBase : public nsISupports {
   NS_IMETHOD GetRevision(PRUint32 *aRevision) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRevision(aRevision); } \
   NS_IMETHOD GetEdition(PRUnichar * *aEdition) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetEdition(aEdition); } \
   NS_IMETHOD GetVRDEModule(PRUnichar * *aVRDEModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVRDEModule(aVRDEModule); } \
+  NS_IMETHOD GetCryptoModule(PRUnichar * *aCryptoModule) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCryptoModule(aCryptoModule); } \
   NS_IMETHOD GetPlugIns(PRUint32 *plugInsSize, IExtPackPlugIn ***plugIns) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPlugIns(plugInsSize, plugIns); } \
   NS_IMETHOD GetUsable(PRBool *aUsable) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUsable(aUsable); } \
   NS_IMETHOD GetWhyUnusable(PRUnichar * *aWhyUnusable) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetWhyUnusable(aWhyUnusable); } \
@@ -48798,6 +54957,12 @@ NS_IMETHODIMP _MYCLASS_::GetEdition(PRUnichar * *aEdition)
 
 /* readonly attribute wstring VRDEModule; */
 NS_IMETHODIMP _MYCLASS_::GetVRDEModule(PRUnichar * *aVRDEModule)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring CryptoModule; */
+NS_IMETHODIMP _MYCLASS_::GetCryptoModule(PRUnichar * *aCryptoModule)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -48931,6 +55096,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IExtPackBase()
 #define COM_FORWARD_IExtPackBase_GETTER_VRDEModule_TO(smth) NS_IMETHOD GetVRDEModule (PRUnichar * * aVRDEModule) { return smth GetVRDEModule (aVRDEModule); }
 #define COM_FORWARD_IExtPackBase_GETTER_VRDEModule_TO_OBJ(obj) COM_FORWARD_IExtPackBase_GETTER_VRDEModule_TO ((obj)->)
 #define COM_FORWARD_IExtPackBase_GETTER_VRDEModule_TO_BASE(base) COM_FORWARD_IExtPackBase_GETTER_VRDEModule_TO (base::)
+#define COM_FORWARD_IExtPackBase_GETTER_CryptoModule_TO(smth) NS_IMETHOD GetCryptoModule (PRUnichar * * aCryptoModule) { return smth GetCryptoModule (aCryptoModule); }
+#define COM_FORWARD_IExtPackBase_GETTER_CryptoModule_TO_OBJ(obj) COM_FORWARD_IExtPackBase_GETTER_CryptoModule_TO ((obj)->)
+#define COM_FORWARD_IExtPackBase_GETTER_CryptoModule_TO_BASE(base) COM_FORWARD_IExtPackBase_GETTER_CryptoModule_TO (base::)
 #define COM_FORWARD_IExtPackBase_GETTER_PlugIns_TO(smth) NS_IMETHOD GetPlugIns (PRUint32 * aPlugInsSize, IExtPackPlugIn * * * aPlugIns) { return smth GetPlugIns (aPlugInsSize, aPlugIns); }
 #define COM_FORWARD_IExtPackBase_GETTER_PlugIns_TO_OBJ(obj) COM_FORWARD_IExtPackBase_GETTER_PlugIns_TO ((obj)->)
 #define COM_FORWARD_IExtPackBase_GETTER_PlugIns_TO_BASE(base) COM_FORWARD_IExtPackBase_GETTER_PlugIns_TO (base::)
@@ -49882,6 +56050,222 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IBandwidthControl()
 #define COM_FORWARD_IBandwidthControl_TO_BASE(base) COM_FORWARD_IBandwidthControl_TO (base::)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IBandwidthControl;
+
+/* starting interface:    IGuestDebugControl */
+#define IGUESTDEBUGCONTROL_IID_STR "1474bb3a-f096-4cd7-a857-8d8e3cea7331"
+
+#define IGUESTDEBUGCONTROL_IID \
+  {0x1474bb3a, 0xf096, 0x4cd7, \
+    { 0xa8, 0x57, 0x8d, 0x8e, 0x3c, 0xea, 0x73, 0x31 }}
+
+class NS_NO_VTABLE IGuestDebugControl : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IGUESTDEBUGCONTROL_IID)
+
+  /* attribute GuestDebugProvider_T debugProvider; */
+  NS_IMETHOD GetDebugProvider(GuestDebugProvider_T *aDebugProvider) = 0;
+  NS_IMETHOD SetDebugProvider(GuestDebugProvider_T aDebugProvider) = 0;
+
+  /* attribute GuestDebugIoProvider_T debugIoProvider; */
+  NS_IMETHOD GetDebugIoProvider(GuestDebugIoProvider_T *aDebugIoProvider) = 0;
+  NS_IMETHOD SetDebugIoProvider(GuestDebugIoProvider_T aDebugIoProvider) = 0;
+
+  /* attribute wstring debugAddress; */
+  NS_IMETHOD GetDebugAddress(PRUnichar * *aDebugAddress) = 0;
+  NS_IMETHOD SetDebugAddress(const PRUnichar * aDebugAddress) = 0;
+
+  /* attribute unsigned long debugPort; */
+  NS_IMETHOD GetDebugPort(PRUint32 *aDebugPort) = 0;
+  NS_IMETHOD SetDebugPort(PRUint32 aDebugPort) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1IGuestDebugControl; */
+  NS_IMETHOD GetInternalAndReservedAttribute1IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute1IGuestDebugControl) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2IGuestDebugControl; */
+  NS_IMETHOD GetInternalAndReservedAttribute2IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute2IGuestDebugControl) = 0;
+
+  /* void InternalAndReservedMethod1IGuestDebugControl (); */
+  NS_IMETHOD InternalAndReservedMethod1IGuestDebugControl(void) = 0;
+
+  /* void InternalAndReservedMethod2IGuestDebugControl (); */
+  NS_IMETHOD InternalAndReservedMethod2IGuestDebugControl(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IGUESTDEBUGCONTROL \
+  NS_IMETHOD GetDebugProvider(GuestDebugProvider_T *aDebugProvider); \
+  NS_IMETHOD SetDebugProvider(GuestDebugProvider_T aDebugProvider); \
+  NS_IMETHOD GetDebugIoProvider(GuestDebugIoProvider_T *aDebugIoProvider); \
+  NS_IMETHOD SetDebugIoProvider(GuestDebugIoProvider_T aDebugIoProvider); \
+  NS_IMETHOD GetDebugAddress(PRUnichar * *aDebugAddress); \
+  NS_IMETHOD SetDebugAddress(const PRUnichar * aDebugAddress); \
+  NS_IMETHOD GetDebugPort(PRUint32 *aDebugPort); \
+  NS_IMETHOD SetDebugPort(PRUint32 aDebugPort); \
+  NS_IMETHOD GetInternalAndReservedAttribute1IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute1IGuestDebugControl); \
+  NS_IMETHOD GetInternalAndReservedAttribute2IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute2IGuestDebugControl); \
+  NS_IMETHOD InternalAndReservedMethod1IGuestDebugControl(void); \
+  NS_IMETHOD InternalAndReservedMethod2IGuestDebugControl(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IGUESTDEBUGCONTROL(_to) \
+  NS_IMETHOD GetDebugProvider(GuestDebugProvider_T *aDebugProvider) { return _to GetDebugProvider(aDebugProvider); } \
+  NS_IMETHOD SetDebugProvider(GuestDebugProvider_T aDebugProvider) { return _to SetDebugProvider(aDebugProvider); } \
+  NS_IMETHOD GetDebugIoProvider(GuestDebugIoProvider_T *aDebugIoProvider) { return _to GetDebugIoProvider(aDebugIoProvider); } \
+  NS_IMETHOD SetDebugIoProvider(GuestDebugIoProvider_T aDebugIoProvider) { return _to SetDebugIoProvider(aDebugIoProvider); } \
+  NS_IMETHOD GetDebugAddress(PRUnichar * *aDebugAddress) { return _to GetDebugAddress(aDebugAddress); } \
+  NS_IMETHOD SetDebugAddress(const PRUnichar * aDebugAddress) { return _to SetDebugAddress(aDebugAddress); } \
+  NS_IMETHOD GetDebugPort(PRUint32 *aDebugPort) { return _to GetDebugPort(aDebugPort); } \
+  NS_IMETHOD SetDebugPort(PRUint32 aDebugPort) { return _to SetDebugPort(aDebugPort); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute1IGuestDebugControl) { return _to GetInternalAndReservedAttribute1IGuestDebugControl(aInternalAndReservedAttribute1IGuestDebugControl); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute2IGuestDebugControl) { return _to GetInternalAndReservedAttribute2IGuestDebugControl(aInternalAndReservedAttribute2IGuestDebugControl); } \
+  NS_IMETHOD InternalAndReservedMethod1IGuestDebugControl(void) { return _to InternalAndReservedMethod1IGuestDebugControl(); } \
+  NS_IMETHOD InternalAndReservedMethod2IGuestDebugControl(void) { return _to InternalAndReservedMethod2IGuestDebugControl(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IGUESTDEBUGCONTROL(_to) \
+  NS_IMETHOD GetDebugProvider(GuestDebugProvider_T *aDebugProvider) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebugProvider(aDebugProvider); } \
+  NS_IMETHOD SetDebugProvider(GuestDebugProvider_T aDebugProvider) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebugProvider(aDebugProvider); } \
+  NS_IMETHOD GetDebugIoProvider(GuestDebugIoProvider_T *aDebugIoProvider) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebugIoProvider(aDebugIoProvider); } \
+  NS_IMETHOD SetDebugIoProvider(GuestDebugIoProvider_T aDebugIoProvider) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebugIoProvider(aDebugIoProvider); } \
+  NS_IMETHOD GetDebugAddress(PRUnichar * *aDebugAddress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebugAddress(aDebugAddress); } \
+  NS_IMETHOD SetDebugAddress(const PRUnichar * aDebugAddress) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebugAddress(aDebugAddress); } \
+  NS_IMETHOD GetDebugPort(PRUint32 *aDebugPort) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebugPort(aDebugPort); } \
+  NS_IMETHOD SetDebugPort(PRUint32 aDebugPort) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebugPort(aDebugPort); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute1IGuestDebugControl) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IGuestDebugControl(aInternalAndReservedAttribute1IGuestDebugControl); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute2IGuestDebugControl) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IGuestDebugControl(aInternalAndReservedAttribute2IGuestDebugControl); } \
+  NS_IMETHOD InternalAndReservedMethod1IGuestDebugControl(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IGuestDebugControl(); } \
+  NS_IMETHOD InternalAndReservedMethod2IGuestDebugControl(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IGuestDebugControl(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IGuestDebugControl
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IGUESTDEBUGCONTROL
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IGuestDebugControl)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* attribute GuestDebugProvider_T debugProvider; */
+NS_IMETHODIMP _MYCLASS_::GetDebugProvider(GuestDebugProvider_T *aDebugProvider)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetDebugProvider(GuestDebugProvider_T aDebugProvider)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute GuestDebugIoProvider_T debugIoProvider; */
+NS_IMETHODIMP _MYCLASS_::GetDebugIoProvider(GuestDebugIoProvider_T *aDebugIoProvider)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetDebugIoProvider(GuestDebugIoProvider_T aDebugIoProvider)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute wstring debugAddress; */
+NS_IMETHODIMP _MYCLASS_::GetDebugAddress(PRUnichar * *aDebugAddress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetDebugAddress(const PRUnichar * aDebugAddress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute unsigned long debugPort; */
+NS_IMETHODIMP _MYCLASS_::GetDebugPort(PRUint32 *aDebugPort)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP _MYCLASS_::SetDebugPort(PRUint32 aDebugPort)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1IGuestDebugControl; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute1IGuestDebugControl)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2IGuestDebugControl; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2IGuestDebugControl(PRUint32 *aInternalAndReservedAttribute2IGuestDebugControl)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1IGuestDebugControl (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IGuestDebugControl()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2IGuestDebugControl (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2IGuestDebugControl()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugProvider_TO(smth) NS_IMETHOD GetDebugProvider (PRUint32 * aDebugProvider) { return smth GetDebugProvider (aDebugProvider); }
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugProvider_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_GETTER_DebugProvider_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugProvider_TO_BASE(base) COM_FORWARD_IGuestDebugControl_GETTER_DebugProvider_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugProvider_TO(smth) NS_IMETHOD SetDebugProvider (PRUint32 aDebugProvider) { return smth SetDebugProvider (aDebugProvider); }
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugProvider_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_SETTER_DebugProvider_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugProvider_TO_BASE(base) COM_FORWARD_IGuestDebugControl_SETTER_DebugProvider_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugIoProvider_TO(smth) NS_IMETHOD GetDebugIoProvider (PRUint32 * aDebugIoProvider) { return smth GetDebugIoProvider (aDebugIoProvider); }
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugIoProvider_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_GETTER_DebugIoProvider_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugIoProvider_TO_BASE(base) COM_FORWARD_IGuestDebugControl_GETTER_DebugIoProvider_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugIoProvider_TO(smth) NS_IMETHOD SetDebugIoProvider (PRUint32 aDebugIoProvider) { return smth SetDebugIoProvider (aDebugIoProvider); }
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugIoProvider_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_SETTER_DebugIoProvider_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugIoProvider_TO_BASE(base) COM_FORWARD_IGuestDebugControl_SETTER_DebugIoProvider_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugAddress_TO(smth) NS_IMETHOD GetDebugAddress (PRUnichar * * aDebugAddress) { return smth GetDebugAddress (aDebugAddress); }
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugAddress_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_GETTER_DebugAddress_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugAddress_TO_BASE(base) COM_FORWARD_IGuestDebugControl_GETTER_DebugAddress_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugAddress_TO(smth) NS_IMETHOD SetDebugAddress (const PRUnichar * aDebugAddress) { return smth SetDebugAddress (aDebugAddress); }
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugAddress_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_SETTER_DebugAddress_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugAddress_TO_BASE(base) COM_FORWARD_IGuestDebugControl_SETTER_DebugAddress_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugPort_TO(smth) NS_IMETHOD GetDebugPort (PRUint32 * aDebugPort) { return smth GetDebugPort (aDebugPort); }
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugPort_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_GETTER_DebugPort_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_GETTER_DebugPort_TO_BASE(base) COM_FORWARD_IGuestDebugControl_GETTER_DebugPort_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugPort_TO(smth) NS_IMETHOD SetDebugPort (PRUint32 aDebugPort) { return smth SetDebugPort (aDebugPort); }
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugPort_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_SETTER_DebugPort_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_SETTER_DebugPort_TO_BASE(base) COM_FORWARD_IGuestDebugControl_SETTER_DebugPort_TO (base::)
+#define COM_FORWARD_IGuestDebugControl_TO(smth) NS_FORWARD_IGUESTDEBUGCONTROL (smth)
+#define COM_FORWARD_IGuestDebugControl_TO_OBJ(obj) COM_FORWARD_IGuestDebugControl_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControl_TO_BASE(base) COM_FORWARD_IGuestDebugControl_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IGuestDebugControl;
 
 /* starting interface:    IVirtualBoxClient */
 #define IVIRTUALBOXCLIENT_IID_STR "d2937a8e-cb8d-4382-90ba-b7da78a74573"
@@ -51168,11 +57552,11 @@ NS_IMETHODIMP _MYCLASS_::GetState(SessionState_T *aState)
 VBOX_EXTERN_C const nsID IID_ISessionStateChangedEvent;
 
 /* starting interface:    IGuestPropertyChangedEvent */
-#define IGUESTPROPERTYCHANGEDEVENT_IID_STR "3f63597a-26f1-4edb-8dd2-6bddd0912368"
+#define IGUESTPROPERTYCHANGEDEVENT_IID_STR "2d0f4c6f-a77e-45c5-96d2-7ca7daae63a9"
 
 #define IGUESTPROPERTYCHANGEDEVENT_IID \
-  {0x3f63597a, 0x26f1, 0x4edb, \
-    { 0x8d, 0xd2, 0x6b, 0xdd, 0xd0, 0x91, 0x23, 0x68 }}
+  {0x2d0f4c6f, 0xa77e, 0x45c5, \
+    { 0x96, 0xd2, 0x7c, 0xa7, 0xda, 0xae, 0x63, 0xa9 }}
 
 class NS_NO_VTABLE IGuestPropertyChangedEvent : public IMachineEvent {
  public: 
@@ -51188,25 +57572,31 @@ class NS_NO_VTABLE IGuestPropertyChangedEvent : public IMachineEvent {
   /* readonly attribute wstring flags; */
   NS_IMETHOD GetFlags(PRUnichar * *aFlags) = 0;
 
+  /* readonly attribute boolean fWasDeleted; */
+  NS_IMETHOD GetFWasDeleted(PRBool *aFWasDeleted) = 0;
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_IGUESTPROPERTYCHANGEDEVENT \
   NS_IMETHOD GetName(PRUnichar * *aName); \
   NS_IMETHOD GetValue(PRUnichar * *aValue); \
-  NS_IMETHOD GetFlags(PRUnichar * *aFlags); 
+  NS_IMETHOD GetFlags(PRUnichar * *aFlags); \
+  NS_IMETHOD GetFWasDeleted(PRBool *aFWasDeleted); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IGUESTPROPERTYCHANGEDEVENT(_to) \
   NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } \
   NS_IMETHOD GetValue(PRUnichar * *aValue) { return _to GetValue(aValue); } \
-  NS_IMETHOD GetFlags(PRUnichar * *aFlags) { return _to GetFlags(aFlags); } 
+  NS_IMETHOD GetFlags(PRUnichar * *aFlags) { return _to GetFlags(aFlags); } \
+  NS_IMETHOD GetFWasDeleted(PRBool *aFWasDeleted) { return _to GetFWasDeleted(aFWasDeleted); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IGUESTPROPERTYCHANGEDEVENT(_to) \
   NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
   NS_IMETHOD GetValue(PRUnichar * *aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetValue(aValue); } \
-  NS_IMETHOD GetFlags(PRUnichar * *aFlags) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFlags(aFlags); } 
+  NS_IMETHOD GetFlags(PRUnichar * *aFlags) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFlags(aFlags); } \
+  NS_IMETHOD GetFWasDeleted(PRBool *aFWasDeleted) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFWasDeleted(aFWasDeleted); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -51258,6 +57648,12 @@ NS_IMETHODIMP _MYCLASS_::GetFlags(PRUnichar * *aFlags)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* readonly attribute boolean fWasDeleted; */
+NS_IMETHODIMP _MYCLASS_::GetFWasDeleted(PRBool *aFWasDeleted)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* End of implementation class template. */
 #endif
 
@@ -51270,6 +57666,9 @@ NS_IMETHODIMP _MYCLASS_::GetFlags(PRUnichar * *aFlags)
 #define COM_FORWARD_IGuestPropertyChangedEvent_GETTER_Flags_TO(smth) NS_IMETHOD GetFlags (PRUnichar * * aFlags) { return smth GetFlags (aFlags); }
 #define COM_FORWARD_IGuestPropertyChangedEvent_GETTER_Flags_TO_OBJ(obj) COM_FORWARD_IGuestPropertyChangedEvent_GETTER_Flags_TO ((obj)->)
 #define COM_FORWARD_IGuestPropertyChangedEvent_GETTER_Flags_TO_BASE(base) COM_FORWARD_IGuestPropertyChangedEvent_GETTER_Flags_TO (base::)
+#define COM_FORWARD_IGuestPropertyChangedEvent_GETTER_FWasDeleted_TO(smth) NS_IMETHOD GetFWasDeleted (PRBool * aFWasDeleted) { return smth GetFWasDeleted (aFWasDeleted); }
+#define COM_FORWARD_IGuestPropertyChangedEvent_GETTER_FWasDeleted_TO_OBJ(obj) COM_FORWARD_IGuestPropertyChangedEvent_GETTER_FWasDeleted_TO ((obj)->)
+#define COM_FORWARD_IGuestPropertyChangedEvent_GETTER_FWasDeleted_TO_BASE(base) COM_FORWARD_IGuestPropertyChangedEvent_GETTER_FWasDeleted_TO (base::)
 #define COM_FORWARD_IGuestPropertyChangedEvent_TO(smth) NS_FORWARD_IGUESTPROPERTYCHANGEDEVENT (smth)
 #define COM_FORWARD_IGuestPropertyChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestPropertyChangedEvent_TO ((obj)->)
 #define COM_FORWARD_IGuestPropertyChangedEvent_TO_BASE(base) COM_FORWARD_IGuestPropertyChangedEvent_TO (base::)
@@ -51841,11 +58240,11 @@ NS_IMETHODIMP _MYCLASS_::GetShape(PRUint32 *shapeSize, PRUint8 **shape)
 VBOX_EXTERN_C const nsID IID_IMousePointerShapeChangedEvent;
 
 /* starting interface:    IMouseCapabilityChangedEvent */
-#define IMOUSECAPABILITYCHANGEDEVENT_IID_STR "70e7779a-e64a-4908-804e-371cad23a756"
+#define IMOUSECAPABILITYCHANGEDEVENT_IID_STR "4a773393-7a8c-4d57-b228-9ade4049a81f"
 
 #define IMOUSECAPABILITYCHANGEDEVENT_IID \
-  {0x70e7779a, 0xe64a, 0x4908, \
-    { 0x80, 0x4e, 0x37, 0x1c, 0xad, 0x23, 0xa7, 0x56 }}
+  {0x4a773393, 0x7a8c, 0x4d57, \
+    { 0xb2, 0x28, 0x9a, 0xde, 0x40, 0x49, 0xa8, 0x1f }}
 
 class NS_NO_VTABLE IMouseCapabilityChangedEvent : public IEvent {
  public: 
@@ -51858,8 +58257,11 @@ class NS_NO_VTABLE IMouseCapabilityChangedEvent : public IEvent {
   /* readonly attribute boolean supportsRelative; */
   NS_IMETHOD GetSupportsRelative(PRBool *aSupportsRelative) = 0;
 
-  /* readonly attribute boolean supportsMultiTouch; */
-  NS_IMETHOD GetSupportsMultiTouch(PRBool *aSupportsMultiTouch) = 0;
+  /* readonly attribute boolean supportsTouchScreen; */
+  NS_IMETHOD GetSupportsTouchScreen(PRBool *aSupportsTouchScreen) = 0;
+
+  /* readonly attribute boolean supportsTouchPad; */
+  NS_IMETHOD GetSupportsTouchPad(PRBool *aSupportsTouchPad) = 0;
 
   /* readonly attribute boolean needsHostCursor; */
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor) = 0;
@@ -51870,21 +58272,24 @@ class NS_NO_VTABLE IMouseCapabilityChangedEvent : public IEvent {
 #define NS_DECL_IMOUSECAPABILITYCHANGEDEVENT \
   NS_IMETHOD GetSupportsAbsolute(PRBool *aSupportsAbsolute); \
   NS_IMETHOD GetSupportsRelative(PRBool *aSupportsRelative); \
-  NS_IMETHOD GetSupportsMultiTouch(PRBool *aSupportsMultiTouch); \
+  NS_IMETHOD GetSupportsTouchScreen(PRBool *aSupportsTouchScreen); \
+  NS_IMETHOD GetSupportsTouchPad(PRBool *aSupportsTouchPad); \
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IMOUSECAPABILITYCHANGEDEVENT(_to) \
   NS_IMETHOD GetSupportsAbsolute(PRBool *aSupportsAbsolute) { return _to GetSupportsAbsolute(aSupportsAbsolute); } \
   NS_IMETHOD GetSupportsRelative(PRBool *aSupportsRelative) { return _to GetSupportsRelative(aSupportsRelative); } \
-  NS_IMETHOD GetSupportsMultiTouch(PRBool *aSupportsMultiTouch) { return _to GetSupportsMultiTouch(aSupportsMultiTouch); } \
+  NS_IMETHOD GetSupportsTouchScreen(PRBool *aSupportsTouchScreen) { return _to GetSupportsTouchScreen(aSupportsTouchScreen); } \
+  NS_IMETHOD GetSupportsTouchPad(PRBool *aSupportsTouchPad) { return _to GetSupportsTouchPad(aSupportsTouchPad); } \
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor) { return _to GetNeedsHostCursor(aNeedsHostCursor); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IMOUSECAPABILITYCHANGEDEVENT(_to) \
   NS_IMETHOD GetSupportsAbsolute(PRBool *aSupportsAbsolute) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportsAbsolute(aSupportsAbsolute); } \
   NS_IMETHOD GetSupportsRelative(PRBool *aSupportsRelative) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportsRelative(aSupportsRelative); } \
-  NS_IMETHOD GetSupportsMultiTouch(PRBool *aSupportsMultiTouch) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportsMultiTouch(aSupportsMultiTouch); } \
+  NS_IMETHOD GetSupportsTouchScreen(PRBool *aSupportsTouchScreen) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportsTouchScreen(aSupportsTouchScreen); } \
+  NS_IMETHOD GetSupportsTouchPad(PRBool *aSupportsTouchPad) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSupportsTouchPad(aSupportsTouchPad); } \
   NS_IMETHOD GetNeedsHostCursor(PRBool *aNeedsHostCursor) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNeedsHostCursor(aNeedsHostCursor); } 
 
 #if 0
@@ -51931,8 +58336,14 @@ NS_IMETHODIMP _MYCLASS_::GetSupportsRelative(PRBool *aSupportsRelative)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute boolean supportsMultiTouch; */
-NS_IMETHODIMP _MYCLASS_::GetSupportsMultiTouch(PRBool *aSupportsMultiTouch)
+/* readonly attribute boolean supportsTouchScreen; */
+NS_IMETHODIMP _MYCLASS_::GetSupportsTouchScreen(PRBool *aSupportsTouchScreen)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean supportsTouchPad; */
+NS_IMETHODIMP _MYCLASS_::GetSupportsTouchPad(PRBool *aSupportsTouchPad)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -51952,9 +58363,12 @@ NS_IMETHODIMP _MYCLASS_::GetNeedsHostCursor(PRBool *aNeedsHostCursor)
 #define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsRelative_TO(smth) NS_IMETHOD GetSupportsRelative (PRBool * aSupportsRelative) { return smth GetSupportsRelative (aSupportsRelative); }
 #define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsRelative_TO_OBJ(obj) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsRelative_TO ((obj)->)
 #define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsRelative_TO_BASE(base) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsRelative_TO (base::)
-#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsMultiTouch_TO(smth) NS_IMETHOD GetSupportsMultiTouch (PRBool * aSupportsMultiTouch) { return smth GetSupportsMultiTouch (aSupportsMultiTouch); }
-#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsMultiTouch_TO_OBJ(obj) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsMultiTouch_TO ((obj)->)
-#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsMultiTouch_TO_BASE(base) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsMultiTouch_TO (base::)
+#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchScreen_TO(smth) NS_IMETHOD GetSupportsTouchScreen (PRBool * aSupportsTouchScreen) { return smth GetSupportsTouchScreen (aSupportsTouchScreen); }
+#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchScreen_TO_OBJ(obj) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchScreen_TO ((obj)->)
+#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchScreen_TO_BASE(base) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchScreen_TO (base::)
+#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchPad_TO(smth) NS_IMETHOD GetSupportsTouchPad (PRBool * aSupportsTouchPad) { return smth GetSupportsTouchPad (aSupportsTouchPad); }
+#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchPad_TO_OBJ(obj) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchPad_TO ((obj)->)
+#define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchPad_TO_BASE(base) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_SupportsTouchPad_TO (base::)
 #define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_NeedsHostCursor_TO(smth) NS_IMETHOD GetNeedsHostCursor (PRBool * aNeedsHostCursor) { return smth GetNeedsHostCursor (aNeedsHostCursor); }
 #define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_NeedsHostCursor_TO_OBJ(obj) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_NeedsHostCursor_TO ((obj)->)
 #define COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_NeedsHostCursor_TO_BASE(base) COM_FORWARD_IMouseCapabilityChangedEvent_GETTER_NeedsHostCursor_TO (base::)
@@ -53364,11 +59778,11 @@ NS_IMETHODIMP _MYCLASS_::GetButtons(PRInt32 *aButtons)
 VBOX_EXTERN_C const nsID IID_IGuestMouseEvent;
 
 /* starting interface:    IGuestMultiTouchEvent */
-#define IGUESTMULTITOUCHEVENT_IID_STR "be8a0eb5-f4f4-4dd0-9d30-c89b873247ec"
+#define IGUESTMULTITOUCHEVENT_IID_STR "1f99d9dc-c144-4c28-9f88-e6f488db5441"
 
 #define IGUESTMULTITOUCHEVENT_IID \
-  {0xbe8a0eb5, 0xf4f4, 0x4dd0, \
-    { 0x9d, 0x30, 0xc8, 0x9b, 0x87, 0x32, 0x47, 0xec }}
+  {0x1f99d9dc, 0xc144, 0x4c28, \
+    { 0x9f, 0x88, 0xe6, 0xf4, 0x88, 0xdb, 0x54, 0x41 }}
 
 class NS_NO_VTABLE IGuestMultiTouchEvent : public IEvent {
  public: 
@@ -53390,6 +59804,9 @@ class NS_NO_VTABLE IGuestMultiTouchEvent : public IEvent {
   /* void getContactFlags (out unsigned long contactFlagsSize, [array, size_is (contactFlagsSize), retval] out unsigned short contactFlags); */
   NS_IMETHOD GetContactFlags(PRUint32 *contactFlagsSize, PRUint16 **contactFlags) = 0;
 
+  /* readonly attribute boolean isTouchScreen; */
+  NS_IMETHOD GetIsTouchScreen(PRBool *aIsTouchScreen) = 0;
+
   /* readonly attribute unsigned long scanTime; */
   NS_IMETHOD GetScanTime(PRUint32 *aScanTime) = 0;
 
@@ -53402,6 +59819,7 @@ class NS_NO_VTABLE IGuestMultiTouchEvent : public IEvent {
   NS_IMETHOD GetYPositions(PRUint32 *yPositionsSize, PRInt16 **yPositions); \
   NS_IMETHOD GetContactIds(PRUint32 *contactIdsSize, PRUint16 **contactIds); \
   NS_IMETHOD GetContactFlags(PRUint32 *contactFlagsSize, PRUint16 **contactFlags); \
+  NS_IMETHOD GetIsTouchScreen(PRBool *aIsTouchScreen); \
   NS_IMETHOD GetScanTime(PRUint32 *aScanTime); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
@@ -53411,6 +59829,7 @@ class NS_NO_VTABLE IGuestMultiTouchEvent : public IEvent {
   NS_IMETHOD GetYPositions(PRUint32 *yPositionsSize, PRInt16 **yPositions) { return _to GetYPositions(yPositionsSize, yPositions); } \
   NS_IMETHOD GetContactIds(PRUint32 *contactIdsSize, PRUint16 **contactIds) { return _to GetContactIds(contactIdsSize, contactIds); } \
   NS_IMETHOD GetContactFlags(PRUint32 *contactFlagsSize, PRUint16 **contactFlags) { return _to GetContactFlags(contactFlagsSize, contactFlags); } \
+  NS_IMETHOD GetIsTouchScreen(PRBool *aIsTouchScreen) { return _to GetIsTouchScreen(aIsTouchScreen); } \
   NS_IMETHOD GetScanTime(PRUint32 *aScanTime) { return _to GetScanTime(aScanTime); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
@@ -53420,6 +59839,7 @@ class NS_NO_VTABLE IGuestMultiTouchEvent : public IEvent {
   NS_IMETHOD GetYPositions(PRUint32 *yPositionsSize, PRInt16 **yPositions) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetYPositions(yPositionsSize, yPositions); } \
   NS_IMETHOD GetContactIds(PRUint32 *contactIdsSize, PRUint16 **contactIds) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetContactIds(contactIdsSize, contactIds); } \
   NS_IMETHOD GetContactFlags(PRUint32 *contactFlagsSize, PRUint16 **contactFlags) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetContactFlags(contactFlagsSize, contactFlags); } \
+  NS_IMETHOD GetIsTouchScreen(PRBool *aIsTouchScreen) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetIsTouchScreen(aIsTouchScreen); } \
   NS_IMETHOD GetScanTime(PRUint32 *aScanTime) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetScanTime(aScanTime); } 
 
 #if 0
@@ -53484,6 +59904,12 @@ NS_IMETHODIMP _MYCLASS_::GetContactFlags(PRUint32 *contactFlagsSize, PRUint16 **
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* readonly attribute boolean isTouchScreen; */
+NS_IMETHODIMP _MYCLASS_::GetIsTouchScreen(PRBool *aIsTouchScreen)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* readonly attribute unsigned long scanTime; */
 NS_IMETHODIMP _MYCLASS_::GetScanTime(PRUint32 *aScanTime)
 {
@@ -53508,6 +59934,9 @@ NS_IMETHODIMP _MYCLASS_::GetScanTime(PRUint32 *aScanTime)
 #define COM_FORWARD_IGuestMultiTouchEvent_GETTER_ContactFlags_TO(smth) NS_IMETHOD GetContactFlags (PRUint32 * aContactFlagsSize, PRUint16 * * aContactFlags) { return smth GetContactFlags (aContactFlagsSize, aContactFlags); }
 #define COM_FORWARD_IGuestMultiTouchEvent_GETTER_ContactFlags_TO_OBJ(obj) COM_FORWARD_IGuestMultiTouchEvent_GETTER_ContactFlags_TO ((obj)->)
 #define COM_FORWARD_IGuestMultiTouchEvent_GETTER_ContactFlags_TO_BASE(base) COM_FORWARD_IGuestMultiTouchEvent_GETTER_ContactFlags_TO (base::)
+#define COM_FORWARD_IGuestMultiTouchEvent_GETTER_IsTouchScreen_TO(smth) NS_IMETHOD GetIsTouchScreen (PRBool * aIsTouchScreen) { return smth GetIsTouchScreen (aIsTouchScreen); }
+#define COM_FORWARD_IGuestMultiTouchEvent_GETTER_IsTouchScreen_TO_OBJ(obj) COM_FORWARD_IGuestMultiTouchEvent_GETTER_IsTouchScreen_TO ((obj)->)
+#define COM_FORWARD_IGuestMultiTouchEvent_GETTER_IsTouchScreen_TO_BASE(base) COM_FORWARD_IGuestMultiTouchEvent_GETTER_IsTouchScreen_TO (base::)
 #define COM_FORWARD_IGuestMultiTouchEvent_GETTER_ScanTime_TO(smth) NS_IMETHOD GetScanTime (PRUint32 * aScanTime) { return smth GetScanTime (aScanTime); }
 #define COM_FORWARD_IGuestMultiTouchEvent_GETTER_ScanTime_TO_OBJ(obj) COM_FORWARD_IGuestMultiTouchEvent_GETTER_ScanTime_TO ((obj)->)
 #define COM_FORWARD_IGuestMultiTouchEvent_GETTER_ScanTime_TO_BASE(base) COM_FORWARD_IGuestMultiTouchEvent_GETTER_ScanTime_TO (base::)
@@ -56397,6 +62826,130 @@ NS_IMETHODIMP _MYCLASS_::GetGuestPort(PRInt32 *aGuestPort)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_INATRedirectEvent;
 
+/* starting interface:    IHostAudioDeviceChangedEvent */
+#define IHOSTAUDIODEVICECHANGEDEVENT_IID_STR "8dcc633f-7b03-4f0a-9f40-7a784dd0835a"
+
+#define IHOSTAUDIODEVICECHANGEDEVENT_IID \
+  {0x8dcc633f, 0x7b03, 0x4f0a, \
+    { 0x9f, 0x40, 0x7a, 0x78, 0x4d, 0xd0, 0x83, 0x5a }}
+
+class NS_NO_VTABLE IHostAudioDeviceChangedEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IHOSTAUDIODEVICECHANGEDEVENT_IID)
+
+  /* readonly attribute IHostAudioDevice device; */
+  NS_IMETHOD GetDevice(IHostAudioDevice * *aDevice) = 0;
+
+  /* readonly attribute boolean new; */
+  NS_IMETHOD GetNew(PRBool *aNew) = 0;
+
+  /* readonly attribute AudioDeviceState_T state; */
+  NS_IMETHOD GetState(AudioDeviceState_T *aState) = 0;
+
+  /* readonly attribute IVirtualBoxErrorInfo error; */
+  NS_IMETHOD GetError(IVirtualBoxErrorInfo * *aError) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IHOSTAUDIODEVICECHANGEDEVENT \
+  NS_IMETHOD GetDevice(IHostAudioDevice * *aDevice); \
+  NS_IMETHOD GetNew(PRBool *aNew); \
+  NS_IMETHOD GetState(AudioDeviceState_T *aState); \
+  NS_IMETHOD GetError(IVirtualBoxErrorInfo * *aError); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IHOSTAUDIODEVICECHANGEDEVENT(_to) \
+  NS_IMETHOD GetDevice(IHostAudioDevice * *aDevice) { return _to GetDevice(aDevice); } \
+  NS_IMETHOD GetNew(PRBool *aNew) { return _to GetNew(aNew); } \
+  NS_IMETHOD GetState(AudioDeviceState_T *aState) { return _to GetState(aState); } \
+  NS_IMETHOD GetError(IVirtualBoxErrorInfo * *aError) { return _to GetError(aError); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IHOSTAUDIODEVICECHANGEDEVENT(_to) \
+  NS_IMETHOD GetDevice(IHostAudioDevice * *aDevice) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDevice(aDevice); } \
+  NS_IMETHOD GetNew(PRBool *aNew) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNew(aNew); } \
+  NS_IMETHOD GetState(AudioDeviceState_T *aState) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetState(aState); } \
+  NS_IMETHOD GetError(IVirtualBoxErrorInfo * *aError) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetError(aError); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IHostAudioDeviceChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IHOSTAUDIODEVICECHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IHostAudioDeviceChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute IHostAudioDevice device; */
+NS_IMETHODIMP _MYCLASS_::GetDevice(IHostAudioDevice * *aDevice)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean new; */
+NS_IMETHODIMP _MYCLASS_::GetNew(PRBool *aNew)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute AudioDeviceState_T state; */
+NS_IMETHODIMP _MYCLASS_::GetState(AudioDeviceState_T *aState)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute IVirtualBoxErrorInfo error; */
+NS_IMETHODIMP _MYCLASS_::GetError(IVirtualBoxErrorInfo * *aError)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Device_TO(smth) NS_IMETHOD GetDevice (IHostAudioDevice * * aDevice) { return smth GetDevice (aDevice); }
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Device_TO_OBJ(obj) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Device_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Device_TO_BASE(base) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Device_TO (base::)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_New_TO(smth) NS_IMETHOD GetNew (PRBool * aNew) { return smth GetNew (aNew); }
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_New_TO_OBJ(obj) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_New_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_New_TO_BASE(base) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_New_TO (base::)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_State_TO(smth) NS_IMETHOD GetState (PRUint32 * aState) { return smth GetState (aState); }
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_State_TO_OBJ(obj) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_State_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_State_TO_BASE(base) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_State_TO (base::)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Error_TO(smth) NS_IMETHOD GetError (IVirtualBoxErrorInfo * * aError) { return smth GetError (aError); }
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Error_TO_OBJ(obj) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Error_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Error_TO_BASE(base) COM_FORWARD_IHostAudioDeviceChangedEvent_GETTER_Error_TO (base::)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_TO(smth) NS_FORWARD_IHOSTAUDIODEVICECHANGEDEVENT (smth)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_TO_OBJ(obj) COM_FORWARD_IHostAudioDeviceChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IHostAudioDeviceChangedEvent_TO_BASE(base) COM_FORWARD_IHostAudioDeviceChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IHostAudioDeviceChangedEvent;
+
 /* starting interface:    IHostPCIDevicePlugEvent */
 #define IHOSTPCIDEVICEPLUGEVENT_IID_STR "a0bad6df-d612-47d3-89d4-db3992533948"
 
@@ -57863,6 +64416,85 @@ NS_IMETHODIMP _MYCLASS_::GetProgressId(PRUnichar * *aProgressId)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IProgressEvent;
 
+/* starting interface:    IProgressCreatedEvent */
+#define IPROGRESSCREATEDEVENT_IID_STR "a85bba40-1b93-47bb-b125-dec708c30fc0"
+
+#define IPROGRESSCREATEDEVENT_IID \
+  {0xa85bba40, 0x1b93, 0x47bb, \
+    { 0xb1, 0x25, 0xde, 0xc7, 0x08, 0xc3, 0x0f, 0xc0 }}
+
+class NS_NO_VTABLE IProgressCreatedEvent : public IProgressEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IPROGRESSCREATEDEVENT_IID)
+
+  /* readonly attribute boolean create; */
+  NS_IMETHOD GetCreate(PRBool *aCreate) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IPROGRESSCREATEDEVENT \
+  NS_IMETHOD GetCreate(PRBool *aCreate); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IPROGRESSCREATEDEVENT(_to) \
+  NS_IMETHOD GetCreate(PRBool *aCreate) { return _to GetCreate(aCreate); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IPROGRESSCREATEDEVENT(_to) \
+  NS_IMETHOD GetCreate(PRBool *aCreate) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCreate(aCreate); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IProgressCreatedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IPROGRESSCREATEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IProgressCreatedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute boolean create; */
+NS_IMETHODIMP _MYCLASS_::GetCreate(PRBool *aCreate)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IProgressCreatedEvent_GETTER_Create_TO(smth) NS_IMETHOD GetCreate (PRBool * aCreate) { return smth GetCreate (aCreate); }
+#define COM_FORWARD_IProgressCreatedEvent_GETTER_Create_TO_OBJ(obj) COM_FORWARD_IProgressCreatedEvent_GETTER_Create_TO ((obj)->)
+#define COM_FORWARD_IProgressCreatedEvent_GETTER_Create_TO_BASE(base) COM_FORWARD_IProgressCreatedEvent_GETTER_Create_TO (base::)
+#define COM_FORWARD_IProgressCreatedEvent_TO(smth) NS_FORWARD_IPROGRESSCREATEDEVENT (smth)
+#define COM_FORWARD_IProgressCreatedEvent_TO_OBJ(obj) COM_FORWARD_IProgressCreatedEvent_TO ((obj)->)
+#define COM_FORWARD_IProgressCreatedEvent_TO_BASE(base) COM_FORWARD_IProgressCreatedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IProgressCreatedEvent;
+
 /* starting interface:    IProgressPercentageChangedEvent */
 #define IPROGRESSPERCENTAGECHANGEDEVENT_IID_STR "f05d7e60-1bcf-4218-9807-04e036cc70f1"
 
@@ -58332,6 +64964,570 @@ NS_IMETHODIMP _MYCLASS_::GetOutput(PRUint32 *aOutput)
 #define COM_FORWARD_IGuestMonitorInfoChangedEvent_TO_BASE(base) COM_FORWARD_IGuestMonitorInfoChangedEvent_TO (base::)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_IGuestMonitorInfoChangedEvent;
+
+/* starting interface:    IUpdateAgentEvent */
+#define IUPDATEAGENTEVENT_IID_STR "ff58a51d-54a1-411c-93e9-3047eb4dcd21"
+
+#define IUPDATEAGENTEVENT_IID \
+  {0xff58a51d, 0x54a1, 0x411c, \
+    { 0x93, 0xe9, 0x30, 0x47, 0xeb, 0x4d, 0xcd, 0x21 }}
+
+class NS_NO_VTABLE IUpdateAgentEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IUPDATEAGENTEVENT_IID)
+
+  /* readonly attribute IUpdateAgent agent; */
+  NS_IMETHOD GetAgent(IUpdateAgent * *aAgent) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IUPDATEAGENTEVENT \
+  NS_IMETHOD GetAgent(IUpdateAgent * *aAgent); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IUPDATEAGENTEVENT(_to) \
+  NS_IMETHOD GetAgent(IUpdateAgent * *aAgent) { return _to GetAgent(aAgent); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IUPDATEAGENTEVENT(_to) \
+  NS_IMETHOD GetAgent(IUpdateAgent * *aAgent) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAgent(aAgent); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IUpdateAgentEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IUPDATEAGENTEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IUpdateAgentEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute IUpdateAgent agent; */
+NS_IMETHODIMP _MYCLASS_::GetAgent(IUpdateAgent * *aAgent)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IUpdateAgentEvent_GETTER_Agent_TO(smth) NS_IMETHOD GetAgent (IUpdateAgent * * aAgent) { return smth GetAgent (aAgent); }
+#define COM_FORWARD_IUpdateAgentEvent_GETTER_Agent_TO_OBJ(obj) COM_FORWARD_IUpdateAgentEvent_GETTER_Agent_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentEvent_GETTER_Agent_TO_BASE(base) COM_FORWARD_IUpdateAgentEvent_GETTER_Agent_TO (base::)
+#define COM_FORWARD_IUpdateAgentEvent_TO(smth) NS_FORWARD_IUPDATEAGENTEVENT (smth)
+#define COM_FORWARD_IUpdateAgentEvent_TO_OBJ(obj) COM_FORWARD_IUpdateAgentEvent_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentEvent_TO_BASE(base) COM_FORWARD_IUpdateAgentEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IUpdateAgentEvent;
+
+/* starting interface:    IUpdateAgentSettingsChangedEvent */
+#define IUPDATEAGENTSETTINGSCHANGEDEVENT_IID_STR "abef51ae-1493-49f4-aa03-efaf106bf086"
+
+#define IUPDATEAGENTSETTINGSCHANGEDEVENT_IID \
+  {0xabef51ae, 0x1493, 0x49f4, \
+    { 0xaa, 0x03, 0xef, 0xaf, 0x10, 0x6b, 0xf0, 0x86 }}
+
+class NS_NO_VTABLE IUpdateAgentSettingsChangedEvent : public IUpdateAgentEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IUPDATEAGENTSETTINGSCHANGEDEVENT_IID)
+
+  /* readonly attribute wstring attributeHint; */
+  NS_IMETHOD GetAttributeHint(PRUnichar * *aAttributeHint) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IUPDATEAGENTSETTINGSCHANGEDEVENT \
+  NS_IMETHOD GetAttributeHint(PRUnichar * *aAttributeHint); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IUPDATEAGENTSETTINGSCHANGEDEVENT(_to) \
+  NS_IMETHOD GetAttributeHint(PRUnichar * *aAttributeHint) { return _to GetAttributeHint(aAttributeHint); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IUPDATEAGENTSETTINGSCHANGEDEVENT(_to) \
+  NS_IMETHOD GetAttributeHint(PRUnichar * *aAttributeHint) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAttributeHint(aAttributeHint); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IUpdateAgentSettingsChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IUPDATEAGENTSETTINGSCHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IUpdateAgentSettingsChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring attributeHint; */
+NS_IMETHODIMP _MYCLASS_::GetAttributeHint(PRUnichar * *aAttributeHint)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IUpdateAgentSettingsChangedEvent_GETTER_AttributeHint_TO(smth) NS_IMETHOD GetAttributeHint (PRUnichar * * aAttributeHint) { return smth GetAttributeHint (aAttributeHint); }
+#define COM_FORWARD_IUpdateAgentSettingsChangedEvent_GETTER_AttributeHint_TO_OBJ(obj) COM_FORWARD_IUpdateAgentSettingsChangedEvent_GETTER_AttributeHint_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentSettingsChangedEvent_GETTER_AttributeHint_TO_BASE(base) COM_FORWARD_IUpdateAgentSettingsChangedEvent_GETTER_AttributeHint_TO (base::)
+#define COM_FORWARD_IUpdateAgentSettingsChangedEvent_TO(smth) NS_FORWARD_IUPDATEAGENTSETTINGSCHANGEDEVENT (smth)
+#define COM_FORWARD_IUpdateAgentSettingsChangedEvent_TO_OBJ(obj) COM_FORWARD_IUpdateAgentSettingsChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentSettingsChangedEvent_TO_BASE(base) COM_FORWARD_IUpdateAgentSettingsChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IUpdateAgentSettingsChangedEvent;
+
+/* starting interface:    IUpdateAgentErrorEvent */
+#define IUPDATEAGENTERROREVENT_IID_STR "2a88033d-82db-4ac2-97b5-e786c839420e"
+
+#define IUPDATEAGENTERROREVENT_IID \
+  {0x2a88033d, 0x82db, 0x4ac2, \
+    { 0x97, 0xb5, 0xe7, 0x86, 0xc8, 0x39, 0x42, 0x0e }}
+
+class NS_NO_VTABLE IUpdateAgentErrorEvent : public IUpdateAgentEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IUPDATEAGENTERROREVENT_IID)
+
+  /* readonly attribute wstring msg; */
+  NS_IMETHOD GetMsg(PRUnichar * *aMsg) = 0;
+
+  /* readonly attribute long rcError; */
+  NS_IMETHOD GetRcError(PRInt32 *aRcError) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IUPDATEAGENTERROREVENT \
+  NS_IMETHOD GetMsg(PRUnichar * *aMsg); \
+  NS_IMETHOD GetRcError(PRInt32 *aRcError); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IUPDATEAGENTERROREVENT(_to) \
+  NS_IMETHOD GetMsg(PRUnichar * *aMsg) { return _to GetMsg(aMsg); } \
+  NS_IMETHOD GetRcError(PRInt32 *aRcError) { return _to GetRcError(aRcError); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IUPDATEAGENTERROREVENT(_to) \
+  NS_IMETHOD GetMsg(PRUnichar * *aMsg) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMsg(aMsg); } \
+  NS_IMETHOD GetRcError(PRInt32 *aRcError) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRcError(aRcError); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IUpdateAgentErrorEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IUPDATEAGENTERROREVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IUpdateAgentErrorEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring msg; */
+NS_IMETHODIMP _MYCLASS_::GetMsg(PRUnichar * *aMsg)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute long rcError; */
+NS_IMETHODIMP _MYCLASS_::GetRcError(PRInt32 *aRcError)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IUpdateAgentErrorEvent_GETTER_Msg_TO(smth) NS_IMETHOD GetMsg (PRUnichar * * aMsg) { return smth GetMsg (aMsg); }
+#define COM_FORWARD_IUpdateAgentErrorEvent_GETTER_Msg_TO_OBJ(obj) COM_FORWARD_IUpdateAgentErrorEvent_GETTER_Msg_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentErrorEvent_GETTER_Msg_TO_BASE(base) COM_FORWARD_IUpdateAgentErrorEvent_GETTER_Msg_TO (base::)
+#define COM_FORWARD_IUpdateAgentErrorEvent_GETTER_RcError_TO(smth) NS_IMETHOD GetRcError (PRInt32 * aRcError) { return smth GetRcError (aRcError); }
+#define COM_FORWARD_IUpdateAgentErrorEvent_GETTER_RcError_TO_OBJ(obj) COM_FORWARD_IUpdateAgentErrorEvent_GETTER_RcError_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentErrorEvent_GETTER_RcError_TO_BASE(base) COM_FORWARD_IUpdateAgentErrorEvent_GETTER_RcError_TO (base::)
+#define COM_FORWARD_IUpdateAgentErrorEvent_TO(smth) NS_FORWARD_IUPDATEAGENTERROREVENT (smth)
+#define COM_FORWARD_IUpdateAgentErrorEvent_TO_OBJ(obj) COM_FORWARD_IUpdateAgentErrorEvent_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentErrorEvent_TO_BASE(base) COM_FORWARD_IUpdateAgentErrorEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IUpdateAgentErrorEvent;
+
+/* starting interface:    IUpdateAgentAvailableEvent */
+#define IUPDATEAGENTAVAILABLEEVENT_IID_STR "243829cb-15b7-42a4-8664-7aa4e34993da"
+
+#define IUPDATEAGENTAVAILABLEEVENT_IID \
+  {0x243829cb, 0x15b7, 0x42a4, \
+    { 0x86, 0x64, 0x7a, 0xa4, 0xe3, 0x49, 0x93, 0xda }}
+
+class NS_NO_VTABLE IUpdateAgentAvailableEvent : public IUpdateAgentEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IUPDATEAGENTAVAILABLEEVENT_IID)
+
+  /* readonly attribute wstring version; */
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion) = 0;
+
+  /* readonly attribute UpdateChannel_T channel; */
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel) = 0;
+
+  /* readonly attribute UpdateSeverity_T severity; */
+  NS_IMETHOD GetSeverity(UpdateSeverity_T *aSeverity) = 0;
+
+  /* readonly attribute wstring downloadURL; */
+  NS_IMETHOD GetDownloadURL(PRUnichar * *aDownloadURL) = 0;
+
+  /* readonly attribute wstring webURL; */
+  NS_IMETHOD GetWebURL(PRUnichar * *aWebURL) = 0;
+
+  /* readonly attribute wstring releaseNotes; */
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IUPDATEAGENTAVAILABLEEVENT \
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion); \
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel); \
+  NS_IMETHOD GetSeverity(UpdateSeverity_T *aSeverity); \
+  NS_IMETHOD GetDownloadURL(PRUnichar * *aDownloadURL); \
+  NS_IMETHOD GetWebURL(PRUnichar * *aWebURL); \
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IUPDATEAGENTAVAILABLEEVENT(_to) \
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion) { return _to GetVersion(aVersion); } \
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel) { return _to GetChannel(aChannel); } \
+  NS_IMETHOD GetSeverity(UpdateSeverity_T *aSeverity) { return _to GetSeverity(aSeverity); } \
+  NS_IMETHOD GetDownloadURL(PRUnichar * *aDownloadURL) { return _to GetDownloadURL(aDownloadURL); } \
+  NS_IMETHOD GetWebURL(PRUnichar * *aWebURL) { return _to GetWebURL(aWebURL); } \
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes) { return _to GetReleaseNotes(aReleaseNotes); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IUPDATEAGENTAVAILABLEEVENT(_to) \
+  NS_IMETHOD GetVersion(PRUnichar * *aVersion) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVersion(aVersion); } \
+  NS_IMETHOD GetChannel(UpdateChannel_T *aChannel) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetChannel(aChannel); } \
+  NS_IMETHOD GetSeverity(UpdateSeverity_T *aSeverity) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSeverity(aSeverity); } \
+  NS_IMETHOD GetDownloadURL(PRUnichar * *aDownloadURL) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDownloadURL(aDownloadURL); } \
+  NS_IMETHOD GetWebURL(PRUnichar * *aWebURL) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetWebURL(aWebURL); } \
+  NS_IMETHOD GetReleaseNotes(PRUnichar * *aReleaseNotes) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetReleaseNotes(aReleaseNotes); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IUpdateAgentAvailableEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IUPDATEAGENTAVAILABLEEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IUpdateAgentAvailableEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring version; */
+NS_IMETHODIMP _MYCLASS_::GetVersion(PRUnichar * *aVersion)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute UpdateChannel_T channel; */
+NS_IMETHODIMP _MYCLASS_::GetChannel(UpdateChannel_T *aChannel)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute UpdateSeverity_T severity; */
+NS_IMETHODIMP _MYCLASS_::GetSeverity(UpdateSeverity_T *aSeverity)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring downloadURL; */
+NS_IMETHODIMP _MYCLASS_::GetDownloadURL(PRUnichar * *aDownloadURL)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring webURL; */
+NS_IMETHODIMP _MYCLASS_::GetWebURL(PRUnichar * *aWebURL)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring releaseNotes; */
+NS_IMETHODIMP _MYCLASS_::GetReleaseNotes(PRUnichar * *aReleaseNotes)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Version_TO(smth) NS_IMETHOD GetVersion (PRUnichar * * aVersion) { return smth GetVersion (aVersion); }
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Version_TO_OBJ(obj) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Version_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Version_TO_BASE(base) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Version_TO (base::)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Channel_TO(smth) NS_IMETHOD GetChannel (PRUint32 * aChannel) { return smth GetChannel (aChannel); }
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Channel_TO_OBJ(obj) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Channel_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Channel_TO_BASE(base) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Channel_TO (base::)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Severity_TO(smth) NS_IMETHOD GetSeverity (PRUint32 * aSeverity) { return smth GetSeverity (aSeverity); }
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Severity_TO_OBJ(obj) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Severity_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Severity_TO_BASE(base) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_Severity_TO (base::)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_DownloadURL_TO(smth) NS_IMETHOD GetDownloadURL (PRUnichar * * aDownloadURL) { return smth GetDownloadURL (aDownloadURL); }
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_DownloadURL_TO_OBJ(obj) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_DownloadURL_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_DownloadURL_TO_BASE(base) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_DownloadURL_TO (base::)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_WebURL_TO(smth) NS_IMETHOD GetWebURL (PRUnichar * * aWebURL) { return smth GetWebURL (aWebURL); }
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_WebURL_TO_OBJ(obj) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_WebURL_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_WebURL_TO_BASE(base) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_WebURL_TO (base::)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_ReleaseNotes_TO(smth) NS_IMETHOD GetReleaseNotes (PRUnichar * * aReleaseNotes) { return smth GetReleaseNotes (aReleaseNotes); }
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_ReleaseNotes_TO_OBJ(obj) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_ReleaseNotes_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_ReleaseNotes_TO_BASE(base) COM_FORWARD_IUpdateAgentAvailableEvent_GETTER_ReleaseNotes_TO (base::)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_TO(smth) NS_FORWARD_IUPDATEAGENTAVAILABLEEVENT (smth)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_TO_OBJ(obj) COM_FORWARD_IUpdateAgentAvailableEvent_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentAvailableEvent_TO_BASE(base) COM_FORWARD_IUpdateAgentAvailableEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IUpdateAgentAvailableEvent;
+
+/* starting interface:    IUpdateAgentStateChangedEvent */
+#define IUPDATEAGENTSTATECHANGEDEVENT_IID_STR "eb000a0e-2079-4f47-bbcc-c6b28a4e50df"
+
+#define IUPDATEAGENTSTATECHANGEDEVENT_IID \
+  {0xeb000a0e, 0x2079, 0x4f47, \
+    { 0xbb, 0xcc, 0xc6, 0xb2, 0x8a, 0x4e, 0x50, 0xdf }}
+
+class NS_NO_VTABLE IUpdateAgentStateChangedEvent : public IUpdateAgentEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IUPDATEAGENTSTATECHANGEDEVENT_IID)
+
+  /* readonly attribute UpdateState_T state; */
+  NS_IMETHOD GetState(UpdateState_T *aState) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IUPDATEAGENTSTATECHANGEDEVENT \
+  NS_IMETHOD GetState(UpdateState_T *aState); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IUPDATEAGENTSTATECHANGEDEVENT(_to) \
+  NS_IMETHOD GetState(UpdateState_T *aState) { return _to GetState(aState); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IUPDATEAGENTSTATECHANGEDEVENT(_to) \
+  NS_IMETHOD GetState(UpdateState_T *aState) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetState(aState); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IUpdateAgentStateChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IUPDATEAGENTSTATECHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IUpdateAgentStateChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute UpdateState_T state; */
+NS_IMETHODIMP _MYCLASS_::GetState(UpdateState_T *aState)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IUpdateAgentStateChangedEvent_GETTER_State_TO(smth) NS_IMETHOD GetState (PRUint32 * aState) { return smth GetState (aState); }
+#define COM_FORWARD_IUpdateAgentStateChangedEvent_GETTER_State_TO_OBJ(obj) COM_FORWARD_IUpdateAgentStateChangedEvent_GETTER_State_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentStateChangedEvent_GETTER_State_TO_BASE(base) COM_FORWARD_IUpdateAgentStateChangedEvent_GETTER_State_TO (base::)
+#define COM_FORWARD_IUpdateAgentStateChangedEvent_TO(smth) NS_FORWARD_IUPDATEAGENTSTATECHANGEDEVENT (smth)
+#define COM_FORWARD_IUpdateAgentStateChangedEvent_TO_OBJ(obj) COM_FORWARD_IUpdateAgentStateChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IUpdateAgentStateChangedEvent_TO_BASE(base) COM_FORWARD_IUpdateAgentStateChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IUpdateAgentStateChangedEvent;
+
+/* starting interface:    IGuestDebugControlChangedEvent */
+#define IGUESTDEBUGCONTROLCHANGEDEVENT_IID_STR "a3d2799e-d3ad-4f73-91ef-7d839689f6d6"
+
+#define IGUESTDEBUGCONTROLCHANGEDEVENT_IID \
+  {0xa3d2799e, 0xd3ad, 0x4f73, \
+    { 0x91, 0xef, 0x7d, 0x83, 0x96, 0x89, 0xf6, 0xd6 }}
+
+class NS_NO_VTABLE IGuestDebugControlChangedEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(IGUESTDEBUGCONTROLCHANGEDEVENT_IID)
+
+  /* readonly attribute IGuestDebugControl guestDebugControl; */
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_IGUESTDEBUGCONTROLCHANGEDEVENT \
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_IGUESTDEBUGCONTROLCHANGEDEVENT(_to) \
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl) { return _to GetGuestDebugControl(aGuestDebugControl); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_IGUESTDEBUGCONTROLCHANGEDEVENT(_to) \
+  NS_IMETHOD GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetGuestDebugControl(aGuestDebugControl); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public IGuestDebugControlChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_IGUESTDEBUGCONTROLCHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IGuestDebugControlChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute IGuestDebugControl guestDebugControl; */
+NS_IMETHODIMP _MYCLASS_::GetGuestDebugControl(IGuestDebugControl * *aGuestDebugControl)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_IGuestDebugControlChangedEvent_GETTER_GuestDebugControl_TO(smth) NS_IMETHOD GetGuestDebugControl (IGuestDebugControl * * aGuestDebugControl) { return smth GetGuestDebugControl (aGuestDebugControl); }
+#define COM_FORWARD_IGuestDebugControlChangedEvent_GETTER_GuestDebugControl_TO_OBJ(obj) COM_FORWARD_IGuestDebugControlChangedEvent_GETTER_GuestDebugControl_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControlChangedEvent_GETTER_GuestDebugControl_TO_BASE(base) COM_FORWARD_IGuestDebugControlChangedEvent_GETTER_GuestDebugControl_TO (base::)
+#define COM_FORWARD_IGuestDebugControlChangedEvent_TO(smth) NS_FORWARD_IGUESTDEBUGCONTROLCHANGEDEVENT (smth)
+#define COM_FORWARD_IGuestDebugControlChangedEvent_TO_OBJ(obj) COM_FORWARD_IGuestDebugControlChangedEvent_TO ((obj)->)
+#define COM_FORWARD_IGuestDebugControlChangedEvent_TO_BASE(base) COM_FORWARD_IGuestDebugControlChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_IGuestDebugControlChangedEvent;
 
 /* starting interface:    IStringArray */
 #define ISTRINGARRAY_IID_STR "3890b2c8-604d-11e9-92d3-53cb473db9fb"
@@ -59213,6 +66409,9 @@ class NS_NO_VTABLE IStringFormValue : public IFormValue {
   /* readonly attribute boolean multiline; */
   NS_IMETHOD GetMultiline(PRBool *aMultiline) = 0;
 
+  /* readonly attribute wstring clipboardString; */
+  NS_IMETHOD GetClipboardString(PRUnichar * *aClipboardString) = 0;
+
   /* readonly attribute unsigned long InternalAndReservedAttribute1IStringFormValue; */
   NS_IMETHOD GetInternalAndReservedAttribute1IStringFormValue(PRUint32 *aInternalAndReservedAttribute1IStringFormValue) = 0;
 
@@ -59248,6 +66447,7 @@ class NS_NO_VTABLE IStringFormValue : public IFormValue {
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_ISTRINGFORMVALUE \
   NS_IMETHOD GetMultiline(PRBool *aMultiline); \
+  NS_IMETHOD GetClipboardString(PRUnichar * *aClipboardString); \
   NS_IMETHOD GetInternalAndReservedAttribute1IStringFormValue(PRUint32 *aInternalAndReservedAttribute1IStringFormValue); \
   NS_IMETHOD GetInternalAndReservedAttribute2IStringFormValue(PRUint32 *aInternalAndReservedAttribute2IStringFormValue); \
   NS_IMETHOD GetInternalAndReservedAttribute3IStringFormValue(PRUint32 *aInternalAndReservedAttribute3IStringFormValue); \
@@ -59262,6 +66462,7 @@ class NS_NO_VTABLE IStringFormValue : public IFormValue {
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_ISTRINGFORMVALUE(_to) \
   NS_IMETHOD GetMultiline(PRBool *aMultiline) { return _to GetMultiline(aMultiline); } \
+  NS_IMETHOD GetClipboardString(PRUnichar * *aClipboardString) { return _to GetClipboardString(aClipboardString); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IStringFormValue(PRUint32 *aInternalAndReservedAttribute1IStringFormValue) { return _to GetInternalAndReservedAttribute1IStringFormValue(aInternalAndReservedAttribute1IStringFormValue); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IStringFormValue(PRUint32 *aInternalAndReservedAttribute2IStringFormValue) { return _to GetInternalAndReservedAttribute2IStringFormValue(aInternalAndReservedAttribute2IStringFormValue); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IStringFormValue(PRUint32 *aInternalAndReservedAttribute3IStringFormValue) { return _to GetInternalAndReservedAttribute3IStringFormValue(aInternalAndReservedAttribute3IStringFormValue); } \
@@ -59276,6 +66477,7 @@ class NS_NO_VTABLE IStringFormValue : public IFormValue {
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_ISTRINGFORMVALUE(_to) \
   NS_IMETHOD GetMultiline(PRBool *aMultiline) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMultiline(aMultiline); } \
+  NS_IMETHOD GetClipboardString(PRUnichar * *aClipboardString) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetClipboardString(aClipboardString); } \
   NS_IMETHOD GetInternalAndReservedAttribute1IStringFormValue(PRUint32 *aInternalAndReservedAttribute1IStringFormValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1IStringFormValue(aInternalAndReservedAttribute1IStringFormValue); } \
   NS_IMETHOD GetInternalAndReservedAttribute2IStringFormValue(PRUint32 *aInternalAndReservedAttribute2IStringFormValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IStringFormValue(aInternalAndReservedAttribute2IStringFormValue); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IStringFormValue(PRUint32 *aInternalAndReservedAttribute3IStringFormValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IStringFormValue(aInternalAndReservedAttribute3IStringFormValue); } \
@@ -59321,6 +66523,12 @@ _MYCLASS_::~_MYCLASS_()
 
 /* readonly attribute boolean multiline; */
 NS_IMETHODIMP _MYCLASS_::GetMultiline(PRBool *aMultiline)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring clipboardString; */
+NS_IMETHODIMP _MYCLASS_::GetClipboardString(PRUnichar * *aClipboardString)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -59391,6 +66599,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IStringFormValue()
 #define COM_FORWARD_IStringFormValue_GETTER_Multiline_TO(smth) NS_IMETHOD GetMultiline (PRBool * aMultiline) { return smth GetMultiline (aMultiline); }
 #define COM_FORWARD_IStringFormValue_GETTER_Multiline_TO_OBJ(obj) COM_FORWARD_IStringFormValue_GETTER_Multiline_TO ((obj)->)
 #define COM_FORWARD_IStringFormValue_GETTER_Multiline_TO_BASE(base) COM_FORWARD_IStringFormValue_GETTER_Multiline_TO (base::)
+#define COM_FORWARD_IStringFormValue_GETTER_ClipboardString_TO(smth) NS_IMETHOD GetClipboardString (PRUnichar * * aClipboardString) { return smth GetClipboardString (aClipboardString); }
+#define COM_FORWARD_IStringFormValue_GETTER_ClipboardString_TO_OBJ(obj) COM_FORWARD_IStringFormValue_GETTER_ClipboardString_TO ((obj)->)
+#define COM_FORWARD_IStringFormValue_GETTER_ClipboardString_TO_BASE(base) COM_FORWARD_IStringFormValue_GETTER_ClipboardString_TO (base::)
 #define COM_FORWARD_IStringFormValue_GetString_TO(smth) NS_IMETHOD GetString (PRUnichar * * aText) { return smth GetString (aText); }
 #define COM_FORWARD_IStringFormValue_GetString_TO_OBJ(obj) COM_FORWARD_IStringFormValue_GetString_TO ((obj)->)
 #define COM_FORWARD_IStringFormValue_GetString_TO_BASE(base) COM_FORWARD_IStringFormValue_GetString_TO (base::)
@@ -59635,6 +66846,12 @@ class NS_NO_VTABLE IForm : public nsISupports {
   /* readonly attribute unsigned long InternalAndReservedAttribute4IForm; */
   NS_IMETHOD GetInternalAndReservedAttribute4IForm(PRUint32 *aInternalAndReservedAttribute4IForm) = 0;
 
+  /* void getFieldGroup (in wstring field, out unsigned long groupSize, [array, size_is (groupSize), retval] out wstring group); */
+  NS_IMETHOD GetFieldGroup(const PRUnichar *field, PRUint32 *groupSize, PRUnichar ***group) = 0;
+
+  /* void apply ([retval] out IProgress progress); */
+  NS_IMETHOD Apply(IProgress **progress) = 0;
+
   /* void InternalAndReservedMethod1IForm (); */
   NS_IMETHOD InternalAndReservedMethod1IForm(void) = 0;
 
@@ -59656,6 +66873,8 @@ class NS_NO_VTABLE IForm : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute2IForm(PRUint32 *aInternalAndReservedAttribute2IForm); \
   NS_IMETHOD GetInternalAndReservedAttribute3IForm(PRUint32 *aInternalAndReservedAttribute3IForm); \
   NS_IMETHOD GetInternalAndReservedAttribute4IForm(PRUint32 *aInternalAndReservedAttribute4IForm); \
+  NS_IMETHOD GetFieldGroup(const PRUnichar *field, PRUint32 *groupSize, PRUnichar ***group); \
+  NS_IMETHOD Apply(IProgress **progress); \
   NS_IMETHOD InternalAndReservedMethod1IForm(void); \
   NS_IMETHOD InternalAndReservedMethod2IForm(void); \
   NS_IMETHOD InternalAndReservedMethod3IForm(void); \
@@ -59668,6 +66887,8 @@ class NS_NO_VTABLE IForm : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute2IForm(PRUint32 *aInternalAndReservedAttribute2IForm) { return _to GetInternalAndReservedAttribute2IForm(aInternalAndReservedAttribute2IForm); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IForm(PRUint32 *aInternalAndReservedAttribute3IForm) { return _to GetInternalAndReservedAttribute3IForm(aInternalAndReservedAttribute3IForm); } \
   NS_IMETHOD GetInternalAndReservedAttribute4IForm(PRUint32 *aInternalAndReservedAttribute4IForm) { return _to GetInternalAndReservedAttribute4IForm(aInternalAndReservedAttribute4IForm); } \
+  NS_IMETHOD GetFieldGroup(const PRUnichar *field, PRUint32 *groupSize, PRUnichar ***group) { return _to GetFieldGroup(field, groupSize, group); } \
+  NS_IMETHOD Apply(IProgress **progress) { return _to Apply(progress); } \
   NS_IMETHOD InternalAndReservedMethod1IForm(void) { return _to InternalAndReservedMethod1IForm(); } \
   NS_IMETHOD InternalAndReservedMethod2IForm(void) { return _to InternalAndReservedMethod2IForm(); } \
   NS_IMETHOD InternalAndReservedMethod3IForm(void) { return _to InternalAndReservedMethod3IForm(); } \
@@ -59680,6 +66901,8 @@ class NS_NO_VTABLE IForm : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute2IForm(PRUint32 *aInternalAndReservedAttribute2IForm) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IForm(aInternalAndReservedAttribute2IForm); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IForm(PRUint32 *aInternalAndReservedAttribute3IForm) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IForm(aInternalAndReservedAttribute3IForm); } \
   NS_IMETHOD GetInternalAndReservedAttribute4IForm(PRUint32 *aInternalAndReservedAttribute4IForm) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IForm(aInternalAndReservedAttribute4IForm); } \
+  NS_IMETHOD GetFieldGroup(const PRUnichar *field, PRUint32 *groupSize, PRUnichar ***group) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFieldGroup(field, groupSize, group); } \
+  NS_IMETHOD Apply(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Apply(progress); } \
   NS_IMETHOD InternalAndReservedMethod1IForm(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IForm(); } \
   NS_IMETHOD InternalAndReservedMethod2IForm(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IForm(); } \
   NS_IMETHOD InternalAndReservedMethod3IForm(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3IForm(); } \
@@ -59747,6 +66970,18 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4IForm(PRUint32 *aIntern
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getFieldGroup (in wstring field, out unsigned long groupSize, [array, size_is (groupSize), retval] out wstring group); */
+NS_IMETHODIMP _MYCLASS_::GetFieldGroup(const PRUnichar *field, PRUint32 *groupSize, PRUnichar ***group)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void apply ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Apply(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void InternalAndReservedMethod1IForm (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1IForm()
 {
@@ -59777,6 +67012,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4IForm()
 #define COM_FORWARD_IForm_GETTER_Values_TO(smth) NS_IMETHOD GetValues (PRUint32 * aValuesSize, IFormValue * * * aValues) { return smth GetValues (aValuesSize, aValues); }
 #define COM_FORWARD_IForm_GETTER_Values_TO_OBJ(obj) COM_FORWARD_IForm_GETTER_Values_TO ((obj)->)
 #define COM_FORWARD_IForm_GETTER_Values_TO_BASE(base) COM_FORWARD_IForm_GETTER_Values_TO (base::)
+#define COM_FORWARD_IForm_GetFieldGroup_TO(smth) NS_IMETHOD GetFieldGroup (PRUnichar * aField, PRUint32 * aGroupSize, PRUnichar * * * aGroup) { return smth GetFieldGroup (aField, aGroupSize, aGroup); }
+#define COM_FORWARD_IForm_GetFieldGroup_TO_OBJ(obj) COM_FORWARD_IForm_GetFieldGroup_TO ((obj)->)
+#define COM_FORWARD_IForm_GetFieldGroup_TO_BASE(base) COM_FORWARD_IForm_GetFieldGroup_TO (base::)
+#define COM_FORWARD_IForm_Apply_TO(smth) NS_IMETHOD Apply (IProgress * * aProgress) { return smth Apply (aProgress); }
+#define COM_FORWARD_IForm_Apply_TO_OBJ(obj) COM_FORWARD_IForm_Apply_TO ((obj)->)
+#define COM_FORWARD_IForm_Apply_TO_BASE(base) COM_FORWARD_IForm_Apply_TO (base::)
 #define COM_FORWARD_IForm_TO(smth) NS_FORWARD_IFORM (smth)
 #define COM_FORWARD_IForm_TO_OBJ(obj) COM_FORWARD_IForm_TO ((obj)->)
 #define COM_FORWARD_IForm_TO_BASE(base) COM_FORWARD_IForm_TO (base::)
@@ -60305,17 +67546,735 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7ICloudNetworkEnvironmen
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_ICloudNetworkEnvironmentInfo;
 
+/* starting interface:    ICloudMachine */
+#define ICLOUDMACHINE_IID_STR "147816c8-17e0-11eb-81fa-87cea6263e1a"
+
+#define ICLOUDMACHINE_IID \
+  {0x147816c8, 0x17e0, 0x11eb, \
+    { 0x81, 0xfa, 0x87, 0xce, 0xa6, 0x26, 0x3e, 0x1a }}
+
+class NS_NO_VTABLE ICloudMachine : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDMACHINE_IID)
+
+  /* readonly attribute wstring id; */
+  NS_IMETHOD GetId(PRUnichar * *aId) = 0;
+
+  /* readonly attribute boolean accessible; */
+  NS_IMETHOD GetAccessible(PRBool *aAccessible) = 0;
+
+  /* readonly attribute IVirtualBoxErrorInfo accessError; */
+  NS_IMETHOD GetAccessError(IVirtualBoxErrorInfo * *aAccessError) = 0;
+
+  /* readonly attribute wstring name; */
+  NS_IMETHOD GetName(PRUnichar * *aName) = 0;
+
+  /* readonly attribute wstring OSTypeId; */
+  NS_IMETHOD GetOSTypeId(PRUnichar * *aOSTypeId) = 0;
+
+  /* readonly attribute CloudMachineState_T state; */
+  NS_IMETHOD GetState(CloudMachineState_T *aState) = 0;
+
+  /* readonly attribute wstring consoleConnectionFingerprint; */
+  NS_IMETHOD GetConsoleConnectionFingerprint(PRUnichar * *aConsoleConnectionFingerprint) = 0;
+
+  /* readonly attribute wstring serialConsoleCommand; */
+  NS_IMETHOD GetSerialConsoleCommand(PRUnichar * *aSerialConsoleCommand) = 0;
+
+  /* readonly attribute wstring serialConsoleCommandWindows; */
+  NS_IMETHOD GetSerialConsoleCommandWindows(PRUnichar * *aSerialConsoleCommandWindows) = 0;
+
+  /* readonly attribute wstring VNCConsoleCommand; */
+  NS_IMETHOD GetVNCConsoleCommand(PRUnichar * *aVNCConsoleCommand) = 0;
+
+  /* readonly attribute wstring VNCConsoleCommandWindows; */
+  NS_IMETHOD GetVNCConsoleCommandWindows(PRUnichar * *aVNCConsoleCommandWindows) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudMachine(PRUint32 *aInternalAndReservedAttribute1ICloudMachine) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudMachine(PRUint32 *aInternalAndReservedAttribute2ICloudMachine) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudMachine(PRUint32 *aInternalAndReservedAttribute3ICloudMachine) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudMachine(PRUint32 *aInternalAndReservedAttribute4ICloudMachine) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudMachine(PRUint32 *aInternalAndReservedAttribute5ICloudMachine) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudMachine(PRUint32 *aInternalAndReservedAttribute6ICloudMachine) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudMachine(PRUint32 *aInternalAndReservedAttribute7ICloudMachine) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute8ICloudMachine; */
+  NS_IMETHOD GetInternalAndReservedAttribute8ICloudMachine(PRUint32 *aInternalAndReservedAttribute8ICloudMachine) = 0;
+
+  /* void refresh ([retval] out IProgress progress); */
+  NS_IMETHOD Refresh(IProgress **progress) = 0;
+
+  /* void getDetailsForm ([retval] out IForm form); */
+  NS_IMETHOD GetDetailsForm(IForm **form) = 0;
+
+  /* void getSettingsForm (out IForm form, [retval] out IProgress progress); */
+  NS_IMETHOD GetSettingsForm(IForm **form, IProgress **progress) = 0;
+
+  /* void powerUp ([retval] out IProgress progress); */
+  NS_IMETHOD PowerUp(IProgress **progress) = 0;
+
+  /* void reboot ([retval] out IProgress progress); */
+  NS_IMETHOD Reboot(IProgress **progress) = 0;
+
+  /* void shutdown ([retval] out IProgress progress); */
+  NS_IMETHOD Shutdown(IProgress **progress) = 0;
+
+  /* void powerDown ([retval] out IProgress progress); */
+  NS_IMETHOD PowerDown(IProgress **progress) = 0;
+
+  /* void terminate ([retval] out IProgress progress); */
+  NS_IMETHOD Terminate(IProgress **progress) = 0;
+
+  /* void unregister ([retval] out IProgress progress); */
+  NS_IMETHOD Unregister(IProgress **progress) = 0;
+
+  /* void remove ([retval] out IProgress progress); */
+  NS_IMETHOD Remove(IProgress **progress) = 0;
+
+  /* void getConsoleHistory (out IDataStream stream, [retval] out IProgress progress); */
+  NS_IMETHOD GetConsoleHistory(IDataStream **stream, IProgress **progress) = 0;
+
+  /* void createConsoleConnection (in wstring sshPublicKey, [retval] out IProgress progress); */
+  NS_IMETHOD CreateConsoleConnection(const PRUnichar *sshPublicKey, IProgress **progress) = 0;
+
+  /* void deleteConsoleConnection ([retval] out IProgress progress); */
+  NS_IMETHOD DeleteConsoleConnection(IProgress **progress) = 0;
+
+  /* void InternalAndReservedMethod1ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod1ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod2ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod2ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod3ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod3ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod4ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod4ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod5ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod5ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod6ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod6ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod7ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod7ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod8ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod8ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod9ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod9ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod10ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod10ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod11ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod11ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod12ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod12ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod13ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod13ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod14ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod14ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod15ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) = 0;
+
+  /* void InternalAndReservedMethod16ICloudMachine (); */
+  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICLOUDMACHINE \
+  NS_IMETHOD GetId(PRUnichar * *aId); \
+  NS_IMETHOD GetAccessible(PRBool *aAccessible); \
+  NS_IMETHOD GetAccessError(IVirtualBoxErrorInfo * *aAccessError); \
+  NS_IMETHOD GetName(PRUnichar * *aName); \
+  NS_IMETHOD GetOSTypeId(PRUnichar * *aOSTypeId); \
+  NS_IMETHOD GetState(CloudMachineState_T *aState); \
+  NS_IMETHOD GetConsoleConnectionFingerprint(PRUnichar * *aConsoleConnectionFingerprint); \
+  NS_IMETHOD GetSerialConsoleCommand(PRUnichar * *aSerialConsoleCommand); \
+  NS_IMETHOD GetSerialConsoleCommandWindows(PRUnichar * *aSerialConsoleCommandWindows); \
+  NS_IMETHOD GetVNCConsoleCommand(PRUnichar * *aVNCConsoleCommand); \
+  NS_IMETHOD GetVNCConsoleCommandWindows(PRUnichar * *aVNCConsoleCommandWindows); \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudMachine(PRUint32 *aInternalAndReservedAttribute1ICloudMachine); \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudMachine(PRUint32 *aInternalAndReservedAttribute2ICloudMachine); \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudMachine(PRUint32 *aInternalAndReservedAttribute3ICloudMachine); \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudMachine(PRUint32 *aInternalAndReservedAttribute4ICloudMachine); \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudMachine(PRUint32 *aInternalAndReservedAttribute5ICloudMachine); \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudMachine(PRUint32 *aInternalAndReservedAttribute6ICloudMachine); \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudMachine(PRUint32 *aInternalAndReservedAttribute7ICloudMachine); \
+  NS_IMETHOD GetInternalAndReservedAttribute8ICloudMachine(PRUint32 *aInternalAndReservedAttribute8ICloudMachine); \
+  NS_IMETHOD Refresh(IProgress **progress); \
+  NS_IMETHOD GetDetailsForm(IForm **form); \
+  NS_IMETHOD GetSettingsForm(IForm **form, IProgress **progress); \
+  NS_IMETHOD PowerUp(IProgress **progress); \
+  NS_IMETHOD Reboot(IProgress **progress); \
+  NS_IMETHOD Shutdown(IProgress **progress); \
+  NS_IMETHOD PowerDown(IProgress **progress); \
+  NS_IMETHOD Terminate(IProgress **progress); \
+  NS_IMETHOD Unregister(IProgress **progress); \
+  NS_IMETHOD Remove(IProgress **progress); \
+  NS_IMETHOD GetConsoleHistory(IDataStream **stream, IProgress **progress); \
+  NS_IMETHOD CreateConsoleConnection(const PRUnichar *sshPublicKey, IProgress **progress); \
+  NS_IMETHOD DeleteConsoleConnection(IProgress **progress); \
+  NS_IMETHOD InternalAndReservedMethod1ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod2ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod3ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod4ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod5ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod6ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod7ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod8ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod9ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod10ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod11ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod12ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod13ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod14ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void); \
+  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICLOUDMACHINE(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return _to GetId(aId); } \
+  NS_IMETHOD GetAccessible(PRBool *aAccessible) { return _to GetAccessible(aAccessible); } \
+  NS_IMETHOD GetAccessError(IVirtualBoxErrorInfo * *aAccessError) { return _to GetAccessError(aAccessError); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } \
+  NS_IMETHOD GetOSTypeId(PRUnichar * *aOSTypeId) { return _to GetOSTypeId(aOSTypeId); } \
+  NS_IMETHOD GetState(CloudMachineState_T *aState) { return _to GetState(aState); } \
+  NS_IMETHOD GetConsoleConnectionFingerprint(PRUnichar * *aConsoleConnectionFingerprint) { return _to GetConsoleConnectionFingerprint(aConsoleConnectionFingerprint); } \
+  NS_IMETHOD GetSerialConsoleCommand(PRUnichar * *aSerialConsoleCommand) { return _to GetSerialConsoleCommand(aSerialConsoleCommand); } \
+  NS_IMETHOD GetSerialConsoleCommandWindows(PRUnichar * *aSerialConsoleCommandWindows) { return _to GetSerialConsoleCommandWindows(aSerialConsoleCommandWindows); } \
+  NS_IMETHOD GetVNCConsoleCommand(PRUnichar * *aVNCConsoleCommand) { return _to GetVNCConsoleCommand(aVNCConsoleCommand); } \
+  NS_IMETHOD GetVNCConsoleCommandWindows(PRUnichar * *aVNCConsoleCommandWindows) { return _to GetVNCConsoleCommandWindows(aVNCConsoleCommandWindows); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudMachine(PRUint32 *aInternalAndReservedAttribute1ICloudMachine) { return _to GetInternalAndReservedAttribute1ICloudMachine(aInternalAndReservedAttribute1ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudMachine(PRUint32 *aInternalAndReservedAttribute2ICloudMachine) { return _to GetInternalAndReservedAttribute2ICloudMachine(aInternalAndReservedAttribute2ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudMachine(PRUint32 *aInternalAndReservedAttribute3ICloudMachine) { return _to GetInternalAndReservedAttribute3ICloudMachine(aInternalAndReservedAttribute3ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudMachine(PRUint32 *aInternalAndReservedAttribute4ICloudMachine) { return _to GetInternalAndReservedAttribute4ICloudMachine(aInternalAndReservedAttribute4ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudMachine(PRUint32 *aInternalAndReservedAttribute5ICloudMachine) { return _to GetInternalAndReservedAttribute5ICloudMachine(aInternalAndReservedAttribute5ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudMachine(PRUint32 *aInternalAndReservedAttribute6ICloudMachine) { return _to GetInternalAndReservedAttribute6ICloudMachine(aInternalAndReservedAttribute6ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudMachine(PRUint32 *aInternalAndReservedAttribute7ICloudMachine) { return _to GetInternalAndReservedAttribute7ICloudMachine(aInternalAndReservedAttribute7ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8ICloudMachine(PRUint32 *aInternalAndReservedAttribute8ICloudMachine) { return _to GetInternalAndReservedAttribute8ICloudMachine(aInternalAndReservedAttribute8ICloudMachine); } \
+  NS_IMETHOD Refresh(IProgress **progress) { return _to Refresh(progress); } \
+  NS_IMETHOD GetDetailsForm(IForm **form) { return _to GetDetailsForm(form); } \
+  NS_IMETHOD GetSettingsForm(IForm **form, IProgress **progress) { return _to GetSettingsForm(form, progress); } \
+  NS_IMETHOD PowerUp(IProgress **progress) { return _to PowerUp(progress); } \
+  NS_IMETHOD Reboot(IProgress **progress) { return _to Reboot(progress); } \
+  NS_IMETHOD Shutdown(IProgress **progress) { return _to Shutdown(progress); } \
+  NS_IMETHOD PowerDown(IProgress **progress) { return _to PowerDown(progress); } \
+  NS_IMETHOD Terminate(IProgress **progress) { return _to Terminate(progress); } \
+  NS_IMETHOD Unregister(IProgress **progress) { return _to Unregister(progress); } \
+  NS_IMETHOD Remove(IProgress **progress) { return _to Remove(progress); } \
+  NS_IMETHOD GetConsoleHistory(IDataStream **stream, IProgress **progress) { return _to GetConsoleHistory(stream, progress); } \
+  NS_IMETHOD CreateConsoleConnection(const PRUnichar *sshPublicKey, IProgress **progress) { return _to CreateConsoleConnection(sshPublicKey, progress); } \
+  NS_IMETHOD DeleteConsoleConnection(IProgress **progress) { return _to DeleteConsoleConnection(progress); } \
+  NS_IMETHOD InternalAndReservedMethod1ICloudMachine(void) { return _to InternalAndReservedMethod1ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod2ICloudMachine(void) { return _to InternalAndReservedMethod2ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod3ICloudMachine(void) { return _to InternalAndReservedMethod3ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod4ICloudMachine(void) { return _to InternalAndReservedMethod4ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod5ICloudMachine(void) { return _to InternalAndReservedMethod5ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod6ICloudMachine(void) { return _to InternalAndReservedMethod6ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod7ICloudMachine(void) { return _to InternalAndReservedMethod7ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod8ICloudMachine(void) { return _to InternalAndReservedMethod8ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod9ICloudMachine(void) { return _to InternalAndReservedMethod9ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod10ICloudMachine(void) { return _to InternalAndReservedMethod10ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod11ICloudMachine(void) { return _to InternalAndReservedMethod11ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod12ICloudMachine(void) { return _to InternalAndReservedMethod12ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod13ICloudMachine(void) { return _to InternalAndReservedMethod13ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod14ICloudMachine(void) { return _to InternalAndReservedMethod14ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) { return _to InternalAndReservedMethod15ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void) { return _to InternalAndReservedMethod16ICloudMachine(); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICLOUDMACHINE(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetId(aId); } \
+  NS_IMETHOD GetAccessible(PRBool *aAccessible) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAccessible(aAccessible); } \
+  NS_IMETHOD GetAccessError(IVirtualBoxErrorInfo * *aAccessError) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAccessError(aAccessError); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
+  NS_IMETHOD GetOSTypeId(PRUnichar * *aOSTypeId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetOSTypeId(aOSTypeId); } \
+  NS_IMETHOD GetState(CloudMachineState_T *aState) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetState(aState); } \
+  NS_IMETHOD GetConsoleConnectionFingerprint(PRUnichar * *aConsoleConnectionFingerprint) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetConsoleConnectionFingerprint(aConsoleConnectionFingerprint); } \
+  NS_IMETHOD GetSerialConsoleCommand(PRUnichar * *aSerialConsoleCommand) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSerialConsoleCommand(aSerialConsoleCommand); } \
+  NS_IMETHOD GetSerialConsoleCommandWindows(PRUnichar * *aSerialConsoleCommandWindows) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSerialConsoleCommandWindows(aSerialConsoleCommandWindows); } \
+  NS_IMETHOD GetVNCConsoleCommand(PRUnichar * *aVNCConsoleCommand) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVNCConsoleCommand(aVNCConsoleCommand); } \
+  NS_IMETHOD GetVNCConsoleCommandWindows(PRUnichar * *aVNCConsoleCommandWindows) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVNCConsoleCommandWindows(aVNCConsoleCommandWindows); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudMachine(PRUint32 *aInternalAndReservedAttribute1ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1ICloudMachine(aInternalAndReservedAttribute1ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudMachine(PRUint32 *aInternalAndReservedAttribute2ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2ICloudMachine(aInternalAndReservedAttribute2ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudMachine(PRUint32 *aInternalAndReservedAttribute3ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3ICloudMachine(aInternalAndReservedAttribute3ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudMachine(PRUint32 *aInternalAndReservedAttribute4ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4ICloudMachine(aInternalAndReservedAttribute4ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudMachine(PRUint32 *aInternalAndReservedAttribute5ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5ICloudMachine(aInternalAndReservedAttribute5ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudMachine(PRUint32 *aInternalAndReservedAttribute6ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6ICloudMachine(aInternalAndReservedAttribute6ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudMachine(PRUint32 *aInternalAndReservedAttribute7ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7ICloudMachine(aInternalAndReservedAttribute7ICloudMachine); } \
+  NS_IMETHOD GetInternalAndReservedAttribute8ICloudMachine(PRUint32 *aInternalAndReservedAttribute8ICloudMachine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8ICloudMachine(aInternalAndReservedAttribute8ICloudMachine); } \
+  NS_IMETHOD Refresh(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Refresh(progress); } \
+  NS_IMETHOD GetDetailsForm(IForm **form) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDetailsForm(form); } \
+  NS_IMETHOD GetSettingsForm(IForm **form, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSettingsForm(form, progress); } \
+  NS_IMETHOD PowerUp(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->PowerUp(progress); } \
+  NS_IMETHOD Reboot(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Reboot(progress); } \
+  NS_IMETHOD Shutdown(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Shutdown(progress); } \
+  NS_IMETHOD PowerDown(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->PowerDown(progress); } \
+  NS_IMETHOD Terminate(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Terminate(progress); } \
+  NS_IMETHOD Unregister(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Unregister(progress); } \
+  NS_IMETHOD Remove(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Remove(progress); } \
+  NS_IMETHOD GetConsoleHistory(IDataStream **stream, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetConsoleHistory(stream, progress); } \
+  NS_IMETHOD CreateConsoleConnection(const PRUnichar *sshPublicKey, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateConsoleConnection(sshPublicKey, progress); } \
+  NS_IMETHOD DeleteConsoleConnection(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->DeleteConsoleConnection(progress); } \
+  NS_IMETHOD InternalAndReservedMethod1ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod2ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod3ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod4ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod4ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod5ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod5ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod6ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod6ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod7ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod7ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod8ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod8ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod9ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod9ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod10ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod10ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod11ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod11ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod12ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod12ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod13ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod13ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod14ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod14ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod15ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudMachine(); } \
+  NS_IMETHOD InternalAndReservedMethod16ICloudMachine(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod16ICloudMachine(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICloudMachine
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICLOUDMACHINE
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICloudMachine)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring id; */
+NS_IMETHODIMP _MYCLASS_::GetId(PRUnichar * *aId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean accessible; */
+NS_IMETHODIMP _MYCLASS_::GetAccessible(PRBool *aAccessible)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute IVirtualBoxErrorInfo accessError; */
+NS_IMETHODIMP _MYCLASS_::GetAccessError(IVirtualBoxErrorInfo * *aAccessError)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring name; */
+NS_IMETHODIMP _MYCLASS_::GetName(PRUnichar * *aName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring OSTypeId; */
+NS_IMETHODIMP _MYCLASS_::GetOSTypeId(PRUnichar * *aOSTypeId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute CloudMachineState_T state; */
+NS_IMETHODIMP _MYCLASS_::GetState(CloudMachineState_T *aState)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring consoleConnectionFingerprint; */
+NS_IMETHODIMP _MYCLASS_::GetConsoleConnectionFingerprint(PRUnichar * *aConsoleConnectionFingerprint)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring serialConsoleCommand; */
+NS_IMETHODIMP _MYCLASS_::GetSerialConsoleCommand(PRUnichar * *aSerialConsoleCommand)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring serialConsoleCommandWindows; */
+NS_IMETHODIMP _MYCLASS_::GetSerialConsoleCommandWindows(PRUnichar * *aSerialConsoleCommandWindows)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring VNCConsoleCommand; */
+NS_IMETHODIMP _MYCLASS_::GetVNCConsoleCommand(PRUnichar * *aVNCConsoleCommand)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring VNCConsoleCommandWindows; */
+NS_IMETHODIMP _MYCLASS_::GetVNCConsoleCommandWindows(PRUnichar * *aVNCConsoleCommandWindows)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute1ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1ICloudMachine(PRUint32 *aInternalAndReservedAttribute1ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute2ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2ICloudMachine(PRUint32 *aInternalAndReservedAttribute2ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3ICloudMachine(PRUint32 *aInternalAndReservedAttribute3ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4ICloudMachine(PRUint32 *aInternalAndReservedAttribute4ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5ICloudMachine(PRUint32 *aInternalAndReservedAttribute5ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6ICloudMachine(PRUint32 *aInternalAndReservedAttribute6ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7ICloudMachine(PRUint32 *aInternalAndReservedAttribute7ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute8ICloudMachine; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8ICloudMachine(PRUint32 *aInternalAndReservedAttribute8ICloudMachine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void refresh ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Refresh(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getDetailsForm ([retval] out IForm form); */
+NS_IMETHODIMP _MYCLASS_::GetDetailsForm(IForm **form)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getSettingsForm (out IForm form, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::GetSettingsForm(IForm **form, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void powerUp ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::PowerUp(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void reboot ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Reboot(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void shutdown ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Shutdown(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void powerDown ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::PowerDown(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void terminate ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Terminate(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void unregister ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Unregister(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void remove ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::Remove(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getConsoleHistory (out IDataStream stream, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::GetConsoleHistory(IDataStream **stream, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void createConsoleConnection (in wstring sshPublicKey, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::CreateConsoleConnection(const PRUnichar *sshPublicKey, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void deleteConsoleConnection ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::DeleteConsoleConnection(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod1ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod2ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod2ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod3ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod3ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod4ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod5ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod5ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod6ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod6ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod7ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod7ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod8ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod8ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod9ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod9ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod10ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod10ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod11ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod11ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod12ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod12ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod13ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod13ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod14ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod14ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod15ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod15ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void InternalAndReservedMethod16ICloudMachine (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudMachine()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICloudMachine_GETTER_Id_TO(smth) NS_IMETHOD GetId (PRUnichar * * aId) { return smth GetId (aId); }
+#define COM_FORWARD_ICloudMachine_GETTER_Id_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_Id_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_Id_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_Id_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_Accessible_TO(smth) NS_IMETHOD GetAccessible (PRBool * aAccessible) { return smth GetAccessible (aAccessible); }
+#define COM_FORWARD_ICloudMachine_GETTER_Accessible_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_Accessible_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_Accessible_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_Accessible_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_AccessError_TO(smth) NS_IMETHOD GetAccessError (IVirtualBoxErrorInfo * * aAccessError) { return smth GetAccessError (aAccessError); }
+#define COM_FORWARD_ICloudMachine_GETTER_AccessError_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_AccessError_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_AccessError_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_AccessError_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_Name_TO(smth) NS_IMETHOD GetName (PRUnichar * * aName) { return smth GetName (aName); }
+#define COM_FORWARD_ICloudMachine_GETTER_Name_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_Name_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_Name_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_Name_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_OSTypeId_TO(smth) NS_IMETHOD GetOSTypeId (PRUnichar * * aOSTypeId) { return smth GetOSTypeId (aOSTypeId); }
+#define COM_FORWARD_ICloudMachine_GETTER_OSTypeId_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_OSTypeId_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_OSTypeId_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_OSTypeId_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_State_TO(smth) NS_IMETHOD GetState (PRUint32 * aState) { return smth GetState (aState); }
+#define COM_FORWARD_ICloudMachine_GETTER_State_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_State_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_State_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_State_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_ConsoleConnectionFingerprint_TO(smth) NS_IMETHOD GetConsoleConnectionFingerprint (PRUnichar * * aConsoleConnectionFingerprint) { return smth GetConsoleConnectionFingerprint (aConsoleConnectionFingerprint); }
+#define COM_FORWARD_ICloudMachine_GETTER_ConsoleConnectionFingerprint_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_ConsoleConnectionFingerprint_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_ConsoleConnectionFingerprint_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_ConsoleConnectionFingerprint_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommand_TO(smth) NS_IMETHOD GetSerialConsoleCommand (PRUnichar * * aSerialConsoleCommand) { return smth GetSerialConsoleCommand (aSerialConsoleCommand); }
+#define COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommand_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommand_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommand_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommand_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommandWindows_TO(smth) NS_IMETHOD GetSerialConsoleCommandWindows (PRUnichar * * aSerialConsoleCommandWindows) { return smth GetSerialConsoleCommandWindows (aSerialConsoleCommandWindows); }
+#define COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommandWindows_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommandWindows_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommandWindows_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_SerialConsoleCommandWindows_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommand_TO(smth) NS_IMETHOD GetVNCConsoleCommand (PRUnichar * * aVNCConsoleCommand) { return smth GetVNCConsoleCommand (aVNCConsoleCommand); }
+#define COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommand_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommand_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommand_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommand_TO (base::)
+#define COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommandWindows_TO(smth) NS_IMETHOD GetVNCConsoleCommandWindows (PRUnichar * * aVNCConsoleCommandWindows) { return smth GetVNCConsoleCommandWindows (aVNCConsoleCommandWindows); }
+#define COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommandWindows_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommandWindows_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommandWindows_TO_BASE(base) COM_FORWARD_ICloudMachine_GETTER_VNCConsoleCommandWindows_TO (base::)
+#define COM_FORWARD_ICloudMachine_Refresh_TO(smth) NS_IMETHOD Refresh (IProgress * * aProgress) { return smth Refresh (aProgress); }
+#define COM_FORWARD_ICloudMachine_Refresh_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Refresh_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Refresh_TO_BASE(base) COM_FORWARD_ICloudMachine_Refresh_TO (base::)
+#define COM_FORWARD_ICloudMachine_GetDetailsForm_TO(smth) NS_IMETHOD GetDetailsForm (IForm * * aForm) { return smth GetDetailsForm (aForm); }
+#define COM_FORWARD_ICloudMachine_GetDetailsForm_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GetDetailsForm_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GetDetailsForm_TO_BASE(base) COM_FORWARD_ICloudMachine_GetDetailsForm_TO (base::)
+#define COM_FORWARD_ICloudMachine_GetSettingsForm_TO(smth) NS_IMETHOD GetSettingsForm (IForm * * aForm, IProgress * * aProgress) { return smth GetSettingsForm (aForm, aProgress); }
+#define COM_FORWARD_ICloudMachine_GetSettingsForm_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GetSettingsForm_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GetSettingsForm_TO_BASE(base) COM_FORWARD_ICloudMachine_GetSettingsForm_TO (base::)
+#define COM_FORWARD_ICloudMachine_PowerUp_TO(smth) NS_IMETHOD PowerUp (IProgress * * aProgress) { return smth PowerUp (aProgress); }
+#define COM_FORWARD_ICloudMachine_PowerUp_TO_OBJ(obj) COM_FORWARD_ICloudMachine_PowerUp_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_PowerUp_TO_BASE(base) COM_FORWARD_ICloudMachine_PowerUp_TO (base::)
+#define COM_FORWARD_ICloudMachine_Reboot_TO(smth) NS_IMETHOD Reboot (IProgress * * aProgress) { return smth Reboot (aProgress); }
+#define COM_FORWARD_ICloudMachine_Reboot_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Reboot_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Reboot_TO_BASE(base) COM_FORWARD_ICloudMachine_Reboot_TO (base::)
+#define COM_FORWARD_ICloudMachine_Shutdown_TO(smth) NS_IMETHOD Shutdown (IProgress * * aProgress) { return smth Shutdown (aProgress); }
+#define COM_FORWARD_ICloudMachine_Shutdown_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Shutdown_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Shutdown_TO_BASE(base) COM_FORWARD_ICloudMachine_Shutdown_TO (base::)
+#define COM_FORWARD_ICloudMachine_PowerDown_TO(smth) NS_IMETHOD PowerDown (IProgress * * aProgress) { return smth PowerDown (aProgress); }
+#define COM_FORWARD_ICloudMachine_PowerDown_TO_OBJ(obj) COM_FORWARD_ICloudMachine_PowerDown_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_PowerDown_TO_BASE(base) COM_FORWARD_ICloudMachine_PowerDown_TO (base::)
+#define COM_FORWARD_ICloudMachine_Terminate_TO(smth) NS_IMETHOD Terminate (IProgress * * aProgress) { return smth Terminate (aProgress); }
+#define COM_FORWARD_ICloudMachine_Terminate_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Terminate_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Terminate_TO_BASE(base) COM_FORWARD_ICloudMachine_Terminate_TO (base::)
+#define COM_FORWARD_ICloudMachine_Unregister_TO(smth) NS_IMETHOD Unregister (IProgress * * aProgress) { return smth Unregister (aProgress); }
+#define COM_FORWARD_ICloudMachine_Unregister_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Unregister_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Unregister_TO_BASE(base) COM_FORWARD_ICloudMachine_Unregister_TO (base::)
+#define COM_FORWARD_ICloudMachine_Remove_TO(smth) NS_IMETHOD Remove (IProgress * * aProgress) { return smth Remove (aProgress); }
+#define COM_FORWARD_ICloudMachine_Remove_TO_OBJ(obj) COM_FORWARD_ICloudMachine_Remove_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_Remove_TO_BASE(base) COM_FORWARD_ICloudMachine_Remove_TO (base::)
+#define COM_FORWARD_ICloudMachine_GetConsoleHistory_TO(smth) NS_IMETHOD GetConsoleHistory (IDataStream * * aStream, IProgress * * aProgress) { return smth GetConsoleHistory (aStream, aProgress); }
+#define COM_FORWARD_ICloudMachine_GetConsoleHistory_TO_OBJ(obj) COM_FORWARD_ICloudMachine_GetConsoleHistory_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_GetConsoleHistory_TO_BASE(base) COM_FORWARD_ICloudMachine_GetConsoleHistory_TO (base::)
+#define COM_FORWARD_ICloudMachine_CreateConsoleConnection_TO(smth) NS_IMETHOD CreateConsoleConnection (PRUnichar * aSshPublicKey, IProgress * * aProgress) { return smth CreateConsoleConnection (aSshPublicKey, aProgress); }
+#define COM_FORWARD_ICloudMachine_CreateConsoleConnection_TO_OBJ(obj) COM_FORWARD_ICloudMachine_CreateConsoleConnection_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_CreateConsoleConnection_TO_BASE(base) COM_FORWARD_ICloudMachine_CreateConsoleConnection_TO (base::)
+#define COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO(smth) NS_IMETHOD DeleteConsoleConnection (IProgress * * aProgress) { return smth DeleteConsoleConnection (aProgress); }
+#define COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO_OBJ(obj) COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO_BASE(base) COM_FORWARD_ICloudMachine_DeleteConsoleConnection_TO (base::)
+#define COM_FORWARD_ICloudMachine_TO(smth) NS_FORWARD_ICLOUDMACHINE (smth)
+#define COM_FORWARD_ICloudMachine_TO_OBJ(obj) COM_FORWARD_ICloudMachine_TO ((obj)->)
+#define COM_FORWARD_ICloudMachine_TO_BASE(base) COM_FORWARD_ICloudMachine_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudMachine;
+
 /* starting interface:    ICloudClient */
-#define ICLOUDCLIENT_IID_STR "435b66a2-0c60-11ea-a0ea-07eb0d1c4ead"
+#define ICLOUDCLIENT_IID_STR "c2db178a-7485-11ec-aec4-2fbf90681a84"
 
 #define ICLOUDCLIENT_IID \
-  {0x435b66a2, 0x0c60, 0x11ea, \
-    { 0xa0, 0xea, 0x07, 0xeb, 0x0d, 0x1c, 0x4e, 0xad }}
+  {0xc2db178a, 0x7485, 0x11ec, \
+    { 0xae, 0xc4, 0x2f, 0xbf, 0x90, 0x68, 0x1a, 0x84 }}
 
 class NS_NO_VTABLE ICloudClient : public nsISupports {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDCLIENT_IID)
+
+  /* void getCloudMachineList (out unsigned long cloudMachineListSize, [array, size_is (cloudMachineListSize), retval] out ICloudMachine cloudMachineList); */
+  NS_IMETHOD GetCloudMachineList(PRUint32 *cloudMachineListSize, ICloudMachine ***cloudMachineList) = 0;
+
+  /* void getCloudMachineStubList (out unsigned long cloudMachineStubListSize, [array, size_is (cloudMachineStubListSize), retval] out ICloudMachine cloudMachineStubList); */
+  NS_IMETHOD GetCloudMachineStubList(PRUint32 *cloudMachineStubListSize, ICloudMachine ***cloudMachineStubList) = 0;
 
   /* readonly attribute unsigned long InternalAndReservedAttribute1ICloudClient; */
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudClient(PRUint32 *aInternalAndReservedAttribute1ICloudClient) = 0;
@@ -60359,11 +68318,38 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   /* void importInstance (in IVirtualSystemDescription description, in IProgress progress); */
   NS_IMETHOD ImportInstance(IVirtualSystemDescription *description, IProgress *progress) = 0;
 
+  /* void getCloudMachine (in wstring id, [retval] out ICloudMachine machine); */
+  NS_IMETHOD GetCloudMachine(const PRUnichar *id, ICloudMachine **machine) = 0;
+
+  /* void readCloudMachineList ([retval] out IProgress progress); */
+  NS_IMETHOD ReadCloudMachineList(IProgress **progress) = 0;
+
+  /* void readCloudMachineStubList ([retval] out IProgress progress); */
+  NS_IMETHOD ReadCloudMachineStubList(IProgress **progress) = 0;
+
+  /* void addCloudMachine (in wstring instanceId, out ICloudMachine machine, [retval] out IProgress progress); */
+  NS_IMETHOD AddCloudMachine(const PRUnichar *instanceId, ICloudMachine **machine, IProgress **progress) = 0;
+
+  /* void createCloudMachine (in IVirtualSystemDescription description, out ICloudMachine machine, [retval] out IProgress progress); */
+  NS_IMETHOD CreateCloudMachine(IVirtualSystemDescription *description, ICloudMachine **machine, IProgress **progress) = 0;
+
   /* void listInstances (in unsigned long machineStateSize, [array, size_is (machineStateSize)] in CloudMachineState_T machineState, out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
   NS_IMETHOD ListInstances(PRUint32 machineStateSize, CloudMachineState_T *machineState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) = 0;
 
+  /* void listSourceInstances (out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
+  NS_IMETHOD ListSourceInstances(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) = 0;
+
   /* void listImages (in unsigned long imageStateSize, [array, size_is (imageStateSize)] in CloudImageState_T imageState, out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
   NS_IMETHOD ListImages(PRUint32 imageStateSize, CloudImageState_T *imageState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) = 0;
+
+  /* void listBootVolumes (out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
+  NS_IMETHOD ListBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) = 0;
+
+  /* void listSourceBootVolumes (out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
+  NS_IMETHOD ListSourceBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) = 0;
+
+  /* void listVnicAttachments (in unsigned long parametersSize, [array, size_is (parametersSize)] in wstring parameters, out IStringArray returnVnicAttachmentIds, out IStringArray returnVnicIds, [retval] out IProgress progress); */
+  NS_IMETHOD ListVnicAttachments(PRUint32 parametersSize, const PRUnichar **parameters, IStringArray **returnVnicAttachmentIds, IStringArray **returnVnicIds, IProgress **progress) = 0;
 
   /* void getInstanceInfo (in wstring uid, in IVirtualSystemDescription description, [retval] out IProgress progress); */
   NS_IMETHOD GetInstanceInfo(const PRUnichar *uid, IVirtualSystemDescription *description, IProgress **progress) = 0;
@@ -60397,6 +68383,12 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
 
   /* void setupCloudNetworkEnvironment (in wstring tunnelNetworkName, in wstring tunnelNetworkRange, in wstring gatewayOsName, in wstring gatewayOsVersion, in wstring gatewayShape, out ICloudNetworkEnvironmentInfo networkEnvironmentInfo, [retval] out IProgress progress); */
   NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress) = 0;
+
+  /* void getVnicInfo (in wstring uid, out IStringArray infoArray, [retval] out IProgress progress); */
+  NS_IMETHOD GetVnicInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress) = 0;
+
+  /* void getSubnetSelectionForm (in IVirtualSystemDescription description, out IVirtualSystemDescriptionForm form, [retval] out IProgress progress); */
+  NS_IMETHOD GetSubnetSelectionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress) = 0;
 
   /* void InternalAndReservedMethod1ICloudClient (); */
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void) = 0;
@@ -60443,10 +68435,15 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   /* void InternalAndReservedMethod15ICloudClient (); */
   NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) = 0;
 
+  /* void InternalAndReservedMethod16ICloudClient (); */
+  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) = 0;
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_ICLOUDCLIENT \
+  NS_IMETHOD GetCloudMachineList(PRUint32 *cloudMachineListSize, ICloudMachine ***cloudMachineList); \
+  NS_IMETHOD GetCloudMachineStubList(PRUint32 *cloudMachineStubListSize, ICloudMachine ***cloudMachineStubList); \
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudClient(PRUint32 *aInternalAndReservedAttribute1ICloudClient); \
   NS_IMETHOD GetInternalAndReservedAttribute2ICloudClient(PRUint32 *aInternalAndReservedAttribute2ICloudClient); \
   NS_IMETHOD GetInternalAndReservedAttribute3ICloudClient(PRUint32 *aInternalAndReservedAttribute3ICloudClient); \
@@ -60461,8 +68458,17 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD LaunchVM(IVirtualSystemDescription *description, IProgress **progress); \
   NS_IMETHOD GetImportDescriptionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress); \
   NS_IMETHOD ImportInstance(IVirtualSystemDescription *description, IProgress *progress); \
+  NS_IMETHOD GetCloudMachine(const PRUnichar *id, ICloudMachine **machine); \
+  NS_IMETHOD ReadCloudMachineList(IProgress **progress); \
+  NS_IMETHOD ReadCloudMachineStubList(IProgress **progress); \
+  NS_IMETHOD AddCloudMachine(const PRUnichar *instanceId, ICloudMachine **machine, IProgress **progress); \
+  NS_IMETHOD CreateCloudMachine(IVirtualSystemDescription *description, ICloudMachine **machine, IProgress **progress); \
   NS_IMETHOD ListInstances(PRUint32 machineStateSize, CloudMachineState_T *machineState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress); \
+  NS_IMETHOD ListSourceInstances(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress); \
   NS_IMETHOD ListImages(PRUint32 imageStateSize, CloudImageState_T *imageState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress); \
+  NS_IMETHOD ListBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress); \
+  NS_IMETHOD ListSourceBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress); \
+  NS_IMETHOD ListVnicAttachments(PRUint32 parametersSize, const PRUnichar **parameters, IStringArray **returnVnicAttachmentIds, IStringArray **returnVnicIds, IProgress **progress); \
   NS_IMETHOD GetInstanceInfo(const PRUnichar *uid, IVirtualSystemDescription *description, IProgress **progress); \
   NS_IMETHOD StartInstance(const PRUnichar *uid, IProgress **progress); \
   NS_IMETHOD PauseInstance(const PRUnichar *uid, IProgress **progress); \
@@ -60474,6 +68480,8 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD GetImageInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress); \
   NS_IMETHOD StartCloudNetworkGateway(ICloudNetwork *network, const PRUnichar *sshPublicKey, ICloudNetworkGatewayInfo **gatewayInfo, IProgress **progress); \
   NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress); \
+  NS_IMETHOD GetVnicInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress); \
+  NS_IMETHOD GetSubnetSelectionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress); \
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod2ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod3ICloudClient(void); \
@@ -60488,10 +68496,13 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void); \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void); 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void); \
+  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_ICLOUDCLIENT(_to) \
+  NS_IMETHOD GetCloudMachineList(PRUint32 *cloudMachineListSize, ICloudMachine ***cloudMachineList) { return _to GetCloudMachineList(cloudMachineListSize, cloudMachineList); } \
+  NS_IMETHOD GetCloudMachineStubList(PRUint32 *cloudMachineStubListSize, ICloudMachine ***cloudMachineStubList) { return _to GetCloudMachineStubList(cloudMachineStubListSize, cloudMachineStubList); } \
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudClient(PRUint32 *aInternalAndReservedAttribute1ICloudClient) { return _to GetInternalAndReservedAttribute1ICloudClient(aInternalAndReservedAttribute1ICloudClient); } \
   NS_IMETHOD GetInternalAndReservedAttribute2ICloudClient(PRUint32 *aInternalAndReservedAttribute2ICloudClient) { return _to GetInternalAndReservedAttribute2ICloudClient(aInternalAndReservedAttribute2ICloudClient); } \
   NS_IMETHOD GetInternalAndReservedAttribute3ICloudClient(PRUint32 *aInternalAndReservedAttribute3ICloudClient) { return _to GetInternalAndReservedAttribute3ICloudClient(aInternalAndReservedAttribute3ICloudClient); } \
@@ -60506,8 +68517,17 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD LaunchVM(IVirtualSystemDescription *description, IProgress **progress) { return _to LaunchVM(description, progress); } \
   NS_IMETHOD GetImportDescriptionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress) { return _to GetImportDescriptionForm(description, form, progress); } \
   NS_IMETHOD ImportInstance(IVirtualSystemDescription *description, IProgress *progress) { return _to ImportInstance(description, progress); } \
+  NS_IMETHOD GetCloudMachine(const PRUnichar *id, ICloudMachine **machine) { return _to GetCloudMachine(id, machine); } \
+  NS_IMETHOD ReadCloudMachineList(IProgress **progress) { return _to ReadCloudMachineList(progress); } \
+  NS_IMETHOD ReadCloudMachineStubList(IProgress **progress) { return _to ReadCloudMachineStubList(progress); } \
+  NS_IMETHOD AddCloudMachine(const PRUnichar *instanceId, ICloudMachine **machine, IProgress **progress) { return _to AddCloudMachine(instanceId, machine, progress); } \
+  NS_IMETHOD CreateCloudMachine(IVirtualSystemDescription *description, ICloudMachine **machine, IProgress **progress) { return _to CreateCloudMachine(description, machine, progress); } \
   NS_IMETHOD ListInstances(PRUint32 machineStateSize, CloudMachineState_T *machineState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return _to ListInstances(machineStateSize, machineState, returnNames, returnIds, progress); } \
+  NS_IMETHOD ListSourceInstances(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return _to ListSourceInstances(returnNames, returnIds, progress); } \
   NS_IMETHOD ListImages(PRUint32 imageStateSize, CloudImageState_T *imageState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return _to ListImages(imageStateSize, imageState, returnNames, returnIds, progress); } \
+  NS_IMETHOD ListBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return _to ListBootVolumes(returnNames, returnIds, progress); } \
+  NS_IMETHOD ListSourceBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return _to ListSourceBootVolumes(returnNames, returnIds, progress); } \
+  NS_IMETHOD ListVnicAttachments(PRUint32 parametersSize, const PRUnichar **parameters, IStringArray **returnVnicAttachmentIds, IStringArray **returnVnicIds, IProgress **progress) { return _to ListVnicAttachments(parametersSize, parameters, returnVnicAttachmentIds, returnVnicIds, progress); } \
   NS_IMETHOD GetInstanceInfo(const PRUnichar *uid, IVirtualSystemDescription *description, IProgress **progress) { return _to GetInstanceInfo(uid, description, progress); } \
   NS_IMETHOD StartInstance(const PRUnichar *uid, IProgress **progress) { return _to StartInstance(uid, progress); } \
   NS_IMETHOD PauseInstance(const PRUnichar *uid, IProgress **progress) { return _to PauseInstance(uid, progress); } \
@@ -60519,6 +68539,8 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD GetImageInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress) { return _to GetImageInfo(uid, infoArray, progress); } \
   NS_IMETHOD StartCloudNetworkGateway(ICloudNetwork *network, const PRUnichar *sshPublicKey, ICloudNetworkGatewayInfo **gatewayInfo, IProgress **progress) { return _to StartCloudNetworkGateway(network, sshPublicKey, gatewayInfo, progress); } \
   NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress) { return _to SetupCloudNetworkEnvironment(tunnelNetworkName, tunnelNetworkRange, gatewayOsName, gatewayOsVersion, gatewayShape, networkEnvironmentInfo, progress); } \
+  NS_IMETHOD GetVnicInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress) { return _to GetVnicInfo(uid, infoArray, progress); } \
+  NS_IMETHOD GetSubnetSelectionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress) { return _to GetSubnetSelectionForm(description, form, progress); } \
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void) { return _to InternalAndReservedMethod1ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod2ICloudClient(void) { return _to InternalAndReservedMethod2ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod3ICloudClient(void) { return _to InternalAndReservedMethod3ICloudClient(); } \
@@ -60533,10 +68555,13 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void) { return _to InternalAndReservedMethod12ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void) { return _to InternalAndReservedMethod13ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void) { return _to InternalAndReservedMethod14ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return _to InternalAndReservedMethod15ICloudClient(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return _to InternalAndReservedMethod15ICloudClient(); } \
+  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) { return _to InternalAndReservedMethod16ICloudClient(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_ICLOUDCLIENT(_to) \
+  NS_IMETHOD GetCloudMachineList(PRUint32 *cloudMachineListSize, ICloudMachine ***cloudMachineList) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCloudMachineList(cloudMachineListSize, cloudMachineList); } \
+  NS_IMETHOD GetCloudMachineStubList(PRUint32 *cloudMachineStubListSize, ICloudMachine ***cloudMachineStubList) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCloudMachineStubList(cloudMachineStubListSize, cloudMachineStubList); } \
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudClient(PRUint32 *aInternalAndReservedAttribute1ICloudClient) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1ICloudClient(aInternalAndReservedAttribute1ICloudClient); } \
   NS_IMETHOD GetInternalAndReservedAttribute2ICloudClient(PRUint32 *aInternalAndReservedAttribute2ICloudClient) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2ICloudClient(aInternalAndReservedAttribute2ICloudClient); } \
   NS_IMETHOD GetInternalAndReservedAttribute3ICloudClient(PRUint32 *aInternalAndReservedAttribute3ICloudClient) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3ICloudClient(aInternalAndReservedAttribute3ICloudClient); } \
@@ -60551,8 +68576,17 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD LaunchVM(IVirtualSystemDescription *description, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->LaunchVM(description, progress); } \
   NS_IMETHOD GetImportDescriptionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetImportDescriptionForm(description, form, progress); } \
   NS_IMETHOD ImportInstance(IVirtualSystemDescription *description, IProgress *progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ImportInstance(description, progress); } \
+  NS_IMETHOD GetCloudMachine(const PRUnichar *id, ICloudMachine **machine) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCloudMachine(id, machine); } \
+  NS_IMETHOD ReadCloudMachineList(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ReadCloudMachineList(progress); } \
+  NS_IMETHOD ReadCloudMachineStubList(IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ReadCloudMachineStubList(progress); } \
+  NS_IMETHOD AddCloudMachine(const PRUnichar *instanceId, ICloudMachine **machine, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddCloudMachine(instanceId, machine, progress); } \
+  NS_IMETHOD CreateCloudMachine(IVirtualSystemDescription *description, ICloudMachine **machine, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->CreateCloudMachine(description, machine, progress); } \
   NS_IMETHOD ListInstances(PRUint32 machineStateSize, CloudMachineState_T *machineState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ListInstances(machineStateSize, machineState, returnNames, returnIds, progress); } \
+  NS_IMETHOD ListSourceInstances(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ListSourceInstances(returnNames, returnIds, progress); } \
   NS_IMETHOD ListImages(PRUint32 imageStateSize, CloudImageState_T *imageState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ListImages(imageStateSize, imageState, returnNames, returnIds, progress); } \
+  NS_IMETHOD ListBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ListBootVolumes(returnNames, returnIds, progress); } \
+  NS_IMETHOD ListSourceBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ListSourceBootVolumes(returnNames, returnIds, progress); } \
+  NS_IMETHOD ListVnicAttachments(PRUint32 parametersSize, const PRUnichar **parameters, IStringArray **returnVnicAttachmentIds, IStringArray **returnVnicIds, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->ListVnicAttachments(parametersSize, parameters, returnVnicAttachmentIds, returnVnicIds, progress); } \
   NS_IMETHOD GetInstanceInfo(const PRUnichar *uid, IVirtualSystemDescription *description, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInstanceInfo(uid, description, progress); } \
   NS_IMETHOD StartInstance(const PRUnichar *uid, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->StartInstance(uid, progress); } \
   NS_IMETHOD PauseInstance(const PRUnichar *uid, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->PauseInstance(uid, progress); } \
@@ -60564,6 +68598,8 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD GetImageInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetImageInfo(uid, infoArray, progress); } \
   NS_IMETHOD StartCloudNetworkGateway(ICloudNetwork *network, const PRUnichar *sshPublicKey, ICloudNetworkGatewayInfo **gatewayInfo, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->StartCloudNetworkGateway(network, sshPublicKey, gatewayInfo, progress); } \
   NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetupCloudNetworkEnvironment(tunnelNetworkName, tunnelNetworkRange, gatewayOsName, gatewayOsVersion, gatewayShape, networkEnvironmentInfo, progress); } \
+  NS_IMETHOD GetVnicInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetVnicInfo(uid, infoArray, progress); } \
+  NS_IMETHOD GetSubnetSelectionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSubnetSelectionForm(description, form, progress); } \
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod2ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod3ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3ICloudClient(); } \
@@ -60578,7 +68614,8 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod12ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod13ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod14ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudClient(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudClient(); } \
+  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod16ICloudClient(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -60610,6 +68647,18 @@ _MYCLASS_::_MYCLASS_()
 _MYCLASS_::~_MYCLASS_()
 {
   /* destructor code */
+}
+
+/* void getCloudMachineList (out unsigned long cloudMachineListSize, [array, size_is (cloudMachineListSize), retval] out ICloudMachine cloudMachineList); */
+NS_IMETHODIMP _MYCLASS_::GetCloudMachineList(PRUint32 *cloudMachineListSize, ICloudMachine ***cloudMachineList)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getCloudMachineStubList (out unsigned long cloudMachineStubListSize, [array, size_is (cloudMachineStubListSize), retval] out ICloudMachine cloudMachineStubList); */
+NS_IMETHODIMP _MYCLASS_::GetCloudMachineStubList(PRUint32 *cloudMachineStubListSize, ICloudMachine ***cloudMachineStubList)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
 }
 
 /* readonly attribute unsigned long InternalAndReservedAttribute1ICloudClient; */
@@ -60696,14 +68745,68 @@ NS_IMETHODIMP _MYCLASS_::ImportInstance(IVirtualSystemDescription *description, 
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void getCloudMachine (in wstring id, [retval] out ICloudMachine machine); */
+NS_IMETHODIMP _MYCLASS_::GetCloudMachine(const PRUnichar *id, ICloudMachine **machine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void readCloudMachineList ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ReadCloudMachineList(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void readCloudMachineStubList ([retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ReadCloudMachineStubList(IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void addCloudMachine (in wstring instanceId, out ICloudMachine machine, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::AddCloudMachine(const PRUnichar *instanceId, ICloudMachine **machine, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void createCloudMachine (in IVirtualSystemDescription description, out ICloudMachine machine, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::CreateCloudMachine(IVirtualSystemDescription *description, ICloudMachine **machine, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void listInstances (in unsigned long machineStateSize, [array, size_is (machineStateSize)] in CloudMachineState_T machineState, out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
 NS_IMETHODIMP _MYCLASS_::ListInstances(PRUint32 machineStateSize, CloudMachineState_T *machineState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void listSourceInstances (out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ListSourceInstances(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void listImages (in unsigned long imageStateSize, [array, size_is (imageStateSize)] in CloudImageState_T imageState, out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
 NS_IMETHODIMP _MYCLASS_::ListImages(PRUint32 imageStateSize, CloudImageState_T *imageState, IStringArray **returnNames, IStringArray **returnIds, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void listBootVolumes (out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ListBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void listSourceBootVolumes (out IStringArray returnNames, out IStringArray returnIds, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ListSourceBootVolumes(IStringArray **returnNames, IStringArray **returnIds, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void listVnicAttachments (in unsigned long parametersSize, [array, size_is (parametersSize)] in wstring parameters, out IStringArray returnVnicAttachmentIds, out IStringArray returnVnicIds, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::ListVnicAttachments(PRUint32 parametersSize, const PRUnichar **parameters, IStringArray **returnVnicAttachmentIds, IStringArray **returnVnicIds, IProgress **progress)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -60770,6 +68873,18 @@ NS_IMETHODIMP _MYCLASS_::StartCloudNetworkGateway(ICloudNetwork *network, const 
 
 /* void setupCloudNetworkEnvironment (in wstring tunnelNetworkName, in wstring tunnelNetworkRange, in wstring gatewayOsName, in wstring gatewayOsVersion, in wstring gatewayShape, out ICloudNetworkEnvironmentInfo networkEnvironmentInfo, [retval] out IProgress progress); */
 NS_IMETHODIMP _MYCLASS_::SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getVnicInfo (in wstring uid, out IStringArray infoArray, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::GetVnicInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getSubnetSelectionForm (in IVirtualSystemDescription description, out IVirtualSystemDescriptionForm form, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::GetSubnetSelectionForm(IVirtualSystemDescription *description, IVirtualSystemDescriptionForm **form, IProgress **progress)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -60864,9 +68979,21 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod15ICloudClient()
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void InternalAndReservedMethod16ICloudClient (); */
+NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudClient()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* End of implementation class template. */
 #endif
 
+#define COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO(smth) NS_IMETHOD GetCloudMachineList (PRUint32 * aCloudMachineListSize, ICloudMachine * * * aCloudMachineList) { return smth GetCloudMachineList (aCloudMachineListSize, aCloudMachineList); }
+#define COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO_OBJ(obj) COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO_BASE(base) COM_FORWARD_ICloudClient_GETTER_CloudMachineList_TO (base::)
+#define COM_FORWARD_ICloudClient_GETTER_CloudMachineStubList_TO(smth) NS_IMETHOD GetCloudMachineStubList (PRUint32 * aCloudMachineStubListSize, ICloudMachine * * * aCloudMachineStubList) { return smth GetCloudMachineStubList (aCloudMachineStubListSize, aCloudMachineStubList); }
+#define COM_FORWARD_ICloudClient_GETTER_CloudMachineStubList_TO_OBJ(obj) COM_FORWARD_ICloudClient_GETTER_CloudMachineStubList_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_GETTER_CloudMachineStubList_TO_BASE(base) COM_FORWARD_ICloudClient_GETTER_CloudMachineStubList_TO (base::)
 #define COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO(smth) NS_IMETHOD GetExportDescriptionForm (IVirtualSystemDescription * aDescription, IVirtualSystemDescriptionForm * * aForm, IProgress * * aProgress) { return smth GetExportDescriptionForm (aDescription, aForm, aProgress); }
 #define COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO_OBJ(obj) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO_BASE(base) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO (base::)
@@ -60885,12 +69012,39 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod15ICloudClient()
 #define COM_FORWARD_ICloudClient_ImportInstance_TO(smth) NS_IMETHOD ImportInstance (IVirtualSystemDescription * aDescription, IProgress * aProgress) { return smth ImportInstance (aDescription, aProgress); }
 #define COM_FORWARD_ICloudClient_ImportInstance_TO_OBJ(obj) COM_FORWARD_ICloudClient_ImportInstance_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_ImportInstance_TO_BASE(base) COM_FORWARD_ICloudClient_ImportInstance_TO (base::)
+#define COM_FORWARD_ICloudClient_GetCloudMachine_TO(smth) NS_IMETHOD GetCloudMachine (PRUnichar * aId, ICloudMachine * * aMachine) { return smth GetCloudMachine (aId, aMachine); }
+#define COM_FORWARD_ICloudClient_GetCloudMachine_TO_OBJ(obj) COM_FORWARD_ICloudClient_GetCloudMachine_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_GetCloudMachine_TO_BASE(base) COM_FORWARD_ICloudClient_GetCloudMachine_TO (base::)
+#define COM_FORWARD_ICloudClient_ReadCloudMachineList_TO(smth) NS_IMETHOD ReadCloudMachineList (IProgress * * aProgress) { return smth ReadCloudMachineList (aProgress); }
+#define COM_FORWARD_ICloudClient_ReadCloudMachineList_TO_OBJ(obj) COM_FORWARD_ICloudClient_ReadCloudMachineList_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ReadCloudMachineList_TO_BASE(base) COM_FORWARD_ICloudClient_ReadCloudMachineList_TO (base::)
+#define COM_FORWARD_ICloudClient_ReadCloudMachineStubList_TO(smth) NS_IMETHOD ReadCloudMachineStubList (IProgress * * aProgress) { return smth ReadCloudMachineStubList (aProgress); }
+#define COM_FORWARD_ICloudClient_ReadCloudMachineStubList_TO_OBJ(obj) COM_FORWARD_ICloudClient_ReadCloudMachineStubList_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ReadCloudMachineStubList_TO_BASE(base) COM_FORWARD_ICloudClient_ReadCloudMachineStubList_TO (base::)
+#define COM_FORWARD_ICloudClient_AddCloudMachine_TO(smth) NS_IMETHOD AddCloudMachine (PRUnichar * aInstanceId, ICloudMachine * * aMachine, IProgress * * aProgress) { return smth AddCloudMachine (aInstanceId, aMachine, aProgress); }
+#define COM_FORWARD_ICloudClient_AddCloudMachine_TO_OBJ(obj) COM_FORWARD_ICloudClient_AddCloudMachine_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_AddCloudMachine_TO_BASE(base) COM_FORWARD_ICloudClient_AddCloudMachine_TO (base::)
+#define COM_FORWARD_ICloudClient_CreateCloudMachine_TO(smth) NS_IMETHOD CreateCloudMachine (IVirtualSystemDescription * aDescription, ICloudMachine * * aMachine, IProgress * * aProgress) { return smth CreateCloudMachine (aDescription, aMachine, aProgress); }
+#define COM_FORWARD_ICloudClient_CreateCloudMachine_TO_OBJ(obj) COM_FORWARD_ICloudClient_CreateCloudMachine_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_CreateCloudMachine_TO_BASE(base) COM_FORWARD_ICloudClient_CreateCloudMachine_TO (base::)
 #define COM_FORWARD_ICloudClient_ListInstances_TO(smth) NS_IMETHOD ListInstances (PRUint32 aMachineStateSize, PRUint32 * aMachineState, IStringArray * * aReturnNames, IStringArray * * aReturnIds, IProgress * * aProgress) { return smth ListInstances (aMachineStateSize+++, aMachineState, aReturnNames, aReturnIds, aProgress); }
 #define COM_FORWARD_ICloudClient_ListInstances_TO_OBJ(obj) COM_FORWARD_ICloudClient_ListInstances_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_ListInstances_TO_BASE(base) COM_FORWARD_ICloudClient_ListInstances_TO (base::)
+#define COM_FORWARD_ICloudClient_ListSourceInstances_TO(smth) NS_IMETHOD ListSourceInstances (IStringArray * * aReturnNames, IStringArray * * aReturnIds, IProgress * * aProgress) { return smth ListSourceInstances (aReturnNames, aReturnIds, aProgress); }
+#define COM_FORWARD_ICloudClient_ListSourceInstances_TO_OBJ(obj) COM_FORWARD_ICloudClient_ListSourceInstances_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ListSourceInstances_TO_BASE(base) COM_FORWARD_ICloudClient_ListSourceInstances_TO (base::)
 #define COM_FORWARD_ICloudClient_ListImages_TO(smth) NS_IMETHOD ListImages (PRUint32 aImageStateSize, PRUint32 * aImageState, IStringArray * * aReturnNames, IStringArray * * aReturnIds, IProgress * * aProgress) { return smth ListImages (aImageStateSize+++, aImageState, aReturnNames, aReturnIds, aProgress); }
 #define COM_FORWARD_ICloudClient_ListImages_TO_OBJ(obj) COM_FORWARD_ICloudClient_ListImages_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_ListImages_TO_BASE(base) COM_FORWARD_ICloudClient_ListImages_TO (base::)
+#define COM_FORWARD_ICloudClient_ListBootVolumes_TO(smth) NS_IMETHOD ListBootVolumes (IStringArray * * aReturnNames, IStringArray * * aReturnIds, IProgress * * aProgress) { return smth ListBootVolumes (aReturnNames, aReturnIds, aProgress); }
+#define COM_FORWARD_ICloudClient_ListBootVolumes_TO_OBJ(obj) COM_FORWARD_ICloudClient_ListBootVolumes_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ListBootVolumes_TO_BASE(base) COM_FORWARD_ICloudClient_ListBootVolumes_TO (base::)
+#define COM_FORWARD_ICloudClient_ListSourceBootVolumes_TO(smth) NS_IMETHOD ListSourceBootVolumes (IStringArray * * aReturnNames, IStringArray * * aReturnIds, IProgress * * aProgress) { return smth ListSourceBootVolumes (aReturnNames, aReturnIds, aProgress); }
+#define COM_FORWARD_ICloudClient_ListSourceBootVolumes_TO_OBJ(obj) COM_FORWARD_ICloudClient_ListSourceBootVolumes_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ListSourceBootVolumes_TO_BASE(base) COM_FORWARD_ICloudClient_ListSourceBootVolumes_TO (base::)
+#define COM_FORWARD_ICloudClient_ListVnicAttachments_TO(smth) NS_IMETHOD ListVnicAttachments (PRUint32 aParametersSize, PRUnichar * * aParameters, IStringArray * * aReturnVnicAttachmentIds, IStringArray * * aReturnVnicIds, IProgress * * aProgress) { return smth ListVnicAttachments (aParametersSize+++, aParameters, aReturnVnicAttachmentIds, aReturnVnicIds, aProgress); }
+#define COM_FORWARD_ICloudClient_ListVnicAttachments_TO_OBJ(obj) COM_FORWARD_ICloudClient_ListVnicAttachments_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_ListVnicAttachments_TO_BASE(base) COM_FORWARD_ICloudClient_ListVnicAttachments_TO (base::)
 #define COM_FORWARD_ICloudClient_GetInstanceInfo_TO(smth) NS_IMETHOD GetInstanceInfo (PRUnichar * aUid, IVirtualSystemDescription * aDescription, IProgress * * aProgress) { return smth GetInstanceInfo (aUid, aDescription, aProgress); }
 #define COM_FORWARD_ICloudClient_GetInstanceInfo_TO_OBJ(obj) COM_FORWARD_ICloudClient_GetInstanceInfo_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_GetInstanceInfo_TO_BASE(base) COM_FORWARD_ICloudClient_GetInstanceInfo_TO (base::)
@@ -60924,6 +69078,12 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod15ICloudClient()
 #define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO(smth) NS_IMETHOD SetupCloudNetworkEnvironment (PRUnichar * aTunnelNetworkName, PRUnichar * aTunnelNetworkRange, PRUnichar * aGatewayOsName, PRUnichar * aGatewayOsVersion, PRUnichar * aGatewayShape, ICloudNetworkEnvironmentInfo * * aNetworkEnvironmentInfo, IProgress * * aProgress) { return smth SetupCloudNetworkEnvironment (aTunnelNetworkName, aTunnelNetworkRange, aGatewayOsName, aGatewayOsVersion, aGatewayShape, aNetworkEnvironmentInfo, aProgress); }
 #define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_OBJ(obj) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_BASE(base) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (base::)
+#define COM_FORWARD_ICloudClient_GetVnicInfo_TO(smth) NS_IMETHOD GetVnicInfo (PRUnichar * aUid, IStringArray * * aInfoArray, IProgress * * aProgress) { return smth GetVnicInfo (aUid, aInfoArray, aProgress); }
+#define COM_FORWARD_ICloudClient_GetVnicInfo_TO_OBJ(obj) COM_FORWARD_ICloudClient_GetVnicInfo_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_GetVnicInfo_TO_BASE(base) COM_FORWARD_ICloudClient_GetVnicInfo_TO (base::)
+#define COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO(smth) NS_IMETHOD GetSubnetSelectionForm (IVirtualSystemDescription * aDescription, IVirtualSystemDescriptionForm * * aForm, IProgress * * aProgress) { return smth GetSubnetSelectionForm (aDescription, aForm, aProgress); }
+#define COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO_OBJ(obj) COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO_BASE(base) COM_FORWARD_ICloudClient_GetSubnetSelectionForm_TO (base::)
 #define COM_FORWARD_ICloudClient_TO(smth) NS_FORWARD_ICLOUDCLIENT (smth)
 #define COM_FORWARD_ICloudClient_TO_OBJ(obj) COM_FORWARD_ICloudClient_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)
@@ -62083,6 +70243,540 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod4ICloudProviderManager()
 #define COM_FORWARD_ICloudProviderManager_TO_BASE(base) COM_FORWARD_ICloudProviderManager_TO (base::)
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_ICloudProviderManager;
+
+/* starting interface:    ICloudProviderListChangedEvent */
+#define ICLOUDPROVIDERLISTCHANGEDEVENT_IID_STR "a54d9cca-f23f-11ea-9755-efd0f1f792d9"
+
+#define ICLOUDPROVIDERLISTCHANGEDEVENT_IID \
+  {0xa54d9cca, 0xf23f, 0x11ea, \
+    { 0x97, 0x55, 0xef, 0xd0, 0xf1, 0xf7, 0x92, 0xd9 }}
+
+class NS_NO_VTABLE ICloudProviderListChangedEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDPROVIDERLISTCHANGEDEVENT_IID)
+
+  /* readonly attribute boolean registered; */
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICLOUDPROVIDERLISTCHANGEDEVENT \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICLOUDPROVIDERLISTCHANGEDEVENT(_to) \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) { return _to GetRegistered(aRegistered); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICLOUDPROVIDERLISTCHANGEDEVENT(_to) \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRegistered(aRegistered); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICloudProviderListChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICLOUDPROVIDERLISTCHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICloudProviderListChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute boolean registered; */
+NS_IMETHODIMP _MYCLASS_::GetRegistered(PRBool *aRegistered)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICloudProviderListChangedEvent_GETTER_Registered_TO(smth) NS_IMETHOD GetRegistered (PRBool * aRegistered) { return smth GetRegistered (aRegistered); }
+#define COM_FORWARD_ICloudProviderListChangedEvent_GETTER_Registered_TO_OBJ(obj) COM_FORWARD_ICloudProviderListChangedEvent_GETTER_Registered_TO ((obj)->)
+#define COM_FORWARD_ICloudProviderListChangedEvent_GETTER_Registered_TO_BASE(base) COM_FORWARD_ICloudProviderListChangedEvent_GETTER_Registered_TO (base::)
+#define COM_FORWARD_ICloudProviderListChangedEvent_TO(smth) NS_FORWARD_ICLOUDPROVIDERLISTCHANGEDEVENT (smth)
+#define COM_FORWARD_ICloudProviderListChangedEvent_TO_OBJ(obj) COM_FORWARD_ICloudProviderListChangedEvent_TO ((obj)->)
+#define COM_FORWARD_ICloudProviderListChangedEvent_TO_BASE(base) COM_FORWARD_ICloudProviderListChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudProviderListChangedEvent;
+
+/* starting interface:    ICloudProviderRegisteredEvent */
+#define ICLOUDPROVIDERREGISTEREDEVENT_IID_STR "e28e227a-f231-11ea-9641-9b500c6d5365"
+
+#define ICLOUDPROVIDERREGISTEREDEVENT_IID \
+  {0xe28e227a, 0xf231, 0x11ea, \
+    { 0x96, 0x41, 0x9b, 0x50, 0x0c, 0x6d, 0x53, 0x65 }}
+
+class NS_NO_VTABLE ICloudProviderRegisteredEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDPROVIDERREGISTEREDEVENT_IID)
+
+  /* readonly attribute wstring id; */
+  NS_IMETHOD GetId(PRUnichar * *aId) = 0;
+
+  /* readonly attribute boolean registered; */
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICLOUDPROVIDERREGISTEREDEVENT \
+  NS_IMETHOD GetId(PRUnichar * *aId); \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICLOUDPROVIDERREGISTEREDEVENT(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return _to GetId(aId); } \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) { return _to GetRegistered(aRegistered); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICLOUDPROVIDERREGISTEREDEVENT(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetId(aId); } \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRegistered(aRegistered); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICloudProviderRegisteredEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICLOUDPROVIDERREGISTEREDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICloudProviderRegisteredEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring id; */
+NS_IMETHODIMP _MYCLASS_::GetId(PRUnichar * *aId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean registered; */
+NS_IMETHODIMP _MYCLASS_::GetRegistered(PRBool *aRegistered)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Id_TO(smth) NS_IMETHOD GetId (PRUnichar * * aId) { return smth GetId (aId); }
+#define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Id_TO_OBJ(obj) COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Id_TO ((obj)->)
+#define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Id_TO_BASE(base) COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Id_TO (base::)
+#define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Registered_TO(smth) NS_IMETHOD GetRegistered (PRBool * aRegistered) { return smth GetRegistered (aRegistered); }
+#define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Registered_TO_OBJ(obj) COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Registered_TO ((obj)->)
+#define COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Registered_TO_BASE(base) COM_FORWARD_ICloudProviderRegisteredEvent_GETTER_Registered_TO (base::)
+#define COM_FORWARD_ICloudProviderRegisteredEvent_TO(smth) NS_FORWARD_ICLOUDPROVIDERREGISTEREDEVENT (smth)
+#define COM_FORWARD_ICloudProviderRegisteredEvent_TO_OBJ(obj) COM_FORWARD_ICloudProviderRegisteredEvent_TO ((obj)->)
+#define COM_FORWARD_ICloudProviderRegisteredEvent_TO_BASE(base) COM_FORWARD_ICloudProviderRegisteredEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudProviderRegisteredEvent;
+
+/* starting interface:    ICloudProviderUninstallEvent */
+#define ICLOUDPROVIDERUNINSTALLEVENT_IID_STR "f01f1066-f231-11ea-8eee-33bb2afb0b6e"
+
+#define ICLOUDPROVIDERUNINSTALLEVENT_IID \
+  {0xf01f1066, 0xf231, 0x11ea, \
+    { 0x8e, 0xee, 0x33, 0xbb, 0x2a, 0xfb, 0x0b, 0x6e }}
+
+class NS_NO_VTABLE ICloudProviderUninstallEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDPROVIDERUNINSTALLEVENT_IID)
+
+  /* readonly attribute wstring id; */
+  NS_IMETHOD GetId(PRUnichar * *aId) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICLOUDPROVIDERUNINSTALLEVENT \
+  NS_IMETHOD GetId(PRUnichar * *aId); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICLOUDPROVIDERUNINSTALLEVENT(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return _to GetId(aId); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICLOUDPROVIDERUNINSTALLEVENT(_to) \
+  NS_IMETHOD GetId(PRUnichar * *aId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetId(aId); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICloudProviderUninstallEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICLOUDPROVIDERUNINSTALLEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICloudProviderUninstallEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring id; */
+NS_IMETHODIMP _MYCLASS_::GetId(PRUnichar * *aId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICloudProviderUninstallEvent_GETTER_Id_TO(smth) NS_IMETHOD GetId (PRUnichar * * aId) { return smth GetId (aId); }
+#define COM_FORWARD_ICloudProviderUninstallEvent_GETTER_Id_TO_OBJ(obj) COM_FORWARD_ICloudProviderUninstallEvent_GETTER_Id_TO ((obj)->)
+#define COM_FORWARD_ICloudProviderUninstallEvent_GETTER_Id_TO_BASE(base) COM_FORWARD_ICloudProviderUninstallEvent_GETTER_Id_TO (base::)
+#define COM_FORWARD_ICloudProviderUninstallEvent_TO(smth) NS_FORWARD_ICLOUDPROVIDERUNINSTALLEVENT (smth)
+#define COM_FORWARD_ICloudProviderUninstallEvent_TO_OBJ(obj) COM_FORWARD_ICloudProviderUninstallEvent_TO ((obj)->)
+#define COM_FORWARD_ICloudProviderUninstallEvent_TO_BASE(base) COM_FORWARD_ICloudProviderUninstallEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudProviderUninstallEvent;
+
+/* starting interface:    ICloudProfileRegisteredEvent */
+#define ICLOUDPROFILEREGISTEREDEVENT_IID_STR "6a5e65ba-eeb9-11ea-ae38-73242bc0f172"
+
+#define ICLOUDPROFILEREGISTEREDEVENT_IID \
+  {0x6a5e65ba, 0xeeb9, 0x11ea, \
+    { 0xae, 0x38, 0x73, 0x24, 0x2b, 0xc0, 0xf1, 0x72 }}
+
+class NS_NO_VTABLE ICloudProfileRegisteredEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDPROFILEREGISTEREDEVENT_IID)
+
+  /* readonly attribute wstring providerId; */
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId) = 0;
+
+  /* readonly attribute wstring name; */
+  NS_IMETHOD GetName(PRUnichar * *aName) = 0;
+
+  /* readonly attribute boolean registered; */
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICLOUDPROFILEREGISTEREDEVENT \
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId); \
+  NS_IMETHOD GetName(PRUnichar * *aName); \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICLOUDPROFILEREGISTEREDEVENT(_to) \
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId) { return _to GetProviderId(aProviderId); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) { return _to GetRegistered(aRegistered); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICLOUDPROFILEREGISTEREDEVENT(_to) \
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProviderId(aProviderId); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
+  NS_IMETHOD GetRegistered(PRBool *aRegistered) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetRegistered(aRegistered); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICloudProfileRegisteredEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICLOUDPROFILEREGISTEREDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICloudProfileRegisteredEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring providerId; */
+NS_IMETHODIMP _MYCLASS_::GetProviderId(PRUnichar * *aProviderId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring name; */
+NS_IMETHODIMP _MYCLASS_::GetName(PRUnichar * *aName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute boolean registered; */
+NS_IMETHODIMP _MYCLASS_::GetRegistered(PRBool *aRegistered)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_ProviderId_TO(smth) NS_IMETHOD GetProviderId (PRUnichar * * aProviderId) { return smth GetProviderId (aProviderId); }
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_ProviderId_TO_OBJ(obj) COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_ProviderId_TO ((obj)->)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_ProviderId_TO_BASE(base) COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_ProviderId_TO (base::)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Name_TO(smth) NS_IMETHOD GetName (PRUnichar * * aName) { return smth GetName (aName); }
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Name_TO_OBJ(obj) COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Name_TO ((obj)->)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Name_TO_BASE(base) COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Name_TO (base::)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Registered_TO(smth) NS_IMETHOD GetRegistered (PRBool * aRegistered) { return smth GetRegistered (aRegistered); }
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Registered_TO_OBJ(obj) COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Registered_TO ((obj)->)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Registered_TO_BASE(base) COM_FORWARD_ICloudProfileRegisteredEvent_GETTER_Registered_TO (base::)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_TO(smth) NS_FORWARD_ICLOUDPROFILEREGISTEREDEVENT (smth)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_TO_OBJ(obj) COM_FORWARD_ICloudProfileRegisteredEvent_TO ((obj)->)
+#define COM_FORWARD_ICloudProfileRegisteredEvent_TO_BASE(base) COM_FORWARD_ICloudProfileRegisteredEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudProfileRegisteredEvent;
+
+/* starting interface:    ICloudProfileChangedEvent */
+#define ICLOUDPROFILECHANGEDEVENT_IID_STR "83795a4c-fce1-11ea-8a17-636028ae0be2"
+
+#define ICLOUDPROFILECHANGEDEVENT_IID \
+  {0x83795a4c, 0xfce1, 0x11ea, \
+    { 0x8a, 0x17, 0x63, 0x60, 0x28, 0xae, 0x0b, 0xe2 }}
+
+class NS_NO_VTABLE ICloudProfileChangedEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDPROFILECHANGEDEVENT_IID)
+
+  /* readonly attribute wstring providerId; */
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId) = 0;
+
+  /* readonly attribute wstring name; */
+  NS_IMETHOD GetName(PRUnichar * *aName) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICLOUDPROFILECHANGEDEVENT \
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId); \
+  NS_IMETHOD GetName(PRUnichar * *aName); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICLOUDPROFILECHANGEDEVENT(_to) \
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId) { return _to GetProviderId(aProviderId); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return _to GetName(aName); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICLOUDPROFILECHANGEDEVENT(_to) \
+  NS_IMETHOD GetProviderId(PRUnichar * *aProviderId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProviderId(aProviderId); } \
+  NS_IMETHOD GetName(PRUnichar * *aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICloudProfileChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICLOUDPROFILECHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICloudProfileChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring providerId; */
+NS_IMETHODIMP _MYCLASS_::GetProviderId(PRUnichar * *aProviderId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring name; */
+NS_IMETHODIMP _MYCLASS_::GetName(PRUnichar * *aName)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICloudProfileChangedEvent_GETTER_ProviderId_TO(smth) NS_IMETHOD GetProviderId (PRUnichar * * aProviderId) { return smth GetProviderId (aProviderId); }
+#define COM_FORWARD_ICloudProfileChangedEvent_GETTER_ProviderId_TO_OBJ(obj) COM_FORWARD_ICloudProfileChangedEvent_GETTER_ProviderId_TO ((obj)->)
+#define COM_FORWARD_ICloudProfileChangedEvent_GETTER_ProviderId_TO_BASE(base) COM_FORWARD_ICloudProfileChangedEvent_GETTER_ProviderId_TO (base::)
+#define COM_FORWARD_ICloudProfileChangedEvent_GETTER_Name_TO(smth) NS_IMETHOD GetName (PRUnichar * * aName) { return smth GetName (aName); }
+#define COM_FORWARD_ICloudProfileChangedEvent_GETTER_Name_TO_OBJ(obj) COM_FORWARD_ICloudProfileChangedEvent_GETTER_Name_TO ((obj)->)
+#define COM_FORWARD_ICloudProfileChangedEvent_GETTER_Name_TO_BASE(base) COM_FORWARD_ICloudProfileChangedEvent_GETTER_Name_TO (base::)
+#define COM_FORWARD_ICloudProfileChangedEvent_TO(smth) NS_FORWARD_ICLOUDPROFILECHANGEDEVENT (smth)
+#define COM_FORWARD_ICloudProfileChangedEvent_TO_OBJ(obj) COM_FORWARD_ICloudProfileChangedEvent_TO ((obj)->)
+#define COM_FORWARD_ICloudProfileChangedEvent_TO_BASE(base) COM_FORWARD_ICloudProfileChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudProfileChangedEvent;
+
+/* starting interface:    ILanguageChangedEvent */
+#define ILANGUAGECHANGEDEVENT_IID_STR "28935887-782b-4c94-8410-ce557b9cfe44"
+
+#define ILANGUAGECHANGEDEVENT_IID \
+  {0x28935887, 0x782b, 0x4c94, \
+    { 0x84, 0x10, 0xce, 0x55, 0x7b, 0x9c, 0xfe, 0x44 }}
+
+class NS_NO_VTABLE ILanguageChangedEvent : public IEvent {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ILANGUAGECHANGEDEVENT_IID)
+
+  /* readonly attribute wstring languageId; */
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ILANGUAGECHANGEDEVENT \
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ILANGUAGECHANGEDEVENT(_to) \
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId) { return _to GetLanguageId(aLanguageId); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ILANGUAGECHANGEDEVENT(_to) \
+  NS_IMETHOD GetLanguageId(PRUnichar * *aLanguageId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetLanguageId(aLanguageId); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ILanguageChangedEvent
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ILANGUAGECHANGEDEVENT
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ILanguageChangedEvent)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring languageId; */
+NS_IMETHODIMP _MYCLASS_::GetLanguageId(PRUnichar * *aLanguageId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ILanguageChangedEvent_GETTER_LanguageId_TO(smth) NS_IMETHOD GetLanguageId (PRUnichar * * aLanguageId) { return smth GetLanguageId (aLanguageId); }
+#define COM_FORWARD_ILanguageChangedEvent_GETTER_LanguageId_TO_OBJ(obj) COM_FORWARD_ILanguageChangedEvent_GETTER_LanguageId_TO ((obj)->)
+#define COM_FORWARD_ILanguageChangedEvent_GETTER_LanguageId_TO_BASE(base) COM_FORWARD_ILanguageChangedEvent_GETTER_LanguageId_TO (base::)
+#define COM_FORWARD_ILanguageChangedEvent_TO(smth) NS_FORWARD_ILANGUAGECHANGEDEVENT (smth)
+#define COM_FORWARD_ILanguageChangedEvent_TO_OBJ(obj) COM_FORWARD_ILanguageChangedEvent_TO ((obj)->)
+#define COM_FORWARD_ILanguageChangedEvent_TO_BASE(base) COM_FORWARD_ILanguageChangedEvent_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ILanguageChangedEvent;
 // Definitions for module VBoxSVC, class VirtualBox:
 #define NS_VIRTUALBOX_CID { \
     0xB1A7A4F2, 0x47B9, 0x4A1E, \
