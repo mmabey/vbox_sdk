@@ -66,7 +66,7 @@
                                                                                                                        
 /* This location is similar to NS_OS_CURRENT_PROCESS_DIR, however, 
  * NS_XPCOM_CURRENT_PROCESS_DIR can be overriden by passing a "bin
- * directory" to NS_InitXPCOM2Ex().
+ * directory" to NS_InitXPCOM2(). 
  */
 #define NS_XPCOM_CURRENT_PROCESS_DIR            "XCurProcD"
 

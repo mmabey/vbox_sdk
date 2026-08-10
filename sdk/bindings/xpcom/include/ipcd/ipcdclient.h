@@ -53,8 +53,6 @@
 #include "ipcIMessageObserver.h"
 #include "ipcIClientObserver.h"
 
-#include <iprt/types.h>
-
 /* This API is only provided for the extensions compiled into the IPCDC
  * library, hence this API is hidden in the final DSO. */
 #define IPC_METHOD NS_HIDDEN_(nsresult)
@@ -239,7 +237,7 @@ IPC_METHOD IPC_WaitMessage(
   const nsID          &aTarget,
   ipcIMessageObserver *aObserver = nsnull,
   ipcIMessageObserver *aConsumer = nsnull,
-  RTMSINTERVAL        aTimeout = RT_INDEFINITE_WAIT
+  PRIntervalTime       aTimeout = PR_INTERVAL_NO_TIMEOUT
 );
 
 /*****************************************************************************/
@@ -288,6 +286,14 @@ IPC_METHOD IPC_RemoveClientObserver(
 IPC_METHOD IPC_ResolveClientName(
   const char *aName,
   PRUint32   *aClientID
+);
+
+/**
+ * Tests whether the client is connected to the IPC daemon.
+ */
+IPC_METHOD IPC_ClientExists(
+  PRUint32  aClientID,
+  PRBool   *aResult
 );
 
 /*****************************************************************************/

@@ -39,10 +39,7 @@
 #define prmon_h___
 
 #include "prtypes.h"
-
-#ifdef VBOX
-# include <iprt/types.h>
-#endif
+#include "prinrval.h"
 
 #ifdef VBOX_WITH_XPCOM_NAMESPACE_CLEANUP
 #define PR_EnterMonitor VBoxNsprPR_EnterMonitor
@@ -52,15 +49,12 @@
 #define PR_Wait VBoxNsprPR_Wait
 #define PR_NewMonitor VBoxNsprPR_NewMonitor
 #define PR_DestroyMonitor VBoxNsprPR_DestroyMonitor
-#define PR_GetMonitorEntryCount VBoxNsprPR_GetMonitorEntryCount
-#define PR_NewNamedMonitor VBoxNsprPR_NewNamedMonitor
 #endif /* VBOX_WITH_XPCOM_NAMESPACE_CLEANUP */
 
 PR_BEGIN_EXTERN_C
 
 typedef struct PRMonitor PRMonitor;
 
-#ifdef VBOX
 /*
 ** Create a new monitor. Monitors are re-entrant locks with a single built-in
 ** condition variable.
@@ -108,7 +102,7 @@ NSPR_API(PRStatus) PR_ExitMonitor(PRMonitor *mon);
 **
 ** Returns PR_FAILURE if the caller has not entered the monitor.
 */
-NSPR_API(PRStatus) PR_Wait(PRMonitor *mon, RTMSINTERVAL msWait);
+NSPR_API(PRStatus) PR_Wait(PRMonitor *mon, PRIntervalTime ticks);
 
 /*
 ** Notify a thread waiting on the monitor's condition variable. If a thread
@@ -123,15 +117,6 @@ NSPR_API(PRStatus) PR_Notify(PRMonitor *mon);
 ** monitor.
 */
 NSPR_API(PRStatus) PR_NotifyAll(PRMonitor *mon);
-
-/*
-** Return the number of times that the current thread has entered the
-** mutex. Returns zero if the current thread has not entered the mutex.
-*/
-NSPR_API(uint32_t) PR_GetMonitorEntryCount(PRMonitor *mon);
-
-NSPR_API(PRMonitor*) PR_NewNamedMonitor(const char* name);
-#endif
 
 PR_END_EXTERN_C
 

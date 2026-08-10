@@ -103,10 +103,10 @@ class nsTPromiseFlatString_CharT : public nsTString_CharT
       NS_COM void Init( const abstract_string_type& );
 
         // NOT TO BE IMPLEMENTED
-      void operator=( const self_type& ) NS_DELETE;
+      void operator=( const self_type& );
 
         // NOT TO BE IMPLEMENTED
-      nsTPromiseFlatString_CharT() NS_DELETE;
+      nsTPromiseFlatString_CharT();
 
     public:
 

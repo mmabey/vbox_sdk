@@ -2,7 +2,7 @@
 
 __copyright__ = \
 """
-Copyright (C) 2012-2025 Oracle and/or its affiliates.
+Copyright (C) 2012-2017 Oracle Corporation
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

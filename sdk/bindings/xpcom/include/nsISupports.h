@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/src/libs/xpcom18a4/xpcom/base/nsISupports.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsISupports.idl
  */
 
 #ifndef __gen_nsISupports_h__
@@ -14,7 +14,6 @@
 #ifndef NS_NO_VTABLE
 #define NS_NO_VTABLE
 #endif
-
 /* 
  * Start commenting out the C++ versions of the below in the output header
  */
@@ -45,9 +44,9 @@ class NS_NO_VTABLE nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTS \
-  NS_IMETHOD QueryInterface(const nsIID & uuid, void * *result) NS_OVERRIDE; \
-  NS_IMETHOD_(nsrefcnt) AddRef(void) NS_OVERRIDE; \
-  NS_IMETHOD_(nsrefcnt) Release(void) NS_OVERRIDE; 
+  NS_IMETHOD QueryInterface(const nsIID & uuid, void * *result); \
+  NS_IMETHOD_(nsrefcnt) AddRef(void); \
+  NS_IMETHOD_(nsrefcnt) Release(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTS(_to) \
@@ -61,14 +60,64 @@ class NS_NO_VTABLE nsISupports {
   NS_IMETHOD_(nsrefcnt) AddRef(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddRef(); } \
   NS_IMETHOD_(nsrefcnt) Release(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Release(); } 
 
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupports : public nsISupports
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTS
+
+  nsSupports();
+
+private:
+  ~nsSupports();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupports, nsISupports)
+
+nsSupports::nsSupports()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupports::~nsSupports()
+{
+  /* destructor code */
+}
+
+/* void QueryInterface (in nsIIDRef uuid, [iid_is (uuid), retval] out nsQIResult result); */
+NS_IMETHODIMP nsSupports::QueryInterface(const nsIID & uuid, void * *result)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript, notxpcom] nsrefcnt AddRef (); */
+NS_IMETHODIMP_(nsrefcnt) nsSupports::AddRef()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript, notxpcom] nsrefcnt Release (); */
+NS_IMETHODIMP_(nsrefcnt) nsSupports::Release()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 /* 
  * End commenting out the C++ versions of the above in the output header
  */
 #endif
-
 #include "nsISupportsBase.h"
-
 #ifndef MOZILLA_STRICT_API
 #include "nsISupportsUtils.h"
 #endif

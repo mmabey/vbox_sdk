@@ -44,8 +44,6 @@
 #ifndef _nsLocalFileUNIX_H_
 #define _nsLocalFileUNIX_H_
 
-#include <iprt/file.h>
-
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -127,8 +125,8 @@ protected:
     }
     nsresult FillStatCache();
 
-    nsresult CreateAndKeepOpen(PRUint32 type, uint32_t flags,
-                               PRUint32 permissions, RTFILE *_retval);
+    nsresult CreateAndKeepOpen(PRUint32 type, PRIntn flags,
+                               PRUint32 permissions, PRFileDesc **_retval);
 };
 
 #endif /* _nsLocalFileUNIX_H_ */

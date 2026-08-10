@@ -1,4 +1,4 @@
-/* $Id: tstCAPIGlue.c 170187 2025-08-11 17:18:47Z klaus $ */
+/* $Id: tstCAPIGlue.c 124132 2018-08-05 13:58:10Z bird $ */
 /** @file tstCAPIGlue.c
  * Demonstrator program to illustrate use of C bindings of Main API.
  *
@@ -8,25 +8,15 @@
  */
 
 /*
- * Copyright (C) 2009-2025 Oracle and/or its affiliates.
+ * Copyright (C) 2009-2017 Oracle Corporation
  *
- * This file is part of VirtualBox base platform packages, as
- * available from https://www.virtualbox.org.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation, in version 3 of the
- * License.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, see <https://www.gnu.org/licenses>.
- *
- * SPDX-License-Identifier: GPL-3.0-only
+ * This file is part of VirtualBox Open Source Edition (OSE), as
+ * available from http://www.virtualbox.org. This file is free software;
+ * you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GPL) as published by the Free Software
+ * Foundation, in version 2 as it comes in the "COPYING" file of the
+ * VirtualBox OSE distribution. VirtualBox OSE is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
  */
 
 
@@ -48,12 +38,8 @@
 # include <signal.h>
 # include <unistd.h>
 # include <sys/poll.h>
-# include <strings.h> /* For strcasecmp */
-# ifndef stricmp
-#  define stricmp strcasecmp
-# endif
 #endif
-#ifdef IPRT_INCLUDED_cdefs_h
+#ifdef ___iprt_cdefs_h
 # error "not supposed to involve any IPRT or VBox headers here."
 #endif
 
@@ -87,7 +73,6 @@ static const char *GetStateName(MachineState_T machineState)
         case MachineState_Saved:               return "Saved";
         case MachineState_Teleported:          return "Teleported";
         case MachineState_Aborted:             return "Aborted";
-        case MachineState_AbortedSaved:        return "Aborted-Saved";
         case MachineState_Running:             return "Running";
         case MachineState_Paused:              return "Paused";
         case MachineState_Stuck:               return "Stuck";
@@ -99,6 +84,7 @@ static const char *GetStateName(MachineState_T machineState)
         case MachineState_Restoring:           return "Restoring";
         case MachineState_TeleportingPausedVM: return "TeleportingPausedVM";
         case MachineState_TeleportingIn:       return "TeleportingIn";
+        case MachineState_FaultTolerantSyncing: return "FaultTolerantSyncing";
         case MachineState_DeletingSnapshotOnline: return "DeletingSnapshotOnline";
         case MachineState_DeletingSnapshotPaused: return "DeletingSnapshotPaused";
         case MachineState_RestoringSnapshot:   return "RestoringSnapshot";
@@ -139,7 +125,7 @@ static void ctrlCHandler(int iInfo)
 static HRESULT EventListenerDemoProcessEvent(IEvent *event)
 {
     VBoxEventType_T evType;
-    HRESULT hrc;
+    HRESULT rc;
 
     if (!event)
     {
@@ -148,10 +134,10 @@ static HRESULT EventListenerDemoProcessEvent(IEvent *event)
     }
 
     evType = VBoxEventType_Invalid;
-    hrc = IEvent_get_Type(event, &evType);
-    if (FAILED(hrc))
+    rc = IEvent_get_Type(event, &evType);
+    if (FAILED(rc))
     {
-        printf("cannot get event type, hrc=%#x\n", (unsigned)hrc);
+        printf("cannot get event type, rc=%#x\n", rc);
         return S_OK;
     }
 
@@ -173,10 +159,10 @@ static HRESULT EventListenerDemoProcessEvent(IEvent *event)
         {
             IStateChangedEvent *ev = NULL;
             enum MachineState state;
-            hrc = IEvent_QueryInterface(event, &IID_IStateChangedEvent, (void **)&ev);
-            if (FAILED(hrc))
+            rc = IEvent_QueryInterface(event, &IID_IStateChangedEvent, (void **)&ev);
+            if (FAILED(rc))
             {
-                printf("cannot get StateChangedEvent interface, hrc=%#x\n", (unsigned)hrc);
+                printf("cannot get StateChangedEvent interface, rc=%#x\n", rc);
                 return S_OK;
             }
             if (!ev)
@@ -184,9 +170,9 @@ static HRESULT EventListenerDemoProcessEvent(IEvent *event)
                 printf("StateChangedEvent reference null\n");
                 return S_OK;
             }
-            hrc = IStateChangedEvent_get_State(ev, &state);
-            if (FAILED(hrc))
-                printf("warning: cannot get state, hrc=%#x\n", (unsigned)hrc);
+            rc = IStateChangedEvent_get_State(ev, &state);
+            if (FAILED(rc))
+                printf("warning: cannot get state, rc=%#x\n", rc);
             IStateChangedEvent_Release(ev);
             printf("OnStateChanged: %s\n", GetStateName(state));
 
@@ -195,7 +181,6 @@ static HRESULT EventListenerDemoProcessEvent(IEvent *event)
                 || state == MachineState_Saved
                 || state == MachineState_Teleported
                 || state == MachineState_Aborted
-                || state == MachineState_AbortedSaved
                )
                 g_fStop = 1;
             break;
@@ -395,17 +380,17 @@ static HRESULT IEventListenerDemoImpl_Invoke(IEventListenerDemo *pThis, DISPID d
 
 static HRESULT LoadTypeInfo(REFIID riid, ITypeInfo **pTInfo)
 {
-    HRESULT hrc;
+    HRESULT rc;
     ITypeLib *pTypeLib;
-    hrc = LoadRegTypeLib(&LIBID_VirtualBox, 1 /* major */, 0 /* minor */, 0 /* lcid */, &pTypeLib);
-    if (FAILED(hrc))
-        return hrc;
-    hrc = ITypeLib_GetTypeInfoOfGuid(pTypeLib, riid, pTInfo);
+    rc = LoadRegTypeLib(&LIBID_VirtualBox, 1 /* major */, 0 /* minor */, 0 /* lcid */, &pTypeLib);
+    if (FAILED(rc))
+        return rc;
+    rc = ITypeLib_GetTypeInfoOfGuid(pTypeLib, riid, pTInfo);
 
     /* No longer need access to the type lib, release it. */
     ITypeLib_Release(pTypeLib);
 
-    return hrc;
+    return rc;
 }
 #endif
 
@@ -468,14 +453,14 @@ static IEventListenerDemoVtblInt g_IEventListenerDemoVtblInt =
 static void registerActiveEventListener(IVirtualBox *virtualBox, ISession *session)
 {
     IConsole *console = NULL;
-    HRESULT hrc;
+    HRESULT rc;
 
-    hrc = ISession_get_Console(session, &console);
-    if (SUCCEEDED(hrc) && console)
+    rc = ISession_get_Console(session, &console);
+    if ((SUCCEEDED(rc)) && console)
     {
         IEventSource *es = NULL;
-        hrc = IConsole_get_EventSource(console, &es);
-        if (SUCCEEDED(hrc) && es)
+        rc = IConsole_get_EventSource(console, &es);
+        if (SUCCEEDED(rc) && es)
         {
             static const ULONG s_auInterestingEvents[] =
             {
@@ -517,10 +502,10 @@ static void registerActiveEventListener(IVirtualBox *virtualBox, ISession *sessi
 #endif
                 IEventListenerDemo_AddRef(consoleListener);
 
-                hrc = IEventSource_RegisterListener(es, (IEventListener *)consoleListener,
-                                                    ComSafeArrayAsInParam(interestingEventsSA),
-                                                    1 /* active */);
-                if (SUCCEEDED(hrc))
+                rc = IEventSource_RegisterListener(es, (IEventListener *)consoleListener,
+                                                   ComSafeArrayAsInParam(interestingEventsSA),
+                                                   1 /* active */);
+                if (SUCCEEDED(rc))
                 {
                     /* Just wait here for events, no easy way to do this better
                      * as there's not much to do after this completes. */
@@ -572,14 +557,14 @@ static void registerActiveEventListener(IVirtualBox *virtualBox, ISession *sessi
 static void registerPassiveEventListener(ISession *session)
 {
     IConsole *console = NULL;
-    HRESULT hrc;
+    HRESULT rc;
 
-    hrc = ISession_get_Console(session, &console);
-    if (SUCCEEDED(hrc) && console)
+    rc = ISession_get_Console(session, &console);
+    if (SUCCEEDED(rc) && console)
     {
         IEventSource *es = NULL;
-        hrc = IConsole_get_EventSource(console, &es);
-        if (SUCCEEDED(hrc) && es)
+        rc = IConsole_get_EventSource(console, &es);
+        if (SUCCEEDED(rc) && es)
         {
             static const ULONG s_auInterestingEvents[] =
             {
@@ -612,13 +597,13 @@ static void registerPassiveEventListener(ISession *session)
             g_pVBoxFuncs->pfnSafeArrayCopyInParamHelper(interestingEventsSA, &s_auInterestingEvents,
                                                         sizeof(s_auInterestingEvents));
 
-            hrc = IEventSource_CreateListener(es, &consoleListener);
-            if (SUCCEEDED(hrc) && consoleListener)
+            rc = IEventSource_CreateListener(es, &consoleListener);
+            if (SUCCEEDED(rc) && consoleListener)
             {
-                hrc = IEventSource_RegisterListener(es, consoleListener,
-                                                    ComSafeArrayAsInParam(interestingEventsSA),
-                                                    0 /* passive */);
-                if (SUCCEEDED(hrc))
+                rc = IEventSource_RegisterListener(es, consoleListener,
+                                                   ComSafeArrayAsInParam(interestingEventsSA),
+                                                   0 /* passive */);
+                if (SUCCEEDED(rc))
                 {
                     /* Just wait here for events, no easy way to do this better
                      * as there's not much to do after this completes. */
@@ -633,27 +618,27 @@ static void registerPassiveEventListener(ISession *session)
                     while (!g_fStop)
                     {
                         IEvent *ev = NULL;
-                        hrc = IEventSource_GetEvent(es, consoleListener, 250, &ev);
-                        if (FAILED(hrc))
+                        rc = IEventSource_GetEvent(es, consoleListener, 250, &ev);
+                        if (FAILED(rc))
                         {
-                            printf("Failed getting event: %#x\n", (unsigned)hrc);
+                            printf("Failed getting event: %#x\n", rc);
                             g_fStop = 1;
                             continue;
                         }
                         /* handle timeouts, resulting in NULL events */
                         if (!ev)
                             continue;
-                        hrc = EventListenerDemoProcessEvent(ev);
-                        if (FAILED(hrc))
+                        rc = EventListenerDemoProcessEvent(ev);
+                        if (FAILED(rc))
                         {
-                            printf("Failed processing event: %#x\n", (unsigned)hrc);
+                            printf("Failed processing event: %#x\n", rc);
                             g_fStop = 1;
                             /* finish processing the event */
                         }
-                        hrc = IEventSource_EventProcessed(es, consoleListener, ev);
-                        if (FAILED(hrc))
+                        rc = IEventSource_EventProcessed(es, consoleListener, ev);
+                        if (FAILED(rc))
                         {
-                            printf("Failed to mark event as processed: %#x\n", (unsigned)hrc);
+                            printf("Failed to mark event as processed: %#x\n", rc);
                             g_fStop = 1;
                             /* continue with event release */
                         }
@@ -692,19 +677,19 @@ static void registerPassiveEventListener(ISession *session)
  * Print detailed error information if available.
  * @param   pszExecutable   string with the executable name
  * @param   pszErrorMsg     string containing the code location specific error message
- * @param   hrc             COM/XPCOM result code
+ * @param   rc              COM/XPCOM result code
  */
-static void PrintErrorInfo(const char *pszExecutable, const char *pszErrorMsg, HRESULT hrc)
+static void PrintErrorInfo(const char *pszExecutable, const char *pszErrorMsg, HRESULT rc)
 {
     IErrorInfo *ex;
-    HRESULT hrc2;
-    fprintf(stderr, "%s: %s (hrc=%#010x)\n", pszExecutable, pszErrorMsg, (unsigned)hrc);
-    hrc2 = g_pVBoxFuncs->pfnGetException(&ex);
-    if (SUCCEEDED(hrc2) && ex)
+    HRESULT rc2;
+    fprintf(stderr, "%s: %s (rc=%#010x)\n", pszExecutable, pszErrorMsg, (unsigned)rc);
+    rc2 = g_pVBoxFuncs->pfnGetException(&ex);
+    if (SUCCEEDED(rc2) && ex)
     {
         IVirtualBoxErrorInfo *ei;
-        hrc2 = IErrorInfo_QueryInterface(ex, &IID_IVirtualBoxErrorInfo, (void **)&ei);
-        if (SUCCEEDED(hrc2) && ei != NULL)
+        rc2 = IErrorInfo_QueryInterface(ex, &IID_IVirtualBoxErrorInfo, (void **)&ei);
+        if (SUCCEEDED(rc2) && ei != NULL)
         {
             /* got extended error info, maybe multiple infos */
             do
@@ -732,8 +717,8 @@ static void PrintErrorInfo(const char *pszExecutable, const char *pszErrorMsg, H
                 fprintf(stderr, "  text=%s\n", text);
                 g_pVBoxFuncs->pfnUtf8Free(text);
 
-                hrc2 = IVirtualBoxErrorInfo_get_Next(ei, &ei_next);
-                if (FAILED(hrc2))
+                rc2 = IVirtualBoxErrorInfo_get_Next(ei, &ei_next);
+                if (FAILED(rc2))
                     ei_next = NULL;
                 IVirtualBoxErrorInfo_Release(ei);
                 ei = ei_next;
@@ -755,22 +740,22 @@ static void PrintErrorInfo(const char *pszExecutable, const char *pszErrorMsg, H
  */
 static void startVM(const char *argv0, IVirtualBox *virtualBox, ISession *session, BSTR id)
 {
-    HRESULT hrc;
+    HRESULT rc;
     IMachine  *machine    = NULL;
     IProgress *progress   = NULL;
-    SAFEARRAY *env        = NULL;
+    BSTR env              = NULL;
     BSTR sessionType;
     SAFEARRAY *groupsSA = g_pVBoxFuncs->pfnSafeArrayOutParamAlloc();
 
-    hrc = IVirtualBox_FindMachine(virtualBox, id, &machine);
-    if (FAILED(hrc) || !machine)
+    rc = IVirtualBox_FindMachine(virtualBox, id, &machine);
+    if (FAILED(rc) || !machine)
     {
-        PrintErrorInfo(argv0, "Error: Couldn't get the Machine reference", hrc);
+        PrintErrorInfo(argv0, "Error: Couldn't get the Machine reference", rc);
         return;
     }
 
-    hrc = IMachine_get_Groups(machine, ComSafeArrayAsOutTypeParam(groupsSA, BSTR));
-    if (SUCCEEDED(hrc))
+    rc = IMachine_get_Groups(machine, ComSafeArrayAsOutTypeParam(groupsSA, BSTR));
+    if (SUCCEEDED(rc))
     {
         BSTR *groups = NULL;
         ULONG cbGroups = 0;
@@ -786,7 +771,7 @@ static void startVM(const char *argv0, IVirtualBox *virtualBox, ISession *sessio
              * 16 bit number. So better play safe and use UTF-8. */
             char *group;
             g_pVBoxFuncs->pfnUtf16ToUtf8(groups[i], &group);
-            printf("Groups[%u]: %s\n", (unsigned)i, group);
+            printf("Groups[%d]: %s\n", i, group);
             g_pVBoxFuncs->pfnUtf8Free(group);
         }
         for (i = 0; i < cGroups; ++i)
@@ -795,9 +780,9 @@ static void startVM(const char *argv0, IVirtualBox *virtualBox, ISession *sessio
     }
 
     g_pVBoxFuncs->pfnUtf8ToUtf16("gui", &sessionType);
-    hrc = IMachine_LaunchVMProcess(machine, session, sessionType, ComSafeArrayAsInParam(env), &progress);
+    rc = IMachine_LaunchVMProcess(machine, session, sessionType, env, &progress);
     g_pVBoxFuncs->pfnUtf16Free(sessionType);
-    if (SUCCEEDED(hrc))
+    if (SUCCEEDED(rc))
     {
         BOOL completed;
         LONG resultCode;
@@ -805,8 +790,8 @@ static void startVM(const char *argv0, IVirtualBox *virtualBox, ISession *sessio
         printf("Waiting for the remote session to open...\n");
         IProgress_WaitForCompletion(progress, -1);
 
-        hrc = IProgress_get_Completed(progress, &completed);
-        if (FAILED(hrc))
+        rc = IProgress_get_Completed(progress, &completed);
+        if (FAILED(rc))
             fprintf(stderr, "Error: GetCompleted status failed\n");
 
         IProgress_get_ResultCode(progress, &resultCode);
@@ -840,7 +825,7 @@ static void startVM(const char *argv0, IVirtualBox *virtualBox, ISession *sessio
         IProgress_Release(progress);
     }
     else
-        PrintErrorInfo(argv0, "Error: LaunchVMProcess failed", hrc);
+        PrintErrorInfo(argv0, "Error: LaunchVMProcess failed", rc);
 
     /* It's important to always release resources. */
     IMachine_Release(machine);
@@ -849,16 +834,13 @@ static void startVM(const char *argv0, IVirtualBox *virtualBox, ISession *sessio
 /**
  * List the registered VMs.
  *
- * @param   argc        number of arguments
- * @param   argv        argument vector
+ * @param   argv0       executable name
  * @param   virtualBox  ptr to IVirtualBox object
  * @param   session     ptr to ISession object
  */
-static void listVMs(int argc, char **argv, IVirtualBox *virtualBox, ISession *session)
+static void listVMs(const char *argv0, IVirtualBox *virtualBox, ISession *session)
 {
-    const char *argv0 = argv[0];
-
-    HRESULT hrc;
+    HRESULT rc;
     SAFEARRAY *machinesSA = g_pVBoxFuncs->pfnSafeArrayOutParamAlloc();
     IMachine **machines = NULL;
     ULONG machineCnt = 0;
@@ -868,10 +850,10 @@ static void listVMs(int argc, char **argv, IVirtualBox *virtualBox, ISession *se
     /*
      * Get the list of all registered VMs.
      */
-    hrc = IVirtualBox_get_Machines(virtualBox, ComSafeArrayAsOutIfaceParam(machinesSA, IMachine *));
-    if (FAILED(hrc))
+    rc = IVirtualBox_get_Machines(virtualBox, ComSafeArrayAsOutIfaceParam(machinesSA, IMachine *));
+    if (FAILED(rc))
     {
-        PrintErrorInfo(argv0, "could not get list of machines", hrc);
+        PrintErrorInfo(argv0, "could not get list of machines", rc);
         return;
     }
 
@@ -951,7 +933,7 @@ static void listVMs(int argc, char **argv, IVirtualBox *virtualBox, ISession *se
                 ULONG memorySize;
 
                 IMachine_get_MemorySize(machine, &memorySize);
-                printf("\tMemory size: %uMB\n", (unsigned)memorySize);
+                printf("\tMemory size: %uMB\n", memorySize);
             }
 
             {
@@ -976,33 +958,24 @@ static void listVMs(int argc, char **argv, IVirtualBox *virtualBox, ISession *se
 
     /*
      * Let the user chose a machine to start.
-     *
-     * Note! Testcases need to run without interaction required by default,
-     *       so only do this if manually specifying the 'start' command.
      */
-    if (    argc >= 2
-        && !stricmp(argv[1], "start"))
+    printf("Type Machine# to start (0 - %u) or 'quit' to do nothing: ",
+           (unsigned)(machineCnt - 1));
+    fflush(stdout);
+
+    if (scanf("%u", &start_id) == 1 && start_id < machineCnt)
     {
-        printf("Type Machine# to start (0 - %u) or 'quit' to do nothing: ",
-               (unsigned)(machineCnt - 1));
-        fflush(stdout);
+        IMachine *machine = machines[start_id];
 
-        if (scanf("%u", &start_id) == 1 && start_id < machineCnt)
+        if (machine)
         {
-            IMachine *machine = machines[start_id];
+            BSTR uuidUtf16 = NULL;
 
-            if (machine)
-            {
-                BSTR uuidUtf16 = NULL;
-
-                IMachine_get_Id(machine, &uuidUtf16);
-                startVM(argv0, virtualBox, session, uuidUtf16);
-                g_pVBoxFuncs->pfnComUnallocString(uuidUtf16);
-            }
+            IMachine_get_Id(machine, &uuidUtf16);
+            startVM(argv0, virtualBox, session, uuidUtf16);
+            g_pVBoxFuncs->pfnComUnallocString(uuidUtf16);
         }
     }
-    else
-        printf("Note: Use 'start' to start a VM when running interactively.\n\n");
 
     /*
      * Don't forget to release the objects in the array.
@@ -1027,7 +1000,7 @@ int main(int argc, char **argv)
     ULONG       revision         = 0;
     BSTR        versionUtf16     = NULL;
     BSTR        homefolderUtf16  = NULL;
-    HRESULT     hrc;     /* Result code of various function (method) calls. */
+    HRESULT     rc;     /* Result code of various function (method) calls. */
     (void)argc;
 
     printf("Starting main()\n");
@@ -1055,25 +1028,25 @@ int main(int argc, char **argv)
 
     printf("----------------------------------------------------\n");
 
-    hrc = IVirtualBoxClient_get_VirtualBox(vboxclient, &vbox);
-    if (FAILED(hrc) || !vbox)
+    rc = IVirtualBoxClient_get_VirtualBox(vboxclient, &vbox);
+    if (FAILED(rc) || !vbox)
     {
-        PrintErrorInfo(argv[0], "FATAL: could not get VirtualBox reference", hrc);
+        PrintErrorInfo(argv[0], "FATAL: could not get VirtualBox reference", rc);
         return EXIT_FAILURE;
     }
-    hrc = IVirtualBoxClient_get_Session(vboxclient, &session);
-    if (FAILED(hrc) || !session)
+    rc = IVirtualBoxClient_get_Session(vboxclient, &session);
+    if (FAILED(rc) || !session)
     {
-        PrintErrorInfo(argv[0], "FATAL: could not get Session reference", hrc);
+        PrintErrorInfo(argv[0], "FATAL: could not get Session reference", rc);
         return EXIT_FAILURE;
     }
 
 #ifdef USE_ACTIVE_EVENT_LISTENER
 # ifdef WIN32
-    hrc = LoadTypeInfo(&IID_IEventListener, &g_pTInfoIEventListener);
-    if (FAILED(hrc) || !g_pTInfoIEventListener)
+    rc = LoadTypeInfo(&IID_IEventListener, &g_pTInfoIEventListener);
+    if (FAILED(rc) || !g_pTInfoIEventListener)
     {
-        PrintErrorInfo(argv[0], "FATAL: could not get type information for IEventListener", hrc);
+        PrintErrorInfo(argv[0], "FATAL: could not get type information for IEventListener", rc);
         return EXIT_FAILURE;
     }
 # endif /* WIN32 */
@@ -1086,15 +1059,15 @@ int main(int argc, char **argv)
      */
 
     /* 1. Revision */
-    hrc = IVirtualBox_get_Revision(vbox, &revision);
-    if (SUCCEEDED(hrc))
-        printf("\tRevision: %u\n", (unsigned)revision);
+    rc = IVirtualBox_get_Revision(vbox, &revision);
+    if (SUCCEEDED(rc))
+        printf("\tRevision: %u\n", revision);
     else
-        PrintErrorInfo(argv[0], "GetRevision() failed", hrc);
+        PrintErrorInfo(argv[0], "GetRevision() failed", rc);
 
     /* 2. Version */
-    hrc = IVirtualBox_get_Version(vbox, &versionUtf16);
-    if (SUCCEEDED(hrc))
+    rc = IVirtualBox_get_Version(vbox, &versionUtf16);
+    if (SUCCEEDED(rc))
     {
         char *version = NULL;
         g_pVBoxFuncs->pfnUtf16ToUtf8(versionUtf16, &version);
@@ -1103,11 +1076,11 @@ int main(int argc, char **argv)
         g_pVBoxFuncs->pfnComUnallocString(versionUtf16);
     }
     else
-        PrintErrorInfo(argv[0], "GetVersion() failed", hrc);
+        PrintErrorInfo(argv[0], "GetVersion() failed", rc);
 
     /* 3. Home Folder */
-    hrc = IVirtualBox_get_HomeFolder(vbox, &homefolderUtf16);
-    if (SUCCEEDED(hrc))
+    rc = IVirtualBox_get_HomeFolder(vbox, &homefolderUtf16);
+    if (SUCCEEDED(rc))
     {
         char *homefolder = NULL;
         g_pVBoxFuncs->pfnUtf16ToUtf8(homefolderUtf16, &homefolder);
@@ -1116,9 +1089,9 @@ int main(int argc, char **argv)
         g_pVBoxFuncs->pfnComUnallocString(homefolderUtf16);
     }
     else
-        PrintErrorInfo(argv[0], "GetHomeFolder() failed", hrc);
+        PrintErrorInfo(argv[0], "GetHomeFolder() failed", rc);
 
-    listVMs(argc, argv, vbox, session);
+    listVMs(argv[0], vbox, session);
     ISession_UnlockMachine(session);
 
     printf("----------------------------------------------------\n");

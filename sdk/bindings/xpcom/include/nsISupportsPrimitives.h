@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsPrimitives.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsISupportsPrimitives.idl
  */
 
 #ifndef __gen_nsISupportsPrimitives_h__
@@ -22,6 +22,14 @@
   {0xd0d4b136, 0x1dd1, 0x11b2, \
     { 0x93, 0x71, 0xf0, 0x72, 0x7e, 0xf8, 0x27, 0xc0 }}
 
+/**
+ * Primitive base interface.
+ *
+ * These first three are pointer types and do data copying
+ * using the nsIMemory. Be careful!
+ *
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPrimitive : public nsISupports {
  public: 
 
@@ -68,7 +76,7 @@ class NS_NO_VTABLE nsISupportsPrimitive : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRIMITIVE \
-  NS_IMETHOD GetType(PRUint16 *aType) NS_OVERRIDE; 
+  NS_IMETHOD GetType(PRUint16 *aType); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRIMITIVE(_to) \
@@ -78,6 +86,47 @@ class NS_NO_VTABLE nsISupportsPrimitive : public nsISupports {
 #define NS_FORWARD_SAFE_NSISUPPORTSPRIMITIVE(_to) \
   NS_IMETHOD GetType(PRUint16 *aType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetType(aType); } 
 
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPrimitive : public nsISupportsPrimitive
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRIMITIVE
+
+  nsSupportsPrimitive();
+
+private:
+  ~nsSupportsPrimitive();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPrimitive, nsISupportsPrimitive)
+
+nsSupportsPrimitive::nsSupportsPrimitive()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPrimitive::~nsSupportsPrimitive()
+{
+  /* destructor code */
+}
+
+/* readonly attribute unsigned short type; */
+NS_IMETHODIMP nsSupportsPrimitive::GetType(PRUint16 *aType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
+
 
 /* starting interface:    nsISupportsID */
 #define NS_ISUPPORTSID_IID_STR "d18290a0-4a1c-11d3-9890-006008962422"
@@ -86,6 +135,11 @@ class NS_NO_VTABLE nsISupportsPrimitive : public nsISupports {
   {0xd18290a0, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for nsID structures
+ *
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsID : public nsISupportsPrimitive {
  public: 
 
@@ -102,21 +156,72 @@ class NS_NO_VTABLE nsISupportsID : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSID \
-  NS_IMETHOD GetData(nsID * *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(const nsID * aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(nsID * *aData); \
+  NS_IMETHOD SetData(const nsID * aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSID(_to) \
   NS_IMETHOD GetData(nsID * *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(const nsID * aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSID(_to) \
   NS_IMETHOD GetData(nsID * *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(const nsID * aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsID : public nsISupportsID
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSID
+
+  nsSupportsID();
+
+private:
+  ~nsSupportsID();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsID, nsISupportsID)
+
+nsSupportsID::nsSupportsID()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsID::~nsSupportsID()
+{
+  /* destructor code */
+}
+
+/* attribute nsIDPtr data; */
+NS_IMETHODIMP nsSupportsID::GetData(nsID * *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsID::SetData(const nsID * aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsID::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsCString */
@@ -126,6 +231,11 @@ class NS_NO_VTABLE nsISupportsID : public nsISupportsPrimitive {
   {0xd65ff270, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for ASCII strings
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsCString : public nsISupportsPrimitive {
  public: 
 
@@ -142,21 +252,72 @@ class NS_NO_VTABLE nsISupportsCString : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSCSTRING \
-  NS_IMETHOD GetData(nsACString & aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(const nsACString & aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(nsACString & aData); \
+  NS_IMETHOD SetData(const nsACString & aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSCSTRING(_to) \
   NS_IMETHOD GetData(nsACString & aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(const nsACString & aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSCSTRING(_to) \
   NS_IMETHOD GetData(nsACString & aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(const nsACString & aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsCString : public nsISupportsCString
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSCSTRING
+
+  nsSupportsCString();
+
+private:
+  ~nsSupportsCString();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsCString, nsISupportsCString)
+
+nsSupportsCString::nsSupportsCString()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsCString::~nsSupportsCString()
+{
+  /* destructor code */
+}
+
+/* attribute ACString data; */
+NS_IMETHODIMP nsSupportsCString::GetData(nsACString & aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsCString::SetData(const nsACString & aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsCString::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsString */
@@ -166,6 +327,11 @@ class NS_NO_VTABLE nsISupportsCString : public nsISupportsPrimitive {
   {0xd79dc970, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for Unicode strings
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsString : public nsISupportsPrimitive {
  public: 
 
@@ -182,21 +348,72 @@ class NS_NO_VTABLE nsISupportsString : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSSTRING \
-  NS_IMETHOD GetData(nsAString & aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(const nsAString & aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(PRUnichar **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(nsAString & aData); \
+  NS_IMETHOD SetData(const nsAString & aData); \
+  NS_IMETHOD ToString(PRUnichar **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSSTRING(_to) \
   NS_IMETHOD GetData(nsAString & aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(const nsAString & aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(PRUnichar **_retval) { return _to ToString(PRUnichar **_retval); } 
+  NS_IMETHOD ToString(PRUnichar **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSSTRING(_to) \
   NS_IMETHOD GetData(nsAString & aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(const nsAString & aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(PRUnichar **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(PRUnichar **_retval); } 
+  NS_IMETHOD ToString(PRUnichar **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsString : public nsISupportsString
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSSTRING
+
+  nsSupportsString();
+
+private:
+  ~nsSupportsString();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsString, nsISupportsString)
+
+nsSupportsString::nsSupportsString()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsString::~nsSupportsString()
+{
+  /* destructor code */
+}
+
+/* attribute AString data; */
+NS_IMETHODIMP nsSupportsString::GetData(nsAString & aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsString::SetData(const nsAString & aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* wstring toString (); */
+NS_IMETHODIMP nsSupportsString::ToString(PRUnichar **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRBool */
@@ -206,6 +423,14 @@ class NS_NO_VTABLE nsISupportsString : public nsISupportsPrimitive {
   {0xddc3b490, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * The rest are truly primitive and are passed by value
+ */
+/**
+ * Scriptable storage for booleans
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRBool : public nsISupportsPrimitive {
  public: 
 
@@ -222,21 +447,72 @@ class NS_NO_VTABLE nsISupportsPRBool : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRBOOL \
-  NS_IMETHOD GetData(PRBool *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRBool aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRBool *aData); \
+  NS_IMETHOD SetData(PRBool aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRBOOL(_to) \
   NS_IMETHOD GetData(PRBool *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRBool aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRBOOL(_to) \
   NS_IMETHOD GetData(PRBool *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRBool aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRBool : public nsISupportsPRBool
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRBOOL
+
+  nsSupportsPRBool();
+
+private:
+  ~nsSupportsPRBool();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRBool, nsISupportsPRBool)
+
+nsSupportsPRBool::nsSupportsPRBool()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRBool::~nsSupportsPRBool()
+{
+  /* destructor code */
+}
+
+/* attribute PRBool data; */
+NS_IMETHODIMP nsSupportsPRBool::GetData(PRBool *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRBool::SetData(PRBool aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRBool::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRUint8 */
@@ -246,6 +522,11 @@ class NS_NO_VTABLE nsISupportsPRBool : public nsISupportsPrimitive {
   {0xdec2e4e0, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for 8-bit integers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRUint8 : public nsISupportsPrimitive {
  public: 
 
@@ -262,21 +543,72 @@ class NS_NO_VTABLE nsISupportsPRUint8 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT8 \
-  NS_IMETHOD GetData(PRUint8 *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRUint8 aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRUint8 *aData); \
+  NS_IMETHOD SetData(PRUint8 aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT8(_to) \
   NS_IMETHOD GetData(PRUint8 *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRUint8 aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRUINT8(_to) \
   NS_IMETHOD GetData(PRUint8 *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRUint8 aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRUint8 : public nsISupportsPRUint8
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRUINT8
+
+  nsSupportsPRUint8();
+
+private:
+  ~nsSupportsPRUint8();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRUint8, nsISupportsPRUint8)
+
+nsSupportsPRUint8::nsSupportsPRUint8()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRUint8::~nsSupportsPRUint8()
+{
+  /* destructor code */
+}
+
+/* attribute PRUint8 data; */
+NS_IMETHODIMP nsSupportsPRUint8::GetData(PRUint8 *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRUint8::SetData(PRUint8 aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRUint8::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRUint16 */
@@ -286,6 +618,11 @@ class NS_NO_VTABLE nsISupportsPRUint8 : public nsISupportsPrimitive {
   {0xdfacb090, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for unsigned 16-bit integers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRUint16 : public nsISupportsPrimitive {
  public: 
 
@@ -302,21 +639,72 @@ class NS_NO_VTABLE nsISupportsPRUint16 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT16 \
-  NS_IMETHOD GetData(PRUint16 *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRUint16 aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRUint16 *aData); \
+  NS_IMETHOD SetData(PRUint16 aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT16(_to) \
   NS_IMETHOD GetData(PRUint16 *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRUint16 aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRUINT16(_to) \
   NS_IMETHOD GetData(PRUint16 *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRUint16 aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRUint16 : public nsISupportsPRUint16
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRUINT16
+
+  nsSupportsPRUint16();
+
+private:
+  ~nsSupportsPRUint16();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRUint16, nsISupportsPRUint16)
+
+nsSupportsPRUint16::nsSupportsPRUint16()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRUint16::~nsSupportsPRUint16()
+{
+  /* destructor code */
+}
+
+/* attribute PRUint16 data; */
+NS_IMETHODIMP nsSupportsPRUint16::GetData(PRUint16 *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRUint16::SetData(PRUint16 aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRUint16::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRUint32 */
@@ -326,6 +714,11 @@ class NS_NO_VTABLE nsISupportsPRUint16 : public nsISupportsPrimitive {
   {0xe01dc470, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for unsigned 32-bit integers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRUint32 : public nsISupportsPrimitive {
  public: 
 
@@ -342,21 +735,72 @@ class NS_NO_VTABLE nsISupportsPRUint32 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT32 \
-  NS_IMETHOD GetData(PRUint32 *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRUint32 aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRUint32 *aData); \
+  NS_IMETHOD SetData(PRUint32 aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT32(_to) \
   NS_IMETHOD GetData(PRUint32 *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRUint32 aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRUINT32(_to) \
   NS_IMETHOD GetData(PRUint32 *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRUint32 aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRUint32 : public nsISupportsPRUint32
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRUINT32
+
+  nsSupportsPRUint32();
+
+private:
+  ~nsSupportsPRUint32();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRUint32, nsISupportsPRUint32)
+
+nsSupportsPRUint32::nsSupportsPRUint32()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRUint32::~nsSupportsPRUint32()
+{
+  /* destructor code */
+}
+
+/* attribute PRUint32 data; */
+NS_IMETHODIMP nsSupportsPRUint32::GetData(PRUint32 *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRUint32::SetData(PRUint32 aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRUint32::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRUint64 */
@@ -366,6 +810,11 @@ class NS_NO_VTABLE nsISupportsPRUint32 : public nsISupportsPrimitive {
   {0xe13567c0, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for 64-bit integers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRUint64 : public nsISupportsPrimitive {
  public: 
 
@@ -382,21 +831,72 @@ class NS_NO_VTABLE nsISupportsPRUint64 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRUINT64 \
-  NS_IMETHOD GetData(PRUint64 *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRUint64 aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRUint64 *aData); \
+  NS_IMETHOD SetData(PRUint64 aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRUINT64(_to) \
   NS_IMETHOD GetData(PRUint64 *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRUint64 aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRUINT64(_to) \
   NS_IMETHOD GetData(PRUint64 *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRUint64 aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRUint64 : public nsISupportsPRUint64
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRUINT64
+
+  nsSupportsPRUint64();
+
+private:
+  ~nsSupportsPRUint64();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRUint64, nsISupportsPRUint64)
+
+nsSupportsPRUint64::nsSupportsPRUint64()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRUint64::~nsSupportsPRUint64()
+{
+  /* destructor code */
+}
+
+/* attribute PRUint64 data; */
+NS_IMETHODIMP nsSupportsPRUint64::GetData(PRUint64 *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRUint64::SetData(PRUint64 aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRUint64::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRTime */
@@ -406,6 +906,11 @@ class NS_NO_VTABLE nsISupportsPRUint64 : public nsISupportsPrimitive {
   {0xe2563630, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for NSPR date/time values
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRTime : public nsISupportsPrimitive {
  public: 
 
@@ -422,21 +927,72 @@ class NS_NO_VTABLE nsISupportsPRTime : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRTIME \
-  NS_IMETHOD GetData(PRTime *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRTime aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRTime *aData); \
+  NS_IMETHOD SetData(PRTime aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRTIME(_to) \
   NS_IMETHOD GetData(PRTime *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRTime aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRTIME(_to) \
   NS_IMETHOD GetData(PRTime *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRTime aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRTime : public nsISupportsPRTime
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRTIME
+
+  nsSupportsPRTime();
+
+private:
+  ~nsSupportsPRTime();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRTime, nsISupportsPRTime)
+
+nsSupportsPRTime::nsSupportsPRTime()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRTime::~nsSupportsPRTime()
+{
+  /* destructor code */
+}
+
+/* attribute PRTime data; */
+NS_IMETHODIMP nsSupportsPRTime::GetData(PRTime *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRTime::SetData(PRTime aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRTime::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsChar */
@@ -446,6 +1002,12 @@ class NS_NO_VTABLE nsISupportsPRTime : public nsISupportsPrimitive {
   {0xe2b05e40, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for single character values
+ * (often used to store an ASCII character)
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsChar : public nsISupportsPrimitive {
  public: 
 
@@ -462,21 +1024,72 @@ class NS_NO_VTABLE nsISupportsChar : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSCHAR \
-  NS_IMETHOD GetData(char *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(char aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(char *aData); \
+  NS_IMETHOD SetData(char aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSCHAR(_to) \
   NS_IMETHOD GetData(char *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(char aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSCHAR(_to) \
   NS_IMETHOD GetData(char *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(char aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsChar : public nsISupportsChar
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSCHAR
+
+  nsSupportsChar();
+
+private:
+  ~nsSupportsChar();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsChar, nsISupportsChar)
+
+nsSupportsChar::nsSupportsChar()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsChar::~nsSupportsChar()
+{
+  /* destructor code */
+}
+
+/* attribute char data; */
+NS_IMETHODIMP nsSupportsChar::GetData(char *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsChar::SetData(char aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsChar::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRInt16 */
@@ -486,6 +1099,11 @@ class NS_NO_VTABLE nsISupportsChar : public nsISupportsPrimitive {
   {0xe30d94b0, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for 16-bit integers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRInt16 : public nsISupportsPrimitive {
  public: 
 
@@ -502,21 +1120,72 @@ class NS_NO_VTABLE nsISupportsPRInt16 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRINT16 \
-  NS_IMETHOD GetData(PRInt16 *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRInt16 aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRInt16 *aData); \
+  NS_IMETHOD SetData(PRInt16 aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRINT16(_to) \
   NS_IMETHOD GetData(PRInt16 *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRInt16 aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRINT16(_to) \
   NS_IMETHOD GetData(PRInt16 *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRInt16 aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRInt16 : public nsISupportsPRInt16
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRINT16
+
+  nsSupportsPRInt16();
+
+private:
+  ~nsSupportsPRInt16();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRInt16, nsISupportsPRInt16)
+
+nsSupportsPRInt16::nsSupportsPRInt16()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRInt16::~nsSupportsPRInt16()
+{
+  /* destructor code */
+}
+
+/* attribute PRInt16 data; */
+NS_IMETHODIMP nsSupportsPRInt16::GetData(PRInt16 *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRInt16::SetData(PRInt16 aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRInt16::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRInt32 */
@@ -526,6 +1195,11 @@ class NS_NO_VTABLE nsISupportsPRInt16 : public nsISupportsPrimitive {
   {0xe36c5250, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for 32-bit integers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRInt32 : public nsISupportsPrimitive {
  public: 
 
@@ -542,21 +1216,72 @@ class NS_NO_VTABLE nsISupportsPRInt32 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRINT32 \
-  NS_IMETHOD GetData(PRInt32 *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRInt32 aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRInt32 *aData); \
+  NS_IMETHOD SetData(PRInt32 aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRINT32(_to) \
   NS_IMETHOD GetData(PRInt32 *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRInt32 aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRINT32(_to) \
   NS_IMETHOD GetData(PRInt32 *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRInt32 aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRInt32 : public nsISupportsPRInt32
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRINT32
+
+  nsSupportsPRInt32();
+
+private:
+  ~nsSupportsPRInt32();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRInt32, nsISupportsPRInt32)
+
+nsSupportsPRInt32::nsSupportsPRInt32()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRInt32::~nsSupportsPRInt32()
+{
+  /* destructor code */
+}
+
+/* attribute PRInt32 data; */
+NS_IMETHODIMP nsSupportsPRInt32::GetData(PRInt32 *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRInt32::SetData(PRInt32 aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRInt32::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsPRInt64 */
@@ -566,6 +1291,11 @@ class NS_NO_VTABLE nsISupportsPRInt32 : public nsISupportsPrimitive {
   {0xe3cb0ff0, 0x4a1c, 0x11d3, \
     { 0x98, 0x90, 0x00, 0x60, 0x08, 0x96, 0x24, 0x22 }}
 
+/**
+ * Scriptable storage for 64-bit integers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsPRInt64 : public nsISupportsPrimitive {
  public: 
 
@@ -582,21 +1312,72 @@ class NS_NO_VTABLE nsISupportsPRInt64 : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSPRINT64 \
-  NS_IMETHOD GetData(PRInt64 *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(PRInt64 aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(PRInt64 *aData); \
+  NS_IMETHOD SetData(PRInt64 aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSPRINT64(_to) \
   NS_IMETHOD GetData(PRInt64 *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(PRInt64 aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSPRINT64(_to) \
   NS_IMETHOD GetData(PRInt64 *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(PRInt64 aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsPRInt64 : public nsISupportsPRInt64
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSPRINT64
+
+  nsSupportsPRInt64();
+
+private:
+  ~nsSupportsPRInt64();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsPRInt64, nsISupportsPRInt64)
+
+nsSupportsPRInt64::nsSupportsPRInt64()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsPRInt64::~nsSupportsPRInt64()
+{
+  /* destructor code */
+}
+
+/* attribute PRInt64 data; */
+NS_IMETHODIMP nsSupportsPRInt64::GetData(PRInt64 *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsPRInt64::SetData(PRInt64 aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsPRInt64::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsFloat */
@@ -606,6 +1387,11 @@ class NS_NO_VTABLE nsISupportsPRInt64 : public nsISupportsPrimitive {
   {0xabeaa390, 0x4ac0, 0x11d3, \
     { 0xba, 0xea, 0x00, 0x80, 0x5f, 0x8a, 0x5d, 0xd7 }}
 
+/**
+ * Scriptable storage for floating point numbers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsFloat : public nsISupportsPrimitive {
  public: 
 
@@ -622,21 +1408,72 @@ class NS_NO_VTABLE nsISupportsFloat : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSFLOAT \
-  NS_IMETHOD GetData(float *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(float aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(float *aData); \
+  NS_IMETHOD SetData(float aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSFLOAT(_to) \
   NS_IMETHOD GetData(float *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(float aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSFLOAT(_to) \
   NS_IMETHOD GetData(float *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(float aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsFloat : public nsISupportsFloat
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSFLOAT
+
+  nsSupportsFloat();
+
+private:
+  ~nsSupportsFloat();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsFloat, nsISupportsFloat)
+
+nsSupportsFloat::nsSupportsFloat()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsFloat::~nsSupportsFloat()
+{
+  /* destructor code */
+}
+
+/* attribute float data; */
+NS_IMETHODIMP nsSupportsFloat::GetData(float *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsFloat::SetData(float aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsFloat::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsDouble */
@@ -646,6 +1483,11 @@ class NS_NO_VTABLE nsISupportsFloat : public nsISupportsPrimitive {
   {0xb32523a0, 0x4ac0, 0x11d3, \
     { 0xba, 0xea, 0x00, 0x80, 0x5f, 0x8a, 0x5d, 0xd7 }}
 
+/**
+ * Scriptable storage for doubles
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsDouble : public nsISupportsPrimitive {
  public: 
 
@@ -662,21 +1504,72 @@ class NS_NO_VTABLE nsISupportsDouble : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSDOUBLE \
-  NS_IMETHOD GetData(double *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(double aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(double *aData); \
+  NS_IMETHOD SetData(double aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSDOUBLE(_to) \
   NS_IMETHOD GetData(double *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(double aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSDOUBLE(_to) \
   NS_IMETHOD GetData(double *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(double aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsDouble : public nsISupportsDouble
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSDOUBLE
+
+  nsSupportsDouble();
+
+private:
+  ~nsSupportsDouble();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsDouble, nsISupportsDouble)
+
+nsSupportsDouble::nsSupportsDouble()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsDouble::~nsSupportsDouble()
+{
+  /* destructor code */
+}
+
+/* attribute double data; */
+NS_IMETHODIMP nsSupportsDouble::GetData(double *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsDouble::SetData(double aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsDouble::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsVoid */
@@ -686,12 +1579,17 @@ class NS_NO_VTABLE nsISupportsDouble : public nsISupportsPrimitive {
   {0x464484f0, 0x568d, 0x11d3, \
     { 0xba, 0xf8, 0x00, 0x80, 0x5f, 0x8a, 0x5d, 0xd7 }}
 
+/**
+ * Scriptable storage for generic pointers
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsVoid : public nsISupportsPrimitive {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_ISUPPORTSVOID_IID)
 
-  /* attribute voidPtr data; */
+  /* [noscript] attribute voidPtr data; */
   NS_IMETHOD GetData(void * *aData) = 0;
   NS_IMETHOD SetData(void * aData) = 0;
 
@@ -702,21 +1600,72 @@ class NS_NO_VTABLE nsISupportsVoid : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSVOID \
-  NS_IMETHOD GetData(void * *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(void * aData) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(void * *aData); \
+  NS_IMETHOD SetData(void * aData); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSVOID(_to) \
   NS_IMETHOD GetData(void * *aData) { return _to GetData(aData); } \
   NS_IMETHOD SetData(void * aData) { return _to SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSVOID(_to) \
   NS_IMETHOD GetData(void * *aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetData(aData); } \
   NS_IMETHOD SetData(void * aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsVoid : public nsISupportsVoid
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSVOID
+
+  nsSupportsVoid();
+
+private:
+  ~nsSupportsVoid();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsVoid, nsISupportsVoid)
+
+nsSupportsVoid::nsSupportsVoid()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsVoid::~nsSupportsVoid()
+{
+  /* destructor code */
+}
+
+/* [noscript] attribute voidPtr data; */
+NS_IMETHODIMP nsSupportsVoid::GetData(void * *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsVoid::SetData(void * aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsVoid::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsISupportsInterfacePointer */
@@ -726,6 +1675,11 @@ class NS_NO_VTABLE nsISupportsVoid : public nsISupportsPrimitive {
   {0x995ea724, 0x1dd1, 0x11b2, \
     { 0x92, 0x11, 0xc2, 0x1b, 0xdd, 0x3e, 0x7e, 0xd0 }}
 
+/**
+ * Scriptable storage for other XPCOM objects
+ * 
+ * @status FROZEN
+ */
 class NS_NO_VTABLE nsISupportsInterfacePointer : public nsISupportsPrimitive {
  public: 
 
@@ -746,11 +1700,11 @@ class NS_NO_VTABLE nsISupportsInterfacePointer : public nsISupportsPrimitive {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISUPPORTSINTERFACEPOINTER \
-  NS_IMETHOD GetData(nsISupports * *aData) NS_OVERRIDE; \
-  NS_IMETHOD SetData(nsISupports * aData) NS_OVERRIDE; \
-  NS_IMETHOD GetDataIID(nsID * *aDataIID) NS_OVERRIDE; \
-  NS_IMETHOD SetDataIID(const nsID * aDataIID) NS_OVERRIDE; \
-  NS_IMETHOD ToString(char **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetData(nsISupports * *aData); \
+  NS_IMETHOD SetData(nsISupports * aData); \
+  NS_IMETHOD GetDataIID(nsID * *aDataIID); \
+  NS_IMETHOD SetDataIID(const nsID * aDataIID); \
+  NS_IMETHOD ToString(char **_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISUPPORTSINTERFACEPOINTER(_to) \
@@ -758,7 +1712,7 @@ class NS_NO_VTABLE nsISupportsInterfacePointer : public nsISupportsPrimitive {
   NS_IMETHOD SetData(nsISupports * aData) { return _to SetData(aData); } \
   NS_IMETHOD GetDataIID(nsID * *aDataIID) { return _to GetDataIID(aDataIID); } \
   NS_IMETHOD SetDataIID(const nsID * aDataIID) { return _to SetDataIID(aDataIID); } \
-  NS_IMETHOD ToString(char **_retval) { return _to ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return _to ToString(_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISUPPORTSINTERFACEPOINTER(_to) \
@@ -766,7 +1720,68 @@ class NS_NO_VTABLE nsISupportsInterfacePointer : public nsISupportsPrimitive {
   NS_IMETHOD SetData(nsISupports * aData) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetData(aData); } \
   NS_IMETHOD GetDataIID(nsID * *aDataIID) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDataIID(aDataIID); } \
   NS_IMETHOD SetDataIID(const nsID * aDataIID) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDataIID(aDataIID); } \
-  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(char **_retval); } 
+  NS_IMETHOD ToString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSupportsInterfacePointer : public nsISupportsInterfacePointer
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISUPPORTSINTERFACEPOINTER
+
+  nsSupportsInterfacePointer();
+
+private:
+  ~nsSupportsInterfacePointer();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSupportsInterfacePointer, nsISupportsInterfacePointer)
+
+nsSupportsInterfacePointer::nsSupportsInterfacePointer()
+{
+  /* member initializers and constructor code */
+}
+
+nsSupportsInterfacePointer::~nsSupportsInterfacePointer()
+{
+  /* destructor code */
+}
+
+/* attribute nsISupports data; */
+NS_IMETHODIMP nsSupportsInterfacePointer::GetData(nsISupports * *aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsInterfacePointer::SetData(nsISupports * aData)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* attribute nsIDPtr dataIID; */
+NS_IMETHODIMP nsSupportsInterfacePointer::GetDataIID(nsID * *aDataIID)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsSupportsInterfacePointer::SetDataIID(const nsID * aDataIID)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* string toString (); */
+NS_IMETHODIMP nsSupportsInterfacePointer::ToString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 #endif /* __gen_nsISupportsPrimitives_h__ */

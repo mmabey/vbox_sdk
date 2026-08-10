@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/src/libs/xpcom18a4/xpcom/proxy/public/nsIProxyObjectManager.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/src/libs/xpcom18a4/xpcom/proxy/public/nsIProxyObjectManager.idl
  */
 
 #ifndef __gen_nsIProxyObjectManager_h__
@@ -30,41 +30,84 @@ class NS_NO_VTABLE nsIProxyObjectManager : public nsISupports {
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_IPROXYOBJECTMANAGER_IID)
 
   /* void getProxyForObject (in nsIEventQueue destQueue, in nsIIDRef iid, in nsISupports object, in PRInt32 proxyType, [iid_is (iid), retval] out nsQIResult result); */
-  NS_IMETHOD GetProxyForObject(nsIEventQueue * destQueue, const nsIID & iid, nsISupports * object, PRInt32 proxyType, void * *result) = 0;
+  NS_IMETHOD GetProxyForObject(nsIEventQueue *destQueue, const nsIID & iid, nsISupports *object, PRInt32 proxyType, void * *result) = 0;
 
   /* void getProxy (in nsIEventQueue destQueue, in nsIIDRef cid, in nsISupports aOuter, in nsIIDRef iid, in PRInt32 proxyType, [iid_is (iid), retval] out nsQIResult result); */
-  NS_IMETHOD GetProxy(nsIEventQueue * destQueue, const nsIID & cid, nsISupports * aOuter, const nsIID & iid, PRInt32 proxyType, void * *result) = 0;
+  NS_IMETHOD GetProxy(nsIEventQueue *destQueue, const nsIID & cid, nsISupports *aOuter, const nsIID & iid, PRInt32 proxyType, void * *result) = 0;
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIPROXYOBJECTMANAGER \
-  NS_IMETHOD GetProxyForObject(nsIEventQueue * destQueue, const nsIID & iid, nsISupports * object, PRInt32 proxyType, void * *result) NS_OVERRIDE; \
-  NS_IMETHOD GetProxy(nsIEventQueue * destQueue, const nsIID & cid, nsISupports * aOuter, const nsIID & iid, PRInt32 proxyType, void * *result) NS_OVERRIDE; 
+  NS_IMETHOD GetProxyForObject(nsIEventQueue *destQueue, const nsIID & iid, nsISupports *object, PRInt32 proxyType, void * *result); \
+  NS_IMETHOD GetProxy(nsIEventQueue *destQueue, const nsIID & cid, nsISupports *aOuter, const nsIID & iid, PRInt32 proxyType, void * *result); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIPROXYOBJECTMANAGER(_to) \
-  NS_IMETHOD GetProxyForObject(nsIEventQueue * destQueue, const nsIID & iid, nsISupports * object, PRInt32 proxyType, void * *result) { return _to GetProxyForObject(destQueue, iid, object, proxyType, result); } \
-  NS_IMETHOD GetProxy(nsIEventQueue * destQueue, const nsIID & cid, nsISupports * aOuter, const nsIID & iid, PRInt32 proxyType, void * *result) { return _to GetProxy(destQueue, cid, aOuter, iid, proxyType, result); } 
+  NS_IMETHOD GetProxyForObject(nsIEventQueue *destQueue, const nsIID & iid, nsISupports *object, PRInt32 proxyType, void * *result) { return _to GetProxyForObject(destQueue, iid, object, proxyType, result); } \
+  NS_IMETHOD GetProxy(nsIEventQueue *destQueue, const nsIID & cid, nsISupports *aOuter, const nsIID & iid, PRInt32 proxyType, void * *result) { return _to GetProxy(destQueue, cid, aOuter, iid, proxyType, result); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIPROXYOBJECTMANAGER(_to) \
-  NS_IMETHOD GetProxyForObject(nsIEventQueue * destQueue, const nsIID & iid, nsISupports * object, PRInt32 proxyType, void * *result) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProxyForObject(destQueue, iid, object, proxyType, result); } \
-  NS_IMETHOD GetProxy(nsIEventQueue * destQueue, const nsIID & cid, nsISupports * aOuter, const nsIID & iid, PRInt32 proxyType, void * *result) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProxy(destQueue, cid, aOuter, iid, proxyType, result); } 
+  NS_IMETHOD GetProxyForObject(nsIEventQueue *destQueue, const nsIID & iid, nsISupports *object, PRInt32 proxyType, void * *result) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProxyForObject(destQueue, iid, object, proxyType, result); } \
+  NS_IMETHOD GetProxy(nsIEventQueue *destQueue, const nsIID & cid, nsISupports *aOuter, const nsIID & iid, PRInt32 proxyType, void * *result) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetProxy(destQueue, cid, aOuter, iid, proxyType, result); } 
 
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsProxyObjectManager : public nsIProxyObjectManager
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSIPROXYOBJECTMANAGER
+
+  nsProxyObjectManager();
+
+private:
+  ~nsProxyObjectManager();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsProxyObjectManager, nsIProxyObjectManager)
+
+nsProxyObjectManager::nsProxyObjectManager()
+{
+  /* member initializers and constructor code */
+}
+
+nsProxyObjectManager::~nsProxyObjectManager()
+{
+  /* destructor code */
+}
+
+/* void getProxyForObject (in nsIEventQueue destQueue, in nsIIDRef iid, in nsISupports object, in PRInt32 proxyType, [iid_is (iid), retval] out nsQIResult result); */
+NS_IMETHODIMP nsProxyObjectManager::GetProxyForObject(nsIEventQueue *destQueue, const nsIID & iid, nsISupports *object, PRInt32 proxyType, void * *result)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void getProxy (in nsIEventQueue destQueue, in nsIIDRef cid, in nsISupports aOuter, in nsIIDRef iid, in PRInt32 proxyType, [iid_is (iid), retval] out nsQIResult result); */
+NS_IMETHODIMP nsProxyObjectManager::GetProxy(nsIEventQueue *destQueue, const nsIID & cid, nsISupports *aOuter, const nsIID & iid, PRInt32 proxyType, void * *result)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 #include "nsProxyEvent.h"
-
 #define NS_XPCOMPROXY_CONTRACTID "@mozilla.org/xpcomproxy;1"
 #define NS_XPCOMPROXY_CLASSNAME "XPCom Proxy"
-
 #define NS_PROXYEVENT_MANAGER_CID                \
 { 0xeea90d41, 									 \
   0xb059, 										 \
   0x11d2,						                 \
  {0x91, 0x5e, 0xc1, 0x2b, 0x69, 0x6c, 0x93, 0x33}\
 } 
-
 /**
  * Helper function for code that already has a link-time dependency on
  * libxpcom and needs to get proxies in a bunch of different places.

@@ -164,7 +164,7 @@ PRBool
 nsInterfaceHashtableMT<KeyClass,Interface>::Get
   (KeyType aKey, UserDataType* pInterface) const
 {
-  RTSemFastMutexRequest(this->mLock);
+  PR_Lock(this->mLock);
 
   typename nsBaseHashtableMT<KeyClass, nsCOMPtr<Interface>, Interface*>::EntryType* ent =
     this->GetEntry(aKey);
@@ -178,7 +178,7 @@ nsInterfaceHashtableMT<KeyClass,Interface>::Get
       NS_IF_ADDREF(*pInterface);
     }
 
-    RTSemFastMutexRelease(this->mLock);
+    PR_Unlock(this->mLock);
 
     return PR_TRUE;
   }
@@ -188,7 +188,7 @@ nsInterfaceHashtableMT<KeyClass,Interface>::Get
   if (pInterface)
     *pInterface = nsnull;
 
-  RTSemFastMutexRelease(this->mLock);
+  PR_Unlock(this->mLock);
 
   return PR_FALSE;
 }

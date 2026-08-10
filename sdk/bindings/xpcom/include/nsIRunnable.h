@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/src/libs/xpcom18a4/xpcom/threads/nsIRunnable.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/src/libs/xpcom18a4/xpcom/threads/nsIRunnable.idl
  */
 
 #ifndef __gen_nsIRunnable_h__
@@ -34,7 +34,7 @@ class NS_NO_VTABLE nsIRunnable : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIRUNNABLE \
-  NS_IMETHOD Run(void) NS_OVERRIDE; 
+  NS_IMETHOD Run(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIRUNNABLE(_to) \
@@ -43,6 +43,47 @@ class NS_NO_VTABLE nsIRunnable : public nsISupports {
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIRUNNABLE(_to) \
   NS_IMETHOD Run(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Run(); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsRunnable : public nsIRunnable
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSIRUNNABLE
+
+  nsRunnable();
+
+private:
+  ~nsRunnable();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsRunnable, nsIRunnable)
+
+nsRunnable::nsRunnable()
+{
+  /* member initializers and constructor code */
+}
+
+nsRunnable::~nsRunnable()
+{
+  /* destructor code */
+}
+
+/* void run (); */
+NS_IMETHODIMP nsRunnable::Run()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 #endif /* __gen_nsIRunnable_h__ */

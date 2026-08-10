@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/src/libs/xpcom18a4/xpcom/ds/nsIVariant.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsIVariant.idl
  */
 
 #ifndef __gen_nsIVariant_h__
@@ -94,6 +94,41 @@ class NS_NO_VTABLE nsIDataType : public nsISupports {
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIDATATYPE(_to) \
 
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsDataType : public nsIDataType
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSIDATATYPE
+
+  nsDataType();
+
+private:
+  ~nsDataType();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsDataType, nsIDataType)
+
+nsDataType::nsDataType()
+{
+  /* member initializers and constructor code */
+}
+
+nsDataType::~nsDataType()
+{
+  /* destructor code */
+}
+
+/* End of implementation class template. */
+#endif
+
 
 /* starting interface:    nsIVariant */
 #define NS_IVARIANT_IID_STR "6c9eb060-8c6a-11d5-90f3-0010a4e73d9a"
@@ -102,12 +137,19 @@ class NS_NO_VTABLE nsIDataType : public nsISupports {
   {0x6c9eb060, 0x8c6a, 0x11d5, \
     { 0x90, 0xf3, 0x00, 0x10, 0xa4, 0xe7, 0x3d, 0x9a }}
 
+/**
+ * XPConnect has magic to transparently convert between nsIVariant and JS types.
+ * We mark the interface [scriptable] so that JS can use methods
+ * that refer to this interface. But we mark all the methods and attributes
+ * [noscript] since any nsIVariant object will be automatically converted to a
+ * JS type anyway.
+ */
 class NS_NO_VTABLE nsIVariant : public nsISupports {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_IVARIANT_IID)
 
-  /* readonly attribute PRUint16 dataType; */
+  /* [noscript] readonly attribute PRUint16 dataType; */
   NS_IMETHOD GetDataType(PRUint16 *aDataType) = 0;
 
   /* [noscript] PRUint8 getAsInt8 (); */
@@ -171,7 +213,7 @@ class NS_NO_VTABLE nsIVariant : public nsISupports {
   NS_IMETHOD GetAsWString(PRUnichar **_retval) = 0;
 
   /* [noscript] nsISupports getAsISupports (); */
-  NS_IMETHOD GetAsISupports(nsISupports * *_retval) = 0;
+  NS_IMETHOD GetAsISupports(nsISupports **_retval) = 0;
 
   /* [noscript] void getAsInterface (out nsIIDPtr iid, [iid_is (iid), retval] out nsQIResult iface); */
   NS_IMETHOD GetAsInterface(nsIID * *iid, void * *iface) = 0;
@@ -189,57 +231,57 @@ class NS_NO_VTABLE nsIVariant : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIVARIANT \
-  NS_IMETHOD GetDataType(PRUint16 *aDataType) NS_OVERRIDE; \
-  NS_IMETHOD GetAsInt8(PRUint8 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsInt16(PRInt16 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsInt32(PRInt32 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsInt64(PRInt64 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsUint8(PRUint8 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsUint16(PRUint16 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsUint32(PRUint32 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsUint64(PRUint64 *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsFloat(float *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsDouble(double *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsBool(PRBool *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsChar(char *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsWChar(PRUnichar *_retval) NS_OVERRIDE; \
-  NS_IMETHOD_(nsresult) GetAsID(nsID *retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsAString(nsAString & _retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsDOMString(nsAString & _retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsACString(nsACString & _retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsAUTF8String(nsACString & _retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsString(char **_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsWString(PRUnichar **_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsISupports(nsISupports * *_retval) NS_OVERRIDE; \
-  NS_IMETHOD GetAsInterface(nsIID * *iid, void * *iface) NS_OVERRIDE; \
-  NS_IMETHOD_(nsresult) GetAsArray(PRUint16 *type, nsIID *iid, PRUint32 *count, void * *ptr) NS_OVERRIDE; \
-  NS_IMETHOD GetAsStringWithSize(PRUint32 *size, char **str) NS_OVERRIDE; \
-  NS_IMETHOD GetAsWStringWithSize(PRUint32 *size, PRUnichar **str) NS_OVERRIDE; 
+  NS_IMETHOD GetDataType(PRUint16 *aDataType); \
+  NS_IMETHOD GetAsInt8(PRUint8 *_retval); \
+  NS_IMETHOD GetAsInt16(PRInt16 *_retval); \
+  NS_IMETHOD GetAsInt32(PRInt32 *_retval); \
+  NS_IMETHOD GetAsInt64(PRInt64 *_retval); \
+  NS_IMETHOD GetAsUint8(PRUint8 *_retval); \
+  NS_IMETHOD GetAsUint16(PRUint16 *_retval); \
+  NS_IMETHOD GetAsUint32(PRUint32 *_retval); \
+  NS_IMETHOD GetAsUint64(PRUint64 *_retval); \
+  NS_IMETHOD GetAsFloat(float *_retval); \
+  NS_IMETHOD GetAsDouble(double *_retval); \
+  NS_IMETHOD GetAsBool(PRBool *_retval); \
+  NS_IMETHOD GetAsChar(char *_retval); \
+  NS_IMETHOD GetAsWChar(PRUnichar *_retval); \
+  NS_IMETHOD_(nsresult) GetAsID(nsID *retval); \
+  NS_IMETHOD GetAsAString(nsAString & _retval); \
+  NS_IMETHOD GetAsDOMString(nsAString & _retval); \
+  NS_IMETHOD GetAsACString(nsACString & _retval); \
+  NS_IMETHOD GetAsAUTF8String(nsACString & _retval); \
+  NS_IMETHOD GetAsString(char **_retval); \
+  NS_IMETHOD GetAsWString(PRUnichar **_retval); \
+  NS_IMETHOD GetAsISupports(nsISupports **_retval); \
+  NS_IMETHOD GetAsInterface(nsIID * *iid, void * *iface); \
+  NS_IMETHOD_(nsresult) GetAsArray(PRUint16 *type, nsIID *iid, PRUint32 *count, void * *ptr); \
+  NS_IMETHOD GetAsStringWithSize(PRUint32 *size, char **str); \
+  NS_IMETHOD GetAsWStringWithSize(PRUint32 *size, PRUnichar **str); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIVARIANT(_to) \
   NS_IMETHOD GetDataType(PRUint16 *aDataType) { return _to GetDataType(aDataType); } \
-  NS_IMETHOD GetAsInt8(PRUint8 *_retval) { return _to GetAsInt8(PRUint8 *_retval); } \
-  NS_IMETHOD GetAsInt16(PRInt16 *_retval) { return _to GetAsInt16(PRInt16 *_retval); } \
-  NS_IMETHOD GetAsInt32(PRInt32 *_retval) { return _to GetAsInt32(PRInt32 *_retval); } \
-  NS_IMETHOD GetAsInt64(PRInt64 *_retval) { return _to GetAsInt64(PRInt64 *_retval); } \
-  NS_IMETHOD GetAsUint8(PRUint8 *_retval) { return _to GetAsUint8(PRUint8 *_retval); } \
-  NS_IMETHOD GetAsUint16(PRUint16 *_retval) { return _to GetAsUint16(PRUint16 *_retval); } \
-  NS_IMETHOD GetAsUint32(PRUint32 *_retval) { return _to GetAsUint32(PRUint32 *_retval); } \
-  NS_IMETHOD GetAsUint64(PRUint64 *_retval) { return _to GetAsUint64(PRUint64 *_retval); } \
-  NS_IMETHOD GetAsFloat(float *_retval) { return _to GetAsFloat(float *_retval); } \
-  NS_IMETHOD GetAsDouble(double *_retval) { return _to GetAsDouble(double *_retval); } \
-  NS_IMETHOD GetAsBool(PRBool *_retval) { return _to GetAsBool(PRBool *_retval); } \
-  NS_IMETHOD GetAsChar(char *_retval) { return _to GetAsChar(char *_retval); } \
-  NS_IMETHOD GetAsWChar(PRUnichar *_retval) { return _to GetAsWChar(PRUnichar *_retval); } \
+  NS_IMETHOD GetAsInt8(PRUint8 *_retval) { return _to GetAsInt8(_retval); } \
+  NS_IMETHOD GetAsInt16(PRInt16 *_retval) { return _to GetAsInt16(_retval); } \
+  NS_IMETHOD GetAsInt32(PRInt32 *_retval) { return _to GetAsInt32(_retval); } \
+  NS_IMETHOD GetAsInt64(PRInt64 *_retval) { return _to GetAsInt64(_retval); } \
+  NS_IMETHOD GetAsUint8(PRUint8 *_retval) { return _to GetAsUint8(_retval); } \
+  NS_IMETHOD GetAsUint16(PRUint16 *_retval) { return _to GetAsUint16(_retval); } \
+  NS_IMETHOD GetAsUint32(PRUint32 *_retval) { return _to GetAsUint32(_retval); } \
+  NS_IMETHOD GetAsUint64(PRUint64 *_retval) { return _to GetAsUint64(_retval); } \
+  NS_IMETHOD GetAsFloat(float *_retval) { return _to GetAsFloat(_retval); } \
+  NS_IMETHOD GetAsDouble(double *_retval) { return _to GetAsDouble(_retval); } \
+  NS_IMETHOD GetAsBool(PRBool *_retval) { return _to GetAsBool(_retval); } \
+  NS_IMETHOD GetAsChar(char *_retval) { return _to GetAsChar(_retval); } \
+  NS_IMETHOD GetAsWChar(PRUnichar *_retval) { return _to GetAsWChar(_retval); } \
   NS_IMETHOD_(nsresult) GetAsID(nsID *retval) { return _to GetAsID(retval); } \
-  NS_IMETHOD GetAsAString(nsAString & _retval) { return _to GetAsAString(nsAString & _retval); } \
-  NS_IMETHOD GetAsDOMString(nsAString & _retval) { return _to GetAsDOMString(nsAString & _retval); } \
-  NS_IMETHOD GetAsACString(nsACString & _retval) { return _to GetAsACString(nsACString & _retval); } \
-  NS_IMETHOD GetAsAUTF8String(nsACString & _retval) { return _to GetAsAUTF8String(nsACString & _retval); } \
-  NS_IMETHOD GetAsString(char **_retval) { return _to GetAsString(char **_retval); } \
-  NS_IMETHOD GetAsWString(PRUnichar **_retval) { return _to GetAsWString(PRUnichar **_retval); } \
-  NS_IMETHOD GetAsISupports(nsISupports * *_retval) { return _to GetAsISupports(nsISupports * *_retval); } \
+  NS_IMETHOD GetAsAString(nsAString & _retval) { return _to GetAsAString(_retval); } \
+  NS_IMETHOD GetAsDOMString(nsAString & _retval) { return _to GetAsDOMString(_retval); } \
+  NS_IMETHOD GetAsACString(nsACString & _retval) { return _to GetAsACString(_retval); } \
+  NS_IMETHOD GetAsAUTF8String(nsACString & _retval) { return _to GetAsAUTF8String(_retval); } \
+  NS_IMETHOD GetAsString(char **_retval) { return _to GetAsString(_retval); } \
+  NS_IMETHOD GetAsWString(PRUnichar **_retval) { return _to GetAsWString(_retval); } \
+  NS_IMETHOD GetAsISupports(nsISupports **_retval) { return _to GetAsISupports(_retval); } \
   NS_IMETHOD GetAsInterface(nsIID * *iid, void * *iface) { return _to GetAsInterface(iid, iface); } \
   NS_IMETHOD_(nsresult) GetAsArray(PRUint16 *type, nsIID *iid, PRUint32 *count, void * *ptr) { return _to GetAsArray(type, iid, count, ptr); } \
   NS_IMETHOD GetAsStringWithSize(PRUint32 *size, char **str) { return _to GetAsStringWithSize(size, str); } \
@@ -248,31 +290,222 @@ class NS_NO_VTABLE nsIVariant : public nsISupports {
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIVARIANT(_to) \
   NS_IMETHOD GetDataType(PRUint16 *aDataType) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDataType(aDataType); } \
-  NS_IMETHOD GetAsInt8(PRUint8 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt8(PRUint8 *_retval); } \
-  NS_IMETHOD GetAsInt16(PRInt16 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt16(PRInt16 *_retval); } \
-  NS_IMETHOD GetAsInt32(PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt32(PRInt32 *_retval); } \
-  NS_IMETHOD GetAsInt64(PRInt64 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt64(PRInt64 *_retval); } \
-  NS_IMETHOD GetAsUint8(PRUint8 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint8(PRUint8 *_retval); } \
-  NS_IMETHOD GetAsUint16(PRUint16 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint16(PRUint16 *_retval); } \
-  NS_IMETHOD GetAsUint32(PRUint32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint32(PRUint32 *_retval); } \
-  NS_IMETHOD GetAsUint64(PRUint64 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint64(PRUint64 *_retval); } \
-  NS_IMETHOD GetAsFloat(float *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsFloat(float *_retval); } \
-  NS_IMETHOD GetAsDouble(double *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsDouble(double *_retval); } \
-  NS_IMETHOD GetAsBool(PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsBool(PRBool *_retval); } \
-  NS_IMETHOD GetAsChar(char *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsChar(char *_retval); } \
-  NS_IMETHOD GetAsWChar(PRUnichar *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsWChar(PRUnichar *_retval); } \
+  NS_IMETHOD GetAsInt8(PRUint8 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt8(_retval); } \
+  NS_IMETHOD GetAsInt16(PRInt16 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt16(_retval); } \
+  NS_IMETHOD GetAsInt32(PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt32(_retval); } \
+  NS_IMETHOD GetAsInt64(PRInt64 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInt64(_retval); } \
+  NS_IMETHOD GetAsUint8(PRUint8 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint8(_retval); } \
+  NS_IMETHOD GetAsUint16(PRUint16 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint16(_retval); } \
+  NS_IMETHOD GetAsUint32(PRUint32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint32(_retval); } \
+  NS_IMETHOD GetAsUint64(PRUint64 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsUint64(_retval); } \
+  NS_IMETHOD GetAsFloat(float *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsFloat(_retval); } \
+  NS_IMETHOD GetAsDouble(double *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsDouble(_retval); } \
+  NS_IMETHOD GetAsBool(PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsBool(_retval); } \
+  NS_IMETHOD GetAsChar(char *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsChar(_retval); } \
+  NS_IMETHOD GetAsWChar(PRUnichar *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsWChar(_retval); } \
   NS_IMETHOD_(nsresult) GetAsID(nsID *retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsID(retval); } \
-  NS_IMETHOD GetAsAString(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsAString(nsAString & _retval); } \
-  NS_IMETHOD GetAsDOMString(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsDOMString(nsAString & _retval); } \
-  NS_IMETHOD GetAsACString(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsACString(nsACString & _retval); } \
-  NS_IMETHOD GetAsAUTF8String(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsAUTF8String(nsACString & _retval); } \
-  NS_IMETHOD GetAsString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsString(char **_retval); } \
-  NS_IMETHOD GetAsWString(PRUnichar **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsWString(PRUnichar **_retval); } \
-  NS_IMETHOD GetAsISupports(nsISupports * *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsISupports(nsISupports * *_retval); } \
+  NS_IMETHOD GetAsAString(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsAString(_retval); } \
+  NS_IMETHOD GetAsDOMString(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsDOMString(_retval); } \
+  NS_IMETHOD GetAsACString(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsACString(_retval); } \
+  NS_IMETHOD GetAsAUTF8String(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsAUTF8String(_retval); } \
+  NS_IMETHOD GetAsString(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsString(_retval); } \
+  NS_IMETHOD GetAsWString(PRUnichar **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsWString(_retval); } \
+  NS_IMETHOD GetAsISupports(nsISupports **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsISupports(_retval); } \
   NS_IMETHOD GetAsInterface(nsIID * *iid, void * *iface) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsInterface(iid, iface); } \
   NS_IMETHOD_(nsresult) GetAsArray(PRUint16 *type, nsIID *iid, PRUint32 *count, void * *ptr) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsArray(type, iid, count, ptr); } \
   NS_IMETHOD GetAsStringWithSize(PRUint32 *size, char **str) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsStringWithSize(size, str); } \
   NS_IMETHOD GetAsWStringWithSize(PRUint32 *size, PRUnichar **str) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetAsWStringWithSize(size, str); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsVariant : public nsIVariant
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSIVARIANT
+
+  nsVariant();
+
+private:
+  ~nsVariant();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsVariant, nsIVariant)
+
+nsVariant::nsVariant()
+{
+  /* member initializers and constructor code */
+}
+
+nsVariant::~nsVariant()
+{
+  /* destructor code */
+}
+
+/* [noscript] readonly attribute PRUint16 dataType; */
+NS_IMETHODIMP nsVariant::GetDataType(PRUint16 *aDataType)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRUint8 getAsInt8 (); */
+NS_IMETHODIMP nsVariant::GetAsInt8(PRUint8 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRInt16 getAsInt16 (); */
+NS_IMETHODIMP nsVariant::GetAsInt16(PRInt16 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRInt32 getAsInt32 (); */
+NS_IMETHODIMP nsVariant::GetAsInt32(PRInt32 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRInt64 getAsInt64 (); */
+NS_IMETHODIMP nsVariant::GetAsInt64(PRInt64 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRUint8 getAsUint8 (); */
+NS_IMETHODIMP nsVariant::GetAsUint8(PRUint8 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRUint16 getAsUint16 (); */
+NS_IMETHODIMP nsVariant::GetAsUint16(PRUint16 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRUint32 getAsUint32 (); */
+NS_IMETHODIMP nsVariant::GetAsUint32(PRUint32 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRUint64 getAsUint64 (); */
+NS_IMETHODIMP nsVariant::GetAsUint64(PRUint64 *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] float getAsFloat (); */
+NS_IMETHODIMP nsVariant::GetAsFloat(float *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] double getAsDouble (); */
+NS_IMETHODIMP nsVariant::GetAsDouble(double *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] PRBool getAsBool (); */
+NS_IMETHODIMP nsVariant::GetAsBool(PRBool *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] char getAsChar (); */
+NS_IMETHODIMP nsVariant::GetAsChar(char *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] wchar getAsWChar (); */
+NS_IMETHODIMP nsVariant::GetAsWChar(PRUnichar *_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [notxpcom] nsresult getAsID (out nsID retval); */
+NS_IMETHODIMP_(nsresult) nsVariant::GetAsID(nsID *retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] AString getAsAString (); */
+NS_IMETHODIMP nsVariant::GetAsAString(nsAString & _retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] DOMString getAsDOMString (); */
+NS_IMETHODIMP nsVariant::GetAsDOMString(nsAString & _retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] ACString getAsACString (); */
+NS_IMETHODIMP nsVariant::GetAsACString(nsACString & _retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] AUTF8String getAsAUTF8String (); */
+NS_IMETHODIMP nsVariant::GetAsAUTF8String(nsACString & _retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] string getAsString (); */
+NS_IMETHODIMP nsVariant::GetAsString(char **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] wstring getAsWString (); */
+NS_IMETHODIMP nsVariant::GetAsWString(PRUnichar **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] nsISupports getAsISupports (); */
+NS_IMETHODIMP nsVariant::GetAsISupports(nsISupports **_retval)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] void getAsInterface (out nsIIDPtr iid, [iid_is (iid), retval] out nsQIResult iface); */
+NS_IMETHODIMP nsVariant::GetAsInterface(nsIID * *iid, void * *iface)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [notxpcom] nsresult getAsArray (out PRUint16 type, out nsIID iid, out PRUint32 count, out voidPtr ptr); */
+NS_IMETHODIMP_(nsresult) nsVariant::GetAsArray(PRUint16 *type, nsIID *iid, PRUint32 *count, void * *ptr)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] void getAsStringWithSize (out PRUint32 size, [size_is (size), retval] out string str); */
+NS_IMETHODIMP nsVariant::GetAsStringWithSize(PRUint32 *size, char **str)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] void getAsWStringWithSize (out PRUint32 size, [size_is (size), retval] out wstring str); */
+NS_IMETHODIMP nsVariant::GetAsWStringWithSize(PRUint32 *size, PRUnichar **str)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 /* starting interface:    nsIWritableVariant */
@@ -282,6 +515,15 @@ class NS_NO_VTABLE nsIVariant : public nsISupports {
   {0x5586a590, 0x8c82, 0x11d5, \
     { 0x90, 0xf3, 0x00, 0x10, 0xa4, 0xe7, 0x3d, 0x9a }}
 
+/**
+ * An object that implements nsIVariant may or may NOT also implement this
+ * nsIWritableVariant.
+ * 
+ * If the 'writable' attribute is false then attempts to call any of the 'set'
+ * methods can be expected to fail. Setting the 'writable' attribute may or
+ * may not succeed.
+ *
+ */
 class NS_NO_VTABLE nsIWritableVariant : public nsIVariant {
  public: 
 
@@ -352,7 +594,7 @@ class NS_NO_VTABLE nsIWritableVariant : public nsIVariant {
   NS_IMETHOD SetAsWString(const PRUnichar *aValue) = 0;
 
   /* void setAsISupports (in nsISupports aValue); */
-  NS_IMETHOD SetAsISupports(nsISupports * aValue) = 0;
+  NS_IMETHOD SetAsISupports(nsISupports *aValue) = 0;
 
   /* void setAsInterface (in nsIIDRef iid, [iid_is (iid)] in nsQIResult iface); */
   NS_IMETHOD SetAsInterface(const nsIID & iid, void * iface) = 0;
@@ -376,43 +618,43 @@ class NS_NO_VTABLE nsIWritableVariant : public nsIVariant {
   NS_IMETHOD SetAsEmptyArray(void) = 0;
 
   /* void setFromVariant (in nsIVariant aValue); */
-  NS_IMETHOD SetFromVariant(nsIVariant * aValue) = 0;
+  NS_IMETHOD SetFromVariant(nsIVariant *aValue) = 0;
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIWRITABLEVARIANT \
-  NS_IMETHOD GetWritable(PRBool *aWritable) NS_OVERRIDE; \
-  NS_IMETHOD SetWritable(PRBool aWritable) NS_OVERRIDE; \
-  NS_IMETHOD SetAsInt8(PRUint8 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsInt16(PRInt16 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsInt32(PRInt32 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsInt64(PRInt64 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsUint8(PRUint8 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsUint16(PRUint16 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsUint32(PRUint32 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsUint64(PRUint64 aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsFloat(float aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsDouble(double aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsBool(PRBool aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsChar(char aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsWChar(PRUnichar aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsID(const nsID & aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsAString(const nsAString & aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsDOMString(const nsAString & aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsACString(const nsACString & aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsAUTF8String(const nsACString & aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsString(const char *aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsWString(const PRUnichar *aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsISupports(nsISupports * aValue) NS_OVERRIDE; \
-  NS_IMETHOD SetAsInterface(const nsIID & iid, void * iface) NS_OVERRIDE; \
-  NS_IMETHOD SetAsArray(PRUint16 type, const nsIID * iid, PRUint32 count, void * ptr) NS_OVERRIDE; \
-  NS_IMETHOD SetAsStringWithSize(PRUint32 size, const char *str) NS_OVERRIDE; \
-  NS_IMETHOD SetAsWStringWithSize(PRUint32 size, const PRUnichar *str) NS_OVERRIDE; \
-  NS_IMETHOD SetAsVoid(void) NS_OVERRIDE; \
-  NS_IMETHOD SetAsEmpty(void) NS_OVERRIDE; \
-  NS_IMETHOD SetAsEmptyArray(void) NS_OVERRIDE; \
-  NS_IMETHOD SetFromVariant(nsIVariant * aValue) NS_OVERRIDE; 
+  NS_IMETHOD GetWritable(PRBool *aWritable); \
+  NS_IMETHOD SetWritable(PRBool aWritable); \
+  NS_IMETHOD SetAsInt8(PRUint8 aValue); \
+  NS_IMETHOD SetAsInt16(PRInt16 aValue); \
+  NS_IMETHOD SetAsInt32(PRInt32 aValue); \
+  NS_IMETHOD SetAsInt64(PRInt64 aValue); \
+  NS_IMETHOD SetAsUint8(PRUint8 aValue); \
+  NS_IMETHOD SetAsUint16(PRUint16 aValue); \
+  NS_IMETHOD SetAsUint32(PRUint32 aValue); \
+  NS_IMETHOD SetAsUint64(PRUint64 aValue); \
+  NS_IMETHOD SetAsFloat(float aValue); \
+  NS_IMETHOD SetAsDouble(double aValue); \
+  NS_IMETHOD SetAsBool(PRBool aValue); \
+  NS_IMETHOD SetAsChar(char aValue); \
+  NS_IMETHOD SetAsWChar(PRUnichar aValue); \
+  NS_IMETHOD SetAsID(const nsID & aValue); \
+  NS_IMETHOD SetAsAString(const nsAString & aValue); \
+  NS_IMETHOD SetAsDOMString(const nsAString & aValue); \
+  NS_IMETHOD SetAsACString(const nsACString & aValue); \
+  NS_IMETHOD SetAsAUTF8String(const nsACString & aValue); \
+  NS_IMETHOD SetAsString(const char *aValue); \
+  NS_IMETHOD SetAsWString(const PRUnichar *aValue); \
+  NS_IMETHOD SetAsISupports(nsISupports *aValue); \
+  NS_IMETHOD SetAsInterface(const nsIID & iid, void * iface); \
+  NS_IMETHOD SetAsArray(PRUint16 type, const nsIID * iid, PRUint32 count, void * ptr); \
+  NS_IMETHOD SetAsStringWithSize(PRUint32 size, const char *str); \
+  NS_IMETHOD SetAsWStringWithSize(PRUint32 size, const PRUnichar *str); \
+  NS_IMETHOD SetAsVoid(void); \
+  NS_IMETHOD SetAsEmpty(void); \
+  NS_IMETHOD SetAsEmptyArray(void); \
+  NS_IMETHOD SetFromVariant(nsIVariant *aValue); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIWRITABLEVARIANT(_to) \
@@ -438,7 +680,7 @@ class NS_NO_VTABLE nsIWritableVariant : public nsIVariant {
   NS_IMETHOD SetAsAUTF8String(const nsACString & aValue) { return _to SetAsAUTF8String(aValue); } \
   NS_IMETHOD SetAsString(const char *aValue) { return _to SetAsString(aValue); } \
   NS_IMETHOD SetAsWString(const PRUnichar *aValue) { return _to SetAsWString(aValue); } \
-  NS_IMETHOD SetAsISupports(nsISupports * aValue) { return _to SetAsISupports(aValue); } \
+  NS_IMETHOD SetAsISupports(nsISupports *aValue) { return _to SetAsISupports(aValue); } \
   NS_IMETHOD SetAsInterface(const nsIID & iid, void * iface) { return _to SetAsInterface(iid, iface); } \
   NS_IMETHOD SetAsArray(PRUint16 type, const nsIID * iid, PRUint32 count, void * ptr) { return _to SetAsArray(type, iid, count, ptr); } \
   NS_IMETHOD SetAsStringWithSize(PRUint32 size, const char *str) { return _to SetAsStringWithSize(size, str); } \
@@ -446,7 +688,7 @@ class NS_NO_VTABLE nsIWritableVariant : public nsIVariant {
   NS_IMETHOD SetAsVoid(void) { return _to SetAsVoid(); } \
   NS_IMETHOD SetAsEmpty(void) { return _to SetAsEmpty(); } \
   NS_IMETHOD SetAsEmptyArray(void) { return _to SetAsEmptyArray(); } \
-  NS_IMETHOD SetFromVariant(nsIVariant * aValue) { return _to SetFromVariant(aValue); } 
+  NS_IMETHOD SetFromVariant(nsIVariant *aValue) { return _to SetFromVariant(aValue); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIWRITABLEVARIANT(_to) \
@@ -472,7 +714,7 @@ class NS_NO_VTABLE nsIWritableVariant : public nsIVariant {
   NS_IMETHOD SetAsAUTF8String(const nsACString & aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsAUTF8String(aValue); } \
   NS_IMETHOD SetAsString(const char *aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsString(aValue); } \
   NS_IMETHOD SetAsWString(const PRUnichar *aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsWString(aValue); } \
-  NS_IMETHOD SetAsISupports(nsISupports * aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsISupports(aValue); } \
+  NS_IMETHOD SetAsISupports(nsISupports *aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsISupports(aValue); } \
   NS_IMETHOD SetAsInterface(const nsIID & iid, void * iface) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsInterface(iid, iface); } \
   NS_IMETHOD SetAsArray(PRUint16 type, const nsIID * iid, PRUint32 count, void * ptr) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsArray(type, iid, count, ptr); } \
   NS_IMETHOD SetAsStringWithSize(PRUint32 size, const char *str) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsStringWithSize(size, str); } \
@@ -480,8 +722,226 @@ class NS_NO_VTABLE nsIWritableVariant : public nsIVariant {
   NS_IMETHOD SetAsVoid(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsVoid(); } \
   NS_IMETHOD SetAsEmpty(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsEmpty(); } \
   NS_IMETHOD SetAsEmptyArray(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetAsEmptyArray(); } \
-  NS_IMETHOD SetFromVariant(nsIVariant * aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetFromVariant(aValue); } 
+  NS_IMETHOD SetFromVariant(nsIVariant *aValue) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetFromVariant(aValue); } 
 
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsWritableVariant : public nsIWritableVariant
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSIWRITABLEVARIANT
+
+  nsWritableVariant();
+
+private:
+  ~nsWritableVariant();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsWritableVariant, nsIWritableVariant)
+
+nsWritableVariant::nsWritableVariant()
+{
+  /* member initializers and constructor code */
+}
+
+nsWritableVariant::~nsWritableVariant()
+{
+  /* destructor code */
+}
+
+/* attribute PRBool writable; */
+NS_IMETHODIMP nsWritableVariant::GetWritable(PRBool *aWritable)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP nsWritableVariant::SetWritable(PRBool aWritable)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsInt8 (in PRUint8 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsInt8(PRUint8 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsInt16 (in PRInt16 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsInt16(PRInt16 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsInt32 (in PRInt32 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsInt32(PRInt32 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsInt64 (in PRInt64 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsInt64(PRInt64 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsUint8 (in PRUint8 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsUint8(PRUint8 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsUint16 (in PRUint16 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsUint16(PRUint16 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsUint32 (in PRUint32 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsUint32(PRUint32 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsUint64 (in PRUint64 aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsUint64(PRUint64 aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsFloat (in float aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsFloat(float aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsDouble (in double aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsDouble(double aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsBool (in PRBool aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsBool(PRBool aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsChar (in char aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsChar(char aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsWChar (in wchar aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsWChar(PRUnichar aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsID (in nsIDRef aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsID(const nsID & aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsAString (in AString aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsAString(const nsAString & aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsDOMString (in DOMString aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsDOMString(const nsAString & aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsACString (in ACString aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsACString(const nsACString & aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsAUTF8String (in AUTF8String aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsAUTF8String(const nsACString & aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsString (in string aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsString(const char *aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsWString (in wstring aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsWString(const PRUnichar *aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsISupports (in nsISupports aValue); */
+NS_IMETHODIMP nsWritableVariant::SetAsISupports(nsISupports *aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsInterface (in nsIIDRef iid, [iid_is (iid)] in nsQIResult iface); */
+NS_IMETHODIMP nsWritableVariant::SetAsInterface(const nsIID & iid, void * iface)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* [noscript] void setAsArray (in PRUint16 type, in nsIIDPtr iid, in PRUint32 count, in voidPtr ptr); */
+NS_IMETHODIMP nsWritableVariant::SetAsArray(PRUint16 type, const nsIID * iid, PRUint32 count, void * ptr)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsStringWithSize (in PRUint32 size, [size_is (size)] in string str); */
+NS_IMETHODIMP nsWritableVariant::SetAsStringWithSize(PRUint32 size, const char *str)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsWStringWithSize (in PRUint32 size, [size_is (size)] in wstring str); */
+NS_IMETHODIMP nsWritableVariant::SetAsWStringWithSize(PRUint32 size, const PRUnichar *str)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsVoid (); */
+NS_IMETHODIMP nsWritableVariant::SetAsVoid()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsEmpty (); */
+NS_IMETHODIMP nsWritableVariant::SetAsEmpty()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setAsEmptyArray (); */
+NS_IMETHODIMP nsWritableVariant::SetAsEmptyArray()
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setFromVariant (in nsIVariant aValue); */
+NS_IMETHODIMP nsWritableVariant::SetFromVariant(nsIVariant *aValue)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 // The contractID for the generic implementation built in to xpcom.
 #define NS_VARIANT_CONTRACTID "@mozilla.org/variant;1"

@@ -1,29 +1,19 @@
-/* $Id: webtest.cpp 170187 2025-08-11 17:18:47Z klaus $ */
+/* $Id: webtest.cpp 126999 2018-11-28 20:08:12Z klaus $ */
 /** @file
  * webtest.cpp:
  *      demo webservice client in C++. This mimics some of the
  *      functionality of VBoxManage for testing purposes.
  */
 /*
- * Copyright (C) 2006-2025 Oracle and/or its affiliates.
+ * Copyright (C) 2006-2017 Oracle Corporation
  *
- * This file is part of VirtualBox base platform packages, as
- * available from https://www.virtualbox.org.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation, in version 3 of the
- * License.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, see <https://www.gnu.org/licenses>.
- *
- * SPDX-License-Identifier: GPL-3.0-only
+ * This file is part of VirtualBox Open Source Edition (OSE), as
+ * available from http://www.virtualbox.org. This file is free software;
+ * you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GPL) as published by the Free Software
+ * Foundation, in version 2 as it comes in the "COPYING" file of the
+ * VirtualBox OSE distribution. VirtualBox OSE is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
  */
 
 // gSOAP headers (must come after vbox includes because it checks for conflicting defs)
@@ -33,12 +23,12 @@
 #include "vboxwebsrv.nsmap"
 
 #include <iostream>
-#include <iprt/sanitized/sstream>
-#include <iprt/sanitized/string>
+#include <sstream>
+#include <string>
 
 #include <iprt/initterm.h>
 #include <iprt/message.h>
-#include <iprt/errcore.h>
+#include <iprt/err.h>
 
 
 static void usage(int exitcode)
@@ -93,9 +83,9 @@ int main(int argc, char* argv[])
     const char *pcszArgEndpoint = "http://localhost:18083/";
 
     /* SSL callbacks drag in IPRT sem/thread use, so make sure it is ready. */
-    int vrc = RTR3InitExe(argc, &argv, 0);
-    if (RT_FAILURE(vrc))
-        return RTMsgInitFailure(vrc);
+    int rc = RTR3InitExe(argc, &argv, 0);
+    if (RT_FAILURE(rc))
+        return RTMsgInitFailure(rc);
 
     int ap;
     for (ap = 1; ap < argc; ap++)

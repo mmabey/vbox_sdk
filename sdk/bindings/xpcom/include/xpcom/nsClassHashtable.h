@@ -123,7 +123,7 @@ template<class KeyClass,class T>
 PRBool
 nsClassHashtableMT<KeyClass,T>::Get(KeyType aKey, T** retVal) const
 {
-  RTSemFastMutexRequest(this->mLock);
+  PR_Lock(this->mLock);
 
   typename nsBaseHashtableMT<KeyClass,nsAutoPtr<T>,T*>::EntryType* ent =
     this->GetEntry(aKey);
@@ -133,7 +133,7 @@ nsClassHashtableMT<KeyClass,T>::Get(KeyType aKey, T** retVal) const
     if (retVal)
       *retVal = ent->mData;
 
-    RTSemFastMutexRelease(this->mLock);
+    PR_Unlock(this->mLock);
 
     return PR_TRUE;
   }
@@ -141,7 +141,7 @@ nsClassHashtableMT<KeyClass,T>::Get(KeyType aKey, T** retVal) const
   if (retVal)
     *retVal = nsnull;
 
-  RTSemFastMutexRelease(this->mLock);
+  PR_Unlock(this->mLock);
 
   return PR_FALSE;
 }

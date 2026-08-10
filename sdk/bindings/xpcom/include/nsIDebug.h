@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/src/libs/xpcom18a4/xpcom/base/nsIDebug.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/src/libs/xpcom18a4/xpcom/base/nsIDebug.idl
  */
 
 #ifndef __gen_nsIDebug_h__
@@ -22,6 +22,14 @@
   {0x3bf0c3d7, 0x3bd9, 0x4cf2, \
     { 0xa9, 0x71, 0x33, 0x57, 0x2c, 0x50, 0x3e, 0x1e }}
 
+/**
+ * nsIDebug is an interface between XPCOM Glue and XPCOM.  Users should access
+ * the nsIDebug interface through the static class nsDebug.
+ * @see nsDebug.h
+ *    
+ * @status UNDER_REVIEW
+ *
+ */
 class NS_NO_VTABLE nsIDebug : public nsISupports {
  public: 
 
@@ -43,10 +51,10 @@ class NS_NO_VTABLE nsIDebug : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDEBUG \
-  NS_IMETHOD Assertion(const char *aStr, const char *aExpr, const char *aFile, PRInt32 aLine) NS_OVERRIDE; \
-  NS_IMETHOD Warning(const char *aStr, const char *aFile, PRInt32 aLine) NS_OVERRIDE; \
-  NS_IMETHOD Break(const char *aFile, PRInt32 aLine) NS_OVERRIDE; \
-  NS_IMETHOD Abort(const char *aFile, PRInt32 aLine) NS_OVERRIDE; 
+  NS_IMETHOD Assertion(const char *aStr, const char *aExpr, const char *aFile, PRInt32 aLine); \
+  NS_IMETHOD Warning(const char *aStr, const char *aFile, PRInt32 aLine); \
+  NS_IMETHOD Break(const char *aFile, PRInt32 aLine); \
+  NS_IMETHOD Abort(const char *aFile, PRInt32 aLine); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDEBUG(_to) \
@@ -61,6 +69,65 @@ class NS_NO_VTABLE nsIDebug : public nsISupports {
   NS_IMETHOD Warning(const char *aStr, const char *aFile, PRInt32 aLine) { return !_to ? NS_ERROR_NULL_POINTER : _to->Warning(aStr, aFile, aLine); } \
   NS_IMETHOD Break(const char *aFile, PRInt32 aLine) { return !_to ? NS_ERROR_NULL_POINTER : _to->Break(aFile, aLine); } \
   NS_IMETHOD Abort(const char *aFile, PRInt32 aLine) { return !_to ? NS_ERROR_NULL_POINTER : _to->Abort(aFile, aLine); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsDebug : public nsIDebug
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSIDEBUG
+
+  nsDebug();
+
+private:
+  ~nsDebug();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsDebug, nsIDebug)
+
+nsDebug::nsDebug()
+{
+  /* member initializers and constructor code */
+}
+
+nsDebug::~nsDebug()
+{
+  /* destructor code */
+}
+
+/* void assertion (in string aStr, in string aExpr, in string aFile, in long aLine); */
+NS_IMETHODIMP nsDebug::Assertion(const char *aStr, const char *aExpr, const char *aFile, PRInt32 aLine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void warning (in string aStr, in string aFile, in long aLine); */
+NS_IMETHODIMP nsDebug::Warning(const char *aStr, const char *aFile, PRInt32 aLine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void break (in string aFile, in long aLine); */
+NS_IMETHODIMP nsDebug::Break(const char *aFile, PRInt32 aLine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void abort (in string aFile, in long aLine); */
+NS_IMETHODIMP nsDebug::Abort(const char *aFile, PRInt32 aLine)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 #endif /* __gen_nsIDebug_h__ */

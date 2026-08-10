@@ -1,69 +1,39 @@
-#!/bin/sh
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long
-# pylint: disable=too-many-statements
-# pylint: disable=deprecated-module
-# $Id: vboxshell.py 170187 2025-08-11 17:18:47Z klaus $
+# $Id: vboxshell.py 123468 2018-07-05 14:44:31Z klaus $
 
-# The following checks for the right (i.e. most recent) Python binary available
-# and re-starts the script using that binary (like a shell wrapper).
-#
-# Using a shebang like "#!/bin/env python" on newer Fedora/Debian distros is banned [1]
-# and also won't work on other newer distros (Ubuntu >= 23.10), as those only ship
-# python3 without a python->python3 symlink anymore.
-#
-# Note: As Python 2 is EOL, we consider this last (and hope for the best).
-#
-# [1] https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/2PD5RNJRKPN2DVTNGJSBHR5RUSVZSDZI/
-''':'
-for python_bin in python3 python python2
-do
-    type "$python_bin" > /dev/null 2>&1 && exec "$python_bin" "$0" "$@"
-done
-echo >&2 "ERROR: Python not found! Please install this first in order to run this program."
-exit 1
-':'''
+"""
+VirtualBox Python Shell.
+
+This program is a simple interactive shell for VirtualBox. You can query
+information and issue commands from a simple command line.
+
+It also provides you with examples on how to use VirtualBox's Python API.
+This shell is even somewhat documented, supports TAB-completion and
+history if you have Python readline installed.
+
+Finally, shell allows arbitrary custom extensions, just create
+.VirtualBox/shexts/ and drop your extensions there.
+                                               Enjoy.
+
+P.S. Our apologies for the code quality.
+"""
 
 from __future__ import print_function
 
-# VirtualBox Python Shell.
-#
-# This program is a simple interactive shell for VirtualBox. You can query
-# information and issue commands from a simple command line.
-#
-# It also provides you with examples on how to use VirtualBox's Python API.
-# This shell is even somewhat documented, supports TAB-completion and
-# history if you have Python readline installed.
-#
-# Finally, shell allows arbitrary custom extensions, just create
-# .VirtualBox/shexts/ and drop your extensions there.
-#                                                Enjoy.
-#
-# P.S. Our apologies for the code quality.
-
 __copyright__ = \
 """
-Copyright (C) 2009-2025 Oracle and/or its affiliates.
+Copyright (C) 2009-2017 Oracle Corporation
 
-This file is part of VirtualBox base platform packages, as
-available from https://www.virtualbox.org.
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation, in version 3 of the
-License.
-
-This program is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, see <https://www.gnu.org/licenses>.
-
-SPDX-License-Identifier: GPL-3.0-only
+This file is part of VirtualBox Open Source Edition (OSE), as
+available from http://www.virtualbox.org. This file is free software;
+you can redistribute it and/or modify it under the terms of the GNU
+General Public License (GPL) as published by the Free Software
+Foundation, in version 2 as it comes in the "COPYING" file of the
+VirtualBox OSE distribution. VirtualBox OSE is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
 """
-__version__ = "$Revision: 170187 $"
+__version__ = "$Revision: 123468 $"
 
 
 import gc
@@ -71,11 +41,11 @@ import os
 import sys
 import traceback
 import shlex
-import tempfile
 import time
 import re
 import platform
 from optparse import OptionParser
+from pprint import pprint
 
 
 #
@@ -127,9 +97,10 @@ if g_fHasReadline:
             taken from:
             http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/496812
             """
-            if text == "":
+            if False and text == "":
                 return ['\t', None][state]
-            return rlcompleter.Completer.complete(self, text, state)
+            else:
+                return rlcompleter.Completer.complete(self, text, state)
 
         def canBePath(self, _phrase, word):
             return word.startswith('/')
@@ -238,7 +209,7 @@ def progressBar(ctx, progress, wait=1000):
 
 def printErr(_ctx, e):
     oVBoxMgr = _ctx['global']
-    if oVBoxMgr.xcptIsOurXcptKind(e):
+    if oVBoxMgr.errIsOurXcptKind(e):
         print(colored('%s: %s' % (oVBoxMgr.xcptToString(e), oVBoxMgr.xcptGetMessage(e)), 'red'))
     else:
         print(colored(str(e), 'red'))
@@ -269,24 +240,9 @@ def colDev(_ctx, pcidev):
 def colSizeM(_ctx, mbyte):
     return colored(str(mbyte)+'M', 'red')
 
-def platformArchFromString(ctx, arch):
-    if arch in [ 'x86', 'x86_64', 'x64' ]:
-        return ctx['global'].constants.PlatformArchitecture_x86
-    if arch in ['arm', 'aarch32', 'aarch64' ]:
-        return ctx['global'].constants.PlatformArchitecture_ARM
-    return ctx['global'].constants.PlatformArchitecture_None
-
-def createVm(ctx, name, arch, kind):
+def createVm(ctx, name, kind):
     vbox = ctx['vb']
-    enmArch = platformArchFromString(ctx, arch)
-    if enmArch == ctx['global'].constants.PlatformArchitecture_None:
-        print("wrong / invalid platform architecture specified!")
-        return
-    sFlags = ''
-    sCipher = '' ## @todo No encryption support here yet!
-    sPasswordID = ''
-    sPassword = ''
-    mach = vbox.createMachine("", name, enmArch, [], kind, sFlags, sCipher, sPasswordID, sPassword)
+    mach = vbox.createMachine("", name, [], kind, "")
     mach.saveSettings()
     print("created machine with UUID", mach.id)
     vbox.registerMachine(mach)
@@ -308,10 +264,10 @@ def removeVm(ctx, mach):
     getMachines(ctx, True)
 
 def startVm(ctx, mach, vmtype):
+    vbox = ctx['vb']
     perf = ctx['perf']
     session = ctx['global'].getSessionObject()
-    asEnv = []
-    progress = mach.launchVMProcess(session, vmtype, asEnv)
+    progress = mach.launchVMProcess(session, vmtype, "")
     if progressBar(ctx, progress, 100) and int(progress.resultCode) == 0:
         # we ignore exceptions to allow starting VM even if
         # perf collector cannot be started
@@ -330,7 +286,7 @@ class CachedMach:
             self.name = mach.name
         else:
             self.name = '<inaccessible>'
-        self.id = mach.id # pylint: disable=invalid-name
+        self.id = mach.id
 
 def cacheMachines(_ctx, lst):
     result = []
@@ -346,18 +302,22 @@ def getMachines(ctx, invalidate = False, simple=False):
             ctx['_machlistsimple'] = cacheMachines(ctx, ctx['_machlist'])
         if simple:
             return ctx['_machlistsimple']
-        return ctx['_machlist']
-    return []
+        else:
+            return ctx['_machlist']
+    else:
+        return []
 
 def asState(var):
     if var:
         return colored('on', 'green')
-    return colored('off', 'green')
+    else:
+        return colored('off', 'green')
 
 def asFlag(var):
     if var:
         return 'yes'
-    return 'no'
+    else:
+        return 'no'
 
 def getFacilityStatus(ctx, guest, facilityType):
     (status, _timestamp) = guest.getFacilityStatus(facilityType)
@@ -369,18 +329,17 @@ def perfStats(ctx, mach):
     for metric in ctx['perf'].query(["*"], [mach]):
         print(metric['name'], metric['values_as_string'])
 
-def guestExec(_ctx, _machine, _console, cmds):
-    exec(cmds) # pylint: disable=exec-used
+def guestExec(ctx, machine, console, cmds):
+    exec(cmds)
 
 def printMouseEvent(_ctx, mev):
-    print("Mouse: mode=%d x=%d y=%d z=%d w=%d buttons=%x" % (mev.mode, mev.x, mev.y, mev.z, mev.w, mev.buttons))
+    print("Mouse : mode=%d x=%d y=%d z=%d w=%d buttons=%x" % (mev.mode, mev.x, mev.y, mev.z, mev.w, mev.buttons))
 
 def printKbdEvent(ctx, kev):
     print("Kbd: ", ctx['global'].getArray(kev, 'scancodes'))
 
 def printMultiTouchEvent(ctx, mtev):
-    print("MultiTouch: %s contacts=%d time=%d" \
-        % ("touchscreen" if mtev.isTouchScreen else "touchpad", mtev.contactCount, mtev.scanTime))
+    print("MultiTouch : contacts=%d time=%d" % (mtev.contactCount, mtev.scanTime))
     xPositions = ctx['global'].getArray(mtev, 'xPositions')
     yPositions = ctx['global'].getArray(mtev, 'yPositions')
     contactIds = ctx['global'].getArray(mtev, 'contactIds')
@@ -404,11 +363,7 @@ def monitorSource(ctx, eventSource, active, dur):
         elif  evtype == ctx['global'].constants.VBoxEventType_OnGuestPropertyChanged:
             gpcev = ctx['global'].queryInterface(event, 'IGuestPropertyChangedEvent')
             if gpcev:
-                if gpcev.fWasDeleted is True:
-                    print("property %s was deleted" % (gpcev.name))
-                else:
-                    print("guest property change: name=%s value=%s flags='%s'" %
-                          (gpcev.name, gpcev.value, gpcev.flags))
+                print("guest property change: name=%s value=%s" % (gpcev.name, gpcev.value))
         elif  evtype == ctx['global'].constants.VBoxEventType_OnMousePointerShapeChanged:
             psev = ctx['global'].queryInterface(event, 'IMousePointerShapeChangedEvent')
             if psev:
@@ -440,6 +395,7 @@ def monitorSource(ctx, eventSource, active, dur):
                 handleEventImpl(ctx['global'].queryInterface(event, 'IEvent'))
             except:
                 traceback.print_exc()
+            pass
 
     if active:
         listener = ctx['global'].createListener(EventListener)
@@ -465,13 +421,17 @@ def monitorSource(ctx, eventSource, active, dur):
     # We need to catch all exceptions here, otherwise listener will never be unregistered
     except:
         traceback.print_exc()
-
+        pass
     if listener and registered:
         eventSource.unregisterListener(listener)
 
 
 g_tsLast = 0
 def recordDemo(ctx, console, filename, dur):
+    demo = open(filename, 'w')
+    header = "VM=" + console.machine.name + "\n"
+    demo.write(header)
+
     global g_tsLast
     g_tsLast = time.time()
 
@@ -500,112 +460,140 @@ def recordDemo(ctx, console, filename, dur):
     registered = False
     # we create an aggregated event source to listen for multiple event sources (keyboard and mouse in our case)
     agg = console.eventSource.createAggregator([console.keyboard.eventSource, console.mouse.eventSource])
-    with open(filename, 'w', encoding='utf-8') as demo:
-        header = "VM=" + console.machine.name + "\n"
-        demo.write(header)
-        if dur == -1:
-            # not infinity, but close enough
-            dur = 100000
-        try:
-            agg.registerListener(listener, [ctx['global'].constants.VBoxEventType_Any], False)
-            registered = True
-            end = time.time() + dur
-            while  time.time() < end:
-                event = agg.getEvent(listener, 1000)
-                if event:
-                    handleEventImpl(event)
-                    # keyboard/mouse events aren't waitable, so no need for eventProcessed
-        # We need to catch all exceptions here, otherwise listener will never be unregistered
-        except:
-            traceback.print_exc()
-
-        demo.close()
+    demo = open(filename, 'w')
+    header = "VM=" + console.machine.name + "\n"
+    demo.write(header)
+    if dur == -1:
+        # not infinity, but close enough
+        dur = 100000
+    try:
+        agg.registerListener(listener, [ctx['global'].constants.VBoxEventType_Any], False)
+        registered = True
+        end = time.time() + dur
+        while  time.time() < end:
+            event = agg.getEvent(listener, 1000)
+            if event:
+                handleEventImpl(event)
+                # keyboard/mouse events aren't waitable, so no need for eventProcessed
+    # We need to catch all exceptions here, otherwise listener will never be unregistered
+    except:
+        traceback.print_exc()
+        pass
+    demo.close()
     if listener and registered:
         agg.unregisterListener(listener)
 
 
 def playbackDemo(ctx, console, filename, dur):
+    demo = open(filename, 'r')
+
     if dur == -1:
         # not infinity, but close enough
         dur = 100000
-    with open(filename, 'r', encoding='utf-8') as demo:
-        header = demo.readline()
-        if g_fVerbose:
-            print("Header is", header)
-        basere = re.compile(r'(?P<s>\d+): (?P<t>[km]) (?P<p>.*)')
-        mre = re.compile(r'(?P<a>\d+) (?P<x>-*\d+) (?P<y>-*\d+) (?P<z>-*\d+) (?P<w>-*\d+) (?P<b>-*\d+)')
-        kre = re.compile(r'\d+')
 
-        kbd = console.keyboard
-        mouse = console.mouse
+    header = demo.readline()
+    print("Header is", header)
+    basere = re.compile(r'(?P<s>\d+): (?P<t>[km]) (?P<p>.*)')
+    mre = re.compile(r'(?P<a>\d+) (?P<x>-*\d+) (?P<y>-*\d+) (?P<z>-*\d+) (?P<w>-*\d+) (?P<b>-*\d+)')
+    kre = re.compile(r'\d+')
 
-        try:
-            end = time.time() + dur
-            for line in demo:
-                if time.time() > end:
-                    break
-                match = basere.search(line)
-                if match is None:
-                    continue
+    kbd = console.keyboard
+    mouse = console.mouse
 
-                rdict = match.groupdict()
-                stamp = rdict['s']
-                params = rdict['p']
-                rtype = rdict['t']
+    try:
+        end = time.time() + dur
+        for line in demo:
+            if time.time() > end:
+                break
+            match = basere.search(line)
+            if match is None:
+                continue
 
-                time.sleep(float(stamp)/1000)
+            rdict = match.groupdict()
+            stamp = rdict['s']
+            params = rdict['p']
+            rtype = rdict['t']
 
-                if rtype == 'k':
-                    codes = kre.findall(params)
-                    if g_fVerbose:
-                        print("KBD:", codes)
-                    kbd.putScancodes(codes)
-                elif rtype == 'm':
-                    mouseEvent = mre.search(params)
-                    if mouseEvent is not None:
-                        mdict = mouseEvent.groupdict()
-                        if mdict['a'] == '1':
-                            if g_fVerbose:
-                                print("MA: ", mdict['x'], mdict['y'], mdict['z'], mdict['b'])
-                            mouse.putMouseEventAbsolute(int(mdict['x']), int(mdict['y']), int(mdict['z']), int(mdict['w']), int(mdict['b']))
-                        else:
-                            if g_fVerbose:
-                                print("MR: ", mdict['x'], mdict['y'], mdict['b'])
-                            mouse.putMouseEvent(int(mdict['x']), int(mdict['y']), int(mdict['z']), int(mdict['w']), int(mdict['b']))
+            time.sleep(float(stamp)/1000)
 
-        # We need to catch all exceptions here, to close file
-        except KeyboardInterrupt:
-            ctx['interrupt'] = True
-        except:
-            traceback.print_exc()
+            if rtype == 'k':
+                codes = kre.findall(params)
+                #print("KBD:", codes)
+                kbd.putScancodes(codes)
+            elif rtype == 'm':
+                mm = mre.search(params)
+                if mm is not None:
+                    mdict = mm.groupdict()
+                    if mdict['a'] == '1':
+                        # absolute
+                        #print("MA: ", mdict['x'], mdict['y'], mdict['z'], mdict['b'])
+                        mouse.putMouseEventAbsolute(int(mdict['x']), int(mdict['y']), int(mdict['z']), int(mdict['w']), int(mdict['b']))
+                    else:
+                        #print("MR: ", mdict['x'], mdict['y'], mdict['b'])
+                        mouse.putMouseEvent(int(mdict['x']), int(mdict['y']), int(mdict['z']), int(mdict['w']), int(mdict['b']))
 
-        demo.close()
+    # We need to catch all exceptions here, to close file
+    except KeyboardInterrupt:
+        ctx['interrupt'] = True
+    except:
+        traceback.print_exc()
+        pass
+    demo.close()
 
-def takeScreenshot(ctx, console, args):
+
+def takeScreenshotOld(_ctx, console, args):
+    from PIL import Image
     display = console.display
     if len(args) > 0:
-        filename = args[0]
+        f = args[0]
     else:
-        filename = os.path.join(tempfile.gettempdir(), "screenshot.png")
+        f = "/tmp/screenshot.png"
     if len(args) > 3:
         screen = int(args[3])
     else:
         screen = 0
-    (fbw, fbh, _fbbpp, _fbx, _fby, _) = display.getScreenResolution(screen)
+    (fbw, fbh, _fbbpp, fbx, fby, _) = display.getScreenResolution(screen)
     if len(args) > 1:
-        width = int(args[1])
+        w = int(args[1])
     else:
-        width = fbw
+        w = fbw
     if len(args) > 2:
-        height = int(args[2])
+        h = int(args[2])
     else:
-        height = fbh
+        h = fbh
 
-    print("Saving screenshot (%d x %d) screen %d in %s..." % (width, height, screen, filename))
-    data = display.takeScreenShotToArray(screen, width, height, ctx['const'].BitmapFormat_PNG)
-    with open(filename, 'wb') as pngfile:
-        pngfile.write(data)
-        pngfile.close()
+    print("Saving screenshot (%d x %d) screen %d in %s..." % (w, h, screen, f))
+    data = display.takeScreenShotToArray(screen, w, h, ctx['const'].BitmapFormat_RGBA)
+    size = (w, h)
+    mode = "RGBA"
+    im = Image.frombuffer(mode, size, str(data), "raw", mode, 0, 1)
+    im.save(f, "PNG")
+
+def takeScreenshot(_ctx, console, args):
+    display = console.display
+    if len(args) > 0:
+        f = args[0]
+    else:
+        f = "/tmp/screenshot.png"
+    if len(args) > 3:
+        screen = int(args[3])
+    else:
+        screen = 0
+    (fbw, fbh, _fbbpp, fbx, fby, _) = display.getScreenResolution(screen)
+    if len(args) > 1:
+        w = int(args[1])
+    else:
+        w = fbw
+    if len(args) > 2:
+        h = int(args[2])
+    else:
+        h = fbh
+
+    print("Saving screenshot (%d x %d) screen %d in %s..." % (w, h, screen, f))
+    data = display.takeScreenShotToArray(screen, w, h, ctx['const'].BitmapFormat_PNG)
+    pngfile = open(f, 'wb')
+    pngfile.write(data)
+    pngfile.close()
 
 def teleport(ctx, _session, console, args):
     if args[0].find(":") == -1:
@@ -633,9 +621,6 @@ def teleport(ctx, _session, console, args):
 
 def guestStats(ctx, console, args):
     guest = console.guest
-    if not guest:
-        print("Guest is not in a running state")
-        return
     # we need to set up guest statistics
     if len(args) > 0 :
         update = args[0]
@@ -672,28 +657,23 @@ def mountIso(_ctx, machine, _session, args):
     machine.mountMedium(args[0], args[1], args[2], args[3], args[4])
     machine.saveSettings()
 
-def cond(condToCheck, resTrue, resFalse):
-    if condToCheck:
-        return resTrue
-    return resFalse
+def cond(c, v1, v2):
+    if c:
+        return v1
+    else:
+        return v2
 
-def printHostUsbDev(ctx, usbdev):
-    print("  %s: %s (vendorId=%d productId=%d serial=%s) %s" \
-          % (usbdev.id, colored(usbdev.product, 'blue'), usbdev.vendorId, usbdev.productId, usbdev.serialNumber, asEnumElem(ctx, 'USBDeviceState', usbdev.state)))
+def printHostUsbDev(ctx, ud):
+    print("  %s: %s (vendorId=%d productId=%d serial=%s) %s" % (ud.id, colored(ud.product, 'blue'), ud.vendorId, ud.productId, ud.serialNumber, asEnumElem(ctx, 'USBDeviceState', ud.state)))
 
-def printUsbDev(_ctx, usbdev):
-    print("  %s: %s (vendorId=%d productId=%d serial=%s)" \
-          % (usbdev.id,  colored(usbdev.product, 'blue'), usbdev.vendorId, usbdev.productId, usbdev.serialNumber))
+def printUsbDev(_ctx, ud):
+    print("  %s: %s (vendorId=%d productId=%d serial=%s)" % (ud.id,  colored(ud.product, 'blue'), ud.vendorId, ud.productId, ud.serialNumber))
 
-def printSf(ctx, sharedfolder):
-    print("    name=%s host=%s %s %s" \
-          % (sharedfolder.name, colPath(ctx, sharedfolder.hostPath), cond(sharedfolder.accessible, "accessible", "not accessible"), cond(sharedfolder.writable, "writable", "read-only")))
+def printSf(ctx, sf):
+    print("    name=%s host=%s %s %s" % (sf.name, colPath(ctx, sf.hostPath), cond(sf.accessible, "accessible", "not accessible"), cond(sf.writable, "writable", "read-only")))
 
 def ginfo(ctx, console, _args):
     guest = console.guest
-    if not guest:
-        print("Guest is not in a running state")
-        return
     if guest.additionsRunLevel != ctx['const'].AdditionsRunLevelType_None:
         print("Additions active, version %s" % (guest.additionsVersion))
         print("Support seamless: %s" % (getFacilityStatus(ctx, guest, ctx['const'].AdditionsFacilityType_Seamless)))
@@ -704,20 +684,21 @@ def ginfo(ctx, console, _args):
         print("No additions")
     usbs = ctx['global'].getArray(console, 'USBDevices')
     print("Attached USB:")
-    for usbdev in usbs:
-        printUsbDev(ctx, usbdev)
+    for ud in usbs:
+        printUsbDev(ctx, ud)
     rusbs = ctx['global'].getArray(console, 'remoteUSBDevices')
     print("Remote USB:")
-    for usbdev in rusbs:
-        printHostUsbDev(ctx, usbdev)
+    for ud in rusbs:
+        printHostUsbDev(ctx, ud)
     print("Transient shared folders:")
     sfs = rusbs = ctx['global'].getArray(console, 'sharedFolders')
-    for sharedfolder in sfs:
-        printSf(ctx, sharedfolder)
+    for sf in sfs:
+        printSf(ctx, sf)
 
 def cmdExistingVm(ctx, mach, cmd, args):
     session = None
     try:
+        vbox = ctx['vb']
         session = ctx['global'].openMachineSession(mach, fPermitSharing=True)
     except Exception as e:
         printErr(ctx, "Session to '%s' not open: %s" % (mach.name, str(e)))
@@ -735,10 +716,10 @@ def cmdExistingVm(ctx, mach, cmd, args):
         session.unlockMachine()
         return
     console = session.console
-    ops = {'pause':           console.pause(),
-           'resume':          console.resume(),
-           'powerdown':       console.powerDown(),
-           'powerbutton':     console.powerButton(),
+    ops = {'pause':           lambda: console.pause(),
+           'resume':          lambda: console.resume(),
+           'powerdown':       lambda: console.powerDown(),
+           'powerbutton':     lambda: console.powerButton(),
            'stats':           lambda: perfStats(ctx, mach),
            'guest':           lambda: guestExec(ctx, mach, console, args),
            'ginfo':           lambda: ginfo(ctx, console, args),
@@ -763,7 +744,7 @@ def cmdExistingVm(ctx, mach, cmd, args):
     session.unlockMachine()
 
 
-def cmdClosedVm(ctx, mach, cmd, args=None, save=True):
+def cmdClosedVm(ctx, mach, cmd, args=[], save=True):
     session = ctx['global'].openMachineSession(mach, fPermitSharing=True)
     mach = session.machine
     try:
@@ -783,7 +764,7 @@ def cmdClosedVm(ctx, mach, cmd, args=None, save=True):
     ctx['global'].closeMachineSession(session)
 
 
-def cmdAnyVm(ctx, mach, cmd, args=None, save=False):
+def cmdAnyVm(ctx, mach, cmd, args=[], save=False):
     session = ctx['global'].openMachineSession(mach, fPermitSharing=True)
     mach = session.machine
     try:
@@ -827,12 +808,12 @@ class XPathNode:
                 xdict = match.groupdict()
                 attr = xdict['a']
                 val = xdict['v']
-                matches = str(getattr(self.obj, attr)) == val
+                matches = (str(getattr(self.obj, attr)) == val)
         except:
             pass
         return matches
     def apply(self, cmd):
-        exec(cmd, {'obj':self.obj, 'node':self, 'ctx':self.getCtx()}, {}) # pylint: disable=exec-used
+        exec(cmd, {'obj':self.obj, 'node':self, 'ctx':self.getCtx()}, {})
     def getCtx(self):
         if hasattr(self, 'ctx'):
             return self.ctx
@@ -876,7 +857,7 @@ class XPathNodeVM(XPathNode):
 class XPathNodeHolderNIC(XPathNodeHolder):
     def __init__(self, parent, mach):
         XPathNodeHolder.__init__(self, parent, mach, 'nics', XPathNodeVM, 'nics')
-        self.maxNic = mach.platform.properties.getMaxNetworkAdapters(mach.platform.chipsetType)
+        self.maxNic = self.getCtx()['vb'].systemProperties.getMaxNetworkAdapters(self.obj.chipsetType)
     def enum(self):
         children = []
         for i in range(0, self.maxNic):
@@ -917,20 +898,20 @@ def eval_xpath(ctx, scope):
 
 def argsToMach(ctx, args):
     if len(args) < 2:
-        print("usage: %s <vmname|uuid>" % (args[0]))
+        print("usage: %s [vmname|uuid]" % (args[0]))
         return None
     uuid = args[1]
     mach = machById(ctx, uuid)
-    if not mach:
+    if mach == None:
         print("Machine '%s' is unknown, use list command to find available machines" % (uuid))
     return mach
 
-def helpSingleCmd(cmd, help_text, from_ext):
-    if from_ext != 0:
-        spec = " [ext from "+from_ext+"]"
+def helpSingleCmd(cmd, h, sp):
+    if sp != 0:
+        spec = " [ext from "+sp+"]"
     else:
         spec = ""
-    print("    %s: %s%s" % (colored(cmd, 'blue'), help_text, spec))
+    print("    %s: %s%s" % (colored(cmd, 'blue'), h, spec))
 
 def helpCmd(_ctx, args):
     if len(args) == 1:
@@ -942,7 +923,7 @@ def helpCmd(_ctx, args):
     else:
         cmd = args[1]
         c = commands.get(cmd)
-        if not c:
+        if c == None:
             print("Command '%s' not known" % (cmd))
         else:
             helpSingleCmd(cmd, c[0], c[2])
@@ -975,10 +956,10 @@ def listCmd(ctx, _args):
 
 def infoCmd(ctx, args):
     if len(args) < 2:
-        print("usage: info <vmname|uuid>")
+        print("usage: info [vmname|uuid]")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     try:
         vmos = ctx['vb'].getGuestOSType(mach.OSTypeId)
@@ -989,13 +970,13 @@ def infoCmd(ctx, args):
     print("  Description [description]: %s" % (mach.description))
     print("  ID [n/a]: %s" % (mach.id))
     print("  OS Type [via OSTypeId]: %s" % (vmos.description if vmos is not None else mach.OSTypeId))
-    print("  Firmware [firmwareType]: %s (%s)" % (asEnumElem(ctx, "FirmwareType", mach.firmwareSettings.firmwareType), mach.firmwareSettings.firmwareType))
+    print("  Firmware [firmwareType]: %s (%s)" % (asEnumElem(ctx, "FirmwareType", mach.firmwareType), mach.firmwareType))
     print()
     print("  CPUs [CPUCount]: %d" % (mach.CPUCount))
     print("  RAM [memorySize]: %dM" % (mach.memorySize))
-    print("  VRAM [VRAMSize]: %dM" % (mach.graphicsAdapter.VRAMSize))
-    print("  Monitors [monitorCount]: %d" % (mach.graphicsAdapter.monitorCount))
-    print("  Chipset [chipsetType]: %s (%s)" % (asEnumElem(ctx, "ChipsetType", mach.platform.chipsetType), mach.platform.chipsetType))
+    print("  VRAM [VRAMSize]: %dM" % (mach.VRAMSize))
+    print("  Monitors [monitorCount]: %d" % (mach.monitorCount))
+    print("  Chipset [chipsetType]: %s (%s)" % (asEnumElem(ctx, "ChipsetType", mach.chipsetType), mach.chipsetType))
     print()
     print("  Clipboard mode [clipboardMode]: %s (%s)" % (asEnumElem(ctx, "ClipboardMode", mach.clipboardMode), mach.clipboardMode))
     print("  Machine status [n/a]: %s (%s)" % (asEnumElem(ctx, "SessionState", mach.sessionState), mach.sessionState))
@@ -1003,27 +984,28 @@ def infoCmd(ctx, args):
     if mach.teleporterEnabled:
         print("  Teleport target on port %d (%s)" % (mach.teleporterPort, mach.teleporterPassword))
         print()
-    print("  ACPI [BIOSSettings.ACPIEnabled]: %s" % (asState(mach.firmwareSettings.ACPIEnabled)))
-    print("  APIC [BIOSSettings.IOAPICEnabled]: %s" % (asState(mach.firmwareSettings.IOAPICEnabled)))
-    if mach.platform.architecture == ctx['global'].constants.PlatformArchitecture_x86:
-        hwVirtEnabled = mach.platform.x86.getHWVirtExProperty(ctx['global'].constants.HWVirtExPropertyType_Enabled)
-        print("  Hardware virtualization [guest win machine.setHWVirtExProperty(ctx[\\'const\\'].HWVirtExPropertyType_Enabled, value)]: " + asState(hwVirtEnabled))
-        hwVirtVPID = mach.platform.x86.getHWVirtExProperty(ctx['const'].HWVirtExPropertyType_VPID)
-        print("  VPID support [guest win machine.setHWVirtExProperty(ctx[\\'const\\'].HWVirtExPropertyType_VPID, value)]: " + asState(hwVirtVPID))
-        hwVirtNestedPaging = mach.platform.x86.getHWVirtExProperty(ctx['const'].HWVirtExPropertyType_NestedPaging)
-        print("  Nested paging [guest win machine.setHWVirtExProperty(ctx[\\'const\\'].HWVirtExPropertyType_NestedPaging, value)]: " + asState(hwVirtNestedPaging))
-        print("  HPET [HPETEnabled]: %s" % (asState(mach.platform.x86.HPETEnabled)))
+    bios = mach.BIOSSettings
+    print("  ACPI [BIOSSettings.ACPIEnabled]: %s" % (asState(bios.ACPIEnabled)))
+    print("  APIC [BIOSSettings.IOAPICEnabled]: %s" % (asState(bios.IOAPICEnabled)))
+    hwVirtEnabled = mach.getHWVirtExProperty(ctx['global'].constants.HWVirtExPropertyType_Enabled)
+    print("  Hardware virtualization [guest win machine.setHWVirtExProperty(ctx[\\'const\\'].HWVirtExPropertyType_Enabled, value)]: " + asState(hwVirtEnabled))
+    hwVirtVPID = mach.getHWVirtExProperty(ctx['const'].HWVirtExPropertyType_VPID)
+    print("  VPID support [guest win machine.setHWVirtExProperty(ctx[\\'const\\'].HWVirtExPropertyType_VPID, value)]: " + asState(hwVirtVPID))
+    hwVirtNestedPaging = mach.getHWVirtExProperty(ctx['const'].HWVirtExPropertyType_NestedPaging)
+    print("  Nested paging [guest win machine.setHWVirtExProperty(ctx[\\'const\\'].HWVirtExPropertyType_NestedPaging, value)]: " + asState(hwVirtNestedPaging))
 
-    print("  Hardware 3d acceleration [accelerate3DEnabled]: " + asState(mach.graphicsAdapter.isFeatureEnabled(ctx['const'].GraphicsFeature_Acceleration3D)))
-    print("  Use universal time [RTCUseUTC]: %s" % (asState(mach.platform.RTCUseUTC)))
-    audioAdp = mach.audioSettings.adapter
-    if audioAdp.enabled:
-        print("  Audio [via audioAdapter]: chip %s; host driver %s" % (asEnumElem(ctx, "AudioControllerType", audioAdp.audioController), asEnumElem(ctx, "AudioDriverType",  audioAdp.audioDriver)))
+    print("  Hardware 3d acceleration [accelerate3DEnabled]: " + asState(mach.accelerate3DEnabled))
+    print("  Hardware 2d video acceleration [accelerate2DVideoEnabled]: " + asState(mach.accelerate2DVideoEnabled))
+
+    print("  Use universal time [RTCUseUTC]: %s" % (asState(mach.RTCUseUTC)))
+    print("  HPET [HPETEnabled]: %s" % (asState(mach.HPETEnabled)))
+    if mach.audioAdapter.enabled:
+        print("  Audio [via audioAdapter]: chip %s; host driver %s" % (asEnumElem(ctx, "AudioControllerType", mach.audioAdapter.audioController), asEnumElem(ctx, "AudioDriverType",  mach.audioAdapter.audioDriver)))
     print("  CPU hotplugging [CPUHotPlugEnabled]: %s" % (asState(mach.CPUHotPlugEnabled)))
 
     print("  Keyboard [keyboardHIDType]: %s (%s)" % (asEnumElem(ctx, "KeyboardHIDType", mach.keyboardHIDType), mach.keyboardHIDType))
     print("  Pointing device [pointingHIDType]: %s (%s)" % (asEnumElem(ctx, "PointingHIDType", mach.pointingHIDType), mach.pointingHIDType))
-    print("  Last changed [n/a]: " + time.asctime(time.localtime(int(mach.lastStateChange)/1000)))
+    print("  Last changed [n/a]: " + time.asctime(time.localtime(mach.lastStateChange/1000)))
     # OSE has no VRDE
     try:
         print("  VRDE server [VRDEServer.enabled]: %s" % (asState(mach.VRDEServer.enabled)))
@@ -1052,30 +1034,30 @@ def infoCmd(ctx, args):
     if attaches:
         print()
         print(colCat(ctx, "  Media:"))
-    for att in attaches:
-        print("   Controller: '%s' port/device: %d:%d type: %s (%s):" % (att.controller, att.port, att.device, asEnumElem(ctx, "DeviceType", att.type), att.type))
-        medium = att.medium
-        if att.type == ctx['global'].constants.DeviceType_HardDisk:
+    for a in attaches:
+        print("   Controller: '%s' port/device: %d:%d type: %s (%s):" % (a.controller, a.port, a.device, asEnumElem(ctx, "DeviceType", a.type), a.type))
+        medium = a.medium
+        if a.type == ctx['global'].constants.DeviceType_HardDisk:
             print("   HDD:")
             print("    Id: %s" % (medium.id))
             print("    Location: %s" % (colPath(ctx, medium.location)))
             print("    Name: %s" % (medium.name))
             print("    Format: %s" % (medium.format))
 
-        if att.type == ctx['global'].constants.DeviceType_DVD:
+        if a.type == ctx['global'].constants.DeviceType_DVD:
             print("   DVD:")
             if medium:
                 print("    Id: %s" % (medium.id))
                 print("    Name: %s" % (medium.name))
                 if medium.hostDrive:
                     print("    Host DVD %s" % (colPath(ctx, medium.location)))
-                    if att.passthrough:
+                    if a.passthrough:
                         print("    [passthrough mode]")
                 else:
                     print("    Virtual image at %s" % (colPath(ctx, medium.location)))
                     print("    Size: %s" % (medium.size))
 
-        if att.type == ctx['global'].constants.DeviceType_Floppy:
+        if a.type == ctx['global'].constants.DeviceType_Floppy:
             print("   Floppy:")
             if medium:
                 print("    Id: %s" % (medium.id))
@@ -1088,17 +1070,17 @@ def infoCmd(ctx, args):
 
     print()
     print(colCat(ctx, "  Shared folders:"))
-    for sharedfolder in ctx['global'].getArray(mach, 'sharedFolders'):
-        printSf(ctx, sharedfolder)
+    for sf in ctx['global'].getArray(mach, 'sharedFolders'):
+        printSf(ctx, sf)
 
     return 0
 
 def startCmd(ctx, args):
     if len(args) < 2:
-        print("usage: start <vmname|uuid> <frontend>")
+        print("usage: start name <frontend>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     if len(args) > 2:
         vmtype = args[2]
@@ -1108,151 +1090,88 @@ def startCmd(ctx, args):
     return 0
 
 def createVmCmd(ctx, args):
-    if len(args) != 4:
-        print("usage: createvm <name> <arch> <ostype>")
+    if len(args) != 3:
+        print("usage: createvm name ostype")
         return 0
     name = args[1]
-    arch = args[2]
-    oskind = args[3]
+    oskind = args[2]
     try:
         ctx['vb'].getGuestOSType(oskind)
     except Exception:
         print('Unknown OS type:', oskind)
         return 0
-    createVm(ctx, name, arch, oskind)
+    createVm(ctx, name, oskind)
     return 0
 
 def ginfoCmd(ctx, args):
     if len(args) < 2:
-        print("usage: ginfo <vmname|uuid>")
+        print("usage: ginfo [vmname|uuid]")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'ginfo', '')
     return 0
 
-def gstctlPrintOk(_ctx, string):
-    return print(colored(string, 'green'))
-
-def gstctlPrintErr(_ctx, string):
-    return print(colored(string, 'red'))
-
-def execInGuest(ctx, console, args, env, user, passwd, tmo, inputPipe=None, _outputPipe=None):
+def execInGuest(ctx, console, args, env, user, passwd, tmo, inputPipe=None, outputPipe=None):
     if len(args) < 1:
         print("exec in guest needs at least program name")
-        return 1
+        return
     guest = console.guest
+    guestSession = guest.createSession(user, passwd, "", "vboxshell guest exec")
     # shall contain program name as argv[0]
     gargs = args
-    if g_fVerbose:
-        gstctlPrintOk(ctx, "starting guest session for user '%s' (password '%s')" % (user, passwd))
-    else:
-        gstctlPrintOk(ctx, ("starting guest session for user '%s' ..." % (user)))
-    try:
-        guestSession = guest.createSession(user, passwd, "", "vboxshell guest exec")
-        guestSession.waitForArray([ ctx['global'].constants.GuestSessionWaitForFlag_Start ], 30 * 1000)
-    except Exception as e:
-        gstctlPrintErr(ctx, "starting guest session failed:")
-        printErr(ctx, e)
-        return 1
-    if g_fVerbose:
-        gstctlPrintOk(ctx, "guest session %d started" % guestSession.id)
-    aProcCreateFlags = [ ctx['global'].constants.ProcessCreateFlag_WaitForStdOut, \
-                         ctx['global'].constants.ProcessCreateFlag_WaitForStdErr ]
+    print("executing %s with args %s as %s" % (args[0], gargs, user))
+    flags = 0
     if inputPipe is not None:
-        aProcCreateFlags.extend([ ctx['global'].constants.ProcessCreateFlag_WaitForStdIn ])
-    if g_fVerbose:
-        gstctlPrintOk(ctx, "starting process '%s' with args '%s' as user '%s' (password '%s')" % (args[0], gargs, user, passwd))
-    process = guestSession.processCreate(args[0], gargs, '', env, aProcCreateFlags, tmo)
-    try:
-        waitResult = process.waitForArray([ ctx['global'].constants.ProcessWaitForFlag_Start ], 30 * 1000)
-    except Exception as e:
-        gstctlPrintErr(ctx, "waiting for guest process start failed:")
-        printErr(ctx, e)
-        return 1
-    if waitResult != ctx['global'].constants.ProcessWaitResult_Start:
-        gstctlPrintErr(ctx, "process start failed: got wait result %d, expected %d" \
-                       % (waitResult, ctx['global'].constants.ProcessWaitResult_Start) )
-        return 1
-    procStatus = process.status
-    if procStatus != ctx['global'].constants.ProcessStatus_Started:
-        gstctlPrintErr(ctx, "process start failed: got process status %d, expected %d" \
-                       % (procStatus, ctx['global'].constants.ProcessStatus_Started) )
-        return 1
-    if g_fVerbose:
-        gstctlPrintOk(ctx, "process %d started" % (process.PID))
-    if process.PID != 0:
+        flags = 1 # set WaitForProcessStartOnly
+    print(args[0])
+    process = guestSession.processCreate(args[0], gargs, env, [], tmo)
+    print("executed with pid %d" % (process.PID))
+    if pid != 0:
         try:
-            fCompleted  = False
-            fReadStdOut = False
-            fReadStdErr = False
-            while not fCompleted:
-                waitResult = process.waitForArray([ ctx['global'].constants.ProcessWaitForFlag_Terminate, \
-                                                    ctx['global'].constants.ProcessWaitForFlag_StdOut, \
-                                                    ctx['global'].constants.ProcessWaitForFlag_StdErr ], 1000)
-                if waitResult == ctx['global'].constants.ProcessWaitResult_WaitFlagNotSupported:
-                    fReadStdOut = True
-                    fReadStdErr = True
-                elif waitResult == ctx['global'].constants.ProcessWaitResult_Terminate:
-                    fCompleted = True
-                    break
-                elif waitResult == ctx['global'].constants.ProcessWaitResult_Timeout:
-                    gstctlPrintErr(ctx, "timeout while waiting for process")
-                    break
-                else:
-                    gstctlPrintErr(ctx, "got unhandled wait result %d" % (waitResult))
-                if inputPipe:
+            while True:
+                if inputPipe is not None:
                     indata = inputPipe(ctx)
                     if indata is not None:
                         write = len(indata)
                         off = 0
                         while write > 0:
-                            written = process.write(0, 10*1000, indata[off:])
-                            off = off + written
-                            write = write - written
+                            w = guest.setProcessInput(pid, 0, 10*1000, indata[off:])
+                            off = off + w
+                            write = write - w
                     else:
                         # EOF
                         try:
-                            process.write(0, 10*1000, " ")
+                            guest.setProcessInput(pid, 1, 10*1000, " ")
                         except:
                             pass
-                if fReadStdOut:
-                    data = process.read(1, 64 * 1024, 10*1000)
-                    if data and len(data):
-                        sys.stdout.write(bytes(data).decode('utf-8'))
-                    fReadStdOut = False
-                if fReadStdErr:
-                    data = process.read(2, 64 * 1024, 10*1000)
-                    if data and len(data):
-                        sys.stderr.write(bytes(data).decode('utf-8'))
-                    fReadStdErr = False
+                data = guest.getProcessOutput(pid, 0, 10000, 4096)
+                if data and len(data) > 0:
+                    sys.stdout.write(data)
+                    continue
+                progress.waitForCompletion(100)
                 ctx['global'].waitForEvents(0)
-
-            if fCompleted:
-                exitCode = process.exitCode
-                if exitCode == 0:
-                    gstctlPrintOk(ctx, "process exit code: %d" % (exitCode))
-                else:
-                    gstctlPrintErr(ctx, "process exit code: %d" % (exitCode))
+                data = guest.getProcessOutput(pid, 0, 0, 4096)
+                if data and len(data) > 0:
+                    if outputPipe is not None:
+                        outputPipe(ctx, data)
+                    else:
+                        sys.stdout.write(data)
+                    continue
+                if progress.completed:
+                    break
 
         except KeyboardInterrupt:
             print("Interrupted.")
             ctx['interrupt'] = True
-
-        except Exception as e:
-            printErr(ctx, e)
-
-    if guestSession:
-        try:
-            if g_fVerbose:
-                gstctlPrintOk(ctx, "closing guest session ...")
-            guestSession.close()
-        except:
-            printErr(ctx, e)
-
-    return 0
-
+            if progress.cancelable:
+                progress.cancel()
+        (_reason, code, _flags) = guest.getProcessStatus(pid)
+        print("Exit code: %d" % (code))
+        return 0
+    else:
+        reportError(ctx, progress)
 
 def copyToGuest(ctx, console, args, user, passwd):
     src = args[0]
@@ -1263,9 +1182,10 @@ def copyToGuest(ctx, console, args, user, passwd):
     progressBar(ctx, progress)
 
 def nh_raw_input(prompt=""):
+    stream = sys.stdout
+    prompt = str(prompt)
     if prompt:
-        sys.stdout.write(prompt)
-        sys.stdout.flush()
+        stream.write(prompt)
     line = sys.stdin.readline()
     if not line:
         raise EOFError
@@ -1273,13 +1193,11 @@ def nh_raw_input(prompt=""):
         line = line[:-1]
     return line
 
+
 def getCred(_ctx):
     import getpass
     user = getpass.getuser()
-    if user:
-        user_inp = nh_raw_input("User (%s): " % (user))
-    else:
-        user_inp = nh_raw_input("User: ")
+    user_inp = nh_raw_input("User (%s): " % (user))
     if len(user_inp) > 0:
         user = user_inp
     passwd = getpass.getpass()
@@ -1288,10 +1206,10 @@ def getCred(_ctx):
 
 def gexecCmd(ctx, args):
     if len(args) < 2:
-        print("usage: gexec <vmname|uuid> command args")
+        print("usage: gexec [vmname|uuid] command args")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     gargs = args[2:]
     env = [] # ["DISPLAY=:0"]
@@ -1302,10 +1220,10 @@ def gexecCmd(ctx, args):
 
 def gcopyCmd(ctx, args):
     if len(args) < 2:
-        print("usage: gcopy <vmname|uuid> host_path guest_path")
+        print("usage: gcopy [vmname|uuid] host_path guest_path")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     gargs = args[2:]
     (user, passwd) = getCred(ctx)
@@ -1321,83 +1239,83 @@ def readCmdPipe(ctx, _hcmd):
 
 def gpipeCmd(ctx, args):
     if len(args) < 4:
-        print("usage: gpipe <vmname|uuid> hostProgram guestProgram, such as gpipe linux  '/bin/uname -a' '/bin/sh -c \"/usr/bin/tee; /bin/uname -a\"'")
+        print("usage: gpipe [vmname|uuid] hostProgram guestProgram, such as gpipe linux  '/bin/uname -a' '/bin/sh -c \"/usr/bin/tee; /bin/uname -a\"'")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     hcmd = args[2]
     gcmd = args[3]
     (user, passwd) = getCred(ctx)
     import subprocess
-    with subprocess.Popen(split_no_quotes(hcmd), stdout=subprocess.PIPE) as ctx['process']:
-        gargs = split_no_quotes(gcmd)
-        env = []
-        gargs.insert(0, lambda ctx, mach, console, args: execInGuest(ctx, console, args, env, user, passwd, 10000, lambda ctx:readCmdPipe(ctx, hcmd)))
-        cmdExistingVm(ctx, mach, 'guestlambda', gargs)
-        try:
-            ctx['process'].terminate()
-        except:
-            pass
-        ctx['process'] = None
+    ctx['process'] = subprocess.Popen(split_no_quotes(hcmd), stdout=subprocess.PIPE)
+    gargs = split_no_quotes(gcmd)
+    env = []
+    gargs.insert(0, lambda ctx, mach, console, args: execInGuest(ctx, console, args, env, user, passwd, 10000, lambda ctx:readCmdPipe(ctx, hcmd)))
+    cmdExistingVm(ctx, mach, 'guestlambda', gargs)
+    try:
+        ctx['process'].terminate()
+    except:
+        pass
+    ctx['process'] = None
     return 0
 
 
 def removeVmCmd(ctx, args):
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     removeVm(ctx, mach)
     return 0
 
 def pauseCmd(ctx, args):
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'pause', '')
     return 0
 
 def powerdownCmd(ctx, args):
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'powerdown', '')
     return 0
 
 def powerbuttonCmd(ctx, args):
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'powerbutton', '')
     return 0
 
 def resumeCmd(ctx, args):
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'resume', '')
     return 0
 
 def saveCmd(ctx, args):
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'save', '')
     return 0
 
 def statsCmd(ctx, args):
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'stats', '')
     return 0
 
 def guestCmd(ctx, args):
     if len(args) < 3:
-        print("usage: guest <vmname|uuid> commands")
+        print("usage: guest name commands")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     if mach.state != ctx['const'].MachineState_Running:
         cmdClosedVm(ctx, mach, lambda ctx, mach, a: guestExec (ctx, mach, None, ' '.join(args[2:])))
@@ -1407,20 +1325,20 @@ def guestCmd(ctx, args):
 
 def screenshotCmd(ctx, args):
     if len(args) < 2:
-        print("usage: screenshot <vmname|uuid> <file> <width> <height> <monitor>")
+        print("usage: screenshot vm <file> <width> <height> <monitor>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'screenshot', args[2:])
     return 0
 
 def teleportCmd(ctx, args):
     if len(args) < 3:
-        print("usage: teleport <vmname|uuid> host:port <password>")
+        print("usage: teleport name host:port <password>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'teleport', args[2:])
     return 0
@@ -1436,10 +1354,10 @@ def portalsettings(_ctx, mach, args):
 
 def openportalCmd(ctx, args):
     if len(args) < 3:
-        print("usage: openportal <vmname|uuid> port <password>")
+        print("usage: openportal name port <password>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     port = int(args[2])
     if len(args) > 3:
@@ -1453,10 +1371,10 @@ def openportalCmd(ctx, args):
 
 def closeportalCmd(ctx, args):
     if len(args) < 2:
-        print("usage: closeportal <vmname|uuid>")
+        print("usage: closeportal name")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     if mach.teleporterEnabled:
         cmdClosedVm(ctx, mach, portalsettings, [False])
@@ -1464,10 +1382,10 @@ def closeportalCmd(ctx, args):
 
 def gueststatsCmd(ctx, args):
     if len(args) < 2:
-        print("usage: gueststats <vmname|uuid> <check interval>")
+        print("usage: gueststats name <check interval>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'gueststats', args[2:])
     return 0
@@ -1484,10 +1402,10 @@ def plugcpu(_ctx, mach, args):
 
 def plugcpuCmd(ctx, args):
     if len(args) < 2:
-        print("usage: plugcpu <vmname|uuid> <cpuid>")
+        print("usage: plugcpu name cpuid")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     if str(mach.sessionState) != str(ctx['const'].SessionState_Locked):
         if mach.CPUHotPlugEnabled:
@@ -1498,10 +1416,10 @@ def plugcpuCmd(ctx, args):
 
 def unplugcpuCmd(ctx, args):
     if len(args) < 2:
-        print("usage: unplugcpu <vmname|uuid> <cpuid>")
+        print("usage: unplugcpu name cpuid")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     if str(mach.sessionState) != str(ctx['const'].SessionState_Locked):
         if mach.CPUHotPlugEnabled:
@@ -1513,14 +1431,14 @@ def unplugcpuCmd(ctx, args):
 def setvar(_ctx, _mach, args):
     expr = 'mach.'+args[0]+' = '+args[1]
     print("Executing", expr)
-    exec(expr) # pylint: disable=exec-used
+    exec(expr)
 
 def setvarCmd(ctx, args):
     if len(args) < 4:
-        print("usage: setvar <vmname|uuid> <expr> <value>")
+        print("usage: setvar [vmname|uuid] expr value")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdClosedVm(ctx, mach, setvar, args[2:])
     return 0
@@ -1545,7 +1463,7 @@ def setExtraDataCmd(ctx, args):
         return 0
 
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdClosedVm(ctx, mach, setvmextra, [key, value])
     return 0
@@ -1566,10 +1484,10 @@ def getExtraDataCmd(ctx, args):
         obj = ctx['vb']
     else:
         obj = argsToMach(ctx, args)
-        if not obj:
+        if obj == None:
             return 0
 
-    if not key:
+    if key == None:
         keys = obj.getExtraDataKeys()
     else:
         keys = [ key ]
@@ -1581,7 +1499,7 @@ def getExtraDataCmd(ctx, args):
 def quitCmd(_ctx, _args):
     return 1
 
-def aliasCmd(_ctx, args):
+def aliasCmd(ctx, args):
     if len(args) == 3:
         aliases[args[1]] = args[2]
         return 0
@@ -1590,23 +1508,23 @@ def aliasCmd(_ctx, args):
         print("'%s' is an alias for '%s'" % (key, value))
     return 0
 
-def verboseCmd(_ctx, args):
+def verboseCmd(ctx, args):
     global g_fVerbose
     if len(args) > 1:
-        g_fVerbose = args[1]=='on'
+        g_fVerbose = (args[1]=='on')
     else:
         g_fVerbose = not g_fVerbose
     return 0
 
-def colorsCmd(_ctx, args):
+def colorsCmd(ctx, args):
     global g_fHasColors
     if len(args) > 1:
-        g_fHasColors = args[1] == 'on'
+        g_fHasColors = (args[1] == 'on')
     else:
         g_fHasColors = not g_fHasColors
     return 0
 
-def hostCmd(ctx, _args):
+def hostCmd(ctx, args):
     vbox = ctx['vb']
     try:
         print("VirtualBox version %s" % (colored(vbox.version, 'blue')))
@@ -1617,9 +1535,9 @@ def hostCmd(ctx, _args):
     props = vbox.systemProperties
     print("Machines: %s" % (colPath(ctx, props.defaultMachineFolder)))
 
-    print("Global shared folders:")
-    for sf in ctx['global'].getArray(vbox, 'sharedFolders'):
-        printSf(ctx, sf)
+    #print("Global shared folders:")
+    #for ud in ctx['global'].getArray(vbox, 'sharedFolders'):
+    #    printSf(ctx, sf)
     host = vbox.host
     cnt = host.processorCount
     print(colCat(ctx, "Processors:"))
@@ -1631,22 +1549,26 @@ def hostCmd(ctx, _args):
     print("  %dM (free %dM)" % (host.memorySize, host.memoryAvailable))
     print(colCat(ctx, "OS:"))
     print("  %s (%s)" % (host.operatingSystem, host.OSVersion))
+    if host.acceleration3DAvailable:
+        print(colCat(ctx, "3D acceleration available"))
+    else:
+        print(colCat(ctx, "3D acceleration NOT available"))
 
     print(colCat(ctx, "Network interfaces:"))
-    for iface in ctx['global'].getArray(host, 'networkInterfaces'):
-        print("  %s (%s)" % (iface.name, iface.IPAddress))
+    for ni in ctx['global'].getArray(host, 'networkInterfaces'):
+        print("  %s (%s)" % (ni.name, ni.IPAddress))
 
     print(colCat(ctx, "DVD drives:"))
-    for drive in ctx['global'].getArray(host, 'DVDDrives'):
-        print("  %s - %s" % (drive.name, drive.description))
+    for dd in ctx['global'].getArray(host, 'DVDDrives'):
+        print("  %s - %s" % (dd.name, dd.description))
 
     print(colCat(ctx, "Floppy drives:"))
-    for drive in ctx['global'].getArray(host, 'floppyDrives'):
-        print("  %s - %s" % (drive.name, drive.description))
+    for dd in ctx['global'].getArray(host, 'floppyDrives'):
+        print("  %s - %s" % (dd.name, dd.description))
 
     print(colCat(ctx, "USB devices:"))
-    for usbdev in ctx['global'].getArray(host, 'USBDevices'):
-        printHostUsbDev(ctx, usbdev)
+    for ud in ctx['global'].getArray(host, 'USBDevices'):
+        printHostUsbDev(ctx, ud)
 
     if ctx['perf']:
         for metric in ctx['perf'].query(["*"], [host]):
@@ -1656,10 +1578,10 @@ def hostCmd(ctx, _args):
 
 def monitorGuestCmd(ctx, args):
     if len(args) < 2:
-        print("usage: monitorGuest <vmname|uuid> (duration)")
+        print("usage: monitorGuest name (duration)")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     dur = 5
     if len(args) > 2:
@@ -1673,7 +1595,7 @@ def monitorGuestKbdCmd(ctx, args):
         print("usage: monitorGuestKbd name (duration)")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     dur = 5
     if len(args) > 2:
@@ -1687,7 +1609,7 @@ def monitorGuestMouseCmd(ctx, args):
         print("usage: monitorGuestMouse name (duration)")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     dur = 5
     if len(args) > 2:
@@ -1701,7 +1623,7 @@ def monitorGuestMultiTouchCmd(ctx, args):
         print("usage: monitorGuestMultiTouch name (duration)")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     dur = 5
     if len(args) > 2:
@@ -1723,26 +1645,27 @@ def monitorVBoxCmd(ctx, args):
     return 0
 
 def getAdapterType(ctx, natype):
-    if (natype in (  ctx['global'].constants.NetworkAdapterType_Am79C970A
-                   , ctx['global'].constants.NetworkAdapterType_Am79C973
-                   , ctx['global'].constants.NetworkAdapterType_Am79C960)):
+    if (natype == ctx['global'].constants.NetworkAdapterType_Am79C970A or
+        natype == ctx['global'].constants.NetworkAdapterType_Am79C973):
         return "pcnet"
-    if (natype in (  ctx['global'].constants.NetworkAdapterType_I82540EM
-                   , ctx['global'].constants.NetworkAdapterType_I82545EM
-                   , ctx['global'].constants.NetworkAdapterType_I82543GC)):
+    elif (natype == ctx['global'].constants.NetworkAdapterType_I82540EM or
+          natype == ctx['global'].constants.NetworkAdapterType_I82545EM or
+          natype == ctx['global'].constants.NetworkAdapterType_I82543GC):
         return "e1000"
-    if natype == ctx['global'].constants.NetworkAdapterType_Virtio:
+    elif (natype == ctx['global'].constants.NetworkAdapterType_Virtio):
         return "virtio"
-    if natype == ctx['global'].constants.NetworkAdapterType_Null:
+    elif (natype == ctx['global'].constants.NetworkAdapterType_Null):
         return None
-    raise Exception("Unknown adapter type: "+natype)
+    else:
+        raise Exception("Unknown adapter type: "+natype)
+
 
 def portForwardCmd(ctx, args):
     if len(args) != 5:
-        print("usage: portForward <vmname|uuid> <adapter> <hostPort> <guestPort>")
+        print("usage: portForward <vm> <adapter> <hostPort> <guestPort>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     adapterNum = int(args[2])
     hostPort = int(args[3])
@@ -1770,10 +1693,10 @@ def portForwardCmd(ctx, args):
 
 def showLogCmd(ctx, args):
     if len(args) < 2:
-        print("usage: showLog <vmname|uuid> <num>")
+        print("usage: showLog vm <num>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
 
     log = 0
@@ -1793,10 +1716,10 @@ def showLogCmd(ctx, args):
 
 def findLogCmd(ctx, args):
     if len(args) < 3:
-        print("usage: findLog <vmname|uuid> <pattern> <num>")
+        print("usage: findLog vm pattern <num>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
 
     log = 0
@@ -1810,13 +1733,13 @@ def findLogCmd(ctx, args):
         data = mach.readLog(log, uOffset, 512*1024)
         if len(data) == 0:
             break
-        buf = str(data).split("\n")
-        for line in buf:
-            match = re.findall(pattern, line)
+        d = str(data).split("\n")
+        for s in d:
+            match = re.findall(pattern, s)
             if len(match) > 0:
-                for cur_match in match:
-                    line = line.replace(cur_match, colored(cur_match, 'red'))
-                print(line)
+                for mt in match:
+                    s = s.replace(mt, colored(mt, 'red'))
+                print(s)
         uOffset += len(data)
 
     return 0
@@ -1824,10 +1747,10 @@ def findLogCmd(ctx, args):
 
 def findAssertCmd(ctx, args):
     if len(args) < 2:
-        print("usage: findAssert <vmname|uuid> <num>")
+        print("usage: findAssert vm <num>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
 
     log = 0
@@ -1843,20 +1766,20 @@ def findAssertCmd(ctx, args):
         data = mach.readLog(log, uOffset, 512*1024)
         if len(data) == 0:
             break
-        buf = str(data).split("\n")
-        for line in buf:
+        d = str(data).split("\n")
+        for s in d:
             if active:
-                print(line)
+                print(s)
                 if context == 0:
                     active = False
                 else:
                     context = context - 1
                 continue
-            match = ere.findall(line)
+            match = ere.findall(s)
             if len(match) > 0:
                 active = True
                 context = 50
-                print(line)
+                print(s)
         uOffset += len(data)
 
     return 0
@@ -1864,14 +1787,14 @@ def findAssertCmd(ctx, args):
 def evalCmd(ctx, args):
     expr = ' '.join(args[1:])
     try:
-        exec(expr) # pylint: disable=exec-used
+        exec(expr)
     except Exception as e:
         printErr(ctx, e)
         if g_fVerbose:
             traceback.print_exc()
     return 0
 
-def reloadExtCmd(ctx, _args):
+def reloadExtCmd(ctx, args):
     # maybe will want more args smartness
     checkUserExtensions(ctx, commands, getHomeFolder(ctx))
     autoCompletion(commands, ctx)
@@ -1881,31 +1804,31 @@ def runScriptCmd(ctx, args):
     if len(args) != 2:
         print("usage: runScript <script>")
         return 0
-
     try:
-        with open(args[1], 'r', encoding='utf-8') as file:
-            try:
-                lines = file.readlines()
-                ctx['scriptLine'] = 0
-                ctx['interrupt'] = False
-                while ctx['scriptLine'] < len(lines):
-                    line = lines[ctx['scriptLine']]
-                    ctx['scriptLine'] = ctx['scriptLine'] + 1
-                    done = runCommand(ctx, line)
-                    if done != 0 or ctx['interrupt']:
-                        break
-
-            except Exception as e:
-                printErr(ctx, e)
-                if g_fVerbose:
-                    traceback.print_exc()
-            file.close()
+        lf = open(args[1], 'r')
     except IOError as e:
         print("cannot open:", args[1], ":", e)
-        return 1
+        return 0
+
+    try:
+        lines = lf.readlines()
+        ctx['scriptLine'] = 0
+        ctx['interrupt'] = False
+        while ctx['scriptLine'] < len(lines):
+            line = lines[ctx['scriptLine']]
+            ctx['scriptLine'] = ctx['scriptLine'] + 1
+            done = runCommand(ctx, line)
+            if done != 0 or ctx['interrupt']:
+                break
+
+    except Exception as e:
+        printErr(ctx, e)
+        if g_fVerbose:
+            traceback.print_exc()
+    lf.close()
     return 0
 
-def sleepCmd(_ctx, args):
+def sleepCmd(ctx, args):
     if len(args) != 2:
         print("usage: sleep <secs>")
         return 0
@@ -1918,7 +1841,7 @@ def sleepCmd(_ctx, args):
     return 0
 
 
-def shellCmd(_ctx, args):
+def shellCmd(ctx, args):
     if len(args) < 2:
         print("usage: shell <commands>")
         return 0
@@ -1985,7 +1908,7 @@ def disconnectCmd(ctx, args):
     ctx['vb'] = None
     return 0
 
-def reconnectCmd(ctx, _args):
+def reconnectCmd(ctx, args):
     if ctx['wsinfo'] is None:
         print("Never connected...")
         return 0
@@ -2165,7 +2088,7 @@ def typeInGuest(console, text, delay):
             # just wait a bit
             time.sleep(0.3)
             continue
-        if ch in ('^', '|', '$', '_'):
+        if  ch == '^' or  ch == '|' or ch == '$' or ch == '_':
             if ch == '^':
                 ch = 'LCTR'
             if ch == '|':
@@ -2225,12 +2148,14 @@ def typeGuestCmd(ctx, args):
 def optId(verbose, uuid):
     if verbose:
         return ": "+uuid
-    return ""
+    else:
+        return ""
 
 def asSize(val, inBytes):
     if inBytes:
         return int(val)/(1024*1024)
-    return int(val)
+    else:
+        return int(val)
 
 def listMediaCmd(ctx, args):
     if len(args) > 1:
@@ -2266,16 +2191,16 @@ def listUsbCmd(ctx, args):
         return 0
 
     host = ctx['vb'].host
-    for usbdev in ctx['global'].getArray(host, 'USBDevices'):
-        printHostUsbDev(ctx, usbdev)
+    for ud in ctx['global'].getArray(host, 'USBDevices'):
+        printHostUsbDev(ctx, ud)
 
     return 0
 
 def findDevOfType(ctx, mach, devtype):
-    attachments = ctx['global'].getArray(mach, 'mediumAttachments')
-    for att in attachments:
-        if att.type == devtype:
-            return [att.controller, att.port, att.device]
+    atts = ctx['global'].getArray(mach, 'mediumAttachments')
+    for a in atts:
+        if a.type == devtype:
+            return [a.controller, a.port, a.device]
     return [None, 0, 0]
 
 def createHddCmd(ctx, args):
@@ -2295,9 +2220,9 @@ def createHddCmd(ctx, args):
     if progressBar(ctx,progress) and hdd.id:
         print("created HDD at %s as %s" % (colPath(ctx,hdd.location), hdd.id))
     else:
-        print("cannot create disk (file %s exist?)" % (loc))
-        reportError(ctx,progress)
-        return 0
+       print("cannot create disk (file %s exist?)" % (loc))
+       reportError(ctx,progress)
+       return 0
 
     return 0
 
@@ -2308,17 +2233,21 @@ def registerHddCmd(ctx, args):
 
     vbox = ctx['vb']
     loc = args[1]
+    setImageId = False
+    imageId = ""
+    setParentId = False
+    parentId = ""
     hdd = vbox.openMedium(loc, ctx['global'].constants.DeviceType_HardDisk, ctx['global'].constants.AccessMode_ReadWrite, False)
     print("registered HDD as %s" % (hdd.id))
     return 0
 
-def controldevice(_ctx, mach, args):
+def controldevice(ctx, mach, args):
     [ctr, port, slot, devtype, uuid] = args
     mach.attachDevice(ctr, port, slot, devtype, uuid)
 
 def attachHddCmd(ctx, args):
     if len(args) < 3:
-        print("usage: attachHdd <vmname|uuid> <hdd> <controller> <port:slot>")
+        print("usage: attachHdd vm hdd controller port:slot")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2341,19 +2270,19 @@ def attachHddCmd(ctx, args):
     return 0
 
 def detachVmDevice(ctx, mach, args):
-    attachments = ctx['global'].getArray(mach, 'mediumAttachments')
+    atts = ctx['global'].getArray(mach, 'mediumAttachments')
     hid = args[0]
-    for att in attachments:
-        if att.medium:
-            if hid in ('ALL', att.medium.id):
-                mach.detachDevice(att.controller, att.port, att.device)
+    for a in atts:
+        if a.medium:
+            if hid == "ALL" or a.medium.id == hid:
+                mach.detachDevice(a.controller, a.port, a.device)
 
 def detachMedium(ctx, mid, medium):
     cmdClosedVm(ctx, machById(ctx, mid), detachVmDevice, [medium])
 
 def detachHddCmd(ctx, args):
     if len(args) < 3:
-        print("usage: detachHdd <vmname|uuid> <hdd>")
+        print("usage: detachHdd vm hdd")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2436,12 +2365,14 @@ def unregisterIsoCmd(ctx, args):
     vbox = ctx['vb']
     loc = args[1]
     try:
-        vbox.openMedium(loc, ctx['global'].constants.DeviceType_DVD, ctx['global'].constants.AccessMode_ReadOnly, False)
+        dvd = vbox.openMedium(loc, ctx['global'].constants.DeviceType_DVD, ctx['global'].constants.AccessMode_ReadOnly, False)
     except:
         print("no DVD with path %s registered" % (loc))
         return 0
 
+    progress = dvd.close()
     print("Unregistered ISO at %s" % (colPath(ctx, loc)))
+
     return 0
 
 def removeIsoCmd(ctx, args):
@@ -2466,7 +2397,7 @@ def removeIsoCmd(ctx, args):
 
 def attachIsoCmd(ctx, args):
     if len(args) < 3:
-        print("usage: attachIso <vmname|uuid> <iso> <controller> <port:slot>")
+        print("usage: attachIso vm iso controller port:slot")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2489,7 +2420,7 @@ def attachIsoCmd(ctx, args):
 
 def detachIsoCmd(ctx, args):
     if len(args) < 3:
-        print("usage: detachIso <vmname|uuid> <iso>")
+        print("usage: detachIso vm iso")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2508,7 +2439,7 @@ def detachIsoCmd(ctx, args):
 
 def mountIsoCmd(ctx, args):
     if len(args) < 3:
-        print("usage: mountIso <vmname|uuid> <iso> <controller> <port:slot>")
+        print("usage: mountIso vm iso controller port:slot")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2535,12 +2466,13 @@ def mountIsoCmd(ctx, args):
 
 def unmountIsoCmd(ctx, args):
     if len(args) < 2:
-        print("usage: unmountIso <vmname|uuid> <controller> <port:slot>")
+        print("usage: unmountIso vm controller port:slot")
         return 0
 
     mach = argsToMach(ctx, args)
     if mach is None:
         return 0
+    vbox = ctx['vb']
 
     if len(args) > 3:
         ctr = args[2]
@@ -2553,20 +2485,20 @@ def unmountIsoCmd(ctx, args):
 
     return 0
 
-def attachCtr(_ctx, mach, args):
+def attachCtr(ctx, mach, args):
     [name, bus, ctrltype] = args
     ctr = mach.addStorageController(name, bus)
-    if ctrltype:
+    if ctrltype != None:
         ctr.controllerType = ctrltype
 
 def attachCtrCmd(ctx, args):
     if len(args) < 4:
-        print("usage: attachCtr <vmname|uuid> <controller name> <bus> <type>")
+        print("usage: attachCtr vm cname bus <type>")
         return 0
 
     if len(args) > 4:
         ctrltype = enumFromString(ctx, 'StorageControllerType', args[4])
-        if not ctrltype:
+        if ctrltype == None:
             print("Controller type %s unknown" % (args[4]))
             return 0
     else:
@@ -2585,7 +2517,7 @@ def attachCtrCmd(ctx, args):
 
 def detachCtrCmd(ctx, args):
     if len(args) < 3:
-        print("usage: detachCtr <vmname|uuid> <controller name>")
+        print("usage: detachCtr vm name")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2595,7 +2527,7 @@ def detachCtrCmd(ctx, args):
     cmdClosedVm(ctx, mach, lambda ctx, mach, args: mach.removeStorageController(ctr))
     return 0
 
-def usbctr(_ctx, _mach, console, args):
+def usbctr(ctx, mach, console, args):
     if args[0]:
         console.attachUSBDevice(args[1], "")
     else:
@@ -2603,7 +2535,7 @@ def usbctr(_ctx, _mach, console, args):
 
 def attachUsbCmd(ctx, args):
     if len(args) < 3:
-        print("usage: attachUsb <vmname|uuid> <device uid>")
+        print("usage: attachUsb vm deviceuid")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2615,7 +2547,7 @@ def attachUsbCmd(ctx, args):
 
 def detachUsbCmd(ctx, args):
     if len(args) < 3:
-        print("usage: detachUsb <vmname|uuid> <device uid>")
+        print("usage: detachUsb vm deviceuid")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2643,26 +2575,23 @@ def guiCmd(ctx, args):
 
 def shareFolderCmd(ctx, args):
     if len(args) < 4:
-        print("usage: shareFolder <vmname|uuid> <path> <name> <writable|persistent>")
+        print("usage: shareFolder vm path name <writable> <persistent>")
         return 0
 
-    if args[1] != 'global':
-        mach = argsToMach(ctx, args)
-        if mach is None:
-            return 0
+    mach = argsToMach(ctx, args)
+    if mach is None:
+        return 0
     path = args[2]
     name = args[3]
     writable = False
     persistent = False
     if len(args) > 4:
-        for cur_arg in args[4:]:
-            if cur_arg == 'writable':
+        for a in args[4:]:
+            if a == 'writable':
                 writable = True
-            if cur_arg == 'persistent':
+            if a == 'persistent':
                 persistent = True
-    if args[1] == 'global':
-        ctx['vb'].createSharedFolder(name, path, writable)
-    elif persistent:
+    if persistent:
         cmdClosedVm(ctx, mach, lambda ctx, mach, args: mach.createSharedFolder(name, path, writable), [])
     else:
         cmdExistingVm(ctx, mach, 'guestlambda', [lambda ctx, mach, console, args: console.createSharedFolder(name, path, writable)])
@@ -2670,37 +2599,29 @@ def shareFolderCmd(ctx, args):
 
 def unshareFolderCmd(ctx, args):
     if len(args) < 3:
-        print("usage: unshareFolder <vmname|uuid> <name>")
+        print("usage: unshareFolder vm name")
         return 0
 
-    if args[1] != 'global':
-        mach = argsToMach(ctx, args)
-        if mach is None:
-            return 0
+    mach = argsToMach(ctx, args)
+    if mach is None:
+        return 0
     name = args[2]
     found = False
-    if args[1] == 'global':
-        for sharedfolder in ctx['global'].getArray(ctx['vb'], 'sharedFolders'):
-            if sharedfolder.name == name:
-                ctx['vb'].removeSharedFolder(name)
-                found = True
-                break
-    else:
-        for sharedfolder in ctx['global'].getArray(mach, 'sharedFolders'):
-            if sharedfolder.name == name:
-                cmdClosedVm(ctx, mach, lambda ctx, mach, args: mach.removeSharedFolder(name), [])
-                found = True
-                break
-        if not found:
-            cmdExistingVm(ctx, mach, 'guestlambda', [lambda ctx, mach, console, args: console.removeSharedFolder(name)])
+    for sf in ctx['global'].getArray(mach, 'sharedFolders'):
+        if sf.name == name:
+            cmdClosedVm(ctx, mach, lambda ctx, mach, args: mach.removeSharedFolder(name), [])
+            found = True
+            break
+    if not found:
+        cmdExistingVm(ctx, mach, 'guestlambda', [lambda ctx, mach, console, args: console.removeSharedFolder(name)])
     return 0
 
 
 def snapshotCmd(ctx, args):
     if (len(args) < 2 or args[1] == 'help'):
-        print("Take snapshot:    snapshot <vmname|uuid> take <name> <description>")
-        print("Restore snapshot: snapshot <vmname|uuid> restore <name>")
-        print("Merge snapshot:   snapshot <vmname|uuid> merge <name>")
+        print("Take snapshot:    snapshot vm take name <description>")
+        print("Restore snapshot: snapshot vm restore name")
+        print("Merge snapshot:   snapshot vm merge name")
         return 0
 
     mach = argsToMach(ctx, args)
@@ -2709,7 +2630,7 @@ def snapshotCmd(ctx, args):
     cmd = args[2]
     if cmd == 'take':
         if len(args) < 4:
-            print("usage: snapshot <vmname|uuid> take <name> <description>")
+            print("usage: snapshot vm take name <description>")
             return 0
         name = args[3]
         if len(args) > 4:
@@ -2721,7 +2642,7 @@ def snapshotCmd(ctx, args):
 
     if cmd == 'restore':
         if len(args) < 4:
-            print("usage: snapshot <vmname|uuid> restore <name>")
+            print("usage: snapshot vm restore name")
             return 0
         name = args[3]
         snap = mach.findSnapshot(name)
@@ -2730,7 +2651,7 @@ def snapshotCmd(ctx, args):
 
     if cmd == 'restorecurrent':
         if len(args) < 4:
-            print("usage: snapshot <vmname|uuid> restorecurrent")
+            print("usage: snapshot vm restorecurrent")
             return 0
         snap = mach.currentSnapshot()
         cmdAnyVm(ctx, mach, lambda ctx, mach, console, args: progressBar(ctx, mach.restoreSnapshot(snap)))
@@ -2738,7 +2659,7 @@ def snapshotCmd(ctx, args):
 
     if cmd == 'delete':
         if len(args) < 4:
-            print("usage: snapshot <vmname|uuid> delete <name>")
+            print("usage: snapshot vm delete name")
             return 0
         name = args[3]
         snap = mach.findSnapshot(name)
@@ -2748,9 +2669,9 @@ def snapshotCmd(ctx, args):
     print("Command '%s' is unknown" % (cmd))
     return 0
 
-def natAlias(_ctx, _mach, _nicnum, nat, args=None):
+def natAlias(ctx, mach, nicnum, nat, args=[]):
     """This command shows/alters NAT's alias settings.
-    usage: nat <vmname|uuid> <nicnum> alias [default|[log] [proxyonly] [sameports]]
+    usage: nat <vm> <nicnum> alias [default|[log] [proxyonly] [sameports]]
     default - set settings to default values
     log - switch on alias logging
     proxyonly - switch proxyonly mode on
@@ -2774,21 +2695,20 @@ def natAlias(_ctx, _mach, _nicnum, nat, args=None):
             else:
                 msg += '%s: %s' % (aliasmode, 'off')
         return (0, [msg])
-
-    nat.aliasMode = 0
-    if 'default' not in args:
-        for idx in range(1, len(args)):
-            if args[idx] not in alias:
-                print('Invalid alias mode: ' + args[idx])
-                print(natAlias.__doc__)
-                return (1, None)
-            nat.aliasMode = int(nat.aliasMode) | alias[args[idx]]
+    else:
+        nat.aliasMode = 0
+        if 'default' not in args:
+            for a in range(1, len(args)):
+                if args[a] not in alias:
+                    print('Invalid alias mode: ' + args[a])
+                    print(natAlias.__doc__)
+                    return (1, None)
+                nat.aliasMode = int(nat.aliasMode) | alias[args[a]]
     return (0, None)
 
-def natSettings(_ctx, _mach, _nicnum, nat, args):
-    """
-    This command shows/alters NAT settings.
-    usage: nat <vmname|uuid> <nicnum> settings [<mtu> [[<socsndbuf> <sockrcvbuf> [<tcpsndwnd> <tcprcvwnd>]]]]
+def natSettings(ctx, mach, nicnum, nat, args):
+    """This command shows/alters NAT settings.
+    usage: nat <vm> <nicnum> settings [<mtu> [[<socsndbuf> <sockrcvbuf> [<tcpsndwnd> <tcprcvwnd>]]]]
     mtu - set mtu <= 16000
     socksndbuf/sockrcvbuf - sets amount of kb for socket sending/receiving buffer
     tcpsndwnd/tcprcvwnd - sets size of initial tcp sending/receiving window
@@ -2802,27 +2722,27 @@ def natSettings(_ctx, _mach, _nicnum, nat, args):
         if tcprcvwnd == 0: tcprcvwnd = 64
         msg = 'mtu:%s socket(snd:%s, rcv:%s) tcpwnd(snd:%s, rcv:%s)' % (mtu, socksndbuf, sockrcvbuf, tcpsndwnd, tcprcvwnd)
         return (0, [msg])
-
-    if args[1] < 16000:
-        print('invalid mtu value (%s not in range [65 - 16000])' % (args[1]))
-        return (1, None)
-    for i in range(2, len(args)):
-        if not args[i].isdigit() or int(args[i]) < 8 or int(args[i]) > 1024:
-            print('invalid %s parameter (%i not in range [8-1024])' % (i, args[i]))
-            return (1, None)
-    nic_args = [args[1]]
-    if len(args) < 6:
-        for i in range(2, len(args)): nic_args.append(args[i])
-        for i in range(len(args), 6): nic_args.append(0)
     else:
-        for i in range(2, len(args)): nic_args.append(args[i])
-    #print(a)
-    nat.setNetworkSettings(int(nic_args[0]), int(nic_args[1]), int(nic_args[2]), int(nic_args[3]), int(nic_args[4]))
+        if args[1] < 16000:
+            print('invalid mtu value (%s not in range [65 - 16000])' % (args[1]))
+            return (1, None)
+        for i in range(2, len(args)):
+            if not args[i].isdigit() or int(args[i]) < 8 or int(args[i]) > 1024:
+                print('invalid %s parameter (%i not in range [8-1024])' % (i, args[i]))
+                return (1, None)
+        a = [args[1]]
+        if len(args) < 6:
+            for i in range(2, len(args)): a.append(args[i])
+            for i in range(len(args), 6): a.append(0)
+        else:
+            for i in range(2, len(args)): a.append(args[i])
+        #print(a)
+        nat.setNetworkSettings(int(a[0]), int(a[1]), int(a[2]), int(a[3]), int(a[4]))
     return (0, None)
 
-def natDns(_ctx, _mach, _nicnum, nat, args):
+def natDns(ctx, mach, nicnum, nat, args):
     """This command shows/alters DNS's NAT settings
-    usage: nat <vmname|uuid> <nicnum> dns [passdomain] [proxy] [usehostresolver]
+    usage: nat <vm> <nicnum> dns [passdomain] [proxy] [usehostresolver]
     passdomain - enforces builtin DHCP server to pass domain
     proxy - switch on builtin NAT DNS proxying mechanism
     usehostresolver - proxies all DNS requests to Host Resolver interface
@@ -2831,15 +2751,15 @@ def natDns(_ctx, _mach, _nicnum, nat, args):
     if len(args) == 1:
         msg = 'passdomain:%s, proxy:%s, usehostresolver:%s' % (yesno[int(nat.DNSPassDomain)], yesno[int(nat.DNSProxy)], yesno[int(nat.DNSUseHostResolver)])
         return (0, [msg])
-
-    nat.DNSPassDomain = 'passdomain' in args
-    nat.DNSProxy = 'proxy' in args
-    nat.DNSUseHostResolver = 'usehostresolver' in args
+    else:
+        nat.DNSPassDomain = 'passdomain' in args
+        nat.DNSProxy = 'proxy' in args
+        nat.DNSUseHostResolver = 'usehostresolver' in args
     return (0, None)
 
 def natTftp(ctx, mach, nicnum, nat, args):
     """This command shows/alters TFTP settings
-    usage nat <vmname|uuid> <nicnum> tftp [prefix <prefix>| bootfile <bootfile>| server <server>]
+    usage nat <vm> <nicnum> tftp [prefix <prefix>| bootfile <bootfile>| server <server>]
     prefix - alters prefix TFTP settings
     bootfile - alters bootfile TFTP settings
     server - sets booting server
@@ -2850,11 +2770,11 @@ def natTftp(ctx, mach, nicnum, nat, args):
             server = nat.network
             if server is None:
                 server = '10.0.%d/24' % (int(nicnum) + 2)
-            (server, _mask) = server.split('/')
+            (server, mask) = server.split('/')
             while server.count('.') != 3:
                 server += '.0'
-            (ipA, ipB, ipC, _ipD) = server.split('.')
-            server = '%d.%d.%d.4' % (ipA, ipB, ipC)
+            (a, b, c, d) = server.split('.')
+            server = '%d.%d.%d.4' % (a, b, c)
         prefix = nat.TFTPPrefix
         if prefix is None:
             prefix = '%s/TFTP/' % (ctx['vb'].homeFolder)
@@ -2863,24 +2783,25 @@ def natTftp(ctx, mach, nicnum, nat, args):
             bootfile = '%s.pxe' % (mach.name)
         msg = 'server:%s, prefix:%s, bootfile:%s' % (server, prefix, bootfile)
         return (0, [msg])
-
-    cmd = args[1]
-    if len(args) != 3:
-        print('invalid args:', args)
-        print(natTftp.__doc__)
-        return (1, None)
-    if   cmd == 'prefix': nat.TFTPPrefix = args[2]
-    elif cmd == 'bootfile': nat.TFTPBootFile = args[2]
-    elif cmd == 'server': nat.TFTPNextServer = args[2]
     else:
-        print("invalid cmd:", cmd)
-        return (1, None)
+
+        cmd = args[1]
+        if len(args) != 3:
+            print('invalid args:', args)
+            print(natTftp.__doc__)
+            return (1, None)
+        if cmd == 'prefix': nat.TFTPPrefix = args[2]
+        elif cmd == 'bootfile': nat.TFTPBootFile = args[2]
+        elif cmd == 'server': nat.TFTPNextServer = args[2]
+        else:
+            print("invalid cmd:", cmd)
+            return (1, None)
     return (0, None)
 
-def natPortForwarding(ctx, _mach, _nicnum, nat, args):
+def natPortForwarding(ctx, mach, nicnum, nat, args):
     """This command shows/manages port-forwarding settings
     usage:
-        nat <vmname|uuid> <nicnum> <pf> [ simple tcp|udp <hostport> <guestport>]
+        nat <vm> <nicnum> <pf> [ simple tcp|udp <hostport> <guestport>]
             |[no_name tcp|udp <hostip> <hostport> <guestip> <guestport>]
             |[ex tcp|udp <pf-name> <hostip> <hostport> <guestip> <guestport>]
             |[delete <pf-name>]
@@ -2889,43 +2810,43 @@ def natPortForwarding(ctx, _mach, _nicnum, nat, args):
         # note: keys/values are swapped in defining part of the function
         proto = {0: 'udp', 1: 'tcp'}
         msg = []
-        port_forwardings = ctx['global'].getArray(nat, 'redirects')
-        for forwarding in port_forwardings:
-            (pfnme, pfp, pfhip, pfhp, pfgip, pfgp) = str(forwarding).split(', ')
+        pfs = ctx['global'].getArray(nat, 'redirects')
+        for pf in pfs:
+            (pfnme, pfp, pfhip, pfhp, pfgip, pfgp) = str(pf).split(', ')
             msg.append('%s: %s %s:%s => %s:%s' % (pfnme, proto[int(pfp)], pfhip, pfhp, pfgip, pfgp))
         return (0, msg) # msg is array
-
-    proto = {'udp': 0, 'tcp': 1}
-    pfcmd = {
-        'simple': {
-            'validate': lambda: args[1] in list(pfcmd) and args[2] in list(proto) and len(args) == 5,
-            'func':lambda: nat.addRedirect('', proto[args[2]], '', int(args[3]), '', int(args[4]))
-        },
-        'no_name': {
-            'validate': lambda: args[1] in list(pfcmd) and args[2] in list(proto) and len(args) == 7,
-            'func': lambda: nat.addRedirect('', proto[args[2]], args[3], int(args[4]), args[5], int(args[6]))
-        },
-        'ex': {
-            'validate': lambda: args[1] in list(pfcmd) and args[2] in list(proto) and len(args) == 8,
-            'func': lambda: nat.addRedirect(args[3], proto[args[2]], args[4], int(args[5]), args[6], int(args[7]))
-        },
-        'delete': {
-            'validate': lambda: len(args) == 3,
-            'func': lambda: nat.removeRedirect(args[2])
+    else:
+        proto = {'udp': 0, 'tcp': 1}
+        pfcmd = {
+            'simple': {
+                'validate': lambda: args[1] in list(pfcmd.keys()) and args[2] in list(proto.keys()) and len(args) == 5,
+                'func':lambda: nat.addRedirect('', proto[args[2]], '', int(args[3]), '', int(args[4]))
+            },
+            'no_name': {
+                'validate': lambda: args[1] in list(pfcmd.keys()) and args[2] in list(proto.keys()) and len(args) == 7,
+                'func': lambda: nat.addRedirect('', proto[args[2]], args[3], int(args[4]), args[5], int(args[6]))
+            },
+            'ex': {
+                'validate': lambda: args[1] in list(pfcmd.keys()) and args[2] in list(proto.keys()) and len(args) == 8,
+                'func': lambda: nat.addRedirect(args[3], proto[args[2]], args[4], int(args[5]), args[6], int(args[7]))
+            },
+            'delete': {
+                'validate': lambda: len(args) == 3,
+                'func': lambda: nat.removeRedirect(args[2])
+            }
         }
-    }
 
-    if not pfcmd[args[1]]['validate']():
-        print('invalid port-forwarding or args of sub command ', args[1])
-        print(natPortForwarding.__doc__)
-        return (1, None)
+        if not pfcmd[args[1]]['validate']():
+            print('invalid port-forwarding or args of sub command ', args[1])
+            print(natPortForwarding.__doc__)
+            return (1, None)
 
-    _not_sure_for_what_this_is = pfcmd[args[1]]['func']()
+        a = pfcmd[args[1]]['func']()
     return (0, None)
 
-def natNetwork(_ctx, _mach, nicnum, nat, args):
+def natNetwork(ctx, mach, nicnum, nat, args):
     """This command shows/alters NAT network settings
-    usage: nat <vmname|uuid> <nicnum> network [<network>]
+    usage: nat <vm> <nicnum> network [<network>]
     """
     if len(args) == 1:
         if nat.network is not None and len(str(nat.network)) != 0:
@@ -2933,17 +2854,17 @@ def natNetwork(_ctx, _mach, nicnum, nat, args):
         else:
             msg = '10.0.%d.0/24' % (int(nicnum) + 2)
         return (0, [msg])
-
-    (addr, mask) = args[1].split('/')
-    if addr.count('.') > 3 or int(mask) < 0 or int(mask) > 32:
-        print('Invalid arguments')
-        return (1, None)
-    nat.network = args[1]
+    else:
+        (addr, mask) = args[1].split('/')
+        if addr.count('.') > 3 or int(mask) < 0 or int(mask) > 32:
+            print('Invalid arguments')
+            return (1, None)
+        nat.network = args[1]
     return (0, None)
 
 def natCmd(ctx, args):
     """This command is entry point to NAT settins management
-    usage: nat <vmname|uuid> <nicnum> <cmd> <cmd-args>
+    usage: nat <vm> <nicnum> <cmd> <cmd-args>
     cmd - [alias|settings|tftp|dns|pf|network]
     for more information about commands:
     nat help <cmd>
@@ -2967,13 +2888,12 @@ def natCmd(ctx, args):
     if len(args) == 1 or len(args) < 4 or args[3] not in natcommands:
         print(natCmd.__doc__)
         return 0
-    mach = argsToMach(ctx, args)
-    if not mach:
+    mach = ctx['argsToMach'](args)
+    if mach == None:
         print("please specify vm")
         return 0
-    platformProps = mach.platform.properties
-    if len(args) < 3 or not args[2].isdigit() or int(args[2]) not in list(range(0, platformProps.getMaxNetworkAdapters(mach.platform.chipsetType))):
-        print('please specify adapter num %d isn\'t in range [0-%d]' % (args[2], platformProps.getMaxNetworkAdapters(mach.platform.chipsetType)))
+    if len(args) < 3 or not args[2].isdigit() or int(args[2]) not in list(range(0, ctx['vb'].systemProperties.getMaxNetworkAdapters(mach.chipsetType))):
+        print('please specify adapter num %d isn\'t in range [0-%d]' % (args[2], ctx['vb'].systemProperties.getMaxNetworkAdapters(mach.chipsetType)))
         return 0
     nicnum = int(args[2])
     cmdargs = []
@@ -2992,68 +2912,68 @@ def natCmd(ctx, args):
 
     adapter = mach.getNetworkAdapter(nicnum)
     natEngine = adapter.NATEngine
-    (rc, reports) = natcommands[func](ctx, mach, nicnum, natEngine, cmdargs)
+    (rc, report) = natcommands[func](ctx, mach, nicnum, natEngine, cmdargs)
     if rosession == 0:
         if rc == 0:
             mach.saveSettings()
         session.unlockMachine()
-    elif reports:
-        for cur_report in reports:
-            msg ='%s nic%d %s: %s' % (mach.name, nicnum, func, cur_report)
+    elif report is not None:
+        for r in report:
+            msg ='%s nic%d %s: %s' % (mach.name, nicnum, func, r)
             print(msg)
     return 0
 
 def nicSwitchOnOff(adapter, attr, args):
     if len(args) == 1:
         yesno = {0: 'off', 1: 'on'}
-        resp = yesno[int(adapter.getattr(attr))]
-        return (0, resp)
-
-    yesno = {'off' : 0, 'on' : 1}
-    if args[1] not in yesno:
-        print('%s isn\'t acceptable, please choose %s' % (args[1], list(yesno.keys())))
-        return (1, None)
-    adapter.setsetattr(attr, yesno[args[1]])
+        r = yesno[int(adapter.__getattr__(attr))]
+        return (0, r)
+    else:
+        yesno = {'off' : 0, 'on' : 1}
+        if args[1] not in yesno:
+            print('%s isn\'t acceptable, please choose %s' % (args[1], list(yesno.keys())))
+            return (1, None)
+        adapter.__setattr__(attr, yesno[args[1]])
     return (0, None)
 
-def nicTraceSubCmd(_ctx, _vm, _nicnum, adapter, args):
+def nicTraceSubCmd(ctx, vm, nicnum, adapter, args):
     '''
-    usage: nic <vmname|uuid> <nicnum> trace [on|off [file]]
+    usage: nic <vm> <nicnum> trace [on|off [file]]
     '''
-    (rc, resp) = nicSwitchOnOff(adapter, 'traceEnabled', args)
+    (rc, r) = nicSwitchOnOff(adapter, 'traceEnabled', args)
     if len(args) == 1 and rc == 0:
-        resp = '%s file:%s' % (resp, adapter.traceFile)
-        return (0, resp)
-    if len(args) == 3 and rc == 0:
+        r = '%s file:%s' % (r, adapter.traceFile)
+        return (0, r)
+    elif len(args) == 3 and rc == 0:
         adapter.traceFile = args[2]
     return (0, None)
 
-def nicLineSpeedSubCmd(_ctx, _vm, _nicnum, adapter, args):
+def nicLineSpeedSubCmd(ctx, vm, nicnum, adapter, args):
     if len(args) == 1:
-        resp = '%d kbps'% (adapter.lineSpeed)
-        return (0, resp)
-
-    if not args[1].isdigit():
-        print('%s isn\'t a number' % (args[1]))
-        return (1, None)
-    adapter.lineSpeed = int(args[1])
+        r = '%d kbps'% (adapter.lineSpeed)
+        return (0, r)
+    else:
+        if not args[1].isdigit():
+            print('%s isn\'t a number' % (args[1]))
+            return (1, None)
+        adapter.lineSpeed = int(args[1])
     return (0, None)
 
-def nicCableSubCmd(_ctx, _vm, _nicnum, adapter, args):
+def nicCableSubCmd(ctx, vm, nicnum, adapter, args):
     '''
-    usage: nic <vmname|uuid> <nicnum> cable [on|off]
+    usage: nic <vm> <nicnum> cable [on|off]
     '''
     return nicSwitchOnOff(adapter, 'cableConnected', args)
 
-def nicEnableSubCmd(_ctx, _vm, _nicnum, adapter, args):
+def nicEnableSubCmd(ctx, vm, nicnum, adapter, args):
     '''
-    usage: nic <vmname|uuid> <nicnum> enable [on|off]
+    usage: nic <vm> <nicnum> enable [on|off]
     '''
     return nicSwitchOnOff(adapter, 'enabled', args)
 
-def nicTypeSubCmd(ctx, _vm, _nicnum, adapter, args):
+def nicTypeSubCmd(ctx, vm, nicnum, adapter, args):
     '''
-    usage: nic <vmname|uuid> <nicnum> type [Am79c970A|Am79c970A|I82540EM|I82545EM|I82543GC|Virtio]
+    usage: nic <vm> <nicnum> type [Am79c970A|Am79c970A|I82540EM|I82545EM|I82543GC|Virtio]
     '''
     if len(args) == 1:
         nictypes = ctx['const'].all_values('NetworkAdapterType')
@@ -3061,17 +2981,17 @@ def nicTypeSubCmd(ctx, _vm, _nicnum, adapter, args):
             if str(adapter.adapterType) == str(nictypes[key]):
                 return (0, str(key))
         return (1, None)
-
-    nictypes = ctx['const'].all_values('NetworkAdapterType')
-    if args[1] not in list(nictypes.keys()):
-        print('%s not in acceptable values (%s)' % (args[1], list(nictypes.keys())))
-        return (1, None)
-    adapter.adapterType = nictypes[args[1]]
+    else:
+        nictypes = ctx['const'].all_values('NetworkAdapterType')
+        if args[1] not in list(nictypes.keys()):
+            print('%s not in acceptable values (%s)' % (args[1], list(nictypes.keys())))
+            return (1, None)
+        adapter.adapterType = nictypes[args[1]]
     return (0, None)
 
-def nicAttachmentSubCmd(ctx, _vm, _nicnum, adapter, args):
+def nicAttachmentSubCmd(ctx, vm, nicnum, adapter, args):
     '''
-    usage: nic <vmname|uuid> <nicnum> attachment [Null|NAT|Bridged <interface>|Internal <name>|HostOnly <interface>
+    usage: nic <vm> <nicnum> attachment [Null|NAT|Bridged <interface>|Internal <name>|HostOnly <interface>
     '''
     if len(args) == 1:
         nicAttachmentType = {
@@ -3083,54 +3003,54 @@ def nicAttachmentSubCmd(ctx, _vm, _nicnum, adapter, args):
             # @todo show details of the generic network attachment type
             ctx['global'].constants.NetworkAttachmentType_Generic: ('Generic', ''),
         }
-        if not isinstance(adapter.attachmentType, int):
+        if type(adapter.attachmentType) != int:
             t = str(adapter.attachmentType)
         else:
             t = adapter.attachmentType
-        (resp, name) = nicAttachmentType[t]
-        return (0, 'attachment:%s, name:%s' % (resp, name))
-
-    nicAttachmentType = {
-        'Null': {
-            'v': lambda: len(args) == 2,
-            'p': lambda: 'do nothing',
-            'f': lambda: ctx['global'].constants.NetworkAttachmentType_Null},
-        'NAT': {
-            'v': lambda: len(args) == 2,
-            'p': lambda: 'do nothing',
-            'f': lambda: ctx['global'].constants.NetworkAttachmentType_NAT},
-        'Bridged': {
-            'v': lambda: len(args) == 3,
-            'p': lambda: adapter.setattr('bridgedInterface', args[2]),
-            'f': lambda: ctx['global'].constants.NetworkAttachmentType_Bridged},
-        'Internal': {
-            'v': lambda: len(args) == 3,
-            'p': lambda: adapter.setattr('internalNetwork', args[2]),
-            'f': lambda: ctx['global'].constants.NetworkAttachmentType_Internal},
-        'HostOnly': {
-            'v': lambda: len(args) == 2,
-            'p': lambda: adapter.setattr('hostOnlyInterface', args[2]),
-            'f': lambda: ctx['global'].constants.NetworkAttachmentType_HostOnly},
-        # @todo implement setting the properties of a generic attachment
-        'Generic': {
-            'v': lambda: len(args) == 3,
-            'p': lambda: 'do nothing',
-            'f': lambda: ctx['global'].constants.NetworkAttachmentType_Generic}
-    }
-    if args[1] not in list(nicAttachmentType):
-        print('%s not in acceptable values (%s)' % (args[1], list(nicAttachmentType.keys())))
-        return (1, None)
-    if not nicAttachmentType[args[1]]['v']():
-        ## @todo r=andy Log this properly!
-        return (1, None)
-    nicAttachmentType[args[1]]['p']()
-    adapter.attachmentType = nicAttachmentType[args[1]]['f']()
+        (r, p) = nicAttachmentType[t]
+        return (0, 'attachment:%s, name:%s' % (r, p))
+    else:
+        nicAttachmentType = {
+            'Null': {
+                'v': lambda: len(args) == 2,
+                'p': lambda: 'do nothing',
+                'f': lambda: ctx['global'].constants.NetworkAttachmentType_Null},
+            'NAT': {
+                'v': lambda: len(args) == 2,
+                'p': lambda: 'do nothing',
+                'f': lambda: ctx['global'].constants.NetworkAttachmentType_NAT},
+            'Bridged': {
+                'v': lambda: len(args) == 3,
+                'p': lambda: adapter.__setattr__('bridgedInterface', args[2]),
+                'f': lambda: ctx['global'].constants.NetworkAttachmentType_Bridged},
+            'Internal': {
+                'v': lambda: len(args) == 3,
+                'p': lambda: adapter.__setattr__('internalNetwork', args[2]),
+                'f': lambda: ctx['global'].constants.NetworkAttachmentType_Internal},
+            'HostOnly': {
+                'v': lambda: len(args) == 2,
+                'p': lambda: adapter.__setattr__('hostOnlyInterface', args[2]),
+                'f': lambda: ctx['global'].constants.NetworkAttachmentType_HostOnly},
+            # @todo implement setting the properties of a generic attachment
+            'Generic': {
+                'v': lambda: len(args) == 3,
+                'p': lambda: 'do nothing',
+                'f': lambda: ctx['global'].constants.NetworkAttachmentType_Generic}
+        }
+        if args[1] not in list(nicAttachmentType.keys()):
+            print('%s not in acceptable values (%s)' % (args[1], list(nicAttachmentType.keys())))
+            return (1, None)
+        if not nicAttachmentType[args[1]]['v']():
+            print(nicAttachmentType.__doc__)
+            return (1, None)
+        nicAttachmentType[args[1]]['p']()
+        adapter.attachmentType = nicAttachmentType[args[1]]['f']()
     return (0, None)
 
 def nicCmd(ctx, args):
     '''
     This command to manage network adapters
-    usage: nic <vmname|uuid> <nicnum> <cmd> <cmd-args>
+    usage: nic <vm> <nicnum> <cmd> <cmd-args>
     where cmd : attachment, trace, linespeed, cable, enable, type
     '''
     # 'command name':{'runtime': is_callable_at_runtime, 'op': function_name}
@@ -3152,27 +3072,27 @@ def nicCmd(ctx, args):
             print(nicCmd.__doc__)
         return 0
 
-    mach = ctx['argsToMach'](args)
-    if not mach:
-        return 1
+    vm = ctx['argsToMach'](args)
+    if vm is None:
+        print('please specify vm')
+        return 0
 
-    platformProps = mach.platform.properties
     if    len(args) < 3 \
-       or int(args[2]) not in list(range(0, platformProps.getMaxNetworkAdapters(mach.platform.chipsetType))):
-        print('please specify adapter num %d isn\'t in range [0-%d]'% (args[2], platformProps.getMaxNetworkAdapters(mach.platform.chipsetType)))
-        return 1
+       or int(args[2]) not in list(range(0, ctx['vb'].systemProperties.getMaxNetworkAdapters(vm.chipsetType))):
+        print('please specify adapter num %d isn\'t in range [0-%d]'% (args[2], ctx['vb'].systemProperties.getMaxNetworkAdapters(vm.chipsetType)))
+        return 0
     nicnum = int(args[2])
     cmdargs = args[3:]
     func = args[3]
     session = None
-    session = ctx['global'].openMachineSession(mach, fPermitSharing=True)
-    mach = session.machine
-    adapter = mach.getNetworkAdapter(nicnum)
-    (rc, report) = niccomand[func](ctx, mach, nicnum, adapter, cmdargs)
+    session = ctx['global'].openMachineSession(vm, fPermitSharing=True)
+    vm = session.machine
+    adapter = vm.getNetworkAdapter(nicnum)
+    (rc, report) = niccomand[func](ctx, vm, nicnum, adapter, cmdargs)
     if rc == 0:
-        mach.saveSettings()
+        vm.saveSettings()
     if report is not None:
-        print('%s nic %d %s: %s' % (mach.name, nicnum, args[3], report))
+        print('%s nic %d %s: %s' % (vm.name, nicnum, args[3], report))
     session.unlockMachine()
     return 0
 
@@ -3214,10 +3134,10 @@ def foreachvmCmd(ctx, args):
 
 def recordDemoCmd(ctx, args):
     if len(args) < 3:
-        print("usage: recordDemo <vmname|uuid> <filename> [duration in s]")
+        print("usage: recordDemo vm filename (duration)")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     filename = args[2]
     dur = 10000
@@ -3228,10 +3148,10 @@ def recordDemoCmd(ctx, args):
 
 def playbackDemoCmd(ctx, args):
     if len(args) < 3:
-        print("usage: playbackDemo <vmname|uuid> <filename> [duration in s]")
+        print("usage: playbackDemo vm filename (duration)")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     filename = args[2]
     dur = 10000
@@ -3247,16 +3167,16 @@ def pciAddr(ctx, addr):
 
 def lspci(ctx, console):
     assigned = ctx['global'].getArray(console.machine, 'PCIDeviceAssignments')
-    for assignment in assigned:
-        if assignment.isPhysicalDevice:
-            print("%s: assigned host device %s guest %s" % (colDev(ctx, assignment.name), pciAddr(ctx, assignment.hostAddress), pciAddr(ctx, assignment.guestAddress)))
+    for a in assigned:
+        if a.isPhysicalDevice:
+            print("%s: assigned host device %s guest %s" % (colDev(ctx, a.name), pciAddr(ctx, a.hostAddress), pciAddr(ctx, a.guestAddress)))
 
     atts = ctx['global'].getArray(console, 'attachedPCIDevices')
-    for att in atts:
-        if att.isPhysicalDevice:
-            print("%s: physical, guest %s, host %s" % (colDev(ctx, att.name), pciAddr(ctx, att.guestAddress), pciAddr(ctx, att.hostAddress)))
+    for a in atts:
+        if a.isPhysicalDevice:
+            print("%s: physical, guest %s, host %s" % (colDev(ctx, a.name), pciAddr(ctx, a.guestAddress), pciAddr(ctx, a.hostAddress)))
         else:
-            print("%s: virtual, guest %s" % (colDev(ctx, att.name), pciAddr(ctx, att.guestAddress)))
+            print("%s: virtual, guest %s" % (colDev(ctx, a.name), pciAddr(ctx, a.guestAddress)))
     return
 
 def parsePci(strg):
@@ -3272,17 +3192,17 @@ def lspciCmd(ctx, args):
         print("usage: lspci vm")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     cmdExistingVm(ctx, mach, 'guestlambda', [lambda ctx, mach, console, args:  lspci(ctx, console)])
     return 0
 
 def attachpciCmd(ctx, args):
     if len(args) < 3:
-        print("usage: attachpci <vmname|uuid> <host pci address> <guest pci address>")
+        print("usage: attachpci vm hostpci <guestpci>")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     hostaddr = parsePci(args[2])
     if hostaddr == -1:
@@ -3301,10 +3221,10 @@ def attachpciCmd(ctx, args):
 
 def detachpciCmd(ctx, args):
     if len(args) < 3:
-        print("usage: detachpci <vmname|uuid> <host pci address>")
+        print("usage: detachpci vm hostpci")
         return 0
     mach = argsToMach(ctx, args)
-    if not mach:
+    if mach == None:
         return 0
     hostaddr = parsePci(args[2])
     if hostaddr == -1:
@@ -3335,8 +3255,8 @@ aliases = {'s':'start',
            'v':'verbose'}
 
 commands = {'help':['Prints help information', helpCmd, 0],
-            'start':['Start virtual machine by name or uuid: start mytestvm headless', startCmd, 0],
-            'createVm':['Create virtual machine: createVm myvmname x86 MacOS', createVmCmd, 0],
+            'start':['Start virtual machine by name or uuid: start Linux headless', startCmd, 0],
+            'createVm':['Create virtual machine: createVm macvm MacOS', createVmCmd, 0],
             'removeVm':['Remove virtual machine', removeVmCmd, 0],
             'pause':['Pause virtual machine', pauseCmd, 0],
             'resume':['Resume virtual machine', resumeCmd, 0],
@@ -3352,55 +3272,55 @@ commands = {'help':['Prints help information', helpCmd, 0],
             'gpipe':['Pipe between host and guest', gpipeCmd, 0],
             'alias':['Control aliases', aliasCmd, 0],
             'verbose':['Toggle verbosity', verboseCmd, 0],
-            'setvar':['Set VM variable: setvar mytestvm firmwareSettings.ACPIEnabled True', setvarCmd, 0],
+            'setvar':['Set VMs variable: setvar Fedora BIOSSettings.ACPIEnabled True', setvarCmd, 0],
             'eval':['Evaluate arbitrary Python construction: eval \'for m in getMachines(ctx): print(m.name, "has", m.memorySize, "M")\'', evalCmd, 0],
             'quit':['Exits', quitCmd, 0],
             'host':['Show host information', hostCmd, 0],
-            'guest':['Execute command for guest: guest mytestvm \'console.mouse.putMouseEvent(20, 20, 0, 0, 0)\'', guestCmd, 0],
-            'monitorGuest':['Monitor what happens with the guest for some time: monitorGuest mytestvm 10', monitorGuestCmd, 0],
-            'monitorGuestKbd':['Monitor guest keyboard for some time: monitorGuestKbd mytestvm 10', monitorGuestKbdCmd, 0],
-            'monitorGuestMouse':['Monitor guest mouse for some time: monitorGuestMouse mytestvm 10', monitorGuestMouseCmd, 0],
-            'monitorGuestMultiTouch':['Monitor guest touch screen for some time: monitorGuestMultiTouch mytestvm 10', monitorGuestMultiTouchCmd, 0],
+            'guest':['Execute command for guest: guest Win32 \'console.mouse.putMouseEvent(20, 20, 0, 0, 0)\'', guestCmd, 0],
+            'monitorGuest':['Monitor what happens with the guest for some time: monitorGuest Win32 10', monitorGuestCmd, 0],
+            'monitorGuestKbd':['Monitor guest keyboard for some time: monitorGuestKbd Win32 10', monitorGuestKbdCmd, 0],
+            'monitorGuestMouse':['Monitor guest mouse for some time: monitorGuestMouse Win32 10', monitorGuestMouseCmd, 0],
+            'monitorGuestMultiTouch':['Monitor guest touch screen for some time: monitorGuestMultiTouch Win32 10', monitorGuestMultiTouchCmd, 0],
             'monitorVBox':['Monitor what happens with VirtualBox for some time: monitorVBox 10', monitorVBoxCmd, 0],
-            'portForward':['Setup permanent port forwarding for a VM, takes adapter number host port and guest port: portForward mytestvm 0 8080 80', portForwardCmd, 0],
-            'showLog':['Show log file of the VM, : showLog mytestvm', showLogCmd, 0],
-            'findLog':['Show entries matching pattern in log file of the VM, : findLog mytestvm PDM|CPUM', findLogCmd, 0],
-            'findAssert':['Find assert in log file of the VM, : findAssert mytestvm', findAssertCmd, 0],
+            'portForward':['Setup permanent port forwarding for a VM, takes adapter number host port and guest port: portForward Win32 0 8080 80', portForwardCmd, 0],
+            'showLog':['Show log file of the VM, : showLog Win32', showLogCmd, 0],
+            'findLog':['Show entries matching pattern in log file of the VM, : findLog Win32 PDM|CPUM', findLogCmd, 0],
+            'findAssert':['Find assert in log file of the VM, : findAssert Win32', findAssertCmd, 0],
             'reloadExt':['Reload custom extensions: reloadExt', reloadExtCmd, 0],
             'runScript':['Run VBox script: runScript script.vbox', runScriptCmd, 0],
             'sleep':['Sleep for specified number of seconds: sleep 3.14159', sleepCmd, 0],
             'shell':['Execute external shell command: shell "ls /etc/rc*"', shellCmd, 0],
-            'exportVm':['Export VM in OVF format: exportVm mytestvm /tmp/win.ovf', exportVMCmd, 0],
-            'screenshot':['Take VM screenshot to a file: screenshot mytestvm /tmp/win.png 1024 768 0', screenshotCmd, 0],
-            'teleport':['Teleport VM to another box (see openportal): teleport mytestvm anotherhost:8000 <passwd> <maxDowntime>', teleportCmd, 0],
+            'exportVm':['Export VM in OVF format: exportVm Win /tmp/win.ovf', exportVMCmd, 0],
+            'screenshot':['Take VM screenshot to a file: screenshot Win /tmp/win.png 1024 768 0', screenshotCmd, 0],
+            'teleport':['Teleport VM to another box (see openportal): teleport Win anotherhost:8000 <passwd> <maxDowntime>', teleportCmd, 0],
             'typeGuest':['Type arbitrary text in guest: typeGuest Linux "^lls\\n&UP;&BKSP;ess /etc/hosts\\nq^c" 0.7', typeGuestCmd, 0],
-            'openportal':['Open portal for teleportation of VM from another box (see teleport): openportal mytestvm 8000 <passwd>', openportalCmd, 0],
+            'openportal':['Open portal for teleportation of VM from another box (see teleport): openportal Win 8000 <passwd>', openportalCmd, 0],
             'closeportal':['Close teleportation portal (see openportal, teleport): closeportal Win', closeportalCmd, 0],
             'getextra':['Get extra data, empty key lists all: getextra <vm|global> <key>', getExtraDataCmd, 0],
             'setextra':['Set extra data, empty value removes key: setextra <vm|global> <key> <value>', setExtraDataCmd, 0],
-            'gueststats':['Print available guest stats (only Windows guests with additions so far): gueststats mytestvm', gueststatsCmd, 0],
-            'plugcpu':['Add a CPU to a running VM: plugcpu mytestvm 1', plugcpuCmd, 0],
+            'gueststats':['Print available guest stats (only Windows guests with additions so far): gueststats Win32', gueststatsCmd, 0],
+            'plugcpu':['Add a CPU to a running VM: plugcpu Win 1', plugcpuCmd, 0],
             'unplugcpu':['Remove a CPU from a running VM (additions required, Windows cannot unplug): unplugcpu Linux 1', unplugcpuCmd, 0],
             'createHdd': ['Create virtual HDD:  createHdd 1000 /disk.vdi ', createHddCmd, 0],
             'removeHdd': ['Permanently remove virtual HDD: removeHdd /disk.vdi', removeHddCmd, 0],
             'registerHdd': ['Register HDD image with VirtualBox instance: registerHdd /disk.vdi', registerHddCmd, 0],
             'unregisterHdd': ['Unregister HDD image with VirtualBox instance: unregisterHdd /disk.vdi', unregisterHddCmd, 0],
-            'attachHdd': ['Attach HDD to the VM: attachHdd mytestvm /disk.vdi "IDE Controller" 0:1', attachHddCmd, 0],
-            'detachHdd': ['Detach HDD from the VM: detachHdd mytestvm /disk.vdi', detachHddCmd, 0],
+            'attachHdd': ['Attach HDD to the VM: attachHdd win /disk.vdi "IDE Controller" 0:1', attachHddCmd, 0],
+            'detachHdd': ['Detach HDD from the VM: detachHdd win /disk.vdi', detachHddCmd, 0],
             'registerIso': ['Register CD/DVD image with VirtualBox instance: registerIso /os.iso', registerIsoCmd, 0],
             'unregisterIso': ['Unregister CD/DVD image with VirtualBox instance: unregisterIso /os.iso', unregisterIsoCmd, 0],
             'removeIso': ['Permanently remove CD/DVD image: removeIso /os.iso', removeIsoCmd, 0],
-            'attachIso': ['Attach CD/DVD to the VM: attachIso mytestvm /os.iso "IDE Controller" 0:1', attachIsoCmd, 0],
-            'detachIso': ['Detach CD/DVD from the VM: detachIso mytestvm /os.iso', detachIsoCmd, 0],
-            'mountIso': ['Mount CD/DVD to the running VM: mountIso mytestvm /os.iso "IDE Controller" 0:1', mountIsoCmd, 0],
-            'unmountIso': ['Unmount CD/DVD from running VM: unmountIso mytestvm "IDE Controller" 0:1', unmountIsoCmd, 0],
-            'attachCtr': ['Attach storage controller to the VM: attachCtr mytestvm Ctr0 IDE ICH6', attachCtrCmd, 0],
-            'detachCtr': ['Detach HDD from the VM: detachCtr mytestvm Ctr0', detachCtrCmd, 0],
-            'attachUsb': ['Attach USB device to the VM (use listUsb to show available devices): attachUsb mytestvm uuid', attachUsbCmd, 0],
-            'detachUsb': ['Detach USB device from the VM: detachUsb mytestvm uuid', detachUsbCmd, 0],
+            'attachIso': ['Attach CD/DVD to the VM: attachIso win /os.iso "IDE Controller" 0:1', attachIsoCmd, 0],
+            'detachIso': ['Detach CD/DVD from the VM: detachIso win /os.iso', detachIsoCmd, 0],
+            'mountIso': ['Mount CD/DVD to the running VM: mountIso win /os.iso "IDE Controller" 0:1', mountIsoCmd, 0],
+            'unmountIso': ['Unmount CD/DVD from running VM: unmountIso win "IDE Controller" 0:1', unmountIsoCmd, 0],
+            'attachCtr': ['Attach storage controller to the VM: attachCtr win Ctr0 IDE ICH6', attachCtrCmd, 0],
+            'detachCtr': ['Detach HDD from the VM: detachCtr win Ctr0', detachCtrCmd, 0],
+            'attachUsb': ['Attach USB device to the VM (use listUsb to show available devices): attachUsb win uuid', attachUsbCmd, 0],
+            'detachUsb': ['Detach USB device from the VM: detachUsb win uuid', detachUsbCmd, 0],
             'listMedia': ['List media known to this VBox instance', listMediaCmd, 0],
             'listUsb': ['List known USB devices', listUsbCmd, 0],
-            'shareFolder': ['Make host\'s folder visible to guest: shareFolder mytestvm /share share writable', shareFolderCmd, 0],
+            'shareFolder': ['Make host\'s folder visible to guest: shareFolder win /share share writable', shareFolderCmd, 0],
             'unshareFolder': ['Remove folder sharing', unshareFolderCmd, 0],
             'gui': ['Start GUI frontend', guiCmd, 0],
             'colors':['Toggle colors', colorsCmd, 0],
@@ -3410,27 +3330,27 @@ commands = {'help':['Prints help information', helpCmd, 0],
             'prompt' : ['Control shell prompt', promptCmd, 0],
             'foreachvm' : ['Perform command for each VM', foreachvmCmd, 0],
             'foreach' : ['Generic "for each" construction, using XPath-like notation: foreach //vms/vm[@OSTypeId=\'MacOS\'] "print(obj.name)"', foreachCmd, 0],
-            'recordDemo':['Record demo: recordDemo mytestvm file.dmo 10', recordDemoCmd, 0],
-            'playbackDemo':['Playback demo: playbackDemo mytestvm file.dmo 10', playbackDemoCmd, 0],
-            'lspci': ['List PCI devices attached to the VM: lspci mytestvm', lspciCmd, 0],
-            'attachpci': ['Attach host PCI device to the VM: attachpci mytestvm 01:00.0', attachpciCmd, 0],
-            'detachpci': ['Detach host PCI device from the VM: detachpci mytestvm 01:00.0', detachpciCmd, 0],
+            'recordDemo':['Record demo: recordDemo Win32 file.dmo 10', recordDemoCmd, 0],
+            'playbackDemo':['Playback demo: playbackDemo Win32 file.dmo 10', playbackDemoCmd, 0],
+            'lspci': ['List PCI devices attached to the VM: lspci Win32', lspciCmd, 0],
+            'attachpci': ['Attach host PCI device to the VM: attachpci Win32 01:00.0', attachpciCmd, 0],
+            'detachpci': ['Detach host PCI device from the VM: detachpci Win32 01:00.0', detachpciCmd, 0],
             'goto': ['Go to line in script (script-only)', gotoCmd, 0]
             }
 
 def runCommandArgs(ctx, args):
     c = args[0]
-    if aliases.get(c, None):
+    if aliases.get(c, None) != None:
         c = aliases[c]
-    cmd_internal = commands.get(c, None)
-    if not cmd_internal:
+    ci = commands.get(c, None)
+    if ci == None:
         print("Unknown command: '%s', type 'help' for list of known commands" % (c))
         return 0
     if ctx['remote'] and ctx['vb'] is None:
         if c not in ['connect', 'reconnect', 'help', 'quit']:
             print("First connect to remote server with %s command." % (colored('connect', 'blue')))
             return 0
-    return cmd_internal[1](ctx, args)
+    return ci[1](ctx, args)
 
 
 def runCommand(ctx, cmd):
@@ -3456,18 +3376,16 @@ def runCommand(ctx, cmd):
 # Also one can put shell extensions into ~/.VirtualBox/shexts and
 # they will also be picked up, so this way one can exchange
 # shell extensions easily.
-def addExtsFromFile(_ctx, cmds, filename):
+def addExtsFromFile(ctx, cmds, filename):
     if not os.path.isfile(filename):
         return
-    extDict = {}
+    d = {}
     try:
-        with open(filename, encoding='utf-8') as file:
-            file_buf = file.read()
-            exec(compile(file_buf, filename, 'exec'), extDict, extDict) # pylint: disable=exec-used
-        for (key, value) in list(extDict['commands'].items()):
+        exec(compile(open(filename).read(), filename, 'exec'), d, d)
+        for (k, v) in list(d['commands'].items()):
             if g_fVerbose:
-                print("customize: adding \"%s\" - %s" % (key, value[0]))
-            cmds[key] = [value[0], value[1], filename]
+                print("customize: adding \"%s\" - %s" % (k, v[0]))
+            cmds[k] = [v[0], v[1], filename]
     except:
         print("Error loading user extensions from %s" % (filename))
         traceback.print_exc()
@@ -3492,8 +3410,8 @@ def getHomeFolder(ctx):
         if 'VBOX_USER_HOME' in os.environ:
             return os.path.join(os.environ['VBOX_USER_HOME'])
         return os.path.join(os.path.expanduser("~"), ".VirtualBox")
-
-    return ctx['vb'].homeFolder
+    else:
+        return ctx['vb'].homeFolder
 
 def interpret(ctx):
     if ctx['remote']:
@@ -3536,22 +3454,21 @@ def interpret(ctx):
 
     if g_sCmd is not None:
         cmds = g_sCmd.split(';')
-    itCmd = iter(cmds)
+    it = cmds.__iter__()
 
     while True:
         try:
             if g_fBatchMode:
                 cmd = 'runScript %s'% (g_sScriptFile)
             elif g_sCmd is not None:
-                cmd = next(itCmd)
+                cmd = next(it)
             else:
                 if sys.version_info[0] <= 2:
-                    cmd = raw_input(ctx['prompt']) # pylint: disable=undefined-variable
+                    cmd = raw_input(ctx['prompt'])
                 else:
                     cmd = input(ctx['prompt'])
             done = runCommand(ctx, cmd)
-            if done != 0:
-                break
+            if done != 0: break
             if g_fBatchMode:
                 break
         except KeyboardInterrupt:
@@ -3567,7 +3484,7 @@ def interpret(ctx):
         ctx['global'].waitForEvents(0)
     try:
         # There is no need to disable metric collection. This is just an example.
-        if ctx['perf']:
+        if ct['perf']:
             ctx['perf'].disable(['*'], [vbox.host])
     except:
         pass
@@ -3580,13 +3497,13 @@ def runCommandCb(ctx, cmd, args):
 
 def runGuestCommandCb(ctx, uuid, guestLambda, args):
     mach = machById(ctx, uuid)
-    if not mach:
+    if mach == None:
         return 0
     args.insert(0, guestLambda)
     cmdExistingVm(ctx, mach, 'guestlambda', args)
     return 0
 
-def main(_argv):
+def main(argv):
 
     #
     # Parse command line arguments.
@@ -3599,7 +3516,7 @@ def main(_argv):
     parse.add_option("-c", dest="command_line", help = "command sequence to execute")
     parse.add_option("-o", dest="opt_line", help = "option line")
     global g_fVerbose, g_sScriptFile, g_fBatchMode, g_fHasColors, g_fHasReadline, g_sCmd
-    (options, _args) = parse.parse_args()
+    (options, args) = parse.parse_args()
     g_fVerbose = options.verbose
     style = options.style
     if options.batch_file is not None:
@@ -3660,6 +3577,7 @@ def main(_argv):
             del sTmp
         del sPath, asLocations
 
+
     #
     # Set up the shell interpreter context and start working.
     #
@@ -3697,3 +3615,4 @@ def main(_argv):
 
 if __name__ == '__main__':
     main(sys.argv)
+

@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM /mnt/tinderbox/7.2-sdk/src/libs/xpcom18a4/xpcom/ds/nsISerializable.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM /home/vbox/tinderbox/sdk/src/libs/xpcom18a4/xpcom/ds/nsISerializable.idl
  */
 
 #ifndef __gen_nsISerializable_h__
@@ -31,28 +31,90 @@ class NS_NO_VTABLE nsISerializable : public nsISupports {
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_ISERIALIZABLE_IID)
 
+  /**
+     * Initialize the object implementing nsISerializable, which must have
+     * been freshly constructed via CreateInstance.  All data members that
+     * can't be set to default values must have been serialized by write,
+     * and should be read from aInputStream in the same order by this method.
+     */
   /* void read (in nsIObjectInputStream aInputStream); */
-  NS_IMETHOD Read(nsIObjectInputStream * aInputStream) = 0;
+  NS_IMETHOD Read(nsIObjectInputStream *aInputStream) = 0;
 
+  /**
+     * Serialize the object implementing nsISerializable to aOutputStream, by
+     * writing each data member that must be recovered later to reconstitute
+     * a working replica of this object, in a canonical member and byte order,
+     * to aOutputStream.
+     *
+     * NB: a class that implements nsISerializable *must* also implement
+     * nsIClassInfo, in particular nsIClassInfo::GetClassID.
+     */
   /* void write (in nsIObjectOutputStream aOutputStream); */
-  NS_IMETHOD Write(nsIObjectOutputStream * aOutputStream) = 0;
+  NS_IMETHOD Write(nsIObjectOutputStream *aOutputStream) = 0;
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSISERIALIZABLE \
-  NS_IMETHOD Read(nsIObjectInputStream * aInputStream) NS_OVERRIDE; \
-  NS_IMETHOD Write(nsIObjectOutputStream * aOutputStream) NS_OVERRIDE; 
+  NS_IMETHOD Read(nsIObjectInputStream *aInputStream); \
+  NS_IMETHOD Write(nsIObjectOutputStream *aOutputStream); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISERIALIZABLE(_to) \
-  NS_IMETHOD Read(nsIObjectInputStream * aInputStream) { return _to Read(aInputStream); } \
-  NS_IMETHOD Write(nsIObjectOutputStream * aOutputStream) { return _to Write(aOutputStream); } 
+  NS_IMETHOD Read(nsIObjectInputStream *aInputStream) { return _to Read(aInputStream); } \
+  NS_IMETHOD Write(nsIObjectOutputStream *aOutputStream) { return _to Write(aOutputStream); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISERIALIZABLE(_to) \
-  NS_IMETHOD Read(nsIObjectInputStream * aInputStream) { return !_to ? NS_ERROR_NULL_POINTER : _to->Read(aInputStream); } \
-  NS_IMETHOD Write(nsIObjectOutputStream * aOutputStream) { return !_to ? NS_ERROR_NULL_POINTER : _to->Write(aOutputStream); } 
+  NS_IMETHOD Read(nsIObjectInputStream *aInputStream) { return !_to ? NS_ERROR_NULL_POINTER : _to->Read(aInputStream); } \
+  NS_IMETHOD Write(nsIObjectOutputStream *aOutputStream) { return !_to ? NS_ERROR_NULL_POINTER : _to->Write(aOutputStream); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class nsSerializable : public nsISerializable
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_NSISERIALIZABLE
+
+  nsSerializable();
+
+private:
+  ~nsSerializable();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(nsSerializable, nsISerializable)
+
+nsSerializable::nsSerializable()
+{
+  /* member initializers and constructor code */
+}
+
+nsSerializable::~nsSerializable()
+{
+  /* destructor code */
+}
+
+/* void read (in nsIObjectInputStream aInputStream); */
+NS_IMETHODIMP nsSerializable::Read(nsIObjectInputStream *aInputStream)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void write (in nsIObjectOutputStream aOutputStream); */
+NS_IMETHODIMP nsSerializable::Write(nsIObjectOutputStream *aOutputStream)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* End of implementation class template. */
+#endif
 
 
 #endif /* __gen_nsISerializable_h__ */

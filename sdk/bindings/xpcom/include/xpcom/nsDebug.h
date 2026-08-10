@@ -38,10 +38,6 @@
 #ifndef nsDebug_h___
 #define nsDebug_h___
 
-#ifdef VBOX
-# include <iprt/thread.h>
-#endif
-
 #ifndef nscore_h___
 #include "nscore.h"
 #endif
@@ -274,9 +270,7 @@ public:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef VBOX
 #define NS_CheckThreadSafe(owningThread, msg)                 \
-  NS_ASSERTION(owningThread == RTThreadSelf(), msg)
-#endif
+  NS_ASSERTION(owningThread == PR_GetCurrentThread(), msg)
 
 #endif /* nsDebug_h___ */

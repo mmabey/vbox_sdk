@@ -1,35 +1,24 @@
-/* $Id: TestVBox.java 170187 2025-08-11 17:18:47Z klaus $ */
+/* $Id: TestVBox.java 118839 2017-10-28 15:14:05Z bird $ */
 /*! file
  * Small sample/testcase which demonstrates that the same source code can
  * be used to connect to the webservice and (XP)COM APIs.
  */
 
 /*
- * Copyright (C) 2010-2025 Oracle and/or its affiliates.
+ * Copyright (C) 2010-2017 Oracle Corporation
  *
- * This file is part of VirtualBox base platform packages, as
- * available from https://www.virtualbox.org.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation, in version 3 of the
- * License.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, see <https://www.gnu.org/licenses>.
- *
- * SPDX-License-Identifier: GPL-3.0-only
+ * This file is part of VirtualBox Open Source Edition (OSE), as
+ * available from http://www.virtualbox.org. This file is free software;
+ * you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GPL) as published by the Free Software
+ * Foundation, in version 2 as it comes in the "COPYING" file of the
+ * VirtualBox OSE distribution. VirtualBox OSE is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
  */
 
-import org.virtualbox_6_2.*;
+import org.virtualbox_5_0.*;
 import java.util.List;
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.math.BigInteger;
 
 public class TestVBox
@@ -155,8 +144,7 @@ public class TestVBox
         System.out.println("\nAttempting to start VM '" + name + "'");
 
         ISession session = mgr.getSessionObject();
-        ArrayList<String> env = new ArrayList<String>();
-        IProgress p = m.launchVMProcess(session, "gui", env);
+        IProgress p = m.launchVMProcess(session, "gui", "");
         progressBar(mgr, p, 10000);
         session.unlockMachine();
         // process system event queue
@@ -178,9 +166,8 @@ public class TestVBox
             String name2 = m2.getName();
             ISession session1 = mgr1.getSessionObject();
             ISession session2 = mgr2.getSessionObject();
-            ArrayList<String> env = new ArrayList<String>();
-            IProgress p1 = m1.launchVMProcess(session1, "gui", env);
-            IProgress p2 = m2.launchVMProcess(session2, "gui", env);
+            IProgress p1 = m1.launchVMProcess(session1, "gui", "");
+            IProgress p2 = m2.launchVMProcess(session2, "gui", "");
             progressBar(mgr1, p1, 10000);
             progressBar(mgr2, p2, 10000);
             session1.unlockMachine();

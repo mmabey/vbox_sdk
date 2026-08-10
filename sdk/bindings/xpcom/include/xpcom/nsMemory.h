@@ -38,7 +38,17 @@
 #ifndef nsMemory_h__
 #define nsMemory_h__
 
-#include "nsISupports.h"
+#include "nsIMemory.h"
+
+#define NS_MEMORY_CONTRACTID "@mozilla.org/xpcom/memory-service;1"
+#define NS_MEMORY_CLASSNAME  "Global Memory Service"
+#define NS_MEMORY_CID                                \
+{ /* 30a04e40-38e7-11d4-8cf5-0060b0fc14a3 */         \
+    0x30a04e40,                                      \
+    0x38e7,                                          \
+    0x11d4,                                          \
+    {0x8c, 0xf5, 0x00, 0x60, 0xb0, 0xfc, 0x14, 0xa3} \
+}
 
 
 /**
@@ -56,7 +66,9 @@ public:
     static NS_COM void*      Alloc(size_t size);
     static NS_COM void*      Realloc(void* ptr, size_t size);
     static NS_COM void       Free(void* ptr);
+    static NS_COM nsresult   HeapMinimize(PRBool aImmediate);
     static NS_COM void*      Clone(const void* ptr, size_t size);
+    static NS_COM nsIMemory* GetGlobalMemoryService();       // AddRefs
 };
 
 /** 

@@ -1,4 +1,4 @@
-/* $Id: tstVBoxAPIXPCOM.cpp 170187 2025-08-11 17:18:47Z klaus $ */
+/* $Id: tstVBoxAPIXPCOM.cpp 118839 2017-10-28 15:14:05Z bird $ */
 /** @file
  *
  * tstVBoxAPIXPCOM - sample program to illustrate the VirtualBox
@@ -8,25 +8,15 @@
  */
 
 /*
- * Copyright (C) 2006-2025 Oracle and/or its affiliates.
+ * Copyright (C) 2006-2017 Oracle Corporation
  *
- * This file is part of VirtualBox base platform packages, as
- * available from https://www.virtualbox.org.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation, in version 3 of the
- * License.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, see <https://www.gnu.org/licenses>.
- *
- * SPDX-License-Identifier: GPL-3.0-only
+ * This file is part of VirtualBox Open Source Edition (OSE), as
+ * available from http://www.virtualbox.org. This file is free software;
+ * you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GPL) as published by the Free Software
+ * Foundation, in version 2 as it comes in the "COPYING" file of the
+ * VirtualBox OSE distribution. VirtualBox OSE is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
  */
 
 /*
@@ -103,7 +93,7 @@ void printErrorInfo();
  *
  * @param virtualBox VirtualBox instance object.
  */
-static void listVMs(IVirtualBox *virtualBox)
+void listVMs(IVirtualBox *virtualBox)
 {
     nsresult rc;
 
@@ -114,15 +104,15 @@ static void listVMs(IVirtualBox *virtualBox)
      * Get the list of all registered VMs
      */
     IMachine **machines = NULL;
-    PRUint32 cMachines = 0;
+    PRUint32 machineCnt = 0;
 
-    rc = virtualBox->GetMachines(&cMachines, &machines);
+    rc = virtualBox->GetMachines(&machineCnt, &machines);
     if (NS_SUCCEEDED(rc))
     {
         /*
          * Iterate through the collection
          */
-        for (PRUint32 i = 0; i < cMachines; ++ i)
+        for (PRUint32 i = 0; i < machineCnt; ++ i)
         {
             IMachine *machine = machines[i];
             if (machine)
@@ -177,7 +167,6 @@ static void listVMs(IVirtualBox *virtualBox)
                 machine->Release();
             }
         }
-        nsMemory::Free(machines);
     }
     printf("----------------------------------------------------\n\n");
 }
@@ -187,7 +176,7 @@ static void listVMs(IVirtualBox *virtualBox)
  *
  * @param virtualBox VirtualBox instance object.
  */
-static void createVM(IVirtualBox *virtualBox)
+void createVM(IVirtualBox *virtualBox)
 {
     nsresult rc;
     /*
@@ -197,13 +186,9 @@ static void createVM(IVirtualBox *virtualBox)
     nsCOMPtr<IMachine> machine;
     rc = virtualBox->CreateMachine(NULL,        /* settings file */
                                    NS_LITERAL_STRING("A brand new name").get(),
-                                   PlatformArchitecture_x86,
                                    0, nsnull,   /* groups (safearray)*/
                                    nsnull,      /* ostype */
                                    nsnull,      /* create flags */
-                                   nsnull,      /* cipher */
-                                   nsnull,      /* password id */
-                                   nsnull,      /* password */
                                    getter_AddRefs(machine));
     if (NS_FAILED(rc))
     {
@@ -216,18 +201,7 @@ static void createVM(IVirtualBox *virtualBox)
      */
     /* alternative to illustrate the use of string classes */
     rc = machine->SetName(NS_ConvertUTF8toUTF16("A new name").get());
-    if (NS_FAILED(rc))
-    {
-        printf("Error: could not set name for machine! rc=%#x\n", rc);
-        return;
-    }
-
     rc = machine->SetMemorySize(128);
-    if (NS_FAILED(rc))
-    {
-        printf("Error: could not set memory size for machine! rc=%#x\n", rc);
-        return;
-    }
 
     /*
      * Now a more advanced property -- the guest OS type. This is
@@ -240,7 +214,7 @@ static void createVM(IVirtualBox *virtualBox)
      * guest OS type collection and enumerating it.
      */
     nsCOMPtr<IGuestOSType> osType;
-    rc = virtualBox->GetGuestOSType(NS_LITERAL_STRING(GUEST_OS_ID_STR_X86("Windows2000")).get(),
+    rc = virtualBox->GetGuestOSType(NS_LITERAL_STRING("Windows2000").get(),
                                     getter_AddRefs(osType));
     if (NS_FAILED(rc))
     {
@@ -248,7 +222,7 @@ static void createVM(IVirtualBox *virtualBox)
     }
     else
     {
-        machine->SetOSTypeId(NS_LITERAL_STRING(GUEST_OS_ID_STR_X86("Windows2000")).get());
+        machine->SetOSTypeId(NS_LITERAL_STRING("Windows2000").get());
     }
 
     /*
@@ -452,19 +426,13 @@ static void createVM(IVirtualBox *virtualBox)
                 printf("Failed to delete the machine! rc=%#x\n",
                        NS_FAILED(rc) ? rc : resultCode);
         }
-
-        /* Release the media array: */
-        for (PRUint32 i = 0; i < cMedia; i++)
-            if (aMedia[i])
-                aMedia[i]->Release();
-        nsMemory::Free(aMedia);
     }
 }
 
 // main
 ///////////////////////////////////////////////////////////////////////////////
 
-int main(int argc, char **argv)
+int main()
 {
     /*
      * Check that PRUnichar is equal in size to what compiler composes L""
@@ -482,25 +450,6 @@ int main(int argc, char **argv)
         return -1;
     }
 
-#if 1 /* Please ignore this! It is very very crude. */
-# ifdef RTPATH_APP_PRIVATE_ARCH
-    if (!getenv("VBOX_XPCOM_HOME"))
-        setenv("VBOX_XPCOM_HOME", RTPATH_APP_PRIVATE_ARCH, 1);
-# else
-    char szTmp[8192];
-    memset(szTmp, 0, sizeof(szTmp));
-    if (!getenv("VBOX_XPCOM_HOME"))
-    {
-        strncpy(szTmp, argv[0], sizeof(szTmp) - 1);
-        *strrchr(szTmp, '/') = '\0';
-        strcat(szTmp, "/..");
-        fprintf(stderr, "tstVBoxAPIXPCOM: VBOX_XPCOM_HOME is not set, using '%s' instead\n", szTmp);
-        setenv("VBOX_XPCOM_HOME", szTmp, 1);
-    }
-# endif
-#endif
-    (void)argc; (void)argv;
-
     nsresult rc;
 
     /*
@@ -514,12 +463,27 @@ int main(int argc, char **argv)
      */
     {
         nsCOMPtr<nsIServiceManager> serviceManager;
-        rc = NS_InitXPCOM2Ex(getter_AddRefs(serviceManager), nsnull, nsnull, 0);
+        rc = NS_InitXPCOM2(getter_AddRefs(serviceManager), nsnull, nsnull);
         if (NS_FAILED(rc))
         {
             printf("Error: XPCOM could not be initialized! rc=%#x\n", rc);
             return -1;
         }
+
+#if 0
+        /*
+         * Register our components. This step is only necessary if this executable
+         * implements XPCOM components itself which is not the case for this
+         * simple example.
+         */
+        nsCOMPtr<nsIComponentRegistrar> registrar = do_QueryInterface(serviceManager);
+        if (!registrar)
+        {
+            printf("Error: could not query nsIComponentRegistrar interface!\n");
+            return -1;
+        }
+        registrar->AutoRegister(nsnull);
+#endif
 
         /*
          * Make sure the main event queue is created. This event queue is
@@ -610,7 +574,8 @@ int main(int argc, char **argv)
  */
 char *nsIDToString(nsID *guid)
 {
-    char *res = (char *)malloc(39);
+    char *res = (char*)malloc(39);
+
     if (res != NULL)
     {
         snprintf(res, 39, "{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
@@ -629,7 +594,8 @@ char *nsIDToString(nsID *guid)
  */
 void printErrorInfo()
 {
-    nsresult rc = NS_ERROR_UNEXPECTED;
+    nsresult rc;
+
     nsCOMPtr<nsIExceptionService> es;
     es = do_GetService(NS_EXCEPTIONSERVICE_CONTRACTID, &rc);
     if (NS_SUCCEEDED(rc))

@@ -1,5 +1,5 @@
 <?php
-/* $Id: clienttest.php 170187 2025-08-11 17:18:47Z klaus $ */
+/* $Id: clienttest.php 118839 2017-10-28 15:14:05Z bird $ */
 /*!file
  * Sample client for the VirtualBox webservice, written in PHP.
  *
@@ -12,7 +12,7 @@
 /*
  * Contributed by James Lucas (mjlucas at eng.uts.edu.au).
  *
- * Copyright (C) 2009-2025 Oracle and/or its affiliates.
+ * Copyright (C) 2009-2017 Oracle Corporation
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation

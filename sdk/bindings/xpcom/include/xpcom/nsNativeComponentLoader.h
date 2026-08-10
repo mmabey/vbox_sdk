@@ -64,8 +64,7 @@ class nsNativeComponentLoader : public nsIComponentLoader, public nsINativeCompo
     nsObjectHashtable   mDllStore;
     nsVoidArray mDeferredComponents;
 
-    ~nsNativeComponentLoader();
-    static RTSEMFASTMUTEX m_hLock;
+    ~nsNativeComponentLoader() {}
 
     NS_IMETHOD RegisterComponentsInDir(PRInt32 when, nsIFile *dir);
 

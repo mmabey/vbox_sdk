@@ -39,6 +39,7 @@
 #define nsProxyRelease_h__
 
 #include "nsIEventQueueService.h"
+#include "pratom.h"
 #include "prmem.h"
 
 /**
@@ -62,7 +63,7 @@ NS_COM nsresult NS_ProxyRelease
 NS_IMETHODIMP_(nsrefcnt) _class::Release(void)                                  \
 {                                                                               \
   NS_PRECONDITION(0 != mRefCnt, "dup release");                                 \
-  nsrefcnt count = ASMAtomicDecU32((volatile uint32_t *)&mRefCnt);              \
+  nsrefcnt count = PR_AtomicDecrement((PRInt32 *)&mRefCnt);                     \
   NS_LOG_RELEASE(this, count, #_class);                                         \
                                                                                 \
   if (count == 0)                                                               \
