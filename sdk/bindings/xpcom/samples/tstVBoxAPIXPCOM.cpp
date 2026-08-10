@@ -1,4 +1,4 @@
-/* $Id: tstVBoxAPIXPCOM.cpp 161672 2024-02-14 14:19:45Z bird $ */
+/* $Id: tstVBoxAPIXPCOM.cpp 164827 2024-09-16 14:03:52Z bird $ */
 /** @file
  *
  * tstVBoxAPIXPCOM - sample program to illustrate the VirtualBox
@@ -8,7 +8,7 @@
  */
 
 /*
- * Copyright (C) 2006-2023 Oracle and/or its affiliates.
+ * Copyright (C) 2006-2024 Oracle and/or its affiliates.
  *
  * This file is part of VirtualBox base platform packages, as
  * available from https://www.virtualbox.org.

@@ -14,7 +14,11 @@
 #ifndef NS_NO_VTABLE
 #define NS_NO_VTABLE
 #endif
-#include <iprt/thread.h>
+#ifdef VBOX
+# include <iprt/thread.h>
+#else
+typedef struct RTTHREADINT *RTTHREAD;
+#endif
 
 // {13D86C61-00A9-11d3-9F2A-00400553EEF0}
 #define NS_EVENTQUEUE_CID \

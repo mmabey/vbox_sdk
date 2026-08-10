@@ -1,10 +1,10 @@
-# $Id: makefile.tstVBoxAPIXPCOM 155244 2023-01-17 14:15:46Z bird $
+# $Id: makefile.tstVBoxAPIXPCOM 164888 2024-09-20 12:18:54Z aeichner $
 ## @file
 # tstVBoxAPIXPCOM makefile
 #
 
 #
-# Copyright (C) 2006-2023 Oracle and/or its affiliates.
+# Copyright (C) 2006-2024 Oracle and/or its affiliates.
 #
 # This file is part of VirtualBox base platform packages, as
 # available from https://www.virtualbox.org.
@@ -47,6 +47,8 @@ endif
 # RT_OS_DARWIN, RT_OS_SOLARIS...
 DEFS_XPCOM += RT_OS_LINUX
 
+# Adjust this to match your platform, pick from RT_ARCH_AMD64, RT_ARCH_ARM64
+DEFS_XPCOM += RT_ARCH_AMD64
 
 #
 # Link with the public XPCOM libraries

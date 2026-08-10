@@ -3,7 +3,7 @@
 # pylint: disable=line-too-long
 # pylint: disable=too-many-statements
 # pylint: disable=deprecated-module
-# $Id: vboxshell.py 164711 2024-09-05 08:03:42Z andy $
+# $Id: vboxshell.py 164827 2024-09-16 14:03:52Z bird $
 
 # The following checks for the right (i.e. most recent) Python binary available
 # and re-starts the script using that binary (like a shell wrapper).
@@ -43,7 +43,7 @@ from __future__ import print_function
 
 __copyright__ = \
 """
-Copyright (C) 2009-2023 Oracle and/or its affiliates.
+Copyright (C) 2009-2024 Oracle and/or its affiliates.
 
 This file is part of VirtualBox base platform packages, as
 available from https://www.virtualbox.org.
@@ -63,7 +63,7 @@ along with this program; if not, see <https://www.gnu.org/licenses>.
 
 SPDX-License-Identifier: GPL-3.0-only
 """
-__version__ = "$Revision: 164711 $"
+__version__ = "$Revision: 164827 $"
 
 
 import gc

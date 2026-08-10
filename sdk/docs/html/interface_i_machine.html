@@ -350,7 +350,7 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a47753f3eaff825b684018a2f88be95f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Means to limit the number of CPU cycles a guest can use.  <br /></td></tr>
 <tr class="separator:a47753f3eaff825b684018a2f88be95f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a404c453a9d1d07b183798f1b1835b95a"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a404c453a9d1d07b183798f1b1835b95a">CPUIDPortabilityLevel</a></td></tr>
-<tr class="memdesc:a404c453a9d1d07b183798f1b1835b95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual CPUID portability level, the higher number the fewer newer or vendor specific CPU feature is reported to the guest (via the CPUID instruction).  <br /></td></tr>
+<tr class="memdesc:a404c453a9d1d07b183798f1b1835b95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual CPUID portability level.  <br /></td></tr>
 <tr class="separator:a404c453a9d1d07b183798f1b1835b95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bb5f057419fdc8505882ed5be4d6876"><td class="memItemLeft" align="right" valign="top">attribute unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a5bb5f057419fdc8505882ed5be4d6876">memorySize</a></td></tr>
 <tr class="memdesc:a5bb5f057419fdc8505882ed5be4d6876"><td class="mdescLeft">&#160;</td><td class="mdescRight">System memory size in megabytes.  <br /></td></tr>
@@ -4687,8 +4687,8 @@ You cannot change the name of the machine if it is running, or if any file in th
       </table>
 </div><div class="memdoc">
 
-<p>Virtual CPUID portability level, the higher number the fewer newer or vendor specific CPU feature is reported to the guest (via the CPUID instruction). </p>
-<p>The default level of zero (0) means that all virtualized features supported by the host is pass thru to the guest. While the three (3) is currently the level supressing the most features.</p>
+<p>Virtual CPUID portability level. </p>
+<p>The higher the number the fewer vendor-specific or recent CPU features are reported to the guest (via the CPUID instruction). The default level of zero (0) means that all virtualized features supported by the host are passed through to the guest. While the value of three (3) is currently the level suppressing the most features.</p>
 <p>Exactly which of the CPUID features are left out by the VMM at which level is subject to change with each major version. </p>
 
 </div>

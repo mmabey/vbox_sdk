@@ -1,10 +1,10 @@
-/* $Id: VBoxCAPIGlue.h.in 155244 2023-01-17 14:15:46Z bird $ */
+/* $Id: VBoxCAPIGlue.h.in 164827 2024-09-16 14:03:52Z bird $ */
 /** @file VBoxCAPIGlue.h
  * Glue for dynamically linking with VBoxCAPI.
  */
 
 /*
- * Copyright (C) 2008-2023 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2024 Oracle and/or its affiliates.
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation

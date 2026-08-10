@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2008-2023 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2024 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
