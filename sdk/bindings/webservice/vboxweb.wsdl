@@ -167,6 +167,8 @@
             HWVirt: 8 -
             SpecCtrl: 9 -
             SpecCtrlByHost: 10 -
+            L1DFlushOnEMTScheduling: 11 -
+            L1DFlushOnVMEntry: 12 -
             -->
       <xsd:simpleType name="CPUPropertyType">
         <xsd:restriction base="xsd:string">
@@ -181,6 +183,8 @@
           <xsd:enumeration value="HWVirt"/>
           <xsd:enumeration value="SpecCtrl"/>
           <xsd:enumeration value="SpecCtrlByHost"/>
+          <xsd:enumeration value="L1DFlushOnEMTScheduling"/>
+          <xsd:enumeration value="L1DFlushOnVMEntry"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: HWVirtExPropertyType -

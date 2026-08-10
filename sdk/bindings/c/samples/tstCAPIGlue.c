@@ -1,4 +1,4 @@
-/* $Id: tstCAPIGlue.c 124132 2018-08-05 13:58:10Z bird $ */
+/* $Id: tstCAPIGlue.c 127859 2019-01-01 02:37:24Z bird $ */
 /** @file tstCAPIGlue.c
  * Demonstrator program to illustrate use of C bindings of Main API.
  *
@@ -8,7 +8,7 @@
  */
 
 /*
- * Copyright (C) 2009-2017 Oracle Corporation
+ * Copyright (C) 2009-2019 Oracle Corporation
  *
  * This file is part of VirtualBox Open Source Edition (OSE), as
  * available from http://www.virtualbox.org. This file is free software;
@@ -39,7 +39,7 @@
 # include <unistd.h>
 # include <sys/poll.h>
 #endif
-#ifdef ___iprt_cdefs_h
+#ifdef IPRT_INCLUDED_cdefs_h
 # error "not supposed to involve any IPRT or VBox headers here."
 #endif
 

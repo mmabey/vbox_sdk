@@ -1046,6 +1046,10 @@ class NS_NO_VTABLE CPUPropertyType {
 
   enum { SpecCtrlByHost = 10U };
 
+  enum { L1DFlushOnEMTScheduling = 11U };
+
+  enum { L1DFlushOnVMEntry = 12U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -1106,6 +1110,8 @@ typedef PRUint32 CPUPropertyType_T;
 # define CPUPropertyType_HWVirt CPUPropertyType::HWVirt
 # define CPUPropertyType_SpecCtrl CPUPropertyType::SpecCtrl
 # define CPUPropertyType_SpecCtrlByHost CPUPropertyType::SpecCtrlByHost
+# define CPUPropertyType_L1DFlushOnEMTScheduling CPUPropertyType::L1DFlushOnEMTScheduling
+# define CPUPropertyType_L1DFlushOnVMEntry CPUPropertyType::L1DFlushOnVMEntry
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum CPUPropertyType_T {
     CPUPropertyType_Null = CPUPropertyType::Null,
@@ -1119,6 +1125,8 @@ typedef enum CPUPropertyType_T {
     CPUPropertyType_HWVirt = CPUPropertyType::HWVirt,
     CPUPropertyType_SpecCtrl = CPUPropertyType::SpecCtrl,
     CPUPropertyType_SpecCtrlByHost = CPUPropertyType::SpecCtrlByHost,
+    CPUPropertyType_L1DFlushOnEMTScheduling = CPUPropertyType::L1DFlushOnEMTScheduling,
+    CPUPropertyType_L1DFlushOnVMEntry = CPUPropertyType::L1DFlushOnVMEntry,
     CPUPropertyType_32BitHack = 0x7fffffff
 } CPUPropertyType_T;
 # ifdef AssertCompileSize
