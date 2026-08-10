@@ -215,6 +215,7 @@ interface IChoiceFormValue;
 interface IForm;
 interface IVirtualSystemDescriptionForm;
 interface ICloudNetworkGatewayInfo;
+interface ICloudNetworkEnvironmentInfo;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;
@@ -17525,6 +17526,12 @@ interface ICloudNetworkGatewayInfo : IDispatch
 {
     [propget] HRESULT PublicIP ([out, retval] BSTR * aPublicIP);
 
+    [propget] HRESULT SecondaryPublicIP ([out, retval] BSTR * aSecondaryPublicIP);
+
+    [propget] HRESULT MacAddress ([out, retval] BSTR * aMacAddress);
+
+    [propget] HRESULT InstanceId ([out, retval] BSTR * aInstanceId);
+
     [propget] HRESULT InternalAndReservedAttribute1ICloudNetworkGatewayInfo ([out, retval] ULONG *aReserved);
 
     [propget] HRESULT InternalAndReservedAttribute2ICloudNetworkGatewayInfo ([out, retval] ULONG *aReserved);
@@ -17535,21 +17542,59 @@ interface ICloudNetworkGatewayInfo : IDispatch
 
     [propget] HRESULT InternalAndReservedAttribute5ICloudNetworkGatewayInfo ([out, retval] ULONG *aReserved);
 
-    [propget] HRESULT InternalAndReservedAttribute6ICloudNetworkGatewayInfo ([out, retval] ULONG *aReserved);
-
-    [propget] HRESULT InternalAndReservedAttribute7ICloudNetworkGatewayInfo ([out, retval] ULONG *aReserved);
-
-    [propget] HRESULT InternalAndReservedAttribute8ICloudNetworkGatewayInfo ([out, retval] ULONG *aReserved);
-
 }; /* interface ICloudNetworkGatewayInfo */
 
 /* Interface implementation forwarder macro */
 cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO(smth) HRESULT STDMETHODCALLTYPE get_PublicIP (BSTR * aPublicIP) { return smth get_PublicIP (aPublicIP); }")
 cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (base::)")
-cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_TO(smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (smth) ")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO(smth) HRESULT STDMETHODCALLTYPE get_SecondaryPublicIP (BSTR * aSecondaryPublicIP) { return smth get_SecondaryPublicIP (aSecondaryPublicIP); }")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO (base::)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO(smth) HRESULT STDMETHODCALLTYPE get_MacAddress (BSTR * aMacAddress) { return smth get_MacAddress (aMacAddress); }")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO (base::)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO(smth) HRESULT STDMETHODCALLTYPE get_InstanceId (BSTR * aInstanceId) { return smth get_InstanceId (aInstanceId); }")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO (base::)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_TO(smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO (smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO (smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO (smth) ")
 cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_ICloudNetworkGatewayInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_TO (base::)")
+
+[
+    uuid(181dfb55-394d-44d3-9edb-af2c4472c40a),
+    object,
+    dual,
+    oleautomation
+    , proxy
+]
+interface ICloudNetworkEnvironmentInfo : IDispatch
+{
+    [propget] HRESULT TunnelNetworkId ([out, retval] BSTR * aTunnelNetworkId);
+
+    [propget] HRESULT InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo ([out, retval] ULONG *aReserved);
+
+    [propget] HRESULT InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo ([out, retval] ULONG *aReserved);
+
+}; /* interface ICloudNetworkEnvironmentInfo */
+
+/* Interface implementation forwarder macro */
+cpp_quote("#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO(smth) HRESULT STDMETHODCALLTYPE get_TunnelNetworkId (BSTR * aTunnelNetworkId) { return smth get_TunnelNetworkId (aTunnelNetworkId); }")
+cpp_quote("#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO (base::)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO(smth) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO (smth) ")
+cpp_quote("#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO (base::)")
 
 [
     uuid(435b66a2-0c60-11ea-a0ea-07eb0d1c4ead),
@@ -17679,6 +17724,16 @@ interface ICloudClient : IDispatch
         [out, retval] IProgress * * aProgress
     );
 
+    HRESULT SetupCloudNetworkEnvironment (
+        [in] BSTR aTunnelNetworkName,
+        [in] BSTR aTunnelNetworkRange,
+        [in] BSTR aGatewayOsName,
+        [in] BSTR aGatewayOsVersion,
+        [in] BSTR aGatewayShape,
+        [out] ICloudNetworkEnvironmentInfo * * aNetworkEnvironmentInfo,
+        [out, retval] IProgress * * aProgress
+    );
+
     HRESULT InternalAndReservedMethod1ICloudClient();
 
     HRESULT InternalAndReservedMethod2ICloudClient();
@@ -17708,8 +17763,6 @@ interface ICloudClient : IDispatch
     HRESULT InternalAndReservedMethod14ICloudClient();
 
     HRESULT InternalAndReservedMethod15ICloudClient();
-
-    HRESULT InternalAndReservedMethod16ICloudClient();
 
 }; /* interface ICloudClient */
 
@@ -17768,7 +17821,10 @@ cpp_quote("#define COM_FORWARD_ICloudClient_GetImageInfo_TO_BASE(base) COM_FORWA
 cpp_quote("#define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO(smth) HRESULT STDMETHODCALLTYPE StartCloudNetworkGateway (ICloudNetwork * aNetwork, BSTR aSshPublicKey, ICloudNetworkGatewayInfo * * aGatewayInfo, IProgress * * aProgress) { return smth StartCloudNetworkGateway (aNetwork, aSshPublicKey, aGatewayInfo, aProgress); }")
 cpp_quote("#define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_OBJ(obj) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_BASE(base) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (base::)")
-cpp_quote("#define COM_FORWARD_ICloudClient_TO(smth) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ExportVM_TO (smth) COM_FORWARD_ICloudClient_GetLaunchDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_LaunchVM_TO (smth) COM_FORWARD_ICloudClient_GetImportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ImportInstance_TO (smth) COM_FORWARD_ICloudClient_ListInstances_TO (smth) COM_FORWARD_ICloudClient_ListImages_TO (smth) COM_FORWARD_ICloudClient_GetInstanceInfo_TO (smth) COM_FORWARD_ICloudClient_StartInstance_TO (smth) COM_FORWARD_ICloudClient_PauseInstance_TO (smth) COM_FORWARD_ICloudClient_TerminateInstance_TO (smth) COM_FORWARD_ICloudClient_CreateImage_TO (smth) COM_FORWARD_ICloudClient_ExportImage_TO (smth) COM_FORWARD_ICloudClient_ImportImage_TO (smth) COM_FORWARD_ICloudClient_DeleteImage_TO (smth) COM_FORWARD_ICloudClient_GetImageInfo_TO (smth) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (smth) ")
+cpp_quote("#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO(smth) HRESULT STDMETHODCALLTYPE SetupCloudNetworkEnvironment (BSTR aTunnelNetworkName, BSTR aTunnelNetworkRange, BSTR aGatewayOsName, BSTR aGatewayOsVersion, BSTR aGatewayShape, ICloudNetworkEnvironmentInfo * * aNetworkEnvironmentInfo, IProgress * * aProgress) { return smth SetupCloudNetworkEnvironment (aTunnelNetworkName, aTunnelNetworkRange, aGatewayOsName, aGatewayOsVersion, aGatewayShape, aNetworkEnvironmentInfo, aProgress); }")
+cpp_quote("#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_OBJ(obj) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_BASE(base) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (base::)")
+cpp_quote("#define COM_FORWARD_ICloudClient_TO(smth) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ExportVM_TO (smth) COM_FORWARD_ICloudClient_GetLaunchDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_LaunchVM_TO (smth) COM_FORWARD_ICloudClient_GetImportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ImportInstance_TO (smth) COM_FORWARD_ICloudClient_ListInstances_TO (smth) COM_FORWARD_ICloudClient_ListImages_TO (smth) COM_FORWARD_ICloudClient_GetInstanceInfo_TO (smth) COM_FORWARD_ICloudClient_StartInstance_TO (smth) COM_FORWARD_ICloudClient_PauseInstance_TO (smth) COM_FORWARD_ICloudClient_TerminateInstance_TO (smth) COM_FORWARD_ICloudClient_CreateImage_TO (smth) COM_FORWARD_ICloudClient_ExportImage_TO (smth) COM_FORWARD_ICloudClient_ImportImage_TO (smth) COM_FORWARD_ICloudClient_DeleteImage_TO (smth) COM_FORWARD_ICloudClient_GetImageInfo_TO (smth) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (smth) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (smth) ")
 cpp_quote("#define COM_FORWARD_ICloudClient_TO_OBJ(obj) COM_FORWARD_ICloudClient_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)")
 
@@ -18297,6 +18353,7 @@ interface IChoiceFormValue;
 interface IForm;
 interface IVirtualSystemDescriptionForm;
 interface ICloudNetworkGatewayInfo;
+interface ICloudNetworkEnvironmentInfo;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;

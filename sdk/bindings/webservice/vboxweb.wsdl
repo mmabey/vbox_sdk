@@ -25864,6 +25864,67 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <!-- readonly attribute ICloudNetworkGatewayInfo::secondaryPublicIP-->
+      <xsd:element name="ICloudNetworkGatewayInfo_getSecondaryPublicIP">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute ICloudNetworkGatewayInfo::macAddress-->
+      <xsd:element name="ICloudNetworkGatewayInfo_getMacAddress">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ICloudNetworkGatewayInfo_getMacAddressResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- readonly attribute ICloudNetworkGatewayInfo::instanceId-->
+      <xsd:element name="ICloudNetworkGatewayInfo_getInstanceId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ICloudNetworkGatewayInfo_getInstanceIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!--Interface ICloudNetworkEnvironmentInfo-->
+      <!-- readonly attribute ICloudNetworkEnvironmentInfo::tunnelNetworkId-->
+      <xsd:element name="ICloudNetworkEnvironmentInfo_getTunnelNetworkId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <!--Interface ICloudClient-->
       <!-- method ICloudClient::getExportDescriptionForm-->
       <xsd:element name="ICloudClient_getExportDescriptionForm">
@@ -26160,6 +26221,27 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="gatewayInfo" type="xsd:string"/>
+            <xsd:element name="returnval" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!-- method ICloudClient::setupCloudNetworkEnvironment-->
+      <xsd:element name="ICloudClient_setupCloudNetworkEnvironment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="tunnelNetworkName" type="xsd:string"/>
+            <xsd:element name="tunnelNetworkRange" type="xsd:string"/>
+            <xsd:element name="gatewayOsName" type="xsd:string"/>
+            <xsd:element name="gatewayOsVersion" type="xsd:string"/>
+            <xsd:element name="gatewayShape" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ICloudClient_setupCloudNetworkEnvironmentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="networkEnvironmentInfo" type="xsd:string"/>
             <xsd:element name="returnval" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
@@ -38129,6 +38211,39 @@
   <wsdl:message name="ICloudNetworkGatewayInfo_getPublicIPResultMsg">
     <wsdl:part name="parameters" element="vbox:ICloudNetworkGatewayInfo_getPublicIPResponse"/>
   </wsdl:message>
+  <!-- readonly attribute ICloudNetworkGatewayInfo::secondaryPublicIP-->
+  <wsdl:message name="ICloudNetworkGatewayInfo_getSecondaryPublicIPRequestMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkGatewayInfo_getSecondaryPublicIP"/>
+  </wsdl:message>
+  <wsdl:message name="ICloudNetworkGatewayInfo_getSecondaryPublicIPResultMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute ICloudNetworkGatewayInfo::macAddress-->
+  <wsdl:message name="ICloudNetworkGatewayInfo_getMacAddressRequestMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkGatewayInfo_getMacAddress"/>
+  </wsdl:message>
+  <wsdl:message name="ICloudNetworkGatewayInfo_getMacAddressResultMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkGatewayInfo_getMacAddressResponse"/>
+  </wsdl:message>
+  <!-- readonly attribute ICloudNetworkGatewayInfo::instanceId-->
+  <wsdl:message name="ICloudNetworkGatewayInfo_getInstanceIdRequestMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkGatewayInfo_getInstanceId"/>
+  </wsdl:message>
+  <wsdl:message name="ICloudNetworkGatewayInfo_getInstanceIdResultMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkGatewayInfo_getInstanceIdResponse"/>
+  </wsdl:message>
+  <!--
+        *************************************
+        messages for interface ICloudNetworkEnvironmentInfo
+        *************************************
+      -->
+  <!-- readonly attribute ICloudNetworkEnvironmentInfo::tunnelNetworkId-->
+  <wsdl:message name="ICloudNetworkEnvironmentInfo_getTunnelNetworkIdRequestMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkEnvironmentInfo_getTunnelNetworkId"/>
+  </wsdl:message>
+  <wsdl:message name="ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResultMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse"/>
+  </wsdl:message>
   <!--
         *************************************
         messages for interface ICloudClient
@@ -38259,6 +38374,13 @@
   </wsdl:message>
   <wsdl:message name="ICloudClient_startCloudNetworkGatewayResultMsg">
     <wsdl:part name="parameters" element="vbox:ICloudClient_startCloudNetworkGatewayResponse"/>
+  </wsdl:message>
+  <!-- method ICloudClient::setupCloudNetworkEnvironment-->
+  <wsdl:message name="ICloudClient_setupCloudNetworkEnvironmentRequestMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudClient_setupCloudNetworkEnvironment"/>
+  </wsdl:message>
+  <wsdl:message name="ICloudClient_setupCloudNetworkEnvironmentResultMsg">
+    <wsdl:part name="parameters" element="vbox:ICloudClient_setupCloudNetworkEnvironmentResponse"/>
   </wsdl:message>
   <!--
         *************************************
@@ -48694,6 +48816,35 @@
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
+    <wsdl:operation name="ICloudNetworkGatewayInfo_getSecondaryPublicIP">
+      <wsdl:input message="vbox:ICloudNetworkGatewayInfo_getSecondaryPublicIPRequestMsg"/>
+      <wsdl:output message="vbox:ICloudNetworkGatewayInfo_getSecondaryPublicIPResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudNetworkGatewayInfo_getMacAddress">
+      <wsdl:input message="vbox:ICloudNetworkGatewayInfo_getMacAddressRequestMsg"/>
+      <wsdl:output message="vbox:ICloudNetworkGatewayInfo_getMacAddressResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudNetworkGatewayInfo_getInstanceId">
+      <wsdl:input message="vbox:ICloudNetworkGatewayInfo_getInstanceIdRequestMsg"/>
+      <wsdl:output message="vbox:ICloudNetworkGatewayInfo_getInstanceIdResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <!--
+          *************************************
+          operations in portType for interface ICloudNetworkEnvironmentInfo
+          *************************************
+        -->
+    <wsdl:operation name="ICloudNetworkEnvironmentInfo_getTunnelNetworkId">
+      <wsdl:input message="vbox:ICloudNetworkEnvironmentInfo_getTunnelNetworkIdRequestMsg"/>
+      <wsdl:output message="vbox:ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
     <!--
           *************************************
           operations in portType for interface ICloudClient
@@ -48804,6 +48955,12 @@
     <wsdl:operation name="ICloudClient_startCloudNetworkGateway">
       <wsdl:input message="vbox:ICloudClient_startCloudNetworkGatewayRequestMsg"/>
       <wsdl:output message="vbox:ICloudClient_startCloudNetworkGatewayResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudClient_setupCloudNetworkEnvironment">
+      <wsdl:input message="vbox:ICloudClient_setupCloudNetworkEnvironmentRequestMsg"/>
+      <wsdl:output message="vbox:ICloudClient_setupCloudNetworkEnvironmentResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -73123,6 +73280,71 @@
         <soap:fault name="RuntimeFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="ICloudNetworkGatewayInfo_getSecondaryPublicIP">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudNetworkGatewayInfo_getMacAddress">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudNetworkGatewayInfo_getInstanceId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <!--
+          *************************************
+          operations in portType for interface ICloudNetworkEnvironmentInfo
+          *************************************
+        -->
+    <wsdl:operation name="ICloudNetworkEnvironmentInfo_getTunnelNetworkId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <!--
           *************************************
           operations in portType for interface ICloudClient
@@ -73384,6 +73606,21 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ICloudClient_startCloudNetworkGateway">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ICloudClient_setupCloudNetworkEnvironment">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

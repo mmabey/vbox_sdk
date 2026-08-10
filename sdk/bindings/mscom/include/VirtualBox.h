@@ -10,7 +10,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Jun  4 17:00:37 2020
+/* at Sat Jul 11 08:07:54 2020
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.1-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -1179,6 +1179,12 @@ typedef interface ICloudNetworkGatewayInfo ICloudNetworkGatewayInfo;
 #endif 	/* __ICloudNetworkGatewayInfo_FWD_DEFINED__ */
 
 
+#ifndef __ICloudNetworkEnvironmentInfo_FWD_DEFINED__
+#define __ICloudNetworkEnvironmentInfo_FWD_DEFINED__
+typedef interface ICloudNetworkEnvironmentInfo ICloudNetworkEnvironmentInfo;
+#endif 	/* __ICloudNetworkEnvironmentInfo_FWD_DEFINED__ */
+
+
 #ifndef __ICloudClient_FWD_DEFINED__
 #define __ICloudClient_FWD_DEFINED__
 typedef interface ICloudClient ICloudClient;
@@ -2331,6 +2337,12 @@ typedef interface ICloudNetworkGatewayInfo ICloudNetworkGatewayInfo;
 #endif 	/* __ICloudNetworkGatewayInfo_FWD_DEFINED__ */
 
 
+#ifndef __ICloudNetworkEnvironmentInfo_FWD_DEFINED__
+#define __ICloudNetworkEnvironmentInfo_FWD_DEFINED__
+typedef interface ICloudNetworkEnvironmentInfo ICloudNetworkEnvironmentInfo;
+#endif 	/* __ICloudNetworkEnvironmentInfo_FWD_DEFINED__ */
+
+
 #ifndef __ICloudClient_FWD_DEFINED__
 #define __ICloudClient_FWD_DEFINED__
 typedef interface ICloudClient ICloudClient;
@@ -2409,6 +2421,7 @@ enum {
     kTypeLibraryMajorVersion = 1,
     kTypeLibraryMinorVersion = 3
 };
+
 
 
 
@@ -66036,6 +66049,15 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PublicIP( 
             /* [retval][out] */ BSTR *aPublicIP) = 0;
         
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SecondaryPublicIP( 
+            /* [retval][out] */ BSTR *aSecondaryPublicIP) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MacAddress( 
+            /* [retval][out] */ BSTR *aMacAddress) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InstanceId( 
+            /* [retval][out] */ BSTR *aInstanceId) = 0;
+        
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute1ICloudNetworkGatewayInfo( 
             /* [retval][out] */ ULONG *aReserved) = 0;
         
@@ -66049,15 +66071,6 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
             /* [retval][out] */ ULONG *aReserved) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute5ICloudNetworkGatewayInfo( 
-            /* [retval][out] */ ULONG *aReserved) = 0;
-        
-        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute6ICloudNetworkGatewayInfo( 
-            /* [retval][out] */ ULONG *aReserved) = 0;
-        
-        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute7ICloudNetworkGatewayInfo( 
-            /* [retval][out] */ ULONG *aReserved) = 0;
-        
-        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute8ICloudNetworkGatewayInfo( 
             /* [retval][out] */ ULONG *aReserved) = 0;
         
     };
@@ -66113,6 +66126,18 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
             ICloudNetworkGatewayInfo * This,
             /* [retval][out] */ BSTR *aPublicIP);
         
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SecondaryPublicIP )( 
+            ICloudNetworkGatewayInfo * This,
+            /* [retval][out] */ BSTR *aSecondaryPublicIP);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MacAddress )( 
+            ICloudNetworkGatewayInfo * This,
+            /* [retval][out] */ BSTR *aMacAddress);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InstanceId )( 
+            ICloudNetworkGatewayInfo * This,
+            /* [retval][out] */ BSTR *aInstanceId);
+        
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute1ICloudNetworkGatewayInfo )( 
             ICloudNetworkGatewayInfo * This,
             /* [retval][out] */ ULONG *aReserved);
@@ -66130,18 +66155,6 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
             /* [retval][out] */ ULONG *aReserved);
         
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute5ICloudNetworkGatewayInfo )( 
-            ICloudNetworkGatewayInfo * This,
-            /* [retval][out] */ ULONG *aReserved);
-        
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute6ICloudNetworkGatewayInfo )( 
-            ICloudNetworkGatewayInfo * This,
-            /* [retval][out] */ ULONG *aReserved);
-        
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute7ICloudNetworkGatewayInfo )( 
-            ICloudNetworkGatewayInfo * This,
-            /* [retval][out] */ ULONG *aReserved);
-        
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute8ICloudNetworkGatewayInfo )( 
             ICloudNetworkGatewayInfo * This,
             /* [retval][out] */ ULONG *aReserved);
         
@@ -66184,6 +66197,15 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
 #define ICloudNetworkGatewayInfo_get_PublicIP(This,aPublicIP)	\
     ( (This)->lpVtbl -> get_PublicIP(This,aPublicIP) ) 
 
+#define ICloudNetworkGatewayInfo_get_SecondaryPublicIP(This,aSecondaryPublicIP)	\
+    ( (This)->lpVtbl -> get_SecondaryPublicIP(This,aSecondaryPublicIP) ) 
+
+#define ICloudNetworkGatewayInfo_get_MacAddress(This,aMacAddress)	\
+    ( (This)->lpVtbl -> get_MacAddress(This,aMacAddress) ) 
+
+#define ICloudNetworkGatewayInfo_get_InstanceId(This,aInstanceId)	\
+    ( (This)->lpVtbl -> get_InstanceId(This,aInstanceId) ) 
+
 #define ICloudNetworkGatewayInfo_get_InternalAndReservedAttribute1ICloudNetworkGatewayInfo(This,aReserved)	\
     ( (This)->lpVtbl -> get_InternalAndReservedAttribute1ICloudNetworkGatewayInfo(This,aReserved) ) 
 
@@ -66198,15 +66220,6 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
 
 #define ICloudNetworkGatewayInfo_get_InternalAndReservedAttribute5ICloudNetworkGatewayInfo(This,aReserved)	\
     ( (This)->lpVtbl -> get_InternalAndReservedAttribute5ICloudNetworkGatewayInfo(This,aReserved) ) 
-
-#define ICloudNetworkGatewayInfo_get_InternalAndReservedAttribute6ICloudNetworkGatewayInfo(This,aReserved)	\
-    ( (This)->lpVtbl -> get_InternalAndReservedAttribute6ICloudNetworkGatewayInfo(This,aReserved) ) 
-
-#define ICloudNetworkGatewayInfo_get_InternalAndReservedAttribute7ICloudNetworkGatewayInfo(This,aReserved)	\
-    ( (This)->lpVtbl -> get_InternalAndReservedAttribute7ICloudNetworkGatewayInfo(This,aReserved) ) 
-
-#define ICloudNetworkGatewayInfo_get_InternalAndReservedAttribute8ICloudNetworkGatewayInfo(This,aReserved)	\
-    ( (This)->lpVtbl -> get_InternalAndReservedAttribute8ICloudNetworkGatewayInfo(This,aReserved) ) 
 
 #endif /* COBJMACROS */
 
@@ -66225,13 +66238,227 @@ EXTERN_C const IID IID_ICloudNetworkGatewayInfo;
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO(smth) HRESULT STDMETHODCALLTYPE get_PublicIP (BSTR * aPublicIP) { return smth get_PublicIP (aPublicIP); }
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO ((obj)->)
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (base::)
-#define COM_FORWARD_ICloudNetworkGatewayInfo_TO(smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (smth) 
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO(smth) HRESULT STDMETHODCALLTYPE get_SecondaryPublicIP (BSTR * aSecondaryPublicIP) { return smth get_SecondaryPublicIP (aSecondaryPublicIP); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO(smth) HRESULT STDMETHODCALLTYPE get_MacAddress (BSTR * aMacAddress) { return smth get_MacAddress (aMacAddress); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO(smth) HRESULT STDMETHODCALLTYPE get_InstanceId (BSTR * aInstanceId) { return smth get_InstanceId (aInstanceId); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_TO(smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO (smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO (smth) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO (smth) 
 #define COM_FORWARD_ICloudNetworkGatewayInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_TO ((obj)->)
 #define COM_FORWARD_ICloudNetworkGatewayInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_TO (base::)
 
 
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0188_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0188_v0_0_s_ifspec;
+
+#ifndef __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__
+#define __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__
+
+/* interface ICloudNetworkEnvironmentInfo */
+/* [proxy][oleautomation][dual][object][uuid] */ 
+
+
+EXTERN_C const IID IID_ICloudNetworkEnvironmentInfo;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("181dfb55-394d-44d3-9edb-af2c4472c40a")
+    ICloudNetworkEnvironmentInfo : public IDispatch
+    {
+    public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TunnelNetworkId( 
+            /* [retval][out] */ BSTR *aTunnelNetworkId) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo( 
+            /* [retval][out] */ ULONG *aReserved) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ICloudNetworkEnvironmentInfoVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ICloudNetworkEnvironmentInfo * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ICloudNetworkEnvironmentInfo * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TunnelNetworkId )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ BSTR *aTunnelNetworkId);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo )( 
+            ICloudNetworkEnvironmentInfo * This,
+            /* [retval][out] */ ULONG *aReserved);
+        
+        END_INTERFACE
+    } ICloudNetworkEnvironmentInfoVtbl;
+
+    interface ICloudNetworkEnvironmentInfo
+    {
+        CONST_VTBL struct ICloudNetworkEnvironmentInfoVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ICloudNetworkEnvironmentInfo_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ICloudNetworkEnvironmentInfo_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ICloudNetworkEnvironmentInfo_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ICloudNetworkEnvironmentInfo_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ICloudNetworkEnvironmentInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ICloudNetworkEnvironmentInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ICloudNetworkEnvironmentInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ICloudNetworkEnvironmentInfo_get_TunnelNetworkId(This,aTunnelNetworkId)	\
+    ( (This)->lpVtbl -> get_TunnelNetworkId(This,aTunnelNetworkId) ) 
+
+#define ICloudNetworkEnvironmentInfo_get_InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(This,aReserved) ) 
+
+#define ICloudNetworkEnvironmentInfo_get_InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(This,aReserved) ) 
+
+#define ICloudNetworkEnvironmentInfo_get_InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(This,aReserved) ) 
+
+#define ICloudNetworkEnvironmentInfo_get_InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(This,aReserved) ) 
+
+#define ICloudNetworkEnvironmentInfo_get_InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(This,aReserved) ) 
+
+#define ICloudNetworkEnvironmentInfo_get_InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(This,aReserved) ) 
+
+#define ICloudNetworkEnvironmentInfo_get_InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(This,aReserved)	\
+    ( (This)->lpVtbl -> get_InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(This,aReserved) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ICloudNetworkEnvironmentInfo_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_VirtualBox_0000_0189 */
+/* [local] */ 
+
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO(smth) HRESULT STDMETHODCALLTYPE get_TunnelNetworkId (BSTR * aTunnelNetworkId) { return smth get_TunnelNetworkId (aTunnelNetworkId); }
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO (base::)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO(smth) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO (smth) 
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO (base::)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0189_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0189_v0_0_s_ifspec;
 
 #ifndef __ICloudClient_INTERFACE_DEFINED__
 #define __ICloudClient_INTERFACE_DEFINED__
@@ -66357,6 +66584,15 @@ EXTERN_C const IID IID_ICloudClient;
             /* [out] */ ICloudNetworkGatewayInfo **aGatewayInfo,
             /* [retval][out] */ IProgress **aProgress) = 0;
         
+        virtual HRESULT STDMETHODCALLTYPE SetupCloudNetworkEnvironment( 
+            /* [in] */ BSTR aTunnelNetworkName,
+            /* [in] */ BSTR aTunnelNetworkRange,
+            /* [in] */ BSTR aGatewayOsName,
+            /* [in] */ BSTR aGatewayOsVersion,
+            /* [in] */ BSTR aGatewayShape,
+            /* [out] */ ICloudNetworkEnvironmentInfo **aNetworkEnvironmentInfo,
+            /* [retval][out] */ IProgress **aProgress) = 0;
+        
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod1ICloudClient( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod2ICloudClient( void) = 0;
@@ -66386,8 +66622,6 @@ EXTERN_C const IID IID_ICloudClient;
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod14ICloudClient( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod15ICloudClient( void) = 0;
-        
-        virtual HRESULT STDMETHODCALLTYPE InternalAndReservedMethod16ICloudClient( void) = 0;
         
     };
     
@@ -66573,6 +66807,16 @@ EXTERN_C const IID IID_ICloudClient;
             /* [out] */ ICloudNetworkGatewayInfo **aGatewayInfo,
             /* [retval][out] */ IProgress **aProgress);
         
+        HRESULT ( STDMETHODCALLTYPE *SetupCloudNetworkEnvironment )( 
+            ICloudClient * This,
+            /* [in] */ BSTR aTunnelNetworkName,
+            /* [in] */ BSTR aTunnelNetworkRange,
+            /* [in] */ BSTR aGatewayOsName,
+            /* [in] */ BSTR aGatewayOsVersion,
+            /* [in] */ BSTR aGatewayShape,
+            /* [out] */ ICloudNetworkEnvironmentInfo **aNetworkEnvironmentInfo,
+            /* [retval][out] */ IProgress **aProgress);
+        
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod1ICloudClient )( 
             ICloudClient * This);
         
@@ -66616,9 +66860,6 @@ EXTERN_C const IID IID_ICloudClient;
             ICloudClient * This);
         
         HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod15ICloudClient )( 
-            ICloudClient * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *InternalAndReservedMethod16ICloudClient )( 
             ICloudClient * This);
         
         END_INTERFACE
@@ -66735,6 +66976,9 @@ EXTERN_C const IID IID_ICloudClient;
 #define ICloudClient_StartCloudNetworkGateway(This,aNetwork,aSshPublicKey,aGatewayInfo,aProgress)	\
     ( (This)->lpVtbl -> StartCloudNetworkGateway(This,aNetwork,aSshPublicKey,aGatewayInfo,aProgress) ) 
 
+#define ICloudClient_SetupCloudNetworkEnvironment(This,aTunnelNetworkName,aTunnelNetworkRange,aGatewayOsName,aGatewayOsVersion,aGatewayShape,aNetworkEnvironmentInfo,aProgress)	\
+    ( (This)->lpVtbl -> SetupCloudNetworkEnvironment(This,aTunnelNetworkName,aTunnelNetworkRange,aGatewayOsName,aGatewayOsVersion,aGatewayShape,aNetworkEnvironmentInfo,aProgress) ) 
+
 #define ICloudClient_InternalAndReservedMethod1ICloudClient(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod1ICloudClient(This) ) 
 
@@ -66780,9 +67024,6 @@ EXTERN_C const IID IID_ICloudClient;
 #define ICloudClient_InternalAndReservedMethod15ICloudClient(This)	\
     ( (This)->lpVtbl -> InternalAndReservedMethod15ICloudClient(This) ) 
 
-#define ICloudClient_InternalAndReservedMethod16ICloudClient(This)	\
-    ( (This)->lpVtbl -> InternalAndReservedMethod16ICloudClient(This) ) 
-
 #endif /* COBJMACROS */
 
 
@@ -66794,7 +67035,7 @@ EXTERN_C const IID IID_ICloudClient;
 #endif 	/* __ICloudClient_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0189 */
+/* interface __MIDL_itf_VirtualBox_0000_0190 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO(smth) HRESULT STDMETHODCALLTYPE GetExportDescriptionForm (IVirtualSystemDescription * aDescription, IVirtualSystemDescriptionForm * * aForm, IProgress * * aProgress) { return smth GetExportDescriptionForm (aDescription, aForm, aProgress); }
@@ -66851,13 +67092,16 @@ EXTERN_C const IID IID_ICloudClient;
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO(smth) HRESULT STDMETHODCALLTYPE StartCloudNetworkGateway (ICloudNetwork * aNetwork, BSTR aSshPublicKey, ICloudNetworkGatewayInfo * * aGatewayInfo, IProgress * * aProgress) { return smth StartCloudNetworkGateway (aNetwork, aSshPublicKey, aGatewayInfo, aProgress); }
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_OBJ(obj) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_BASE(base) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (base::)
-#define COM_FORWARD_ICloudClient_TO(smth) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ExportVM_TO (smth) COM_FORWARD_ICloudClient_GetLaunchDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_LaunchVM_TO (smth) COM_FORWARD_ICloudClient_GetImportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ImportInstance_TO (smth) COM_FORWARD_ICloudClient_ListInstances_TO (smth) COM_FORWARD_ICloudClient_ListImages_TO (smth) COM_FORWARD_ICloudClient_GetInstanceInfo_TO (smth) COM_FORWARD_ICloudClient_StartInstance_TO (smth) COM_FORWARD_ICloudClient_PauseInstance_TO (smth) COM_FORWARD_ICloudClient_TerminateInstance_TO (smth) COM_FORWARD_ICloudClient_CreateImage_TO (smth) COM_FORWARD_ICloudClient_ExportImage_TO (smth) COM_FORWARD_ICloudClient_ImportImage_TO (smth) COM_FORWARD_ICloudClient_DeleteImage_TO (smth) COM_FORWARD_ICloudClient_GetImageInfo_TO (smth) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (smth) 
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO(smth) HRESULT STDMETHODCALLTYPE SetupCloudNetworkEnvironment (BSTR aTunnelNetworkName, BSTR aTunnelNetworkRange, BSTR aGatewayOsName, BSTR aGatewayOsVersion, BSTR aGatewayShape, ICloudNetworkEnvironmentInfo * * aNetworkEnvironmentInfo, IProgress * * aProgress) { return smth SetupCloudNetworkEnvironment (aTunnelNetworkName, aTunnelNetworkRange, aGatewayOsName, aGatewayOsVersion, aGatewayShape, aNetworkEnvironmentInfo, aProgress); }
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_OBJ(obj) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_BASE(base) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (base::)
+#define COM_FORWARD_ICloudClient_TO(smth) COM_FORWARD_ICloudClient_GetExportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ExportVM_TO (smth) COM_FORWARD_ICloudClient_GetLaunchDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_LaunchVM_TO (smth) COM_FORWARD_ICloudClient_GetImportDescriptionForm_TO (smth) COM_FORWARD_ICloudClient_ImportInstance_TO (smth) COM_FORWARD_ICloudClient_ListInstances_TO (smth) COM_FORWARD_ICloudClient_ListImages_TO (smth) COM_FORWARD_ICloudClient_GetInstanceInfo_TO (smth) COM_FORWARD_ICloudClient_StartInstance_TO (smth) COM_FORWARD_ICloudClient_PauseInstance_TO (smth) COM_FORWARD_ICloudClient_TerminateInstance_TO (smth) COM_FORWARD_ICloudClient_CreateImage_TO (smth) COM_FORWARD_ICloudClient_ExportImage_TO (smth) COM_FORWARD_ICloudClient_ImportImage_TO (smth) COM_FORWARD_ICloudClient_DeleteImage_TO (smth) COM_FORWARD_ICloudClient_GetImageInfo_TO (smth) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (smth) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (smth) 
 #define COM_FORWARD_ICloudClient_TO_OBJ(obj) COM_FORWARD_ICloudClient_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0189_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0189_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0190_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0190_v0_0_s_ifspec;
 
 #ifndef __ICloudProfile_INTERFACE_DEFINED__
 #define __ICloudProfile_INTERFACE_DEFINED__
@@ -67180,7 +67424,7 @@ EXTERN_C const IID IID_ICloudProfile;
 #endif 	/* __ICloudProfile_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0190 */
+/* interface __MIDL_itf_VirtualBox_0000_0191 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProfile_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -67215,8 +67459,8 @@ EXTERN_C const IID IID_ICloudProfile;
 #define COM_FORWARD_ICloudProfile_TO_BASE(base) COM_FORWARD_ICloudProfile_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0190_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0190_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0191_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0191_v0_0_s_ifspec;
 
 #ifndef __ICloudProvider_INTERFACE_DEFINED__
 #define __ICloudProvider_INTERFACE_DEFINED__
@@ -67683,7 +67927,7 @@ EXTERN_C const IID IID_ICloudProvider;
 #endif 	/* __ICloudProvider_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0191 */
+/* interface __MIDL_itf_VirtualBox_0000_0192 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProvider_GETTER_Name_TO(smth) HRESULT STDMETHODCALLTYPE get_Name (BSTR * aName) { return smth get_Name (aName); }
@@ -67730,8 +67974,8 @@ EXTERN_C const IID IID_ICloudProvider;
 #define COM_FORWARD_ICloudProvider_TO_BASE(base) COM_FORWARD_ICloudProvider_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0191_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0191_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0192_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0192_v0_0_s_ifspec;
 
 #ifndef __ICloudProviderManager_INTERFACE_DEFINED__
 #define __ICloudProviderManager_INTERFACE_DEFINED__
@@ -68002,7 +68246,7 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #endif 	/* __ICloudProviderManager_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_VirtualBox_0000_0192 */
+/* interface __MIDL_itf_VirtualBox_0000_0193 */
 /* [local] */ 
 
 #define COM_FORWARD_ICloudProviderManager_GETTER_Providers_TO(smth) HRESULT STDMETHODCALLTYPE get_Providers (SAFEARRAY * * aProviders) { return smth get_Providers (aProviders); }
@@ -68022,8 +68266,8 @@ EXTERN_C const IID IID_ICloudProviderManager;
 #define COM_FORWARD_ICloudProviderManager_TO_BASE(base) COM_FORWARD_ICloudProviderManager_TO (base::)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0192_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0192_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0193_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0193_v0_0_s_ifspec;
 
 
 #ifndef __VirtualBox_LIBRARY_DEFINED__
@@ -68048,6 +68292,7 @@ extern RPC_IF_HANDLE __MIDL_itf_VirtualBox_0000_0192_v0_0_s_ifspec;
 #define VBOX_E_MAXIMUM_REACHED ((HRESULT)0x80BB000E)
 #define VBOX_E_GSTCTL_GUEST_ERROR ((HRESULT)0x80BB000F)
 #define VBOX_E_TIMEOUT ((HRESULT)0x80BB0010)
+
 
 
 

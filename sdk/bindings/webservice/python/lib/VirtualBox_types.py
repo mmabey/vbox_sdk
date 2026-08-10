@@ -63737,6 +63737,166 @@ class ns0:
             Holder.__name__ = "ICloudNetworkGatewayInfo_getPublicIPResponse_Holder"
             self.pyclass = Holder
 
+    class ICloudNetworkGatewayInfo_getSecondaryPublicIP_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkGatewayInfo_getSecondaryPublicIP"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkGatewayInfo_getSecondaryPublicIP_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkGatewayInfo_getSecondaryPublicIP")
+            kw["aname"] = "_ICloudNetworkGatewayInfo_getSecondaryPublicIP"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "ICloudNetworkGatewayInfo_getSecondaryPublicIP_Holder"
+            self.pyclass = Holder
+
+    class ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse")
+            kw["aname"] = "_ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse_Holder"
+            self.pyclass = Holder
+
+    class ICloudNetworkGatewayInfo_getMacAddress_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkGatewayInfo_getMacAddress"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkGatewayInfo_getMacAddress_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkGatewayInfo_getMacAddress")
+            kw["aname"] = "_ICloudNetworkGatewayInfo_getMacAddress"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "ICloudNetworkGatewayInfo_getMacAddress_Holder"
+            self.pyclass = Holder
+
+    class ICloudNetworkGatewayInfo_getMacAddressResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkGatewayInfo_getMacAddressResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkGatewayInfo_getMacAddressResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkGatewayInfo_getMacAddressResponse")
+            kw["aname"] = "_ICloudNetworkGatewayInfo_getMacAddressResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "ICloudNetworkGatewayInfo_getMacAddressResponse_Holder"
+            self.pyclass = Holder
+
+    class ICloudNetworkGatewayInfo_getInstanceId_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkGatewayInfo_getInstanceId"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkGatewayInfo_getInstanceId_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkGatewayInfo_getInstanceId")
+            kw["aname"] = "_ICloudNetworkGatewayInfo_getInstanceId"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "ICloudNetworkGatewayInfo_getInstanceId_Holder"
+            self.pyclass = Holder
+
+    class ICloudNetworkGatewayInfo_getInstanceIdResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkGatewayInfo_getInstanceIdResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkGatewayInfo_getInstanceIdResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkGatewayInfo_getInstanceIdResponse")
+            kw["aname"] = "_ICloudNetworkGatewayInfo_getInstanceIdResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "ICloudNetworkGatewayInfo_getInstanceIdResponse_Holder"
+            self.pyclass = Holder
+
+    class ICloudNetworkEnvironmentInfo_getTunnelNetworkId_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkEnvironmentInfo_getTunnelNetworkId"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkEnvironmentInfo_getTunnelNetworkId_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkEnvironmentInfo_getTunnelNetworkId")
+            kw["aname"] = "_ICloudNetworkEnvironmentInfo_getTunnelNetworkId"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    return
+            Holder.__name__ = "ICloudNetworkEnvironmentInfo_getTunnelNetworkId_Holder"
+            self.pyclass = Holder
+
+    class ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse")
+            kw["aname"] = "_ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._returnval = None
+                    return
+            Holder.__name__ = "ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse_Holder"
+            self.pyclass = Holder
+
     class ICloudClient_getExportDescriptionForm_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
         literal = "ICloudClient_getExportDescriptionForm"
         schema = "http://www.virtualbox.org/"
@@ -64486,6 +64646,52 @@ class ns0:
                     self._returnval = None
                     return
             Holder.__name__ = "ICloudClient_startCloudNetworkGatewayResponse_Holder"
+            self.pyclass = Holder
+
+    class ICloudClient_setupCloudNetworkEnvironment_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudClient_setupCloudNetworkEnvironment"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudClient_setupCloudNetworkEnvironment_Dec.schema
+            TClist = [ZSI.TC.String(pname="_this", aname="__this", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="tunnelNetworkName", aname="_tunnelNetworkName", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="tunnelNetworkRange", aname="_tunnelNetworkRange", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="gatewayOsName", aname="_gatewayOsName", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="gatewayOsVersion", aname="_gatewayOsVersion", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="gatewayShape", aname="_gatewayShape", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudClient_setupCloudNetworkEnvironment")
+            kw["aname"] = "_ICloudClient_setupCloudNetworkEnvironment"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self.__this = None
+                    self._tunnelNetworkName = None
+                    self._tunnelNetworkRange = None
+                    self._gatewayOsName = None
+                    self._gatewayOsVersion = None
+                    self._gatewayShape = None
+                    return
+            Holder.__name__ = "ICloudClient_setupCloudNetworkEnvironment_Holder"
+            self.pyclass = Holder
+
+    class ICloudClient_setupCloudNetworkEnvironmentResponse_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):
+        literal = "ICloudClient_setupCloudNetworkEnvironmentResponse"
+        schema = "http://www.virtualbox.org/"
+        def __init__(self, **kw):
+            ns = ns0.ICloudClient_setupCloudNetworkEnvironmentResponse_Dec.schema
+            TClist = [ZSI.TC.String(pname="networkEnvironmentInfo", aname="_networkEnvironmentInfo", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="returnval", aname="_returnval", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            kw["pname"] = ("http://www.virtualbox.org/","ICloudClient_setupCloudNetworkEnvironmentResponse")
+            kw["aname"] = "_ICloudClient_setupCloudNetworkEnvironmentResponse"
+            self.attribute_typecode_dict = {}
+            ZSI.TCcompound.ComplexType.__init__(self,None,TClist,inorder=0,**kw)
+            class Holder:
+                __metaclass__ = pyclass_type
+                typecode = self
+                def __init__(self):
+                    # pyclass
+                    self._networkEnvironmentInfo = None
+                    self._returnval = None
+                    return
+            Holder.__name__ = "ICloudClient_setupCloudNetworkEnvironmentResponse_Holder"
             self.pyclass = Holder
 
     class ICloudProfile_getName_Dec(ZSI.TCcompound.ComplexType, ElementDeclaration):

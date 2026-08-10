@@ -26471,9 +26471,111 @@ class ICloudNetworkGatewayInfo(IUnknown):
        req._this=self.handle
        val=self.mgr.getPort().ICloudNetworkGatewayInfo_getPublicIP(req)
        return String(self.mgr,val._returnval)
+   def getSecondaryPublicIP(self):
+       req=ICloudNetworkGatewayInfo_getSecondaryPublicIPRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetworkGatewayInfo_getSecondaryPublicIP(req)
+       return String(self.mgr,val._returnval)
+   def getMacAddress(self):
+       req=ICloudNetworkGatewayInfo_getMacAddressRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetworkGatewayInfo_getMacAddress(req)
+       return String(self.mgr,val._returnval)
+   def getInstanceId(self):
+       req=ICloudNetworkGatewayInfo_getInstanceIdRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetworkGatewayInfo_getInstanceId(req)
+       return String(self.mgr,val._returnval)
 
 
-   _Attrs_={         'publicIP':[getPublicIP,None]}
+   _Attrs_={         'publicIP':[getPublicIP,None],
+         'secondaryPublicIP':[getSecondaryPublicIP,None],
+         'macAddress':[getMacAddress,None],
+         'instanceId':[getInstanceId,None]}
+
+class ICloudNetworkEnvironmentInfo(IUnknown):
+   def __init__(self, mgr, handle, isarray = False):
+       self.mgr = mgr
+       if handle is None:
+           raise Exception("bad handle: "+str(handle))
+       self.handle = handle
+       self.isarray = isarray
+       if self.isarray:
+           for strHnd in handle:
+               mgr.register(strHnd)
+       else:
+           mgr.register(self.handle)
+
+   def __del__(self):
+       self.releaseRemote()
+
+   def releaseRemote(self):
+        try:
+            if self.handle is not None:
+               if self.isarray:
+                   for strHnd in self.handle:
+                       self.mgr.unregister(strHnd)
+               else:
+                   self.mgr.unregister(self.handle)
+               self.handle = None;
+        except:
+            pass
+
+   def __next(self):
+      if self.isarray:
+          return self.handle.__next()
+      raise TypeError("iteration over non-sequence")
+
+   def __size(self):
+      if self.isarray:
+          return self.handle.__size()
+      raise TypeError("iteration over non-sequence")
+
+   def __len__(self):
+      if self.isarray:
+          return self.handle.__len__()
+      raise TypeError("iteration over non-sequence")
+
+   def __getitem__(self, index):
+      if self.isarray:
+          return ICloudNetworkEnvironmentInfo(self.mgr, self.handle[index])
+      raise TypeError("iteration over non-sequence")
+
+   def __str__(self):
+        if self.isarray:
+            return str(self.handle)
+        else:
+            return self.handle
+
+   def isValid(self):
+        return self.handle != None and self.handle != ''
+
+   def __getattr__(self,name):
+      hndl = ICloudNetworkEnvironmentInfo._Attrs_.get(name, None)
+      if hndl != None:
+         if hndl[0] != None:
+           return hndl[0](self)
+         else:
+          raise AttributeError
+      else:
+         return IUnknown.__getattr__(self, name)
+
+   def __setattr__(self, name, val):
+      hndl = ICloudNetworkEnvironmentInfo._Attrs_.get(name, None)
+      if (hndl != None and hndl[1] != None):
+         hndl[1](self,val)
+      else:
+         self.__dict__[name] = val
+
+   
+   def getTunnelNetworkId(self):
+       req=ICloudNetworkEnvironmentInfo_getTunnelNetworkIdRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().ICloudNetworkEnvironmentInfo_getTunnelNetworkId(req)
+       return String(self.mgr,val._returnval)
+
+
+   _Attrs_={         'tunnelNetworkId':[getTunnelNetworkId,None]}
 
 class ICloudClient(IUnknown):
    def __init__(self, mgr, handle, isarray = False):
@@ -26734,6 +26836,20 @@ class ICloudClient(IUnknown):
        val=self.mgr.getPort().ICloudClient_startCloudNetworkGateway(req)
        
        return IProgress(self.mgr,val._returnval), ICloudNetworkGatewayInfo(self.mgr,val._gatewayInfo)
+
+
+   def setupCloudNetworkEnvironment(self, _arg_tunnelNetworkName, _arg_tunnelNetworkRange, _arg_gatewayOsName, _arg_gatewayOsVersion, _arg_gatewayShape):
+       req=ICloudClient_setupCloudNetworkEnvironmentRequestMsg()
+       req._this=self.handle
+       
+       req._tunnelNetworkName=_arg_tunnelNetworkName
+       req._tunnelNetworkRange=_arg_tunnelNetworkRange
+       req._gatewayOsName=_arg_gatewayOsName
+       req._gatewayOsVersion=_arg_gatewayOsVersion
+       req._gatewayShape=_arg_gatewayShape
+       val=self.mgr.getPort().ICloudClient_setupCloudNetworkEnvironment(req)
+       
+       return IProgress(self.mgr,val._returnval), ICloudNetworkEnvironmentInfo(self.mgr,val._networkEnvironmentInfo)
 
 
 

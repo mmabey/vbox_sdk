@@ -368,6 +368,7 @@ interface IChoiceFormValue;
 interface IForm;
 interface IVirtualSystemDescriptionForm;
 interface ICloudNetworkGatewayInfo;
+interface ICloudNetworkEnvironmentInfo;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;
@@ -21494,6 +21495,12 @@ interface ICloudNetworkGatewayInfo : nsISupports
 {
     readonly attribute wstring publicIP;
 
+    readonly attribute wstring secondaryPublicIP;
+
+    readonly attribute wstring macAddress;
+
+    readonly attribute wstring instanceId;
+
     readonly attribute unsigned long InternalAndReservedAttribute1ICloudNetworkGatewayInfo;
 
     readonly attribute unsigned long InternalAndReservedAttribute2ICloudNetworkGatewayInfo;
@@ -21504,12 +21511,6 @@ interface ICloudNetworkGatewayInfo : nsISupports
 
     readonly attribute unsigned long InternalAndReservedAttribute5ICloudNetworkGatewayInfo;
 
-    readonly attribute unsigned long InternalAndReservedAttribute6ICloudNetworkGatewayInfo;
-
-    readonly attribute unsigned long InternalAndReservedAttribute7ICloudNetworkGatewayInfo;
-
-    readonly attribute unsigned long InternalAndReservedAttribute8ICloudNetworkGatewayInfo;
-
 }; /* interface ICloudNetworkGatewayInfo */
 
 /* Interface implementation forwarder macro */
@@ -21517,12 +21518,58 @@ interface ICloudNetworkGatewayInfo : nsISupports
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO(smth) NS_IMETHOD GetPublicIP (PRUnichar * * aPublicIP) { return smth GetPublicIP (aPublicIP); }
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO ((obj)->)
 #define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO(smth) NS_IMETHOD GetSecondaryPublicIP (PRUnichar * * aSecondaryPublicIP) { return smth GetSecondaryPublicIP (aSecondaryPublicIP); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO(smth) NS_IMETHOD GetMacAddress (PRUnichar * * aMacAddress) { return smth GetMacAddress (aMacAddress); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO(smth) NS_IMETHOD GetInstanceId (PRUnichar * * aInstanceId) { return smth GetInstanceId (aInstanceId); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO (base::)
 #define COM_FORWARD_ICloudNetworkGatewayInfo_TO(smth) NS_FORWARD_ICLOUDNETWORKGATEWAYINFO (smth)
 #define COM_FORWARD_ICloudNetworkGatewayInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_TO ((obj)->)
 #define COM_FORWARD_ICloudNetworkGatewayInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_TO (base::)
 
 // for compatibility with Win32
 VBOX_EXTERN_C const nsID IID_ICloudNetworkGatewayInfo;
+%}
+
+[
+    uuid(181dfb55-394d-44d3-9edb-af2c4472c40a),
+    scriptable
+]
+interface ICloudNetworkEnvironmentInfo : nsISupports
+{
+    readonly attribute wstring tunnelNetworkId;
+
+    readonly attribute unsigned long InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo;
+
+    readonly attribute unsigned long InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo;
+
+    readonly attribute unsigned long InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo;
+
+    readonly attribute unsigned long InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo;
+
+    readonly attribute unsigned long InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo;
+
+    readonly attribute unsigned long InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo;
+
+    readonly attribute unsigned long InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo;
+
+}; /* interface ICloudNetworkEnvironmentInfo */
+
+/* Interface implementation forwarder macro */
+%{C++
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO(smth) NS_IMETHOD GetTunnelNetworkId (PRUnichar * * aTunnelNetworkId) { return smth GetTunnelNetworkId (aTunnelNetworkId); }
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO (base::)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO(smth) NS_FORWARD_ICLOUDNETWORKENVIRONMENTINFO (smth)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO (base::)
+
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudNetworkEnvironmentInfo;
 %}
 
 [
@@ -21655,6 +21702,16 @@ interface ICloudClient : nsISupports
         [retval] out IProgress progress
     );
 
+    void setupCloudNetworkEnvironment (
+        in wstring tunnelNetworkName,
+        in wstring tunnelNetworkRange,
+        in wstring gatewayOsName,
+        in wstring gatewayOsVersion,
+        in wstring gatewayShape,
+        out ICloudNetworkEnvironmentInfo networkEnvironmentInfo,
+        [retval] out IProgress progress
+    );
+
     void InternalAndReservedMethod1ICloudClient();
 
     void InternalAndReservedMethod2ICloudClient();
@@ -21684,8 +21741,6 @@ interface ICloudClient : nsISupports
     void InternalAndReservedMethod14ICloudClient();
 
     void InternalAndReservedMethod15ICloudClient();
-
-    void InternalAndReservedMethod16ICloudClient();
 
 }; /* interface ICloudClient */
 
@@ -21745,6 +21800,9 @@ interface ICloudClient : nsISupports
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO(smth) NS_IMETHOD StartCloudNetworkGateway (ICloudNetwork * aNetwork, PRUnichar * aSshPublicKey, ICloudNetworkGatewayInfo * * aGatewayInfo, IProgress * * aProgress) { return smth StartCloudNetworkGateway (aNetwork, aSshPublicKey, aGatewayInfo, aProgress); }
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_OBJ(obj) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_BASE(base) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (base::)
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO(smth) NS_IMETHOD SetupCloudNetworkEnvironment (PRUnichar * aTunnelNetworkName, PRUnichar * aTunnelNetworkRange, PRUnichar * aGatewayOsName, PRUnichar * aGatewayOsVersion, PRUnichar * aGatewayShape, ICloudNetworkEnvironmentInfo * * aNetworkEnvironmentInfo, IProgress * * aProgress) { return smth SetupCloudNetworkEnvironment (aTunnelNetworkName, aTunnelNetworkRange, aGatewayOsName, aGatewayOsVersion, aGatewayShape, aNetworkEnvironmentInfo, aProgress); }
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_OBJ(obj) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_BASE(base) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (base::)
 #define COM_FORWARD_ICloudClient_TO(smth) NS_FORWARD_ICLOUDCLIENT (smth)
 #define COM_FORWARD_ICloudClient_TO_OBJ(obj) COM_FORWARD_ICloudClient_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)

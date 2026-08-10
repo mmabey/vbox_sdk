@@ -12,7 +12,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu Jun  4 17:00:37 2020
+/* at Sat Jul 11 08:07:54 2020
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.1-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -635,6 +635,9 @@ MIDL_DEFINE_GUID(IID, IID_IVirtualSystemDescriptionForm,0x14c2db8a,0x3ee4,0x11e9
 
 
 MIDL_DEFINE_GUID(IID, IID_ICloudNetworkGatewayInfo,0x89a63ace,0x0c65,0x11ea,0xad,0x23,0x0f,0xf2,0x57,0xc7,0x1a,0x7f);
+
+
+MIDL_DEFINE_GUID(IID, IID_ICloudNetworkEnvironmentInfo,0x181dfb55,0x394d,0x44d3,0x9e,0xdb,0xaf,0x2c,0x44,0x72,0xc4,0x0a);
 
 
 MIDL_DEFINE_GUID(IID, IID_ICloudClient,0x435b66a2,0x0c60,0x11ea,0xa0,0xea,0x07,0xeb,0x0d,0x1c,0x4e,0xad);

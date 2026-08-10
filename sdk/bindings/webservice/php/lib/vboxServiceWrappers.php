@@ -17707,6 +17707,30 @@ class ICloudNetworkGatewayInfo extends VBox_ManagedObject
         $response = $this->connection->__soapCall('ICloudNetworkGatewayInfo_getPublicIP', array((array)$request));
         return (string)$response->returnval;
     }
+
+    public function getSecondaryPublicIP()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('ICloudNetworkGatewayInfo_getSecondaryPublicIP', array((array)$request));
+        return (string)$response->returnval;
+    }
+
+    public function getMacAddress()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('ICloudNetworkGatewayInfo_getMacAddress', array((array)$request));
+        return (string)$response->returnval;
+    }
+
+    public function getInstanceId()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('ICloudNetworkGatewayInfo_getInstanceId', array((array)$request));
+        return (string)$response->returnval;
+    }
 }
 
 /**
@@ -17715,6 +17739,29 @@ class ICloudNetworkGatewayInfo extends VBox_ManagedObject
 class ICloudNetworkGatewayInfoCollection extends VBox_ManagedObjectCollection
 {
     protected $_interfaceName = "ICloudNetworkGatewayInfo";
+}
+
+/**
+ * Generated VBoxWebService Interface Wrapper
+ */
+class ICloudNetworkEnvironmentInfo extends VBox_ManagedObject
+{
+
+    public function getTunnelNetworkId()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('ICloudNetworkEnvironmentInfo_getTunnelNetworkId', array((array)$request));
+        return (string)$response->returnval;
+    }
+}
+
+/**
+ * Generated VBoxWebService Managed Object Collection
+ */
+class ICloudNetworkEnvironmentInfoCollection extends VBox_ManagedObjectCollection
+{
+    protected $_interfaceName = "ICloudNetworkEnvironmentInfo";
 }
 
 /**
@@ -17889,6 +17936,19 @@ class ICloudClient extends VBox_ManagedObject
         $request->sshPublicKey = $arg_sshPublicKey;
         $response = $this->connection->__soapCall('ICloudClient_startCloudNetworkGateway', array((array)$request));
         return array(new IProgress ($this->connection, $response->returnval), new ICloudNetworkGatewayInfo ($this->connection, $response->gatewayInfo));
+    }
+
+    public function setupCloudNetworkEnvironment($arg_tunnelNetworkName, $arg_tunnelNetworkRange, $arg_gatewayOsName, $arg_gatewayOsVersion, $arg_gatewayShape)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $request->tunnelNetworkName = $arg_tunnelNetworkName;
+        $request->tunnelNetworkRange = $arg_tunnelNetworkRange;
+        $request->gatewayOsName = $arg_gatewayOsName;
+        $request->gatewayOsVersion = $arg_gatewayOsVersion;
+        $request->gatewayShape = $arg_gatewayShape;
+        $response = $this->connection->__soapCall('ICloudClient_setupCloudNetworkEnvironment', array((array)$request));
+        return array(new IProgress ($this->connection, $response->returnval), new ICloudNetworkEnvironmentInfo ($this->connection, $response->networkEnvironmentInfo));
     }
 }
 

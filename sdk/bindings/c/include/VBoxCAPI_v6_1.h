@@ -1365,6 +1365,7 @@ interface IChoiceFormValue;
 interface IForm;
 interface IVirtualSystemDescriptionForm;
 interface ICloudNetworkGatewayInfo;
+interface ICloudNetworkEnvironmentInfo;
 interface ICloudClient;
 interface ICloudProfile;
 interface ICloudProvider;
@@ -1555,6 +1556,7 @@ typedef interface IChoiceFormValue IChoiceFormValue;
 typedef interface IForm IForm;
 typedef interface IVirtualSystemDescriptionForm IVirtualSystemDescriptionForm;
 typedef interface ICloudNetworkGatewayInfo ICloudNetworkGatewayInfo;
+typedef interface ICloudNetworkEnvironmentInfo ICloudNetworkEnvironmentInfo;
 typedef interface ICloudClient ICloudClient;
 typedef interface ICloudProfile ICloudProfile;
 typedef interface ICloudProvider ICloudProvider;
@@ -31485,6 +31487,12 @@ struct ICloudNetworkGatewayInfo_vtbl
 
     nsresult (*GetPublicIP)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *publicIP);
 
+    nsresult (*GetSecondaryPublicIP)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *secondaryPublicIP);
+
+    nsresult (*GetMacAddress)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *macAddress);
+
+    nsresult (*GetInstanceId)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *instanceId);
+
     nsresult (*GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
@@ -31494,12 +31502,6 @@ struct ICloudNetworkGatewayInfo_vtbl
     nsresult (*GetInternalAndReservedAttribute4ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -31510,6 +31512,12 @@ struct ICloudNetworkGatewayInfoVtbl
     nsrefcnt (*Release)(ICloudNetworkGatewayInfo *pThis);
     nsresult (*GetPublicIP)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *publicIP);
 
+    nsresult (*GetSecondaryPublicIP)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *secondaryPublicIP);
+
+    nsresult (*GetMacAddress)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *macAddress);
+
+    nsresult (*GetInstanceId)(ICloudNetworkGatewayInfo *pThis, PRUnichar * *instanceId);
+
     nsresult (*GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
@@ -31520,18 +31528,18 @@ struct ICloudNetworkGatewayInfoVtbl
 
     nsresult (*GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
 
-    nsresult (*GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo)(ICloudNetworkGatewayInfo *pThis, PRUint32 *reserved);
-
 };
 #define ICloudNetworkGatewayInfo_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
 #define ICloudNetworkGatewayInfo_AddRef(p) ((p)->lpVtbl->AddRef(p))
 #define ICloudNetworkGatewayInfo_Release(p) ((p)->lpVtbl->Release(p))
 #define ICloudNetworkGatewayInfo_get_PublicIP(p, aPublicIP) ((p)->lpVtbl->GetPublicIP(p, aPublicIP))
 #define ICloudNetworkGatewayInfo_GetPublicIP(p, aPublicIP) ((p)->lpVtbl->GetPublicIP(p, aPublicIP))
+#define ICloudNetworkGatewayInfo_get_SecondaryPublicIP(p, aSecondaryPublicIP) ((p)->lpVtbl->GetSecondaryPublicIP(p, aSecondaryPublicIP))
+#define ICloudNetworkGatewayInfo_GetSecondaryPublicIP(p, aSecondaryPublicIP) ((p)->lpVtbl->GetSecondaryPublicIP(p, aSecondaryPublicIP))
+#define ICloudNetworkGatewayInfo_get_MacAddress(p, aMacAddress) ((p)->lpVtbl->GetMacAddress(p, aMacAddress))
+#define ICloudNetworkGatewayInfo_GetMacAddress(p, aMacAddress) ((p)->lpVtbl->GetMacAddress(p, aMacAddress))
+#define ICloudNetworkGatewayInfo_get_InstanceId(p, aInstanceId) ((p)->lpVtbl->GetInstanceId(p, aInstanceId))
+#define ICloudNetworkGatewayInfo_GetInstanceId(p, aInstanceId) ((p)->lpVtbl->GetInstanceId(p, aInstanceId))
 #endif /* VBOX_WITH_GLUE */
 
 interface ICloudNetworkGatewayInfo
@@ -31543,6 +31551,77 @@ interface ICloudNetworkGatewayInfo
 #endif /* VBOX_WITH_GLUE */
 };
 /* End of struct ICloudNetworkGatewayInfo declaration */
+
+
+/* Start of struct ICloudNetworkEnvironmentInfo declaration */
+#define ICLOUDNETWORKENVIRONMENTINFO_IID_STR "181dfb55-394d-44d3-9edb-af2c4472c40a"
+#define ICLOUDNETWORKENVIRONMENTINFO_IID { \
+    0x181dfb55, 0x394d, 0x44d3, \
+    { 0x9e, 0xdb, 0xaf, 0x2c, 0x44, 0x72, 0xc4, 0x0a } \
+}
+/* COM compatibility */
+VBOX_EXTERN_CONST(nsIID, IID_ICloudNetworkEnvironmentInfo);
+#ifndef VBOX_WITH_GLUE
+struct ICloudNetworkEnvironmentInfo_vtbl
+{
+    struct nsISupports_vtbl nsisupports;
+
+    nsresult (*GetTunnelNetworkId)(ICloudNetworkEnvironmentInfo *pThis, PRUnichar * *tunnelNetworkId);
+
+    nsresult (*GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+};
+#else /* VBOX_WITH_GLUE */
+struct ICloudNetworkEnvironmentInfoVtbl
+{
+    nsresult (*QueryInterface)(ICloudNetworkEnvironmentInfo *pThis, const nsID *iid, void **resultp);
+    nsrefcnt (*AddRef)(ICloudNetworkEnvironmentInfo *pThis);
+    nsrefcnt (*Release)(ICloudNetworkEnvironmentInfo *pThis);
+    nsresult (*GetTunnelNetworkId)(ICloudNetworkEnvironmentInfo *pThis, PRUnichar * *tunnelNetworkId);
+
+    nsresult (*GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+    nsresult (*GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo)(ICloudNetworkEnvironmentInfo *pThis, PRUint32 *reserved);
+
+};
+#define ICloudNetworkEnvironmentInfo_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
+#define ICloudNetworkEnvironmentInfo_AddRef(p) ((p)->lpVtbl->AddRef(p))
+#define ICloudNetworkEnvironmentInfo_Release(p) ((p)->lpVtbl->Release(p))
+#define ICloudNetworkEnvironmentInfo_get_TunnelNetworkId(p, aTunnelNetworkId) ((p)->lpVtbl->GetTunnelNetworkId(p, aTunnelNetworkId))
+#define ICloudNetworkEnvironmentInfo_GetTunnelNetworkId(p, aTunnelNetworkId) ((p)->lpVtbl->GetTunnelNetworkId(p, aTunnelNetworkId))
+#endif /* VBOX_WITH_GLUE */
+
+interface ICloudNetworkEnvironmentInfo
+{
+#ifndef VBOX_WITH_GLUE
+    struct ICloudNetworkEnvironmentInfo_vtbl *vtbl;
+#else /* VBOX_WITH_GLUE */
+    CONST_VTBL struct ICloudNetworkEnvironmentInfoVtbl *lpVtbl;
+#endif /* VBOX_WITH_GLUE */
+};
+/* End of struct ICloudNetworkEnvironmentInfo declaration */
 
 
 /* Start of struct ICloudClient declaration */
@@ -31700,6 +31779,17 @@ struct ICloudClient_vtbl
         IProgress * * progress
     );
 
+    nsresult (*SetupCloudNetworkEnvironment)(
+        ICloudClient *pThis,
+        PRUnichar * tunnelNetworkName,
+        PRUnichar * tunnelNetworkRange,
+        PRUnichar * gatewayOsName,
+        PRUnichar * gatewayOsVersion,
+        PRUnichar * gatewayShape,
+        ICloudNetworkEnvironmentInfo * * networkEnvironmentInfo,
+        IProgress * * progress
+    );
+
     nsresult (*InternalAndReservedMethod1ICloudClient)(ICloudClient *pThis);
 
     nsresult (*InternalAndReservedMethod2ICloudClient)(ICloudClient *pThis);
@@ -31729,8 +31819,6 @@ struct ICloudClient_vtbl
     nsresult (*InternalAndReservedMethod14ICloudClient)(ICloudClient *pThis);
 
     nsresult (*InternalAndReservedMethod15ICloudClient)(ICloudClient *pThis);
-
-    nsresult (*InternalAndReservedMethod16ICloudClient)(ICloudClient *pThis);
 
 };
 #else /* VBOX_WITH_GLUE */
@@ -31881,6 +31969,17 @@ struct ICloudClientVtbl
         IProgress * * progress
     );
 
+    nsresult (*SetupCloudNetworkEnvironment)(
+        ICloudClient *pThis,
+        PRUnichar * tunnelNetworkName,
+        PRUnichar * tunnelNetworkRange,
+        PRUnichar * gatewayOsName,
+        PRUnichar * gatewayOsVersion,
+        PRUnichar * gatewayShape,
+        ICloudNetworkEnvironmentInfo * * networkEnvironmentInfo,
+        IProgress * * progress
+    );
+
     nsresult (*InternalAndReservedMethod1ICloudClient)(ICloudClient *pThis);
 
     nsresult (*InternalAndReservedMethod2ICloudClient)(ICloudClient *pThis);
@@ -31911,8 +32010,6 @@ struct ICloudClientVtbl
 
     nsresult (*InternalAndReservedMethod15ICloudClient)(ICloudClient *pThis);
 
-    nsresult (*InternalAndReservedMethod16ICloudClient)(ICloudClient *pThis);
-
 };
 #define ICloudClient_QueryInterface(p, iid, resultp) ((p)->lpVtbl->QueryInterface(p, iid, resultp))
 #define ICloudClient_AddRef(p) ((p)->lpVtbl->AddRef(p))
@@ -31935,6 +32032,7 @@ struct ICloudClientVtbl
 #define ICloudClient_DeleteImage(p, aUid, aProgress) ((p)->lpVtbl->DeleteImage(p, aUid, aProgress))
 #define ICloudClient_GetImageInfo(p, aUid, aInfoArray, aProgress) ((p)->lpVtbl->GetImageInfo(p, aUid, aInfoArray, aProgress))
 #define ICloudClient_StartCloudNetworkGateway(p, aNetwork, aSshPublicKey, aGatewayInfo, aProgress) ((p)->lpVtbl->StartCloudNetworkGateway(p, aNetwork, aSshPublicKey, aGatewayInfo, aProgress))
+#define ICloudClient_SetupCloudNetworkEnvironment(p, aTunnelNetworkName, aTunnelNetworkRange, aGatewayOsName, aGatewayOsVersion, aGatewayShape, aNetworkEnvironmentInfo, aProgress) ((p)->lpVtbl->SetupCloudNetworkEnvironment(p, aTunnelNetworkName, aTunnelNetworkRange, aGatewayOsName, aGatewayOsVersion, aGatewayShape, aNetworkEnvironmentInfo, aProgress))
 #endif /* VBOX_WITH_GLUE */
 
 interface ICloudClient

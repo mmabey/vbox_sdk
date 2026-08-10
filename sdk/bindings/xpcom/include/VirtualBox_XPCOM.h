@@ -541,6 +541,8 @@ class IVirtualSystemDescriptionForm; /* forward declaration */
 
 class ICloudNetworkGatewayInfo; /* forward declaration */
 
+class ICloudNetworkEnvironmentInfo; /* forward declaration */
+
 class ICloudClient; /* forward declaration */
 
 class ICloudProfile; /* forward declaration */
@@ -59956,6 +59958,15 @@ class NS_NO_VTABLE ICloudNetworkGatewayInfo : public nsISupports {
   /* readonly attribute wstring publicIP; */
   NS_IMETHOD GetPublicIP(PRUnichar * *aPublicIP) = 0;
 
+  /* readonly attribute wstring secondaryPublicIP; */
+  NS_IMETHOD GetSecondaryPublicIP(PRUnichar * *aSecondaryPublicIP) = 0;
+
+  /* readonly attribute wstring macAddress; */
+  NS_IMETHOD GetMacAddress(PRUnichar * *aMacAddress) = 0;
+
+  /* readonly attribute wstring instanceId; */
+  NS_IMETHOD GetInstanceId(PRUnichar * *aInstanceId) = 0;
+
   /* readonly attribute unsigned long InternalAndReservedAttribute1ICloudNetworkGatewayInfo; */
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkGatewayInfo) = 0;
 
@@ -59971,52 +59982,43 @@ class NS_NO_VTABLE ICloudNetworkGatewayInfo : public nsISupports {
   /* readonly attribute unsigned long InternalAndReservedAttribute5ICloudNetworkGatewayInfo; */
   NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkGatewayInfo) = 0;
 
-  /* readonly attribute unsigned long InternalAndReservedAttribute6ICloudNetworkGatewayInfo; */
-  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkGatewayInfo) = 0;
-
-  /* readonly attribute unsigned long InternalAndReservedAttribute7ICloudNetworkGatewayInfo; */
-  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkGatewayInfo) = 0;
-
-  /* readonly attribute unsigned long InternalAndReservedAttribute8ICloudNetworkGatewayInfo; */
-  NS_IMETHOD GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute8ICloudNetworkGatewayInfo) = 0;
-
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_ICLOUDNETWORKGATEWAYINFO \
   NS_IMETHOD GetPublicIP(PRUnichar * *aPublicIP); \
+  NS_IMETHOD GetSecondaryPublicIP(PRUnichar * *aSecondaryPublicIP); \
+  NS_IMETHOD GetMacAddress(PRUnichar * *aMacAddress); \
+  NS_IMETHOD GetInstanceId(PRUnichar * *aInstanceId); \
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkGatewayInfo); \
   NS_IMETHOD GetInternalAndReservedAttribute2ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkGatewayInfo); \
   NS_IMETHOD GetInternalAndReservedAttribute3ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkGatewayInfo); \
   NS_IMETHOD GetInternalAndReservedAttribute4ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkGatewayInfo); \
-  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkGatewayInfo); \
-  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkGatewayInfo); \
-  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkGatewayInfo); \
-  NS_IMETHOD GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute8ICloudNetworkGatewayInfo); 
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkGatewayInfo); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_ICLOUDNETWORKGATEWAYINFO(_to) \
   NS_IMETHOD GetPublicIP(PRUnichar * *aPublicIP) { return _to GetPublicIP(aPublicIP); } \
+  NS_IMETHOD GetSecondaryPublicIP(PRUnichar * *aSecondaryPublicIP) { return _to GetSecondaryPublicIP(aSecondaryPublicIP); } \
+  NS_IMETHOD GetMacAddress(PRUnichar * *aMacAddress) { return _to GetMacAddress(aMacAddress); } \
+  NS_IMETHOD GetInstanceId(PRUnichar * *aInstanceId) { return _to GetInstanceId(aInstanceId); } \
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo(aInternalAndReservedAttribute1ICloudNetworkGatewayInfo); } \
   NS_IMETHOD GetInternalAndReservedAttribute2ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute2ICloudNetworkGatewayInfo(aInternalAndReservedAttribute2ICloudNetworkGatewayInfo); } \
   NS_IMETHOD GetInternalAndReservedAttribute3ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute3ICloudNetworkGatewayInfo(aInternalAndReservedAttribute3ICloudNetworkGatewayInfo); } \
   NS_IMETHOD GetInternalAndReservedAttribute4ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute4ICloudNetworkGatewayInfo(aInternalAndReservedAttribute4ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(aInternalAndReservedAttribute5ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo(aInternalAndReservedAttribute6ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo(aInternalAndReservedAttribute7ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute8ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo(aInternalAndReservedAttribute8ICloudNetworkGatewayInfo); } 
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkGatewayInfo) { return _to GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(aInternalAndReservedAttribute5ICloudNetworkGatewayInfo); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_ICLOUDNETWORKGATEWAYINFO(_to) \
   NS_IMETHOD GetPublicIP(PRUnichar * *aPublicIP) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetPublicIP(aPublicIP); } \
+  NS_IMETHOD GetSecondaryPublicIP(PRUnichar * *aSecondaryPublicIP) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetSecondaryPublicIP(aSecondaryPublicIP); } \
+  NS_IMETHOD GetMacAddress(PRUnichar * *aMacAddress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMacAddress(aMacAddress); } \
+  NS_IMETHOD GetInstanceId(PRUnichar * *aInstanceId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInstanceId(aInstanceId); } \
   NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo(aInternalAndReservedAttribute1ICloudNetworkGatewayInfo); } \
   NS_IMETHOD GetInternalAndReservedAttribute2ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2ICloudNetworkGatewayInfo(aInternalAndReservedAttribute2ICloudNetworkGatewayInfo); } \
   NS_IMETHOD GetInternalAndReservedAttribute3ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3ICloudNetworkGatewayInfo(aInternalAndReservedAttribute3ICloudNetworkGatewayInfo); } \
   NS_IMETHOD GetInternalAndReservedAttribute4ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4ICloudNetworkGatewayInfo(aInternalAndReservedAttribute4ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(aInternalAndReservedAttribute5ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo(aInternalAndReservedAttribute6ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo(aInternalAndReservedAttribute7ICloudNetworkGatewayInfo); } \
-  NS_IMETHOD GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute8ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo(aInternalAndReservedAttribute8ICloudNetworkGatewayInfo); } 
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkGatewayInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5ICloudNetworkGatewayInfo(aInternalAndReservedAttribute5ICloudNetworkGatewayInfo); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -60056,6 +60058,24 @@ NS_IMETHODIMP _MYCLASS_::GetPublicIP(PRUnichar * *aPublicIP)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* readonly attribute wstring secondaryPublicIP; */
+NS_IMETHODIMP _MYCLASS_::GetSecondaryPublicIP(PRUnichar * *aSecondaryPublicIP)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring macAddress; */
+NS_IMETHODIMP _MYCLASS_::GetMacAddress(PRUnichar * *aMacAddress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute wstring instanceId; */
+NS_IMETHODIMP _MYCLASS_::GetInstanceId(PRUnichar * *aInstanceId)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* readonly attribute unsigned long InternalAndReservedAttribute1ICloudNetworkGatewayInfo; */
 NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkGatewayInfo)
 {
@@ -60086,20 +60106,174 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5ICloudNetworkGatewayInf
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute6ICloudNetworkGatewayInfo; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkGatewayInfo)
+/* End of implementation class template. */
+#endif
+
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO(smth) NS_IMETHOD GetPublicIP (PRUnichar * * aPublicIP) { return smth GetPublicIP (aPublicIP); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO(smth) NS_IMETHOD GetSecondaryPublicIP (PRUnichar * * aSecondaryPublicIP) { return smth GetSecondaryPublicIP (aSecondaryPublicIP); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_SecondaryPublicIP_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO(smth) NS_IMETHOD GetMacAddress (PRUnichar * * aMacAddress) { return smth GetMacAddress (aMacAddress); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_MacAddress_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO(smth) NS_IMETHOD GetInstanceId (PRUnichar * * aInstanceId) { return smth GetInstanceId (aInstanceId); }
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_InstanceId_TO (base::)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_TO(smth) NS_FORWARD_ICLOUDNETWORKGATEWAYINFO (smth)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkGatewayInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_TO (base::)
+// for compatibility with Win32
+VBOX_EXTERN_C const nsID IID_ICloudNetworkGatewayInfo;
+
+/* starting interface:    ICloudNetworkEnvironmentInfo */
+#define ICLOUDNETWORKENVIRONMENTINFO_IID_STR "181dfb55-394d-44d3-9edb-af2c4472c40a"
+
+#define ICLOUDNETWORKENVIRONMENTINFO_IID \
+  {0x181dfb55, 0x394d, 0x44d3, \
+    { 0x9e, 0xdb, 0xaf, 0x2c, 0x44, 0x72, 0xc4, 0x0a }}
+
+class NS_NO_VTABLE ICloudNetworkEnvironmentInfo : public nsISupports {
+ public: 
+
+  NS_DEFINE_STATIC_IID_ACCESSOR(ICLOUDNETWORKENVIRONMENTINFO_IID)
+
+  /* readonly attribute wstring tunnelNetworkId; */
+  NS_IMETHOD GetTunnelNetworkId(PRUnichar * *aTunnelNetworkId) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo) = 0;
+
+  /* readonly attribute unsigned long InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo; */
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo) = 0;
+
+};
+
+/* Use this macro when declaring classes that implement this interface. */
+#define NS_DECL_ICLOUDNETWORKENVIRONMENTINFO \
+  NS_IMETHOD GetTunnelNetworkId(PRUnichar * *aTunnelNetworkId); \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo); \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo); 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object. */
+#define NS_FORWARD_ICLOUDNETWORKENVIRONMENTINFO(_to) \
+  NS_IMETHOD GetTunnelNetworkId(PRUnichar * *aTunnelNetworkId) { return _to GetTunnelNetworkId(aTunnelNetworkId); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo) { return _to GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo) { return _to GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo) { return _to GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo) { return _to GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo) { return _to GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo) { return _to GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo) { return _to GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo); } 
+
+/* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
+#define NS_FORWARD_SAFE_ICLOUDNETWORKENVIRONMENTINFO(_to) \
+  NS_IMETHOD GetTunnelNetworkId(PRUnichar * *aTunnelNetworkId) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetTunnelNetworkId(aTunnelNetworkId); } \
+  NS_IMETHOD GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo); } \
+  NS_IMETHOD GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(aInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo); } 
+
+#if 0
+/* Use the code below as a template for the implementation class for this interface. */
+
+/* Header file */
+class _MYCLASS_ : public ICloudNetworkEnvironmentInfo
+{
+public:
+  NS_DECL_ISUPPORTS
+  NS_DECL_ICLOUDNETWORKENVIRONMENTINFO
+
+  _MYCLASS_();
+
+private:
+  ~_MYCLASS_();
+
+protected:
+  /* additional members */
+};
+
+/* Implementation file */
+NS_IMPL_ISUPPORTS1(_MYCLASS_, ICloudNetworkEnvironmentInfo)
+
+_MYCLASS_::_MYCLASS_()
+{
+  /* member initializers and constructor code */
+}
+
+_MYCLASS_::~_MYCLASS_()
+{
+  /* destructor code */
+}
+
+/* readonly attribute wstring tunnelNetworkId; */
+NS_IMETHODIMP _MYCLASS_::GetTunnelNetworkId(PRUnichar * *aTunnelNetworkId)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute7ICloudNetworkGatewayInfo; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkGatewayInfo)
+/* readonly attribute unsigned long InternalAndReservedAttribute1ICloudNetworkEnvironmentInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute1ICloudNetworkEnvironmentInfo)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* readonly attribute unsigned long InternalAndReservedAttribute8ICloudNetworkGatewayInfo; */
-NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8ICloudNetworkGatewayInfo(PRUint32 *aInternalAndReservedAttribute8ICloudNetworkGatewayInfo)
+/* readonly attribute unsigned long InternalAndReservedAttribute2ICloudNetworkEnvironmentInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute2ICloudNetworkEnvironmentInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute3ICloudNetworkEnvironmentInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute3ICloudNetworkEnvironmentInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute4ICloudNetworkEnvironmentInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute4ICloudNetworkEnvironmentInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute5ICloudNetworkEnvironmentInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute5ICloudNetworkEnvironmentInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute6ICloudNetworkEnvironmentInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute6ICloudNetworkEnvironmentInfo)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* readonly attribute unsigned long InternalAndReservedAttribute7ICloudNetworkEnvironmentInfo; */
+NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo(PRUint32 *aInternalAndReservedAttribute7ICloudNetworkEnvironmentInfo)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -60107,14 +60281,14 @@ NS_IMETHODIMP _MYCLASS_::GetInternalAndReservedAttribute8ICloudNetworkGatewayInf
 /* End of implementation class template. */
 #endif
 
-#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO(smth) NS_IMETHOD GetPublicIP (PRUnichar * * aPublicIP) { return smth GetPublicIP (aPublicIP); }
-#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO ((obj)->)
-#define COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_GETTER_PublicIP_TO (base::)
-#define COM_FORWARD_ICloudNetworkGatewayInfo_TO(smth) NS_FORWARD_ICLOUDNETWORKGATEWAYINFO (smth)
-#define COM_FORWARD_ICloudNetworkGatewayInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkGatewayInfo_TO ((obj)->)
-#define COM_FORWARD_ICloudNetworkGatewayInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkGatewayInfo_TO (base::)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO(smth) NS_IMETHOD GetTunnelNetworkId (PRUnichar * * aTunnelNetworkId) { return smth GetTunnelNetworkId (aTunnelNetworkId); }
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_GETTER_TunnelNetworkId_TO (base::)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO(smth) NS_FORWARD_ICLOUDNETWORKENVIRONMENTINFO (smth)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_OBJ(obj) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO ((obj)->)
+#define COM_FORWARD_ICloudNetworkEnvironmentInfo_TO_BASE(base) COM_FORWARD_ICloudNetworkEnvironmentInfo_TO (base::)
 // for compatibility with Win32
-VBOX_EXTERN_C const nsID IID_ICloudNetworkGatewayInfo;
+VBOX_EXTERN_C const nsID IID_ICloudNetworkEnvironmentInfo;
 
 /* starting interface:    ICloudClient */
 #define ICLOUDCLIENT_IID_STR "435b66a2-0c60-11ea-a0ea-07eb0d1c4ead"
@@ -60206,6 +60380,9 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   /* void startCloudNetworkGateway (in ICloudNetwork network, in wstring sshPublicKey, out ICloudNetworkGatewayInfo gatewayInfo, [retval] out IProgress progress); */
   NS_IMETHOD StartCloudNetworkGateway(ICloudNetwork *network, const PRUnichar *sshPublicKey, ICloudNetworkGatewayInfo **gatewayInfo, IProgress **progress) = 0;
 
+  /* void setupCloudNetworkEnvironment (in wstring tunnelNetworkName, in wstring tunnelNetworkRange, in wstring gatewayOsName, in wstring gatewayOsVersion, in wstring gatewayShape, out ICloudNetworkEnvironmentInfo networkEnvironmentInfo, [retval] out IProgress progress); */
+  NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress) = 0;
+
   /* void InternalAndReservedMethod1ICloudClient (); */
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void) = 0;
 
@@ -60251,9 +60428,6 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   /* void InternalAndReservedMethod15ICloudClient (); */
   NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) = 0;
 
-  /* void InternalAndReservedMethod16ICloudClient (); */
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) = 0;
-
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -60284,6 +60458,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD DeleteImage(const PRUnichar *uid, IProgress **progress); \
   NS_IMETHOD GetImageInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress); \
   NS_IMETHOD StartCloudNetworkGateway(ICloudNetwork *network, const PRUnichar *sshPublicKey, ICloudNetworkGatewayInfo **gatewayInfo, IProgress **progress); \
+  NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress); \
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod2ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod3ICloudClient(void); \
@@ -60298,8 +60473,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void); \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void); \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void); \
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void); 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_ICLOUDCLIENT(_to) \
@@ -60329,6 +60503,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD DeleteImage(const PRUnichar *uid, IProgress **progress) { return _to DeleteImage(uid, progress); } \
   NS_IMETHOD GetImageInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress) { return _to GetImageInfo(uid, infoArray, progress); } \
   NS_IMETHOD StartCloudNetworkGateway(ICloudNetwork *network, const PRUnichar *sshPublicKey, ICloudNetworkGatewayInfo **gatewayInfo, IProgress **progress) { return _to StartCloudNetworkGateway(network, sshPublicKey, gatewayInfo, progress); } \
+  NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress) { return _to SetupCloudNetworkEnvironment(tunnelNetworkName, tunnelNetworkRange, gatewayOsName, gatewayOsVersion, gatewayShape, networkEnvironmentInfo, progress); } \
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void) { return _to InternalAndReservedMethod1ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod2ICloudClient(void) { return _to InternalAndReservedMethod2ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod3ICloudClient(void) { return _to InternalAndReservedMethod3ICloudClient(); } \
@@ -60343,8 +60518,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void) { return _to InternalAndReservedMethod12ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void) { return _to InternalAndReservedMethod13ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void) { return _to InternalAndReservedMethod14ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return _to InternalAndReservedMethod15ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) { return _to InternalAndReservedMethod16ICloudClient(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return _to InternalAndReservedMethod15ICloudClient(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_ICLOUDCLIENT(_to) \
@@ -60374,6 +60548,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD DeleteImage(const PRUnichar *uid, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->DeleteImage(uid, progress); } \
   NS_IMETHOD GetImageInfo(const PRUnichar *uid, IStringArray **infoArray, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetImageInfo(uid, infoArray, progress); } \
   NS_IMETHOD StartCloudNetworkGateway(ICloudNetwork *network, const PRUnichar *sshPublicKey, ICloudNetworkGatewayInfo **gatewayInfo, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->StartCloudNetworkGateway(network, sshPublicKey, gatewayInfo, progress); } \
+  NS_IMETHOD SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetupCloudNetworkEnvironment(tunnelNetworkName, tunnelNetworkRange, gatewayOsName, gatewayOsVersion, gatewayShape, networkEnvironmentInfo, progress); } \
   NS_IMETHOD InternalAndReservedMethod1ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod2ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod3ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod3ICloudClient(); } \
@@ -60388,8 +60563,7 @@ class NS_NO_VTABLE ICloudClient : public nsISupports {
   NS_IMETHOD InternalAndReservedMethod12ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod12ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod13ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod13ICloudClient(); } \
   NS_IMETHOD InternalAndReservedMethod14ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod14ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudClient(); } \
-  NS_IMETHOD InternalAndReservedMethod16ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod16ICloudClient(); } 
+  NS_IMETHOD InternalAndReservedMethod15ICloudClient(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod15ICloudClient(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -60579,6 +60753,12 @@ NS_IMETHODIMP _MYCLASS_::StartCloudNetworkGateway(ICloudNetwork *network, const 
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
+/* void setupCloudNetworkEnvironment (in wstring tunnelNetworkName, in wstring tunnelNetworkRange, in wstring gatewayOsName, in wstring gatewayOsVersion, in wstring gatewayShape, out ICloudNetworkEnvironmentInfo networkEnvironmentInfo, [retval] out IProgress progress); */
+NS_IMETHODIMP _MYCLASS_::SetupCloudNetworkEnvironment(const PRUnichar *tunnelNetworkName, const PRUnichar *tunnelNetworkRange, const PRUnichar *gatewayOsName, const PRUnichar *gatewayOsVersion, const PRUnichar *gatewayShape, ICloudNetworkEnvironmentInfo **networkEnvironmentInfo, IProgress **progress)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
 /* void InternalAndReservedMethod1ICloudClient (); */
 NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod1ICloudClient()
 {
@@ -60669,12 +60849,6 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod15ICloudClient()
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void InternalAndReservedMethod16ICloudClient (); */
-NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudClient()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
 /* End of implementation class template. */
 #endif
 
@@ -60732,6 +60906,9 @@ NS_IMETHODIMP _MYCLASS_::InternalAndReservedMethod16ICloudClient()
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO(smth) NS_IMETHOD StartCloudNetworkGateway (ICloudNetwork * aNetwork, PRUnichar * aSshPublicKey, ICloudNetworkGatewayInfo * * aGatewayInfo, IProgress * * aProgress) { return smth StartCloudNetworkGateway (aNetwork, aSshPublicKey, aGatewayInfo, aProgress); }
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_OBJ(obj) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO_BASE(base) COM_FORWARD_ICloudClient_StartCloudNetworkGateway_TO (base::)
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO(smth) NS_IMETHOD SetupCloudNetworkEnvironment (PRUnichar * aTunnelNetworkName, PRUnichar * aTunnelNetworkRange, PRUnichar * aGatewayOsName, PRUnichar * aGatewayOsVersion, PRUnichar * aGatewayShape, ICloudNetworkEnvironmentInfo * * aNetworkEnvironmentInfo, IProgress * * aProgress) { return smth SetupCloudNetworkEnvironment (aTunnelNetworkName, aTunnelNetworkRange, aGatewayOsName, aGatewayOsVersion, aGatewayShape, aNetworkEnvironmentInfo, aProgress); }
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_OBJ(obj) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO ((obj)->)
+#define COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO_BASE(base) COM_FORWARD_ICloudClient_SetupCloudNetworkEnvironment_TO (base::)
 #define COM_FORWARD_ICloudClient_TO(smth) NS_FORWARD_ICLOUDCLIENT (smth)
 #define COM_FORWARD_ICloudClient_TO_OBJ(obj) COM_FORWARD_ICloudClient_TO ((obj)->)
 #define COM_FORWARD_ICloudClient_TO_BASE(base) COM_FORWARD_ICloudClient_TO (base::)

@@ -15481,6 +15481,46 @@ class vboxBindingSOAP:
         response = self.binding.Receive(ICloudNetworkGatewayInfo_getPublicIPResultMsg.typecode)
         return response
 
+    # op: ICloudNetworkGatewayInfo_getSecondaryPublicIP
+    def ICloudNetworkGatewayInfo_getSecondaryPublicIP(self, request, **kw):
+        if isinstance(request, ICloudNetworkGatewayInfo_getSecondaryPublicIPRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(ICloudNetworkGatewayInfo_getSecondaryPublicIPResultMsg.typecode)
+        return response
+
+    # op: ICloudNetworkGatewayInfo_getMacAddress
+    def ICloudNetworkGatewayInfo_getMacAddress(self, request, **kw):
+        if isinstance(request, ICloudNetworkGatewayInfo_getMacAddressRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(ICloudNetworkGatewayInfo_getMacAddressResultMsg.typecode)
+        return response
+
+    # op: ICloudNetworkGatewayInfo_getInstanceId
+    def ICloudNetworkGatewayInfo_getInstanceId(self, request, **kw):
+        if isinstance(request, ICloudNetworkGatewayInfo_getInstanceIdRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(ICloudNetworkGatewayInfo_getInstanceIdResultMsg.typecode)
+        return response
+
+    # op: ICloudNetworkEnvironmentInfo_getTunnelNetworkId
+    def ICloudNetworkEnvironmentInfo_getTunnelNetworkId(self, request, **kw):
+        if isinstance(request, ICloudNetworkEnvironmentInfo_getTunnelNetworkIdRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResultMsg.typecode)
+        return response
+
     # op: ICloudClient_getExportDescriptionForm
     def ICloudClient_getExportDescriptionForm(self, request, **kw):
         if isinstance(request, ICloudClient_getExportDescriptionFormRequestMsg) is False:
@@ -15659,6 +15699,16 @@ class vboxBindingSOAP:
         self.binding.Send(None, None, request, soapaction="", **kw)
         # no output wsaction
         response = self.binding.Receive(ICloudClient_startCloudNetworkGatewayResultMsg.typecode)
+        return response
+
+    # op: ICloudClient_setupCloudNetworkEnvironment
+    def ICloudClient_setupCloudNetworkEnvironment(self, request, **kw):
+        if isinstance(request, ICloudClient_setupCloudNetworkEnvironmentRequestMsg) is False:
+            raise TypeError, "%s incorrect request type" % (request.__class__)
+        # no input wsaction
+        self.binding.Send(None, None, request, soapaction="", **kw)
+        # no output wsaction
+        response = self.binding.Receive(ICloudClient_setupCloudNetworkEnvironmentResultMsg.typecode)
         return response
 
     # op: ICloudProfile_getName
@@ -22101,6 +22151,22 @@ ICloudNetworkGatewayInfo_getPublicIPRequestMsg = GED("http://www.virtualbox.org/
 
 ICloudNetworkGatewayInfo_getPublicIPResultMsg = GED("http://www.virtualbox.org/", "ICloudNetworkGatewayInfo_getPublicIPResponse").pyclass
 
+ICloudNetworkGatewayInfo_getSecondaryPublicIPRequestMsg = GED("http://www.virtualbox.org/", "ICloudNetworkGatewayInfo_getSecondaryPublicIP").pyclass
+
+ICloudNetworkGatewayInfo_getSecondaryPublicIPResultMsg = GED("http://www.virtualbox.org/", "ICloudNetworkGatewayInfo_getSecondaryPublicIPResponse").pyclass
+
+ICloudNetworkGatewayInfo_getMacAddressRequestMsg = GED("http://www.virtualbox.org/", "ICloudNetworkGatewayInfo_getMacAddress").pyclass
+
+ICloudNetworkGatewayInfo_getMacAddressResultMsg = GED("http://www.virtualbox.org/", "ICloudNetworkGatewayInfo_getMacAddressResponse").pyclass
+
+ICloudNetworkGatewayInfo_getInstanceIdRequestMsg = GED("http://www.virtualbox.org/", "ICloudNetworkGatewayInfo_getInstanceId").pyclass
+
+ICloudNetworkGatewayInfo_getInstanceIdResultMsg = GED("http://www.virtualbox.org/", "ICloudNetworkGatewayInfo_getInstanceIdResponse").pyclass
+
+ICloudNetworkEnvironmentInfo_getTunnelNetworkIdRequestMsg = GED("http://www.virtualbox.org/", "ICloudNetworkEnvironmentInfo_getTunnelNetworkId").pyclass
+
+ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResultMsg = GED("http://www.virtualbox.org/", "ICloudNetworkEnvironmentInfo_getTunnelNetworkIdResponse").pyclass
+
 ICloudClient_getExportDescriptionFormRequestMsg = GED("http://www.virtualbox.org/", "ICloudClient_getExportDescriptionForm").pyclass
 
 ICloudClient_getExportDescriptionFormResultMsg = GED("http://www.virtualbox.org/", "ICloudClient_getExportDescriptionFormResponse").pyclass
@@ -22172,6 +22238,10 @@ ICloudClient_getImageInfoResultMsg = GED("http://www.virtualbox.org/", "ICloudCl
 ICloudClient_startCloudNetworkGatewayRequestMsg = GED("http://www.virtualbox.org/", "ICloudClient_startCloudNetworkGateway").pyclass
 
 ICloudClient_startCloudNetworkGatewayResultMsg = GED("http://www.virtualbox.org/", "ICloudClient_startCloudNetworkGatewayResponse").pyclass
+
+ICloudClient_setupCloudNetworkEnvironmentRequestMsg = GED("http://www.virtualbox.org/", "ICloudClient_setupCloudNetworkEnvironment").pyclass
+
+ICloudClient_setupCloudNetworkEnvironmentResultMsg = GED("http://www.virtualbox.org/", "ICloudClient_setupCloudNetworkEnvironmentResponse").pyclass
 
 ICloudProfile_getNameRequestMsg = GED("http://www.virtualbox.org/", "ICloudProfile_getName").pyclass
 
