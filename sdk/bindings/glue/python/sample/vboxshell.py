@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# $Id: vboxshell.py 135976 2020-02-04 10:35:17Z bird $
+# $Id: vboxshell.py 148572 2021-12-01 14:10:11Z klaus $
 
 """
 VirtualBox Python Shell.
@@ -33,7 +33,7 @@ Foundation, in version 2 as it comes in the "COPYING" file of the
 VirtualBox OSE distribution. VirtualBox OSE is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
 """
-__version__ = "$Revision: 135976 $"
+__version__ = "$Revision: 148572 $"
 
 
 import gc
@@ -209,7 +209,7 @@ def progressBar(ctx, progress, wait=1000):
 
 def printErr(_ctx, e):
     oVBoxMgr = _ctx['global']
-    if oVBoxMgr.errIsOurXcptKind(e):
+    if oVBoxMgr.xcptIsOurXcptKind(e):
         print(colored('%s: %s' % (oVBoxMgr.xcptToString(e), oVBoxMgr.xcptGetMessage(e)), 'red'))
     else:
         print(colored(str(e), 'red'))
