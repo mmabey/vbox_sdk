@@ -1832,7 +1832,7 @@ AssertCompileSize(CertificateVersion_T, sizeof(PRUint32));
 %}
 
 [
-    uuid(70c5ca7b-65a8-49cc-9b19-e80192b9db1d),
+    uuid(6e18c6d7-e1b7-4cb0-9706-1f31d18248f8),
     scriptable
 ]
 interface VirtualSystemDescriptionType
@@ -1887,6 +1887,7 @@ interface VirtualSystemDescriptionType
     const PRUint32 CloudPublicSSHKey = 48;
     const PRUint32 BootingFirmware = 49;
     const PRUint32 CloudInitScriptPath = 50;
+    const PRUint32 HardDiskControllerVirtioSCSI = 60;
 };
 
 
@@ -1946,6 +1947,7 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudPublicSSHKey VirtualSystemDescriptionType::CloudPublicSSHKey
 # define VirtualSystemDescriptionType_BootingFirmware VirtualSystemDescriptionType::BootingFirmware
 # define VirtualSystemDescriptionType_CloudInitScriptPath VirtualSystemDescriptionType::CloudInitScriptPath
+# define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -1998,6 +2000,7 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudPublicSSHKey = VirtualSystemDescriptionType::CloudPublicSSHKey,
     VirtualSystemDescriptionType_BootingFirmware = VirtualSystemDescriptionType::BootingFirmware,
     VirtualSystemDescriptionType_CloudInitScriptPath = VirtualSystemDescriptionType::CloudInitScriptPath,
+    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize

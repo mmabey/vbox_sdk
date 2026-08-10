@@ -10,7 +10,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Tue Jul 19 22:07:34 2022
+/* at Thu Sep  1 14:29:21 2022
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.1-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -3003,7 +3003,7 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0029
     } 	CertificateVersion;
 
 #define CertificateVersion_T CertificateVersion
-typedef /* [public][public][public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("70c5ca7b-65a8-49cc-9b19-e80192b9db1d") 
+typedef /* [public][public][public][public][public][public][public][v1_enum][uuid] */  DECLSPEC_UUID("6e18c6d7-e1b7-4cb0-9706-1f31d18248f8") 
 enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0030
     {	VirtualSystemDescriptionType_Ignore	= 1,
 	VirtualSystemDescriptionType_OS	= 2,
@@ -3054,7 +3054,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0030
 	VirtualSystemDescriptionType_CloudOCISubnetCompartment	= 47,
 	VirtualSystemDescriptionType_CloudPublicSSHKey	= 48,
 	VirtualSystemDescriptionType_BootingFirmware	= 49,
-	VirtualSystemDescriptionType_CloudInitScriptPath	= 50
+	VirtualSystemDescriptionType_CloudInitScriptPath	= 50,
+	VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI	= 60
     } 	VirtualSystemDescriptionType;
 
 #define VirtualSystemDescriptionType_T VirtualSystemDescriptionType

@@ -2613,6 +2613,7 @@ class VirtualBoxReflectionInfo:
             'CloudPublicSSHKey': 48,
             'BootingFirmware': 49,
             'CloudInitScriptPath': 50,
+            'HardDiskControllerVirtioSCSI': 60,
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 1,
@@ -3688,6 +3689,7 @@ class VirtualBoxReflectionInfo:
             'CloudPublicSSHKey': 'CloudPublicSSHKey',
             'BootingFirmware': 'BootingFirmware',
             'CloudInitScriptPath': 'CloudInitScriptPath',
+            'HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 'Reference',
@@ -4702,6 +4704,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudPublicSSHKey': 48,
         'VirtualSystemDescriptionType_BootingFirmware': 49,
         'VirtualSystemDescriptionType_CloudInitScriptPath': 50,
+        'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 60,
         'VirtualSystemDescriptionValueType_Reference': 1,
         'VirtualSystemDescriptionValueType_Original': 2,
         'VirtualSystemDescriptionValueType_Auto': 3,
@@ -5548,6 +5551,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudPublicSSHKey': 'CloudPublicSSHKey',
         'VirtualSystemDescriptionType_BootingFirmware': 'BootingFirmware',
         'VirtualSystemDescriptionType_CloudInitScriptPath': 'CloudInitScriptPath',
+        'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
         'VirtualSystemDescriptionValueType_Reference': 'Reference',
         'VirtualSystemDescriptionValueType_Original': 'Original',
         'VirtualSystemDescriptionValueType_Auto': 'Auto',

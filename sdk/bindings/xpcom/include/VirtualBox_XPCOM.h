@@ -3559,11 +3559,11 @@ AssertCompileSize(CertificateVersion_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    VirtualSystemDescriptionType */
-#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "70c5ca7b-65a8-49cc-9b19-e80192b9db1d"
+#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "6e18c6d7-e1b7-4cb0-9706-1f31d18248f8"
 
 #define VIRTUALSYSTEMDESCRIPTIONTYPE_IID \
-  {0x70c5ca7b, 0x65a8, 0x49cc, \
-    { 0x9b, 0x19, 0xe8, 0x01, 0x92, 0xb9, 0xdb, 0x1d }}
+  {0x6e18c6d7, 0xe1b7, 0x4cb0, \
+    { 0x97, 0x06, 0x1f, 0x31, 0xd1, 0x82, 0x48, 0xf8 }}
 
 class NS_NO_VTABLE VirtualSystemDescriptionType {
  public: 
@@ -3670,6 +3670,8 @@ class NS_NO_VTABLE VirtualSystemDescriptionType {
 
   enum { CloudInitScriptPath = 50U };
 
+  enum { HardDiskControllerVirtioSCSI = 60U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -3769,6 +3771,7 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudPublicSSHKey VirtualSystemDescriptionType::CloudPublicSSHKey
 # define VirtualSystemDescriptionType_BootingFirmware VirtualSystemDescriptionType::BootingFirmware
 # define VirtualSystemDescriptionType_CloudInitScriptPath VirtualSystemDescriptionType::CloudInitScriptPath
+# define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -3821,6 +3824,7 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudPublicSSHKey = VirtualSystemDescriptionType::CloudPublicSSHKey,
     VirtualSystemDescriptionType_BootingFirmware = VirtualSystemDescriptionType::BootingFirmware,
     VirtualSystemDescriptionType_CloudInitScriptPath = VirtualSystemDescriptionType::CloudInitScriptPath,
+    VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize

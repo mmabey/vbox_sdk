@@ -29600,7 +29600,7 @@ class VirtualSystemDescriptionType:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance',37:'CloudInstanceId',38:'CloudImageId',39:'CloudInstanceState',40:'CloudImageState',41:'CloudInstanceDisplayName',42:'CloudImageDisplayName',43:'CloudOCILaunchMode',44:'CloudPrivateIP',45:'CloudBootVolumeId',46:'CloudOCIVCNCompartment',47:'CloudOCISubnetCompartment',48:'CloudPublicSSHKey',49:'BootingFirmware',50:'CloudInitScriptPath'}
+   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance',37:'CloudInstanceId',38:'CloudImageId',39:'CloudInstanceState',40:'CloudImageState',41:'CloudInstanceDisplayName',42:'CloudImageDisplayName',43:'CloudOCILaunchMode',44:'CloudPrivateIP',45:'CloudBootVolumeId',46:'CloudOCIVCNCompartment',47:'CloudOCISubnetCompartment',48:'CloudPublicSSHKey',49:'BootingFirmware',50:'CloudInitScriptPath',60:'HardDiskControllerVirtioSCSI'}
    _ValueMap={
               'Ignore':1,
               'OS':2,
@@ -29651,7 +29651,8 @@ class VirtualSystemDescriptionType:
               'CloudOCISubnetCompartment':47,
               'CloudPublicSSHKey':48,
               'BootingFirmware':49,
-              'CloudInitScriptPath':50}
+              'CloudInitScriptPath':50,
+              'HardDiskControllerVirtioSCSI':60}
 
    Ignore=1
    OS=2
@@ -29703,6 +29704,7 @@ class VirtualSystemDescriptionType:
    CloudPublicSSHKey=48
    BootingFirmware=49
    CloudInitScriptPath=50
+   HardDiskControllerVirtioSCSI=60
 
 class VirtualSystemDescriptionValueType:
    def __init__(self,mgr,handle):
