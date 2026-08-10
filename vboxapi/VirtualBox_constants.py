@@ -2273,7 +2273,7 @@ class VirtualBoxReflectionInfo:
         'VERR_GIM_INVALID_HYPERCALL_INSTR': -6318,
         'VERR_MAIN_CONFIG_CONSTRUCTOR_COM_ERROR': -6400,
         'VERR_MAIN_CONFIG_CONSTRUCTOR_IPE': -6401,
-        'VERR_GSTDND_GUEST_ERROR': -6500,
+        'VERR_DND_GUEST_ERROR': -6500,
         'VERR_AUDIO_BACKEND_INIT_FAILED': -6600,
         'VERR_AUDIO_BACKEND_NOT_ATTACHED': -6601,
         'VERR_AUDIO_NO_FREE_INPUT_STREAMS': -6602,
@@ -2971,6 +2971,7 @@ class VirtualBoxReflectionInfo:
             'DetachAllReturnNone': 2,
             'DetachAllReturnHardDisksOnly': 3,
             'Full': 4,
+            'DetachAllReturnHardDisksAndVMRemovable': 5,
         },
         'CloneMode': {
             'MachineState': 1,
@@ -4349,6 +4350,7 @@ class VirtualBoxReflectionInfo:
             'DetachAllReturnNone': 'DetachAllReturnNone',
             'DetachAllReturnHardDisksOnly': 'DetachAllReturnHardDisksOnly',
             'Full': 'Full',
+            'DetachAllReturnHardDisksAndVMRemovable': 'DetachAllReturnHardDisksAndVMRemovable',
         },
         'CloneMode': {
             'MachineState': 'MachineState',
@@ -5634,6 +5636,7 @@ class VirtualBoxReflectionInfo:
         'CleanupMode_DetachAllReturnNone': 2,
         'CleanupMode_DetachAllReturnHardDisksOnly': 3,
         'CleanupMode_Full': 4,
+        'CleanupMode_DetachAllReturnHardDisksAndVMRemovable': 5,
         'CloneMode_MachineState': 1,
         'CloneMode_MachineAndChildStates': 2,
         'CloneMode_AllStates': 3,
@@ -6227,6 +6230,7 @@ class VirtualBoxReflectionInfo:
         'VBOX_E_MAXIMUM_REACHED': 0x80BB000E,
         'VBOX_E_GSTCTL_GUEST_ERROR': 0x80BB000F,
         'VBOX_E_TIMEOUT': 0x80BB0010,
+        'VBOX_E_DND_ERROR': 0x80BB0011,
     }, **__dVBoxStatuses)
 
     __dValuesFlatSym = {
@@ -6749,6 +6753,7 @@ class VirtualBoxReflectionInfo:
         'CleanupMode_DetachAllReturnNone': 'DetachAllReturnNone',
         'CleanupMode_DetachAllReturnHardDisksOnly': 'DetachAllReturnHardDisksOnly',
         'CleanupMode_Full': 'Full',
+        'CleanupMode_DetachAllReturnHardDisksAndVMRemovable': 'DetachAllReturnHardDisksAndVMRemovable',
         'CloneMode_MachineState': 'MachineState',
         'CloneMode_MachineAndChildStates': 'MachineAndChildStates',
         'CloneMode_AllStates': 'AllStates',
@@ -7342,6 +7347,7 @@ class VirtualBoxReflectionInfo:
         'VBOX_E_MAXIMUM_REACHED': 'VBOX_E_MAXIMUM_REACHED',
         'VBOX_E_GSTCTL_GUEST_ERROR': 'VBOX_E_GSTCTL_GUEST_ERROR',
         'VBOX_E_TIMEOUT': 'VBOX_E_TIMEOUT',
+        'VBOX_E_DND_ERROR': 'VBOX_E_DND_ERROR',
     }
 
     def __getattr__(self, sAttrName):
