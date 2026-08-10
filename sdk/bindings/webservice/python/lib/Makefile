@@ -1,10 +1,10 @@
-# $Id: Makefile.glue 127855 2019-01-01 01:45:53Z bird $
+# $Id: Makefile.glue 135976 2020-02-04 10:35:17Z bird $
 ## @file
 # Makefile for java samples.
 #
 
 #
-# Copyright (C) 2008-2019 Oracle Corporation
+# Copyright (C) 2008-2020 Oracle Corporation
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation

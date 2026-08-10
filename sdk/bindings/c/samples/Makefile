@@ -1,10 +1,10 @@
-# $Id: makefile.tstCAPIGlue 127855 2019-01-01 01:45:53Z bird $
+# $Id: makefile.tstCAPIGlue 135976 2020-02-04 10:35:17Z bird $
 ## @file makefile.tstCAPIGlue
 # Makefile for sample program illustrating use of C binding for COM/XPCOM.
 #
 
 #
-# Copyright (C) 2009-2019 Oracle Corporation
+# Copyright (C) 2009-2020 Oracle Corporation
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation

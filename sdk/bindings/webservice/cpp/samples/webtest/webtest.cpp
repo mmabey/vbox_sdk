@@ -1,11 +1,11 @@
-/* $Id: webtest.cpp 127855 2019-01-01 01:45:53Z bird $ */
+/* $Id: webtest.cpp 135976 2020-02-04 10:35:17Z bird $ */
 /** @file
  * webtest.cpp:
  *      demo webservice client in C++. This mimics some of the
  *      functionality of VBoxManage for testing purposes.
  */
 /*
- * Copyright (C) 2006-2019 Oracle Corporation
+ * Copyright (C) 2006-2020 Oracle Corporation
  *
  * This file is part of VirtualBox Open Source Edition (OSE), as
  * available from http://www.virtualbox.org. This file is free software;

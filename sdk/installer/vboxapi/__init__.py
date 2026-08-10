@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# $Id: vboxapi.py 131696 2019-07-01 15:34:26Z bird $
+# $Id: vboxapi.py 135976 2020-02-04 10:35:17Z bird $
 """
 VirtualBox Python API Glue.
 """
 
 __copyright__ = \
 """
-Copyright (C) 2009-2019 Oracle Corporation
+Copyright (C) 2009-2020 Oracle Corporation
 
 This file is part of VirtualBox Open Source Edition (OSE), as
 available from http://www.virtualbox.org. This file is free software;
@@ -25,7 +25,7 @@ CDDL are applicable instead of those of the GPL.
 You may elect to license modified versions of this file under the
 terms and conditions of either the GPL or the CDDL or both.
 """
-__version__ = "$Revision: 131696 $"
+__version__ = "$Revision: 135976 $"
 
 
 # Note! To set Python bitness on OSX use 'export VERSIONER_PYTHON_PREFER_32_BIT=yes'

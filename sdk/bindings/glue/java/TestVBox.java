@@ -1,11 +1,11 @@
-/* $Id: TestVBox.java 133393 2019-09-16 13:18:44Z adiachen $ */
+/* $Id: TestVBox.java 135976 2020-02-04 10:35:17Z bird $ */
 /*! file
  * Small sample/testcase which demonstrates that the same source code can
  * be used to connect to the webservice and (XP)COM APIs.
  */
 
 /*
- * Copyright (C) 2010-2019 Oracle Corporation
+ * Copyright (C) 2010-2020 Oracle Corporation
  *
  * This file is part of VirtualBox Open Source Edition (OSE), as
  * available from http://www.virtualbox.org. This file is free software;
