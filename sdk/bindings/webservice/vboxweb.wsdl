@@ -1840,6 +1840,7 @@
             I82545EM: 5 -
             Virtio: 6 -
             Am79C960: 7 -
+            Virtio_1_0: 8 -
             -->
       <xsd:simpleType name="NetworkAdapterType">
         <xsd:restriction base="xsd:string">
@@ -1851,6 +1852,7 @@
           <xsd:enumeration value="I82545EM"/>
           <xsd:enumeration value="Virtio"/>
           <xsd:enumeration value="Am79C960"/>
+          <xsd:enumeration value="Virtio_1_0"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: NetworkAdapterPromiscModePolicy -

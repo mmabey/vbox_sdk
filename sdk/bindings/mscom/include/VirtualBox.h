@@ -10,7 +10,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Tue Dec 10 15:14:15 2019
+/* at Mon Jan 13 10:46:29 2020
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -3708,7 +3708,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0097
 	NetworkAdapterType_I82543GC	= 4,
 	NetworkAdapterType_I82545EM	= 5,
 	NetworkAdapterType_Virtio	= 6,
-	NetworkAdapterType_Am79C960	= 7
+	NetworkAdapterType_Am79C960	= 7,
+	NetworkAdapterType_Virtio_1_0	= 8
     } 	NetworkAdapterType;
 
 #define NetworkAdapterType_T NetworkAdapterType

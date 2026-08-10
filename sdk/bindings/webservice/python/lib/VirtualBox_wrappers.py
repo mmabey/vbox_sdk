@@ -32636,7 +32636,7 @@ class NetworkAdapterType:
    def __int__(self):
         return self.handle
 
-   _NameMap={0:'Null',1:'Am79C970A',2:'Am79C973',3:'I82540EM',4:'I82543GC',5:'I82545EM',6:'Virtio',7:'Am79C960'}
+   _NameMap={0:'Null',1:'Am79C970A',2:'Am79C973',3:'I82540EM',4:'I82543GC',5:'I82545EM',6:'Virtio',7:'Am79C960',8:'Virtio_1_0'}
    _ValueMap={
               'Null':0,
               'Am79C970A':1,
@@ -32645,7 +32645,8 @@ class NetworkAdapterType:
               'I82543GC':4,
               'I82545EM':5,
               'Virtio':6,
-              'Am79C960':7}
+              'Am79C960':7,
+              'Virtio_1_0':8}
 
    Null=0
    Am79C970A=1
@@ -32655,6 +32656,7 @@ class NetworkAdapterType:
    I82545EM=5
    Virtio=6
    Am79C960=7
+   Virtio_1_0=8
 
 class NetworkAdapterPromiscModePolicy:
    def __init__(self,mgr,handle):

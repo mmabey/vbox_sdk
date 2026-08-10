@@ -9770,6 +9770,8 @@ class NS_NO_VTABLE NetworkAdapterType {
 
   enum { Am79C960 = 7U };
 
+  enum { Virtio_1_0 = 8U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -9827,6 +9829,7 @@ typedef PRUint32 NetworkAdapterType_T;
 # define NetworkAdapterType_I82545EM NetworkAdapterType::I82545EM
 # define NetworkAdapterType_Virtio NetworkAdapterType::Virtio
 # define NetworkAdapterType_Am79C960 NetworkAdapterType::Am79C960
+# define NetworkAdapterType_Virtio_1_0 NetworkAdapterType::Virtio_1_0
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum NetworkAdapterType_T {
     NetworkAdapterType_Null = NetworkAdapterType::Null,
@@ -9837,6 +9840,7 @@ typedef enum NetworkAdapterType_T {
     NetworkAdapterType_I82545EM = NetworkAdapterType::I82545EM,
     NetworkAdapterType_Virtio = NetworkAdapterType::Virtio,
     NetworkAdapterType_Am79C960 = NetworkAdapterType::Am79C960,
+    NetworkAdapterType_Virtio_1_0 = NetworkAdapterType::Virtio_1_0,
     NetworkAdapterType_32BitHack = 0x7fffffff
 } NetworkAdapterType_T;
 # ifdef AssertCompileSize

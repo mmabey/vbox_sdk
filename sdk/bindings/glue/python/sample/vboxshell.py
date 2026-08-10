@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# $Id: vboxshell.py 134761 2019-11-18 20:42:02Z klaus $
+# $Id: vboxshell.py 135597 2020-01-09 04:31:04Z pklissne $
 
 """
 VirtualBox Python Shell.
@@ -33,7 +33,7 @@ Foundation, in version 2 as it comes in the "COPYING" file of the
 VirtualBox OSE distribution. VirtualBox OSE is distributed in the
 hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
 """
-__version__ = "$Revision: 134761 $"
+__version__ = "$Revision: 135597 $"
 
 
 import gc
@@ -1656,6 +1656,8 @@ def getAdapterType(ctx, natype):
         return "e1000"
     elif (natype == ctx['global'].constants.NetworkAdapterType_Virtio):
         return "virtio"
+    elif (natype == ctx['global'].constants.NetworkAdapterType_Virtio_1_0):
+        return "virtio_1.0"
     elif (natype == ctx['global'].constants.NetworkAdapterType_Null):
         return None
     else:
