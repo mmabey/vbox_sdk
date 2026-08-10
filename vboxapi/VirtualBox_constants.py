@@ -3003,6 +3003,7 @@ class VirtualBoxReflectionInfo:
             'CloudImageFreeFormTags': 56,
             'HardDiskControllerVirtioSCSI': 60,
             'HardDiskControllerNVMe': 61,
+            'NVRAM': 0x8000,
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 1,
@@ -4439,6 +4440,7 @@ class VirtualBoxReflectionInfo:
             'CloudImageFreeFormTags': 'CloudImageFreeFormTags',
             'HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
             'HardDiskControllerNVMe': 'HardDiskControllerNVMe',
+            'NVRAM': 'NVRAM',
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 'Reference',
@@ -5806,6 +5808,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudImageFreeFormTags': 56,
         'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 60,
         'VirtualSystemDescriptionType_HardDiskControllerNVMe': 61,
+        'VirtualSystemDescriptionType_NVRAM': 0x8000,
         'VirtualSystemDescriptionValueType_Reference': 1,
         'VirtualSystemDescriptionValueType_Original': 2,
         'VirtualSystemDescriptionValueType_Auto': 3,
@@ -6972,6 +6975,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudImageFreeFormTags': 'CloudImageFreeFormTags',
         'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
         'VirtualSystemDescriptionType_HardDiskControllerNVMe': 'HardDiskControllerNVMe',
+        'VirtualSystemDescriptionType_NVRAM': 'NVRAM',
         'VirtualSystemDescriptionValueType_Reference': 'Reference',
         'VirtualSystemDescriptionValueType_Original': 'Original',
         'VirtualSystemDescriptionValueType_Auto': 'Auto',
