@@ -111,10 +111,10 @@
   there can be only one object of this class on the local machine at any given
   time. This object is a parent of many other objects in the VirtualBox COM
   library and lives in the VBoxSVC process. In fact, when you create an instance
-  of the <tt>VirtualBox.VirtualBox</tt>, the COM subsystem checks if the VBoxSVC
-  process is already running, starts it if not, and returns you a reference to
+  of <tt>VirtualBox.VirtualBox</tt>, the COM subsystem checks if the VBoxSVC
+  process is already running, starts it if not, and returns a reference to
   the <tt>VirtualBox</tt> object created in this process. When the last reference
-  to this object is released, the VBoxSVC process ends (with a 5 second delay to
+  to this object is released, the VBoxSVC process exits (with a 5 second delay to
   protect from too frequent restarts).
 
   The <tt>%VirtualBox.Session</tt> class is a regular component. You can create
@@ -2108,7 +2108,7 @@
       </param>
       <param name="hostIP" type="wstring" dir="in">
         <desc>IP of the host interface to which the rule should apply.
-        An empty ip address is acceptable, in which case the NAT engine
+        An empty IP address is acceptable, in which case the NAT engine
         binds the handling socket to any interface.
         </desc>
       </param>
@@ -2258,7 +2258,7 @@
     <const name="ExtensionPath"           value="18"><desc>Path to a file containing additional DHCP options (RFC2123).</desc></const>
     <const name="IPForwarding"            value="19"><desc>Whether IP forwarding should be enabled by the client (boolean).</desc></const>
     <const name="OptNonLocalSourceRouting" value="20"><desc>Whether non-local datagrams should be forwarded by the client (boolean)</desc></const>
-    <const name="PolicyFilter"            value="21"><desc>List of IPv4 addresses and masks paris controlling non-local source routing.</desc></const>
+    <const name="PolicyFilter"            value="21"><desc>List of IPv4 addresses and masks pairs controlling non-local source routing.</desc></const>
     <const name="MaxDgramReassemblySize"  value="22"><desc>The maximum datagram size the client should reassemble (16-bit decimal value).</desc></const>
     <const name="DefaultIPTTL"            value="23"><desc>The default time-to-leave on outgoing (IP) datagrams (8-bit decimal value).</desc></const>
     <const name="PathMTUAgingTimeout"     value="24"><desc>RFC1191 path MTU discovery timeout value in seconds (32-bit decimal value).</desc></const>
@@ -2304,8 +2304,8 @@
     <const name="StreetTalkServers"       value="75"><desc>Space separated list of IPv4 StreetTalk server addresses.</desc></const>
     <const name="STDAServers"             value="76"><desc>Space separated list of IPv4 StreetTalk directory assistance (STDA) server addresses.</desc></const>
     <!-- 77 is client only -->
-    <const name="SLPDirectoryAgent"       value="78"><desc>Addresses of one or more service location protocol (SLP) directory agent, and an indicator of whether their use is mandatory. Only accessible using <link to="DHCPOptionEncoding_Hex"/>.</desc></const>
-    <const name="SLPServiceScope"         value="79"><desc>List of service scopes for the service location protocol (SLP) and whether using the list is mandator. Only accessible using <link to="DHCPOptionEncoding_Hex"/>.</desc></const>
+    <const name="SLPDirectoryAgent"       value="78"><desc>Address of one or more service location protocol (SLP) directory agent, and an indicator of whether their use is mandatory. Only accessible using <link to="DHCPOptionEncoding_Hex"/>.</desc></const>
+    <const name="SLPServiceScope"         value="79"><desc>List of service scopes for the service location protocol (SLP) and whether using the list is mandatory. Only accessible using <link to="DHCPOptionEncoding_Hex"/>.</desc></const>
     <!-- 80 is client only -->
     <const name="DomainSearch"            value="119"><desc>Domain search list, see RFC3397 and section 4.1.4 in RFC1035 for encoding.  Only accessible using <link to="DHCPOptionEncoding_Hex"/>.</desc></const>
   </enum>
@@ -3595,7 +3595,7 @@
 
         The <link to="IVirtualBox::guestOSTypes"/> collection contains all
         available guest OS type objects. Each object has an
-        <link to="IGuestOSType::familyId"/> attribute which contains a
+        <link to="IGuestOSType::familyId"/> attribute which contains
         the guest OS family this object describes.  The guest OS family
         subtype is contained in the <link to="IGuestOSType::subtype"/>
         attribute.
@@ -5145,8 +5145,8 @@
       <desc>
         Indicates whether the Guest Additions should be installed or not.
 
-        Setting this to false does not affect additions shipped with the linux
-        distribution, only the installation of additions pointed to by
+        Setting this to false does not affect guest additions shipped with
+        Linux distributions, only the installation of additions pointed to by
         <link to="IUnattended::additionsIsoPath"/>.
       </desc>
     </attribute>
@@ -5327,10 +5327,10 @@
         The path + basename for auxiliary files generated by the unattended
         installation.  This defaults to the VM folder + Unattended + VM UUID.
 
-        The files which gets generated depends on the OS being installed.  When
-        installing Windows there is currently only a auxiliaryBasePath + "floppy.img"
-        being created.  But for linux, a "cdrom.viso" and one or more configuration
-        files are generate generated.
+        The files which get generated depend on the OS being installed.  When
+        installing Windows there is currently only an auxiliaryBasePath + "floppy.img"
+        being created.  But for Linux, a "cdrom.viso" and one or more configuration
+        files are generated.
       </desc>
     </attribute>
 
@@ -5391,7 +5391,7 @@
       <desc>
         Extra kernel arguments passed to the install kernel of some guests.
 
-        This is currently only picked up by linux guests.  The exact parameters
+        This is currently only picked up by Linux guests.  The exact parameters
         are specific to the guest OS being installed of course.
 
         After <link to="IUnattended::prepare"/> is called, it can be read to see
@@ -6239,7 +6239,7 @@
 
     <const name="None"                  value="0">
       <desc>No scaling performed.
-        The image wil be cropped when the source is bigger than the target size.</desc>
+        The image will be cropped when the source is bigger than the target size.</desc>
     </const>
     <const name="NearestNeighbor"       value="1">
       <desc>Performs scaling via nearest-neighbor interpolation.
@@ -6399,7 +6399,7 @@
       <desc>
         This setting contains any additional recording options required in
         comma-separated key=value format, which are currently not represented
-        via own attribtues. Consider these options as experimental and mostly
+        via own attributes. Consider these options as experimental and mostly
         for codec-specific settings, and are subject to change. This setting
         cannot be changed while recording is enabled.
       </desc>
@@ -6448,7 +6448,7 @@
     <attribute name="audioChannels" type="unsigned long" default="2">
       <desc>
         Determines the audio channels of the recorded audio data.
-        Specifiy 2 for stereo or 1 for mono. More than stereo (2) channels
+        Specify 2 for stereo or 1 for mono. More than stereo (2) channels
         are not supported at the moment. This setting cannot be changed while
         recording is enabled.
       </desc>
@@ -6598,7 +6598,7 @@
 
         Note that this attribute does not actually start or stop recording.
         For starting recording, use <link to="IRecordingSettings::start"/>, for
-        stopping, use the the progress object via <link to="IRecordingSettings::progress"/>.
+        stopping, use the progress object via <link to="IRecordingSettings::progress"/>.
 
         If a VM is being started with this setting enabled, recording automatically
         will be started with the currently configured recording settings.
@@ -9326,7 +9326,7 @@
     <method name="getMediumAttachmentsOfController" const="yes">
       <rest name="AttachmentsList" request="get" path="/vm/{vmid}/controller/"/>
       <desc>
-        Returns an array of medium attachments which are attached to the
+        Returns an array of medium attachments which are attached to
         the controller with the given name.
 
         <result name="VBOX_E_OBJECT_NOT_FOUND">
@@ -11008,7 +11008,7 @@
 
     <method name="addEncryptionPassword" wrap-hint-server="limitedcaller">
       <desc>
-        Adds a password used for encryption. Updates the accesibility
+        Adds a password used for encryption. Updates the accessibility
         state if password used the VM encryption.
 
         <result name="VBOX_E_PASSWORD_INCORRECT">
@@ -11029,7 +11029,7 @@
 
     <method name="addEncryptionPasswords" wrap-hint-server="limitedcaller">
       <desc>
-        Adds passwords used for encryption. Updates the accesibility
+        Adds passwords used for encryption. Updates the accessibility
         state if the list contains password used the VM encryption.
 
         <result name="VBOX_E_PASSWORD_INCORRECT">
@@ -12149,7 +12149,7 @@
     >
 
     <desc>
-      Abstract parent interface for handling updateable software components.
+      Abstract parent interface for handling updatable software components.
     </desc>
 
     <method name="checkFor">
@@ -12369,7 +12369,7 @@
     <attribute name="number" type="unsigned long" readonly="yes">
       <desc>
         The number of the partition. Represents the system number of the
-        partition, e.g. /dev/sdX in the linux, where X is the number
+        partition, e.g. /dev/sdX on Linux, where X is the number
         returned.
       </desc>
     </attribute>
@@ -14834,7 +14834,7 @@
     </const>
     <const name="AllowDirectoryMoves"   value="4">
       <desc>
-        Allow moving directories accross file system boundraries. Because it
+        Allow moving directories across file system boundaries. Because it
         is could be a big undertaking, we require extra assurance that we
         should do it when requested.
       </desc>
@@ -14883,7 +14883,7 @@
     uuid="455aabf0-7692-48f6-9061-f21579b65769"
     >
     <desc>
-      Directory recursive removement flags.
+      Directory recursive remove flags.
     </desc>
 
     <const name="None"                  value="0">
@@ -16096,7 +16096,7 @@
       <param name="followSymlinks" type="boolean" dir="in">
         <desc>
           If @c true, symbolic links in the final component will be followed
-          and the existance of the symlink target made the question for this method.
+          and the existence of the symlink target made the question for this method.
           If @c false, a symbolic link in the final component will make the
           method return @c false (because a symlink isn't a directory).
         </desc>
@@ -16413,7 +16413,7 @@
       <param name="followSymlinks" type="boolean" dir="in">
         <desc>
           If @c true, symbolic links in the final component will be followed
-          and the existance of the symlink target made the question for this method.
+          and the existence of the symlink target made the question for this method.
           If @c false, a symbolic link in the final component will make the
           method return @c false (because a symlink isn't a regular file).
         </desc>
@@ -16528,7 +16528,7 @@
           It @c true, symbolic links in the final path component will be
           followed to their target, and the size of the target is returned.
           If @c false, symbolic links in the final path component will make
-          the method call fail (symblink is not a regular file).
+          the method call fail (symlink is not a regular file).
         </desc>
       </param>
       <param name="size" type="long long" dir="return">
@@ -16548,7 +16548,7 @@
         </result>
       </desc>
       <param name="path" type="wstring" dir="in">
-        <desc>Path to the file system object to check the existance of.  Guest
+        <desc>Path to the file system object to check the existence of.  Guest
           path style.</desc>
       </param>
       <param name="followSymlinks" type="boolean" dir="in">
@@ -16667,7 +16667,7 @@
         guest location to another.
 
         This differs from <link to="IGuestSession::fsObjRename"/> in that it
-        can move accross file system boundraries.  In that case it will
+        can move across file system boundaries.  In that case it will
         perform a copy and then delete the original.  For directories, this
         can take a while and is subject to races.
 
@@ -17451,7 +17451,7 @@
         to the end of the file and will leave this attribute unchanged.
 
         The <link to="IFile::seek"/> is used to change this attribute without
-        transfering any file data like read and write does.
+        transferring any file data like read and write does.
 
         <note> This will not always be correct with older Guest Additions
         (version 5.2.30 and earlier, as well as versions 6.0.0 thru 6.0.8)
@@ -20841,7 +20841,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
         rockridge, joliet, udf, hfs, ...).
 
         A partitioned harddisk image will have subdirs for each partition.  The
-        the filesystem content of each partition can be accessed thru the subdirs
+        filesystem content of each partition can be accessed thru the subdirs
         if we have a file system interpreter for it.  There will also be raw files
         for each subdirectory, to provide a simple way of accessing raw partition
         data from an API client.
@@ -20942,7 +20942,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
 
     <method name="close">
       <desc>
-        Explictly close the medium I/O rather than waiting for garbage
+        Explicitly close the medium I/O rather than waiting for garbage
         collection and the destructor.
 
         This will wait for any pending reads and writes to complete and then
@@ -22534,6 +22534,9 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     <const name="UsbNet"                value="14">
         <desc>Ethernet over USB device (usbnet).</desc>
     </const>
+    <const name="I82583V"               value="15">
+        <desc>Intel 82583V Gigabit Network Connection [EXPERIMENTAL].</desc>
+    </const>
   </enum>
 
   <enum
@@ -23283,8 +23286,8 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
       </param>
       <param name="value" type="wstring" dir="in">
         <desc>
-          The new register value. Hexadecimal, decimal and octal formattings
-          are supported in addition to any special formattings returned by
+          The new register value. Hexadecimal, decimal and octal formats
+          are supported in addition to any special formats returned by
           the getters.
         </desc>
       </param>
@@ -23305,7 +23308,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
       </param>
       <param name="values" type="wstring" dir="in" safearray="yes">
         <desc>
-          Array paralell to the names holding the register values. See
+          Array parallel to the names holding the register values. See
           <link to="IMachineDebugger::setRegister"/> for formatting
           guidelines.
         </desc>
@@ -23333,7 +23336,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
       </desc>
       <param name="pattern" type="wstring" dir="in">
         <desc>The selection pattern. A bit similar to filename globbing.
-          Wildchars are '*' and '?', where the asterisk matches zero or
+          Wildcards are '*' and '?', where the asterisk matches zero or
           more characters and question mark matches exactly one character.
           Multiple pattern can be joined by putting '|' between them.</desc>
       </param>
@@ -23345,7 +23348,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
       </desc>
       <param name="pattern" type="wstring" dir="in">
         <desc>The selection pattern. A bit similar to filename globbing.
-          Wildchars are '*' and '?', where the asterisk matches zero or
+          Wildcards are '*' and '?', where the asterisk matches zero or
           more characters and question mark matches exactly one character.
           Multiple pattern can be joined by putting '|' between them.</desc>
       </param>
@@ -23466,7 +23469,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     </attribute>
 
     <attribute name="logRelDestinations" type="wstring" readonly="yes">
-      <desc>The relase logger's destination settings.</desc>
+      <desc>The release logger's destination settings.</desc>
     </attribute>
 
     <attribute name="executionEngine" type="VMExecutionEngine" readonly="yes">
@@ -26877,7 +26880,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
           Platform specific display information. Reserved for future hacks.
         </desc>
       </param>
-      <param name="progess" type="IProgress" dir="return">
+      <param name="progress" type="IProgress" dir="return">
         <desc>
           Progress object for the operation.
         </desc>
@@ -26949,7 +26952,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
           Platform specific display information. Reserved for future hacks.
         </desc>
       </param>
-      <param name="progess" type="IProgress" dir="return">
+      <param name="progress" type="IProgress" dir="return">
         <desc>
           Progress object for the operation.
         </desc>
@@ -27045,7 +27048,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     </attribute>
 
     <attribute name="maxBytesPerSec" type="long long">
-      <desc>The maximum number of bytes which can be transfered by all
+      <desc>The maximum number of bytes which can be transferred by all
         entities attached to this group during one second.</desc>
     </attribute>
 
@@ -27085,7 +27088,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
         <desc>The type of the bandwidth group (network or disk).</desc>
       </param>
       <param name="maxBytesPerSec" type="long long" dir="in">
-        <desc>The maximum number of bytes which can be transfered by all
+        <desc>The maximum number of bytes which can be transferred by all
           entities attached to this group during one second.</desc>
       </param>
     </method>
@@ -27171,7 +27174,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     </const>
     <const name="IPC"       value="3">
       <desc>The remote stub is available through a IPC connection,
-        namely a named pipe on Windows or a unix socket on other hosts.</desc>
+        namely a named pipe on Windows or a Unix socket on other hosts.</desc>
     </const>
   </enum>
 
@@ -29785,7 +29788,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     </attribute>
     <attribute name="hostIP" type="wstring" readonly="yes">
       <desc>
-        Host ip address to bind socket on.
+        Host IP address to bind socket on.
       </desc>
     </attribute>
     <attribute name="hostPort" type="long" readonly="yes">
@@ -29795,7 +29798,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     </attribute>
     <attribute name="guestIP" type="wstring" readonly="yes">
       <desc>
-        Guest ip address to redirect to.
+        Guest IP address to redirect to.
       </desc>
     </attribute>
     <attribute name="guestPort" type="long" readonly="yes">
@@ -30139,7 +30142,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     uuid="a85bba40-1b93-47bb-b125-dec708c30fc0"
     wsmap="managed" autogen="VBoxEvent" id="OnProgressCreated">
     <desc>Notification of a new progress object creation/deletion.
-      Covers purely projess objects in VBoxSVC. This
+      Covers purely progress objects in VBoxSVC. This
       event is signaled on the event source of IVirtualBox, unlike
       the other progress events.</desc>
 
@@ -30475,7 +30478,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
 
     <attribute name="clipboardString" type="wstring" readonly="yes">
       <desc>
-        Intnded for cases when a read-only string value is used to
+        Intended for cases when a read-only string value is used to
         display information and different string is to be used when
         copying to the clipboard.
       </desc>
@@ -30870,7 +30873,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
         <desc>
           Data stream object for reading the console history.  For now
           we are abusing/repurposing this interface from the media
-          convertion API to avoid marshalling a huge string through
+          conversion API to avoid marshalling a huge string through
           xpcom.
         </desc>
       </param>
@@ -30986,7 +30989,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
         <desc>
           The timestamps of the metric returned. The array entries match
           the corresponding entries in the @a array.
-          Time format is represented in Rfc2822.
+          Time format is represented in RFC2822.
         </desc>
       </param>
       <param name="unit" type="IStringArray" dir="out">
@@ -31125,7 +31128,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
       <desc>
         Create an object that represents a cloud machine with the
         specified UUID.  Note that the operation is synchronous.  The
-        returned machine is initiatally in inaccessible state and
+        returned machine is initially in inaccessible state and
         requires a refresh to get its data from the cloud.
       </desc>
       <param name="id" type="uuid" mod="string" dir="in">
@@ -31162,7 +31165,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
         Make the list of cloud machine stubs available via
         <link to="#cloudMachineStubList"/> attribute.
         Like with <link to="#getCloudMachine"/>, the returned machines
-        are initiatally inaccessible and require a refresh to get
+        are initially inaccessible and require a refresh to get
         their data from the cloud.
       </desc>
       <param name="progress" type="IProgress" dir="return">
@@ -31406,7 +31409,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
       <param name="uid" type="wstring" dir="in">
         <desc>
           The id of instance in the Cloud that should be cloned.
-          Prerequisities:
+          Prerequisites:
             The instance must be in the list of VirtualBox cloud machines.
             VirtualBox operates only with those machines which are already
             known.
@@ -31883,7 +31886,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     <desc>
       Each individual provider that is installed or uninstalled is
       reported as an <link to="ICloudProviderRegisteredEvent"/>.  When
-      the batch is done this event is sent and listerns can get the
+      the batch is done this event is sent and listens can get the
       new list.
     </desc>
     <attribute name="registered" type="boolean" readonly="yes"/>
@@ -31911,7 +31914,7 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
       A cloud provider is about to be uninstalled.
       Unlike <link to="ICloudProviderRegisteredEvent"/> this one is
       waitable and is sent <i>before</i> an attempt is made to
-      uninstall a provider.  Listerns should release references to the
+      uninstall a provider.  Listens should release references to the
       provider and related objects if they have any, or the
       uninstallation of the provider is going to fail because it's
       still in use.

@@ -2706,7 +2706,8 @@ typedef enum
     NetworkAdapterType_WD8003 = 11,
     NetworkAdapterType_ELNK2 = 12,
     NetworkAdapterType_ELNK1 = 13,
-    NetworkAdapterType_UsbNet = 14
+    NetworkAdapterType_UsbNet = 14,
+    NetworkAdapterType_I82583V = 15
 } NetworkAdapterType;
 
 /* cross-platform type name for NetworkAdapterType */
@@ -17212,7 +17213,7 @@ interface IExtPackFile : IExtPackBase
     HRESULT Install (
         [in] BOOL aReplace,
         [in] BSTR aDisplayInfo,
-        [out, retval] IProgress * * aProgess
+        [out, retval] IProgress * * aProgress
     );
 
     HRESULT InternalAndReservedMethod1IExtPackFile();
@@ -17225,7 +17226,7 @@ interface IExtPackFile : IExtPackBase
 cpp_quote("#define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO(smth) HRESULT STDMETHODCALLTYPE get_FilePath (BSTR * aFilePath) { return smth get_FilePath (aFilePath); }")
 cpp_quote("#define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO_OBJ(obj) COM_FORWARD_IExtPackFile_GETTER_FilePath_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO_BASE(base) COM_FORWARD_IExtPackFile_GETTER_FilePath_TO (base::)")
-cpp_quote("#define COM_FORWARD_IExtPackFile_Install_TO(smth) HRESULT STDMETHODCALLTYPE Install (BOOL aReplace, BSTR aDisplayInfo, IProgress * * aProgess) { return smth Install (aReplace, aDisplayInfo, aProgess); }")
+cpp_quote("#define COM_FORWARD_IExtPackFile_Install_TO(smth) HRESULT STDMETHODCALLTYPE Install (BOOL aReplace, BSTR aDisplayInfo, IProgress * * aProgress) { return smth Install (aReplace, aDisplayInfo, aProgress); }")
 cpp_quote("#define COM_FORWARD_IExtPackFile_Install_TO_OBJ(obj) COM_FORWARD_IExtPackFile_Install_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IExtPackFile_Install_TO_BASE(base) COM_FORWARD_IExtPackFile_Install_TO (base::)")
 cpp_quote("#define COM_FORWARD_IExtPackFile_TO(smth) COM_FORWARD_IExtPackFile_GETTER_FilePath_TO (smth) COM_FORWARD_IExtPackFile_Install_TO (smth) ")
@@ -17273,7 +17274,7 @@ interface IExtPackManager : IDispatch
         [in] BSTR aName,
         [in] BOOL aForcedRemoval,
         [in] BSTR aDisplayInfo,
-        [out, retval] IProgress * * aProgess
+        [out, retval] IProgress * * aProgress
     );
 
     HRESULT Cleanup();
@@ -17308,7 +17309,7 @@ cpp_quote("#define COM_FORWARD_IExtPackManager_Find_TO_BASE(base) COM_FORWARD_IE
 cpp_quote("#define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO(smth) HRESULT STDMETHODCALLTYPE OpenExtPackFile (BSTR aPath, IExtPackFile * * aFile) { return smth OpenExtPackFile (aPath, aFile); }")
 cpp_quote("#define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO_OBJ(obj) COM_FORWARD_IExtPackManager_OpenExtPackFile_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO_BASE(base) COM_FORWARD_IExtPackManager_OpenExtPackFile_TO (base::)")
-cpp_quote("#define COM_FORWARD_IExtPackManager_Uninstall_TO(smth) HRESULT STDMETHODCALLTYPE Uninstall (BSTR aName, BOOL aForcedRemoval, BSTR aDisplayInfo, IProgress * * aProgess) { return smth Uninstall (aName, aForcedRemoval, aDisplayInfo, aProgess); }")
+cpp_quote("#define COM_FORWARD_IExtPackManager_Uninstall_TO(smth) HRESULT STDMETHODCALLTYPE Uninstall (BSTR aName, BOOL aForcedRemoval, BSTR aDisplayInfo, IProgress * * aProgress) { return smth Uninstall (aName, aForcedRemoval, aDisplayInfo, aProgress); }")
 cpp_quote("#define COM_FORWARD_IExtPackManager_Uninstall_TO_OBJ(obj) COM_FORWARD_IExtPackManager_Uninstall_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_IExtPackManager_Uninstall_TO_BASE(base) COM_FORWARD_IExtPackManager_Uninstall_TO (base::)")
 cpp_quote("#define COM_FORWARD_IExtPackManager_Cleanup_TO(smth) HRESULT STDMETHODCALLTYPE Cleanup() { return smth Cleanup(); }")

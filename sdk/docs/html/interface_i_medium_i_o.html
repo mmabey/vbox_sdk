@@ -74,7 +74,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a00254ba9ce08190ee5b193982a7a8d56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the currently opened image into a stream of the specified image type/variant.  <br /></td></tr>
 <tr class="separator:a00254ba9ce08190ee5b193982a7a8d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd3ca8ffb6a5ca451461376c4f1a378d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_medium_i_o.html#afd3ca8ffb6a5ca451461376c4f1a378d">close</a> ()</td></tr>
-<tr class="memdesc:afd3ca8ffb6a5ca451461376c4f1a378d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explictly close the medium I/O rather than waiting for garbage collection and the destructor.  <br /></td></tr>
+<tr class="memdesc:afd3ca8ffb6a5ca451461376c4f1a378d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicitly close the medium I/O rather than waiting for garbage collection and the destructor.  <br /></td></tr>
 <tr class="separator:afd3ca8ffb6a5ca451461376c4f1a378d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -327,7 +327,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Explictly close the medium I/O rather than waiting for garbage collection and the destructor. </p>
+<p>Explicitly close the medium I/O rather than waiting for garbage collection and the destructor. </p>
 <p>This will wait for any pending reads and writes to complete and then close down the I/O access without regard for open explorer instances or anything like that. </p>
 
 </div>
@@ -382,7 +382,7 @@ Public Attributes</h2></td></tr>
 <p>This will attempt to recognize the format of the medium content and present it as a virtual directory structure to the API user.</p>
 <p>A FAT floppy image will be represented will a single root subdir 'fat12' that gives access to the file system content.</p>
 <p>A ISO-9660 image will have one subdir in the root for each format present in the image, so the API user can select which data view to access (iso9660, rockridge, joliet, udf, hfs, ...).</p>
-<p>A partitioned harddisk image will have subdirs for each partition. The the filesystem content of each partition can be accessed thru the subdirs if we have a file system interpreter for it. There will also be raw files for each subdirectory, to provide a simple way of accessing raw partition data from an API client.</p>
+<p>A partitioned harddisk image will have subdirs for each partition. The filesystem content of each partition can be accessed thru the subdirs if we have a file system interpreter for it. There will also be raw files for each subdirectory, to provide a simple way of accessing raw partition data from an API client.</p>
 <p>Please note that the explorer may show inconsistent information if the API user modifies the raw image content after it was opened. </p>
 
 </div>

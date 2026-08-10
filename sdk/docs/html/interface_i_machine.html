@@ -110,7 +110,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac3fb22d03a2c75b298ce1ec0ae1dc154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the virtual medium attached to a device slot of the specified bus.  <br /></td></tr>
 <tr class="separator:ac3fb22d03a2c75b298ce1ec0ae1dc154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a645de5a36a9fd0380d5651ec61013c54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#a645de5a36a9fd0380d5651ec61013c54">getMediumAttachmentsOfController</a> (in wstring <a class="el" href="interface_i_machine.html#a0f8041e0562be7a0b32be686384285f5">name</a>, [retval] out <a class="el" href="interface_i_medium_attachment.html">IMediumAttachment</a>[] <a class="el" href="interface_i_machine.html#aef972b7f8785c3a3f98a592a246ca4b4">mediumAttachments</a>)</td></tr>
-<tr class="memdesc:a645de5a36a9fd0380d5651ec61013c54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array of medium attachments which are attached to the the controller with the given name.  <br /></td></tr>
+<tr class="memdesc:a645de5a36a9fd0380d5651ec61013c54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array of medium attachments which are attached to the controller with the given name.  <br /></td></tr>
 <tr class="separator:a645de5a36a9fd0380d5651ec61013c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8a32585929a391a118c82778138df3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_machine.html#aa8a32585929a391a118c82778138df3a">getMediumAttachment</a> (in wstring <a class="el" href="interface_i_machine.html#a0f8041e0562be7a0b32be686384285f5">name</a>, in long controllerPort, in long device, [retval] out <a class="el" href="interface_i_medium_attachment.html">IMediumAttachment</a> attachment)</td></tr>
 <tr class="memdesc:aa8a32585929a391a118c82778138df3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a medium attachment which corresponds to the controller with the given name, on the given port and device slot.  <br /></td></tr>
@@ -1672,7 +1672,7 @@ Detaching differencing media implicitly created by <a class="el" href="interface
       </table>
 </div><div class="memdoc">
 
-<p>Returns an array of medium attachments which are attached to the the controller with the given name. </p>
+<p>Returns an array of medium attachments which are attached to the controller with the given name. </p>
 <dl class="section user"><dt>Expected result codes:</dt><dd><table class="doxtable">
 <tr>
 <td>VBOX_E_OBJECT_NOT_FOUND</td><td>A storage controller with given name doesn't exist. </td></tr>
@@ -4302,7 +4302,7 @@ If the machine is in the <a class="el" href="_virtual_box_8idl.html#a80b08f71210
 </div><div class="memdoc">
 
 <p>Adds a password used for encryption. </p>
-<p>Updates the accesibility state if password used the VM encryption.</p>
+<p>Updates the accessibility state if password used the VM encryption.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>The identifier used for the password. Must match the identifier used when the encrypted VM was created.</td></tr>
@@ -4345,7 +4345,7 @@ If the machine is in the <a class="el" href="_virtual_box_8idl.html#a80b08f71210
 </div><div class="memdoc">
 
 <p>Adds passwords used for encryption. </p>
-<p>Updates the accesibility state if the list contains password used the VM encryption.</p>
+<p>Updates the accessibility state if the list contains password used the VM encryption.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ids</td><td>List of identifiers for the passwords. Must match the identifier used when the encrypted VM was created.</td></tr>

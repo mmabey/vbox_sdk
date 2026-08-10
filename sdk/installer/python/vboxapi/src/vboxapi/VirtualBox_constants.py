@@ -3616,6 +3616,7 @@ class VirtualBoxReflectionInfo:
             'ELNK2': 12,
             'ELNK1': 13,
             'UsbNet': 14,
+            'I82583V': 15,
         },
         'NetworkAdapterPromiscModePolicy': {
             'Deny': 1,
@@ -5078,6 +5079,7 @@ class VirtualBoxReflectionInfo:
             'ELNK2': 'ELNK2',
             'ELNK1': 'ELNK1',
             'UsbNet': 'UsbNet',
+            'I82583V': 'I82583V',
         },
         'NetworkAdapterPromiscModePolicy': {
             'Deny': 'Deny',
@@ -6307,6 +6309,7 @@ class VirtualBoxReflectionInfo:
         'NetworkAdapterType_ELNK2': 12,
         'NetworkAdapterType_ELNK1': 13,
         'NetworkAdapterType_UsbNet': 14,
+        'NetworkAdapterType_I82583V': 15,
         'NetworkAdapterPromiscModePolicy_Deny': 1,
         'NetworkAdapterPromiscModePolicy_AllowNetwork': 2,
         'NetworkAdapterPromiscModePolicy_AllowAll': 3,
@@ -7493,6 +7496,7 @@ class VirtualBoxReflectionInfo:
         'NetworkAdapterType_ELNK2': 'ELNK2',
         'NetworkAdapterType_ELNK1': 'ELNK1',
         'NetworkAdapterType_UsbNet': 'UsbNet',
+        'NetworkAdapterType_I82583V': 'I82583V',
         'NetworkAdapterPromiscModePolicy_Deny': 'Deny',
         'NetworkAdapterPromiscModePolicy_AllowNetwork': 'AllowNetwork',
         'NetworkAdapterPromiscModePolicy_AllowAll': 'AllowAll',

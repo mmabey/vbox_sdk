@@ -157,7 +157,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents one of host's video capture devices, for example a webcam.  <a href="interface_i_host_video_input_device.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_update_agent.html">IUpdateAgent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract parent interface for handling updateable software components.  <a href="interface_i_update_agent.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract parent interface for handling updatable software components.  <a href="interface_i_update_agent.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_host_update_agent.html">IHostUpdateAgent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the <a class="el" href="interface_i_update_agent.html">IUpdateAgent</a><b></b> object for VirtualBox host updates.  <a href="interface_i_host_update_agent.html#details">More...</a><br /></td></tr>
@@ -1910,7 +1910,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="_virtual_box_8idl.html#a6fe363aef90dbf30abd5b35b2a83032ea8b4cd8bed5ec69e0b89b6c165567aec4">DirectoryRemoveRecFlag_ContentAndDir</a> = 1
 , <a class="el" href="_virtual_box_8idl.html#a6fe363aef90dbf30abd5b35b2a83032ea521fb20985be5608c7bdfc5eadf60319">DirectoryRemoveRecFlag_ContentOnly</a> = 2
  }</td></tr>
-<tr class="memdesc:a6fe363aef90dbf30abd5b35b2a83032e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directory recursive removement flags.  <a href="_virtual_box_8idl.html#a6fe363aef90dbf30abd5b35b2a83032e">More...</a><br /></td></tr>
+<tr class="memdesc:a6fe363aef90dbf30abd5b35b2a83032e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directory recursive remove flags.  <a href="_virtual_box_8idl.html#a6fe363aef90dbf30abd5b35b2a83032e">More...</a><br /></td></tr>
 <tr class="separator:a6fe363aef90dbf30abd5b35b2a83032e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac916192f9fe04577260d9458162f6bef"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_virtual_box_8idl.html#ac916192f9fe04577260d9458162f6bef">FsObjRenameFlag</a> { <a class="el" href="_virtual_box_8idl.html#ac916192f9fe04577260d9458162f6befa8f5d616738f5c58730bdd29fd85db4a9">FsObjRenameFlag_NoReplace</a> = 0
 , <a class="el" href="_virtual_box_8idl.html#ac916192f9fe04577260d9458162f6befae8c611008498e8228c6dbc98f0dc265d">FsObjRenameFlag_Replace</a> = 1
@@ -2249,6 +2249,7 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1a9f7b01f4b7879dfc6588c53f3ac487e3">NetworkAdapterType_ELNK2</a> = 12
 , <a class="el" href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1ab7cac34b7c794fbb2186fc4dfa465366">NetworkAdapterType_ELNK1</a> = 13
 , <a class="el" href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1ac65622e540ae9d825a5ac8c98bb64808">NetworkAdapterType_UsbNet</a> = 14
+, <a class="el" href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1aaf1780dfc9e71864305dc0eacf68a93b">NetworkAdapterType_I82583V</a> = 15
 <br />
  }</td></tr>
 <tr class="memdesc:a96c97a415133544e2413087febd964b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network adapter type.  <a href="_virtual_box_8idl.html#a96c97a415133544e2413087febd964b1">More...</a><br /></td></tr>
@@ -4044,7 +4045,7 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eaca2fb5130653a3b8f69895f84c700bca21" name="a3aa07ba542bbdee1fd67178ec1882eaca2fb5130653a3b8f69895f84c700bca21"></a>DHCPOption_OptNonLocalSourceRouting&#160;</td><td class="fielddoc"><p>Whether non-local datagrams should be forwarded by the client (boolean) </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eacac3971463d853beffd02c61e4900b1e17" name="a3aa07ba542bbdee1fd67178ec1882eacac3971463d853beffd02c61e4900b1e17"></a>DHCPOption_PolicyFilter&#160;</td><td class="fielddoc"><p>List of IPv4 addresses and masks paris controlling non-local source routing. </p>
+<tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eacac3971463d853beffd02c61e4900b1e17" name="a3aa07ba542bbdee1fd67178ec1882eacac3971463d853beffd02c61e4900b1e17"></a>DHCPOption_PolicyFilter&#160;</td><td class="fielddoc"><p>List of IPv4 addresses and masks pairs controlling non-local source routing. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eaca41b209232d9cb6fc09ab29f29ed50a79" name="a3aa07ba542bbdee1fd67178ec1882eaca41b209232d9cb6fc09ab29f29ed50a79"></a>DHCPOption_MaxDgramReassemblySize&#160;</td><td class="fielddoc"><p>The maximum datagram size the client should reassemble (16-bit decimal value). </p>
 </td></tr>
@@ -4135,10 +4136,10 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eaca2bd8d9c70f57bc0c3967ad87380653ea" name="a3aa07ba542bbdee1fd67178ec1882eaca2bd8d9c70f57bc0c3967ad87380653ea"></a>DHCPOption_STDAServers&#160;</td><td class="fielddoc"><p>Space separated list of IPv4 StreetTalk directory assistance (STDA) server addresses. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eacad14034287548ccdb63a9f29579d09db9" name="a3aa07ba542bbdee1fd67178ec1882eacad14034287548ccdb63a9f29579d09db9"></a>DHCPOption_SLPDirectoryAgent&#160;</td><td class="fielddoc"><p>Addresses of one or more service location protocol (SLP) directory agent, and an indicator of whether their use is mandatory. </p>
+<tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eacad14034287548ccdb63a9f29579d09db9" name="a3aa07ba542bbdee1fd67178ec1882eacad14034287548ccdb63a9f29579d09db9"></a>DHCPOption_SLPDirectoryAgent&#160;</td><td class="fielddoc"><p>Address of one or more service location protocol (SLP) directory agent, and an indicator of whether their use is mandatory. </p>
 <p>Only accessible using <a class="el" href="_virtual_box_8idl.html#a73e0638c60bff3bdd4b8159f131d4ceeaa6185f5d58274242be9664b45b9a0cbd">DHCPOptionEncoding_Hex</a><b></b>. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eaca1567cdcc93f1598685070645729ae645" name="a3aa07ba542bbdee1fd67178ec1882eaca1567cdcc93f1598685070645729ae645"></a>DHCPOption_SLPServiceScope&#160;</td><td class="fielddoc"><p>List of service scopes for the service location protocol (SLP) and whether using the list is mandator. </p>
+<tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eaca1567cdcc93f1598685070645729ae645" name="a3aa07ba542bbdee1fd67178ec1882eaca1567cdcc93f1598685070645729ae645"></a>DHCPOption_SLPServiceScope&#160;</td><td class="fielddoc"><p>List of service scopes for the service location protocol (SLP) and whether using the list is mandatory. </p>
 <p>Only accessible using <a class="el" href="_virtual_box_8idl.html#a73e0638c60bff3bdd4b8159f131d4ceeaa6185f5d58274242be9664b45b9a0cbd">DHCPOptionEncoding_Hex</a><b></b>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a3aa07ba542bbdee1fd67178ec1882eacad53a1377ab1d4fca13835782e1e7348c" name="a3aa07ba542bbdee1fd67178ec1882eacad53a1377ab1d4fca13835782e1e7348c"></a>DHCPOption_DomainSearch&#160;</td><td class="fielddoc"><p>Domain search list, see RFC3397 and section 4.1.4 in RFC1035 for encoding. </p>
@@ -4620,7 +4621,7 @@ Variables</h2></td></tr>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{0DD1127D-4F62-4B82-BEEE-91086A9F1D24}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="afaee3e5f66dd67b5c8dbb0d8488e8cd6a2fe32eeae3b468b2bd5d110237a4a45c" name="afaee3e5f66dd67b5c8dbb0d8488e8cd6a2fe32eeae3b468b2bd5d110237a4a45c"></a>RecordingVideoScalingMode_None&#160;</td><td class="fielddoc"><p>No scaling performed. </p>
-<p>The image wil be cropped when the source is bigger than the target size. </p>
+<p>The image will be cropped when the source is bigger than the target size. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="afaee3e5f66dd67b5c8dbb0d8488e8cd6a2c7fc4ee760fa69675b6b13feacbd047" name="afaee3e5f66dd67b5c8dbb0d8488e8cd6a2c7fc4ee760fa69675b6b13feacbd047"></a>RecordingVideoScalingMode_NearestNeighbor&#160;</td><td class="fielddoc"><p>Performs scaling via nearest-neighbor interpolation. </p>
 <p>Not yet implemented. </p>
@@ -5785,7 +5786,7 @@ On Windows guests this function currently only supports reporting contiguous idl
 </td></tr>
 <tr><td class="fieldname"><a id="a8c3a6fb6a9cd87e71e06a8d622677df9abf423bb39bb12024e85ad67b9e0313ae" name="a8c3a6fb6a9cd87e71e06a8d622677df9abf423bb39bb12024e85ad67b9e0313ae"></a>FsObjMoveFlag_FollowLinks&#160;</td><td class="fielddoc"><p>Follow symbolic links in the final components or not (only applied to the given source and target paths, not to anything else). </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a8c3a6fb6a9cd87e71e06a8d622677df9a0169e31b160141f7a134662fdd908e89" name="a8c3a6fb6a9cd87e71e06a8d622677df9a0169e31b160141f7a134662fdd908e89"></a>FsObjMoveFlag_AllowDirectoryMoves&#160;</td><td class="fielddoc"><p>Allow moving directories accross file system boundraries. </p>
+<tr><td class="fieldname"><a id="a8c3a6fb6a9cd87e71e06a8d622677df9a0169e31b160141f7a134662fdd908e89" name="a8c3a6fb6a9cd87e71e06a8d622677df9a0169e31b160141f7a134662fdd908e89"></a>FsObjMoveFlag_AllowDirectoryMoves&#160;</td><td class="fielddoc"><p>Allow moving directories across file system boundaries. </p>
 <p>Because it is could be a big undertaking, we require extra assurance that we should do it when requested. </p>
 </td></tr>
 </table>
@@ -5854,7 +5855,7 @@ On Windows guests this function currently only supports reporting contiguous idl
       </table>
 </div><div class="memdoc">
 
-<p>Directory recursive removement flags. </p>
+<p>Directory recursive remove flags. </p>
 <dl class="section user"><dt>Interface ID:</dt><dd><code>{455AABF0-7692-48F6-9061-F21579B65769}</code> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6fe363aef90dbf30abd5b35b2a83032ea5c2f9f23b634bab30642b801a48d5445" name="a6fe363aef90dbf30abd5b35b2a83032ea5c2f9f23b634bab30642b801a48d5445"></a>DirectoryRemoveRecFlag_None&#160;</td><td class="fielddoc"><p>No flag set. </p>
@@ -6846,6 +6847,8 @@ On Windows guests this function currently only supports reporting contiguous idl
 </td></tr>
 <tr><td class="fieldname"><a id="a96c97a415133544e2413087febd964b1ac65622e540ae9d825a5ac8c98bb64808" name="a96c97a415133544e2413087febd964b1ac65622e540ae9d825a5ac8c98bb64808"></a>NetworkAdapterType_UsbNet&#160;</td><td class="fielddoc"><p>Ethernet over USB device (usbnet). </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a96c97a415133544e2413087febd964b1aaf1780dfc9e71864305dc0eacf68a93b" name="a96c97a415133544e2413087febd964b1aaf1780dfc9e71864305dc0eacf68a93b"></a>NetworkAdapterType_I82583V&#160;</td><td class="fielddoc"><p>Intel 82583V Gigabit Network Connection [EXPERIMENTAL]. </p>
+</td></tr>
 </table>
 
 </div>
@@ -7508,7 +7511,7 @@ On Windows guests this function currently only supports reporting contiguous idl
 </td></tr>
 <tr><td class="fieldname"><a id="a1ab0a75b0c1289e32e85564148c354e7a7451b2e7c83f9c6971137ad31cefb77a" name="a1ab0a75b0c1289e32e85564148c354e7a7451b2e7c83f9c6971137ad31cefb77a"></a>GuestDebugIoProvider_UDP&#160;</td><td class="fielddoc"><p>The remote stub is available through a UDP connection. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a1ab0a75b0c1289e32e85564148c354e7a632c2b8edeeb6229221dc42138b442c8" name="a1ab0a75b0c1289e32e85564148c354e7a632c2b8edeeb6229221dc42138b442c8"></a>GuestDebugIoProvider_IPC&#160;</td><td class="fielddoc"><p>The remote stub is available through a IPC connection, namely a named pipe on Windows or a unix socket on other hosts. </p>
+<tr><td class="fieldname"><a id="a1ab0a75b0c1289e32e85564148c354e7a632c2b8edeeb6229221dc42138b442c8" name="a1ab0a75b0c1289e32e85564148c354e7a632c2b8edeeb6229221dc42138b442c8"></a>GuestDebugIoProvider_IPC&#160;</td><td class="fielddoc"><p>The remote stub is available through a IPC connection, namely a named pipe on Windows or a Unix socket on other hosts. </p>
 </td></tr>
 </table>
 

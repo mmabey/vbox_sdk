@@ -743,7 +743,7 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Path to the directory to check if exists. Guest path style.</td></tr>
-    <tr><td class="paramname">followSymlinks</td><td>If <code>true</code>, symbolic links in the final component will be followed and the existance of the symlink target made the question for this method. If <code>false</code>, a symbolic link in the final component will make the method return <code>false</code> (because a symlink isn't a directory).</td></tr>
+    <tr><td class="paramname">followSymlinks</td><td>If <code>true</code>, symbolic links in the final component will be followed and the existence of the symlink target made the question for this method. If <code>false</code>, a symbolic link in the final component will make the method return <code>false</code> (because a symlink isn't a directory).</td></tr>
     <tr><td class="paramname">exists</td><td>Returns <code>true</code> if the directory exists, <code>false</code> if not, or is not a directory.</td></tr>
   </table>
   </dd>
@@ -1329,7 +1329,7 @@ WARNING! SPECIFYING <a class="el" href="_virtual_box_8idl.html#a6fe363aef90dbf30
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Path to the alleged regular file. Guest path style.</td></tr>
-    <tr><td class="paramname">followSymlinks</td><td>If <code>true</code>, symbolic links in the final component will be followed and the existance of the symlink target made the question for this method. If <code>false</code>, a symbolic link in the final component will make the method return <code>false</code> (because a symlink isn't a regular file).</td></tr>
+    <tr><td class="paramname">followSymlinks</td><td>If <code>true</code>, symbolic links in the final component will be followed and the existence of the symlink target made the question for this method. If <code>false</code>, a symbolic link in the final component will make the method return <code>false</code> (because a symlink isn't a regular file).</td></tr>
     <tr><td class="paramname">exists</td><td>Returns <code>true</code> if the file exists, <code>false</code> if not. <code>false</code> is also return if this <em>path</em> does not point to a file object.</td></tr>
   </table>
   </dd>
@@ -1524,7 +1524,7 @@ WARNING! SPECIFYING <a class="el" href="_virtual_box_8idl.html#a6fe363aef90dbf30
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Path to the file which size is requested. Guest path style.</td></tr>
-    <tr><td class="paramname">followSymlinks</td><td>It <code>true</code>, symbolic links in the final path component will be followed to their target, and the size of the target is returned. If <code>false</code>, symbolic links in the final path component will make the method call fail (symblink is not a regular file).</td></tr>
+    <tr><td class="paramname">followSymlinks</td><td>It <code>true</code>, symbolic links in the final path component will be followed to their target, and the size of the target is returned. If <code>false</code>, symbolic links in the final path component will make the method call fail (symlink is not a regular file).</td></tr>
     <tr><td class="paramname">size</td><td>Queried file size.</td></tr>
   </table>
   </dd>
@@ -1574,7 +1574,7 @@ WARNING! SPECIFYING <a class="el" href="_virtual_box_8idl.html#a6fe363aef90dbf30
 <p>Checks whether a file system object (file, directory, etc) exists in the guest or not. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>Path to the file system object to check the existance of. Guest path style.</td></tr>
+    <tr><td class="paramname">path</td><td>Path to the file system object to check the existence of. Guest path style.</td></tr>
     <tr><td class="paramname">followSymlinks</td><td>If <code>true</code>, symbolic links in the final component will be followed and the method will instead check if the target exists. If <code>false</code>, symbolic links in the final component will satisfy the method and it will return <code>true</code> in <em>exists</em>.</td></tr>
     <tr><td class="paramname">exists</td><td>Returns <code>true</code> if the file exists, <code>false</code> if not.</td></tr>
   </table>
@@ -1812,7 +1812,7 @@ This method will remove symbolic links in the final path component, not follow t
 </div><div class="memdoc">
 
 <p>Moves a file system object (file, directory, symlink, etc) from one guest location to another. </p>
-<p>This differs from <a class="el" href="interface_i_guest_session.html#a035b3d54847f985d0629f2a070a9fc90">IGuestSession::fsObjRename</a><b></b> in that it can move accross file system boundraries. In that case it will perform a copy and then delete the original. For directories, this can take a while and is subject to races.</p>
+<p>This differs from <a class="el" href="interface_i_guest_session.html#a035b3d54847f985d0629f2a070a9fc90">IGuestSession::fsObjRename</a><b></b> in that it can move across file system boundaries. In that case it will perform a copy and then delete the original. For directories, this can take a while and is subject to races.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">source</td><td>Path to the file to move. Guest path style.</td></tr>

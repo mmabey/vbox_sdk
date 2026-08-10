@@ -412,7 +412,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Create an object that represents a cloud machine with the specified UUID. </p>
-<p>Note that the operation is synchronous. The returned machine is initiatally in inaccessible state and requires a refresh to get its data from the cloud.</p>
+<p>Note that the operation is synchronous. The returned machine is initially in inaccessible state and requires a refresh to get its data from the cloud.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>UUID of a cloud machine.</td></tr>
@@ -466,7 +466,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Make the list of cloud machine stubs available via <a class="el" href="interface_i_cloud_client.html#a0c924fc055cf0f71b8b2d2087bde3969">cloudMachineStubList</a><b></b> attribute. </p>
-<p>Like with <a class="el" href="interface_i_cloud_client.html#ac42d759f2ea2fce01cae88f77e270756">getCloudMachine</a><b></b>, the returned machines are initiatally inaccessible and require a refresh to get their data from the cloud.</p>
+<p>Like with <a class="el" href="interface_i_cloud_client.html#ac42d759f2ea2fce01cae88f77e270756">getCloudMachine</a><b></b>, the returned machines are initially inaccessible and require a refresh to get their data from the cloud.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">progress</td><td>Progress object to track the operation completion. </td></tr>
@@ -1083,7 +1083,7 @@ Public Attributes</h2></td></tr>
 <p>Clone cloud virtual machine. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">uid</td><td>The id of instance in the Cloud that should be cloned. Prerequisities: The instance must be in the list of VirtualBox cloud machines. VirtualBox operates only with those machines which are already known.</td></tr>
+    <tr><td class="paramname">uid</td><td>The id of instance in the Cloud that should be cloned. Prerequisites: The instance must be in the list of VirtualBox cloud machines. VirtualBox operates only with those machines which are already known.</td></tr>
     <tr><td class="paramname">newName</td><td>Name for a cloud machine.</td></tr>
     <tr><td class="paramname">clone</td><td>Object that represents a cloned cloud machine.</td></tr>
     <tr><td class="paramname">progress</td><td>Progress object to track the operation completion. </td></tr>

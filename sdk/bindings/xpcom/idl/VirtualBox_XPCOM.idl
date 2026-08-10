@@ -6059,6 +6059,7 @@ interface NetworkAdapterType
     const PRUint32 ELNK2 = 12;
     const PRUint32 ELNK1 = 13;
     const PRUint32 UsbNet = 14;
+    const PRUint32 I82583V = 15;
 };
 
 
@@ -6083,6 +6084,7 @@ typedef PRUint32 NetworkAdapterType_T;
 # define NetworkAdapterType_ELNK2 NetworkAdapterType::ELNK2
 # define NetworkAdapterType_ELNK1 NetworkAdapterType::ELNK1
 # define NetworkAdapterType_UsbNet NetworkAdapterType::UsbNet
+# define NetworkAdapterType_I82583V NetworkAdapterType::I82583V
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum NetworkAdapterType_T {
     NetworkAdapterType_Null = NetworkAdapterType::Null,
@@ -6100,6 +6102,7 @@ typedef enum NetworkAdapterType_T {
     NetworkAdapterType_ELNK2 = NetworkAdapterType::ELNK2,
     NetworkAdapterType_ELNK1 = NetworkAdapterType::ELNK1,
     NetworkAdapterType_UsbNet = NetworkAdapterType::UsbNet,
+    NetworkAdapterType_I82583V = NetworkAdapterType::I82583V,
     NetworkAdapterType_32BitHack = 0x7fffffff
 } NetworkAdapterType_T;
 # ifdef AssertCompileSize
@@ -22027,7 +22030,7 @@ interface IExtPackFile : IExtPackBase
     void install (
         in boolean replace,
         in wstring displayInfo,
-        [retval] out IProgress progess
+        [retval] out IProgress progress
     );
 
     void InternalAndReservedMethod1IExtPackFile();
@@ -22041,7 +22044,7 @@ interface IExtPackFile : IExtPackBase
 #define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO(smth) NS_IMETHOD GetFilePath (PRUnichar * * aFilePath) { return smth GetFilePath (aFilePath); }
 #define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO_OBJ(obj) COM_FORWARD_IExtPackFile_GETTER_FilePath_TO ((obj)->)
 #define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO_BASE(base) COM_FORWARD_IExtPackFile_GETTER_FilePath_TO (base::)
-#define COM_FORWARD_IExtPackFile_Install_TO(smth) NS_IMETHOD Install (PRBool aReplace, PRUnichar * aDisplayInfo, IProgress * * aProgess) { return smth Install (aReplace, aDisplayInfo, aProgess); }
+#define COM_FORWARD_IExtPackFile_Install_TO(smth) NS_IMETHOD Install (PRBool aReplace, PRUnichar * aDisplayInfo, IProgress * * aProgress) { return smth Install (aReplace, aDisplayInfo, aProgress); }
 #define COM_FORWARD_IExtPackFile_Install_TO_OBJ(obj) COM_FORWARD_IExtPackFile_Install_TO ((obj)->)
 #define COM_FORWARD_IExtPackFile_Install_TO_BASE(base) COM_FORWARD_IExtPackFile_Install_TO (base::)
 #define COM_FORWARD_IExtPackFile_TO(smth) NS_FORWARD_IEXTPACKFILE (smth)
@@ -22093,7 +22096,7 @@ interface IExtPackManager : nsISupports
         in wstring name,
         in boolean forcedRemoval,
         in wstring displayInfo,
-        [retval] out IProgress progess
+        [retval] out IProgress progress
     );
 
     void cleanup();
@@ -22130,7 +22133,7 @@ interface IExtPackManager : nsISupports
 #define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO(smth) NS_IMETHOD OpenExtPackFile (PRUnichar * aPath, IExtPackFile * * aFile) { return smth OpenExtPackFile (aPath, aFile); }
 #define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO_OBJ(obj) COM_FORWARD_IExtPackManager_OpenExtPackFile_TO ((obj)->)
 #define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO_BASE(base) COM_FORWARD_IExtPackManager_OpenExtPackFile_TO (base::)
-#define COM_FORWARD_IExtPackManager_Uninstall_TO(smth) NS_IMETHOD Uninstall (PRUnichar * aName, PRBool aForcedRemoval, PRUnichar * aDisplayInfo, IProgress * * aProgess) { return smth Uninstall (aName, aForcedRemoval, aDisplayInfo, aProgess); }
+#define COM_FORWARD_IExtPackManager_Uninstall_TO(smth) NS_IMETHOD Uninstall (PRUnichar * aName, PRBool aForcedRemoval, PRUnichar * aDisplayInfo, IProgress * * aProgress) { return smth Uninstall (aName, aForcedRemoval, aDisplayInfo, aProgress); }
 #define COM_FORWARD_IExtPackManager_Uninstall_TO_OBJ(obj) COM_FORWARD_IExtPackManager_Uninstall_TO ((obj)->)
 #define COM_FORWARD_IExtPackManager_Uninstall_TO_BASE(base) COM_FORWARD_IExtPackManager_Uninstall_TO (base::)
 #define COM_FORWARD_IExtPackManager_Cleanup_TO(smth) NS_IMETHOD Cleanup() { return smth Cleanup(); }

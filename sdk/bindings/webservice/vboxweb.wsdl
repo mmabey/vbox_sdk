@@ -2515,6 +2515,7 @@
             ELNK2: 12 -
             ELNK1: 13 -
             UsbNet: 14 -
+            I82583V: 15 -
             -->
       <xsd:simpleType name="NetworkAdapterType">
         <xsd:restriction base="xsd:string">
@@ -2533,6 +2534,7 @@
           <xsd:enumeration value="ELNK2"/>
           <xsd:enumeration value="ELNK1"/>
           <xsd:enumeration value="UsbNet"/>
+          <xsd:enumeration value="I82583V"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: NetworkAdapterPromiscModePolicy -

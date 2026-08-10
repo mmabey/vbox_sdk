@@ -24581,8 +24581,8 @@ class NetworkAttachmentTypeCollection extends VBox_EnumCollection
  */
 class NetworkAdapterType extends VBox_Enum
 {
-    public $NameMap = array(0 => 'Null', 1 => 'Am79C970A', 2 => 'Am79C973', 3 => 'I82540EM', 4 => 'I82543GC', 5 => 'I82545EM', 6 => 'Virtio', 7 => 'Am79C960', 8 => 'NE2000', 9 => 'NE1000', 10 => 'WD8013', 11 => 'WD8003', 12 => 'ELNK2', 13 => 'ELNK1', 14 => 'UsbNet');
-    public $ValueMap = array('Null' => 0, 'Am79C970A' => 1, 'Am79C973' => 2, 'I82540EM' => 3, 'I82543GC' => 4, 'I82545EM' => 5, 'Virtio' => 6, 'Am79C960' => 7, 'NE2000' => 8, 'NE1000' => 9, 'WD8013' => 10, 'WD8003' => 11, 'ELNK2' => 12, 'ELNK1' => 13, 'UsbNet' => 14);
+    public $NameMap = array(0 => 'Null', 1 => 'Am79C970A', 2 => 'Am79C973', 3 => 'I82540EM', 4 => 'I82543GC', 5 => 'I82545EM', 6 => 'Virtio', 7 => 'Am79C960', 8 => 'NE2000', 9 => 'NE1000', 10 => 'WD8013', 11 => 'WD8003', 12 => 'ELNK2', 13 => 'ELNK1', 14 => 'UsbNet', 15 => 'I82583V');
+    public $ValueMap = array('Null' => 0, 'Am79C970A' => 1, 'Am79C973' => 2, 'I82540EM' => 3, 'I82543GC' => 4, 'I82545EM' => 5, 'Virtio' => 6, 'Am79C960' => 7, 'NE2000' => 8, 'NE1000' => 9, 'WD8013' => 10, 'WD8003' => 11, 'ELNK2' => 12, 'ELNK1' => 13, 'UsbNet' => 14, 'I82583V' => 15);
 }
 
 /**

@@ -8306,6 +8306,8 @@ class NS_NO_VTABLE NetworkAdapterType {
 
   enum { UsbNet = 14U };
 
+  enum { I82583V = 15U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -8335,6 +8337,7 @@ typedef PRUint32 NetworkAdapterType_T;
 # define NetworkAdapterType_ELNK2 NetworkAdapterType::ELNK2
 # define NetworkAdapterType_ELNK1 NetworkAdapterType::ELNK1
 # define NetworkAdapterType_UsbNet NetworkAdapterType::UsbNet
+# define NetworkAdapterType_I82583V NetworkAdapterType::I82583V
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum NetworkAdapterType_T {
     NetworkAdapterType_Null = NetworkAdapterType::Null,
@@ -8352,6 +8355,7 @@ typedef enum NetworkAdapterType_T {
     NetworkAdapterType_ELNK2 = NetworkAdapterType::ELNK2,
     NetworkAdapterType_ELNK1 = NetworkAdapterType::ELNK1,
     NetworkAdapterType_UsbNet = NetworkAdapterType::UsbNet,
+    NetworkAdapterType_I82583V = NetworkAdapterType::I82583V,
     NetworkAdapterType_32BitHack = 0x7fffffff
 } NetworkAdapterType_T;
 # ifdef AssertCompileSize
@@ -34459,8 +34463,8 @@ class NS_NO_VTABLE IExtPackFile : public IExtPackBase {
   /* readonly attribute unsigned long InternalAndReservedAttribute4IExtPackFile; */
   NS_IMETHOD GetInternalAndReservedAttribute4IExtPackFile(PRUint32 *aInternalAndReservedAttribute4IExtPackFile) = 0;
 
-  /* void install (in boolean replace, in wstring displayInfo, [retval] out IProgress progess); */
-  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progess) = 0;
+  /* void install (in boolean replace, in wstring displayInfo, [retval] out IProgress progress); */
+  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progress) = 0;
 
   /* void InternalAndReservedMethod1IExtPackFile (); */
   NS_IMETHOD InternalAndReservedMethod1IExtPackFile(void) = 0;
@@ -34477,7 +34481,7 @@ class NS_NO_VTABLE IExtPackFile : public IExtPackBase {
   NS_IMETHOD GetInternalAndReservedAttribute2IExtPackFile(PRUint32 *aInternalAndReservedAttribute2IExtPackFile) NS_OVERRIDE; \
   NS_IMETHOD GetInternalAndReservedAttribute3IExtPackFile(PRUint32 *aInternalAndReservedAttribute3IExtPackFile) NS_OVERRIDE; \
   NS_IMETHOD GetInternalAndReservedAttribute4IExtPackFile(PRUint32 *aInternalAndReservedAttribute4IExtPackFile) NS_OVERRIDE; \
-  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progess) NS_OVERRIDE; \
+  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progress) NS_OVERRIDE; \
   NS_IMETHOD InternalAndReservedMethod1IExtPackFile(void) NS_OVERRIDE; \
   NS_IMETHOD InternalAndReservedMethod2IExtPackFile(void) NS_OVERRIDE; 
 
@@ -34488,7 +34492,7 @@ class NS_NO_VTABLE IExtPackFile : public IExtPackBase {
   NS_IMETHOD GetInternalAndReservedAttribute2IExtPackFile(PRUint32 *aInternalAndReservedAttribute2IExtPackFile) { return _to GetInternalAndReservedAttribute2IExtPackFile(aInternalAndReservedAttribute2IExtPackFile); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IExtPackFile(PRUint32 *aInternalAndReservedAttribute3IExtPackFile) { return _to GetInternalAndReservedAttribute3IExtPackFile(aInternalAndReservedAttribute3IExtPackFile); } \
   NS_IMETHOD GetInternalAndReservedAttribute4IExtPackFile(PRUint32 *aInternalAndReservedAttribute4IExtPackFile) { return _to GetInternalAndReservedAttribute4IExtPackFile(aInternalAndReservedAttribute4IExtPackFile); } \
-  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progess) { return _to Install(replace, displayInfo, progess); } \
+  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progress) { return _to Install(replace, displayInfo, progress); } \
   NS_IMETHOD InternalAndReservedMethod1IExtPackFile(void) { return _to InternalAndReservedMethod1IExtPackFile(); } \
   NS_IMETHOD InternalAndReservedMethod2IExtPackFile(void) { return _to InternalAndReservedMethod2IExtPackFile(); } 
 
@@ -34499,14 +34503,14 @@ class NS_NO_VTABLE IExtPackFile : public IExtPackBase {
   NS_IMETHOD GetInternalAndReservedAttribute2IExtPackFile(PRUint32 *aInternalAndReservedAttribute2IExtPackFile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute2IExtPackFile(aInternalAndReservedAttribute2IExtPackFile); } \
   NS_IMETHOD GetInternalAndReservedAttribute3IExtPackFile(PRUint32 *aInternalAndReservedAttribute3IExtPackFile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute3IExtPackFile(aInternalAndReservedAttribute3IExtPackFile); } \
   NS_IMETHOD GetInternalAndReservedAttribute4IExtPackFile(PRUint32 *aInternalAndReservedAttribute4IExtPackFile) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute4IExtPackFile(aInternalAndReservedAttribute4IExtPackFile); } \
-  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progess) { return !_to ? NS_ERROR_NULL_POINTER : _to->Install(replace, displayInfo, progess); } \
+  NS_IMETHOD Install(PRBool replace, const PRUnichar *displayInfo, IProgress * *progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Install(replace, displayInfo, progress); } \
   NS_IMETHOD InternalAndReservedMethod1IExtPackFile(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod1IExtPackFile(); } \
   NS_IMETHOD InternalAndReservedMethod2IExtPackFile(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->InternalAndReservedMethod2IExtPackFile(); } 
 
 #define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO(smth) NS_IMETHOD GetFilePath (PRUnichar * * aFilePath) { return smth GetFilePath (aFilePath); }
 #define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO_OBJ(obj) COM_FORWARD_IExtPackFile_GETTER_FilePath_TO ((obj)->)
 #define COM_FORWARD_IExtPackFile_GETTER_FilePath_TO_BASE(base) COM_FORWARD_IExtPackFile_GETTER_FilePath_TO (base::)
-#define COM_FORWARD_IExtPackFile_Install_TO(smth) NS_IMETHOD Install (PRBool aReplace, PRUnichar * aDisplayInfo, IProgress * * aProgess) { return smth Install (aReplace, aDisplayInfo, aProgess); }
+#define COM_FORWARD_IExtPackFile_Install_TO(smth) NS_IMETHOD Install (PRBool aReplace, PRUnichar * aDisplayInfo, IProgress * * aProgress) { return smth Install (aReplace, aDisplayInfo, aProgress); }
 #define COM_FORWARD_IExtPackFile_Install_TO_OBJ(obj) COM_FORWARD_IExtPackFile_Install_TO ((obj)->)
 #define COM_FORWARD_IExtPackFile_Install_TO_BASE(base) COM_FORWARD_IExtPackFile_Install_TO (base::)
 #define COM_FORWARD_IExtPackFile_TO(smth) NS_FORWARD_IEXTPACKFILE (smth)
@@ -34561,8 +34565,8 @@ class NS_NO_VTABLE IExtPackManager : public nsISupports {
   /* void openExtPackFile (in wstring path, [retval] out IExtPackFile file); */
   NS_IMETHOD OpenExtPackFile(const PRUnichar *path, IExtPackFile * *file) = 0;
 
-  /* void uninstall (in wstring name, in boolean forcedRemoval, in wstring displayInfo, [retval] out IProgress progess); */
-  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progess) = 0;
+  /* void uninstall (in wstring name, in boolean forcedRemoval, in wstring displayInfo, [retval] out IProgress progress); */
+  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progress) = 0;
 
   /* void cleanup (); */
   NS_IMETHOD Cleanup(void) = 0;
@@ -34600,7 +34604,7 @@ class NS_NO_VTABLE IExtPackManager : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute8IExtPackManager(PRUint32 *aInternalAndReservedAttribute8IExtPackManager) NS_OVERRIDE; \
   NS_IMETHOD Find(const PRUnichar *name, IExtPack * *returnData) NS_OVERRIDE; \
   NS_IMETHOD OpenExtPackFile(const PRUnichar *path, IExtPackFile * *file) NS_OVERRIDE; \
-  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progess) NS_OVERRIDE; \
+  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progress) NS_OVERRIDE; \
   NS_IMETHOD Cleanup(void) NS_OVERRIDE; \
   NS_IMETHOD QueryAllPlugInsForFrontend(const PRUnichar *frontendName, PRUint32 *plugInModulesSize, PRUnichar ***plugInModules) NS_OVERRIDE; \
   NS_IMETHOD IsExtPackUsable(const PRUnichar *name, PRBool *usable) NS_OVERRIDE; \
@@ -34622,7 +34626,7 @@ class NS_NO_VTABLE IExtPackManager : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute8IExtPackManager(PRUint32 *aInternalAndReservedAttribute8IExtPackManager) { return _to GetInternalAndReservedAttribute8IExtPackManager(aInternalAndReservedAttribute8IExtPackManager); } \
   NS_IMETHOD Find(const PRUnichar *name, IExtPack * *returnData) { return _to Find(name, returnData); } \
   NS_IMETHOD OpenExtPackFile(const PRUnichar *path, IExtPackFile * *file) { return _to OpenExtPackFile(path, file); } \
-  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progess) { return _to Uninstall(name, forcedRemoval, displayInfo, progess); } \
+  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progress) { return _to Uninstall(name, forcedRemoval, displayInfo, progress); } \
   NS_IMETHOD Cleanup(void) { return _to Cleanup(); } \
   NS_IMETHOD QueryAllPlugInsForFrontend(const PRUnichar *frontendName, PRUint32 *plugInModulesSize, PRUnichar ***plugInModules) { return _to QueryAllPlugInsForFrontend(frontendName, plugInModulesSize, plugInModules); } \
   NS_IMETHOD IsExtPackUsable(const PRUnichar *name, PRBool *usable) { return _to IsExtPackUsable(name, usable); } \
@@ -34644,7 +34648,7 @@ class NS_NO_VTABLE IExtPackManager : public nsISupports {
   NS_IMETHOD GetInternalAndReservedAttribute8IExtPackManager(PRUint32 *aInternalAndReservedAttribute8IExtPackManager) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInternalAndReservedAttribute8IExtPackManager(aInternalAndReservedAttribute8IExtPackManager); } \
   NS_IMETHOD Find(const PRUnichar *name, IExtPack * *returnData) { return !_to ? NS_ERROR_NULL_POINTER : _to->Find(name, returnData); } \
   NS_IMETHOD OpenExtPackFile(const PRUnichar *path, IExtPackFile * *file) { return !_to ? NS_ERROR_NULL_POINTER : _to->OpenExtPackFile(path, file); } \
-  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progess) { return !_to ? NS_ERROR_NULL_POINTER : _to->Uninstall(name, forcedRemoval, displayInfo, progess); } \
+  NS_IMETHOD Uninstall(const PRUnichar *name, PRBool forcedRemoval, const PRUnichar *displayInfo, IProgress * *progress) { return !_to ? NS_ERROR_NULL_POINTER : _to->Uninstall(name, forcedRemoval, displayInfo, progress); } \
   NS_IMETHOD Cleanup(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Cleanup(); } \
   NS_IMETHOD QueryAllPlugInsForFrontend(const PRUnichar *frontendName, PRUint32 *plugInModulesSize, PRUnichar ***plugInModules) { return !_to ? NS_ERROR_NULL_POINTER : _to->QueryAllPlugInsForFrontend(frontendName, plugInModulesSize, plugInModules); } \
   NS_IMETHOD IsExtPackUsable(const PRUnichar *name, PRBool *usable) { return !_to ? NS_ERROR_NULL_POINTER : _to->IsExtPackUsable(name, usable); } \
@@ -34662,7 +34666,7 @@ class NS_NO_VTABLE IExtPackManager : public nsISupports {
 #define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO(smth) NS_IMETHOD OpenExtPackFile (PRUnichar * aPath, IExtPackFile * * aFile) { return smth OpenExtPackFile (aPath, aFile); }
 #define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO_OBJ(obj) COM_FORWARD_IExtPackManager_OpenExtPackFile_TO ((obj)->)
 #define COM_FORWARD_IExtPackManager_OpenExtPackFile_TO_BASE(base) COM_FORWARD_IExtPackManager_OpenExtPackFile_TO (base::)
-#define COM_FORWARD_IExtPackManager_Uninstall_TO(smth) NS_IMETHOD Uninstall (PRUnichar * aName, PRBool aForcedRemoval, PRUnichar * aDisplayInfo, IProgress * * aProgess) { return smth Uninstall (aName, aForcedRemoval, aDisplayInfo, aProgess); }
+#define COM_FORWARD_IExtPackManager_Uninstall_TO(smth) NS_IMETHOD Uninstall (PRUnichar * aName, PRBool aForcedRemoval, PRUnichar * aDisplayInfo, IProgress * * aProgress) { return smth Uninstall (aName, aForcedRemoval, aDisplayInfo, aProgress); }
 #define COM_FORWARD_IExtPackManager_Uninstall_TO_OBJ(obj) COM_FORWARD_IExtPackManager_Uninstall_TO ((obj)->)
 #define COM_FORWARD_IExtPackManager_Uninstall_TO_BASE(base) COM_FORWARD_IExtPackManager_Uninstall_TO (base::)
 #define COM_FORWARD_IExtPackManager_Cleanup_TO(smth) NS_IMETHOD Cleanup() { return smth Cleanup(); }

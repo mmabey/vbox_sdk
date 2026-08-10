@@ -484,7 +484,7 @@ Public Attributes</h2></td></tr>
 <p>If you have ever seen console teletypes, this is like looking at the last few meters of the paper it spewed.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stream</td><td>Data stream object for reading the console history. For now we are abusing/repurposing this interface from the media convertion API to avoid marshalling a huge string through xpcom.</td></tr>
+    <tr><td class="paramname">stream</td><td>Data stream object for reading the console history. For now we are abusing/repurposing this interface from the media conversion API to avoid marshalling a huge string through xpcom.</td></tr>
     <tr><td class="paramname">progress</td><td>Progress object to track the operation completion. </td></tr>
   </table>
   </dd>
@@ -636,7 +636,7 @@ Public Attributes</h2></td></tr>
 </td></tr>
     <tr><td class="paramname">pointsNumber</td><td>History metric point numbers start at 1 and can go backwards as long as history exists. Points are counted from the current time to the past. If user only wants the last actual value he passes the value "1". If 2 values need to be returned (last and second to last), the user passes "2", etc. and etc.</td></tr>
     <tr><td class="paramname">values</td><td>The values of the metric returned.</td></tr>
-    <tr><td class="paramname">timestamps</td><td>The timestamps of the metric returned. The array entries match the corresponding entries in the <em>array</em>. Time format is represented in Rfc2822.</td></tr>
+    <tr><td class="paramname">timestamps</td><td>The timestamps of the metric returned. The array entries match the corresponding entries in the <em>array</em>. Time format is represented in RFC2822.</td></tr>
     <tr><td class="paramname">unit</td><td>The measurement unit as "byte", "percentage" and etc... The array entries match the corresponding entries in the <em>array</em>.</td></tr>
     <tr><td class="paramname">progress</td><td>Progress object to track the operation completion. </td></tr>
   </table>

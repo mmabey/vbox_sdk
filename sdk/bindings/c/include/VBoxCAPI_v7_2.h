@@ -4076,7 +4076,8 @@ typedef enum NetworkAdapterType
     NetworkAdapterType_WD8003 = 11,
     NetworkAdapterType_ELNK2 = 12,
     NetworkAdapterType_ELNK1 = 13,
-    NetworkAdapterType_UsbNet = 14
+    NetworkAdapterType_UsbNet = 14,
+    NetworkAdapterType_I82583V = 15
 } NetworkAdapterType;
 /* End of enum NetworkAdapterType declaration */
 #define NetworkAdapterType_T PRUint32
@@ -27458,7 +27459,7 @@ struct IExtPackFile_vtbl
         IExtPackFile *pThis,
         PRBool replace,
         PRUnichar * displayInfo,
-        IProgress * * progess
+        IProgress * * progress
     );
 
     nsresult (*InternalAndReservedMethod1IExtPackFile)(IExtPackFile *pThis);
@@ -27542,7 +27543,7 @@ struct IExtPackFileVtbl
         IExtPackFile *pThis,
         PRBool replace,
         PRUnichar * displayInfo,
-        IProgress * * progess
+        IProgress * * progress
     );
 
     nsresult (*InternalAndReservedMethod1IExtPackFile)(IExtPackFile *pThis);
@@ -27580,7 +27581,7 @@ struct IExtPackFileVtbl
 #define IExtPackFile_QueryLicense(p, aPreferredLocale, aPreferredLanguage, aFormat, aLicenseText) ((p)->lpVtbl->QueryLicense(p, aPreferredLocale, aPreferredLanguage, aFormat, aLicenseText))
 #define IExtPackFile_get_FilePath(p, aFilePath) ((p)->lpVtbl->GetFilePath(p, aFilePath))
 #define IExtPackFile_GetFilePath(p, aFilePath) ((p)->lpVtbl->GetFilePath(p, aFilePath))
-#define IExtPackFile_Install(p, aReplace, aDisplayInfo, aProgess) ((p)->lpVtbl->Install(p, aReplace, aDisplayInfo, aProgess))
+#define IExtPackFile_Install(p, aReplace, aDisplayInfo, aProgress) ((p)->lpVtbl->Install(p, aReplace, aDisplayInfo, aProgress))
 #endif /* VBOX_WITH_GLUE */
 
 interface IExtPackFile
@@ -27642,7 +27643,7 @@ struct IExtPackManager_vtbl
         PRUnichar * name,
         PRBool forcedRemoval,
         PRUnichar * displayInfo,
-        IProgress * * progess
+        IProgress * * progress
     );
 
     nsresult (*Cleanup)(IExtPackManager *pThis );
@@ -27710,7 +27711,7 @@ struct IExtPackManagerVtbl
         PRUnichar * name,
         PRBool forcedRemoval,
         PRUnichar * displayInfo,
-        IProgress * * progess
+        IProgress * * progress
     );
 
     nsresult (*Cleanup)(IExtPackManager *pThis );
@@ -27744,7 +27745,7 @@ struct IExtPackManagerVtbl
 #define IExtPackManager_GetInstalledExtPacks(p, aInstalledExtPacks) ((p)->lpVtbl->GetInstalledExtPacks(p, aInstalledExtPacks))
 #define IExtPackManager_Find(p, aName, aReturnData) ((p)->lpVtbl->Find(p, aName, aReturnData))
 #define IExtPackManager_OpenExtPackFile(p, aPath, aFile) ((p)->lpVtbl->OpenExtPackFile(p, aPath, aFile))
-#define IExtPackManager_Uninstall(p, aName, aForcedRemoval, aDisplayInfo, aProgess) ((p)->lpVtbl->Uninstall(p, aName, aForcedRemoval, aDisplayInfo, aProgess))
+#define IExtPackManager_Uninstall(p, aName, aForcedRemoval, aDisplayInfo, aProgress) ((p)->lpVtbl->Uninstall(p, aName, aForcedRemoval, aDisplayInfo, aProgress))
 #define IExtPackManager_Cleanup(p) ((p)->lpVtbl->Cleanup(p))
 #define IExtPackManager_QueryAllPlugInsForFrontend(p, aFrontendName, aPlugInModules) ((p)->lpVtbl->QueryAllPlugInsForFrontend(p, aFrontendName, aPlugInModules))
 #define IExtPackManager_IsExtPackUsable(p, aName, aUsable) ((p)->lpVtbl->IsExtPackUsable(p, aName, aUsable))
