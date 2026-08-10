@@ -24744,7 +24744,10 @@ Snapshot 1 (B.vdi)            Snapshot 1 (B.vdi)
     <attribute name="VRDEExtPack" type="wstring">
       <desc>
         The name of Extension Pack providing VRDE for this VM. Overrides
-        <link to="ISystemProperties::defaultVRDEExtPack"/>.
+        <link to="ISystemProperties::defaultVRDEExtPack"/>. Querying this
+        attribute returns the effective value directly, that means if the
+        per-VM setting is empty then the global default is directly
+        returned.
       </desc>
     </attribute>
 
