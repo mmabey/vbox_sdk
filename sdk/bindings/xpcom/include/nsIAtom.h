@@ -14,6 +14,7 @@
 #ifndef NS_NO_VTABLE
 #define NS_NO_VTABLE
 #endif
+
 #include "nsAString.h"
 #include "nsCOMPtr.h"
 
@@ -29,30 +30,21 @@ class nsIAtom : public nsISupports {
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_IATOM_IID)
 
-  /**
-   * Get the Unicode or UTF8 value for the string
-   */
   /* AString toString (); */
   NS_IMETHOD ToString(nsAString & _retval) = 0;
 
   /* AUTF8String toUTF8String (); */
   NS_IMETHOD ToUTF8String(nsACString & _retval) = 0;
 
-  /**
-   * Return a pointer to a zero terminated UTF8 string.
-   */
   /* [noscript] void getUTF8String ([shared, retval] out string aResult); */
   NS_IMETHOD GetUTF8String(const char **aResult) = 0;
 
-  /**
-   * Compare the atom to a specific string value
-   * Note that this will NEVER return/throw an error condition.
-   */
   /* boolean equals (in AString aString); */
   NS_IMETHOD Equals(const nsAString & aString, PRBool *_retval) = 0;
 
   /* boolean equalsUTF8 (in AUTF8String aString); */
   NS_IMETHOD EqualsUTF8(const nsACString & aString, PRBool *_retval) = 0;
+
 
   // note this is NOT virtual so this won't muck with the vtable!
   inline PRBool Equals(const nsAString& s) {
@@ -78,84 +70,20 @@ class nsIAtom : public nsISupports {
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIATOM(_to) \
-  NS_IMETHOD ToString(nsAString & _retval) { return _to ToString(_retval); } \
-  NS_IMETHOD ToUTF8String(nsACString & _retval) { return _to ToUTF8String(_retval); } \
+  NS_IMETHOD ToString(nsAString & _retval) { return _to ToString(nsAString & _retval); } \
+  NS_IMETHOD ToUTF8String(nsACString & _retval) { return _to ToUTF8String(nsACString & _retval); } \
   NS_IMETHOD GetUTF8String(const char **aResult) { return _to GetUTF8String(aResult); } \
-  NS_IMETHOD Equals(const nsAString & aString, PRBool *_retval) { return _to Equals(aString, _retval); } \
-  NS_IMETHOD EqualsUTF8(const nsACString & aString, PRBool *_retval) { return _to EqualsUTF8(aString, _retval); } \
+  NS_IMETHOD Equals(const nsAString & aString, PRBool *_retval) { return _to Equals(aString, PRBool *_retval); } \
+  NS_IMETHOD EqualsUTF8(const nsACString & aString, PRBool *_retval) { return _to EqualsUTF8(aString, PRBool *_retval); } \
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIATOM(_to) \
-  NS_IMETHOD ToString(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(_retval); } \
-  NS_IMETHOD ToUTF8String(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToUTF8String(_retval); } \
+  NS_IMETHOD ToString(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToString(nsAString & _retval); } \
+  NS_IMETHOD ToUTF8String(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->ToUTF8String(nsACString & _retval); } \
   NS_IMETHOD GetUTF8String(const char **aResult) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetUTF8String(aResult); } \
-  NS_IMETHOD Equals(const nsAString & aString, PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Equals(aString, _retval); } \
-  NS_IMETHOD EqualsUTF8(const nsACString & aString, PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->EqualsUTF8(aString, _retval); } \
+  NS_IMETHOD Equals(const nsAString & aString, PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Equals(aString, PRBool *_retval); } \
+  NS_IMETHOD EqualsUTF8(const nsACString & aString, PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->EqualsUTF8(aString, PRBool *_retval); } \
 
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsAtom : public nsIAtom
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSIATOM
-
-  nsAtom();
-
-private:
-  ~nsAtom();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsAtom, nsIAtom)
-
-nsAtom::nsAtom()
-{
-  /* member initializers and constructor code */
-}
-
-nsAtom::~nsAtom()
-{
-  /* destructor code */
-}
-
-/* AString toString (); */
-NS_IMETHODIMP nsAtom::ToString(nsAString & _retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* AUTF8String toUTF8String (); */
-NS_IMETHODIMP nsAtom::ToUTF8String(nsACString & _retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* [noscript] void getUTF8String ([shared, retval] out string aResult); */
-NS_IMETHODIMP nsAtom::GetUTF8String(const char **aResult)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* boolean equals (in AString aString); */
-NS_IMETHODIMP nsAtom::Equals(const nsAString & aString, PRBool *_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* boolean equalsUTF8 (in AUTF8String aString); */
-NS_IMETHODIMP nsAtom::EqualsUTF8(const nsACString & aString, PRBool *_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
 
 /*
  * The three forms of NS_NewAtom and do_GetAtom (for use with

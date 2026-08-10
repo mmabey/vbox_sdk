@@ -26,91 +26,27 @@
   {0xbbf8cab0, 0xd43a, 0x11d3, \
     { 0x8c, 0xc2, 0x00, 0x60, 0x97, 0x92, 0x27, 0x8c }}
 
-/**
- * nsIDirectoryServiceProvider
- *
- * Used by Directory Service to get file locations.
- *
- * @status FROZEN
- */
 class NS_NO_VTABLE nsIDirectoryServiceProvider : public nsISupports {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_IDIRECTORYSERVICEPROVIDER_IID)
 
-  /**
-  * getFile
-  *
-  * Directory Service calls this when it gets the first request for
-  * a prop or on every request if the prop is not persistent.
-  *
-  * @param prop         The symbolic name of the file.
-  * @param persistent   TRUE - The returned file will be cached by Directory
-  *                     Service. Subsequent requests for this prop will
-  *                     bypass the provider and use the cache.
-  *                     FALSE - The provider will be asked for this prop
-  *                     each time it is requested.
-  *
-  * @return             The file represented by the property.
-  *
-  */
   /* nsIFile getFile (in string prop, out PRBool persistent); */
-  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile **_retval) = 0;
+  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile * *_retval) = 0;
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDIRECTORYSERVICEPROVIDER \
-  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile * *_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDIRECTORYSERVICEPROVIDER(_to) \
-  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile **_retval) { return _to GetFile(prop, persistent, _retval); } 
+  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile * *_retval) { return _to GetFile(prop, persistent, nsIFile * *_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIDIRECTORYSERVICEPROVIDER(_to) \
-  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFile(prop, persistent, _retval); } 
-
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsDirectoryServiceProvider : public nsIDirectoryServiceProvider
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSIDIRECTORYSERVICEPROVIDER
-
-  nsDirectoryServiceProvider();
-
-private:
-  ~nsDirectoryServiceProvider();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsDirectoryServiceProvider, nsIDirectoryServiceProvider)
-
-nsDirectoryServiceProvider::nsDirectoryServiceProvider()
-{
-  /* member initializers and constructor code */
-}
-
-nsDirectoryServiceProvider::~nsDirectoryServiceProvider()
-{
-  /* destructor code */
-}
-
-/* nsIFile getFile (in string prop, out PRBool persistent); */
-NS_IMETHODIMP nsDirectoryServiceProvider::GetFile(const char *prop, PRBool *persistent, nsIFile **_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
+  NS_IMETHOD GetFile(const char *prop, PRBool *persistent, nsIFile * *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFile(prop, persistent, nsIFile * *_retval); } 
 
 
 /* starting interface:    nsIDirectoryServiceProvider2 */
@@ -120,88 +56,27 @@ NS_IMETHODIMP nsDirectoryServiceProvider::GetFile(const char *prop, PRBool *pers
   {0x2f977d4b, 0x5485, 0x11d4, \
     { 0x87, 0xe2, 0x00, 0x10, 0xa4, 0xe7, 0x5e, 0xf2 }}
 
-/**
- * nsIDirectoryServiceProvider2
- *
- * An extension of nsIDirectoryServiceProvider which allows
- * multiple files to be returned for the given key.
- *
- * @status FROZEN
- */
 class NS_NO_VTABLE nsIDirectoryServiceProvider2 : public nsIDirectoryServiceProvider {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_IDIRECTORYSERVICEPROVIDER2_IID)
 
-  /**
-  * getFiles
-  *
-  * Directory Service calls this when it gets a request for
-  * a prop and the requested type is nsISimpleEnumerator.
-  *
-  * @param prop         The symbolic name of the file list.
-  *
-  * @return             An enumerator for a list of file locations.
-  *                     The elements in the enumeration are nsIFile
-  *
-  */
   /* nsISimpleEnumerator getFiles (in string prop); */
-  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator **_retval) = 0;
+  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator * *_retval) = 0;
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDIRECTORYSERVICEPROVIDER2 \
-  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator **_retval) NS_OVERRIDE; 
+  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator * *_retval) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDIRECTORYSERVICEPROVIDER2(_to) \
-  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator **_retval) { return _to GetFiles(prop, _retval); } 
+  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator * *_retval) { return _to GetFiles(prop, nsISimpleEnumerator * *_retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIDIRECTORYSERVICEPROVIDER2(_to) \
-  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFiles(prop, _retval); } 
-
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsDirectoryServiceProvider2 : public nsIDirectoryServiceProvider2
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSIDIRECTORYSERVICEPROVIDER2
-
-  nsDirectoryServiceProvider2();
-
-private:
-  ~nsDirectoryServiceProvider2();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsDirectoryServiceProvider2, nsIDirectoryServiceProvider2)
-
-nsDirectoryServiceProvider2::nsDirectoryServiceProvider2()
-{
-  /* member initializers and constructor code */
-}
-
-nsDirectoryServiceProvider2::~nsDirectoryServiceProvider2()
-{
-  /* destructor code */
-}
-
-/* nsISimpleEnumerator getFiles (in string prop); */
-NS_IMETHODIMP nsDirectoryServiceProvider2::GetFiles(const char *prop, nsISimpleEnumerator **_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
+  NS_IMETHOD GetFiles(const char *prop, nsISimpleEnumerator * *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetFiles(prop, nsISimpleEnumerator * *_retval); } 
 
 
 /* starting interface:    nsIDirectoryService */
@@ -211,121 +86,39 @@ NS_IMETHODIMP nsDirectoryServiceProvider2::GetFiles(const char *prop, nsISimpleE
   {0x57a66a60, 0xd43a, 0x11d3, \
     { 0x8c, 0xc2, 0x00, 0x60, 0x97, 0x92, 0x27, 0x8c }}
 
-/**
- * nsIDirectoryService
- *
- * @status FROZEN
- */
 class NS_NO_VTABLE nsIDirectoryService : public nsISupports {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_IDIRECTORYSERVICE_IID)
 
-  /**
-  * init
-  *
-  * Must be called. Used internally by XPCOM initialization.
-  *
-  */
   /* void init (); */
   NS_IMETHOD Init(void) = 0;
 
-  /**
-  * registerProvider
-  *
-  * Register a provider with the service.
-  *
-  * @param prov            The service will keep a strong reference
-  *                        to this object. It will be released when
-  *                        the service is released.
-  *
-  */
   /* void registerProvider (in nsIDirectoryServiceProvider prov); */
-  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider *prov) = 0;
+  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider * prov) = 0;
 
-  /**
-  * unregisterProvider
-  *
-  * Unregister a provider with the service.
-  *
-  * @param prov            
-  *
-  */
   /* void unregisterProvider (in nsIDirectoryServiceProvider prov); */
-  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider *prov) = 0;
+  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider * prov) = 0;
 
 };
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIDIRECTORYSERVICE \
   NS_IMETHOD Init(void) NS_OVERRIDE; \
-  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider *prov) NS_OVERRIDE; \
-  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider *prov) NS_OVERRIDE; 
+  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider * prov) NS_OVERRIDE; \
+  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider * prov) NS_OVERRIDE; 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIDIRECTORYSERVICE(_to) \
   NS_IMETHOD Init(void) { return _to Init(); } \
-  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider *prov) { return _to RegisterProvider(prov); } \
-  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider *prov) { return _to UnregisterProvider(prov); } 
+  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider * prov) { return _to RegisterProvider(prov); } \
+  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider * prov) { return _to UnregisterProvider(prov); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIDIRECTORYSERVICE(_to) \
   NS_IMETHOD Init(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(); } \
-  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider *prov) { return !_to ? NS_ERROR_NULL_POINTER : _to->RegisterProvider(prov); } \
-  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider *prov) { return !_to ? NS_ERROR_NULL_POINTER : _to->UnregisterProvider(prov); } 
-
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsDirectoryService : public nsIDirectoryService
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSIDIRECTORYSERVICE
-
-  nsDirectoryService();
-
-private:
-  ~nsDirectoryService();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsDirectoryService, nsIDirectoryService)
-
-nsDirectoryService::nsDirectoryService()
-{
-  /* member initializers and constructor code */
-}
-
-nsDirectoryService::~nsDirectoryService()
-{
-  /* destructor code */
-}
-
-/* void init (); */
-NS_IMETHODIMP nsDirectoryService::Init()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void registerProvider (in nsIDirectoryServiceProvider prov); */
-NS_IMETHODIMP nsDirectoryService::RegisterProvider(nsIDirectoryServiceProvider *prov)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void unregisterProvider (in nsIDirectoryServiceProvider prov); */
-NS_IMETHODIMP nsDirectoryService::UnregisterProvider(nsIDirectoryServiceProvider *prov)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
+  NS_IMETHOD RegisterProvider(nsIDirectoryServiceProvider * prov) { return !_to ? NS_ERROR_NULL_POINTER : _to->RegisterProvider(prov); } \
+  NS_IMETHOD UnregisterProvider(nsIDirectoryServiceProvider * prov) { return !_to ? NS_ERROR_NULL_POINTER : _to->UnregisterProvider(prov); } 
 
 
 #endif /* __gen_nsIDirectoryService_h__ */

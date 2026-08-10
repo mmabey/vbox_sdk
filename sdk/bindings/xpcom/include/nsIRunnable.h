@@ -44,46 +44,5 @@ class NS_NO_VTABLE nsIRunnable : public nsISupports {
 #define NS_FORWARD_SAFE_NSIRUNNABLE(_to) \
   NS_IMETHOD Run(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Run(); } 
 
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsRunnable : public nsIRunnable
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSIRUNNABLE
-
-  nsRunnable();
-
-private:
-  ~nsRunnable();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsRunnable, nsIRunnable)
-
-nsRunnable::nsRunnable()
-{
-  /* member initializers and constructor code */
-}
-
-nsRunnable::~nsRunnable()
-{
-  /* destructor code */
-}
-
-/* void run (); */
-NS_IMETHODIMP nsRunnable::Run()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
-
 
 #endif /* __gen_nsIRunnable_h__ */

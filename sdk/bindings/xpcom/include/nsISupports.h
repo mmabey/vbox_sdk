@@ -14,6 +14,7 @@
 #ifndef NS_NO_VTABLE
 #define NS_NO_VTABLE
 #endif
+
 /* 
  * Start commenting out the C++ versions of the below in the output header
  */
@@ -60,63 +61,12 @@ class NS_NO_VTABLE nsISupports {
   NS_IMETHOD_(nsrefcnt) AddRef(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddRef(); } \
   NS_IMETHOD_(nsrefcnt) Release(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Release(); } 
 
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsSupports : public nsISupports
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSISUPPORTS
-
-  nsSupports();
-
-private:
-  ~nsSupports();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsSupports, nsISupports)
-
-nsSupports::nsSupports()
-{
-  /* member initializers and constructor code */
-}
-
-nsSupports::~nsSupports()
-{
-  /* destructor code */
-}
-
-/* void QueryInterface (in nsIIDRef uuid, [iid_is (uuid), retval] out nsQIResult result); */
-NS_IMETHODIMP nsSupports::QueryInterface(const nsIID & uuid, void * *result)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* [noscript, notxpcom] nsrefcnt AddRef (); */
-NS_IMETHODIMP_(nsrefcnt) nsSupports::AddRef()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* [noscript, notxpcom] nsrefcnt Release (); */
-NS_IMETHODIMP_(nsrefcnt) nsSupports::Release()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
 
 /* 
  * End commenting out the C++ versions of the above in the output header
  */
 #endif
+
 #include "nsISupportsBase.h"
 
 #ifndef MOZILLA_STRICT_API

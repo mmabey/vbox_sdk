@@ -10,10 +10,6 @@
 #include "nsIOutputStream.h"
 #endif
 
-#ifndef __gen_nsrootidl_h__
-#include "nsrootidl.h"
-#endif
-
 /* For IDL files that don't want to include root IDL files. */
 #ifndef NS_NO_VTABLE
 #define NS_NO_VTABLE
@@ -26,24 +22,13 @@
   {0x204ee610, 0x8765, 0x11d3, \
     { 0x90, 0xcf, 0x00, 0x40, 0x05, 0x6a, 0x90, 0x6e }}
 
-/**
- * This interface allows writing of primitive data types (integers,
- * floating-point values, booleans, etc.) to a stream in a binary, untagged,
- * fixed-endianness format.  This might be used, for example, to implement
- * network protocols or to produce architecture-neutral binary disk files,
- * i.e. ones that can be read and written by both big-endian and little-endian
- * platforms.  Output is written in big-endian order (high-order byte first),
- * as this is traditional network order.
- *
- * @See nsIBinaryInputStream
- */
 class NS_NO_VTABLE nsIBinaryOutputStream : public nsIOutputStream {
  public: 
 
   NS_DEFINE_STATIC_IID_ACCESSOR(NS_IBINARYOUTPUTSTREAM_IID)
 
   /* void setOutputStream (in nsIOutputStream aOutputStream); */
-  NS_IMETHOD SetOutputStream(nsIOutputStream *aOutputStream) = 0;
+  NS_IMETHOD SetOutputStream(nsIOutputStream * aOutputStream) = 0;
 
   /* void writeBoolean (in PRBool aBoolean); */
   NS_IMETHOD WriteBoolean(PRBool aBoolean) = 0;
@@ -66,34 +51,18 @@ class NS_NO_VTABLE nsIBinaryOutputStream : public nsIOutputStream {
   /* void writeDouble (in double aDouble); */
   NS_IMETHOD WriteDouble(double aDouble) = 0;
 
-  /**
-     * Write a NUL-terminated 8-bit char* string to a binary stream.
-     */
   /* void writeStringZ (in string aString); */
   NS_IMETHOD WriteStringZ(const char *aString) = 0;
 
-  /**
-     * Write a NUL-terminated 16-bit PRUnichar* string to a binary stream.
-     */
   /* void writeWStringZ (in wstring aString); */
   NS_IMETHOD WriteWStringZ(const PRUnichar *aString) = 0;
 
-  /**
-     * Write a NUL-terminated UTF8-encoded string to a binary stream, produced
-     * from a NUL-terminated 16-bit PRUnichar* string argument.
-     */
   /* void writeUtf8Z (in wstring aString); */
   NS_IMETHOD WriteUtf8Z(const PRUnichar *aString) = 0;
 
-  /**
-     * Write an opaque byte array to a binary stream.
-     */
   /* void writeBytes ([size_is (aLength)] in string aString, in PRUint32 aLength); */
   NS_IMETHOD WriteBytes(const char *aString, PRUint32 aLength) = 0;
 
-  /**
-     * Write an opaque byte array to a binary stream.
-     */
   /* void writeByteArray ([array, size_is (aLength)] in PRUint8 aBytes, in PRUint32 aLength); */
   NS_IMETHOD WriteByteArray(PRUint8 *aBytes, PRUint32 aLength) = 0;
 
@@ -101,7 +70,7 @@ class NS_NO_VTABLE nsIBinaryOutputStream : public nsIOutputStream {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_NSIBINARYOUTPUTSTREAM \
-  NS_IMETHOD SetOutputStream(nsIOutputStream *aOutputStream) NS_OVERRIDE; \
+  NS_IMETHOD SetOutputStream(nsIOutputStream * aOutputStream) NS_OVERRIDE; \
   NS_IMETHOD WriteBoolean(PRBool aBoolean) NS_OVERRIDE; \
   NS_IMETHOD Write8(PRUint8 aByte) NS_OVERRIDE; \
   NS_IMETHOD Write16(PRUint16 a16) NS_OVERRIDE; \
@@ -117,7 +86,7 @@ class NS_NO_VTABLE nsIBinaryOutputStream : public nsIOutputStream {
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIBINARYOUTPUTSTREAM(_to) \
-  NS_IMETHOD SetOutputStream(nsIOutputStream *aOutputStream) { return _to SetOutputStream(aOutputStream); } \
+  NS_IMETHOD SetOutputStream(nsIOutputStream * aOutputStream) { return _to SetOutputStream(aOutputStream); } \
   NS_IMETHOD WriteBoolean(PRBool aBoolean) { return _to WriteBoolean(aBoolean); } \
   NS_IMETHOD Write8(PRUint8 aByte) { return _to Write8(aByte); } \
   NS_IMETHOD Write16(PRUint16 a16) { return _to Write16(a16); } \
@@ -133,7 +102,7 @@ class NS_NO_VTABLE nsIBinaryOutputStream : public nsIOutputStream {
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIBINARYOUTPUTSTREAM(_to) \
-  NS_IMETHOD SetOutputStream(nsIOutputStream *aOutputStream) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetOutputStream(aOutputStream); } \
+  NS_IMETHOD SetOutputStream(nsIOutputStream * aOutputStream) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetOutputStream(aOutputStream); } \
   NS_IMETHOD WriteBoolean(PRBool aBoolean) { return !_to ? NS_ERROR_NULL_POINTER : _to->WriteBoolean(aBoolean); } \
   NS_IMETHOD Write8(PRUint8 aByte) { return !_to ? NS_ERROR_NULL_POINTER : _to->Write8(aByte); } \
   NS_IMETHOD Write16(PRUint16 a16) { return !_to ? NS_ERROR_NULL_POINTER : _to->Write16(a16); } \
@@ -147,118 +116,6 @@ class NS_NO_VTABLE nsIBinaryOutputStream : public nsIOutputStream {
   NS_IMETHOD WriteBytes(const char *aString, PRUint32 aLength) { return !_to ? NS_ERROR_NULL_POINTER : _to->WriteBytes(aString, aLength); } \
   NS_IMETHOD WriteByteArray(PRUint8 *aBytes, PRUint32 aLength) { return !_to ? NS_ERROR_NULL_POINTER : _to->WriteByteArray(aBytes, aLength); } 
 
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsBinaryOutputStream : public nsIBinaryOutputStream
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSIBINARYOUTPUTSTREAM
-
-  nsBinaryOutputStream();
-
-private:
-  ~nsBinaryOutputStream();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsBinaryOutputStream, nsIBinaryOutputStream)
-
-nsBinaryOutputStream::nsBinaryOutputStream()
-{
-  /* member initializers and constructor code */
-}
-
-nsBinaryOutputStream::~nsBinaryOutputStream()
-{
-  /* destructor code */
-}
-
-/* void setOutputStream (in nsIOutputStream aOutputStream); */
-NS_IMETHODIMP nsBinaryOutputStream::SetOutputStream(nsIOutputStream *aOutputStream)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeBoolean (in PRBool aBoolean); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteBoolean(PRBool aBoolean)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void write8 (in PRUint8 aByte); */
-NS_IMETHODIMP nsBinaryOutputStream::Write8(PRUint8 aByte)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void write16 (in PRUint16 a16); */
-NS_IMETHODIMP nsBinaryOutputStream::Write16(PRUint16 a16)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void write32 (in PRUint32 a32); */
-NS_IMETHODIMP nsBinaryOutputStream::Write32(PRUint32 a32)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void write64 (in PRUint64 a64); */
-NS_IMETHODIMP nsBinaryOutputStream::Write64(PRUint64 a64)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeFloat (in float aFloat); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteFloat(float aFloat)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeDouble (in double aDouble); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteDouble(double aDouble)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeStringZ (in string aString); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteStringZ(const char *aString)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeWStringZ (in wstring aString); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteWStringZ(const PRUnichar *aString)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeUtf8Z (in wstring aString); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteUtf8Z(const PRUnichar *aString)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeBytes ([size_is (aLength)] in string aString, in PRUint32 aLength); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteBytes(const char *aString, PRUint32 aLength)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void writeByteArray ([array, size_is (aLength)] in PRUint8 aBytes, in PRUint32 aLength); */
-NS_IMETHODIMP nsBinaryOutputStream::WriteByteArray(PRUint8 *aBytes, PRUint32 aLength)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
 
 
 inline nsresult

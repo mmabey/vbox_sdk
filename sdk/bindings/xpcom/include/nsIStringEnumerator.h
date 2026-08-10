@@ -22,9 +22,6 @@
   {0x50d3ef6c, 0x9380, 0x4f06, \
     { 0x9f, 0xb2, 0x95, 0x48, 0x8f, 0x7d, 0x14, 0x1c }}
 
-/**
- * Used to enumerate over an ordered list of strings.
- */
 class NS_NO_VTABLE nsIStringEnumerator : public nsISupports {
  public: 
 
@@ -45,60 +42,13 @@ class NS_NO_VTABLE nsIStringEnumerator : public nsISupports {
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSISTRINGENUMERATOR(_to) \
-  NS_IMETHOD HasMore(PRBool *_retval) { return _to HasMore(_retval); } \
-  NS_IMETHOD GetNext(nsAString & _retval) { return _to GetNext(_retval); } 
+  NS_IMETHOD HasMore(PRBool *_retval) { return _to HasMore(PRBool *_retval); } \
+  NS_IMETHOD GetNext(nsAString & _retval) { return _to GetNext(nsAString & _retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSISTRINGENUMERATOR(_to) \
-  NS_IMETHOD HasMore(PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->HasMore(_retval); } \
-  NS_IMETHOD GetNext(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNext(_retval); } 
-
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsStringEnumerator : public nsIStringEnumerator
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSISTRINGENUMERATOR
-
-  nsStringEnumerator();
-
-private:
-  ~nsStringEnumerator();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsStringEnumerator, nsIStringEnumerator)
-
-nsStringEnumerator::nsStringEnumerator()
-{
-  /* member initializers and constructor code */
-}
-
-nsStringEnumerator::~nsStringEnumerator()
-{
-  /* destructor code */
-}
-
-/* boolean hasMore (); */
-NS_IMETHODIMP nsStringEnumerator::HasMore(PRBool *_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* AString getNext (); */
-NS_IMETHODIMP nsStringEnumerator::GetNext(nsAString & _retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
+  NS_IMETHOD HasMore(PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->HasMore(PRBool *_retval); } \
+  NS_IMETHOD GetNext(nsAString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNext(nsAString & _retval); } 
 
 
 /* starting interface:    nsIUTF8StringEnumerator */
@@ -128,60 +78,13 @@ class NS_NO_VTABLE nsIUTF8StringEnumerator : public nsISupports {
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_NSIUTF8STRINGENUMERATOR(_to) \
-  NS_IMETHOD HasMore(PRBool *_retval) { return _to HasMore(_retval); } \
-  NS_IMETHOD GetNext(nsACString & _retval) { return _to GetNext(_retval); } 
+  NS_IMETHOD HasMore(PRBool *_retval) { return _to HasMore(PRBool *_retval); } \
+  NS_IMETHOD GetNext(nsACString & _retval) { return _to GetNext(nsACString & _retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_NSIUTF8STRINGENUMERATOR(_to) \
-  NS_IMETHOD HasMore(PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->HasMore(_retval); } \
-  NS_IMETHOD GetNext(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNext(_retval); } 
-
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class nsUTF8StringEnumerator : public nsIUTF8StringEnumerator
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_NSIUTF8STRINGENUMERATOR
-
-  nsUTF8StringEnumerator();
-
-private:
-  ~nsUTF8StringEnumerator();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(nsUTF8StringEnumerator, nsIUTF8StringEnumerator)
-
-nsUTF8StringEnumerator::nsUTF8StringEnumerator()
-{
-  /* member initializers and constructor code */
-}
-
-nsUTF8StringEnumerator::~nsUTF8StringEnumerator()
-{
-  /* destructor code */
-}
-
-/* boolean hasMore (); */
-NS_IMETHODIMP nsUTF8StringEnumerator::HasMore(PRBool *_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* AUTF8String getNext (); */
-NS_IMETHODIMP nsUTF8StringEnumerator::GetNext(nsACString & _retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
+  NS_IMETHOD HasMore(PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->HasMore(PRBool *_retval); } \
+  NS_IMETHOD GetNext(nsACString & _retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetNext(nsACString & _retval); } 
 
 
 #endif /* __gen_nsIStringEnumerator_h__ */

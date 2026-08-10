@@ -22,9 +22,6 @@
   {0x42283079, 0x030c, 0x4b13, \
     { 0xb0, 0x69, 0xa0, 0x8b, 0x7a, 0xd5, 0xea, 0xb2 }}
 
-/**
- * ipcIClientObserver
- */
 class NS_NO_VTABLE ipcIClientObserver : public nsISupports {
  public: 
 
@@ -50,47 +47,6 @@ class NS_NO_VTABLE ipcIClientObserver : public nsISupports {
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IPCICLIENTOBSERVER(_to) \
   NS_IMETHOD OnClientStateChange(PRUint32 aClientID, PRUint32 aClientState) { return !_to ? NS_ERROR_NULL_POINTER : _to->OnClientStateChange(aClientID, aClientState); } 
-
-#if 0
-/* Use the code below as a template for the implementation class for this interface. */
-
-/* Header file */
-class _MYCLASS_ : public ipcIClientObserver
-{
-public:
-  NS_DECL_ISUPPORTS
-  NS_DECL_IPCICLIENTOBSERVER
-
-  _MYCLASS_();
-
-private:
-  ~_MYCLASS_();
-
-protected:
-  /* additional members */
-};
-
-/* Implementation file */
-NS_IMPL_ISUPPORTS1(_MYCLASS_, ipcIClientObserver)
-
-_MYCLASS_::_MYCLASS_()
-{
-  /* member initializers and constructor code */
-}
-
-_MYCLASS_::~_MYCLASS_()
-{
-  /* destructor code */
-}
-
-/* void onClientStateChange (in unsigned long aClientID, in unsigned long aClientState); */
-NS_IMETHODIMP _MYCLASS_::OnClientStateChange(PRUint32 aClientID, PRUint32 aClientState)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* End of implementation class template. */
-#endif
 
 
 #endif /* __gen_ipcIClientObserver_h__ */
