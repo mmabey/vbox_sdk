@@ -2898,6 +2898,7 @@ class VirtualBoxReflectionInfo:
             'CloudInstanceFreeFormTags': 55,
             'CloudImageFreeFormTags': 56,
             'HardDiskControllerVirtioSCSI': 60,
+            'HardDiskControllerNVMe': 61,
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 1,
@@ -3726,6 +3727,7 @@ class VirtualBoxReflectionInfo:
             'String': 1,
             'Choice': 2,
             'RangedInteger': 3,
+            'RangedInteger64': 4,
         },
         'CloudMachineState': {
             'Invalid': 0,
@@ -4281,6 +4283,7 @@ class VirtualBoxReflectionInfo:
             'CloudInstanceFreeFormTags': 'CloudInstanceFreeFormTags',
             'CloudImageFreeFormTags': 'CloudImageFreeFormTags',
             'HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
+            'HardDiskControllerNVMe': 'HardDiskControllerNVMe',
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 'Reference',
@@ -5109,6 +5112,7 @@ class VirtualBoxReflectionInfo:
             'String': 'String',
             'Choice': 'Choice',
             'RangedInteger': 'RangedInteger',
+            'RangedInteger64': 'RangedInteger64',
         },
         'CloudMachineState': {
             'Invalid': 'Invalid',
@@ -5597,6 +5601,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudInstanceFreeFormTags': 55,
         'VirtualSystemDescriptionType_CloudImageFreeFormTags': 56,
         'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 60,
+        'VirtualSystemDescriptionType_HardDiskControllerNVMe': 61,
         'VirtualSystemDescriptionValueType_Reference': 1,
         'VirtualSystemDescriptionValueType_Original': 2,
         'VirtualSystemDescriptionValueType_Auto': 3,
@@ -6217,6 +6222,7 @@ class VirtualBoxReflectionInfo:
         'FormValueType_String': 1,
         'FormValueType_Choice': 2,
         'FormValueType_RangedInteger': 3,
+        'FormValueType_RangedInteger64': 4,
         'CloudMachineState_Invalid': 0,
         'CloudMachineState_Provisioning': 1,
         'CloudMachineState_Running': 2,
@@ -6718,6 +6724,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudInstanceFreeFormTags': 'CloudInstanceFreeFormTags',
         'VirtualSystemDescriptionType_CloudImageFreeFormTags': 'CloudImageFreeFormTags',
         'VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI': 'HardDiskControllerVirtioSCSI',
+        'VirtualSystemDescriptionType_HardDiskControllerNVMe': 'HardDiskControllerNVMe',
         'VirtualSystemDescriptionValueType_Reference': 'Reference',
         'VirtualSystemDescriptionValueType_Original': 'Original',
         'VirtualSystemDescriptionValueType_Auto': 'Auto',
@@ -7338,6 +7345,7 @@ class VirtualBoxReflectionInfo:
         'FormValueType_String': 'String',
         'FormValueType_Choice': 'Choice',
         'FormValueType_RangedInteger': 'RangedInteger',
+        'FormValueType_RangedInteger64': 'RangedInteger64',
         'CloudMachineState_Invalid': 'Invalid',
         'CloudMachineState_Provisioning': 'Provisioning',
         'CloudMachineState_Running': 'Running',
