@@ -12,7 +12,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Fri Sep  4 08:08:40 2020
+/* at Thu Oct 15 15:09:54 2020
  */
 /* Compiler settings for Z:\home\vbox\tinderbox\6.1-sdk\out\linux.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
