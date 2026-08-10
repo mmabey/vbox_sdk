@@ -22,7 +22,13 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from check_new_versions import SdkRelease, download, find_latest_new_release, get_release
+from check_new_versions import (
+    SdkRelease,
+    download,
+    find_latest_new_release,
+    find_new_releases_matching,
+    get_release,
+)
 from extract_vboxapi import extract_vboxapi
 from version import load_manifest, next_package_version, record_release, save_manifest
 
@@ -194,11 +200,39 @@ def record_heartbeat(dry_run: bool = False) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", help="Specific VirtualBox SDK version to release (for backfill)")
+    parser.add_argument("--version", help="Specific VirtualBox SDK version to release (one-off backfill)")
+    parser.add_argument(
+        "--backfill-prefixes",
+        help="Comma-separated version prefixes to batch-backfill, oldest first, e.g. '6.,7.'. "
+        "Skips anything already in manifest.json; safe to re-run if a version fails partway through.",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Do everything except push/publish/gh release")
     args = parser.parse_args()
 
     download_dir = Path(tempfile.mkdtemp())
+
+    if args.backfill_prefixes:
+        prefixes = tuple(p.strip() for p in args.backfill_prefixes.split(","))
+        releases = find_new_releases_matching(prefixes)
+        if not releases:
+            print(f"Nothing to backfill for prefixes {prefixes}")
+            record_heartbeat(dry_run=args.dry_run)
+            return
+
+        print(f"Backfilling {len(releases)} version(s), oldest first: {[r.version for r in releases]}")
+        failures = []
+        for release in releases:
+            try:
+                pkg_version = release_one(release, download_dir, dry_run=args.dry_run)
+                if pkg_version:
+                    print(f"Released {pkg_version}")
+            except Exception as exc:  # noqa: BLE001 -- one bad historical zip shouldn't abort the whole batch
+                print(f"FAILED to release {release.version}: {exc}", file=sys.stderr)
+                failures.append(release.version)
+        if failures:
+            sys.exit(f"Backfill finished with {len(failures)} failure(s): {failures}")
+        return
+
     if args.version:
         release = get_release(args.version)
         if release is None:
@@ -207,7 +241,6 @@ def main() -> None:
         # Only ever the single newest version -- NOT every version missing
         # from manifest.json. With just one historical entry seeded, that
         # would mean backfilling the entire release history on every run.
-        # Backfill is workflows/backfill.yml's job, one version at a time.
         release = find_latest_new_release()
 
     if release is None:

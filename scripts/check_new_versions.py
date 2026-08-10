@@ -131,6 +131,27 @@ def find_new_releases(manifest: dict | None = None) -> list[SdkRelease]:
     return new_releases
 
 
+def find_new_releases_matching(prefixes: tuple[str, ...], manifest: dict | None = None) -> list[SdkRelease]:
+    """SDK releases online matching any of the given version prefixes, not yet
+    in manifest.json, sorted oldest first.
+
+    Used for a scoped batch backfill (e.g. prefixes=("6.", "7.")) so old
+    versions get published in the same order they were originally released,
+    which keeps `pip install vbox-sdk==<old version>` pins meaningful.
+    """
+    manifest = load_manifest() if manifest is None else manifest
+    matches = []
+    for version in sorted(list_online_versions(), key=_version_key):
+        if not any(version.startswith(p) for p in prefixes):
+            continue
+        release = get_release(version)
+        if release is None:
+            continue
+        if next_package_version(release.version, release.build, manifest) is not None:
+            matches.append(release)
+    return matches
+
+
 def verify_checksum(path: Path, release: SdkRelease) -> None:
     data = path.read_bytes()
     if release.sha256 and hashlib.sha256(data).hexdigest() != release.sha256:

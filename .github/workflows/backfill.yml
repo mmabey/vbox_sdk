@@ -1,21 +1,28 @@
-name: Backfill a historical VirtualBox SDK release
+name: Backfill historical VirtualBox SDK releases
 
-# Manual only -- publishes one specific past VirtualBox version as a pinnable
-# vbox-sdk release, reusing the exact same release.py path check-new-release.yml
-# uses for new versions. Scoped to 6.x/7.x per the backfill decision; nothing
-# stops running it against an older version by hand if that changes later.
+# Manual only -- publishes past VirtualBox versions as pinnable vbox-sdk
+# releases, reusing the exact same release.py path check-new-release.yml uses
+# for new versions. Two modes:
+#   - Leave `version` blank: batch-backfills every version matching
+#     `prefixes` (default "6.,7." per the backfill scope decision) that isn't
+#     already in manifest.json, oldest first, in one run.
+#   - Set `version`: releases just that one, regardless of prefixes.
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: "VirtualBox SDK version to release, e.g. 7.0.14"
-        required: true
+        description: "One specific VirtualBox SDK version to release, e.g. 7.0.14. Leave blank to batch-backfill `prefixes` instead."
+        required: false
+      prefixes:
+        description: "Comma-separated version prefixes to batch-backfill (only used when `version` is blank)"
+        required: false
+        default: "6.,7."
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: automation
           fetch-depth: 0
@@ -24,7 +31,7 @@ jobs:
         run: |
           git fetch origin main:main pylibsonly:pylibsonly
 
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
 
@@ -35,8 +42,13 @@ jobs:
           git config user.name "vbox-sdk release bot"
           git config user.email "actions@github.com"
 
-      - name: Release the requested version
+      - name: Release the requested version(s)
         env:
           UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
           GH_TOKEN: ${{ github.token }}
-        run: uv run scripts/release.py --version "${{ inputs.version }}"
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            uv run scripts/release.py --version "${{ inputs.version }}"
+          else
+            uv run scripts/release.py --backfill-prefixes "${{ inputs.prefixes }}"
+          fi
