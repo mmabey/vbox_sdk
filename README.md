@@ -5,6 +5,12 @@ and LICENSE files, everything is exactly as it would be if you were to
 download the kit directly from Oracle 
 (https://www.virtualbox.org/wiki/Downloads).
 
+A new commit is added here, tagged `sdk-vX.Y.Z`, each time Oracle publishes a
+new SDK version. If you just want the Python bindings (`vboxapi`) as an
+installable package, see the [`pylibsonly`](../../tree/pylibsonly) branch or
+[`vbox-sdk` on PyPI](https://pypi.org/project/vbox-sdk/) instead of checking
+out this whole tree.
+
 # License
 
 Although I've listed this repository as being licensed under "The Unlicense", 
