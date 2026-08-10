@@ -36054,7 +36054,7 @@ class VirtualSystemDescriptionType:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance',37:'CloudInstanceId',38:'CloudImageId',39:'CloudInstanceState',40:'CloudImageState',41:'CloudInstanceDisplayName',42:'CloudImageDisplayName',43:'CloudOCILaunchMode',44:'CloudPrivateIP',45:'CloudBootVolumeId',46:'CloudOCIVCNCompartment',47:'CloudOCISubnetCompartment',48:'CloudPublicSSHKey',49:'BootingFirmware',50:'CloudInitScriptPath',51:'CloudCompartmentId',52:'CloudShapeCpus',53:'CloudShapeMemory',54:'CloudInstanceMetadata',55:'CloudInstanceFreeFormTags',56:'CloudImageFreeFormTags',60:'HardDiskControllerVirtioSCSI',61:'HardDiskControllerNVMe'}
+   _NameMap={1:'Ignore',2:'OS',3:'Name',4:'Product',5:'Vendor',6:'Version',7:'ProductUrl',8:'VendorUrl',9:'Description',10:'License',11:'Miscellaneous',12:'CPU',13:'Memory',14:'HardDiskControllerIDE',15:'HardDiskControllerSATA',16:'HardDiskControllerSCSI',17:'HardDiskControllerSAS',18:'HardDiskImage',19:'Floppy',20:'CDROM',21:'NetworkAdapter',22:'USBController',23:'SoundCard',24:'SettingsFile',25:'BaseFolder',26:'PrimaryGroup',27:'CloudInstanceShape',28:'CloudDomain',29:'CloudBootDiskSize',30:'CloudBucket',31:'CloudOCIVCN',32:'CloudPublicIP',33:'CloudProfileName',34:'CloudOCISubnet',35:'CloudKeepObject',36:'CloudLaunchInstance',37:'CloudInstanceId',38:'CloudImageId',39:'CloudInstanceState',40:'CloudImageState',41:'CloudInstanceDisplayName',42:'CloudImageDisplayName',43:'CloudOCILaunchMode',44:'CloudPrivateIP',45:'CloudBootVolumeId',46:'CloudOCIVCNCompartment',47:'CloudOCISubnetCompartment',48:'CloudPublicSSHKey',49:'BootingFirmware',50:'CloudInitScriptPath',51:'CloudCompartmentId',52:'CloudShapeCpus',53:'CloudShapeMemory',54:'CloudInstanceMetadata',55:'CloudInstanceFreeFormTags',56:'CloudImageFreeFormTags',60:'HardDiskControllerVirtioSCSI',61:'HardDiskControllerNVMe',0x8000:'NVRAM'}
    _ValueMap={
               'Ignore':1,
               'OS':2,
@@ -36113,7 +36113,8 @@ class VirtualSystemDescriptionType:
               'CloudInstanceFreeFormTags':55,
               'CloudImageFreeFormTags':56,
               'HardDiskControllerVirtioSCSI':60,
-              'HardDiskControllerNVMe':61}
+              'HardDiskControllerNVMe':61,
+              'NVRAM':0x8000}
 
    Ignore=1
    OS=2
@@ -36173,6 +36174,7 @@ class VirtualSystemDescriptionType:
    CloudImageFreeFormTags=56
    HardDiskControllerVirtioSCSI=60
    HardDiskControllerNVMe=61
+   NVRAM=0x8000
 
 class VirtualSystemDescriptionValueType:
    def __init__(self,mgr,handle):

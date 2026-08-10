@@ -2571,7 +2571,8 @@ typedef enum VirtualSystemDescriptionType
     VirtualSystemDescriptionType_CloudInstanceFreeFormTags = 55,
     VirtualSystemDescriptionType_CloudImageFreeFormTags = 56,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = 60,
-    VirtualSystemDescriptionType_HardDiskControllerNVMe = 61
+    VirtualSystemDescriptionType_HardDiskControllerNVMe = 61,
+    VirtualSystemDescriptionType_NVRAM = 0x8000
 } VirtualSystemDescriptionType;
 /* End of enum VirtualSystemDescriptionType declaration */
 #define VirtualSystemDescriptionType_T PRUint32

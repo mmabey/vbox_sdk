@@ -1102,6 +1102,7 @@
             CloudImageFreeFormTags: 56 -
             HardDiskControllerVirtioSCSI: 60 -
             HardDiskControllerNVMe: 61 -
+            NVRAM: 0x8000 -
             -->
       <xsd:simpleType name="VirtualSystemDescriptionType">
         <xsd:restriction base="xsd:string">
@@ -1163,6 +1164,7 @@
           <xsd:enumeration value="CloudImageFreeFormTags"/>
           <xsd:enumeration value="HardDiskControllerVirtioSCSI"/>
           <xsd:enumeration value="HardDiskControllerNVMe"/>
+          <xsd:enumeration value="NVRAM"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: VirtualSystemDescriptionValueType -

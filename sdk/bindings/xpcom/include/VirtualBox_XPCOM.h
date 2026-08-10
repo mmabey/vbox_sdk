@@ -3594,6 +3594,8 @@ class NS_NO_VTABLE VirtualSystemDescriptionType {
 
   enum { HardDiskControllerNVMe = 61U };
 
+  enum { NVRAM = 32768U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -3666,6 +3668,7 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudImageFreeFormTags VirtualSystemDescriptionType::CloudImageFreeFormTags
 # define VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI
 # define VirtualSystemDescriptionType_HardDiskControllerNVMe VirtualSystemDescriptionType::HardDiskControllerNVMe
+# define VirtualSystemDescriptionType_NVRAM VirtualSystemDescriptionType::NVRAM
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -3726,6 +3729,7 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudImageFreeFormTags = VirtualSystemDescriptionType::CloudImageFreeFormTags,
     VirtualSystemDescriptionType_HardDiskControllerVirtioSCSI = VirtualSystemDescriptionType::HardDiskControllerVirtioSCSI,
     VirtualSystemDescriptionType_HardDiskControllerNVMe = VirtualSystemDescriptionType::HardDiskControllerNVMe,
+    VirtualSystemDescriptionType_NVRAM = VirtualSystemDescriptionType::NVRAM,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize
