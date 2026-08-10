@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2008-2024 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2025 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -16629,6 +16629,29 @@ class INATEngine extends VBox_ManagedObject
             $request->localhostReachable = $value->handle;
         }
         $this->connection->__soapCall('INATEngine_setLocalhostReachable', array((array)$request));
+    }
+
+    public function getForwardBroadcast()
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        $response = $this->connection->__soapCall('INATEngine_getForwardBroadcast', array((array)$request));
+        return (bool)$response->returnval;
+    }
+
+    public function setForwardBroadcast($value)
+    {
+        $request = new stdClass();
+        $request->_this = $this->handle;
+        if (is_null($value) || is_scalar($value))
+        {
+            $request->forwardBroadcast = $value;
+        }
+        else
+        {
+            $request->forwardBroadcast = $value->handle;
+        }
+        $this->connection->__soapCall('INATEngine_setForwardBroadcast', array((array)$request));
     }
 }
 

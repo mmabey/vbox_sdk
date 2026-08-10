@@ -26203,6 +26203,34 @@
           <xsd:sequence/>
         </xsd:complexType>
       </xsd:element>
+      <!-- read/write attribute INATEngine::forwardBroadcast-->
+      <xsd:element name="INATEngine_getForwardBroadcast">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_getForwardBroadcastResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="returnval" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setForwardBroadcast">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="_this" type="xsd:string"/>
+            <xsd:element name="forwardBroadcast" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="INATEngine_setForwardBroadcastResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
       <!-- method INATEngine::setNetworkSettings-->
       <xsd:element name="INATEngine_setNetworkSettings">
         <xsd:complexType>
@@ -42985,6 +43013,19 @@
   <wsdl:message name="INATEngine_setLocalhostReachableResultMsg">
     <wsdl:part name="parameters" element="vbox:INATEngine_setLocalhostReachableResponse"/>
   </wsdl:message>
+  <!-- read/write attribute INATEngine::forwardBroadcast-->
+  <wsdl:message name="INATEngine_getForwardBroadcastRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getForwardBroadcast"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_getForwardBroadcastResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_getForwardBroadcastResponse"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setForwardBroadcastRequestMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setForwardBroadcast"/>
+  </wsdl:message>
+  <wsdl:message name="INATEngine_setForwardBroadcastResultMsg">
+    <wsdl:part name="parameters" element="vbox:INATEngine_setForwardBroadcastResponse"/>
+  </wsdl:message>
   <!-- method INATEngine::setNetworkSettings-->
   <wsdl:message name="INATEngine_setNetworkSettingsRequestMsg">
     <wsdl:part name="parameters" element="vbox:INATEngine_setNetworkSettings"/>
@@ -55950,6 +55991,18 @@
     <wsdl:operation name="INATEngine_setLocalhostReachable">
       <wsdl:input message="vbox:INATEngine_setLocalhostReachableRequestMsg"/>
       <wsdl:output message="vbox:INATEngine_setLocalhostReachableResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getForwardBroadcast">
+      <wsdl:input message="vbox:INATEngine_getForwardBroadcastRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_getForwardBroadcastResultMsg"/>
+      <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
+      <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setForwardBroadcast">
+      <wsdl:input message="vbox:INATEngine_setForwardBroadcastRequestMsg"/>
+      <wsdl:output message="vbox:INATEngine_setForwardBroadcastResultMsg"/>
       <wsdl:fault name="InvalidObjectFault" message="vbox:InvalidObjectFaultMsg"/>
       <wsdl:fault name="RuntimeFault" message="vbox:RuntimeFaultMsg"/>
     </wsdl:operation>
@@ -82239,6 +82292,36 @@
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="INATEngine_setLocalhostReachable">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_getForwardBroadcast">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidObjectFault">
+        <soap:fault name="InvalidObjectFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeFault">
+        <soap:fault name="RuntimeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="INATEngine_setForwardBroadcast">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>

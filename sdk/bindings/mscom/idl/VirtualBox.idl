@@ -16704,6 +16704,9 @@ interface INATEngine : IDispatch
     [propget] HRESULT LocalhostReachable ([out, retval] BOOL * aLocalhostReachable);
     [propput] HRESULT LocalhostReachable ([in] BOOL aLocalhostReachable);
 
+    [propget] HRESULT ForwardBroadcast ([out, retval] BOOL * aForwardBroadcast);
+    [propput] HRESULT ForwardBroadcast ([in] BOOL aForwardBroadcast);
+
     [propget] HRESULT InternalAndReservedAttribute1INATEngine ([out, retval] ULONG *aReserved);
 
     [propget] HRESULT InternalAndReservedAttribute2INATEngine ([out, retval] ULONG *aReserved);
@@ -16717,8 +16720,6 @@ interface INATEngine : IDispatch
     [propget] HRESULT InternalAndReservedAttribute6INATEngine ([out, retval] ULONG *aReserved);
 
     [propget] HRESULT InternalAndReservedAttribute7INATEngine ([out, retval] ULONG *aReserved);
-
-    [propget] HRESULT InternalAndReservedAttribute8INATEngine ([out, retval] ULONG *aReserved);
 
     HRESULT SetNetworkSettings (
         [in] ULONG aMtu,
@@ -16823,6 +16824,12 @@ cpp_quote("#define COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO_BASE(base
 cpp_quote("#define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO(smth) HRESULT STDMETHODCALLTYPE put_LocalhostReachable (BOOL aLocalhostReachable) { return smth put_LocalhostReachable (aLocalhostReachable); }")
 cpp_quote("#define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO(smth) HRESULT STDMETHODCALLTYPE get_ForwardBroadcast (BOOL * aForwardBroadcast) { return smth get_ForwardBroadcast (aForwardBroadcast); }")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO (base::)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO(smth) HRESULT STDMETHODCALLTYPE put_ForwardBroadcast (BOOL aForwardBroadcast) { return smth put_ForwardBroadcast (aForwardBroadcast); }")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO ((obj)->)")
+cpp_quote("#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO (base::)")
 cpp_quote("#define COM_FORWARD_INATEngine_SetNetworkSettings_TO(smth) HRESULT STDMETHODCALLTYPE SetNetworkSettings (ULONG aMtu, ULONG aSockSnd, ULONG aSockRcv, ULONG aTcpWndSnd, ULONG aTcpWndRcv) { return smth SetNetworkSettings (aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv); }")
 cpp_quote("#define COM_FORWARD_INATEngine_SetNetworkSettings_TO_OBJ(obj) COM_FORWARD_INATEngine_SetNetworkSettings_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_SetNetworkSettings_TO_BASE(base) COM_FORWARD_INATEngine_SetNetworkSettings_TO (base::)")
@@ -16835,7 +16842,7 @@ cpp_quote("#define COM_FORWARD_INATEngine_AddRedirect_TO_BASE(base) COM_FORWARD_
 cpp_quote("#define COM_FORWARD_INATEngine_RemoveRedirect_TO(smth) HRESULT STDMETHODCALLTYPE RemoveRedirect (BSTR aName) { return smth RemoveRedirect (aName); }")
 cpp_quote("#define COM_FORWARD_INATEngine_RemoveRedirect_TO_OBJ(obj) COM_FORWARD_INATEngine_RemoveRedirect_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_RemoveRedirect_TO_BASE(base) COM_FORWARD_INATEngine_RemoveRedirect_TO (base::)")
-cpp_quote("#define COM_FORWARD_INATEngine_TO(smth) COM_FORWARD_INATEngine_GETTER_Network_TO (smth) COM_FORWARD_INATEngine_SETTER_Network_TO (smth) COM_FORWARD_INATEngine_GETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_SETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_GETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_SETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_GETTER_Redirects_TO (smth) COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_SetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_GetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_AddRedirect_TO (smth) COM_FORWARD_INATEngine_RemoveRedirect_TO (smth) ")
+cpp_quote("#define COM_FORWARD_INATEngine_TO(smth) COM_FORWARD_INATEngine_GETTER_Network_TO (smth) COM_FORWARD_INATEngine_SETTER_Network_TO (smth) COM_FORWARD_INATEngine_GETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_SETTER_HostIP_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPPrefix_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPBootFile_TO (smth) COM_FORWARD_INATEngine_GETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_SETTER_TFTPNextServer_TO (smth) COM_FORWARD_INATEngine_GETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_SETTER_AliasMode_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSPassDomain_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSProxy_TO (smth) COM_FORWARD_INATEngine_GETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_SETTER_DNSUseHostResolver_TO (smth) COM_FORWARD_INATEngine_GETTER_Redirects_TO (smth) COM_FORWARD_INATEngine_GETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO (smth) COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO (smth) COM_FORWARD_INATEngine_SetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_GetNetworkSettings_TO (smth) COM_FORWARD_INATEngine_AddRedirect_TO (smth) COM_FORWARD_INATEngine_RemoveRedirect_TO (smth) ")
 cpp_quote("#define COM_FORWARD_INATEngine_TO_OBJ(obj) COM_FORWARD_INATEngine_TO ((obj)->)")
 cpp_quote("#define COM_FORWARD_INATEngine_TO_BASE(base) COM_FORWARD_INATEngine_TO (base::)")
 

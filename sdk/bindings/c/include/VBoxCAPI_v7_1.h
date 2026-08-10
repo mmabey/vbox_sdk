@@ -20,7 +20,7 @@
  */
 
 /*
- * Copyright (C) 2008-2024 Oracle and/or its affiliates.
+ * Copyright (C) 2008-2025 Oracle and/or its affiliates.
  *
  * This file is part of a free software library; you can redistribute
  * it and/or modify it under the terms of the GNU Lesser General
@@ -26634,6 +26634,9 @@ struct INATEngine_vtbl
     nsresult (*GetLocalhostReachable)(INATEngine *pThis, PRBool *localhostReachable);
     nsresult (*SetLocalhostReachable)(INATEngine *pThis, PRBool localhostReachable);
 
+    nsresult (*GetForwardBroadcast)(INATEngine *pThis, PRBool *forwardBroadcast);
+    nsresult (*SetForwardBroadcast)(INATEngine *pThis, PRBool forwardBroadcast);
+
     nsresult (*GetInternalAndReservedAttribute1INATEngine)(INATEngine *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2INATEngine)(INATEngine *pThis, PRUint32 *reserved);
@@ -26647,8 +26650,6 @@ struct INATEngine_vtbl
     nsresult (*GetInternalAndReservedAttribute6INATEngine)(INATEngine *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute7INATEngine)(INATEngine *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute8INATEngine)(INATEngine *pThis, PRUint32 *reserved);
 
     nsresult (*SetNetworkSettings)(
         INATEngine *pThis,
@@ -26730,6 +26731,9 @@ struct INATEngineVtbl
     nsresult (*GetLocalhostReachable)(INATEngine *pThis, PRBool *localhostReachable);
     nsresult (*SetLocalhostReachable)(INATEngine *pThis, PRBool localhostReachable);
 
+    nsresult (*GetForwardBroadcast)(INATEngine *pThis, PRBool *forwardBroadcast);
+    nsresult (*SetForwardBroadcast)(INATEngine *pThis, PRBool forwardBroadcast);
+
     nsresult (*GetInternalAndReservedAttribute1INATEngine)(INATEngine *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute2INATEngine)(INATEngine *pThis, PRUint32 *reserved);
@@ -26743,8 +26747,6 @@ struct INATEngineVtbl
     nsresult (*GetInternalAndReservedAttribute6INATEngine)(INATEngine *pThis, PRUint32 *reserved);
 
     nsresult (*GetInternalAndReservedAttribute7INATEngine)(INATEngine *pThis, PRUint32 *reserved);
-
-    nsresult (*GetInternalAndReservedAttribute8INATEngine)(INATEngine *pThis, PRUint32 *reserved);
 
     nsresult (*SetNetworkSettings)(
         INATEngine *pThis,
@@ -26833,6 +26835,10 @@ struct INATEngineVtbl
 #define INATEngine_GetLocalhostReachable(p, aLocalhostReachable) ((p)->lpVtbl->GetLocalhostReachable(p, aLocalhostReachable))
 #define INATEngine_put_LocalhostReachable(p, aLocalhostReachable) ((p)->lpVtbl->SetLocalhostReachable(p, aLocalhostReachable))
 #define INATEngine_SetLocalhostReachable(p, aLocalhostReachable) ((p)->lpVtbl->SetLocalhostReachable(p, aLocalhostReachable))
+#define INATEngine_get_ForwardBroadcast(p, aForwardBroadcast) ((p)->lpVtbl->GetForwardBroadcast(p, aForwardBroadcast))
+#define INATEngine_GetForwardBroadcast(p, aForwardBroadcast) ((p)->lpVtbl->GetForwardBroadcast(p, aForwardBroadcast))
+#define INATEngine_put_ForwardBroadcast(p, aForwardBroadcast) ((p)->lpVtbl->SetForwardBroadcast(p, aForwardBroadcast))
+#define INATEngine_SetForwardBroadcast(p, aForwardBroadcast) ((p)->lpVtbl->SetForwardBroadcast(p, aForwardBroadcast))
 #define INATEngine_SetNetworkSettings(p, aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv) ((p)->lpVtbl->SetNetworkSettings(p, aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv))
 #define INATEngine_GetNetworkSettings(p, aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv) ((p)->lpVtbl->GetNetworkSettings(p, aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv))
 #define INATEngine_AddRedirect(p, aName, aProto, aHostIP, aHostPort, aGuestIP, aGuestPort) ((p)->lpVtbl->AddRedirect(p, aName, aProto, aHostIP, aHostPort, aGuestIP, aGuestPort))

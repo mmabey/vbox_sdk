@@ -20,7 +20,7 @@
  /* File created by MIDL compiler version 8.01.0626 */
 /* at Tue Jan 19 04:14:07 2038
  */
-/* Compiler settings for D:\tinderbox\sdk\out\win.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
+/* Compiler settings for D:\tinderbox\7.1-sdk\out\win.amd64\release\bin\sdk\bindings\mscom\idl\VirtualBox.idl:
     Oicf, W4, Zp8, env=Win64 (32b run), target_arch=AMD64 8.01.0626 
     protocol : all , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 

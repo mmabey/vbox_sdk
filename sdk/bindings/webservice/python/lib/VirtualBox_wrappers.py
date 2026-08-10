@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2024 Oracle and/or its affiliates.
+# Copyright (C) 2008-2025 Oracle and/or its affiliates.
 #
 # This file is part of a free software library; you can redistribute
 # it and/or modify it under the terms of the GNU Lesser General
@@ -20335,6 +20335,20 @@ class INATEngine(IUnknown):
             req._localhostReachable = value.handle
        self.mgr.getPort().INATEngine_setLocalhostReachable(req)
 
+   def getForwardBroadcast(self):
+       req=INATEngine_getForwardBroadcastRequestMsg()
+       req._this=self.handle
+       val=self.mgr.getPort().INATEngine_getForwardBroadcast(req)
+       return Boolean(self.mgr,val._returnval)
+   def setForwardBroadcast(self, value):
+       req=INATEngine_setForwardBroadcastRequestMsg()
+       req._this=self.handle
+       if type(value) in [int, bool, basestring, str]:
+            req._forwardBroadcast = value
+       else:
+            req._forwardBroadcast = value.handle
+       self.mgr.getPort().INATEngine_setForwardBroadcast(req)
+
 
 
    _Attrs_={         'network':[getNetwork,setNetwork,
@@ -20357,6 +20371,8 @@ class INATEngine(IUnknown):
         ],
          'redirects':[getRedirects,None],
          'localhostReachable':[getLocalhostReachable,setLocalhostReachable,
+        ],
+         'forwardBroadcast':[getForwardBroadcast,setForwardBroadcast,
         ]}
 
 class IBandwidthGroup(IUnknown):

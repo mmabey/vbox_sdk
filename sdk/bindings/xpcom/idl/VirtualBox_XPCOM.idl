@@ -21442,6 +21442,8 @@ interface INATEngine : nsISupports
 
     attribute boolean localhostReachable;
 
+    attribute boolean forwardBroadcast;
+
     readonly attribute unsigned long InternalAndReservedAttribute1INATEngine;
 
     readonly attribute unsigned long InternalAndReservedAttribute2INATEngine;
@@ -21455,8 +21457,6 @@ interface INATEngine : nsISupports
     readonly attribute unsigned long InternalAndReservedAttribute6INATEngine;
 
     readonly attribute unsigned long InternalAndReservedAttribute7INATEngine;
-
-    readonly attribute unsigned long InternalAndReservedAttribute8INATEngine;
 
     void setNetworkSettings (
         in unsigned long mtu,
@@ -21562,6 +21562,12 @@ interface INATEngine : nsISupports
 #define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO(smth) NS_IMETHOD SetLocalhostReachable (PRBool aLocalhostReachable) { return smth SetLocalhostReachable (aLocalhostReachable); }
 #define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO ((obj)->)
 #define COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_LocalhostReachable_TO (base::)
+#define COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO(smth) NS_IMETHOD GetForwardBroadcast (PRBool * aForwardBroadcast) { return smth GetForwardBroadcast (aForwardBroadcast); }
+#define COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO ((obj)->)
+#define COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATEngine_GETTER_ForwardBroadcast_TO (base::)
+#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO(smth) NS_IMETHOD SetForwardBroadcast (PRBool aForwardBroadcast) { return smth SetForwardBroadcast (aForwardBroadcast); }
+#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_OBJ(obj) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO ((obj)->)
+#define COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO_BASE(base) COM_FORWARD_INATEngine_SETTER_ForwardBroadcast_TO (base::)
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO(smth) NS_IMETHOD SetNetworkSettings (PRUint32 aMtu, PRUint32 aSockSnd, PRUint32 aSockRcv, PRUint32 aTcpWndSnd, PRUint32 aTcpWndRcv) { return smth SetNetworkSettings (aMtu, aSockSnd, aSockRcv, aTcpWndSnd, aTcpWndRcv); }
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO_OBJ(obj) COM_FORWARD_INATEngine_SetNetworkSettings_TO ((obj)->)
 #define COM_FORWARD_INATEngine_SetNetworkSettings_TO_BASE(base) COM_FORWARD_INATEngine_SetNetworkSettings_TO (base::)
