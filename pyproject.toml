@@ -1,0 +1,64 @@
+[project]
+name = "vbox-sdk"
+version = "5.1.18"
+description = "The VirtualBox Software Developer Kit's Python bindings, as available from https://www.virtualbox.org/wiki/Downloads"
+readme = "README.rst"
+license = "Unlicense"
+authors = [
+    { name = "Oracle Corp.", email = "help@oracle.com" },
+]
+maintainers = [
+    { name = "Mike Mabey", email = "mmabey@ieee.org" },
+]
+requires-python = ">=3.10"
+keywords = [
+    "vbox",
+    "vbox api",
+    "vbox sdk",
+    "VirtualBox",
+    "Oracle",
+    "virtual machine manager",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/mmabey/vbox_sdk"
+Source = "https://github.com/mmabey/vbox_sdk/tree/pylibsonly"
+Releases = "https://github.com/mmabey/vbox_sdk/releases"
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.uv.build-backend]
+module-name = "vboxapi"
+module-root = ""
+
+[tool.ruff]
+line-length = 100
+# vboxapi/ is vendored code from Oracle, wholesale-replaced on every release --
+# lint/format only this project's own packaging/test code, not Oracle's.
+extend-exclude = ["vboxapi"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.13"]
+build-backend = "uv_build"

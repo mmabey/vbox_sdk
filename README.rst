@@ -13,14 +13,14 @@ VirtualBox Software Developer Kit (SDK)
 .. image:: https://img.shields.io/pypi/dm/vbox_sdk.svg
     :target: https://pypi.python.org/pypi/vbox_sdk
 
-Oracle provides this SDK to interface with VirtualBox. In the main branch, 
-everything is exactly as it would be if you were to download the kit directly 
-from Oracle (https://www.virtualbox.org/wiki/Downloads), except for the README,
-LICENSE, Makefile, and setup.py files.
+Oracle provides this SDK to interface with VirtualBox. This branch contains
+only the Python bindings (``vboxapi``) extracted from Oracle's SDK, packaged
+for installation via pip. For the full SDK exactly as Oracle ships it, see the
+``main`` branch instead.
 
-In this branch, only the original (Python 2) libraries remain. This is to make
-checkouts smaller that only need those few files. Nothing else about the files
-has changed from the version made available by Oracle.
+A new release is published here automatically whenever Oracle publishes a new
+VirtualBox SDK version; the package version always matches VirtualBox's own
+version number (see ``pyproject.toml``).
 
 The code is available on `Github`_ and `PyPI`_.
 
@@ -32,9 +32,12 @@ Since the package is listed on `PyPI`_, you can install it with:
 
 ::
 
-    pip install vbox_sdk
+    pip install vbox-sdk
 
 Please note that this package conflicts with the ``vboxapi`` package.
+
+If you need the bindings for a specific old VirtualBox version, pin that
+version, e.g. ``pip install vbox-sdk==7.0.14``.
 
 
 Usage
