@@ -2184,10 +2184,10 @@ typedef enum CertificateVersion
 
 
 /* Start of enum VirtualSystemDescriptionType declaration */
-#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "9078595f-74cf-4454-8787-34a8f72beed5"
+#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "70c5ca7b-65a8-49cc-9b19-e80192b9db1d"
 #define VIRTUALSYSTEMDESCRIPTIONTYPE_IID { \
-    0x9078595f, 0x74cf, 0x4454, \
-    { 0x87, 0x87, 0x34, 0xa8, 0xf7, 0x2b, 0xee, 0xd5 } \
+    0x70c5ca7b, 0x65a8, 0x49cc, \
+    { 0x9b, 0x19, 0xe8, 0x01, 0x92, 0xb9, 0xdb, 0x1d } \
 }
 typedef enum VirtualSystemDescriptionType
 {
@@ -2239,7 +2239,8 @@ typedef enum VirtualSystemDescriptionType
     VirtualSystemDescriptionType_CloudOCIVCNCompartment = 46,
     VirtualSystemDescriptionType_CloudOCISubnetCompartment = 47,
     VirtualSystemDescriptionType_CloudPublicSSHKey = 48,
-    VirtualSystemDescriptionType_BootingFirmware = 49
+    VirtualSystemDescriptionType_BootingFirmware = 49,
+    VirtualSystemDescriptionType_CloudInitScriptPath = 50
 } VirtualSystemDescriptionType;
 /* End of enum VirtualSystemDescriptionType declaration */
 #define VirtualSystemDescriptionType_T PRUint32

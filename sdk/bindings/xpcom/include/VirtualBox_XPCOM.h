@@ -3559,11 +3559,11 @@ AssertCompileSize(CertificateVersion_T, sizeof(PRUint32));
 #endif /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 
 /* starting interface:    VirtualSystemDescriptionType */
-#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "9078595f-74cf-4454-8787-34a8f72beed5"
+#define VIRTUALSYSTEMDESCRIPTIONTYPE_IID_STR "70c5ca7b-65a8-49cc-9b19-e80192b9db1d"
 
 #define VIRTUALSYSTEMDESCRIPTIONTYPE_IID \
-  {0x9078595f, 0x74cf, 0x4454, \
-    { 0x87, 0x87, 0x34, 0xa8, 0xf7, 0x2b, 0xee, 0xd5 }}
+  {0x70c5ca7b, 0x65a8, 0x49cc, \
+    { 0x9b, 0x19, 0xe8, 0x01, 0x92, 0xb9, 0xdb, 0x1d }}
 
 class NS_NO_VTABLE VirtualSystemDescriptionType {
  public: 
@@ -3668,6 +3668,8 @@ class NS_NO_VTABLE VirtualSystemDescriptionType {
 
   enum { BootingFirmware = 49U };
 
+  enum { CloudInitScriptPath = 50U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -3766,6 +3768,7 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudOCISubnetCompartment VirtualSystemDescriptionType::CloudOCISubnetCompartment
 # define VirtualSystemDescriptionType_CloudPublicSSHKey VirtualSystemDescriptionType::CloudPublicSSHKey
 # define VirtualSystemDescriptionType_BootingFirmware VirtualSystemDescriptionType::BootingFirmware
+# define VirtualSystemDescriptionType_CloudInitScriptPath VirtualSystemDescriptionType::CloudInitScriptPath
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -3817,6 +3820,7 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudOCISubnetCompartment = VirtualSystemDescriptionType::CloudOCISubnetCompartment,
     VirtualSystemDescriptionType_CloudPublicSSHKey = VirtualSystemDescriptionType::CloudPublicSSHKey,
     VirtualSystemDescriptionType_BootingFirmware = VirtualSystemDescriptionType::BootingFirmware,
+    VirtualSystemDescriptionType_CloudInitScriptPath = VirtualSystemDescriptionType::CloudInitScriptPath,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize

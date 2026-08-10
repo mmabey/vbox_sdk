@@ -731,6 +731,7 @@
             CloudOCISubnetCompartment: 47 -
             CloudPublicSSHKey: 48 -
             BootingFirmware: 49 -
+            CloudInitScriptPath: 50 -
             -->
       <xsd:simpleType name="VirtualSystemDescriptionType">
         <xsd:restriction base="xsd:string">
@@ -783,6 +784,7 @@
           <xsd:enumeration value="CloudOCISubnetCompartment"/>
           <xsd:enumeration value="CloudPublicSSHKey"/>
           <xsd:enumeration value="BootingFirmware"/>
+          <xsd:enumeration value="CloudInitScriptPath"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: VirtualSystemDescriptionValueType -

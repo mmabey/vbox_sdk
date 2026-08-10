@@ -843,7 +843,7 @@ cpp_quote("#define CertificateVersion_T CertificateVersion")
 
 
 [
-    uuid(9078595f-74cf-4454-8787-34a8f72beed5),
+    uuid(70c5ca7b-65a8-49cc-9b19-e80192b9db1d),
     v1_enum
 ]
 typedef enum 
@@ -896,7 +896,8 @@ typedef enum
     VirtualSystemDescriptionType_CloudOCIVCNCompartment = 46,
     VirtualSystemDescriptionType_CloudOCISubnetCompartment = 47,
     VirtualSystemDescriptionType_CloudPublicSSHKey = 48,
-    VirtualSystemDescriptionType_BootingFirmware = 49
+    VirtualSystemDescriptionType_BootingFirmware = 49,
+    VirtualSystemDescriptionType_CloudInitScriptPath = 50
 } VirtualSystemDescriptionType;
 
 /* cross-platform type name for VirtualSystemDescriptionType */

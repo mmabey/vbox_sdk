@@ -1832,7 +1832,7 @@ AssertCompileSize(CertificateVersion_T, sizeof(PRUint32));
 %}
 
 [
-    uuid(9078595f-74cf-4454-8787-34a8f72beed5),
+    uuid(70c5ca7b-65a8-49cc-9b19-e80192b9db1d),
     scriptable
 ]
 interface VirtualSystemDescriptionType
@@ -1886,6 +1886,7 @@ interface VirtualSystemDescriptionType
     const PRUint32 CloudOCISubnetCompartment = 47;
     const PRUint32 CloudPublicSSHKey = 48;
     const PRUint32 BootingFirmware = 49;
+    const PRUint32 CloudInitScriptPath = 50;
 };
 
 
@@ -1944,6 +1945,7 @@ typedef PRUint32 VirtualSystemDescriptionType_T;
 # define VirtualSystemDescriptionType_CloudOCISubnetCompartment VirtualSystemDescriptionType::CloudOCISubnetCompartment
 # define VirtualSystemDescriptionType_CloudPublicSSHKey VirtualSystemDescriptionType::CloudPublicSSHKey
 # define VirtualSystemDescriptionType_BootingFirmware VirtualSystemDescriptionType::BootingFirmware
+# define VirtualSystemDescriptionType_CloudInitScriptPath VirtualSystemDescriptionType::CloudInitScriptPath
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_Ignore = VirtualSystemDescriptionType::Ignore,
@@ -1995,6 +1997,7 @@ typedef enum VirtualSystemDescriptionType_T {
     VirtualSystemDescriptionType_CloudOCISubnetCompartment = VirtualSystemDescriptionType::CloudOCISubnetCompartment,
     VirtualSystemDescriptionType_CloudPublicSSHKey = VirtualSystemDescriptionType::CloudPublicSSHKey,
     VirtualSystemDescriptionType_BootingFirmware = VirtualSystemDescriptionType::BootingFirmware,
+    VirtualSystemDescriptionType_CloudInitScriptPath = VirtualSystemDescriptionType::CloudInitScriptPath,
     VirtualSystemDescriptionType_32BitHack = 0x7fffffff
 } VirtualSystemDescriptionType_T;
 # ifdef AssertCompileSize

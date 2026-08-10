@@ -2602,6 +2602,7 @@ class VirtualBoxReflectionInfo:
             'CloudOCISubnetCompartment': 47,
             'CloudPublicSSHKey': 48,
             'BootingFirmware': 49,
+            'CloudInitScriptPath': 50,
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 1,
@@ -3676,6 +3677,7 @@ class VirtualBoxReflectionInfo:
             'CloudOCISubnetCompartment': 'CloudOCISubnetCompartment',
             'CloudPublicSSHKey': 'CloudPublicSSHKey',
             'BootingFirmware': 'BootingFirmware',
+            'CloudInitScriptPath': 'CloudInitScriptPath',
         },
         'VirtualSystemDescriptionValueType': {
             'Reference': 'Reference',
@@ -4689,6 +4691,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudOCISubnetCompartment': 47,
         'VirtualSystemDescriptionType_CloudPublicSSHKey': 48,
         'VirtualSystemDescriptionType_BootingFirmware': 49,
+        'VirtualSystemDescriptionType_CloudInitScriptPath': 50,
         'VirtualSystemDescriptionValueType_Reference': 1,
         'VirtualSystemDescriptionValueType_Original': 2,
         'VirtualSystemDescriptionValueType_Auto': 3,
@@ -5534,6 +5537,7 @@ class VirtualBoxReflectionInfo:
         'VirtualSystemDescriptionType_CloudOCISubnetCompartment': 'CloudOCISubnetCompartment',
         'VirtualSystemDescriptionType_CloudPublicSSHKey': 'CloudPublicSSHKey',
         'VirtualSystemDescriptionType_BootingFirmware': 'BootingFirmware',
+        'VirtualSystemDescriptionType_CloudInitScriptPath': 'CloudInitScriptPath',
         'VirtualSystemDescriptionValueType_Reference': 'Reference',
         'VirtualSystemDescriptionValueType_Original': 'Original',
         'VirtualSystemDescriptionValueType_Auto': 'Auto',
