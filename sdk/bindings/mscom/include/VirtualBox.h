@@ -4351,7 +4351,8 @@ enum __MIDL___MIDL_itf_VirtualBox_0000_0000_0033
     {
         ImportOptions_KeepAllMACs	= 1,
         ImportOptions_KeepNATMACs	= 2,
-        ImportOptions_ImportToVDI	= 3
+        ImportOptions_ImportToVDI	= 3,
+        ImportOptions_KeepExtraData	= 4
     } 	ImportOptions;
 
 #define ImportOptions_T ImportOptions

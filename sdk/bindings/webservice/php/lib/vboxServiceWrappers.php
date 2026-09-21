@@ -23202,8 +23202,8 @@ class VFSTypeCollection extends VBox_EnumCollection
  */
 class ImportOptions extends VBox_Enum
 {
-    public $NameMap = array(1 => 'KeepAllMACs', 2 => 'KeepNATMACs', 3 => 'ImportToVDI');
-    public $ValueMap = array('KeepAllMACs' => 1, 'KeepNATMACs' => 2, 'ImportToVDI' => 3);
+    public $NameMap = array(1 => 'KeepAllMACs', 2 => 'KeepNATMACs', 3 => 'ImportToVDI', 4 => 'KeepExtraData');
+    public $ValueMap = array('KeepAllMACs' => 1, 'KeepNATMACs' => 2, 'ImportToVDI' => 3, 'KeepExtraData' => 4);
 }
 
 /**

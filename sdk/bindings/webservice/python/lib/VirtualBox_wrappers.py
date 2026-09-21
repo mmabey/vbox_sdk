@@ -36215,15 +36215,17 @@ class ImportOptions:
    def __int__(self):
         return self.handle
 
-   _NameMap={1:'KeepAllMACs',2:'KeepNATMACs',3:'ImportToVDI'}
+   _NameMap={1:'KeepAllMACs',2:'KeepNATMACs',3:'ImportToVDI',4:'KeepExtraData'}
    _ValueMap={
               'KeepAllMACs':1,
               'KeepNATMACs':2,
-              'ImportToVDI':3}
+              'ImportToVDI':3,
+              'KeepExtraData':4}
 
    KeepAllMACs=1
    KeepNATMACs=2
    ImportToVDI=3
+   KeepExtraData=4
 
 class ExportOptions:
    def __init__(self,mgr,handle):

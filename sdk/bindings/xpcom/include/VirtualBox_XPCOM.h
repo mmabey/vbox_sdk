@@ -3437,6 +3437,8 @@ class NS_NO_VTABLE ImportOptions {
 
   enum { ImportToVDI = 3U };
 
+  enum { KeepExtraData = 4U };
+
 };
 
 /* Use this macro when declaring classes that implement this interface. */
@@ -3454,11 +3456,13 @@ typedef PRUint32 ImportOptions_T;
 # define ImportOptions_KeepAllMACs ImportOptions::KeepAllMACs
 # define ImportOptions_KeepNATMACs ImportOptions::KeepNATMACs
 # define ImportOptions_ImportToVDI ImportOptions::ImportToVDI
+# define ImportOptions_KeepExtraData ImportOptions::KeepExtraData
 #else /* VBOX_WITH_XPCOM_CPP_ENUM_HACK */
 typedef enum ImportOptions_T {
     ImportOptions_KeepAllMACs = ImportOptions::KeepAllMACs,
     ImportOptions_KeepNATMACs = ImportOptions::KeepNATMACs,
     ImportOptions_ImportToVDI = ImportOptions::ImportToVDI,
+    ImportOptions_KeepExtraData = ImportOptions::KeepExtraData,
     ImportOptions_32BitHack = 0x7fffffff
 } ImportOptions_T;
 # ifdef AssertCompileSize

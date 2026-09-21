@@ -1035,12 +1035,14 @@
             KeepAllMACs: 1 -
             KeepNATMACs: 2 -
             ImportToVDI: 3 -
+            KeepExtraData: 4 -
             -->
       <xsd:simpleType name="ImportOptions">
         <xsd:restriction base="xsd:string">
           <xsd:enumeration value="KeepAllMACs"/>
           <xsd:enumeration value="KeepNATMACs"/>
           <xsd:enumeration value="ImportToVDI"/>
+          <xsd:enumeration value="KeepExtraData"/>
         </xsd:restriction>
       </xsd:simpleType>
       <!-- enum: ExportOptions -
